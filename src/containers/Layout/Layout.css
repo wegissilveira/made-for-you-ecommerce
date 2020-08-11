@@ -1,0 +1,11 @@
+.account-icons {
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.fonts {
+    font-family: 'Lemonada', 
+    cursive;
+}

@@ -1,0 +1,24 @@
+.header-text {
+    /* height: 650px; */
+    margin-top: -470px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+
+    width: 93%;
+    margin-left: 3.5%;
+    
+    /* background-color: aqua; */
+}
+
+.icones {
+    margin-bottom: 14px;
+}
+
+.change-slide-setas {
+    width: 8%;
+    margin-left: 86%;
+    line-height: 2;
+    margin-top: 15px;
+}
