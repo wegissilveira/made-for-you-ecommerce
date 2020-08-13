@@ -12,7 +12,12 @@ import {
   faSearch,
   faSuitcase,
   faArrowRight,
-  faArrowLeft
+  faArrowLeft,
+  faEye,
+  faPlane,
+  faGift,
+  faAward,
+  faTrophy
 } from '@fortawesome/free-solid-svg-icons'
 
 import {
@@ -28,7 +33,12 @@ library.add(
   faHeart,
   faSuitcase,
   faArrowRight,
-  faArrowLeft
+  faArrowLeft,
+  faEye,
+  faPlane,
+  faGift,
+  faAward,
+  faTrophy
 )
 
 function App() {

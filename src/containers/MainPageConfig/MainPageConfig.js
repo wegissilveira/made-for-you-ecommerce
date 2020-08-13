@@ -1,14 +1,22 @@
-import React, {Component} from 'react'
+import React, {Component, Fragment} from 'react'
+
+import './MainPageConfig.css'
 
 import MainPageHeader from '../../components/MainPageHeader/MainPageHeader'
+import MainPageShop from '../../components/MainPageShop/MainPageShop'
+import MainPageProducts from '../../components/MainPageProducts/MainPageProducts'
+import MainPageDiscounts from '../../components/MainPageDiscounts/MainPageDiscounts'
 
 class MainPageConfig extends Component {
 
     render () {
         return (
-            <div>
+            <Fragment>
                 <MainPageHeader />
-            </div>
+                <MainPageShop />
+                <MainPageProducts />
+                <MainPageDiscounts />
+            </Fragment>
         )
     }
 }

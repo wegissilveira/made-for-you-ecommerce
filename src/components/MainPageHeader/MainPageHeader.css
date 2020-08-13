@@ -1,15 +1,11 @@
 .header-text {
     /* height: 650px; */
-    margin-top: -470px;
+    width: 93%;
+    margin: -470px 0 350px 3.5%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     position: relative;
-
-    width: 93%;
-    margin-left: 3.5%;
-    
-    /* background-color: aqua; */
 }
 
 .icones {
@@ -19,6 +15,6 @@
 .change-slide-setas {
     width: 8%;
     margin-left: 86%;
-    line-height: 2;
     margin-top: 15px;
+    line-height: 2;
 }

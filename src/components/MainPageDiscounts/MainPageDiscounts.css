@@ -1,0 +1,51 @@
+/* .discounts-quadros-container-1 {
+    width: 680px;
+} */
+
+/* .discounts-quadros-container-2 {
+    width: 520px;
+} */
+
+.discounts-container {
+    height: 650px;
+}
+
+.discounts-quadros-container-1 p {
+    margin: 0;
+}
+
+.discounts-quadros-container-2 p {
+    margin: 0;
+}
+
+input {
+    border: 0;
+    outline: 0;
+    background: transparent;
+    border-bottom: 1px solid black;
+
+    margin-top: 24px;
+}
+
+.discount-icons-container {
+    width: 1160px;
+    margin-left: 210px;
+    margin-top: 80px;
+}
+
+.discounts-icons h6 {
+    margin-bottom: 0;
+    margin-top: 30px;
+}
+
+.discounts-icons p {
+    margin: 0;
+}
+
+.plane-icon {
+    transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+}
