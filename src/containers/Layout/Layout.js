@@ -1,5 +1,7 @@
 import React, {Component, Fragment} from 'react'
 
+import Footer from '../../components/Footer/Footer'
+
 import './Layout.css'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -91,9 +93,9 @@ class Layout extends Component {
                 <main>
                     {this.props.children}
                 </main>
-                <footer style={{height: '150px'}}>
+                <Footer>
 
-                </footer>
+                </Footer>
             </Fragment>
         )
     }
