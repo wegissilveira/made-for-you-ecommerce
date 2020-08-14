@@ -1,0 +1,26 @@
+.footer-container {
+    width: 74%;
+    margin-left: 13%;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.footer-menu ul li {
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.footer-staysocial-icons {
+    width: 50%;
+}
+
+.subfooter p {
+    margin: 0;
+}
+
+.footer-cards-icons > * {
+    padding-left: 40px;
+}
