@@ -4,6 +4,7 @@ import './App.css';
 
 import Layout from './containers/Layout/Layout'
 import MainPageConfig from './containers/MainPageConfig/MainPageConfig'
+import ShopConfig from './containers/ShopConfig/ShopConfig'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
@@ -17,7 +18,8 @@ import {
   faPlane,
   faGift,
   faAward,
-  faTrophy
+  faTrophy,
+  faFilter
 } from '@fortawesome/free-solid-svg-icons'
 
 import {
@@ -38,13 +40,15 @@ library.add(
   faPlane,
   faGift,
   faAward,
-  faTrophy
+  faTrophy,
+  faFilter
 )
 
 function App() {
   return (
     <Layout>
-      <MainPageConfig />
+      {/* <MainPageConfig /> */}
+      <ShopConfig />
     </Layout>
   );
 }

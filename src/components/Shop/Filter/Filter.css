@@ -1,0 +1,22 @@
+.filter-container {
+    width: 76%;
+    margin-left: 12%;
+}
+
+.filter-switch {
+    width: 15%;
+    height: 50px;
+    cursor: pointer;
+}
+
+.filter-switch p {
+    margin: 0;
+}
+
+.filter-sort {
+    width: 40%;
+}
+
+.filter-sort p {
+    margin: 0;
+}

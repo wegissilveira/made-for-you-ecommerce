@@ -1,0 +1,17 @@
+.products-container {
+    width: 75.8%;
+    margin-left: 12.1%;
+}
+
+.products-description {
+    height: 65px;
+    margin-left: 10%;
+}
+
+.products-description p {
+    margin: 0;
+}
+
+.bestDeal-passaSlide {
+    width: 7%;
+}

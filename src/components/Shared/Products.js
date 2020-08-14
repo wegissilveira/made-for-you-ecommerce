@@ -1,21 +1,13 @@
 import React from 'react'
 
-import './MainPageProducts.css'
+import './Products.css'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const mainPageProducts = props => {
+const products = props => {
 
     return (
-        <div className="session-container text-center">
-            <h1>FEATURED PRODUCTS</h1>
-            <p>Select a catecory using special switches or go to the section with a convenient filter by product</p>
-            <div className="d-flex justify-content-between products-select-container  mt-5">
-                <p className="products-select">ALL PRODUCTS</p>
-                <p className="products-select">FURNITURE</p>
-                <p className="products-select">DECORATION</p>
-                <p className="products-select">TEXTILE</p>
-            </div>
+        <div className="session-container">
             <div>
                 <div className="d-flex products-container justify-content-between mt-5">
                     <div className="border">
@@ -135,4 +127,4 @@ const mainPageProducts = props => {
     )
 }
 
-export default mainPageProducts
+export default products

@@ -1,0 +1,14 @@
+.products-select-container {
+    width: 42%;
+    margin-left: 29%;
+}
+
+.products-select {
+    width: 155px;
+    height: 46px;
+    /* background-color: #3A3A3A; */
+    background-color: #F5F5F5;
+    /* color: white; */
+    padding: 10px;
+    cursor: pointer;
+}

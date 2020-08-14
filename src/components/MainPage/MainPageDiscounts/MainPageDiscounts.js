@@ -17,10 +17,10 @@ const mainPageDiscounts = props => {
                         <p>favorite home products at the best prices. And every monday a random discount on</p>
                         <p>certain products. Hurry up to buy at an attractive price.</p>
                     </div>
-                    <img src={require('../../assets/images/Discounts/quadro-3.png')} alt="discount-img" />
+                    <img src={require('../../../assets/images/Discounts/quadro-3.png')} alt="discount-img" />
                 </div>
                 <div className="discounts-quadros-container-2 pl-3 d-flex flex-column justify-content-between">
-                    <img src={require('../../assets/images/Discounts/quadro-2.png')} alt="discount-img" />
+                    <img src={require('../../../assets/images/Discounts/quadro-2.png')} alt="discount-img" />
                     <div className="border">
                         <div className="p-5">
                             <h3 className="mb-4">NEWSLETTER</h3>
