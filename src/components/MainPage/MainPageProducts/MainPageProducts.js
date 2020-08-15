@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Products from '../Shared/Products'
+import Products from '../../Shared/Products'
 
 import './MainPageProducts.css'
 

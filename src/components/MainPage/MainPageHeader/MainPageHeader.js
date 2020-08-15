@@ -12,11 +12,11 @@ const mainPageHeader = props => {
             <div className="container-fluid d-flex">
                 <div className="col-6 container-fluid d-flex align-items-center" style={{height:'700px'}}>
                     <div style={{height:'65%', width:'25%'}}></div>
-                    <img style={{height:'65%', width:'50%'}} src={require("../../assets/images/imgSolo-mainpage.png")} alt={"img-1"} />
+                    <img style={{height:'65%', width:'50%'}} src={require("../../../assets/images/imgSolo-mainpage.png")} alt={"img-1"} />
                     <div style={{height:'65%', width:'40%'}}></div>
                 </div>
                 <div className="col-6" style={{height:'700px'}}>
-                    <img style={{height:'90%', maxWidth:'100%'}} src={require("../../assets/images/imgSlider1-mainpage.png")} alt={"img-2"} />
+                    <img style={{height:'90%', maxWidth:'100%'}} src={require("../../../assets/images/imgSlider1-mainpage.png")} alt={"img-2"} />
                     <div className="change-slide-setas d-flex justify-content-between">
                         <FontAwesomeIcon icon="arrow-left" />
                         <FontAwesomeIcon icon="arrow-right" />
