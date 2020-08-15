@@ -19,7 +19,9 @@ import {
   faGift,
   faAward,
   faTrophy,
-  faFilter
+  faFilter,
+  faShareAlt,
+  faCheck
 } from '@fortawesome/free-solid-svg-icons'
 
 import {
@@ -41,7 +43,9 @@ library.add(
   faGift,
   faAward,
   faTrophy,
-  faFilter
+  faFilter,
+  faShareAlt,
+  faCheck
 )
 
 function App() {

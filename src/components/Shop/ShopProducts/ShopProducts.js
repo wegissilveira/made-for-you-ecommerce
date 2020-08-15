@@ -9,9 +9,9 @@ const shopProducts = props => {
     return (
         <div>
             <h1 className="text-center mb-5 mt-5">SHOP</h1>
-            <Filter />
+            {/* <Filter />
             <Products />
-            <BestDeal />
+            <BestDeal /> */}
         </div>
     )
 }

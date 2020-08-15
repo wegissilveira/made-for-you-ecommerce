@@ -1,0 +1,15 @@
+.product-card-container {
+    width: 78%;
+    margin-left: 11%;
+}
+
+.change-slide-setas-corrigir-nome {
+    width: 11%;
+    margin-left: 80%;
+    margin-top: -45px;
+    line-height: 2;
+}
+
+.product-card-sub-images {
+    margin-top: 55px;
+}
