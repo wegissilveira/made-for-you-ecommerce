@@ -1,6 +1,18 @@
+input {
+    margin: 0;
+}
+
 .product-card-container {
     width: 78%;
     margin-left: 11%;
+}
+
+.product-card-container p {
+    margin: 0;
+}
+
+.main-img-slider img {
+    width: 100%;
 }
 
 .change-slide-setas-corrigir-nome {
@@ -12,4 +24,28 @@
 
 .product-card-sub-images {
     margin-top: 55px;
+}
+
+.product-price-container {
+    width: 60%;
+}
+
+.product-price-availability {
+    width: 25%;
+}
+
+.product-details-container {
+    width: 60%;
+}
+
+.product-qtde-container {
+    width: 60%;
+}
+
+.product-category-container {
+    font-size: 12px;
+}
+
+.product-specifications-container {
+    width: 40%;
 }
