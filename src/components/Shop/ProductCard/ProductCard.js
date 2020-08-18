@@ -40,25 +40,70 @@ const productCard = props => {
                     <div className="product-details-container d-flex justify-content-between mt-4">
                         <div>
                             <p>Size</p>
-                            <select className="mt-2">
+                            <select className="
+                                    product-details-select 
+                                    mt-2 
+                                    border-left-0 
+                                    border-right-0
+                                    border-top-0
+                                    border-bottom
+                                "
+                            >
                                 <option>100x100 cm</option>
                                 <option>200x200 cm</option>
                                 <option>300x300 cm</option>
                             </select>
                         </div>
                         <div>
+                            {/* Removi a borda do bootstrap e passei pro css para que seja possível alterá-la durante o hover. Verificar como fazer o mesmo no caso do 'focus'. Além disso transformar esse trecho em algo dinâmico que será lido provavelmente de um objeto. E também é falta inserir a propriedade 'hover' nos spans, para que as cores sejam mais claras quando não estiverem selecionados. Não coloquei aqui, pois já que a lista de opções ainda não está dinâmica eu teria que criar uma classe para cada span. */}
                             <p>Color</p>
-                            <div className="mt-2">
-                                <input type="checkbox" />
-                                <input type="checkbox" />
-                                <input type="checkbox" />
+                            <div className="d-flex justify-content-between">
+                                <div className="
+                                        product-details-color 
+                                        mt-2 
+                                        rounded-circle 
+                                        d-flex 
+                                        justify-content-center 
+                                        align-items-center
+                                    "
+                                >
+                                    <span className="bg-primary rounded-circle"></span>
+                                </div>
+                                <div className="
+                                        product-details-color 
+                                        mt-2 
+                                        rounded-circle 
+                                        d-flex 
+                                        justify-content-center 
+                                        align-items-center
+                                    "
+                                >
+                                    <span className="bg-success rounded-circle"></span>
+                                </div>
+                                <div className="
+                                        product-details-color 
+                                        mt-2 
+                                        rounded-circle 
+                                        d-flex 
+                                        justify-content-center 
+                                        align-items-center
+                                    "
+                                >
+                                    <span className="bg-danger rounded-circle"></span>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div className="product-qtde-container d-flex justify-content-between align-items-center mt-4">
-                        <input type="number" name="tentacles" min="0"/>
-                        <p>ADD TO BAG</p>     
-                        <FontAwesomeIcon icon={["far", "heart"]} />
+                        <div className="product-qtde d-flex justify-content-around align-items-center border">
+                            <p>1</p>
+                            <div className="product-qtde-arrows d-flex flex-column justify-content-between">
+                                <FontAwesomeIcon icon="chevron-up" size="xs"/>
+                                <FontAwesomeIcon icon="chevron-down" size="xs"/>
+                            </div>
+                        </div>
+                        <button type="button" className="btn btn-dark">ADD TO BAG</button>   
+                        <FontAwesomeIcon icon={["far", "heart"]} size="2x" />
                     </div>
                     <div className="product-category-container mt-3">
                         <p>Category: <span className="font-weight-bold"> Living room</span></p>

@@ -21,7 +21,9 @@ import {
   faTrophy,
   faFilter,
   faShareAlt,
-  faCheck
+  faCheck,
+  faChevronDown,
+  faChevronUp
 } from '@fortawesome/free-solid-svg-icons'
 
 import {
@@ -45,7 +47,9 @@ library.add(
   faTrophy,
   faFilter,
   faShareAlt,
-  faCheck
+  faCheck,
+  faChevronDown,
+  faChevronUp
 )
 
 function App() {
