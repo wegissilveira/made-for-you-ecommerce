@@ -6,6 +6,7 @@ import Layout from './containers/Layout/Layout'
 import MainPageConfig from './containers/MainPageConfig/MainPageConfig'
 import ShopConfig from './containers/ShopConfig/ShopConfig'
 
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import {
@@ -54,10 +55,15 @@ library.add(
 
 function App() {
   return (
-    <Layout>
-      {/* <MainPageConfig /> */}
-      <ShopConfig />
-    </Layout>
+    <BrowserRouter>
+      <Layout>
+        <Switch>
+          <Route path="/" exact component={MainPageConfig} />
+          <Route path="/shop" exact component={ShopConfig} />
+        </Switch>
+      </Layout>
+    </BrowserRouter>
+    
   );
 }
 

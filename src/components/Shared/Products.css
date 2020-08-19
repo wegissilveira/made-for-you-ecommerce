@@ -1,7 +1,7 @@
-.products-container {
+/* .products-container {
     width: 75.8%;
     margin-left: 12.1%;
-}
+} */
 
 .products-description {
     height: 75px;
@@ -27,11 +27,10 @@
     
 }
 
-.products-showmore-text p {
+.products-showmore-text button {
     width: 131px;
     height: 131px;
     margin: auto;
-    padding-top: 50px;
     color: #3A3A3A;
     border: 1px solid #bbbbbb;
     border-radius: 50%;
@@ -40,4 +39,8 @@
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
+}
+
+.products-showmore-text button:focus {
+    outline: none;
 }

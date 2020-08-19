@@ -10,8 +10,8 @@ class ShopConfig extends Component {
     render () {
         return (
             <Fragment>
-                {/* <ShopProducts /> */}
-                <ProductCard />
+                <ShopProducts />
+                {/* <ProductCard /> */}
             </Fragment>
         )
     }
