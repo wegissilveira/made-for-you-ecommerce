@@ -21,13 +21,18 @@
     margin: 0;
 }
 
-.products-showmore {
+.products-show-container {
+    width: 40%;
+    margin-left: 30%;
+}
+
+.products-show {
     margin-top: 50px;
     text-align: center;
     
 }
 
-.products-showmore-text button {
+.products-show-text button {
     width: 131px;
     height: 131px;
     margin: auto;
@@ -41,6 +46,6 @@
     -o-border-radius: 50%;
 }
 
-.products-showmore-text button:focus {
+.products-show-text button:focus {
     outline: none;
 }
