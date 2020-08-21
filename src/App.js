@@ -24,7 +24,9 @@ import {
   faShareAlt,
   faCheck,
   faChevronDown,
-  faChevronUp
+  faChevronUp,
+  faCaretDown,
+  // faSortDown
 } from '@fortawesome/free-solid-svg-icons'
 
 import {
@@ -50,7 +52,9 @@ library.add(
   faShareAlt,
   faCheck,
   faChevronDown,
-  faChevronUp
+  faChevronUp,
+  faCaretDown,
+  // faSortDown
 )
 
 function App() {

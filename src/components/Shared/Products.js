@@ -24,7 +24,9 @@ const Products = props => {
                 {
                     products.map((product, i) => {
                         let productsList
+                        // O loop é executado somente se os itens forem menores que 'count', variável que determina quantos itens serão mostrados na tela, isso garante que não sejam exibidos todos os itens de uma vez e que o usuário tenha o controle de incrementar ou diminuir 'count'
                         if (i + 1 <= count) {
+                            // Mostra o item relacionado à aba clicada, furniture, textile ou decorations
                             if (props.tag === 'all' || product.tag === props.tag) {
                                 productsList = <div className=" col-3 mt-4 pl-0" key={product+i}>
                                                     <div className="border p-0">
