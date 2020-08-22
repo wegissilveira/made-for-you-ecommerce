@@ -17,6 +17,7 @@
 
 .products-select p {
     display: none;
+    cursor: default;
 }
 
 .products-select-active {

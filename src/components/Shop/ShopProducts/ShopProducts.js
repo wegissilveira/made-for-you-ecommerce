@@ -10,7 +10,7 @@ const shopProducts = props => {
         <div>
             <h1 className="text-center mb-5 mt-5">SHOP</h1>
             <Filter />
-            <Products />
+            {/* <Products /> */}
             <BestDeal />
         </div>
     )
