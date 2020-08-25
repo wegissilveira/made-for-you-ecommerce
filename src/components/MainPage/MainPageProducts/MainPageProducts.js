@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Products from '../../Shared/Products'
+import products from '../../../productsData'
 
 import './MainPageProducts.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -9,105 +10,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const MainPageProducts = props => {
 
     let [tag, setTag] = React.useState('all')
-
-    let products = [
-        {
-            name: 'Produto',
-            price: '38.99',
-            img: require('../../../assets/images/Products/molde-textile.png'),
-            tag: 'textile'
-        },
-        {
-            name: 'Produto',
-            price: '38.99',
-            img: require('../../../assets/images/Products/molde-furniture.png'),
-            tag: 'furniture'
-        },
-        {
-            name: 'Produto',
-            price: '38.99',
-            img: require('../../../assets/images/Products/molde-decorations.png'),
-            tag: 'decorations'
-        },
-        {
-            name: 'Produto',
-            price: '38.99',
-            img: require('../../../assets/images/Products/molde-furniture.png'),
-            tag: 'furniture'
-        },
-        {
-            name: 'Produto',
-            price: '38.99',
-            img: require('../../../assets/images/Products/molde-decorations.png'),
-            tag: 'decorations'
-        },
-        {
-            name: 'Produto',
-            price: '38.99',
-            img: require('../../../assets/images/Products/molde-furniture.png'),
-            tag: 'furniture'
-        },
-        {
-            name: 'Produto',
-            price: '38.99',
-            img: require('../../../assets/images/Products/molde-textile.png'),
-            tag: 'textile'
-        },
-        {
-            name: 'Produto',
-            price: '38.99',
-            img: require('../../../assets/images/Products/molde-furniture.png'),
-            tag: 'furniture'
-        },
-        {
-            name: 'Produto',
-            price: '38.99',
-            img: require('../../../assets/images/Products/molde-textile.png'),
-            tag: 'textile'
-        },
-        {
-            name: 'Produto',
-            price: '38.99',
-            img: require('../../../assets/images/Products/molde-decorations.png'),
-            tag: 'decorations'
-        },
-        {
-            name: 'Produto',
-            price: '38.99',
-            img: require('../../../assets/images/Products/molde-decorations.png'),
-            tag: 'decorations'
-        },
-        {
-            name: 'Produto',
-            price: '38.99',
-            img: require('../../../assets/images/Products/molde-furniture.png'),
-            tag: 'furniture'
-        },
-        {
-            name: 'Produto',
-            price: '38.99',
-            img: require('../../../assets/images/Products/molde-furniture.png'),
-            tag: 'furniture'
-        },
-        {
-            name: 'Produto',
-            price: '38.99',
-            img: require('../../../assets/images/Products/molde-furniture.png'),
-            tag: 'furniture'
-        },
-        {
-            name: 'Produto',
-            price: '38.99',
-            img: require('../../../assets/images/Products/molde-textile.png'),
-            tag: 'textile'
-        },
-        {
-            name: 'Produto',
-            price: '38.99',
-            img: require('../../../assets/images/Products/molde-decorations.png'),
-            tag: 'decorations'
-        },
-    ]
 
     const setActiveTabHandler = e => {
 

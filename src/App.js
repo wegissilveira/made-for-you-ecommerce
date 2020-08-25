@@ -5,6 +5,7 @@ import './App.css';
 import Layout from './containers/Layout/Layout'
 import MainPageConfig from './containers/MainPageConfig/MainPageConfig'
 import ShopConfig from './containers/ShopConfig/ShopConfig'
+import ProductCard from './components/Shop/ProductCard/ProductCard'
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -64,6 +65,7 @@ function App() {
         <Switch>
           <Route path="/" exact component={MainPageConfig} />
           <Route path="/shop" exact component={ShopConfig} />
+          <Route path="/shop/:id" exact component={ProductCard} />
         </Switch>
       </Layout>
     </BrowserRouter>

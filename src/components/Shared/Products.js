@@ -3,8 +3,9 @@ import React, { Fragment } from 'react'
 import './Products.css'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from 'react-router-dom'
 
-import ProductCard from '../Shop/ProductCard/ProductCard'
+import ProductCardModal from '../Shop/ProductCardModal/ProductCardModal'
 
 const Products = props => {
 
@@ -41,7 +42,13 @@ const Products = props => {
                                     productsList = <Fragment key={product+i}>
                                                         <div className=" col-3 mt-4 pl-0">
                                                             <div className="border p-0">
-                                                                <img src={product.img} alt="Produto" style={{maxWidth: '100%'}} />
+                                                                <Link to={"/shop/" + product._id} >
+                                                                    <img 
+                                                                        // onClick={() => setCard(i)} 
+                                                                        src={product.img} alt="Produto" 
+                                                                        style={{maxWidth: '100%'}} 
+                                                                    />
+                                                                </Link>
                                                                 <div className="products-description d-flex justify-content-between align-items-center">
                                                                     <div className="d-flex flex-column align-items-start products-description-icons">
                                                                         <p>{product.name}</p>
@@ -55,7 +62,15 @@ const Products = props => {
                                                             </div>
                                                             
                                                         </div>
-                                                        {productIndex === i ? <ProductCard product={product} imgs={product.imgsDemo} showProduct={showProduct} name={product.name}/> : null}
+                                                        { productIndex === i ? 
+                                                            <ProductCardModal 
+                                                                showProduct={showProduct}
+                                                                setShowProduct={setShowProduct}
+                                                                product={product} 
+                                                                imgs={product.imgsDemo} 
+                                                                name={product.name}
+                                                            /> 
+                                                        : null }
                                                     </Fragment>
                                 }
                             }

@@ -1,0 +1,37 @@
+.product-price-container-modal {
+    width: 80%;
+}
+
+.product-card-modal-exit {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin-right: 15px;
+    margin-top: 10px;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.product-price-availability p {
+    margin: 0;
+}
+
+.product-details-container-modal {
+    width: 70%;
+}
+
+.product-qtde-container-modal {
+    width: 80%;
+}
+
+.product-qtde-container-modal button {
+    font-size: 12px;
+    height: 45px;
+    width: 160px;
+    border-radius: 0;
+    -webkit-border-radius: none;
+    -moz-border-radius: 0;
+    -ms-border-radius: 0;
+    -o-border-radius: 0;
+    -webkit-border-radius: 0;
+}
