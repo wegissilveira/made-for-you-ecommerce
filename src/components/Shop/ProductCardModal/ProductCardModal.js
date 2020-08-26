@@ -1,12 +1,11 @@
 import React, { Fragment } from 'react'
 
 import './ProductCardModal.css'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
-// import products from '../../../productsData'
-
-import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
+
+import ProductsQtde from '../../Shared/ProductsQtde/ProductsQtde'
 
 const customStyles = {
     content : {
@@ -33,37 +32,20 @@ const ProductCardModal = props => {
             imgSlide < props.imgs.length - 1 ? setImgSlide(imgSlide + 1) : setImgSlide(0)
         }
     }
-
-    // var subtitle;
-    const [modalIsOpen,setIsOpen] = React.useState(false);
-    function openModal() {
-      setIsOpen(true);
-    }
    
-    // function afterOpenModal() {
-    //   // references are now sync'd and can be accessed.
-    //   subtitle.style.color = '#f00';
-    // }
-   
-    function closeModal(){
-      setIsOpen(false);
-    }
 
     return (
         <Fragment>
-            {/* <button onClick={openModal}>Open Modal</button> */}
             <Modal
                 isOpen={props.showProduct}
-                // onAfterOpen={afterOpenModal}
-                onRequestClose={closeModal}
+                onRequestClose={() => props.setShowProduct(false)}
                 style={customStyles}
-                contentLabel="Example Modal"
+                contentLabel="Product Card"
                 ariaHideApp={false}
-                // onClick={() => props.setShowProduct()}
             >
 
                 <div className="container-fluid d-flex">
-                    <p className="product-card-modal-exit" onClick={() => props.setShowProduct()}>X</p>
+                    <p className="product-card-modal-exit" onClick={() => props.setShowProduct(false)}>X</p>
                     <div className="col-6 pl-0 pr-5">
                         <div className="main-img-slider">
                             <img src={props.product.imgsDemo[imgSlide]} alt="img-1" />
@@ -88,7 +70,7 @@ const ProductCardModal = props => {
                         <h1 className="mt-1">{props.product.name}</h1>
                         <p>A comfortable bed for the dog. It will bring a lot of pleasure to your pet. High quality material does not allow the wool to stick and easy to clean.</p>
                         <div className="product-price-container-modal d-flex justify-content-between mt-4">
-                            <h3 className="mb-0">$ 37.99</h3>
+                            <h3 className="mb-0">$ {props.product.price}</h3>
                             <div className="product-price-availability d-flex justify-content-between align-items-center text-success">
                                 <FontAwesomeIcon icon="check" />
                                 <p>Available</p>
@@ -151,13 +133,7 @@ const ProductCardModal = props => {
                             </div>
                         </div>
                         <div className="product-qtde-container-modal d-flex justify-content-between align-items-center mt-4">
-                            <div className="product-qtde d-flex justify-content-around align-items-center border">
-                                <p style={{margin:'0'}}>1</p>
-                                <div className="product-qtde-arrows d-flex flex-column justify-content-between">
-                                    <FontAwesomeIcon icon="chevron-up" size="xs"/>
-                                    <FontAwesomeIcon icon="chevron-down" size="xs"/>
-                                </div>
-                            </div>
+                            <ProductsQtde />
                             <button type="button" className="btn btn-dark">ADD TO BAG</button>   
                             <FontAwesomeIcon icon={["far", "heart"]} size="2x" />
                         </div>

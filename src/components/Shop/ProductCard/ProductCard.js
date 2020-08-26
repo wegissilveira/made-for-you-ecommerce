@@ -1,26 +1,27 @@
 import React, { Fragment } from 'react'
 
 import './ProductCard.css'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import products from '../../../productsData'
+import ProductsQtde from '../../Shared/ProductsQtde/ProductsQtde'
   
 
 const ProductCard = props => {
     
     let [imgSlide, setImgSlide] = React.useState(0)
 
-    const product = products.find(x => x._id === props.match.params.id)
+    const product = products.find(product => product._id === props.match.params.id)
 
     const changeSlide = arg => {
-
         if (arg === 'previous') {
             imgSlide > 0 ? setImgSlide(imgSlide - 1) : setImgSlide(product.imgsDemo.length - 1)
         } else if (arg === 'next') {
             imgSlide < product.imgsDemo.length - 1 ? setImgSlide(imgSlide + 1) : setImgSlide(0)
         }
     }
-    
+
 
     return (
         
@@ -49,7 +50,7 @@ const ProductCard = props => {
                         <h1 className="mt-5">{product.name}</h1>
                         <p>A comfortable bed for the dog. It will bring a lot of pleasure to your pet. High quality material does not allow the wool to stick and easy to clean.</p>
                         <div className="product-price-container d-flex justify-content-between mt-4">
-                            <h3 className="mb-0">$ 37.99</h3>
+                            <h3 className="mb-0">$ {product.price}</h3>
                             <div className="product-price-availability d-flex justify-content-between align-items-center text-success">
                                 <FontAwesomeIcon icon="check" />
                                 <p>Available</p>
@@ -113,13 +114,7 @@ const ProductCard = props => {
                             </div>
                         </div>
                         <div className="product-qtde-container d-flex justify-content-between align-items-center mt-4">
-                            <div className="product-qtde d-flex justify-content-around align-items-center border">
-                                <p>1</p>
-                                <div className="product-qtde-arrows d-flex flex-column justify-content-between">
-                                    <FontAwesomeIcon icon="chevron-up" size="xs"/>
-                                    <FontAwesomeIcon icon="chevron-down" size="xs"/>
-                                </div>
-                            </div>
+                            <ProductsQtde />
                             <button type="button" className="btn btn-dark">ADD TO BAG</button>   
                             <FontAwesomeIcon icon={["far", "heart"]} size="2x" />
                         </div>

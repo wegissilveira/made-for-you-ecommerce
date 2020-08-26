@@ -5,7 +5,7 @@ import './Products.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from 'react-router-dom'
 
-import ProductCardModal from '../Shop/ProductCardModal/ProductCardModal'
+import ProductCardModal from '../../Shop/ProductCardModal/ProductCardModal'
 
 const Products = props => {
 
@@ -23,6 +23,12 @@ const Products = props => {
     const setCard = i => {
         setShowProduct(!showProduct)
         setProductIndex(i)
+    }
+
+    if (showProduct === true) {
+        document.body.style.overflow = "hidden"
+    } else {
+        document.body.style.overflow = "visible"
     }
 
 

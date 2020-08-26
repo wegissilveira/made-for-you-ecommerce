@@ -2,7 +2,7 @@ const products = [
     {
         _id: '1',
         name: 'Produto-1',
-        price: '38.99',
+        price: '48.99',
         img: require('./assets/images/Products/molde-textile.png'),
         tag: 'textile',
         imgsDemo: [
