@@ -5,8 +5,8 @@
 
 .circle-progress {
     stroke: rgb(151, 151, 151);
-    stroke-linecap: round;
-    stroke-linejoin: round;
+    stroke-linecap: butt;
+    stroke-linejoin: butt;
 }
 
 .circle-center {

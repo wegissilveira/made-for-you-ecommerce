@@ -58,13 +58,13 @@ const MainPageHeader = props => {
         },
     ]
 
-    // React.useEffect(() => {
-    //     const interval = setTimeout(() => {
-    //         changeSlide('next', mainSlides, slideImg, setSlideImg)
-    //         changeSlide('next', minorSlides, minorSlideImg, setMinorSlideImg)
-    //     }, 5000);
-    //     return () => clearTimeout(interval);
-    // });
+    React.useEffect(() => {
+        const interval = setTimeout(() => {
+            changeSlide('next', mainSlides, slideImg, setSlideImg)
+            changeSlide('next', minorSlides, minorSlideImg, setMinorSlideImg)
+        }, 5000);
+        return () => clearTimeout(interval);
+    });
 
 
 
@@ -86,7 +86,7 @@ const MainPageHeader = props => {
             </div>
             <div className="header-text row">
                 <div className="col-1 d-flex flex-column justify-content-between" style={{height: '150px'}}>
-                    <ProgressBar bar={4} />
+                    <ProgressBar bar={4} timer={5000} />
                 </div>
                 <div className="header-title col-4">
                     <p>MADE</p>
