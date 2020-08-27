@@ -5,7 +5,7 @@ import './ProductCard.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import products from '../../../productsData'
-import ProductsQtde from '../../Shared/ProductsQtde/ProductsQtde'
+import ProductsQtde from '../../UI/ProductsQtde/ProductsQtde'
   
 
 const ProductCard = props => {

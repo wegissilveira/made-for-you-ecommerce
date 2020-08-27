@@ -5,7 +5,7 @@ import './ProductCardModal.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Modal from 'react-modal';
 
-import ProductsQtde from '../../Shared/ProductsQtde/ProductsQtde'
+import ProductsQtde from '../../UI/ProductsQtde/ProductsQtde'
 
 const customStyles = {
     content : {

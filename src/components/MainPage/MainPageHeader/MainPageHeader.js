@@ -5,6 +5,8 @@ import './MainPageHeader.css'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import ProgressBar from '../../UI/ProgressBar/ProgressBar';
+
 const MainPageHeader = props => {
 
     let [slideImg, setSlideImg] = React.useState(0)
@@ -56,13 +58,13 @@ const MainPageHeader = props => {
         },
     ]
 
-    React.useEffect(() => {
-        const interval = setInterval(() => {
-            changeSlide('next', mainSlides, slideImg, setSlideImg)
-            changeSlide('next', minorSlides, minorSlideImg, setMinorSlideImg)
-        }, 5000);
-        return () => clearInterval(interval);
-    });
+    // React.useEffect(() => {
+    //     const interval = setTimeout(() => {
+    //         changeSlide('next', mainSlides, slideImg, setSlideImg)
+    //         changeSlide('next', minorSlides, minorSlideImg, setMinorSlideImg)
+    //     }, 5000);
+    //     return () => clearTimeout(interval);
+    // });
 
 
 
@@ -82,14 +84,11 @@ const MainPageHeader = props => {
                     </div>
                 </div>
             </div>
-            <div className="header-text">
-                <div className="icone-provisorio">
-                    <p>*</p>
-                    <p>*</p>
-                    <p>*</p>
-                    <p>*</p>
+            <div className="header-text row">
+                <div className="col-1 d-flex flex-column justify-content-between" style={{height: '150px'}}>
+                    <ProgressBar bar={4} />
                 </div>
-                <div style={{fontSize: '100px', fontWeight: 'bold', lineHeight:'70px'}}>
+                <div className="header-title col-4">
                     <p>MADE</p>
                     <p>FOR YOU</p>
                 </div>

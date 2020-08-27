@@ -8,6 +8,12 @@
     position: relative;
 }
 
+.header-title {
+    font-size: 100px;
+    font-weight: bold;
+    line-height: 70px;
+}
+
 .icones {
     margin-bottom: 14px;
 }
