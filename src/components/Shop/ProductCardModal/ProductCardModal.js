@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Modal from 'react-modal';
 
 import ProductsQtde from '../../UI/ProductsQtde/ProductsQtde'
+import ProgressBar from '../../UI/ProgressBar/ProgressBar'
 
 const customStyles = {
     content : {
@@ -24,15 +25,18 @@ const ProductCardModal = props => {
         
     let [imgSlide, setImgSlide] = React.useState(0)
 
+    // Case eu decida que as setas sejam definitivamente removidas asa condições 'next' e 'previous' também podem ser retiradas da equação
     const changeSlide = arg => {
 
         if (arg === 'previous') {
             imgSlide > 0 ? setImgSlide(imgSlide - 1) : setImgSlide(props.imgs.length - 1)
         } else if (arg === 'next') {
             imgSlide < props.imgs.length - 1 ? setImgSlide(imgSlide + 1) : setImgSlide(0)
+        } else if (typeof arg === 'number') {
+            setImgSlide(arg)
         }
     }
-   
+    
 
     return (
         <Fragment>
@@ -50,16 +54,19 @@ const ProductCardModal = props => {
                         <div className="main-img-slider">
                             <img src={props.product.imgsDemo[imgSlide]} alt="img-1" />
                         </div>
-                        <div className="d-flex row justify-content-between mt-4">
-                            <div className="d-flex justify-content-between col-3">
-                                <p>*</p>
-                                <p>*</p>
-                                <p>*</p>
-                            </div>
-                            <div className="d-flex justify-content-between col-2">
+                        <div className="d-flex row justify-content-between mt-4 ml-1">
+                            <ProgressBar 
+                                bars={props.product.imgsDemo.length}
+                                auto={true}
+                                timer={5000}
+                                change={changeSlide}
+                                // slide={imgSlide}
+                            />
+                            {/* Não consegui sincronizar as setas com as barras (também não insisti), por isso vou deixar isso suspenso por enquanto e talvez volte depois, já que gastei muito tempo com isso. */}
+                            {/* <div className="d-flex justify-content-between col-2">
                                 <FontAwesomeIcon onClick={() => changeSlide('previous')} icon="arrow-left" />
                                 <FontAwesomeIcon onClick={() => changeSlide('next')} icon="arrow-right" />
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                     <div className="col-6">

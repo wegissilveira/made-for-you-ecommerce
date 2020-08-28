@@ -35,7 +35,7 @@ const ProgressBar = props => {
             setPercentage(100)
         }
     })
-    
+
     // Passa o slide manualmente
     const changeSlideHandler = arg => {
 

@@ -18,7 +18,7 @@ const ShopProducts = props => {
                 pageLimit={12} 
                 tag={tag}
             />
-            <BestDeal />
+            <BestDeal products={products} />
         </div>
     )
 }

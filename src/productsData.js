@@ -9,7 +9,8 @@ const products = [
             require('./assets/images/ProductCard/Textile/img-1.png'),
             require('./assets/images/ProductCard/Textile/img-2.png'),
             require('./assets/images/ProductCard/Textile/img-3.png'),
-        ]
+        ],
+        deal: false
     },
     {
         _id: '2',
@@ -21,7 +22,8 @@ const products = [
             require('./assets/images/ProductCard/Furniture/img-1.png'),
             require('./assets/images/ProductCard/Furniture/img-2.png'),
             require('./assets/images/ProductCard/Furniture/img-3.png'),
-        ]
+        ],
+        deal: true
     },
     {
         _id: '3',
@@ -33,7 +35,8 @@ const products = [
             require('./assets/images/ProductCard/Decorations/img-1.png'),
             require('./assets/images/ProductCard/Decorations/img-2.png'),
             require('./assets/images/ProductCard/Decorations/img-3.png'),
-        ]
+        ],
+        deal: false
     },
     {
         _id: '4',
@@ -45,7 +48,8 @@ const products = [
             require('./assets/images/ProductCard/Furniture/img-1.png'),
             require('./assets/images/ProductCard/Furniture/img-2.png'),
             require('./assets/images/ProductCard/Furniture/img-3.png'),
-        ]
+        ],
+        deal: false
     },
     {
         _id: '5',
@@ -57,7 +61,8 @@ const products = [
             require('./assets/images/ProductCard/Decorations/img-1.png'),
             require('./assets/images/ProductCard/Decorations/img-2.png'),
             require('./assets/images/ProductCard/Decorations/img-3.png'),
-        ]
+        ],
+        deal: true
     },
     {
         _id: '6',
@@ -69,7 +74,8 @@ const products = [
             require('./assets/images/ProductCard/Furniture/img-1.png'),
             require('./assets/images/ProductCard/Furniture/img-2.png'),
             require('./assets/images/ProductCard/Furniture/img-3.png'),
-        ]
+        ],
+        deal: true
     },
     {
         _id: '7',
@@ -81,7 +87,8 @@ const products = [
             require('./assets/images/ProductCard/Textile/img-1.png'),
             require('./assets/images/ProductCard/Textile/img-2.png'),
             require('./assets/images/ProductCard/Textile/img-3.png'),
-        ]
+        ],
+        deal: false
     },
     {
         _id: '8',
@@ -93,7 +100,8 @@ const products = [
             require('./assets/images/ProductCard/Furniture/img-1.png'),
             require('./assets/images/ProductCard/Furniture/img-2.png'),
             require('./assets/images/ProductCard/Furniture/img-3.png'),
-        ]
+        ],
+        deal: false
     },
     {
         _id: '9',
@@ -105,7 +113,8 @@ const products = [
             require('./assets/images/ProductCard/Textile/img-1.png'),
             require('./assets/images/ProductCard/Textile/img-2.png'),
             require('./assets/images/ProductCard/Textile/img-3.png'),
-        ]
+        ],
+        deal: true
     },
     {
         _id: '10',
@@ -117,7 +126,8 @@ const products = [
             require('./assets/images/ProductCard/Decorations/img-1.png'),
             require('./assets/images/ProductCard/Decorations/img-2.png'),
             require('./assets/images/ProductCard/Decorations/img-3.png'),
-        ]
+        ],
+        deal: true
     },
     {
         _id: '11',
@@ -129,7 +139,8 @@ const products = [
             require('./assets/images/ProductCard/Furniture/img-1.png'),
             require('./assets/images/ProductCard/Furniture/img-2.png'),
             require('./assets/images/ProductCard/Furniture/img-3.png'),
-        ]
+        ],
+        deal: false
     },
     {
         _id: '12',
@@ -141,7 +152,8 @@ const products = [
             require('./assets/images/ProductCard/Furniture/img-1.png'),
             require('./assets/images/ProductCard/Furniture/img-2.png'),
             require('./assets/images/ProductCard/Furniture/img-3.png'),
-        ]
+        ],
+        deal: true
     },
     {
         _id: '13',
@@ -153,7 +165,8 @@ const products = [
             require('./assets/images/ProductCard/Furniture/img-1.png'),
             require('./assets/images/ProductCard/Furniture/img-2.png'),
             require('./assets/images/ProductCard/Furniture/img-3.png'),
-        ]
+        ],
+        deal: false
     },
     {
         _id: '14',
@@ -165,7 +178,8 @@ const products = [
             require('./assets/images/ProductCard/Furniture/img-1.png'),
             require('./assets/images/ProductCard/Furniture/img-2.png'),
             require('./assets/images/ProductCard/Furniture/img-3.png'),
-        ]
+        ],
+        deal: true
     },
     {
         _id: '15',
@@ -177,7 +191,8 @@ const products = [
             require('./assets/images/ProductCard/Textile/img-1.png'),
             require('./assets/images/ProductCard/Textile/img-2.png'),
             require('./assets/images/ProductCard/Textile/img-3.png'),
-        ]
+        ],
+        deal: true
     },
     {
         _id: '16',
@@ -189,7 +204,8 @@ const products = [
             require('./assets/images/ProductCard/Decorations/img-1.png'),
             require('./assets/images/ProductCard/Decorations/img-2.png'),
             require('./assets/images/ProductCard/Decorations/img-3.png'),
-        ]
+        ],
+        deal: false
     },
 ]
 

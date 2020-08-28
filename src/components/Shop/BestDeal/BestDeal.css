@@ -15,3 +15,14 @@
 .bestDeal-passaSlide {
     width: 7%;
 }
+
+/* Fazer com que imagem fique quadrada. Baseado na resposta: https://stackoverflow.com/questions/23400232/force-bootstrap-responsive-image-to-be-square/23518465#23518465 */
+
+.image{
+    position:relative;
+    overflow:hidden;
+    padding-bottom:100%;
+}
+.image img{
+    position:absolute;
+}

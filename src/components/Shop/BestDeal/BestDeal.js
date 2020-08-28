@@ -1,53 +1,60 @@
 import React from 'react'
 
 import './BestDeal.css'
+import ProgressBar from '../../UI/ProgressBar/ProgressBar'
 
-const bestDeal = props => {
+const BestDeal = props => {
+
+    let [imgSlide, setImgSlide] = React.useState(0)
+
+    // Array com os produtos que possuem 'deal: true'. Garante que todos sejam mostrados e que não haja fileiras incompletas. 
+    // Explicação mais detalhada no componente 'Produtos', que possui a mesma lógica para exibição de produtos com tag
+    const products = props.products.filter(product => product.deal)
+
+    const changeSlide = arg => {
+        if (typeof arg === 'number') {
+            setImgSlide(arg)
+        } else {
+            imgSlide === products.length - 1 ? setImgSlide(0) : setImgSlide(imgSlide + 1)
+        }
+    }
+
 
     return (
         <div className="session-container">
             <h1 className="text-center mb-5">BEST DEAL</h1>
-            <div className="products-container d-flex justify-content-between mb-5">
-                <div className="border">
-                    <img src={require('../../../assets/images/Products/molde - deal.png')} alt="img-deal" />
-                    <div className="products-description d-flex flex-column justify-content-center">
-                        <p>DECORATIVE PILLOW</p>
-                        <p>$ 12.99</p>
-                    </div>
-                </div>
-                <div className="border">
-                    <img src={require('../../../assets/images/Products/molde - deal.png')} alt="img-deal" />
-                    <div className="products-description d-flex flex-column justify-content-center">
-                        <p>DECORATIVE PILLOW</p>
-                        <p>$ 12.99</p>
-                    </div>
-                </div>
-                <div className="border">
-                    <img src={require('../../../assets/images/Products/molde - deal.png')} alt="img-deal" />
-                    <div className="products-description d-flex flex-column justify-content-center">
-                        <p>DECORATIVE PILLOW</p>
-                        <p>$ 12.99</p>
-                    </div>
-                </div>
-                <div className="border">
-                    <img src={require('../../../assets/images/Products/molde - deal.png')} alt="img-deal" />
-                    <div className="products-description d-flex flex-column justify-content-center">
-                        <p>DECORATIVE PILLOW</p>
-                        <p>$ 12.99</p>
-                    </div>
-                </div>
+            <div className="products-container row d-flex mb-5">
+                {
+                    products.map((product, i) => {
+                        if (i >= imgSlide && i < imgSlide + 4) {
+                            if (product.deal) {
+                                return <div key={i} className="col-3">
+                                            <div className="border ">
+                                                <div className="image" >
+                                                    <img className="img" src={product.img} alt="img-deal" />
+                                                </div>
+                                                <div className="products-description d-flex flex-column justify-content-center">
+                                                    <p>{product.name}</p>
+                                                    <p>{product.price}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                            }
+                        }
+                    })
+                }
                 
             </div>
             <div className="d-flex justify-content-center" >
-                <div className="bestDeal-passaSlide d-flex justify-content-between">
-                    <p>*</p>
-                    <p>*</p>
-                    <p>*</p>
-                    <p>*</p>
-                </div>
+                <ProgressBar 
+                    bars={products.length}
+                    auto={true}
+                    timer={5000}
+                    change={changeSlide}
+                />
             </div>
         </div>
     )
 }
 
-export default bestDeal
+export default BestDeal

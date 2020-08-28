@@ -13,6 +13,9 @@ const Products = props => {
     let [showProduct, setShowProduct] = React.useState(false)
     let [productIndex, setProductIndex] = React.useState(null)
     
+    // O loop para a exibição dos produtos é realizado sobre o array 'products', que possui todos os itens ou somente os produtos com a tag selecionada. 
+    // Caso utilizemos diretamente o array completo quando alguma tag estiver selecionada isso fará com que só sejam mostrados os itens que ocupam indexes inferiores ao valor de 'count', 
+    // O que é perfeito em caso de todos os produtos estarem sendo mostrados, mas que criaria fileiras incompletas quando se seleciona alguma tag
     let products 
     if (props.tag === 'all') {
         products = props.products

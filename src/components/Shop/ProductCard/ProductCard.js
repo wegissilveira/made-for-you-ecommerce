@@ -19,6 +19,8 @@ const ProductCard = props => {
             imgSlide > 0 ? setImgSlide(imgSlide - 1) : setImgSlide(product.imgsDemo.length - 1)
         } else if (arg === 'next') {
             imgSlide < product.imgsDemo.length - 1 ? setImgSlide(imgSlide + 1) : setImgSlide(0)
+        }else if (typeof arg !== isNaN) {
+            setImgSlide(arg)
         }
     }
 
@@ -37,9 +39,9 @@ const ProductCard = props => {
                             </div>
                         </div>
                         <div className="d-flex justify-content-between product-card-sub-images">
-                            <img src={product.imgsDemo[0]} alt="img-1" style={{maxWidth: '30%', maxHeight: '30%'}} />
-                            <img src={product.imgsDemo[1]} alt="img-2" style={{maxWidth: '30%', maxHeight: '30%'}} />
-                            <img src={product.imgsDemo[2]} alt="img-3" style={{maxWidth: '30%', maxHeight: '30%'}} />
+                            <img onClick={() => changeSlide(0)} src={product.imgsDemo[0]} alt="img-1" style={{maxWidth: '30%', maxHeight: '30%', cursor: 'pointer'}} />
+                            <img onClick={() => changeSlide(1)} src={product.imgsDemo[1]} alt="img-2" style={{maxWidth: '30%', maxHeight: '30%', cursor: 'pointer'}} />
+                            <img onClick={() => changeSlide(2)} src={product.imgsDemo[2]} alt="img-3" style={{maxWidth: '30%', maxHeight: '30%', cursor: 'pointer'}} />
                         </div>
                     </div>
                     <div className="col-6 ml-5">

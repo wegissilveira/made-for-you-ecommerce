@@ -97,7 +97,7 @@ const MainPageHeader = props => {
             <div className="header-text row">
                 {/* <div> */}
                     <ProgressBar 
-                        bars={4} // => Qtde de barras
+                        bars={minorSlides.length} // => Qtde de barras
                         timer={5000} // => Tempo do loop
                         change={changeSlideCallbackHandler} // => Função que controla a passagem automática de slides
                         auto={true} // => Determina se a passagem de slides e barras será automática
