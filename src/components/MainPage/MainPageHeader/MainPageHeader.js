@@ -12,14 +12,6 @@ const MainPageHeader = props => {
     let [slideImg, setSlideImg] = React.useState(0)
     let [minorSlideImg, setMinorSlideImg] = React.useState(0)
 
-    const changeSlide = (arg, obj, img, fn) => {
-        if (arg === 'next') {
-            img < obj.length - 1 ? fn(img + 1) : fn(0) 
-        } else if (arg === 'previous') {
-            img > 0 ? fn(img - 1) : fn(obj.length - 1) 
-        }
-    }    
-
     let mainSlides = [
         {
             img: require('../../../assets/images/Header/MainSlider/imgSlider1-mainpage.png'),
@@ -57,14 +49,32 @@ const MainPageHeader = props => {
             alt: 'Produto 4'
         },
     ]
+    
+    // Passa os slides baseado nos argumentos
+    const changeSlideHandler = (arg, obj, img, fn) => {
+        if (arg === 'next') {
+            img < obj.length - 1 ? fn(img + 1) : fn(0) 
+        } else if (arg === 'previous') {
+            img > 0 ? fn(img - 1) : fn(obj.length - 1) 
+        } else if (typeof arg !== isNaN) {
+            fn(arg)
+        }
+    }   
 
+    // Executa a função de passar os slides periodicamente
     React.useEffect(() => {
         const interval = setTimeout(() => {
-            changeSlide('next', mainSlides, slideImg, setSlideImg)
-            changeSlide('next', minorSlides, minorSlideImg, setMinorSlideImg)
+            changeSlideHandler('next', mainSlides, slideImg, setSlideImg)
+            // changeSlide('next', minorSlides, minorSlideImg, setMinorSlideImg)
         }, 5000);
         return () => clearTimeout(interval);
     });
+
+    // É executado pelo componente 'ProgressBar' para que os slides sejam passados em sincronia com as barras
+    const changeSlideCallbackHandler = arg => {
+        // changeSlide('next', mainSlides, slideImg, setSlideImg)
+        changeSlideHandler(arg, minorSlides, minorSlideImg, setMinorSlideImg)
+    }
 
 
 
@@ -79,14 +89,18 @@ const MainPageHeader = props => {
                 <div className="col-6" style={{height:'700px'}}>
                     <img style={{height:'90%', maxWidth:'100%'}} src={mainSlides[slideImg].img} alt={mainSlides[slideImg].alt} />
                     <div className="change-slide-setas d-flex justify-content-between">
-                        <FontAwesomeIcon onClick={() => changeSlide('previous', mainSlides, slideImg, setSlideImg)} icon="arrow-left" />
-                        <FontAwesomeIcon onClick={() => changeSlide('next', mainSlides, slideImg, setSlideImg)} icon="arrow-right" />
+                        <FontAwesomeIcon onClick={() => changeSlideHandler('previous', mainSlides, slideImg, setSlideImg)} icon="arrow-left" />
+                        <FontAwesomeIcon onClick={() => changeSlideHandler('next', mainSlides, slideImg, setSlideImg)} icon="arrow-right" />
                     </div>
                 </div>
             </div>
             <div className="header-text row">
                 <div className="col-1 d-flex flex-column justify-content-between" style={{height: '150px'}}>
-                    <ProgressBar bar={4} timer={5000} />
+                    <ProgressBar 
+                        bars={4} // Qtde de barras
+                        timer={5000} // Tempo do loop
+                        change={changeSlideCallbackHandler} // Função que controla a passagem automática de slides
+                    />
                 </div>
                 <div className="header-title col-4">
                     <p>MADE</p>

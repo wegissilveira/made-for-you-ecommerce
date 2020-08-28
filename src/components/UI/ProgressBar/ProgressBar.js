@@ -9,33 +9,37 @@ const ProgressBar = props => {
     let [percentage, setPercentage] = React.useState(0)
     let [strokeWidth, setStrokeWidth] = React.useState(3)
 
-    let [trigger, setTrigger] = React.useState(false)
-    let [barIndex, setBarIndex] = React.useState(0)
+    let [barIndex, setBarIndex] = React.useState(0) // => Define o ponto que recebe a barra baseado em seu index
 
-    let bars = Array(props.bar).fill(1)
+    let bars = Array(props.bars).fill(1) // => Quantidade de barras que serão criadas
 
-    let timer = props.timer
+    let timer = props.timer // => Intervalo que se levará para que a barra seja completada e para que ela vá para o ponto seguinte
 
 
-    const barTriggerHandler = () => {
-        setTrigger(!trigger)
-    }
-
-    // if (trigger) {
+    // Controla a velocidade de rotação da barra e muda a parra de ponto, além de passar o slide do componente parent com a função callback
+    let interval
     React.useEffect(() => {
-        const interval = setTimeout(() => {
-            percentage < 99 ? setPercentage(percentage + 1) : setPercentage(0)
-
-            if (percentage === 99) {
-                    console.log(percentage)
-                    barIndex < bars.length - 1 ? setBarIndex(barIndex + 1) : setBarIndex(0)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        interval = setTimeout(() => {
+            percentage < 100 ? setPercentage(percentage + 1) : setPercentage(0)
+            if (percentage === 100) {
+                barIndex < bars.length - 1 ? setBarIndex(barIndex + 1) : setBarIndex(0)
+                props.change('next')
             }
 
         }, timer / 100);
-        return () => clearTimeout(interval);
     })
-                
-    // }
+    
+    // Passa o slide manualmente
+    const changeSlideHandler = arg => {
+
+        setPercentage(0) // Reseta a posição da barra
+        setBarIndex(arg) // Coloca a barra no ponto clicado
+
+        props.change(arg) // Passa o slide do componente parent para acompanhar o ponto que recebe a barra
+
+        clearTimeout(interval) // Limpa o tempo de 'seTimeout' para que este 0 juntamente com 'percentage'
+    }
 
 
     // Size of the enclosing square
@@ -60,32 +64,24 @@ const ProgressBar = props => {
                             height={sqSize}
                             viewBox={viewBox}
 
-                            onClick={() => barTriggerHandler()}
+                            style={{cursor: 'pointer'}}
+
+                            onClick={() => changeSlideHandler(i)}
                         >
                             { i === barIndex ?  
-                                <Fragment>
-                                    <circle
-                                        className="circle-progress"
-                                        cx={sqSize / 2}
-                                        cy={sqSize / 2}
-                                        r={radius}
-                                        strokeWidth={`${strokeWidth}px`}
-                                        // Start progress marker at 12 O'Clock
-                                        transform={`rotate(-90 ${sqSize / 2} ${sqSize / 2})`}
-                                        style={{
-                                            strokeDasharray: dashArray,
-                                            strokeDashoffset: dashOffset
-                                        }} 
-                                    /> 
-                                    {/* <text
-                                        className="circle-text"
-                                        x="50%"
-                                        y="50%"
-                                        dy=".3em"
-                                        textAnchor="middle">
-                                        {`${percentage}%`}
-                                    </text> */}
-                                </Fragment>
+                                <circle
+                                    className="circle-progress"
+                                    cx={sqSize / 2}
+                                    cy={sqSize / 2}
+                                    r={radius}
+                                    strokeWidth={`${strokeWidth}px`}
+                                    // Start progress marker at 12 O'Clock
+                                    transform={`rotate(-90 ${sqSize / 2} ${sqSize / 2})`}
+                                    style={{
+                                        strokeDasharray: dashArray,
+                                        strokeDashoffset: dashOffset
+                                    }} 
+                                /> 
                             : null }
                             <circle
                                 className="circle-center"
