@@ -95,13 +95,16 @@ const MainPageHeader = props => {
                 </div>
             </div>
             <div className="header-text row">
-                <div className="col-1 d-flex flex-column justify-content-between" style={{height: '150px'}}>
+                {/* <div> */}
                     <ProgressBar 
-                        bars={4} // Qtde de barras
-                        timer={5000} // Tempo do loop
-                        change={changeSlideCallbackHandler} // Função que controla a passagem automática de slides
+                        bars={4} // => Qtde de barras
+                        timer={5000} // => Tempo do loop
+                        change={changeSlideCallbackHandler} // => Função que controla a passagem automática de slides
+                        auto={true} // => Determina se a passagem de slides e barras será automática
+                        direction={'column'} // => Orientação dos pontos, horizontal ou vertical
+                        height={150} // => Altura que o bloco de pontos ocupará
                     />
-                </div>
+                {/* </div> */}
                 <div className="header-title col-4">
                     <p>MADE</p>
                     <p>FOR YOU</p>

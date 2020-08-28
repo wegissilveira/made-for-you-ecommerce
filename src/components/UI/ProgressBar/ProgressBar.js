@@ -1,8 +1,10 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 
 import './ProgressBar.css'
 
-
+// A barra está reaproveitável e personalizável em algumas características, como tempo de execução e quantidade de barras que serão criadas, além de ser possível decidir se a passagem de slides será automática ou manual.
+// Seria possível possível configurar outras propriedades como personalizáveis, como cores do ponto e da barra, tamanho, espessura etc. Mas como aqui não será necessário, provavelmente não farei isso, quando eu for utilizar tal componente em outra aplicação eu posso realizar as implementações necessárias.
+// Também personalizei a orientação (horizontal/ vertical) dos pontos e a altura, talvez fazer o mesmo para 'width'. Verificar isso no momento em que for colocar horizontal na popup e checar se é necessário.
 const ProgressBar = props => {
     
     let [sqSize, setSqSize] = React.useState(30)
@@ -19,15 +21,19 @@ const ProgressBar = props => {
     // Controla a velocidade de rotação da barra e muda a parra de ponto, além de passar o slide do componente parent com a função callback
     let interval
     React.useEffect(() => {
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        interval = setTimeout(() => {
-            percentage < 100 ? setPercentage(percentage + 1) : setPercentage(0)
-            if (percentage === 100) {
-                barIndex < bars.length - 1 ? setBarIndex(barIndex + 1) : setBarIndex(0)
-                props.change('next')
-            }
+        if (props.auto) { // => Determina se a passagem de slides e barras será automática
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+            interval = setTimeout(() => {
+                percentage < 100 ? setPercentage(percentage + 1) : setPercentage(0)
+                if (percentage === 100) {
+                    barIndex < bars.length - 1 ? setBarIndex(barIndex + 1) : setBarIndex(0)
+                    props.change('next')
+                }
 
-        }, timer / 100);
+            }, timer / 100);
+        } else {
+            setPercentage(100)
+        }
     })
     
     // Passa o slide manualmente
@@ -41,9 +47,7 @@ const ProgressBar = props => {
         clearTimeout(interval) // Limpa o tempo de 'seTimeout' para que este 0 juntamente com 'percentage'
     }
 
-
-    // Size of the enclosing square
-    // const sqSize = sqSize;
+    
     // SVG centers the stroke width on the radius, subtract out so circle fits in square
     const radius = (sqSize - strokeWidth) / 2;
     // Enclose cicle in a circumscribing square
@@ -52,10 +56,12 @@ const ProgressBar = props => {
     const dashArray = radius * Math.PI * 2;
     // Scale 100% coverage overlay with the actual percent
     const dashOffset = dashArray - dashArray * percentage / 100;
-    // console.log(dashOffset)
+
+    let direction = props.direction === 'column' ? 'flex-column' : 'flex-row'
+    const style = `d-flex ${direction} justify-content-between`
     
     return (
-        <Fragment>
+        <div className={style} style={{height: props.height + 'px'}}>
             { bars.map((bar, i) => {
                 return <svg
                             key={i}
@@ -92,7 +98,7 @@ const ProgressBar = props => {
                             
                         </svg>
             }) }
-        </Fragment>
+        </div>
     );
 }
 
