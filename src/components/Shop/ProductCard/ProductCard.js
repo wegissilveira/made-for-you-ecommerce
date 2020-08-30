@@ -4,15 +4,15 @@ import './ProductCard.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import products from '../../../productsData'
-import ProductsQtde from '../../UI/ProductsQtde/ProductsQtde'
+import productsData from '../../../productsData'
+import ProductsQtde from '../../Shared/UI/ProductsQtde/ProductsQtde'
   
 
 const ProductCard = props => {
     
     let [imgSlide, setImgSlide] = React.useState(0)
 
-    const product = products.find(product => product._id === props.match.params.id)
+    const product = productsData.find(product => product._id === props.match.params.id)
 
     const changeSlide = arg => {
         if (arg === 'previous') {
@@ -121,8 +121,8 @@ const ProductCard = props => {
                             <FontAwesomeIcon icon={["far", "heart"]} size="2x" />
                         </div>
                         <div className="product-category-container mt-3">
-                            <p>Category: <span className="font-weight-bold"> Living room</span></p>
-                            <p>Tags: <span className="font-weight-bold"> Furniture, Decor</span></p>
+                            <p>Category: <span className="font-weight-bold">{product.category}</span></p>
+                            <p>Tags: <span className="font-weight-bold">{product.tag}</span></p>
                         </div>
                         <div className="d-flex justify-content-between align-items-end mt-5">
                             <div className="product-specifications-container d-flex flex-column">

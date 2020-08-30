@@ -1,10 +1,11 @@
-const products = [
+const productsData = [
     {
         _id: '1',
         name: 'Produto-1',
         price: '48.99',
         img: require('./assets/images/Products/molde-textile.png'),
-        tag: 'textile',
+        tag: 'bedroom',
+        category: 'living-room',
         imgsDemo: [
             require('./assets/images/ProductCard/Textile/img-1.png'),
             require('./assets/images/ProductCard/Textile/img-2.png'),
@@ -18,6 +19,7 @@ const products = [
         price: '38.99',
         img: require('./assets/images/Products/molde-furniture.png'),
         tag: 'furniture',
+        category: 'bedroom',
         imgsDemo: [
             require('./assets/images/ProductCard/Furniture/img-1.png'),
             require('./assets/images/ProductCard/Furniture/img-2.png'),
@@ -31,6 +33,7 @@ const products = [
         price: '38.99',
         img: require('./assets/images/Products/molde-decorations.png'),
         tag: 'decorations',
+        category: 'living-room',
         imgsDemo: [
             require('./assets/images/ProductCard/Decorations/img-1.png'),
             require('./assets/images/ProductCard/Decorations/img-2.png'),
@@ -44,6 +47,7 @@ const products = [
         price: '38.99',
         img: require('./assets/images/Products/molde-furniture.png'),
         tag: 'furniture',
+        category: 'kitchen',
         imgsDemo: [
             require('./assets/images/ProductCard/Furniture/img-1.png'),
             require('./assets/images/ProductCard/Furniture/img-2.png'),
@@ -57,6 +61,7 @@ const products = [
         price: '38.99',
         img: require('./assets/images/Products/molde-decorations.png'),
         tag: 'decorations',
+        category: 'living-room',
         imgsDemo: [
             require('./assets/images/ProductCard/Decorations/img-1.png'),
             require('./assets/images/ProductCard/Decorations/img-2.png'),
@@ -70,6 +75,7 @@ const products = [
         price: '38.99',
         img: require('./assets/images/Products/molde-furniture.png'),
         tag: 'furniture',
+        category: 'bedroom',
         imgsDemo: [
             require('./assets/images/ProductCard/Furniture/img-1.png'),
             require('./assets/images/ProductCard/Furniture/img-2.png'),
@@ -83,6 +89,7 @@ const products = [
         price: '38.99',
         img: require('./assets/images/Products/molde-textile.png'),
         tag: 'textile',
+        category: 'kitchen',
         imgsDemo: [
             require('./assets/images/ProductCard/Textile/img-1.png'),
             require('./assets/images/ProductCard/Textile/img-2.png'),
@@ -96,6 +103,7 @@ const products = [
         price: '38.99',
         img: require('./assets/images/Products/molde-furniture.png'),
         tag: 'furniture',
+        category: 'kitchen',
         imgsDemo: [
             require('./assets/images/ProductCard/Furniture/img-1.png'),
             require('./assets/images/ProductCard/Furniture/img-2.png'),
@@ -107,6 +115,7 @@ const products = [
         _id: '9',
         name: 'Produto-9',
         price: '38.99',
+        category: '',
         img: require('./assets/images/Products/molde-textile.png'),
         tag: 'textile',
         imgsDemo: [
@@ -122,6 +131,7 @@ const products = [
         price: '38.99',
         img: require('./assets/images/Products/molde-decorations.png'),
         tag: 'decorations',
+        category: 'living-room',
         imgsDemo: [
             require('./assets/images/ProductCard/Decorations/img-1.png'),
             require('./assets/images/ProductCard/Decorations/img-2.png'),
@@ -135,6 +145,7 @@ const products = [
         price: '38.99',
         img: require('./assets/images/Products/molde-decorations.png'),
         tag: 'decorations',
+        category: 'kitchen',
         imgsDemo: [
             require('./assets/images/ProductCard/Furniture/img-1.png'),
             require('./assets/images/ProductCard/Furniture/img-2.png'),
@@ -148,6 +159,7 @@ const products = [
         price: '38.99',
         img: require('./assets/images/Products/molde-furniture.png'),
         tag: 'furniture',
+        category: 'bathroom',
         imgsDemo: [
             require('./assets/images/ProductCard/Furniture/img-1.png'),
             require('./assets/images/ProductCard/Furniture/img-2.png'),
@@ -161,6 +173,7 @@ const products = [
         price: '38.99',
         img: require('./assets/images/Products/molde-furniture.png'),
         tag: 'furniture',
+        category: 'kitchen',
         imgsDemo: [
             require('./assets/images/ProductCard/Furniture/img-1.png'),
             require('./assets/images/ProductCard/Furniture/img-2.png'),
@@ -174,6 +187,7 @@ const products = [
         price: '38.99',
         img: require('./assets/images/Products/molde-furniture.png'),
         tag: 'furniture',
+        category: 'bathroom',
         imgsDemo: [
             require('./assets/images/ProductCard/Furniture/img-1.png'),
             require('./assets/images/ProductCard/Furniture/img-2.png'),
@@ -187,6 +201,7 @@ const products = [
         price: '38.99',
         img: require('./assets/images/Products/molde-textile.png'),
         tag: 'textile',
+        category: 'bedroom',
         imgsDemo: [
             require('./assets/images/ProductCard/Textile/img-1.png'),
             require('./assets/images/ProductCard/Textile/img-2.png'),
@@ -200,6 +215,7 @@ const products = [
         price: '38.99',
         img: require('./assets/images/Products/molde-decorations.png'),
         tag: 'decorations',
+        category: 'bathroom',
         imgsDemo: [
             require('./assets/images/ProductCard/Decorations/img-1.png'),
             require('./assets/images/ProductCard/Decorations/img-2.png'),
@@ -209,4 +225,4 @@ const products = [
     },
 ]
 
-export default products
+export default productsData

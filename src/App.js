@@ -34,6 +34,7 @@ import {
   faUser,
   faHeart,
 } from '@fortawesome/free-regular-svg-icons'
+import Products from './components/Shared/Products/Products';
 
 library.add(
   fab,
@@ -64,8 +65,9 @@ function App() {
       <Layout>
         <Switch>
           <Route path="/" exact component={MainPageConfig} />
-          <Route path="/shop" exact component={ShopConfig} />
-          <Route path="/shop/:id" exact component={ProductCard} />
+          <Route path="/shop/" exact component={ShopConfig} />
+          <Route path="/shop/:cat" exact component={Products} />
+          <Route path="/shop/product/:id" exact component={ProductCard} />
         </Switch>
       </Layout>
     </BrowserRouter>

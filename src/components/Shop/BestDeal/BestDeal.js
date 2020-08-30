@@ -1,7 +1,7 @@
 import React from 'react'
 
 import './BestDeal.css'
-import ProgressBar from '../../UI/ProgressBar/ProgressBar'
+import ProgressBar from '../../Shared/UI/ProgressBar/ProgressBar'
 
 const BestDeal = props => {
 

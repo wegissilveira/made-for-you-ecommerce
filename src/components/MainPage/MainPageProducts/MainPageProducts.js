@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Products from '../../Shared/Products/Products'
-import products from '../../../productsData'
+import productsData from '../../../productsData'
 
 import './MainPageProducts.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -74,7 +74,7 @@ const MainPageProducts = props => {
 
             </div>
             <Products 
-                products={products} 
+                products={productsData} 
                 pageLimit={8} 
                 tag={tag}
             />

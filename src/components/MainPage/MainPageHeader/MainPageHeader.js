@@ -5,7 +5,7 @@ import './MainPageHeader.css'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import ProgressBar from '../../UI/ProgressBar/ProgressBar';
+import ProgressBar from '../../Shared/UI/ProgressBar/ProgressBar';
 
 const MainPageHeader = props => {
 

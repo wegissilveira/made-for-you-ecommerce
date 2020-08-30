@@ -5,8 +5,8 @@ import './ProductCardModal.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Modal from 'react-modal';
 
-import ProductsQtde from '../../UI/ProductsQtde/ProductsQtde'
-import ProgressBar from '../../UI/ProgressBar/ProgressBar'
+import ProductsQtde from '../../Shared/UI/ProductsQtde/ProductsQtde'
+import ProgressBar from '../../Shared/UI/ProgressBar/ProgressBar'
 
 const customStyles = {
     content : {
@@ -147,8 +147,8 @@ const ProductCardModal = props => {
                         
                         <div className="d-flex justify-content-between align-items-end mt-1">
                             <div className="product-category-container mt-3">
-                                <p>Category: <span className="font-weight-bold"> Living room</span></p>
-                                <p>Tags: <span className="font-weight-bold"> Furniture, Decor</span></p>
+                                <p>Category: <span className="font-weight-bold">{props.product.category}</span></p>
+                                <p>Tags: <span className="font-weight-bold">{props.product.tag}</span></p>
                             </div>
                             <div className="d-flex justify-content-end align-items-center">
                                 <FontAwesomeIcon icon="share-alt" className="mr-4" />
