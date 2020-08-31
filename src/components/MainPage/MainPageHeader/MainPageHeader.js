@@ -15,38 +15,46 @@ const MainPageHeader = props => {
     let mainSlides = [
         {
             img: require('../../../assets/images/Header/MainSlider/imgSlider1-mainpage.png'),
-            alt: 'Produto 1'
+            alt: 'Produto 1',
+            linkText: ['LIVING ROOM DECOR COLLECTION', 'Start from $ 199.99']
         },
         {
             img: require('../../../assets/images/Header/MainSlider/imgSlider2-mainpage.png'),
-            alt: 'Produto 2'
+            alt: 'Produto 2',
+            linkText: ['KITCHEN DECORATION', 'Start from $ 50.00']
         },
         {
             img: require('../../../assets/images/Header/MainSlider/imgSlider3-mainpage.png'),
-            alt: 'Produto 3'
+            alt: 'Produto 3',
+            linkText: ['BATHROOM UTILITIES', 'Max price $ 200.99']
         },
         {
             img: require('../../../assets/images/Header/MainSlider/imgSlider4-mainpage.png'),
-            alt: 'Produto 4'
+            alt: 'Produto 4',
+            linkText: ['BEDROOM PIECES', 'Start from $ 40.99']
         },
     ]
 
     let minorSlides = [
         {
             img: require('../../../assets/images/Header/MinorSlider/imgSolo1-mainpage.png'),
-            alt: 'Produto 1'
+            alt: 'Produto 1',
+            linkText: ['STERLING VASE GRAY', '$ 19.99']
         },
         {
             img: require('../../../assets/images/Header/MinorSlider/imgSolo2-mainpage.png'),
-            alt: 'Produto 2'
+            alt: 'Produto 2',
+            linkText: ['DOG HOUSE', '$ 199.99']
         },
         {
             img: require('../../../assets/images/Header/MinorSlider/imgSolo3-mainpage.png'),
-            alt: 'Produto 3'
+            alt: 'Produto 3',
+            linkText: ['RED CHAIR', '$ 499.99']
         },
         {
             img: require('../../../assets/images/Header/MinorSlider/imgSolo4-mainpage.png'),
-            alt: 'Produto 4'
+            alt: 'Produto 4',
+            linkText: ['BEAUTIFUL BED', '$ 999.99']
         },
     ]
     
@@ -83,18 +91,42 @@ const MainPageHeader = props => {
             <div className="container-fluid d-flex">
                 <div className="col-6 container-fluid d-flex align-items-center" style={{height:'700px'}}>
                     <div style={{height:'65%', width:'25%'}}></div>
-                    <img style={{height:'65%', width:'50%'}} src={minorSlides[minorSlideImg].img} alt={"img-1"} />
+                    <div className="minorSlider-container">
+                        <img 
+                            src={minorSlides[minorSlideImg].img} 
+                            alt={"img-1"} 
+                        />
+                        <div>
+                            <p className="font-weight-bold">{minorSlides[minorSlideImg].linkText[0]}</p>
+                            <p>{minorSlides[minorSlideImg].linkText[1]}</p>
+                        </div>
+                    </div>
                     <div style={{height:'65%', width:'40%'}}></div>
                 </div>
-                <div className="col-6" style={{height:'700px'}}>
-                    <img style={{height:'90%', maxWidth:'100%'}} src={mainSlides[slideImg].img} alt={mainSlides[slideImg].alt} />
+                <div className="col-6" style={{height:'700px', cursor: 'pointer'}}>
+                    <div className="mainSlider-container">
+                        <img 
+                            src={mainSlides[slideImg].img} 
+                            alt={mainSlides[slideImg].alt} 
+                        />
+                        <div>
+                            <p className="font-weight-bold">{mainSlides[slideImg].linkText[0]}</p>
+                            <p>{mainSlides[slideImg].linkText[1]}</p>
+                        </div>
+                    </div>
                     <div className="change-slide-setas d-flex justify-content-between">
-                        <FontAwesomeIcon onClick={() => changeSlideHandler('previous', mainSlides, slideImg, setSlideImg)} icon="arrow-left" />
-                        <FontAwesomeIcon onClick={() => changeSlideHandler('next', mainSlides, slideImg, setSlideImg)} icon="arrow-right" />
+                        <FontAwesomeIcon 
+                            onClick={() => changeSlideHandler('previous', mainSlides, slideImg, setSlideImg)} 
+                            icon="arrow-left" 
+                        />
+                        <FontAwesomeIcon 
+                            onClick={() => changeSlideHandler('next', mainSlides, slideImg, setSlideImg)} 
+                            icon="arrow-right" 
+                        />
                     </div>
                 </div>
             </div>
-            <div className="header-text row">
+            <div className="header-text row bg-primary">
                 {/* <div> */}
                     <ProgressBar 
                         bars={minorSlides.length} // => Qtde de barras

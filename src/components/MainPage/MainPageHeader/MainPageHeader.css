@@ -29,3 +29,59 @@
 .change-slide-setas > * {
     cursor: pointer;
 }
+
+.mainSlider-container {
+    height: 90%;
+    max-width: 100%;
+}
+
+.mainSlider-container img {
+    height: 100%;
+    max-width: 100%;
+}
+
+.mainSlider-container div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    position: relative;
+    background-color: white;
+    width: 50%;
+    height: 70px;
+    margin-top: -70px;
+    padding-left: 25px;
+
+    /* cursor: pointer; */
+}
+
+.mainSlider-container div p {
+    margin: 0;
+}
+
+.minorSlider-container {
+    height: 65%;
+    width: 50%;
+}
+
+.minorSlider-container img {
+    height: 100%;
+    width: 100%;
+}
+
+.minorSlider-container div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    position: relative;
+    background-color: white;
+    width: 100%;
+    height: 65px;
+    margin-top: -140px;
+    padding-left: 25px;
+}
+
+.minorSlider-container div p {
+    margin: 0;
+}
