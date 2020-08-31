@@ -20,3 +20,26 @@
 .filter-sort p {
     margin: 0;
 }
+
+
+/* ** */
+
+.range {
+    width: 200px;
+    height: 2px;
+    background-color: black;
+    margin-bottom: 50px;
+}
+
+.range span {
+    width: 10px;
+    height: 10px;
+    /* background-color: black; */
+    /* margin-top: -50%; */
+    position: absolute;
+    /* border-radius: 50%; */
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}

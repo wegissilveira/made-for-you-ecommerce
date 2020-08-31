@@ -4,6 +4,7 @@ import { Fragment } from 'react'
 import './MainPageHeader.css'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from 'react-router-dom'
 
 import ProgressBar from '../../Shared/UI/ProgressBar/ProgressBar';
 
@@ -16,22 +17,26 @@ const MainPageHeader = props => {
         {
             img: require('../../../assets/images/Header/MainSlider/imgSlider1-mainpage.png'),
             alt: 'Produto 1',
-            linkText: ['LIVING ROOM DECOR COLLECTION', 'Start from $ 199.99']
+            linkText: ['LIVING ROOM DECOR COLLECTION', 'Start from $ 199.99'],
+            cat: 'living-room/'
         },
         {
             img: require('../../../assets/images/Header/MainSlider/imgSlider2-mainpage.png'),
             alt: 'Produto 2',
-            linkText: ['KITCHEN DECORATION', 'Start from $ 50.00']
+            linkText: ['KITCHEN DECORATION', 'Start from $ 50.00'],
+            cat: 'kitchen'
         },
         {
             img: require('../../../assets/images/Header/MainSlider/imgSlider3-mainpage.png'),
             alt: 'Produto 3',
-            linkText: ['BATHROOM UTILITIES', 'Max price $ 200.99']
+            linkText: ['BATHROOM UTILITIES', 'Max price $ 200.99'],
+            cat: 'bathroom'
         },
         {
             img: require('../../../assets/images/Header/MainSlider/imgSlider4-mainpage.png'),
             alt: 'Produto 4',
-            linkText: ['BEDROOM PIECES', 'Start from $ 40.99']
+            linkText: ['BEDROOM PIECES', 'Start from $ 40.99'],
+            cat: 'bedroom'
         },
     ]
 
@@ -39,22 +44,26 @@ const MainPageHeader = props => {
         {
             img: require('../../../assets/images/Header/MinorSlider/imgSolo1-mainpage.png'),
             alt: 'Produto 1',
-            linkText: ['STERLING VASE GRAY', '$ 19.99']
+            linkText: ['STERLING VASE GRAY', '$ 19.99'],
+            productId: 1
         },
         {
             img: require('../../../assets/images/Header/MinorSlider/imgSolo2-mainpage.png'),
             alt: 'Produto 2',
-            linkText: ['DOG HOUSE', '$ 199.99']
+            linkText: ['DOG HOUSE', '$ 199.99'],
+            productId: 5
         },
         {
             img: require('../../../assets/images/Header/MinorSlider/imgSolo3-mainpage.png'),
             alt: 'Produto 3',
-            linkText: ['RED CHAIR', '$ 499.99']
+            linkText: ['RED CHAIR', '$ 499.99'],
+            productId: 8
         },
         {
             img: require('../../../assets/images/Header/MinorSlider/imgSolo4-mainpage.png'),
             alt: 'Produto 4',
-            linkText: ['BEAUTIFUL BED', '$ 999.99']
+            linkText: ['BEAUTIFUL BED', '$ 999.99'],
+            productId: 14
         },
     ]
     
@@ -97,21 +106,25 @@ const MainPageHeader = props => {
                             alt={"img-1"} 
                         />
                         <div>
-                            <p className="font-weight-bold">{minorSlides[minorSlideImg].linkText[0]}</p>
-                            <p>{minorSlides[minorSlideImg].linkText[1]}</p>
+                            <Link to={'/shop/product/' + minorSlides[minorSlideImg].productId} >
+                                <p className="font-weight-bold">{minorSlides[minorSlideImg].linkText[0]}</p>
+                                <p>{minorSlides[minorSlideImg].linkText[1]}</p>
+                            </Link>
                         </div>
                     </div>
                     <div style={{height:'65%', width:'40%'}}></div>
                 </div>
-                <div className="col-6" style={{height:'700px', cursor: 'pointer'}}>
+                <div className="col-6" style={{height:'700px'}}>
                     <div className="mainSlider-container">
                         <img 
                             src={mainSlides[slideImg].img} 
                             alt={mainSlides[slideImg].alt} 
                         />
                         <div>
-                            <p className="font-weight-bold">{mainSlides[slideImg].linkText[0]}</p>
-                            <p>{mainSlides[slideImg].linkText[1]}</p>
+                            <Link to={'/shop/' + mainSlides[slideImg].cat}>
+                                <p className="font-weight-bold">{mainSlides[slideImg].linkText[0]}</p>
+                                <p>{mainSlides[slideImg].linkText[1]}</p>
+                            </Link>
                         </div>
                     </div>
                     <div className="change-slide-setas d-flex justify-content-between">
@@ -126,7 +139,7 @@ const MainPageHeader = props => {
                     </div>
                 </div>
             </div>
-            <div className="header-text row bg-primary">
+            <div className="header-text row">
                 {/* <div> */}
                     <ProgressBar 
                         bars={minorSlides.length} // => Qtde de barras

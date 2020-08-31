@@ -39,9 +39,21 @@ const ProductCard = props => {
                             </div>
                         </div>
                         <div className="d-flex justify-content-between product-card-sub-images">
-                            <img onClick={() => changeSlide(0)} src={product.imgsDemo[0]} alt="img-1" style={{maxWidth: '30%', maxHeight: '30%', cursor: 'pointer'}} />
-                            <img onClick={() => changeSlide(1)} src={product.imgsDemo[1]} alt="img-2" style={{maxWidth: '30%', maxHeight: '30%', cursor: 'pointer'}} />
-                            <img onClick={() => changeSlide(2)} src={product.imgsDemo[2]} alt="img-3" style={{maxWidth: '30%', maxHeight: '30%', cursor: 'pointer'}} />
+                            <img 
+                                onClick={() => changeSlide(0)} 
+                                src={product.imgsDemo[0]} alt="img-1" 
+                                style={{maxWidth: '30%', maxHeight: '30%', cursor: 'pointer'}} 
+                            />
+                            <img 
+                                onClick={() => changeSlide(1)} 
+                                src={product.imgsDemo[1]} alt="img-2" 
+                                style={{maxWidth: '30%', maxHeight: '30%', cursor: 'pointer'}} 
+                            />
+                            <img 
+                                onClick={() => changeSlide(2)} 
+                                src={product.imgsDemo[2]} alt="img-3" 
+                                style={{maxWidth: '30%', maxHeight: '30%', cursor: 'pointer'}} 
+                            />
                         </div>
                     </div>
                     <div className="col-6 ml-5">

@@ -54,7 +54,7 @@ class Layout extends Component {
                                 </li> */}
                                 <li className="nav-item">
                                     <NavLink 
-                                        to="/shop/all" 
+                                        to="/shop/" 
                                         // exact={true}
                                         // tag={RRNavLink}
                                         className="nav-link"
