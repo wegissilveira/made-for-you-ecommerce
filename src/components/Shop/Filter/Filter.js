@@ -6,16 +6,34 @@ import './Filter.css'
 
 const Filter = props => {
 
-    let [value, setValue] =  React.useState(70)
+    const off_x = 190 // Valor inicial do thumb. CORRIGIR DE ACORDO COM A POSIÇÃO DEFINITIVA NA TELA
+    let [value, setValue] =  React.useState(off_x)
+    let [move, setMove] =  React.useState(false)
+
 
     const handleChange = e => {
-        setValue(e.target.value);
-      };
+        var x = e.clientX;
+        if (move === true) {
+            value > off_x ? setValue(x) : setValue(off_x)
+        }
+        
+    }
+    
+    const moveOn = e => {
+        var x = e.clientX;
+        setValue(x)
+        setMove(true)
+    }
+    
+    const moveOff = () => {
+        setMove(false)
+    }
+    
 
     return (
         <Fragment>
             <div className="filter-container d-flex justify-content-between">
-                {/* <div className="filter-switch border d-flex justify-content-around align-items-center">
+                <div className="filter-switch border d-flex justify-content-around align-items-center">
                     <FontAwesomeIcon icon="filter" />
                     <p>OPEN FILTERS</p>
                 </div>
@@ -27,35 +45,9 @@ const Filter = props => {
                         <option>Price</option>
                         <option>Importance</option>
                     </select>
-                </div> */}
-                    {/* <input
-                        type="range"
-                        id={'threshold'}
-                        min={1}
-                        max={100}
-                        step={0.5}
-                        value={value}
-                        onChange={handleChange}
-                    /> */}
-                    <div className="range">
-                        <span className="rounded-circle" 
-                            style={{
-                                width:'15px', 
-                                height: '15px', 
-                                backgroundColor: 'red', 
-                                marginTop: '-6px'}}
-                            ></span>
-                        <span className="rounded-circle" 
-                            style={{
-                                width:'10px', 
-                                height: '10px', 
-                                backgroundColor: 'black', 
-                                marginTop: '-4px', 
-                                marginLeft: '195px'}}
-                            ></span>
-                    </div>
+                </div>                    
             </div>
-            {/* <div>
+            <div>
                 <div>
                     <h6>CATEGORIAS</h6>
                     <p>Bedroom</p>
@@ -121,14 +113,39 @@ const Filter = props => {
                 </div>
                 <div>
                     <h6>PRICE FILTER</h6>
-                    <InputRange
-                        maxValue={20}
-                        minValue={0}
-                        value={value}
-                        onChange={value => setValue(value)} 
-                    />
+                    
+                    <div className="range-container"
+                        onMouseMove={(e) => handleChange(e)}
+                        onMouseDown={(e) => moveOn(e)}
+                        onMouseUp={() => moveOff()}
+                        onMouseLeave={() => moveOff()}
+                    >
+                        <div className="range" 
+                            
+                        >
+                            <span className="rounded-circle" 
+                                style={{
+                                    width:'15px', 
+                                    height: '15px', 
+                                    backgroundColor: 'red', 
+                                    marginTop: '-6px',
+                                    left: value - 7 + 'px'
+                                }}
+                                ></span>
+                            <span className="rounded-circle" 
+                                style={{
+                                    width:'10px', 
+                                    height: '10px', 
+                                    backgroundColor: 'black', 
+                                    marginTop: '-4px', 
+                                    marginLeft: '195px'
+                                }}
+                                
+                                ></span>
+                        </div>
+                    </div>
                 </div>
-            </div> */}
+            </div>
         </Fragment>
     )
 }

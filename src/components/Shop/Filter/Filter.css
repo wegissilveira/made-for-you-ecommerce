@@ -24,8 +24,14 @@
 
 /* ** */
 
-.range {
+.range-container {
     width: 200px;
+    height: 15px;
+    cursor: pointer;
+}
+
+.range {
+    width: 100%;
     height: 2px;
     background-color: black;
     margin-bottom: 50px;
