@@ -24,6 +24,10 @@
 
 /* ** */
 
+h6 {
+    margin-bottom: 20px;
+}
+
 .range-container {
     width: 200px;
     height: 15px;
