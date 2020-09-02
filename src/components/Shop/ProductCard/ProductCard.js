@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import productsData from '../../../productsData'
 import ProductsQtde from '../../Shared/UI/ProductsQtde/ProductsQtde'
+import ColorSelect from '../../Shared/UI/ColorSelect/ColorSelect'
   
 
 const ProductCard = props => {
@@ -88,43 +89,10 @@ const ProductCard = props => {
                                 </select>
                             </div>
                             <div>
-                                {/* Removi a borda do bootstrap e passei pro css para que seja possível alterá-la durante o hover. Verificar como fazer o mesmo no caso do 'focus'. Além disso transformar esse trecho em algo dinâmico que será lido provavelmente de um objeto. E também é falta inserir a propriedade 'hover' nos spans, para que as cores sejam mais claras quando não estiverem selecionados. Não coloquei aqui, pois já que a lista de opções ainda não está dinâmica eu teria que criar uma classe para cada span. */}
                                 <p>Color</p>
-                                <div className="d-flex justify-content-between">
-                                    <div className="
-                                            product-details-color 
-                                            mt-2 
-                                            rounded-circle 
-                                            d-flex 
-                                            justify-content-center 
-                                            align-items-center
-                                        "
-                                    >
-                                        <span className="bg-primary rounded-circle"></span>
-                                    </div>
-                                    <div className="
-                                            product-details-color 
-                                            mt-2 
-                                            rounded-circle 
-                                            d-flex 
-                                            justify-content-center 
-                                            align-items-center
-                                        "
-                                    >
-                                        <span className="bg-success rounded-circle"></span>
-                                    </div>
-                                    <div className="
-                                            product-details-color 
-                                            mt-2 
-                                            rounded-circle 
-                                            d-flex 
-                                            justify-content-center 
-                                            align-items-center
-                                        "
-                                    >
-                                        <span className="bg-danger rounded-circle"></span>
-                                    </div>
-                                </div>
+                                <ColorSelect 
+                                    colors={product.colors}
+                                />
                             </div>
                         </div>
                         <div className="product-qtde-container d-flex justify-content-between align-items-center mt-4">

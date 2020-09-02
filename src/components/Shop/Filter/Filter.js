@@ -1,8 +1,11 @@
 import React, { Fragment } from 'react'
 
+import './Filter.css'
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import './Filter.css'
+import ColorSelect from '../../Shared/UI/ColorSelect/ColorSelect'
+
 
 const Filter = props => {
 
@@ -11,12 +14,18 @@ const Filter = props => {
     const initial_min_value = 5 // => Valor inicial do preço mínimo
     const initial_max_value = 1290 // => Valor inicial do preço máximo
 
+    let [filterOpen, setFilterOpen] =  React.useState(false)
+
     let [thumb1_position, setValueThumb1] =  React.useState(initial_position)
     let [thumb2_position, setValueThumb2] =  React.useState(end_position)
     let [min_value, setMinValue] =  React.useState(initial_min_value)
     let [max_value, setMaxValue] =  React.useState(initial_max_value)
     let [move, setMove] =  React.useState(false) // => habilita os thumbs a serem movidos
 
+
+    const openFilterHandler = () => {
+        filterOpen ? setFilterOpen(false) : setFilterOpen(true)
+    }
 
     const handleChange = e => {
 
@@ -80,9 +89,19 @@ const Filter = props => {
         <Fragment>
             <div className="filter-container">
                 <div className="d-flex justify-content-between">
-                    <div className="filter-switch border d-flex justify-content-around align-items-center">
-                        <FontAwesomeIcon icon="filter" />
-                        <p>OPEN FILTERS</p>
+                    <div onClick={() => openFilterHandler()} className="filter-switch border d-flex justify-content-around align-items-center">
+                        { filterOpen === false ? 
+                            <Fragment>
+                                <FontAwesomeIcon icon="filter" /> 
+                                <p>OPEN FILTERS</p>
+                            </Fragment>
+                          :
+                            <Fragment>
+                                <FontAwesomeIcon icon="times" />
+                                <p>CLOSE FILTERS</p>
+                            </Fragment>
+                        }
+                        
                     </div>
                     <div className="filter-sort d-flex justify-content-between align-items-center">
                         <p>Showing 1 - 9 of 19 results</p>
@@ -94,7 +113,7 @@ const Filter = props => {
                         </select>
                     </div>                    
                 </div>
-                <div>
+                { filterOpen ? <div>
                     <div className="mt-5 mb-5 d-flex justify-content-between row">
                         <div>
                             <h6>CATEGORIAS</h6>
@@ -136,63 +155,10 @@ const Filter = props => {
                         <div className="divider"></div>
                         <div className="col-3">
                             <h6>COLOR</h6>
-                            <div className="d-flex justify-content-between">
-                                <div className="
-                                        product-details-color 
-                                        mt-2 
-                                        rounded-circle 
-                                        d-flex 
-                                        justify-content-center 
-                                        align-items-center
-                                    "
-                                >
-                                    <span className="bg-primary rounded-circle"></span>
-                                </div>
-                                <div className="
-                                        product-details-color 
-                                        mt-2 
-                                        rounded-circle 
-                                        d-flex 
-                                        justify-content-center 
-                                        align-items-center
-                                    "
-                                >
-                                    <span className="bg-success rounded-circle"></span>
-                                </div>
-                                <div className="
-                                        product-details-color 
-                                        mt-2 
-                                        rounded-circle 
-                                        d-flex 
-                                        justify-content-center 
-                                        align-items-center
-                                    "
-                                >
-                                    <span className="bg-warning rounded-circle"></span>
-                                </div>
-                                <div className="
-                                        product-details-color 
-                                        mt-2 
-                                        rounded-circle 
-                                        d-flex 
-                                        justify-content-center 
-                                        align-items-center
-                                    "
-                                >
-                                    <span className="bg-info rounded-circle"></span>
-                                </div>
-                                <div className="
-                                        product-details-color 
-                                        mt-2 
-                                        rounded-circle 
-                                        d-flex 
-                                        justify-content-center 
-                                        align-items-center
-                                    "
-                                >
-                                    <span className="bg-danger rounded-circle"></span>
-                                </div>
-                            </div>
+                            <ColorSelect
+                                title={'COLOR'}
+                                colors={['red', 'yellow', 'blue', 'purple', 'green']}
+                            />
                         </div>
                         <div className="divider"></div>
                         <div>
@@ -236,7 +202,7 @@ const Filter = props => {
                         <p className="filter-button filter-button-active">FILTER</p>
                         <p className="filter-button">CLEAR ALL</p>
                     </div>
-                </div>
+                </div> : null}
             </div>
         </Fragment>
     )

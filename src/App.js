@@ -6,6 +6,7 @@ import Layout from './containers/Layout/Layout'
 import MainPageConfig from './containers/MainPageConfig/MainPageConfig'
 import ShopConfig from './containers/ShopConfig/ShopConfig'
 import ProductCard from './components/Shop/ProductCard/ProductCard'
+import Cart from './components/Shop/Cart/Cart'
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -27,6 +28,7 @@ import {
   faChevronDown,
   faChevronUp,
   faCaretDown,
+  faTimes
   // faSortDown
 } from '@fortawesome/free-solid-svg-icons'
 
@@ -56,6 +58,7 @@ library.add(
   faChevronDown,
   faChevronUp,
   faCaretDown,
+  faTimes
   // faSortDown
 )
 
@@ -68,6 +71,7 @@ function App() {
           <Route path="/shop/" exact component={ShopConfig} />
           <Route path="/shop/:cat" exact component={Products} />
           <Route path="/shop/product/:id" exact component={ProductCard} />
+          <Route path="/cart/" exact component={Cart} />
         </Switch>
       </Layout>
     </BrowserRouter>

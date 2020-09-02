@@ -7,6 +7,7 @@ import Modal from 'react-modal';
 
 import ProductsQtde from '../../Shared/UI/ProductsQtde/ProductsQtde'
 import ProgressBar from '../../Shared/UI/ProgressBar/ProgressBar'
+import ColorSelect from '../../Shared/UI/ColorSelect/ColorSelect';
 
 const customStyles = {
     content : {
@@ -49,7 +50,9 @@ const ProductCardModal = props => {
             >
 
                 <div className="container-fluid d-flex">
-                    <p className="product-card-modal-exit" onClick={() => props.setShowProduct(false)}>X</p>
+                    <p className="product-card-modal-exit" onClick={() => props.setShowProduct(false)}>
+                        <FontAwesomeIcon icon="times" />
+                    </p>
                     <div className="col-6 pl-0 pr-5">
                         <div className="main-img-slider">
                             <img src={props.product.imgsDemo[imgSlide]} alt="img-1" />
@@ -102,41 +105,9 @@ const ProductCardModal = props => {
                             </div>
                             <div className="col-6">
                                 <p>Color</p>
-                                <div className="d-flex justify-content-between">
-                                    <div className="
-                                            product-details-color 
-                                            mt-2 
-                                            rounded-circle 
-                                            d-flex 
-                                            justify-content-center 
-                                            align-items-center
-                                        "
-                                    >
-                                        <span className="bg-primary rounded-circle"></span>
-                                    </div>
-                                    <div className="
-                                            product-details-color 
-                                            mt-2 
-                                            rounded-circle 
-                                            d-flex 
-                                            justify-content-center 
-                                            align-items-center
-                                        "
-                                    >
-                                        <span className="bg-success rounded-circle"></span>
-                                    </div>
-                                    <div className="
-                                            product-details-color 
-                                            mt-2 
-                                            rounded-circle 
-                                            d-flex 
-                                            justify-content-center 
-                                            align-items-center
-                                        "
-                                    >
-                                        <span className="bg-danger rounded-circle"></span>
-                                    </div>
-                                </div>
+                                <ColorSelect
+                                    colors={props.product.colors}
+                                />
                             </div>
                         </div>
                         <div className="product-qtde-container-modal d-flex justify-content-between align-items-center mt-4">

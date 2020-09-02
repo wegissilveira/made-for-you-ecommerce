@@ -11,6 +11,7 @@ const productsData = [
             require('./assets/images/ProductCard/Textile/img-2.png'),
             require('./assets/images/ProductCard/Textile/img-3.png'),
         ],
+        colors: ['red', 'green', 'purple'],
         deal: false
     },
     {
@@ -25,6 +26,7 @@ const productsData = [
             require('./assets/images/ProductCard/Furniture/img-2.png'),
             require('./assets/images/ProductCard/Furniture/img-3.png'),
         ],
+        colors: ['red', 'green', 'purple'],
         deal: true
     },
     {
@@ -39,6 +41,7 @@ const productsData = [
             require('./assets/images/ProductCard/Decorations/img-2.png'),
             require('./assets/images/ProductCard/Decorations/img-3.png'),
         ],
+        colors: ['red', 'green', 'purple'],
         deal: false
     },
     {
@@ -53,6 +56,7 @@ const productsData = [
             require('./assets/images/ProductCard/Furniture/img-2.png'),
             require('./assets/images/ProductCard/Furniture/img-3.png'),
         ],
+        colors: ['red', 'green', 'purple'],
         deal: false
     },
     {
@@ -67,6 +71,7 @@ const productsData = [
             require('./assets/images/ProductCard/Decorations/img-2.png'),
             require('./assets/images/ProductCard/Decorations/img-3.png'),
         ],
+        colors: ['red', 'green', 'purple'],
         deal: true
     },
     {
@@ -81,6 +86,7 @@ const productsData = [
             require('./assets/images/ProductCard/Furniture/img-2.png'),
             require('./assets/images/ProductCard/Furniture/img-3.png'),
         ],
+        colors: ['red', 'green', 'purple'],
         deal: true
     },
     {
@@ -95,6 +101,7 @@ const productsData = [
             require('./assets/images/ProductCard/Textile/img-2.png'),
             require('./assets/images/ProductCard/Textile/img-3.png'),
         ],
+        colors: ['red', 'green', 'purple'],
         deal: false
     },
     {
@@ -109,6 +116,7 @@ const productsData = [
             require('./assets/images/ProductCard/Furniture/img-2.png'),
             require('./assets/images/ProductCard/Furniture/img-3.png'),
         ],
+        colors: ['red', 'green', 'purple'],
         deal: false
     },
     {
@@ -123,6 +131,7 @@ const productsData = [
             require('./assets/images/ProductCard/Textile/img-2.png'),
             require('./assets/images/ProductCard/Textile/img-3.png'),
         ],
+        colors: ['red', 'green', 'purple'],
         deal: true
     },
     {
@@ -137,6 +146,7 @@ const productsData = [
             require('./assets/images/ProductCard/Decorations/img-2.png'),
             require('./assets/images/ProductCard/Decorations/img-3.png'),
         ],
+        colors: ['red', 'green', 'purple'],
         deal: true
     },
     {
@@ -151,6 +161,7 @@ const productsData = [
             require('./assets/images/ProductCard/Furniture/img-2.png'),
             require('./assets/images/ProductCard/Furniture/img-3.png'),
         ],
+        colors: ['red', 'green', 'purple'],
         deal: false
     },
     {
@@ -165,6 +176,7 @@ const productsData = [
             require('./assets/images/ProductCard/Furniture/img-2.png'),
             require('./assets/images/ProductCard/Furniture/img-3.png'),
         ],
+        colors: ['red', 'green', 'purple'],
         deal: true
     },
     {
@@ -179,6 +191,7 @@ const productsData = [
             require('./assets/images/ProductCard/Furniture/img-2.png'),
             require('./assets/images/ProductCard/Furniture/img-3.png'),
         ],
+        colors: ['red', 'green', 'purple'],
         deal: false
     },
     {
@@ -193,6 +206,7 @@ const productsData = [
             require('./assets/images/ProductCard/Furniture/img-2.png'),
             require('./assets/images/ProductCard/Furniture/img-3.png'),
         ],
+        colors: ['red', 'green', 'purple'],
         deal: true
     },
     {
@@ -207,6 +221,7 @@ const productsData = [
             require('./assets/images/ProductCard/Textile/img-2.png'),
             require('./assets/images/ProductCard/Textile/img-3.png'),
         ],
+        colors: ['red', 'green', 'purple'],
         deal: true
     },
     {
@@ -221,6 +236,7 @@ const productsData = [
             require('./assets/images/ProductCard/Decorations/img-2.png'),
             require('./assets/images/ProductCard/Decorations/img-3.png'),
         ],
+        colors: ['red', 'green', 'purple'],
         deal: false
     },
 ]

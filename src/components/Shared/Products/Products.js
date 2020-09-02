@@ -60,8 +60,6 @@ const Products = props => {
         document.body.style.overflow = "visible"
     }
 
-    console.log(products)
-
     
     return (
         <Fragment>
