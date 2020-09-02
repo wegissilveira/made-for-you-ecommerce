@@ -53,3 +53,31 @@ h6 {
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
 }
+
+
+.divider {
+    background-color: #ccc;
+    width: 1px;
+}
+
+.filter-button-container {
+    display: flex;
+    justify-content: space-between;
+    width: 35%;
+}
+
+.filter-button {
+    background-color: white;
+    color: #3A3A3A;
+    border: 1px solid #3A3A3A;
+    text-align: center;
+    height: 45px;
+    width: 200px;
+    padding-top: 10px;
+    cursor: pointer;
+}
+
+.filter-button-active {
+    background-color: #3A3A3A;
+    color: white;
+}

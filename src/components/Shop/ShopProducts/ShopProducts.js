@@ -13,12 +13,12 @@ const ShopProducts = props => {
         <div>
             <h1 className="text-center mb-5 mt-5">SHOP</h1>
             <Filter />
-            {/* <Products 
+            <Products 
                 products={products} 
                 pageLimit={12} 
                 tag={tag}
-            /> */}
-            {/* <BestDeal products={products} /> */}
+            />
+            <BestDeal products={products} />
         </div>
     )
 }
