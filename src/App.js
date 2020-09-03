@@ -28,7 +28,9 @@ import {
   faChevronDown,
   faChevronUp,
   faCaretDown,
-  faTimes
+  faTimes,
+  faLongArrowAltLeft,
+  faSyncAlt
   // faSortDown
 } from '@fortawesome/free-solid-svg-icons'
 
@@ -58,7 +60,9 @@ library.add(
   faChevronDown,
   faChevronUp,
   faCaretDown,
-  faTimes
+  faTimes,
+  faLongArrowAltLeft,
+  faSyncAlt
   // faSortDown
 )
 

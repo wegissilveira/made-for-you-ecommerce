@@ -9,7 +9,7 @@ const footer = props => {
     return (
         <div className="session-container">
             <div className="footer-container">
-                <div className="container-fluid d-flex justify-content-between p-0 border-bottom">
+                <div className="container-fluid p-0 m-0 row d-flex justify-content-between border-bottom">
                     <div className="col-3 pl-0">
                         <h3>MENU</h3>
                         <div className="footer-menu d-flex justify-content-between mt-4">
@@ -27,14 +27,14 @@ const footer = props => {
                             </ul>
                         </div>
                     </div>
-                    <div className="col-3 pl-0">
+                    <div className="col-5 d-flex flex-column align-items-center">
                         <h3>CONTACTS</h3>
                         <div className="mt-4">
                             <p>hello@myhome.com</p>
                             <p>+375 29 364-74-69</p>
                         </div>
                     </div>
-                    <div className="col-3 pl-0">
+                    <div className="col-3 pr-0 d-flex flex-column align-items-end">
                         <h3>STAY SOCIAL</h3>
                         <div className="footer-staysocial-icons mt-4 d-flex justify-content-between">
                             <FontAwesomeIcon icon={['fab', 'twitter']} />

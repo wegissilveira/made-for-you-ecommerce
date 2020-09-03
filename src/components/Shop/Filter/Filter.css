@@ -77,7 +77,15 @@ h6 {
     cursor: pointer;
 }
 
+.filter-button:hover {
+    background-color: rgb(235, 235, 235);
+}
+
 .filter-button-active {
     background-color: #3A3A3A;
     color: white;
+}
+
+.filter-button-active:hover {
+    background-color: #4e4e4e;
 }

@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import './Cart.css'
 
 import ProductQtde from '../../Shared/UI/ProductsQtde/ProductsQtde'
@@ -46,18 +48,61 @@ const Cart = props => {
                     
                     <p className="font-weight-bold">$ 37.99</p>
                 </div>
-                <div>
-
+                <div className="d-flex justify-content-between mt-5 border-bottom">
+                    <p className="cart-dark-button">
+                        <FontAwesomeIcon icon="long-arrow-alt-left" />
+                        <span>CONTINUE COMPRANDO</span>
+                    </p>
+                    <p className="cart-light-button">
+                        <FontAwesomeIcon icon="sync-alt" />
+                        <span>UPDATE CART</span>
+                    </p>
                 </div>
-                <div>
-                    <div>
-                        
+                <div className="form-cart-container row mt-4 mr-0 ml-0">
+                    <div className="col-4 pl-0 form-cart-first-column">
+                        <p>COUPON DISCOUNT</p>
+                        <p>Enter your coupon code if you have one</p>
+                        <input placeholder="Enter your code"/>
+                        <p className="cart-light-button">APPLY COUPON</p>
                     </div>
-                    <div>
-
+                    <div className="col-4 form-cart-second-column">
+                        <p>CALCULATE SHIPPING</p>
+                        <select
+                            className="
+                                select-cart
+                                border-left-0 
+                                border-right-0
+                                border-top-0
+                                border-bottom"
+                        >
+                            <option>Argentina</option>
+                            <option>Brazil</option>
+                            <option>Germany</option>
+                            <option>United States</option>
+                        </select>
+                        <input placeholder="State/Country" />
+                        <input placeholder="Town/City" />
+                        <input placeholder="Postcode/ZIP" />
+                        <p className="cart-light-button">UPDATE</p>
                     </div>
-                    <div>
-
+                    <div className="col-4 pr-0 form-cart-third-column">
+                        <div className="border">
+                            <div className="form-cart-total-container">
+                                <div className="border-bottom">
+                                    <p>SUBTOTAL</p>
+                                    <p>$ 20.00</p>
+                                </div>
+                                <div className="border-bottom">
+                                    <p>SHIPPING</p>
+                                    <p>$ 20.00</p>
+                                </div>
+                                <div>
+                                    <p>TOTAL</p>
+                                    <p>$ 40.00</p>
+                                </div>
+                            </div>
+                        </div>
+                        <p className="cart-dark-button" style={{width: '100%'}}>PROCEED TO CHECKOUT</p>
                     </div>
                 </div>
             </div>
