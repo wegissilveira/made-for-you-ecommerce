@@ -7,7 +7,10 @@ import { Link } from 'react-router-dom'
 
 import ProductCardModal from '../../Shop/ProductCardModal/ProductCardModal'
 
-import productsData from '../../../productsData' // => Onde utilizo tais dados era utilizado o 'props.products'
+// Onde utilizo tais dados era utilizado o 'props.products'
+// Agora que decidi utilizar este componente também no 'Wishlist', talvez o fetch dos produtos não deva ser realizado aqui, já que talvez ficarão salvos em uma tabela distinta e, nesse caso, os dados que 'Products' recebem deve vir de seu parent, já que podem diferir.
+// Vou buscar uma maneira de salvar apenas a marcação de 'favorito' na tabela e referenciar o produto aqui. Escolherei a maneira mais econômica.
+import productsData from '../../../productsData' 
 
 const Products = props => {
 
@@ -25,7 +28,8 @@ const Products = props => {
     if (props.tag) {
         tag = props.tag
         category = 'all'
-    } else if (props.match.params.cat) {
+    // } else if (props.match.params.cat !== undefined) {
+    } else if (props.match) {
         tag = 'all'
         category = props.match.params.cat
     } else {

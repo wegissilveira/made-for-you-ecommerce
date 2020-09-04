@@ -94,7 +94,11 @@ class Layout extends Component {
                                     <FontAwesomeIcon icon={['far', 'user']} color="grey" />
                                 </li>
                                 <li className="nav-item">
-                                    <FontAwesomeIcon icon={['far', 'heart']} color="grey" />
+                                    <NavLink
+                                        to="/wishlist/"
+                                    >
+                                        <FontAwesomeIcon icon={['far', 'heart']} color="grey" />
+                                    </NavLink>
                                 </li>
                                 <li className="nav-item">
                                     <NavLink

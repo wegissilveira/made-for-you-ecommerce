@@ -7,6 +7,7 @@ import MainPageConfig from './containers/MainPageConfig/MainPageConfig'
 import ShopConfig from './containers/ShopConfig/ShopConfig'
 import ProductCard from './components/Shop/ProductCard/ProductCard'
 import Cart from './components/Shop/Cart/Cart'
+import Wishlist from './components/User/Wishlist/Wishlist'
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -76,6 +77,7 @@ function App() {
           <Route path="/shop/:cat" exact component={Products} />
           <Route path="/shop/product/:id" exact component={ProductCard} />
           <Route path="/cart/" exact component={Cart} />
+          <Route path="/wishlist/" exact component={Wishlist} />
         </Switch>
       </Layout>
     </BrowserRouter>
