@@ -8,6 +8,7 @@ import ShopConfig from './containers/ShopConfig/ShopConfig'
 import ProductCard from './components/Shop/ProductCard/ProductCard'
 import Cart from './components/Shop/Cart/Cart'
 import Wishlist from './components/User/Wishlist/Wishlist'
+import Products from './components/Shared/Products/Products';
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -31,15 +32,16 @@ import {
   faCaretDown,
   faTimes,
   faLongArrowAltLeft,
-  faSyncAlt
+  faSyncAlt,
+  faHeart
   // faSortDown
 } from '@fortawesome/free-solid-svg-icons'
 
 import {
   faUser,
-  faHeart,
+  faHeart as regularFaheart
 } from '@fortawesome/free-regular-svg-icons'
-import Products from './components/Shared/Products/Products';
+
 
 library.add(
   fab,
@@ -63,7 +65,8 @@ library.add(
   faCaretDown,
   faTimes,
   faLongArrowAltLeft,
-  faSyncAlt
+  faSyncAlt,
+  regularFaheart
   // faSortDown
 )
 

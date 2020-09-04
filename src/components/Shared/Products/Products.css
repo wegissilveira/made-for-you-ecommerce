@@ -3,6 +3,19 @@
     margin-left: 12.1%;
 } */
 
+.wishlist-icon {
+    position: absolute;
+    right: 0;
+    margin-right: 30px;
+    margin-top: 10px;
+    color: rgb(253, 91, 91);
+    cursor: pointer;
+}
+
+.wishlist-icon:hover {
+    color: red;
+}
+
 .products-description {
     height: 75px;
     width: 80%;
