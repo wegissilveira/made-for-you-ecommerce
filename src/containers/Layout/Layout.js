@@ -87,9 +87,10 @@ class Layout extends Component {
                         <div className="col-4 d-flex justify-content-between">
                             <p className="mb-0">+375 29 364-74-69</p>
 
-                            <ul className="navbar-nav account-icons">
+                            {/* <ul className="navbar-nav account-icons">
                                 <li className="nav-item">
-                                    <FontAwesomeIcon icon="search" color="grey" /></li>
+                                    <FontAwesomeIcon icon="search" color="grey" />
+                                </li>
                                 <li className="nav-item">
                                     <FontAwesomeIcon icon={['far', 'user']} color="grey" />
                                 </li>
@@ -107,6 +108,23 @@ class Layout extends Component {
                                         <FontAwesomeIcon icon='suitcase' color="grey" />
                                     </NavLink>
                                 </li>
+                            </ul> */}
+                            <ul className="navbar-nav account-icons account-icons-enter">
+                                <li className="nav-item">
+                                    <FontAwesomeIcon icon="search" />
+                                </li>
+                                <NavLink
+                                    className="user-enter-btn"
+                                    to="/user-login/"
+                                >
+                                    <p>Login</p>
+                                </NavLink>
+                                <NavLink
+                                    className="user-enter-btn"
+                                    to="/user-signup/"
+                                >
+                                    <p>Sign up</p>
+                                </NavLink>
                             </ul>
                         </div>
                     </div>

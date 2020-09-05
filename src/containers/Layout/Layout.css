@@ -1,11 +1,49 @@
+.teste {
+    color: grey;
+}
+
+.teste:hover {
+    text-decoration: none;
+    color: #ffc107;
+}
+
 .account-icons {
     width: 30%;
     display: flex;
     justify-content: space-between;
-    
+    align-items: center;
 }
 
 .fonts {
     font-family: 'Lemonada', 
     cursive;
+}
+
+.account-icons-enter {
+    width: 40%;
+    color: grey;
+}
+
+.user-enter-btn {
+    width: auto;
+    height: 40px;
+    border: 3px solid grey;
+    color: grey;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
+.user-enter-btn:hover {
+    border: 3px solid #ffc107;
+    color: #ffc107;
+    text-decoration: none;
+}
+
+.user-enter-btn p {
+    margin: 5px 10px 5px 10px
 }

@@ -8,7 +8,9 @@ import ShopConfig from './containers/ShopConfig/ShopConfig'
 import ProductCard from './components/Shop/ProductCard/ProductCard'
 import Cart from './components/Shop/Cart/Cart'
 import Wishlist from './components/User/Wishlist/Wishlist'
-import Products from './components/Shared/Products/Products';
+import Products from './components/Shared/Products/Products'
+import UserLogin from './components/User/UserLogin/UserLogin'
+import UserSignUp from './components/User/UserSignUp/UserSignUp';
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -41,6 +43,7 @@ import {
   faUser,
   faHeart as regularFaheart
 } from '@fortawesome/free-regular-svg-icons'
+
 
 
 library.add(
@@ -81,6 +84,8 @@ function App() {
           <Route path="/shop/product/:id" exact component={ProductCard} />
           <Route path="/cart/" exact component={Cart} />
           <Route path="/wishlist/" exact component={Wishlist} />
+          <Route path="/user-login/" exact component={UserLogin} />
+          <Route path="/user-signup/" exact component={UserSignUp} />
         </Switch>
       </Layout>
     </BrowserRouter>

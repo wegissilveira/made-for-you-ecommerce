@@ -77,7 +77,6 @@ const Products = props => {
         }
     }
 
-
     const setCard = i => {
         setShowProduct(!showProduct)
         setProductIndex(i)
