@@ -114,13 +114,13 @@ class Layout extends Component {
                                     <FontAwesomeIcon icon="search" />
                                 </li>
                                 <NavLink
-                                    className="user-enter-btn"
+                                    className="enter-btn"
                                     to="/user-login/"
                                 >
                                     <p>Login</p>
                                 </NavLink>
                                 <NavLink
-                                    className="user-enter-btn"
+                                    className="enter-btn"
                                     to="/user-signup/"
                                 >
                                     <p>Sign up</p>

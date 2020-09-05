@@ -1,0 +1,98 @@
+.login-img-container {
+    width: 50%;
+    height: 600px;
+    background-color: green;
+}
+
+.login-form-container {
+    width: 50%;
+    height: 600px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 60%;
+    margin-left: 20%;
+    height: 80%;
+    margin-top: 5%;
+
+}
+
+.login-form > * {
+    width: 100%;
+}
+
+.login-form h3 {
+    text-align: center;
+}
+
+.login-form label {
+    margin-bottom: 0;
+    margin-left: 2%;
+    
+}
+
+.account-access-btn,
+.login-form  input {
+    width: 100%;
+    height: 35px;
+    border: 1px solid grey;
+    padding-left: 10px;
+
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+}
+
+.account-access-btn {
+    background-color: grey;
+    color: white;
+    cursor: pointer;
+    padding-top : 3px;
+    padding-left: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.account-access-btn:hover {
+    background-color: rgb(100, 100, 100);
+}
+
+.enter-lines {
+    width: 100%;
+    height: 1px;
+    background-color: grey;
+}
+
+.enter-icons-container {
+    width: 60%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.enter-icons-container > * {
+    width: 45px;
+    height: 45px;
+    padding: 5px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.enter-recover-pass {
+    text-align: center;
+    cursor: pointer;
+}
+
+.enter-recover-pass:hover {
+    text-decoration: underline;
+}

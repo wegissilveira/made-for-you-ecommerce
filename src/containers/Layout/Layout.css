@@ -1,3 +1,7 @@
+/* * {
+    color: grey;
+} */
+
 .teste {
     color: grey;
 }
@@ -24,7 +28,7 @@
     color: grey;
 }
 
-.user-enter-btn {
+.enter-btn {
     width: auto;
     height: 40px;
     border: 3px solid grey;
@@ -38,12 +42,12 @@
     -o-border-radius: 5px;
 }
 
-.user-enter-btn:hover {
+.enter-btn:hover {
     border: 3px solid #ffc107;
     color: #ffc107;
     text-decoration: none;
 }
 
-.user-enter-btn p {
+.enter-btn p {
     margin: 5px 10px 5px 10px
 }
