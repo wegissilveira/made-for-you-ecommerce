@@ -70,8 +70,17 @@ class Layout extends Component {
                                 <li className="nav-item">
                                     <a href="/" className="nav-link">Shopping</a>
                                 </li> 
-                                <li className="nav-item">
+                                {/* <li className="nav-item">
                                     <a href="/" className="nav-link">Contacts</a>
+                                </li> */}
+                                <li className="nav-item">
+                                    <NavLink 
+                                        to="/contact/" 
+                                        // exact={true}
+                                        // tag={RRNavLink}
+                                        className="nav-link"
+                                    > Contacts
+                                    </NavLink>
                                 </li>
                             </ul>
                         </div>
@@ -87,7 +96,7 @@ class Layout extends Component {
                         <div className="col-4 d-flex justify-content-between">
                             <p className="mb-0">+375 29 364-74-69</p>
 
-                            {/* <ul className="navbar-nav account-icons">
+                            <ul className="navbar-nav account-icons">
                                 <li className="nav-item">
                                     <FontAwesomeIcon icon="search" color="grey" />
                                 </li>
@@ -108,8 +117,8 @@ class Layout extends Component {
                                         <FontAwesomeIcon icon='suitcase' color="grey" />
                                     </NavLink>
                                 </li>
-                            </ul> */}
-                            <ul className="navbar-nav account-icons account-icons-enter">
+                            </ul>
+                            {/* <ul className="navbar-nav account-icons account-icons-enter">
                                 <li className="nav-item">
                                     <FontAwesomeIcon icon="search" />
                                 </li>
@@ -125,7 +134,7 @@ class Layout extends Component {
                                 >
                                     <p>Sign up</p>
                                 </NavLink>
-                            </ul>
+                            </ul> */}
                         </div>
                     </div>
                 </nav>
