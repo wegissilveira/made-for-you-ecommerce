@@ -9,6 +9,9 @@ import ProductQtde from '../../Shared/UI/ProductsQtde/ProductsQtde'
 
 const Cart = props => {
 
+    const [qtde, setQtde] = React.useState(1)
+    
+    
     return (
         <div className="products-container session-container">
             <h1 className="text-center mb-5 mt-5">CART</h1>
@@ -43,10 +46,10 @@ const Cart = props => {
                     <p className="font-weight-bold col-2">0%</p>
                     <p className="font-weight-bold col-2">$ 37.99</p>
                     <div className="col-2">
-                        <ProductQtde/>
+                        <ProductQtde changeQtdeCallBack={qtde => setQtde(qtde)} />
                     </div>
                     
-                    <p className="font-weight-bold">$ 37.99</p>
+                    <p className="font-weight-bold">$ {qtde * 2}</p>
                 </div>
                 <div className="d-flex justify-content-between mt-5 border-bottom">
                     <p className="cart-dark-button">
