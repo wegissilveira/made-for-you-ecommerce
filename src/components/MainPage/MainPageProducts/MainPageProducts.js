@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Products from '../../Shared/Products/Products'
-import productsData from '../../../productsData'
+import productsData from '../../../Data/productsData'
 
 import './MainPageProducts.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

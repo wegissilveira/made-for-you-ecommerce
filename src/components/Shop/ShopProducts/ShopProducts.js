@@ -3,7 +3,7 @@ import React from 'react'
 import Products from '../../Shared/Products/Products'
 import Filter from '../Filter/Filter'
 import BestDeal from '../BestDeal/BestDeal'
-import products from '../../../productsData'
+import products from '../../../Data/productsData'
 
 const ShopProducts = props => {
 

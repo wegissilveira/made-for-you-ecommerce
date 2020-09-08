@@ -4,7 +4,7 @@ import './Wishlist.css'
 
 import Products from '../../Shared/Products/Products'
 
-import wishlist from '../../../wishlistData'
+import wishlist from '../../../Data/wishlistData'
 
 const Wishlist = props => {
 

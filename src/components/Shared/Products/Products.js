@@ -10,8 +10,9 @@ import ProductCardModal from '../../Shop/ProductCardModal/ProductCardModal'
 // Onde utilizo tais dados era utilizado o 'props.products'
 // Agora que decidi utilizar este componente também no 'Wishlist', talvez o fetch dos produtos não deva ser realizado aqui, já que talvez ficarão salvos em uma tabela distinta e, nesse caso, os dados que 'Products' recebem deve vir de seu parent, já que podem diferir.
 // Vou buscar uma maneira de salvar apenas a marcação de 'favorito' na tabela e referenciar o produto aqui. Escolherei a maneira mais econômica.
-import productsData from '../../../productsData' 
-import wishlist from '../../../wishlistData';
+import productsData from '../../../Data/productsData' 
+import wishlist from '../../../Data/wishlistData';
+import cart from '../../../Data/cartData';
 
 const Products = props => {
 
@@ -20,6 +21,7 @@ const Products = props => {
     let [productIndex, setProductIndex] = React.useState(null)
 
     let [wishlistState, setWishlist] = React.useState(wishlist)
+    // let [cartState, setCart] = React.useState(cart)
 
 
     if (count === undefined) {
@@ -40,6 +42,7 @@ const Products = props => {
         category = 'all'
     }
 
+    // Update da state wishlist quando o botão é clicado pelo usuário
     const wishlistHandler = id => {
 
         let list = [...wishlistState]
@@ -52,8 +55,20 @@ const Products = props => {
         setWishlist(list)
     }
 
+    // Update da state cart quando o botão é clicado pelo usuário
+    // const cartHandler = id => {
 
-    // console.log(wishlistState)
+    //     let list = [...cartState]
+    //     if (list.includes(id)) {
+    //         list = cartState.filter(item => item !== id)
+    //     } else {
+    //         list.push(id)
+    //     }
+        
+    //     setCart(list)
+    // }
+
+
     // O loop para a exibição dos produtos é realizado sobre o array 'products', que possui todos os itens ou somente os produtos com a tag selecionada. 
     // Caso utilizemos diretamente o array completo quando alguma tag estiver selecionada isso fará com que só sejam mostrados os itens que ocupam indexes inferiores ao valor de 'count', 
     // O que é perfeito em caso de todos os produtos estarem sendo mostrados, mas que criaria fileiras incompletas quando se seleciona alguma tag
@@ -62,7 +77,11 @@ const Products = props => {
     if (props.wishlist) {
 
         products = productsData.filter(product => wishlistState.includes(product._id))
-        console.log(products)
+        
+    // } else if (props.cart) {
+
+    //     products = productsData.filter(product => cartState.includes(product._id))
+
     } else {
 
         if (tag === 'all' && category === 'all') {

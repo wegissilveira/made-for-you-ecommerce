@@ -4,14 +4,25 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import './Cart.css'
 
+// import Products from '../../Shared/Products/Products'
 import ProductQtde from '../../Shared/UI/ProductsQtde/ProductsQtde'
+
+import cartData from '../../../Data/cartData'
 
 
 const Cart = props => {
 
-    const [qtde, setQtde] = React.useState(1)
+    // quando mudo a quantidade de um único produto isso afeta a todos, já que estão utilizando a mesma state para calcular o preço
+    const [qtde, setQtde] = React.useState(Array(cartData.length).fill(1))
     
-    
+    // console.log(cartData)
+    // setQtde(qtde.fill())
+
+    // let arr = Array(cartData.length).fill(1)
+    // console.log(arr)
+    // setQtde(arr)
+    console.log(qtde)
+
     return (
         <div className="products-container session-container">
             <h1 className="text-center mb-5 mt-5">CART</h1>
@@ -23,34 +34,41 @@ const Cart = props => {
                     <p className="col-2">QUANTITY</p>
                     <p>TOTAL</p>
                 </div>
-                <div className="cart-details d-flex justify-content-between align-items-center row mt-3">
-                    <div className="col-4 d-flex align-items-center" style={{height: '80px'}}>
-                        
-                        {/* <img /> */}
-                        <div style={{width: '80px', height: '80px', backgroundColor: 'pink', marginRight: '30px'}}></div>
+                {cartData.map((product, i) => {
+                    return  <div key={i} className="cart-details d-flex justify-content-between align-items-center row mt-3">
+                                <div className="col-4 d-flex align-items-center" style={{height: '80px'}}>
+                                    
+                                    
+                                    {/* <div style={{width: '80px', height: '80px', backgroundColor: 'pink', marginRight: '30px'}}></div> */}
+                                    <div style={{width: '80px', height: '80px', marginRight: '30px'}}>
+                                        <img style={{maxWidth: '100%', maxHeight: '100%'}} src={product.imgsDemo[0]} alt='img' />
+                                    </div>
 
-                        <div className="d-flex flex-column justify-content-between mb-1" style={{height: '100%'}}>
-                            <p className="font-weight-bold">DOG HOUSE</p>
-                            <div className="d-flex" style={{fontSize: '12px'}}>
-                                <div className="text-secondary">
-                                    <p className="mb-2">Size</p>
-                                    <p>Color</p>
+                                    <div className="d-flex flex-column justify-content-between mb-1" style={{height: '100%'}}>
+                                        <p className="font-weight-bold">{product.name}</p>
+                                        <div className="d-flex" style={{fontSize: '12px'}}>
+                                            <div className="text-secondary">
+                                                <p className="mb-2">Size</p>
+                                                <p>Color</p>
+                                            </div>
+                                            <div className="ml-3">
+                                                <p className="mb-2">100 x 100</p>
+                                                <p>Pink</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="ml-3">
-                                    <p className="mb-2">100 x 100</p>
-                                    <p>Pink</p>
+                                <p className="font-weight-bold col-2">0%</p>
+                                <p className="font-weight-bold col-2">$ {product.price}</p>
+                                <div className="col-2">
+                                    <ProductQtde changeQtdeCallBack={qtde => setQtde(qtde)} />
                                 </div>
+                                
+                                <p className="font-weight-bold">$ {qtde * parseInt(product.price)}</p>
                             </div>
-                        </div>
-                    </div>
-                    <p className="font-weight-bold col-2">0%</p>
-                    <p className="font-weight-bold col-2">$ 37.99</p>
-                    <div className="col-2">
-                        <ProductQtde changeQtdeCallBack={qtde => setQtde(qtde)} />
-                    </div>
-                    
-                    <p className="font-weight-bold">$ {qtde * 2}</p>
-                </div>
+                })
+                  
+                }
                 <div className="d-flex justify-content-between mt-5 border-bottom">
                     <p className="cart-dark-button">
                         <FontAwesomeIcon icon="long-arrow-alt-left" />

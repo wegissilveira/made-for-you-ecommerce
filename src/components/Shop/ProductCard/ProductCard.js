@@ -4,7 +4,7 @@ import './ProductCard.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import productsData from '../../../productsData'
+import productsData from '../../../Data/productsData'
 import ProductsQtde from '../../Shared/UI/ProductsQtde/ProductsQtde'
 import ColorSelect from '../../Shared/UI/ColorSelect/ColorSelect'
   
