@@ -2,7 +2,7 @@ const cartData = [
     {
         _id: '2',
         name: 'Produto-2',
-        price: '38.99',
+        price: '98.99',
         img: require('../assets/images/Products/molde-furniture.png'),
         tag: 'furniture',
         category: 'bedroom',
@@ -18,7 +18,7 @@ const cartData = [
     {
         _id: '8',
         name: 'Produto-8',
-        price: '38.99',
+        price: '18.99',
         img: require('../assets/images/Products/molde-furniture.png'),
         tag: 'furniture',
         category: 'kitchen',
@@ -33,7 +33,7 @@ const cartData = [
     {
         _id: '9',
         name: 'Produto-9',
-        price: '38.99',
+        price: '36.99',
         category: '',
         img: require('../assets/images/Products/molde-textile.png'),
         tag: 'textile',
@@ -49,7 +49,7 @@ const cartData = [
     {
         _id: '16',
         name: 'Produto-16',
-        price: '38.99',
+        price: '28.99',
         img: require('../assets/images/Products/molde-decorations.png'),
         tag: 'decorations',
         category: 'bathroom',

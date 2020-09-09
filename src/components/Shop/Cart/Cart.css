@@ -1,3 +1,11 @@
+a {
+    color: transparent;
+}
+
+a:hover {
+    color: transparent;
+}
+
 .cart-details p {
     margin-bottom: 0;
 }
