@@ -12,7 +12,7 @@ import ProductCardModal from '../../Shop/ProductCardModal/ProductCardModal'
 // Vou buscar uma maneira de salvar apenas a marcação de 'favorito' na tabela e referenciar o produto aqui. Escolherei a maneira mais econômica.
 import productsData from '../../../Data/productsData' 
 import wishlist from '../../../Data/wishlistData';
-import cart from '../../../Data/cartData';
+// import cart from '../../../Data/cartData';
 
 const Products = props => {
 
@@ -167,7 +167,7 @@ const Products = props => {
                             }
                             return productsList
                         })
-                    : <h1 className="text-center" style={{width: '100%'}}>NENHUM ITEM NA WISHLIST</h1>}
+                    : <h1 className="text-center" style={{width: '100%'}}>NENHUM ITEM NA ENCONTRADO</h1>}
 
                 </div>
                 <div className="d-flex justify-content-between products-show-container">

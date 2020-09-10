@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react'
 
 import Footer from '../../components/Footer/Footer'
+import SearchProduct from '../../components/SearchProduct/SearchProduct'
 
 import './Layout.css'
 
@@ -10,13 +11,29 @@ import GoogleFontLoader from 'react-google-font-loader';
 
 class Layout extends Component {
     
+    state = {
+        searchProduct: false,
+        input: ''
+    }
 
-    // O que farei é criar um método para realizar as buscas utilizando o código que já tenho no arqui es6fund.
-    // O que tenho que decidir é como vou exibir os produtos.
-    // Uma opção é remover todo o conteúdo de 'main', que se trata de tudo que está entre o navigation e o footer, e inserir um componente no lugar com os resultados da busca, assim somente as buscas apareceriam quando houver resultado. 
-    // Não sei se seria possível direcionar o usuário para a página do produto, já que os demais componentes estariam supostamente desativados.
-    // Uma outra opção também seria utilizar o componente 'Products', mas isso o deixaria ainda mais complexo.
-    // Talvez eu possa criar um componente a parte, mas não desabilitar os demais, nesse caso eu teria que encontrar uma maneira de fazer com que eles funcionem juntos sem comprometer a UI e a UX.
+
+    searchProductHandler = e => {
+        let inputValue = e.target.parentElement.childNodes[0].value
+        console.log(inputValue)
+        // console.log(inputValue.length)
+        // if (inputValue.length >= 3) {
+        //     this.setState({
+        //         searchProduct: true, 
+        //         input: inputValue
+        //     })
+        // } 
+        // else {
+        //     alert('Digite ao menos 3 letras no campo de busca')
+        // }
+
+    }
+
+
 
     render () {
         return (
@@ -104,9 +121,15 @@ class Layout extends Component {
                             <p className="mb-0">+375 29 364-74-69</p>
 
                             <ul className="navbar-nav account-icons">
-                                <li className="nav-item d-flex align-items-center">
+                                <li className="nav-item d-flex align-items-center" >
                                     <input />
-                                    <FontAwesomeIcon icon="search" color="grey" style={{cursor: 'pointer'}} />
+                                    <FontAwesomeIcon 
+                                        icon="search" 
+                                        color="grey" 
+                                        style={{cursor: 'pointer'}} 
+
+                                        onClick={this.searchProductHandler}
+                                    />
                                 </li>
                                 <li className="nav-item">
                                     <FontAwesomeIcon icon={['far', 'user']} color="grey" />
@@ -148,7 +171,7 @@ class Layout extends Component {
                 </nav>
                 
                 <main>
-                    {this.props.children}
+                    {this.state.searchProduct ? <SearchProduct searchKey={this.state.input} /> : this.props.children}
                 </main>
                 <Footer>
 
