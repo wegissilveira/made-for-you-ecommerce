@@ -11,6 +11,13 @@ import GoogleFontLoader from 'react-google-font-loader';
 class Layout extends Component {
     
 
+    // O que farei é criar um método para realizar as buscas utilizando o código que já tenho no arqui es6fund.
+    // O que tenho que decidir é como vou exibir os produtos.
+    // Uma opção é remover todo o conteúdo de 'main', que se trata de tudo que está entre o navigation e o footer, e inserir um componente no lugar com os resultados da busca, assim somente as buscas apareceriam quando houver resultado. 
+    // Não sei se seria possível direcionar o usuário para a página do produto, já que os demais componentes estariam supostamente desativados.
+    // Uma outra opção também seria utilizar o componente 'Products', mas isso o deixaria ainda mais complexo.
+    // Talvez eu possa criar um componente a parte, mas não desabilitar os demais, nesse caso eu teria que encontrar uma maneira de fazer com que eles funcionem juntos sem comprometer a UI e a UX.
+
     render () {
         return (
 
@@ -97,8 +104,9 @@ class Layout extends Component {
                             <p className="mb-0">+375 29 364-74-69</p>
 
                             <ul className="navbar-nav account-icons">
-                                <li className="nav-item">
-                                    <FontAwesomeIcon icon="search" color="grey" />
+                                <li className="nav-item d-flex align-items-center">
+                                    <input />
+                                    <FontAwesomeIcon icon="search" color="grey" style={{cursor: 'pointer'}} />
                                 </li>
                                 <li className="nav-item">
                                     <FontAwesomeIcon icon={['far', 'user']} color="grey" />
