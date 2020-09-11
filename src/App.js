@@ -12,7 +12,7 @@ import Products from './components/Shared/Products/Products'
 import UserLogin from './components/User/UserLogin/UserLogin'
 import UserSignUp from './components/User/UserSignUp/UserSignUp'
 import Contact from './components/Contact/Contact'
-// import SearchProduct from './components/SearchProduct/SearchProduct'
+import SearchProduct from './components/SearchProduct/SearchProduct'
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -85,7 +85,7 @@ function App() {
       <Layout>
         <Switch>
           <Route path="/" exact component={MainPageConfig} />
-          {/* <Route path="/teste" exact component={SearchProduct} /> */}
+          <Route path="/search/:searchKey" exact component={SearchProduct} />
           <Route path="/shop/" exact component={ShopConfig} />
           <Route path="/shop/:cat" exact component={Products} />
           <Route path="/shop/product/:id" exact component={ProductCard} />

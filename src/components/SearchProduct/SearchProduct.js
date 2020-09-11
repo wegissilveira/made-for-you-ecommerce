@@ -12,13 +12,14 @@ import productsData from '../../Data/productsData'
 
 const SearchProduct = props => {
     
-    let [count, setCount] = React.useState(props.pageLimit)
+    const pageLimit = 12
+    let [count, setCount] = React.useState(pageLimit)
     let [showProduct, setShowProduct] = React.useState(false)
     let [productIndex, setProductIndex] = React.useState(null)
 
 
     let products = []
-    let searchKey = new RegExp(props.searchKey, 'gi') 
+    let searchKey = new RegExp(props.match.params.searchKey, 'gi') 
 
     productsData.map(product => {
         for (let i in product) {
@@ -111,7 +112,7 @@ const SearchProduct = props => {
                             <div className="products-show">
                                 <div className="products-show-text">
                                     <button 
-                                        disabled={count <= props.pageLimit || products.length <= props.pageLimit} 
+                                        disabled={count <= pageLimit || products.length <= pageLimit} 
                                         type="button" 
                                         className="btn border-danger" 
                                         onClick={() => setCount(count - 4)}
