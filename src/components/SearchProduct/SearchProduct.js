@@ -12,18 +12,22 @@ import productsData from '../../Data/productsData'
 
 const SearchProduct = props => {
     
-    let [count, setCount] = React.useState(8)
+    let [count, setCount] = React.useState(props.pageLimit)
     let [showProduct, setShowProduct] = React.useState(false)
     let [productIndex, setProductIndex] = React.useState(null)
+
 
     let products = []
     let searchKey = new RegExp(props.searchKey, 'gi') 
 
     productsData.map(product => {
         for (let i in product) {
-            if (product[i].toString().match(searchKey)) {
-                products.push(product)
+            if (i !== 'imgsDemo' && i !== 'img' && i !== 'deal') {
+                if (product[i].toString().match(searchKey)) {
+                    products.push(product)
+                }
             }
+
         }
     })
     
@@ -37,9 +41,6 @@ const SearchProduct = props => {
     } else {
         document.body.style.overflow = "visible"
     }
-
-    
-    console.log(products)
 
 
 
@@ -93,30 +94,35 @@ const SearchProduct = props => {
                     : <h1 className="text-center" style={{width: '100%'}}>NENHUM ITEM NA WISHLIST</h1>}
 
                 </div>
-                <div className="d-flex justify-content-between products-show-container">
-                    <div className="products-show">
-                        <div className="products-show-text">
-                            <button 
-                                disabled={count >= products.length} 
-                                type="button" 
-                                className="btn border-success" 
-                                onClick={() => setCount(count + 4)}
-                                > SHOW MORE
-                            </button>
+                {
+                    products.length >= count ?
+                        <div className="d-flex justify-content-between products-show-container">
+                            <div className="products-show">
+                                <div className="products-show-text">
+                                    <button 
+                                        disabled={count >= products.length} 
+                                        type="button" 
+                                        className="btn border-success" 
+                                        onClick={() => setCount(count + 4)}
+                                        > SHOW MORE
+                                    </button>
+                                </div>
+                            </div>
+                            <div className="products-show">
+                                <div className="products-show-text">
+                                    <button 
+                                        disabled={count <= props.pageLimit || products.length <= props.pageLimit} 
+                                        type="button" 
+                                        className="btn border-danger" 
+                                        onClick={() => setCount(count - 4)}
+                                        > SHOW MENOS
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div className="products-show">
-                        <div className="products-show-text">
-                            <button 
-                                disabled={count <= props.pageLimit || products.length <= props.pageLimit} 
-                                type="button" 
-                                className="btn border-danger" 
-                                onClick={() => setCount(count - 4)}
-                                > SHOW MENOS
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                    : null
+                }
+
             </div>
         </Fragment>
     )

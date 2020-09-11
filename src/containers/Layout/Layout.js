@@ -6,11 +6,18 @@ import SearchProduct from '../../components/SearchProduct/SearchProduct'
 import './Layout.css'
 
 import { NavLink as RRNavLink, NavLink } from 'react-router-dom'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import GoogleFontLoader from 'react-google-font-loader';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import GoogleFontLoader from 'react-google-font-loader'
 
 class Layout extends Component {
     
+    // Preciso encontrar uma maneira de setar 'searchProduct' como false após a busca ou pelo menos quando algum link for clicado
+    // Os links não estão funcionando e não é possível sair da página, pois após realizar a busca 'searchProduct' continua sendo 'true'
+    // Eu pensei em verificar a url, mas ela não sofre nenhuma alteração no momento da busca, ela manté mantida como estava anteriormente, então não há padrão para utilizar como referência
+    // Também considerei a ideia de verificar se houve alteração na url, mas isso seria um problema quando o usuário quiser apensas voltar para a página anterior. Apesar de que seria possível com o botão voltar do browser, comprometeria a UI.
+    // Pensei em criar um método para isso, mas a única maneira que pensei por enquanto é a de inserir tal método em todos os links, não sei se é a melhor maneira, procurarei outra, caso não encontre será a solução, ainda que não muito atraente.
+    // Talvez acrescentando uma variável aumentaria as possibilidades, mas por ora não tenho ideia de como aproveitar isso
+    // Talvez haja uma maneira de verificar se o 'Link' recebeu um click, se foi ativado, caso isso seja possível resolveria o problema. VERIFICAR ISSO COMO PRIMEIRA HIPÓTESE DE SOLUÇÃO.
     state = {
         searchProduct: false,
         input: ''
@@ -18,18 +25,16 @@ class Layout extends Component {
 
 
     searchProductHandler = e => {
-        let inputValue = e.target.parentElement.childNodes[0].value
-        console.log(inputValue)
-        // console.log(inputValue.length)
-        // if (inputValue.length >= 3) {
-        //     this.setState({
-        //         searchProduct: true, 
-        //         input: inputValue
-        //     })
-        // } 
-        // else {
-        //     alert('Digite ao menos 3 letras no campo de busca')
-        // }
+        let inputValue = e.currentTarget.parentElement.childNodes[0].value
+        
+        if (inputValue.length >= 3) {
+            this.setState({
+                searchProduct: true, 
+                input: inputValue
+            })
+        } else {
+            alert('Digite ao menos 3 letras no campo de busca')
+        }
 
     }
 
@@ -171,7 +176,15 @@ class Layout extends Component {
                 </nav>
                 
                 <main>
-                    {this.state.searchProduct ? <SearchProduct searchKey={this.state.input} /> : this.props.children}
+                    {
+                        this.state.searchProduct ? 
+                            <SearchProduct 
+                                searchKey={this.state.input} 
+                                pageLimit={12}
+                            /> 
+                        : 
+                            this.props.children
+                    }
                 </main>
                 <Footer>
 
