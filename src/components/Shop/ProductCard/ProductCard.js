@@ -12,6 +12,7 @@ import ColorSelect from '../../Shared/UI/ColorSelect/ColorSelect'
 const ProductCard = props => {
     
     let [imgSlide, setImgSlide] = React.useState(0)
+    let [productColor, setProductColor] = React.useState('')
 
     const product = productsData.find(product => product._id === props.match.params.id)
 
@@ -24,6 +25,14 @@ const ProductCard = props => {
             setImgSlide(arg)
         }
     }
+
+    // Selecionar cor do produto ao clicar nos círculos.
+    // Tal método muda a UI apresentando o slide que se refere a cor selecionada, mas também armazena os valores no objeto com todas as informações do produto enviado para o DB (ainda será criado).
+    const selectColorHandler = (color, i) => {
+        setProductColor(color)
+        setImgSlide(i)
+    }
+
 
 
     return (
@@ -92,6 +101,7 @@ const ProductCard = props => {
                                 <p>Color</p>
                                 <ColorSelect 
                                     colors={product.colors}
+                                    selectColorHandlerCallback={(color, i) => selectColorHandler(color, i)}
                                 />
                             </div>
                         </div>
