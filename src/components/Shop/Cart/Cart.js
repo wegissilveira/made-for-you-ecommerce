@@ -30,8 +30,8 @@ const Cart = props => {
 
 
     // Aqui eu atualizo a quantidade de produtos do item que ocupa a posição no array que está sofrendo a alteração.
-    // Ou seja, se eu altero a quantidade do produto de índice 2, somente o índice 2 receberá a alteração e o somente o preço total deste será alterado, já que o índice é utilizado para realizar o cálculo => qtde[i] * parseInt(product.price)
-    // Caso eu não tivesse um array com uma posição para cada produto, eu teria somente uma state para todos, sendo assim, quando a quantidade de um alterasse os preços de todos acompanhariam, já que se baseariam na mesma variável.
+    // Ou seja, se eu altero a quantidade do produto de índice 2, somente o índice 2 receberá a alteração e somente o preço total deste será alterado, já que o índice é utilizado para realizar o cálculo => qtde[i] * parseInt(product.price)
+    // Caso eu não tivesse um array com uma posição para cada produto, eu teria somente uma state para todos, sendo assim, quando a quantidade de um alterasse, os preços de todos acompanhariam, já que se baseariam na mesma variável.
     // Poderia ter sido criada uma state para cada produto, mas isso, além de muito mais verboso que desta forma, só seria possível em caso do número de produtos ser fixo.
     const setQtdeHandler = (value, index) => {
         let arrQtde = [...qtde]

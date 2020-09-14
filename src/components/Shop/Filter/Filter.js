@@ -22,6 +22,8 @@ const Filter = props => {
     let [max_value, setMaxValue] =  React.useState(initial_max_value)
     let [move, setMove] =  React.useState(false) // => habilita os thumbs a serem movidos
 
+    let [productColor, setProductColor] = React.useState('') // => Armazena cor selecionada do produto
+
 
     const openFilterHandler = () => {
         filterOpen ? setFilterOpen(false) : setFilterOpen(true)
@@ -83,7 +85,67 @@ const Filter = props => {
     const moveOff = () => {
         setMove(false)
     }
-    
+
+    // Explicação em 'ProductCard'
+    const selectColorHandler = (color, i) => {
+        setProductColor(color)
+    }
+  
+    // Categorias
+    let livingRoomQtde = 0
+    let bedRoomQtde = 0
+    let bathRoomQtde = 0
+    let kitchen = 0
+    let childrenRoom = 0
+
+    // Tipos
+    let furnitureQtde = 0
+    let accessoriesQtde = 0
+    let storageQtde = 0
+    let textileQtde = 0
+    let lightingQtde = 0
+
+    // Atualizando quantidade de produtos separados por tipos e categorias
+    props.products.map(product => {
+        for (let i in product) {
+            //Categorias
+            if (product[i].toString().match('living-room')) {
+                livingRoomQtde++
+            }
+            if (product[i].toString().match('bedroom')) {
+                bedRoomQtde++
+            }
+            if (product[i].toString().match('bathroom')) {
+                bathRoomQtde++
+            }
+            if (product[i].toString().match('kitchen')) {
+                kitchen++
+            }
+            if (product[i].toString().match('children-room')) {
+                childrenRoom++
+            }
+
+            // Tipos
+            if (product[i].toString().match('furniture')) {
+                furnitureQtde++
+            }
+            if (product[i].toString().match('accessories')) {
+                accessoriesQtde++
+            }
+            if (product[i].toString().match('storage')) {
+                storageQtde++
+            }
+            if (product[i].toString().match('textile')) {
+                textileQtde++
+            }
+            if (product[i].toString().match('lightning')) {
+                lightingQtde++
+            }
+        }
+        
+    })
+
+
 
     return (
         <Fragment>
@@ -117,20 +179,20 @@ const Filter = props => {
                     <div className="mt-5 mb-5 d-flex justify-content-between row">
                         <div>
                             <h6>CATEGORIAS</h6>
-                            <p>Bedroom (31)</p>
-                            <p>Living room (31)</p>
-                            <p>Kitchen (31)</p>
-                            <p>Bathroom (31)</p>
-                            <p>Children's room (31)</p>
+                            <p>Bedroom ({bedRoomQtde}) </p>
+                            <p>Living room ({livingRoomQtde}) </p>
+                            <p>Kitchen ({kitchen}) </p>
+                            <p>Bathroom ({bathRoomQtde}) </p>
+                            <p>Children's room ({childrenRoom}) </p>
                         </div>
                         <div className="divider"></div>
                         <div>
                             <h6>TYPE</h6>
-                            <p>Furniture (31)</p>
-                            <p>Accessories (31)</p>
-                            <p>Storage (31)</p>
-                            <p>Textile (31)</p>
-                            <p>Lighting (31)</p>
+                            <p>Furniture ({furnitureQtde}) </p>
+                            <p>Accessories ({accessoriesQtde}) </p>
+                            <p>Storage ({storageQtde}) </p>
+                            <p>Textile ({textileQtde}) </p>
+                            <p>Lighting ({lightingQtde}) </p>
                         </div>
                         <div className="divider"></div>
                         <div className="d-flex flex-column">
@@ -158,6 +220,7 @@ const Filter = props => {
                             <ColorSelect
                                 title={'COLOR'}
                                 colors={['red', 'yellow', 'blue', 'purple', 'green']}
+                                selectColorHandlerCallback={(color, i) => selectColorHandler(color, i)}
                             />
                         </div>
                         <div className="divider"></div>

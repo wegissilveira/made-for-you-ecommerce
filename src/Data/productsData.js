@@ -123,7 +123,7 @@ const productsData = [
         _id: '9',
         name: 'Produto-9',
         price: '36.99',
-        category: '',
+        category: 'children-room',
         img: require('../assets/images/Products/molde-textile.png'),
         tag: 'textile',
         imgsDemo: [

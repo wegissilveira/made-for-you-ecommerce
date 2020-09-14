@@ -12,7 +12,7 @@ import ColorSelect from '../../Shared/UI/ColorSelect/ColorSelect'
 const ProductCard = props => {
     
     let [imgSlide, setImgSlide] = React.useState(0)
-    let [productColor, setProductColor] = React.useState('')
+    let [productColor, setProductColor] = React.useState('') // => Armazena cor selecionada do produto
 
     const product = productsData.find(product => product._id === props.match.params.id)
 

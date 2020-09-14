@@ -12,7 +12,9 @@ const ShopProducts = props => {
     return (
         <div>
             <h1 className="text-center mb-5 mt-5">SHOP</h1>
-            <Filter />
+            <Filter 
+                products={products}
+            />
             <Products 
                 products={products} 
                 pageLimit={12} 

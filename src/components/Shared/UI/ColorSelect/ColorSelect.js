@@ -13,13 +13,35 @@ const ColorSelect = props => {
     // OBS.: Decidi enviar o índice e o nome da cor, o índice é utilizado para alterar o slide mostrado e o nome da cor para inserir a informação no objeto que será armazenado no DB. Acredito que isso também deixará o componente mais dinâmico ajudará no momento de implementá-lo no filtro.
     // OBS.: Não vejo necessidade de uma state aqui, mas a manterei por ora.
 
+    let opacityArr = Array(props.colors.length).fill('0.4')
+    opacityArr[0] = '1.0'
+
+    let borderArr = Array(props.colors.length).fill('1px solid black')
+    borderArr[0] = '2px solid black'
+
     let [colorState, setColorState] = React.useState('')
+    let [opacity, setOpacity] = React.useState(opacityArr)
+    let [border, setBorder] = React.useState(borderArr)
 
     const selectColorHandler = (color, i) => {
+        let newBorder = [...border]
+        let newOpacity = [...opacity]
+        
+        newBorder.map((color, k) => {
+            k === i ? newBorder[k] = '2px solid black' : newBorder[k] = '1px solid black' 
+        })
+
+        newOpacity.map((color, k) => {
+            k === i ? newOpacity[k] = '1.0' : newOpacity[k] = '0.4' 
+        })
+
+        setBorder(newBorder)
+        setOpacity(newOpacity)
         setColorState(color)
+        
         props.selectColorHandlerCallback(color, i)
     }
-
+ 
 
                                 
     return (
@@ -35,11 +57,13 @@ const ColorSelect = props => {
                                     justify-content-center 
                                     align-items-center
                                 "
+                                style={{border: border[i]}}
+
                                 onClick={() => selectColorHandler(color, i)}
                             >
                                 <span 
                                     className="rounded-circle" 
-                                    style={{backgroundColor: color}}
+                                    style={{backgroundColor: color, opacity: opacity[i]}}
                                 >
                                 </span>
                             </div>

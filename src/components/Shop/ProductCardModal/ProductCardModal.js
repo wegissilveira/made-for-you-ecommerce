@@ -25,6 +25,7 @@ const customStyles = {
 const ProductCardModal = props => {
         
     let [imgSlide, setImgSlide] = React.useState(0)
+    let [productColor, setProductColor] = React.useState('')
 
     // Case eu decida que as setas sejam definitivamente removidas asa condições 'next' e 'previous' também podem ser retiradas da equação
     const changeSlide = arg => {
@@ -36,6 +37,12 @@ const ProductCardModal = props => {
         } else if (typeof arg === 'number') {
             setImgSlide(arg)
         }
+    }
+
+    // Aqui esta função que seleciona as cores não passará o slide, já que o slide é automático.
+    // Simplesmente armazenará as informações sobre o produto destinado ao DB.
+    const selectColorHandler = (color, i) => {
+        setProductColor(color)
     }
     
 
@@ -107,6 +114,7 @@ const ProductCardModal = props => {
                                 <p>Color</p>
                                 <ColorSelect
                                     colors={props.product.colors}
+                                    selectColorHandlerCallback={(color, i) => selectColorHandler(color, i)}
                                 />
                             </div>
                         </div>

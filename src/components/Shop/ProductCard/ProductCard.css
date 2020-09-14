@@ -50,8 +50,9 @@ input {
     outline: none;
 }
 
+/* Provavelmente alterar para 'ColoSelect' */
 .product-details-color {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     width: 26px;
     height: 26px;
     cursor: pointer;
