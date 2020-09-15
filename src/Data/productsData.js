@@ -77,7 +77,7 @@ const productsData = [
     {
         _id: '6',
         name: 'Produto-6',
-        price: '38.99',
+        price: '388.99',
         img: require('../assets/images/Products/molde-furniture.png'),
         tag: 'furniture',
         category: 'bedroom',
@@ -92,7 +92,7 @@ const productsData = [
     {
         _id: '7',
         name: 'Produto-7',
-        price: '38.99',
+        price: '389.90',
         img: require('../assets/images/Products/molde-textile.png'),
         tag: 'textile',
         category: 'kitchen',
@@ -137,7 +137,7 @@ const productsData = [
     {
         _id: '10',
         name: 'Produto-10',
-        price: '38.99',
+        price: '500.99',
         img: require('../assets/images/Products/molde-decorations.png'),
         tag: 'decorations',
         category: 'living-room',
@@ -152,7 +152,7 @@ const productsData = [
     {
         _id: '11',
         name: 'Produto-11',
-        price: '38.99',
+        price: '1038.99',
         img: require('../assets/images/Products/molde-decorations.png'),
         tag: 'decorations',
         category: 'kitchen',
@@ -197,7 +197,7 @@ const productsData = [
     {
         _id: '14',
         name: 'Produto-14',
-        price: '38.99',
+        price: '318.99',
         img: require('../assets/images/Products/molde-furniture.png'),
         tag: 'furniture',
         category: 'bathroom',
@@ -212,7 +212,7 @@ const productsData = [
     {
         _id: '15',
         name: 'Produto-15',
-        price: '38.99',
+        price: '118.99',
         img: require('../assets/images/Products/molde-textile.png'),
         tag: 'textile',
         category: 'bedroom',
@@ -227,7 +227,7 @@ const productsData = [
     {
         _id: '16',
         name: 'Produto-16',
-        price: '28.99',
+        price: '288.99',
         img: require('../assets/images/Products/molde-decorations.png'),
         tag: 'decorations',
         category: 'bathroom',

@@ -7,7 +7,7 @@ import products from '../../../Data/productsData'
 
 const ShopProducts = props => {
 
-    let [tag, setTag] = React.useState('all')
+    // let [tag, setTag] = React.useState('all')
 
     return (
         <div>
@@ -15,11 +15,11 @@ const ShopProducts = props => {
             <Filter 
                 products={products}
             />
-            <Products 
-                products={products} 
+            {/* <Products 
+                // products={products} 
                 pageLimit={12} 
-                tag={tag}
-            />
+                tag={'all'}
+            /> */}
             <BestDeal products={products} />
         </div>
     )

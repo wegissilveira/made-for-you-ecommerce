@@ -23,6 +23,8 @@ const Products = props => {
     let [wishlistState, setWishlist] = React.useState(wishlist)
     // let [cartState, setCart] = React.useState(cart)
 
+    // console.log(props.tag)
+    // console.log(props.category)
 
     if (count === undefined) {
         setCount(8)
@@ -30,13 +32,19 @@ const Products = props => {
 
     let tag
     let category
-    if (props.tag) {
+    if (props.tag && props.category) {
         tag = props.tag
-        category = 'all'
+        category = props.category
     // } else if (props.match.params.cat !== undefined) {
     } else if (props.match) {
         tag = 'all'
         category = props.match.params.cat
+    } else if (props.tag) {
+        tag = props.tag
+        category = 'all'
+    } else if (props.category) {
+        tag = 'all'
+        category = props.category
     } else {
         tag = 'all'
         category = 'all'
@@ -96,6 +104,13 @@ const Products = props => {
         }
     }
 
+    //Determina o intervalo de preços que os produtos devem aparecer, por exemplo, maior que 50 e menor que 500
+    if (props.valueRange) {
+        products = products.filter(product => 
+            parseFloat(product.price) >= props.valueRange[0] && parseFloat(product.price) <= props.valueRange[1]
+        )
+    }
+    console.log(products)
     const setCard = i => {
         setShowProduct(!showProduct)
         setProductIndex(i)
@@ -107,7 +122,7 @@ const Products = props => {
         document.body.style.overflow = "visible"
     }
 
-    
+
     
     return (
         <Fragment>

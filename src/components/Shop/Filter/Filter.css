@@ -21,6 +21,10 @@
     margin: 0;
 }
 
+.sub-filter-type p {
+    cursor: pointer;
+}
+
 
 /* ** */
 
