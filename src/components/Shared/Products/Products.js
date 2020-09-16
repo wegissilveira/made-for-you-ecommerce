@@ -110,7 +110,37 @@ const Products = props => {
             parseFloat(product.price) >= props.valueRange[0] && parseFloat(product.price) <= props.valueRange[1]
         )
     }
-    console.log(products)
+
+    // Determina os produtos que devem ser exibidos baseado na cor selecionada, ou seja, serão mostrados somente os produtos que possuem uma variação da cor desejada
+    if (props.productColor && props.productColor !== '') {
+        products = products.filter(product => 
+            product.colors.includes(props.productColor)
+        )
+    }
+
+    // Seleciona os produtos pelo tipo de oferta
+    if (props.offer && props.offer.length > 0) {
+        products = products.filter(product => 
+            props.offer.includes(product.offer))
+    }
+ 
+    // Ordena produtos
+    if (props.order) {
+        if (props.order === 'low-high') {
+            products.sort((a,b) => parseFloat(a.price) - parseFloat(b.price))
+        } else if (props.order === 'high-low') {
+            products.sort((a,b) => parseFloat(b.price) - parseFloat(a.price))
+        } else if (props.order === 'alphabetical') {
+            products.sort((a, b) => a.name.localeCompare(
+                b.name,
+                undefined,
+                { numeric: true, sensitivity: 'base' }
+            ));
+        }
+    }
+    
+
+    // Abre e fecha o filtro
     const setCard = i => {
         setShowProduct(!showProduct)
         setProductIndex(i)
@@ -121,6 +151,7 @@ const Products = props => {
     } else {
         document.body.style.overflow = "visible"
     }
+    
 
 
     
@@ -148,11 +179,13 @@ const Products = props => {
                                                                             <FontAwesomeIcon onClick={() => wishlistHandler(product._id)} className="wishlist-icon" icon={['far', 'heart']} size="2x" />
                                                                     }
                                                                     <Link to={"/shop/product/" + product._id} >
-                                                                        <img 
-                                                                            // onClick={() => setCard(i)} 
-                                                                            src={product.img} alt="Produto" 
-                                                                            style={{maxWidth: '100%'}} 
-                                                                        />
+                                                                        <div style={{height: '359px'}} className="d-flex align-items-center">
+                                                                            <img 
+                                                                                // onClick={() => setCard(i)} 
+                                                                                src={product.img} alt="Produto" 
+                                                                                style={{maxWidth: '100%'}} 
+                                                                            />
+                                                                        </div>
                                                                     </Link>
                                                                     <div className="products-description d-flex justify-content-between align-items-center">
                                                                         <div className="d-flex flex-column align-items-start products-description-icons">

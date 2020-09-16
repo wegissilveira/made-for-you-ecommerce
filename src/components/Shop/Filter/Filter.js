@@ -10,31 +10,47 @@ import Products from '../../Shared/Products/Products';
 
 const Filter = props => {
 
-    // Ainda faltam o ‘our offer’, que tenho que decidir se existirá e, caso seja mantido, decidir como será, provavelmente entrará na propriedade ‘tag’, ou posso criar uma nova propriedade, como fiz com ‘deal’, pensando bem a segunda opção é melhor. 
-    // Também falta determinar como a seleção de cores se comportará, já que as imagens de ‘products’ não são as mesmas dos sliders, o que torna um pouco mais complicado mostrar a imagem do produto com a cor específica, ainda que a exista a opção de tal cor.
+    // Sobre o filtro por cores:
+    // As imagens de ‘products’ não são as mesmas dos sliders, o que torna um pouco mais complicado mostrar a imagem do produto com a cor específica, ainda que exista a opção de tal cor.
     // Preciso decidir se mostro a imagem original, deixando implícito que existe uma variação do produto apresentado na cor desejada, então o usuário entraria na página do produto pra ver os detalhes, inclusive a cor que busca; ou se crio uma variação das imagens e possibilito a alteração da imagem apresentada para que a variação com a cor buscada apareça.
-    // A primeira opção está bem simples de ser realizada, mas a segunda talvez melhore a UX. O que devo considerar é se o trabalho de fazer isso valha a pena. 
+    // A primeira opção está bem simples de ser realizada, mas a segunda talvez melhore a UX. O que devo considerar é se o trabalho de fazer isso vale a pena. 
     // Vou pensar em como fazer e depois decido se vale ou não a pena.
-    // Além disso falta criar um método pra limpar o filtro, mas isso vai ser a última coisa, já que é bem simples e quando criar já terei todas as variáveis para trabalhar.
+    // Quanto ao filtro por cores, vou ficar ocm a primeira opção, pois como as imagens tem dimensões diferentes a segunda opção implicaria a distorção das imagens em algumas das páginas, seja no slider ou em 'products', ou utilizar a imagem quadrada e centralizá-la dentro de uma div em 'products', o que eu não achei interessante.
+    // Para preencher o vazio deixado pelas imagens quadradas seria possível utilizar um fundo colorido como alternativa.
+    // A outra opção seria utilizar imagens quadradas em 'products', resolveria o problema, mas esteticamente prefiro as retangulares.
+    // O ideal a meu ver é manter imagens distintas para cada área e, em case de haver área administrativa, deixar alertado as dimensões ideais das imagens em cada área, mas também possibilitando as demais opções, seja com as imagens uniformes ou com as quadradas centralizadas em uma div em 'products'. Isso daria liberdade ao administrador e o permitiria realizar aquilo que le agrada mais.
+    // Aqui eu manterei de maneira estática como já está feito e a seleção por cores será como foi descrita na primeira opção.
+    /* */
+
+    // Falta inserir a opção 'sem cor' na seleção de cores
+    // Falta resetar os itens selecionados para não selecionados após a limpeza do filtro. Os valores já estão sendo resetados.
+    // Para selecioná-los eu utilizo o evento, mas no caso da limpeza de filtro eu não possuo tal recurso. Preciso descobrir como acessar as propriedades dos elementos sem o 'event.target'. No JS puro eu simplesmente utilizaria um id, mas aqui não tenho certeza de como fazer isso.
+    // No react aparentemente é possível utilizar 'ref' to do that.
 
 
+    let [filterOpen, setFilterOpen] =  React.useState(false)
+
+    /* Slider de preço */
     const initial_position = 1204 // => Valor inicial do thumb esquerdo
     const end_position = 1403 // => Valor final do thumb direito
     const initial_min_value = 5 // => Valor inicial do preço mínimo
     const initial_max_value = 1290 // => Valor inicial do preço máximo
-
-    let [filterOpen, setFilterOpen] =  React.useState(false)
-
-    let [tag, setTag] = React.useState('all')
-    let [category, setCategory] = React.useState('all')
-
+    
     let [thumb1_position, setValueThumb1] =  React.useState(initial_position)
     let [thumb2_position, setValueThumb2] =  React.useState(end_position)
     let [min_value, setMinValue] =  React.useState(initial_min_value)
     let [max_value, setMaxValue] =  React.useState(initial_max_value)
     let [move, setMove] =  React.useState(false) // => habilita os thumbs a serem movidos
-
+    /* */
+    
+    /* Demais filtros */
+    let [tag, setTag] = React.useState('all')
+    let [category, setCategory] = React.useState('all')
     let [productColor, setProductColor] = React.useState('') // => Armazena cor selecionada do produto
+    let [offer, setOffer] = React.useState([])
+    let [order, setOrder] = React.useState('default')
+    /* */
+
 
 
     const openFilterHandler = () => {
@@ -180,6 +196,35 @@ const Filter = props => {
         e.target.style.fontWeight = 'bold'
     }
 
+    // Atualiza state 'offer', responsável por filtrar produtos pelo tipo de oferta
+    const setOfferHandler = e => {
+
+        let inputValuesArr = [...offer]
+        const input = e.target
+
+        if (input.checked) {
+            inputValuesArr.push(input.value)
+        } else {
+            inputValuesArr = inputValuesArr.filter(value => value !== input.value)
+        }
+
+        setOffer(inputValuesArr)
+    }
+
+    // Reseta todas as especificações do filtro para os valores iniciais
+    const cleanFiltersHandler = () => {
+        setValueThumb1(initial_position)
+        setValueThumb2(end_position)
+        setMinValue(initial_min_value)
+        setMaxValue(initial_max_value)
+
+        setTag('all')
+        setCategory('all')
+        setProductColor('')
+        setOffer([])
+        setOrder('default')
+    }
+
 
 
 
@@ -202,12 +247,13 @@ const Filter = props => {
                         
                     </div>
                     <div className="filter-sort d-flex justify-content-between align-items-center">
-                        <p>Showing 1 - 9 of 19 results</p>
+                        <p>Showing 1 - 9 of 19 results</p> {/* Decidir se esta parte ficará realmente aqui, já que depende do 'length' de 'products' que foi retornado pelo filtro. Também pensar se é necessário, talvez eu simplesmente insira o total de produtos retornados */}
                         <p>Sort by</p>
-                        <select>
-                            <option>Default Sorting</option>
-                            <option>Price</option>
-                            <option>Importance</option>
+                        <select onChange={e => setOrder(e.target.value)}>
+                            <option value="default">Default Sorting</option>
+                            <option value="low-high">Price: Low to High</option>
+                            <option value="high-low">Price: High to Low</option>
+                            <option value="alphabetical">Alphabetical Order</option>
                         </select>
                     </div>                    
                 </div>
@@ -236,19 +282,19 @@ const Filter = props => {
                         <div className="d-flex flex-column">
                             <h6>OUR OFFER</h6>
                             <div>
-                                <input type="checkbox" />
+                                <input type="checkbox" value="new" onChange={e => setOfferHandler(e)}/>
                                 <label className="ml-2">New Products</label>
                             </div>
                             <div>
-                                <input type="checkbox" />
+                                <input type="checkbox" value="old" onChange={e => setOfferHandler(e)}/>
                                 <label className="ml-2">Old Products</label>
                             </div>
                             <div>
-                                <input type="checkbox" />
+                                <input type="checkbox" value="best-seller" onChange={e => setOfferHandler(e)}/>
                                 <label className="ml-2">Best Sellers</label>
                             </div>
                             <div>
-                                <input type="checkbox" />
+                                <input type="checkbox" value="sales" onChange={e => setOfferHandler(e)}/>
                                 <label className="ml-2">Sales</label>
                             </div>
                         </div>
@@ -301,7 +347,7 @@ const Filter = props => {
                     {/* criar toggle entre os botões para serem ativos ou não */}
                     <div className="filter-button-container">
                         <p className="filter-button filter-button-active">FILTER</p>
-                        <p className="filter-button">CLEAR ALL</p>
+                        <p className="filter-button" onClick={() => cleanFiltersHandler()}>CLEAR ALL</p>
                     </div>
                 </div> : null}
                 <Products 
@@ -310,6 +356,9 @@ const Filter = props => {
                     tag={tag} // => Tag que determina quais produtos serão mostrados
                     category={category} // => Categoria dos produtos que serão mostrados
                     valueRange={[min_value, max_value]} // => Intervalo de preço que determinará os produtos que serão mostrados
+                    productColor={productColor} // => Filtra o produto por cor
+                    offer={offer} // => Filtra os produtos por tipo de oferta
+                    order={order}
                 />
             </div>
         </Fragment>
