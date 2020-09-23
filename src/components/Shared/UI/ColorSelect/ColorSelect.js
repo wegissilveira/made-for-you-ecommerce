@@ -14,10 +14,10 @@ const ColorSelect = props => {
     // OBS.: Não vejo necessidade de uma state aqui, mas a manterei por ora.
 
     let opacityArr = Array(props.colors.length).fill('0.4')
-    opacityArr[0] = '1.0'
+    // opacityArr[0] = '1.0' // => Ativando esta linha a primeira cor é inicialmente selecionada
 
     let borderArr = Array(props.colors.length).fill('1px solid black')
-    borderArr[0] = '2px solid black'
+    // borderArr[0] = '2px solid black' // => Ativando esta linha a primeira cor é inicialmente selecionada
 
     let [colorState, setColorState] = React.useState('')
     let [opacity, setOpacity] = React.useState(opacityArr)

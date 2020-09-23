@@ -22,11 +22,6 @@ const Filter = props => {
     // Aqui eu manterei de maneira estática como já está feito e a seleção por cores será como foi descrita na primeira opção.
     /* */
 
-    // Falta inserir a opção 'sem cor' na seleção de cores
-    // Falta resetar os itens selecionados para não selecionados após a limpeza do filtro. Os valores já estão sendo resetados.
-    // Para selecioná-los eu utilizo o evento, mas no caso da limpeza de filtro eu não possuo tal recurso. Preciso descobrir como acessar as propriedades dos elementos sem o 'event.target'. No JS puro eu simplesmente utilizaria um id, mas aqui não tenho certeza de como fazer isso.
-    // No react aparentemente é possível utilizar 'ref' to do that.
-
 
     let [filterOpen, setFilterOpen] =  React.useState(false)
 
@@ -46,10 +41,18 @@ const Filter = props => {
     /* Demais filtros */
     let [tag, setTag] = React.useState('all')
     let [category, setCategory] = React.useState('all')
+    let [checkColor, setCheckColor] =  React.useState(true)
     let [productColor, setProductColor] = React.useState('') // => Armazena cor selecionada do produto
+    let [productColorStep, setProductColorStep] = React.useState('') // => Armazena cor selecionada do produto
     let [offer, setOffer] = React.useState([])
     let [order, setOrder] = React.useState('default')
     /* */
+
+    const categoriesRef = React.useRef()
+    const typesRef = React.useRef()
+    const offerRef = React.useRef()
+    const selectRef = React.useRef()
+
 
 
 
@@ -115,9 +118,18 @@ const Filter = props => {
     }
 
     // Explicação em 'ProductCard'
-    const selectColorHandler = (color, i) => {
+    const selectColorHandler = (color) => {
+        setProductColorStep(color)
         setProductColor(color)
+        setCheckColor(false)        
     }
+
+    // Controlando o checkbox de cores
+    const setCheckColorHandler = (check) => {
+        check ? setProductColor('') : setProductColor(productColorStep)
+        setCheckColor(check)
+    }
+    
   
     // Categorias
     let categoriesTotalQtde = 0
@@ -213,16 +225,52 @@ const Filter = props => {
 
     // Reseta todas as especificações do filtro para os valores iniciais
     const cleanFiltersHandler = () => {
+
+        const selectList = Array.from(selectRef.current.children)
+        const categoriesList = Array.from(categoriesRef.current.children)
+        const typesList = Array.from(typesRef.current.children)
+        const offerList = Array.from(offerRef.current.children)
+        
+        selectList.map((element, i) => {
+            if (i === 0) {
+                element.selected = true
+            } else {
+                element.selected = false
+            }
+        })
+
+        categoriesList.map((element, i) => {
+            i === 1 ? element.style.fontWeight = 'bold' : element.style.fontWeight = 'normal'
+        })
+
+        typesList.map((element, i) => {
+            i === 1 ? element.style.fontWeight = 'bold' : element.style.fontWeight = 'normal'
+        })
+
+        offerList.map(element => {
+
+            if (element.tagName === 'DIV') {
+                Array.from(element.children).map(el => {
+                    
+                    if (el.tagName === 'INPUT') {
+                        el.checked = false
+                    }
+                })
+            }
+            
+        })
+
         setValueThumb1(initial_position)
         setValueThumb2(end_position)
         setMinValue(initial_min_value)
         setMaxValue(initial_max_value)
 
+        setOrder('default')
         setTag('all')
         setCategory('all')
+        setCheckColor(true)
         setProductColor('')
         setOffer([])
-        setOrder('default')
     }
 
 
@@ -247,9 +295,10 @@ const Filter = props => {
                         
                     </div>
                     <div className="filter-sort d-flex justify-content-between align-items-center">
-                        <p>Showing 1 - 9 of 19 results</p> {/* Decidir se esta parte ficará realmente aqui, já que depende do 'length' de 'products' que foi retornado pelo filtro. Também pensar se é necessário, talvez eu simplesmente insira o total de produtos retornados */}
+                        {/* Decidir se esta parte ficará realmente aqui, já que depende do 'length' de 'products' que foi retornado pelo filtro. Também pensar se é necessário, talvez eu simplesmente insira o total de produtos retornados */}
+                        <p>Showing 1 - 9 of 19 (ILUSTRATIVO)</p>
                         <p>Sort by</p>
-                        <select onChange={e => setOrder(e.target.value)}>
+                        <select onChange={e => setOrder(e.target.value)} ref={selectRef}>
                             <option value="default">Default Sorting</option>
                             <option value="low-high">Price: Low to High</option>
                             <option value="high-low">Price: High to Low</option>
@@ -259,7 +308,7 @@ const Filter = props => {
                 </div>
                 { filterOpen ? <div>
                     <div className="mt-5 mb-5 d-flex justify-content-between row">
-                        <div className="sub-filter-type">
+                        <div className="sub-filter-type" ref={categoriesRef}>
                             <h6>CATEGORIES</h6>
                             <p onClick={e => setFilterDetails(e, 'cat', 'all')} style={{fontWeight:'bold'}}>All categories ({categoriesTotalQtde}) </p>
                             <p onClick={e => setFilterDetails(e, 'cat', 'bedroom')}>Bedroom ({bedRoomQtde}) </p>
@@ -269,7 +318,7 @@ const Filter = props => {
                             <p onClick={e => setFilterDetails(e, 'cat', 'children-room')}>Children's room ({childrenRoom}) </p>
                         </div>
                         <div className="divider"></div>
-                        <div className="sub-filter-type">
+                        <div className="sub-filter-type" ref={typesRef}>
                             <h6>TYPE</h6>
                             <p onClick={e => setFilterDetails(e, 'type', 'all')} style={{fontWeight:'bold'}}>All tags ({typesTotalQtde}) </p>
                             <p onClick={e => setFilterDetails(e, 'type', 'furniture')}>Furniture ({furnitureQtde}) </p>
@@ -279,7 +328,7 @@ const Filter = props => {
                             <p onClick={e => setFilterDetails(e, 'type', 'lightning')}>Lighting ({lightingQtde}) </p>
                         </div>
                         <div className="divider"></div>
-                        <div className="d-flex flex-column">
+                        <div className="d-flex flex-column" ref={offerRef}>
                             <h6>OUR OFFER</h6>
                             <div>
                                 <input type="checkbox" value="new" onChange={e => setOfferHandler(e)}/>
@@ -301,10 +350,12 @@ const Filter = props => {
                         <div className="divider"></div>
                         <div className="col-3">
                             <h6>COLOR</h6>
+                            <input type="checkbox" onChange={() => setCheckColorHandler(!checkColor)} checked={checkColor}/>
+                            <label className="ml-2">Todas as cores</label>
                             <ColorSelect
                                 title={'COLOR'}
                                 colors={['red', 'yellow', 'blue', 'purple', 'green']}
-                                selectColorHandlerCallback={(color, i) => selectColorHandler(color, i)}
+                                selectColorHandlerCallback={(color) => selectColorHandler(color, false)}
                             />
                         </div>
                         <div className="divider"></div>
