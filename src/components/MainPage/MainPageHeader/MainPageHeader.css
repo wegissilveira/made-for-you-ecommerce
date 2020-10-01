@@ -32,12 +32,12 @@
 
 .mainSlider-container {
     height: 90%;
-    max-width: 100%;
+    /* max-width: 100%; */
 }
 
 .mainSlider-container img {
     height: 100%;
-    max-width: 100%;
+    /* max-width: 100%; */
 }
 
 .mainSlider-container div {
@@ -96,4 +96,13 @@
 .minorSlider-container div p {
     margin: 0;
     color: rgb(75, 75, 75);
+}
+
+.test {
+    display: flex;
+    transition: .8s ease-in-out;
+    -webkit-transition: .8s ease-in-out;
+    -moz-transition: .8s ease-in-out;
+    -ms-transition: .8s ease-in-out;
+    -o-transition: .8s ease-in-out;
 }

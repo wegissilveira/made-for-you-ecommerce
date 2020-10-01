@@ -13,6 +13,8 @@ const MainPageHeader = props => {
     let [slideImg, setSlideImg] = React.useState(0)
     let [minorSlideImg, setMinorSlideImg] = React.useState(0)
 
+    let [translateValue, setTranslateValue] =  React.useState(0)
+
     let mainSlides = [
         {
             img: require('../../../assets/images/Header/MainSlider/imgSlider1-mainpage.png'),
@@ -67,12 +69,22 @@ const MainPageHeader = props => {
         },
     ]
     
+    // const translate = `transform: translateX( ${translateValue}px)`
+    // const transition = '.4s easeInOut'
+
+    const translateT = {
+        transform: `translateX(${translateValue}%)`,
+        // transition: '.4s easeInOut'
+        width: '100%'
+    }
     // Passa os slides baseado nos argumentos
     const changeSlideHandler = (arg, obj, img, fn) => {
         if (arg === 'next') {
             img < obj.length - 1 ? fn(img + 1) : fn(0) 
+            setTranslateValue(-100)
         } else if (arg === 'previous') {
-            img > 0 ? fn(img - 1) : fn(obj.length - 1) 
+            img > 0 ? fn(img - 1) : fn(obj.length - 1)
+            setTranslateValue(0) 
         } else if (typeof arg !== isNaN) {
             fn(arg)
         }
@@ -83,16 +95,16 @@ const MainPageHeader = props => {
         const interval = setTimeout(() => {
             changeSlideHandler('next', mainSlides, slideImg, setSlideImg)
             // changeSlide('next', minorSlides, minorSlideImg, setMinorSlideImg)
-        }, 5000);
+        }, 2500);
         return () => clearTimeout(interval);
     });
 
     // É executado pelo componente 'ProgressBar' para que os slides sejam passados em sincronia com as barras
     const changeSlideCallbackHandler = arg => {
         // changeSlide('next', mainSlides, slideImg, setSlideImg)
-        changeSlideHandler(arg, minorSlides, minorSlideImg, setMinorSlideImg)
+        // changeSlideHandler(arg, minorSlides, minorSlideImg, setMinorSlideImg)
     }
-
+    
 
 
     return (
@@ -102,7 +114,7 @@ const MainPageHeader = props => {
                     <div style={{height:'65%', width:'25%'}}></div>
                     <div className="minorSlider-container">
                         <img 
-                            src={minorSlides[minorSlideImg].img} 
+                            src={minorSlides[minorSlideImg].img}
                             alt={"img-1"} 
                         />
                         <div>
@@ -114,8 +126,52 @@ const MainPageHeader = props => {
                     </div>
                     <div style={{height:'65%', width:'40%'}}></div>
                 </div>
-                <div className="col-6" style={{height:'700px'}}>
-                    <div className="mainSlider-container">
+                <div style={{height:'700px', overflow: 'hidden', padding: '0'}}>
+                    
+                
+                    <div className="mainSlider-container test" style={translateT}>
+                    
+                        {/* <div> */}
+                        {mainSlides.map( img =>
+                        <img 
+                            style={{width: '100%'}}
+                            src={img.img} 
+                            alt={img.alt} 
+                        />)}
+                        {/* <div>
+                            <Link to={'/shop/' + img.cat}>
+                                <p className="font-weight-bold">{img.linkText[0]}</p>
+                                <p>{img.linkText[1]}</p>
+                            </Link>
+                        </div> */}
+                        {/* </div> */}
+                        
+                    </div>
+                    {/* <div className="mainSlider-container test" style={translateT}>
+                        <img 
+                            src={mainSlides[slideImg].img} 
+                            alt={mainSlides[slideImg].alt} 
+                        />
+                        <div>
+                            <Link to={'/shop/' + mainSlides[slideImg].cat}>
+                                <p className="font-weight-bold">{mainSlides[slideImg].linkText[0]}</p>
+                                <p>{mainSlides[slideImg].linkText[1]}</p>
+                            </Link>
+                        </div>
+                    </div> */}
+                    <div className="change-slide-setas d-flex justify-content-between">
+                        <FontAwesomeIcon 
+                            onClick={() => changeSlideHandler('previous', mainSlides, slideImg, setSlideImg)} 
+                            icon="arrow-left" 
+                        />
+                        <FontAwesomeIcon 
+                            onClick={() => changeSlideHandler('next', mainSlides, slideImg, setSlideImg)} 
+                            icon="arrow-right" 
+                        />
+                    </div>
+                </div>
+                {/* <div className="col-6" style={{height:'700px', overflow: 'hidden', padding: '0', display: 'flex'}}>
+                    <div className="mainSlider-container test" style={translateT}>
                         <img 
                             src={mainSlides[slideImg].img} 
                             alt={mainSlides[slideImg].alt} 
@@ -137,7 +193,7 @@ const MainPageHeader = props => {
                             icon="arrow-right" 
                         />
                     </div>
-                </div>
+                </div> */}
             </div>
             <div className="header-text row">
                 {/* <div> */}

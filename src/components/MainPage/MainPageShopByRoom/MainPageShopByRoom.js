@@ -14,12 +14,12 @@ const mainPageShopByRoom  = props => {
                     <Link to={'/shop/bedroom'}>
                         <img className="pb-2" src={require("../../../assets/images/Shop/quadro-1-pequeno.png")} alt="img-1" />
                     </Link>
-                    <Link to={'/shop/living-room'}>
+                    <Link to={'/shop/bathroom'}>
                         <img className="pb-2" src={require("../../../assets/images/Shop/quadro-3-grande.png")} alt="img-2" />
                     </Link>
                 </div>
                 <div className="pl-2 shop-img-container">
-                    <Link to={'/shop/bathroom'}>
+                    <Link to={'/shop/living-room'}>
                         <img className="pb-2" src={require("../../../assets/images/Shop/quadro-2-grande.png")} alt="img-2" />
                     </Link>
                     <Link to={'/shop/kitchen'}>

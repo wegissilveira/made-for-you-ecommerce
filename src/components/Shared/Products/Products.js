@@ -158,6 +158,7 @@ const Products = props => {
     return (
         <Fragment>
             <div className="session-container container">
+                {props.match ? <h1 className="text-center">{category.toUpperCase()}</h1> : null}
                 <div className="row">
                     {/* Corrigir key */}
                     {/* Funcionando perfeitamente, mas ainda falta melhorar a transição quando clicamos em 'SHOW MORE' */}

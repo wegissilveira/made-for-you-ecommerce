@@ -2,10 +2,11 @@ import React, { Fragment } from 'react'
 
 import './Filter.css'
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import ColorSelect from '../../Shared/UI/ColorSelect/ColorSelect'
 import Products from '../../Shared/Products/Products';
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import {Animated} from "react-animated-css"
 
 
 const Filter = props => {
@@ -306,7 +307,19 @@ const Filter = props => {
                         </select>
                     </div>                    
                 </div>
-                { filterOpen ? <div>
+                { filterOpen ?
+                <Animated
+                    animationIn="fadeIn" 
+                    animationOut="fadeOut"
+                    isVisible={filterOpen}
+                > 
+                <div>
+                {/* <Animated
+                    animationIn="fadeIn" 
+                    animationOut="fadeOut"
+                    isVisible={filterOpen}
+                > */}
+                {/* { filterOpen ? <div> */}
                     <div className="mt-5 mb-5 d-flex justify-content-between row">
                         <div className="sub-filter-type" ref={categoriesRef}>
                             <h6>CATEGORIES</h6>
@@ -400,7 +413,15 @@ const Filter = props => {
                         <p className="filter-button filter-button-active">FILTER</p>
                         <p className="filter-button" onClick={() => cleanFiltersHandler()}>CLEAR ALL</p>
                     </div>
-                </div> : null}
+                {/* </div> : null} */}
+                {/* </Animated>  */}
+                </div>
+                
+                </Animated> : null}
+                {/* <Animated
+                    animationIn="slideInDown" 
+                    animationOut="fadeOut"
+                > */}
                 <Products 
                     // products={products} // => Envia o array com os produtos que serão exibidos
                     pageLimit={12}  // => Número limite de produtos a serem mostrados inicialmente
@@ -411,6 +432,7 @@ const Filter = props => {
                     offer={offer} // => Filtra os produtos por tipo de oferta
                     order={order}
                 />
+                {/* </Animated> */}
             </div>
         </Fragment>
     )
