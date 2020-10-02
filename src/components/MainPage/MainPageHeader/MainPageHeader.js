@@ -69,40 +69,51 @@ const MainPageHeader = props => {
         },
     ]
     
-    // const translate = `transform: translateX( ${translateValue}px)`
-    // const transition = '.4s easeInOut'
 
     const translateT = {
-        transform: `translateX(${translateValue}%)`,
-        // transition: '.4s easeInOut'
-        width: '100%'
+        transform: `translateX(${translateValue}%)`
     }
+
     // Passa os slides baseado nos argumentos
-    const changeSlideHandler = (arg, obj, img, fn) => {
+    const changeSlideHandler = (arg, obj, img, fn, slide) => {
         if (arg === 'next') {
-            img < obj.length - 1 ? fn(img + 1) : fn(0) 
-            setTranslateValue(-100)
+            
+            if (img < obj.length - 1) {
+                fn(img + 1)
+                if (slide === 'main') setTranslateValue(translateValue - 100)
+            } else {
+                fn(0)
+                if (slide === 'main') setTranslateValue(0)
+            }
+            
         } else if (arg === 'previous') {
-            img > 0 ? fn(img - 1) : fn(obj.length - 1)
-            setTranslateValue(0) 
+
+            if (img > 0) {
+                fn(img - 1)
+                if (slide === 'main') setTranslateValue(translateValue + 100)
+            } else {
+                fn(obj.length - 1)
+                if (slide === 'main') setTranslateValue((obj.length - 1) * -100)
+            }
+            
         } else if (typeof arg !== isNaN) {
             fn(arg)
         }
     }   
-
+    
     // Executa a função de passar os slides periodicamente
     React.useEffect(() => {
         const interval = setTimeout(() => {
-            changeSlideHandler('next', mainSlides, slideImg, setSlideImg)
+            changeSlideHandler('next', mainSlides, slideImg, setSlideImg, 'main')
             // changeSlide('next', minorSlides, minorSlideImg, setMinorSlideImg)
-        }, 2500);
+        }, 5000);
         return () => clearTimeout(interval);
     });
 
     // É executado pelo componente 'ProgressBar' para que os slides sejam passados em sincronia com as barras
     const changeSlideCallbackHandler = arg => {
         // changeSlide('next', mainSlides, slideImg, setSlideImg)
-        // changeSlideHandler(arg, minorSlides, minorSlideImg, setMinorSlideImg)
+        changeSlideHandler(arg, minorSlides, minorSlideImg, setMinorSlideImg)
     }
     
 
@@ -126,74 +137,35 @@ const MainPageHeader = props => {
                     </div>
                     <div style={{height:'65%', width:'40%'}}></div>
                 </div>
-                <div style={{height:'700px', overflow: 'hidden', padding: '0'}}>
-                    
-                
+                <div style={{height:'700px', overflow: 'hidden', padding: '0'}}>                
                     <div className="mainSlider-container test" style={translateT}>
                     
-                        {/* <div> */}
-                        {mainSlides.map( img =>
-                        <img 
-                            style={{width: '100%'}}
-                            src={img.img} 
-                            alt={img.alt} 
-                        />)}
-                        {/* <div>
-                            <Link to={'/shop/' + img.cat}>
-                                <p className="font-weight-bold">{img.linkText[0]}</p>
-                                <p>{img.linkText[1]}</p>
-                            </Link>
-                        </div> */}
-                        {/* </div> */}
-                        
+                        {mainSlides.map( (img, i) =>
+                            <div key={i} style={{width: '100%'}}>
+                                <img 
+                                    src={img.img} 
+                                    alt={img.alt} 
+                                />
+                                <div className="divTest">
+                                    <Link to={'/shop/' + img.cat}>
+                                        <p className="font-weight-bold">{img.linkText[0]}</p>
+                                        <p>{img.linkText[1]}</p>
+                                    </Link>
+                                </div>
+                            </div>
+                        )}
                     </div>
-                    {/* <div className="mainSlider-container test" style={translateT}>
-                        <img 
-                            src={mainSlides[slideImg].img} 
-                            alt={mainSlides[slideImg].alt} 
-                        />
-                        <div>
-                            <Link to={'/shop/' + mainSlides[slideImg].cat}>
-                                <p className="font-weight-bold">{mainSlides[slideImg].linkText[0]}</p>
-                                <p>{mainSlides[slideImg].linkText[1]}</p>
-                            </Link>
-                        </div>
-                    </div> */}
                     <div className="change-slide-setas d-flex justify-content-between">
                         <FontAwesomeIcon 
-                            onClick={() => changeSlideHandler('previous', mainSlides, slideImg, setSlideImg)} 
+                            onClick={() => changeSlideHandler('previous', mainSlides, slideImg, setSlideImg, 'main')} 
                             icon="arrow-left" 
                         />
                         <FontAwesomeIcon 
-                            onClick={() => changeSlideHandler('next', mainSlides, slideImg, setSlideImg)} 
+                            onClick={() => changeSlideHandler('next', mainSlides, slideImg, setSlideImg, 'main')} 
                             icon="arrow-right" 
                         />
                     </div>
                 </div>
-                {/* <div className="col-6" style={{height:'700px', overflow: 'hidden', padding: '0', display: 'flex'}}>
-                    <div className="mainSlider-container test" style={translateT}>
-                        <img 
-                            src={mainSlides[slideImg].img} 
-                            alt={mainSlides[slideImg].alt} 
-                        />
-                        <div>
-                            <Link to={'/shop/' + mainSlides[slideImg].cat}>
-                                <p className="font-weight-bold">{mainSlides[slideImg].linkText[0]}</p>
-                                <p>{mainSlides[slideImg].linkText[1]}</p>
-                            </Link>
-                        </div>
-                    </div>
-                    <div className="change-slide-setas d-flex justify-content-between">
-                        <FontAwesomeIcon 
-                            onClick={() => changeSlideHandler('previous', mainSlides, slideImg, setSlideImg)} 
-                            icon="arrow-left" 
-                        />
-                        <FontAwesomeIcon 
-                            onClick={() => changeSlideHandler('next', mainSlides, slideImg, setSlideImg)} 
-                            icon="arrow-right" 
-                        />
-                    </div>
-                </div> */}
             </div>
             <div className="header-text row">
                 {/* <div> */}
