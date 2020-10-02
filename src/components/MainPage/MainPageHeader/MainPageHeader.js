@@ -75,6 +75,8 @@ const MainPageHeader = props => {
     }
 
     // Passa os slides baseado nos argumentos
+    // O argumento 'slide' foi inserido para garantir que somente o mainSlider tenha o efeito de slideIn-out, sendo assim se verifica se a chamada da função partiu do mainSlider e não do menor.
+    // Sem tal verificação o mainSlider seria alterado ainda que a chamada partisse do minorSlider
     const changeSlideHandler = (arg, obj, img, fn, slide) => {
         if (arg === 'next') {
             
@@ -138,7 +140,7 @@ const MainPageHeader = props => {
                     <div style={{height:'65%', width:'40%'}}></div>
                 </div>
                 <div style={{height:'700px', overflow: 'hidden', padding: '0'}}>                
-                    <div className="mainSlider-container test" style={translateT}>
+                    <div className="mainSlider-container" style={translateT}>
                     
                         {mainSlides.map( (img, i) =>
                             <div key={i} style={{width: '100%'}}>
@@ -146,7 +148,7 @@ const MainPageHeader = props => {
                                     src={img.img} 
                                     alt={img.alt} 
                                 />
-                                <div className="divTest">
+                                <div className="mainSlider-link-container">
                                     <Link to={'/shop/' + img.cat}>
                                         <p className="font-weight-bold">{img.linkText[0]}</p>
                                         <p>{img.linkText[1]}</p>
