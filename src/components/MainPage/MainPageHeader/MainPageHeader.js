@@ -70,7 +70,7 @@ const MainPageHeader = props => {
     ]
     
 
-    const translateT = {
+    const translateSlider = {
         transform: `translateX(${translateValue}%)`
     }
 
@@ -140,7 +140,7 @@ const MainPageHeader = props => {
                     <div style={{height:'65%', width:'40%'}}></div>
                 </div>
                 <div style={{height:'700px', overflow: 'hidden', padding: '0'}}>                
-                    <div className="mainSlider-container" style={translateT}>
+                    <div className="mainSlider-container" style={translateSlider}>
                     
                         {mainSlides.map( (img, i) =>
                             <div key={i} style={{width: '100%'}}>

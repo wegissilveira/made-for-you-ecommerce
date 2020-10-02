@@ -11,8 +11,13 @@ input {
     margin: 0;
 }
 
+.main-img-slider {
+    overflow: hidden;
+    padding-bottom: 30px;
+}
+
 .main-img-slider img {
-    width: 100%;
+    max-width: 100%;
 }
 
 .change-slide-setas-corrigir-nome {
@@ -20,10 +25,11 @@ input {
     margin-left: 80%;
     margin-top: -45px;
     line-height: 2;
+    position: relative;
 }
 
 .product-card-sub-images {
-    margin-top: 55px;
+    margin-top: 25px;
 }
 
 .product-price-container {

@@ -14,15 +14,39 @@ const ProductCard = props => {
     let [imgSlide, setImgSlide] = React.useState(0)
     let [productColor, setProductColor] = React.useState('') // => Armazena cor selecionada do produto
 
+    let [translateValue, setTranslateValue] = React.useState(0)
+
     const product = productsData.find(product => product._id === props.match.params.id)
+
+    const translateSlider = {
+        transform: `translateX(${translateValue}%)`,
+        transition: '.8s ease-in-out'
+    }
 
     const changeSlide = arg => {
         if (arg === 'previous') {
-            imgSlide > 0 ? setImgSlide(imgSlide - 1) : setImgSlide(product.imgsDemo.length - 1)
+             
+            if (imgSlide > 0) {
+                setImgSlide(imgSlide - 1)
+                setTranslateValue(translateValue + 100)
+            } else {
+                setImgSlide(product.imgsDemo.length - 1)
+                setTranslateValue((product.imgsDemo.length - 1) * -100)
+            }
+            
         } else if (arg === 'next') {
-            imgSlide < product.imgsDemo.length - 1 ? setImgSlide(imgSlide + 1) : setImgSlide(0)
+
+            if (imgSlide < product.imgsDemo.length - 1) {
+                setImgSlide(imgSlide + 1)
+                setTranslateValue(translateValue -100)
+            } else {
+                setImgSlide(0)
+                setTranslateValue(0)
+            }
+            
         }else if (typeof arg !== isNaN) {
-            setImgSlide(arg)
+            setImgSlide(arg / (-100))
+            setTranslateValue(arg)
         }
     }
 
@@ -40,9 +64,14 @@ const ProductCard = props => {
         <Fragment>
             <div className="session-container mt-5">
                 <div className="product-card-container container-fluid d-flex">
-                    <div className="col-6 pl-0 pr-5">
+                    <div className="pl-0 pr-5">
                         <div className="main-img-slider">
-                            <img src={product.imgsDemo[imgSlide]} alt="img-1" />
+                            {/* <img src={product.imgsDemo[imgSlide]} alt="img-1" /> */}
+                            <div className="d-flex" style={translateSlider}>
+                                {product.imgsDemo.map((img, i) => 
+                                    <img key={i} src={img} alt="img-1"/>
+                                )}
+                            </div>
                             <div className="d-flex justify-content-between change-slide-setas-corrigir-nome">
                                 <FontAwesomeIcon onClick={() => changeSlide('previous')} icon="arrow-left" />
                                 <FontAwesomeIcon onClick={() => changeSlide('next')} icon="arrow-right" />
@@ -55,12 +84,12 @@ const ProductCard = props => {
                                 style={{maxWidth: '30%', maxHeight: '30%', cursor: 'pointer'}} 
                             />
                             <img 
-                                onClick={() => changeSlide(1)} 
+                                onClick={() => changeSlide(-100)} 
                                 src={product.imgsDemo[1]} alt="img-2" 
                                 style={{maxWidth: '30%', maxHeight: '30%', cursor: 'pointer'}} 
                             />
                             <img 
-                                onClick={() => changeSlide(2)} 
+                                onClick={() => changeSlide(-200)} 
                                 src={product.imgsDemo[2]} alt="img-3" 
                                 style={{maxWidth: '30%', maxHeight: '30%', cursor: 'pointer'}} 
                             />

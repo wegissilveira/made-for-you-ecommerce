@@ -7,17 +7,27 @@ const BestDeal = props => {
 
     let [imgSlide, setImgSlide] = React.useState(0)
 
+    let [translateValue, setTranslateValue] = React.useState(0)
+
     // Array com os produtos que possuem 'deal: true'. Garante que todos sejam mostrados e que não haja fileiras incompletas. 
     // Explicação mais detalhada no componente 'Produtos', que possui a mesma lógica para exibição de produtos com tag
     const products = props.products.filter(product => product.deal)
 
+    
+    const translateSlider = {
+        transform: `translateX(${translateValue}%)`,
+        transition: '2s ease-in-out'
+    }
+
     const changeSlide = arg => {
         if (typeof arg === 'number') {
             setImgSlide(arg)
+            // setTranslateValue(-100)
         } else {
             imgSlide === products.length - 1 ? setImgSlide(0) : setImgSlide(imgSlide + 1)
         }
     }
+
 
 
     return (
@@ -28,8 +38,8 @@ const BestDeal = props => {
                     products.map((product, i) => {
                         if (i >= imgSlide && i < imgSlide + 4) {
                             if (product.deal) {
-                                return <div key={i} className="col-3">
-                                            <div className="border ">
+                                return <div key={i} className="col-3" style={translateSlider}>
+                                            <div className="border">
                                                 <div className="image" >
                                                     <img className="img" src={product.img} alt="img-deal" />
                                                 </div>
