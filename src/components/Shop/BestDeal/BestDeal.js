@@ -5,7 +5,7 @@ import ProgressBar from '../../Shared/UI/ProgressBar/ProgressBar'
 
 const BestDeal = props => {
 
-    let [imgSlide, setImgSlide] = React.useState(0)
+    // let [imgSlide, setImgSlide] = React.useState(0)
 
     let [translateValue, setTranslateValue] = React.useState(0)
 
@@ -21,10 +21,18 @@ const BestDeal = props => {
 
     const changeSlide = arg => {
         if (typeof arg === 'number') {
-            setImgSlide(arg)
-            // setTranslateValue(-100)
+    
+            if (arg === 0) {
+                setTranslateValue(0)
+            } else if (arg > (translateValue / -100)) {
+                setTranslateValue(-arg * 100)
+            } else {
+                let newTransValue = ((translateValue / -100) - arg) * 100
+                setTranslateValue(translateValue + newTransValue)
+            }
+
         } else {
-            imgSlide === products.length - 1 ? setImgSlide(0) : setImgSlide(imgSlide + 1)
+            translateValue / -100 === products.length - 1 ? setTranslateValue(0) : setTranslateValue(translateValue - 100)
         }
     }
 
@@ -33,10 +41,10 @@ const BestDeal = props => {
     return (
         <div className="session-container">
             <h1 className="text-center mb-5">BEST DEAL</h1>
-            <div className="products-container row d-flex mb-5">
+            <div className="products-container d-flex mb-5">
                 {
                     products.map((product, i) => {
-                        if (i >= imgSlide && i < imgSlide + 4) {
+                        // if (i >= imgSlide && i < imgSlide + 4) {
                             if (product.deal) {
                                 return <div key={i} className="col-3" style={translateSlider}>
                                             <div className="border">
@@ -50,7 +58,7 @@ const BestDeal = props => {
                                             </div>
                                         </div>
                             }
-                        }
+                        // }
                     })
                 }
                 

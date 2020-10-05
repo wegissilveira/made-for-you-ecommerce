@@ -1,6 +1,7 @@
 .products-container {
     width: 75.8%;
     margin-left: 12.1%;
+    overflow: hidden;
 }
 
 .products-description {

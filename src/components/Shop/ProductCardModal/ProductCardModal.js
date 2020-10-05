@@ -17,7 +17,8 @@ const customStyles = {
         right: 'auto',
         bottom: 'auto',
         marginRight: '-50%',
-        transform: 'translate(-50%, -50%)'
+        transform: 'translate(-50%, -50%)',
+        overflow: 'hidden'
     }
 };
 
@@ -27,16 +28,48 @@ const ProductCardModal = props => {
     let [imgSlide, setImgSlide] = React.useState(0)
     let [productColor, setProductColor] = React.useState('')
 
-    // Case eu decida que as setas sejam definitivamente removidas asa condições 'next' e 'previous' também podem ser retiradas da equação
+    let [translateValue, setTranslateValue] = React.useState(0)
+
+    const translateSlider = {
+        transform: `translateX(${translateValue}%)`,
+        transition: '.8s ease-in-out',
+        overflow: 'unset'
+    }
+
     const changeSlide = arg => {
 
         if (arg === 'previous') {
-            imgSlide > 0 ? setImgSlide(imgSlide - 1) : setImgSlide(props.imgs.length - 1)
+             
+            if (imgSlide > 0) {
+                setImgSlide(imgSlide - 1)
+                setTranslateValue(translateValue + 100)
+            } else {
+                setImgSlide(props.imgs.length - 1)
+                setTranslateValue((props.imgs.length - 1) * -100)
+            }
+            
         } else if (arg === 'next') {
-            imgSlide < props.imgs.length - 1 ? setImgSlide(imgSlide + 1) : setImgSlide(0)
-        } else if (typeof arg === 'number') {
+
+            if (imgSlide < props.imgs.length - 1) {
+                setImgSlide(imgSlide + 1)
+                setTranslateValue(translateValue -100)
+            } else {
+                setImgSlide(0)
+                setTranslateValue(0)
+            }
+            
+        }else if (typeof arg === 'number') {
             setImgSlide(arg)
+            setTranslateValue(arg * -100)
         }
+
+        // if (arg === 'previous') {
+        //     imgSlide > 0 ? setImgSlide(imgSlide - 1) : setImgSlide(props.imgs.length - 1)
+        // } else if (arg === 'next') {
+        //     imgSlide < props.imgs.length - 1 ? setImgSlide(imgSlide + 1) : setImgSlide(0)
+        // } else if (typeof arg === 'number') {
+        //     setImgSlide(arg)
+        // }
     }
 
     // Aqui esta função que seleciona as cores não passará o slide, já que o slide é automático.
@@ -60,15 +93,18 @@ const ProductCardModal = props => {
                     <p className="product-card-modal-exit" onClick={() => props.setShowProduct(false)}>
                         <FontAwesomeIcon icon="times" />
                     </p>
-                    <div className="col-6 pl-0 pr-5">
-                        <div className="main-img-slider">
-                            <img src={props.product.imgsDemo[imgSlide]} alt="img-1" />
+                    <div className="col-6 pl-0 pr-0 mr-4" style={{overflow: 'hidden'}}>
+                        <div className="main-img-slider d-flex" style={translateSlider}>
+                            {/* <img src={props.product.imgsDemo[imgSlide]} alt="img-1" /> */}
+                            {props.product.imgsDemo.map((slide, i) => 
+                                <img key={i} src={slide} alt="img-1" />
+                            )}
                         </div>
                         <div className="d-flex row justify-content-between mt-4 ml-1">
                             <ProgressBar 
                                 bars={props.product.imgsDemo.length}
                                 auto={true}
-                                timer={5000}
+                                timer={2500}
                                 change={changeSlide}
                                 // slide={imgSlide}
                             />
