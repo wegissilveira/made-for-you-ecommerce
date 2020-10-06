@@ -104,7 +104,7 @@ const ProductCardModal = props => {
                             <ProgressBar 
                                 bars={props.product.imgsDemo.length}
                                 auto={true}
-                                timer={2500}
+                                timer={5000}
                                 change={changeSlide}
                                 // slide={imgSlide}
                             />

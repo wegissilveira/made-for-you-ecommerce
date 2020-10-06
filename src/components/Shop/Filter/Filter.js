@@ -26,6 +26,10 @@ const Filter = props => {
 
     let [filterOpen, setFilterOpen] =  React.useState(false)
 
+    let [translateValue, setTranslateValue] = React.useState(-110)
+    let [translateProductsValue, setTranslateProductsValue] = React.useState(-436)
+
+
     /* Slider de preço */
     const initial_position = 1204 // => Valor inicial do thumb esquerdo
     const end_position = 1403 // => Valor final do thumb direito
@@ -54,11 +58,25 @@ const Filter = props => {
     const offerRef = React.useRef()
     const selectRef = React.useRef()
 
+    const [display, setDisplay] = React.useState('none')
 
+    const translateFilter = {
+        transform: `translateY(${translateValue}%)`,
+        // display: display,
+        transition: '.8s ease-in-out'
+    }
 
+    const translateProducts = {
+        transform: `translateY(${translateProductsValue}px)`,
+        // display: display,
+        transition: '.8s ease-in-out'
+    }
 
     const openFilterHandler = () => {
         filterOpen ? setFilterOpen(false) : setFilterOpen(true)
+
+        translateValue < 0 ? setTranslateValue(0) : setTranslateValue(-110)
+        translateProductsValue < 0 ? setTranslateProductsValue(0) : setTranslateProductsValue(-436)
     }
 
     const handleChange = e => {
@@ -307,121 +325,114 @@ const Filter = props => {
                         </select>
                     </div>                    
                 </div>
-                { filterOpen ?
+                {/* { filterOpen ?
                 <Animated
                     animationIn="fadeIn" 
                     animationOut="fadeOut"
                     isVisible={filterOpen}
-                > 
-                <div>
-                {/* <Animated
-                    animationIn="fadeIn" 
-                    animationOut="fadeOut"
-                    isVisible={filterOpen}
-                > */}
+                >  */}
+                <div style={{overflow: 'hidden', paddingLeft: '2%', paddingRight: '2%'}}>
                 {/* { filterOpen ? <div> */}
-                    <div className="mt-5 mb-5 d-flex justify-content-between row">
-                        <div className="sub-filter-type" ref={categoriesRef}>
-                            <h6>CATEGORIES</h6>
-                            <p onClick={e => setFilterDetails(e, 'cat', 'all')} style={{fontWeight:'bold'}}>All categories ({categoriesTotalQtde}) </p>
-                            <p onClick={e => setFilterDetails(e, 'cat', 'bedroom')}>Bedroom ({bedRoomQtde}) </p>
-                            <p onClick={e => setFilterDetails(e, 'cat', 'living-room')}>Living room ({livingRoomQtde}) </p>
-                            <p onClick={e => setFilterDetails(e, 'cat', 'kitchen')}>Kitchen ({kitchen}) </p>
-                            <p onClick={e => setFilterDetails(e, 'cat', 'bathroom')}>Bathroom ({bathRoomQtde}) </p>
-                            <p onClick={e => setFilterDetails(e, 'cat', 'children-room')}>Children's room ({childrenRoom}) </p>
-                        </div>
-                        <div className="divider"></div>
-                        <div className="sub-filter-type" ref={typesRef}>
-                            <h6>TYPE</h6>
-                            <p onClick={e => setFilterDetails(e, 'type', 'all')} style={{fontWeight:'bold'}}>All tags ({typesTotalQtde}) </p>
-                            <p onClick={e => setFilterDetails(e, 'type', 'furniture')}>Furniture ({furnitureQtde}) </p>
-                            <p onClick={e => setFilterDetails(e, 'type', 'accessories')}>Accessories ({accessoriesQtde}) </p>
-                            <p onClick={e => setFilterDetails(e, 'type', 'decorations')}>Decorations ({decorationsQtde}) </p>
-                            <p onClick={e => setFilterDetails(e, 'type', 'textile')}>Textile ({textileQtde}) </p>
-                            <p onClick={e => setFilterDetails(e, 'type', 'lightning')}>Lighting ({lightingQtde}) </p>
-                        </div>
-                        <div className="divider"></div>
-                        <div className="d-flex flex-column" ref={offerRef}>
-                            <h6>OUR OFFER</h6>
-                            <div>
-                                <input type="checkbox" value="new" onChange={e => setOfferHandler(e)}/>
-                                <label className="ml-2">New Products</label>
+                    <div style={translateFilter}>
+                        <div className="mt-5 mb-5 d-flex justify-content-between row">
+                            <div className="sub-filter-type" ref={categoriesRef}>
+                                <h6>CATEGORIES</h6>
+                                <p onClick={e => setFilterDetails(e, 'cat', 'all')} style={{fontWeight:'bold'}}>All categories ({categoriesTotalQtde}) </p>
+                                <p onClick={e => setFilterDetails(e, 'cat', 'bedroom')}>Bedroom ({bedRoomQtde}) </p>
+                                <p onClick={e => setFilterDetails(e, 'cat', 'living-room')}>Living room ({livingRoomQtde}) </p>
+                                <p onClick={e => setFilterDetails(e, 'cat', 'kitchen')}>Kitchen ({kitchen}) </p>
+                                <p onClick={e => setFilterDetails(e, 'cat', 'bathroom')}>Bathroom ({bathRoomQtde}) </p>
+                                <p onClick={e => setFilterDetails(e, 'cat', 'children-room')}>Children's room ({childrenRoom}) </p>
                             </div>
-                            <div>
-                                <input type="checkbox" value="old" onChange={e => setOfferHandler(e)}/>
-                                <label className="ml-2">Old Products</label>
+                            <div className="divider"></div>
+                            <div className="sub-filter-type" ref={typesRef}>
+                                <h6>TYPE</h6>
+                                <p onClick={e => setFilterDetails(e, 'type', 'all')} style={{fontWeight:'bold'}}>All tags ({typesTotalQtde}) </p>
+                                <p onClick={e => setFilterDetails(e, 'type', 'furniture')}>Furniture ({furnitureQtde}) </p>
+                                <p onClick={e => setFilterDetails(e, 'type', 'accessories')}>Accessories ({accessoriesQtde}) </p>
+                                <p onClick={e => setFilterDetails(e, 'type', 'decorations')}>Decorations ({decorationsQtde}) </p>
+                                <p onClick={e => setFilterDetails(e, 'type', 'textile')}>Textile ({textileQtde}) </p>
+                                <p onClick={e => setFilterDetails(e, 'type', 'lightning')}>Lighting ({lightingQtde}) </p>
                             </div>
-                            <div>
-                                <input type="checkbox" value="best-seller" onChange={e => setOfferHandler(e)}/>
-                                <label className="ml-2">Best Sellers</label>
+                            <div className="divider"></div>
+                            <div className="d-flex flex-column" ref={offerRef}>
+                                <h6>OUR OFFER</h6>
+                                <div>
+                                    <input type="checkbox" value="new" onChange={e => setOfferHandler(e)}/>
+                                    <label className="ml-2">New Products</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" value="old" onChange={e => setOfferHandler(e)}/>
+                                    <label className="ml-2">Old Products</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" value="best-seller" onChange={e => setOfferHandler(e)}/>
+                                    <label className="ml-2">Best Sellers</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" value="sales" onChange={e => setOfferHandler(e)}/>
+                                    <label className="ml-2">Sales</label>
+                                </div>
                             </div>
-                            <div>
-                                <input type="checkbox" value="sales" onChange={e => setOfferHandler(e)}/>
-                                <label className="ml-2">Sales</label>
+                            <div className="divider"></div>
+                            <div className="col-3">
+                                <h6>COLOR</h6>
+                                <input type="checkbox" onChange={() => setCheckColorHandler(!checkColor)} checked={checkColor}/>
+                                <label className="ml-2">Todas as cores</label>
+                                <ColorSelect
+                                    title={'COLOR'}
+                                    colors={['red', 'yellow', 'blue', 'purple', 'green']}
+                                    selectColorHandlerCallback={(color) => selectColorHandler(color, false)}
+                                />
                             </div>
-                        </div>
-                        <div className="divider"></div>
-                        <div className="col-3">
-                            <h6>COLOR</h6>
-                            <input type="checkbox" onChange={() => setCheckColorHandler(!checkColor)} checked={checkColor}/>
-                            <label className="ml-2">Todas as cores</label>
-                            <ColorSelect
-                                title={'COLOR'}
-                                colors={['red', 'yellow', 'blue', 'purple', 'green']}
-                                selectColorHandlerCallback={(color) => selectColorHandler(color, false)}
-                            />
-                        </div>
-                        <div className="divider"></div>
-                        <div>
-                            <h6 style={{marginBottom: '35px'}}>PRICE FILTER</h6>
-                            <div className="range-container"
-                                onMouseMove={(e) => handleChange(e)}
-                                onMouseDown={(e) => moveOn(e)}
-                                onMouseUp={() => moveOff()}
-                                onMouseLeave={() => moveOff()}
-                            >
-                                <div className="range" 
-                                    
+                            <div className="divider"></div>
+                            <div>
+                                <h6 style={{marginBottom: '35px'}}>PRICE FILTER</h6>
+                                <div className="range-container"
+                                    onMouseMove={(e) => handleChange(e)}
+                                    onMouseDown={(e) => moveOn(e)}
+                                    onMouseUp={() => moveOff()}
+                                    onMouseLeave={() => moveOff()}
                                 >
-                                    <span className="rounded-circle left-thumb" 
-                                        style={{
-                                            width:'15px', 
-                                            height: '15px', 
-                                            backgroundColor: 'red', 
-                                            marginTop: '-6px',
-                                            left: thumb1_position - 7 + 'px'
-                                        }}
-                                    ></span>
-                                    <span className="rounded-circle right-thumb" 
-                                        style={{
-                                            width:'15px', 
-                                            height: '15px', 
-                                            backgroundColor: 'black', 
-                                            marginTop: '-6px', 
-                                            left: thumb2_position - 7 + 'px'
-                                        }}
+                                    <div className="range" 
                                         
-                                    ></span>
-                                    <p style={{left: thumb1_position - 4 + 'px', position: 'absolute', marginTop: '15px'}}>{Math.floor(min_value)}</p>
-                                    <p style={{left: thumb2_position - 15 + 'px', position: 'absolute', marginTop: '15px'}}>{Math.floor(max_value)}</p>
+                                    >
+                                        <span className="rounded-circle left-thumb" 
+                                            style={{
+                                                width:'15px', 
+                                                height: '15px', 
+                                                backgroundColor: 'red', 
+                                                marginTop: '-6px',
+                                                left: thumb1_position - 7 + 'px'
+                                            }}
+                                        ></span>
+                                        <span className="rounded-circle right-thumb" 
+                                            style={{
+                                                width:'15px', 
+                                                height: '15px', 
+                                                backgroundColor: 'black', 
+                                                marginTop: '-6px', 
+                                                left: thumb2_position - 7 + 'px'
+                                            }}
+                                            
+                                        ></span>
+                                        <p style={{left: thumb1_position - 4 + 'px', position: 'absolute', marginTop: '15px'}}>{Math.floor(min_value)}</p>
+                                        <p style={{left: thumb2_position - 15 + 'px', position: 'absolute', marginTop: '15px'}}>{Math.floor(max_value)}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     {/* criar toggle entre os botões para serem ativos ou não */}
                     <div className="filter-button-container">
                         <p className="filter-button filter-button-active">FILTER</p>
                         <p className="filter-button" onClick={() => cleanFiltersHandler()}>CLEAR ALL</p>
                     </div>
                 {/* </div> : null} */}
-                {/* </Animated>  */}
+                </div>
                 </div>
                 
-                </Animated> : null}
-                {/* <Animated
-                    animationIn="slideInDown" 
-                    animationOut="fadeOut"
-                > */}
+                {/* </Animated> : null} */}
+                <div style={translateProducts}>
                 <Products 
                     // products={products} // => Envia o array com os produtos que serão exibidos
                     pageLimit={12}  // => Número limite de produtos a serem mostrados inicialmente
@@ -432,7 +443,7 @@ const Filter = props => {
                     offer={offer} // => Filtra os produtos por tipo de oferta
                     order={order}
                 />
-                {/* </Animated> */}
+                </div>
             </div>
         </Fragment>
     )

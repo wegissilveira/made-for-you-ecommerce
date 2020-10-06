@@ -44,7 +44,7 @@ const ProductCard = props => {
                 setTranslateValue(0)
             }
             
-        }else if (typeof arg !== isNaN) {
+        }else if (typeof arg === 'number') {
             setImgSlide(arg / (-100))
             setTranslateValue(arg)
         }
