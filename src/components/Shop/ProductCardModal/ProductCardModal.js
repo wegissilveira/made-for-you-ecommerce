@@ -18,6 +18,7 @@ const customStyles = {
         bottom: 'auto',
         marginRight: '-50%',
         transform: 'translate(-50%, -50%)',
+        transition: 'transform 3s ease-in-out 3s',
         overflow: 'hidden'
     }
 };
@@ -87,9 +88,10 @@ const ProductCardModal = props => {
                 style={customStyles}
                 contentLabel="Product Card"
                 ariaHideApp={false}
+                closeTimeoutMS={500}
             >
 
-                <div className="container-fluid d-flex">
+                <div className="container-fluid d-flex" style={{paddingRight: '35px'}}>
                     <p className="product-card-modal-exit" onClick={() => props.setShowProduct(false)}>
                         <FontAwesomeIcon icon="times" />
                     </p>

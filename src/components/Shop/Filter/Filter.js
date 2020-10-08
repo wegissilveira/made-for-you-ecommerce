@@ -72,6 +72,7 @@ const Filter = props => {
         transition: '.8s ease-in-out'
     }
 
+
     const openFilterHandler = () => {
         filterOpen ? setFilterOpen(false) : setFilterOpen(true)
 
@@ -299,10 +300,18 @@ const Filter = props => {
         <Fragment>
             <div className="filter-container">
                 <div className="d-flex justify-content-between">
-                    <div onClick={() => openFilterHandler()} className="filter-switch border d-flex justify-content-around align-items-center">
+                    <div onClick={() => openFilterHandler()} 
+                        className="
+                            filter-switch 
+                            border 
+                            d-flex 
+                            justify-content-around 
+                            align-items-center
+                        "
+                    >
                         { filterOpen === false ? 
                             <Fragment>
-                                <FontAwesomeIcon icon="filter" /> 
+                                <FontAwesomeIcon icon="filter"/>
                                 <p>OPEN FILTERS</p>
                             </Fragment>
                           :
@@ -403,7 +412,7 @@ const Filter = props => {
                                                 height: '15px', 
                                                 backgroundColor: 'red', 
                                                 marginTop: '-6px',
-                                                left: thumb1_position - 7 + 'px'
+                                                // left: thumb1_position - 7 + 'px'
                                             }}
                                         ></span>
                                         <span className="rounded-circle right-thumb" 
@@ -412,12 +421,22 @@ const Filter = props => {
                                                 height: '15px', 
                                                 backgroundColor: 'black', 
                                                 marginTop: '-6px', 
-                                                left: thumb2_position - 7 + 'px'
+                                                // left: thumb2_position - 7 + 'px'
                                             }}
                                             
                                         ></span>
-                                        <p style={{left: thumb1_position - 4 + 'px', position: 'absolute', marginTop: '15px'}}>{Math.floor(min_value)}</p>
-                                        <p style={{left: thumb2_position - 15 + 'px', position: 'absolute', marginTop: '15px'}}>{Math.floor(max_value)}</p>
+                                        <p style={{
+                                            // left: thumb1_position - 4 + 'px', 
+                                            position: 'absolute', 
+                                            marginTop: '15px'}}
+                                        > {Math.floor(min_value)}
+                                        </p>
+                                        <p style={{
+                                            // left: thumb2_position - 15 + 'px', 
+                                            position: 'absolute', 
+                                            marginTop: '15px'}}
+                                        > {Math.floor(max_value)}
+                                        </p>
                                     </div>
                                 </div>
                             </div>
