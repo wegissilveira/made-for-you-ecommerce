@@ -14,7 +14,7 @@ const Filter = props => {
     // Sobre o filtro por cores:
     // As imagens de ‘products’ não são as mesmas dos sliders, o que torna um pouco mais complicado mostrar a imagem do produto com a cor específica, ainda que exista a opção de tal cor.
     // Preciso decidir se mostro a imagem original, deixando implícito que existe uma variação do produto apresentado na cor desejada, então o usuário entraria na página do produto pra ver os detalhes, inclusive a cor que busca; ou se crio uma variação das imagens e possibilito a alteração da imagem apresentada para que a variação com a cor buscada apareça.
-    // A primeira opção está bem simples de ser realizada, mas a segunda talvez melhore a UX. O que devo considerar é se o trabalho de fazer isso vale a pena. 
+    // A primeira opção está bem simples de ser realizada, mas a segunda talvez melhore a UX. O que devo considerar é se o trabalho de fazer isso vale a pena.
     // Vou pensar em como fazer e depois decido se vale ou não a pena.
     // Quanto ao filtro por cores, vou ficar ocm a primeira opção, pois como as imagens tem dimensões diferentes a segunda opção implicaria a distorção das imagens em algumas das páginas, seja no slider ou em 'products', ou utilizar a imagem quadrada e centralizá-la dentro de uma div em 'products', o que eu não achei interessante.
     // Para preencher o vazio deixado pelas imagens quadradas seria possível utilizar um fundo colorido como alternativa.
@@ -31,18 +31,27 @@ const Filter = props => {
 
 
     /* Slider de preço */
-    const initial_position = 1204 // => Valor inicial do thumb esquerdo
-    const end_position = 1403 // => Valor final do thumb direito
+    const sliderRef = React.useRef() // => Div que engloba o slider
+
+    const initial_position = 0 // => Valor inicial do thumb esquerdo ***
+    const end_position = 200 // => Valor final do thumb direito ***
+
     const initial_min_value = 5 // => Valor inicial do preço mínimo
     const initial_max_value = 1290 // => Valor inicial do preço máximo
-    
-    let [thumb1_position, setValueThumb1] =  React.useState(initial_position)
-    let [thumb2_position, setValueThumb2] =  React.useState(end_position)
+
+    let [thumb1_position, setValueThumb1] =  React.useState(0)
+    let [thumb2_position, setValueThumb2] =  React.useState(0)
     let [min_value, setMinValue] =  React.useState(initial_min_value)
     let [max_value, setMaxValue] =  React.useState(initial_max_value)
     let [move, setMove] =  React.useState(false) // => habilita os thumbs a serem movidos
-    /* */
     
+    React.useEffect(() => {
+        // console.log(sliderRef.current.offsetWidth)
+        setValueThumb2(sliderRef.current.offsetWidth - 5)
+    }, [])
+
+    /* */
+
     /* Demais filtros */
     let [tag, setTag] = React.useState('all')
     let [category, setCategory] = React.useState('all')
@@ -83,10 +92,20 @@ const Filter = props => {
     const handleChange = e => {
 
         let thumb_class = e.target.className
-        const current_position = e.clientX // => Posição atual do cursor
-        
+        //const current_position = e.clientX // => Posição atual do cursor
+
+        var rect = sliderRef.current.getBoundingClientRect();
+        const current_position = e.clientX - rect.left; //x position within the element.
+        // var y = e.clientY - rect.top;  //y position within the element.
+        // console.log("Left? : " + current_position + " ; Top? : " + y + ".");
+
+        console.log(e.clientX)
+        console.log(rect.left)
+        console.log(current_position)
+        console.log('***')
+
         if (move === true) {
-            
+
             // Aqui, dentro das primeiras sub verificações se verifica se os thumbs estão dentro dos limites da linha e se estão mantendo a distância mínima de 25 píxels entre si
             // Já a segunda sub verificação atribuí o preço proporcional de acordo com a posição de cada thumb
             if (thumb_class.includes('left-thumb')) {
@@ -108,7 +127,7 @@ const Filter = props => {
                 }
 
             } else if (thumb_class.includes('right-thumb')) {
-
+                
                 if (current_position >= thumb1_position + 25 && current_position <= end_position) {
                     setValueThumb2(current_position)
                 } else if (current_position >= thumb1_position + 25 && current_position >= end_position) {
@@ -118,7 +137,7 @@ const Filter = props => {
                     setValueThumb2(thumb1_position + 25)
                     setMove(false)
                 }
-                
+
                 if (thumb2_position > end_position - 1) {
                     setMaxValue(initial_max_value)
                 } else {
@@ -126,13 +145,13 @@ const Filter = props => {
                 }
             }
         }
-        
+
     }
-    
+
     const moveOn = e => {
         setMove(true)
     }
-    
+
     const moveOff = () => {
         setMove(false)
     }
@@ -141,7 +160,7 @@ const Filter = props => {
     const selectColorHandler = (color) => {
         setProductColorStep(color)
         setProductColor(color)
-        setCheckColor(false)        
+        setCheckColor(false)
     }
 
     // Controlando o checkbox de cores
@@ -149,8 +168,8 @@ const Filter = props => {
         check ? setProductColor('') : setProductColor(productColorStep)
         setCheckColor(check)
     }
-    
-  
+
+
     // Categorias
     let categoriesTotalQtde = 0
     let livingRoomQtde = 0
@@ -169,7 +188,7 @@ const Filter = props => {
 
     // Atualizando quantidade de produtos separados por tipos e categorias
     props.products.map(product => {
-        
+
         //Categorias
         categoriesTotalQtde++
 
@@ -211,7 +230,7 @@ const Filter = props => {
                 lightingQtde++
             }
         }
-        
+
     })
 
     // Atualiza as states de categoria e tag e torna 'bold' o item selecionado na UI para que se destaque dos não selecionados
@@ -220,7 +239,7 @@ const Filter = props => {
         block === 'cat' ? setCategory(arg) : setTag(arg)
 
         let elementsArr = Array.from(e.target.parentNode.children)
-        
+
         elementsArr.map(element => {
             element.style.fontWeight = 'normal'
         })
@@ -250,7 +269,7 @@ const Filter = props => {
         const categoriesList = Array.from(categoriesRef.current.children)
         const typesList = Array.from(typesRef.current.children)
         const offerList = Array.from(offerRef.current.children)
-        
+
         selectList.map((element, i) => {
             if (i === 0) {
                 element.selected = true
@@ -271,13 +290,13 @@ const Filter = props => {
 
             if (element.tagName === 'DIV') {
                 Array.from(element.children).map(el => {
-                    
+
                     if (el.tagName === 'INPUT') {
                         el.checked = false
                     }
                 })
             }
-            
+
         })
 
         setValueThumb1(initial_position)
@@ -300,16 +319,16 @@ const Filter = props => {
         <Fragment>
             <div className="filter-container">
                 <div className="d-flex justify-content-between">
-                    <div onClick={() => openFilterHandler()} 
+                    <div onClick={() => openFilterHandler()}
                         className="
-                            filter-switch 
-                            border 
-                            d-flex 
-                            justify-content-around 
+                            filter-switch
+                            border
+                            d-flex
+                            justify-content-around
                             align-items-center
                         "
                     >
-                        { filterOpen === false ? 
+                        { filterOpen === false ?
                             <Fragment>
                                 <FontAwesomeIcon icon="filter"/>
                                 <p>OPEN FILTERS</p>
@@ -320,7 +339,7 @@ const Filter = props => {
                                 <p>CLOSE FILTERS</p>
                             </Fragment>
                         }
-                        
+
                     </div>
                     <div className="filter-sort d-flex justify-content-between align-items-center">
                         {/* Decidir se esta parte ficará realmente aqui, já que depende do 'length' de 'products' que foi retornado pelo filtro. Também pensar se é necessário, talvez eu simplesmente insira o total de produtos retornados */}
@@ -332,11 +351,11 @@ const Filter = props => {
                             <option value="high-low">Price: High to Low</option>
                             <option value="alphabetical">Alphabetical Order</option>
                         </select>
-                    </div>                    
+                    </div>
                 </div>
                 {/* { filterOpen ?
                 <Animated
-                    animationIn="fadeIn" 
+                    animationIn="fadeIn"
                     animationOut="fadeOut"
                     isVisible={filterOpen}
                 >  */}
@@ -402,38 +421,44 @@ const Filter = props => {
                                     onMouseDown={(e) => moveOn(e)}
                                     onMouseUp={() => moveOff()}
                                     onMouseLeave={() => moveOff()}
+
+                                    ref={sliderRef}
                                 >
-                                    <div className="range" 
-                                        
+                                    <div className="range"
+
                                     >
-                                        <span className="rounded-circle left-thumb" 
+                                        <span className="rounded-circle left-thumb"
                                             style={{
-                                                width:'15px', 
-                                                height: '15px', 
-                                                backgroundColor: 'red', 
+                                                width:'15px',
+                                                height: '15px',
+                                                backgroundColor: 'red',
                                                 marginTop: '-6px',
                                                 // left: thumb1_position - 7 + 'px'
+                                                marginLeft: thumb1_position - 7 + 'px'
                                             }}
                                         ></span>
-                                        <span className="rounded-circle right-thumb" 
+                                        <span className="rounded-circle right-thumb"
                                             style={{
-                                                width:'15px', 
-                                                height: '15px', 
-                                                backgroundColor: 'black', 
-                                                marginTop: '-6px', 
+                                                width:'15px',
+                                                height: '15px',
+                                                backgroundColor: 'black',
+                                                marginTop: '-6px',
                                                 // left: thumb2_position - 7 + 'px'
+                                                marginLeft: thumb2_position - 7 + 'px'
                                             }}
-                                            
+
                                         ></span>
                                         <p style={{
-                                            // left: thumb1_position - 4 + 'px', 
-                                            position: 'absolute', 
+                                            // left: thumb1_position - 4 + 'px',
+                                            marginLeft: thumb1_position - 15 + 'px',
+                                            position: 'absolute',
                                             marginTop: '15px'}}
                                         > {Math.floor(min_value)}
                                         </p>
                                         <p style={{
-                                            // left: thumb2_position - 15 + 'px', 
-                                            position: 'absolute', 
+                                            // left: thumb2_position - 15 + 'px',
+                                            marginLeft: thumb2_position - 15 + 'px',
+                                            position: 'absolute',
                                             marginTop: '15px'}}
                                         > {Math.floor(max_value)}
                                         </p>
@@ -449,10 +474,10 @@ const Filter = props => {
                 {/* </div> : null} */}
                 </div>
                 </div>
-                
+
                 {/* </Animated> : null} */}
                 <div style={translateProducts}>
-                <Products 
+                <Products
                     // products={products} // => Envia o array com os produtos que serão exibidos
                     pageLimit={12}  // => Número limite de produtos a serem mostrados inicialmente
                     tag={tag} // => Tag que determina quais produtos serão mostrados
