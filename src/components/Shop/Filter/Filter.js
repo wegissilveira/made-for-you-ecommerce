@@ -32,6 +32,8 @@ const Filter = props => {
 
     /* Slider de preço */
     const sliderRef = React.useRef() // => Div que engloba o slider
+    const thumb_1_Ref = React.useRef() // => Div que engloba o slider
+    const thumb_2_Ref = React.useRef() // => Div que engloba o slider
 
     const initial_position = 0 // => Valor inicial do thumb esquerdo ***
     const end_position = 200 // => Valor final do thumb direito ***
@@ -82,6 +84,7 @@ const Filter = props => {
     }
 
 
+    let slider
     const openFilterHandler = () => {
         filterOpen ? setFilterOpen(false) : setFilterOpen(true)
 
@@ -89,62 +92,104 @@ const Filter = props => {
         translateProductsValue < 0 ? setTranslateProductsValue(0) : setTranslateProductsValue(-436)
     }
 
+    const beginSliding = e => {
+        slider.onpointermove = slide
+        slider.setPointerCapture(e.pointerId)
+    }
+    
+    const stopSliding = e => {
+        slider.onpointermove = null
+        slider.releasePointerCapture(e.pointerId)
+    }
+    
+    const slide = e => {
+        const thumb_class = e.target.className
+
+        let rect = sliderRef.current.getBoundingClientRect()
+        let current_position = e.clientX - rect.left 
+        
+        if (thumb_class.includes('right-thumb')) {
+            current_position = current_position - sliderRef.current.offsetWidth
+        }         
+        
+        slider.style.transform = `translate(${current_position}px)`
+    }
+        
+    
     const handleChange = e => {
 
-        let thumb_class = e.target.className
-        //const current_position = e.clientX // => Posição atual do cursor
 
-        var rect = sliderRef.current.getBoundingClientRect();
-        const current_position = e.clientX - rect.left; //x position within the element.
+        
+        // slider.onpointerdown = beginSliding;
+        // slider.onpointerup = stopSliding;
+
+        // if (move === false) {
+        //     stopSliding()
+        // }
+        
+
+        const thumb_class = e.target.className
+        // const current_position = e.clientX // => Posição atual do cursor
+
+        // let rect = sliderRef.current.getBoundingClientRect();
+        // const current_position = e.clientX - rect.left; //x position within the element.
         // var y = e.clientY - rect.top;  //y position within the element.
         // console.log("Left? : " + current_position + " ; Top? : " + y + ".");
 
-        console.log(e.clientX)
-        console.log(rect.left)
-        console.log(current_position)
-        console.log('***')
+        // console.log(e.clientX)
+        // console.log(sliderRef.current)
+        // console.log('***')
 
-        if (move === true) {
+        // if (move === true) {
+
+            
 
             // Aqui, dentro das primeiras sub verificações se verifica se os thumbs estão dentro dos limites da linha e se estão mantendo a distância mínima de 25 píxels entre si
             // Já a segunda sub verificação atribuí o preço proporcional de acordo com a posição de cada thumb
             if (thumb_class.includes('left-thumb')) {
 
-                if (current_position >= initial_position && current_position < thumb2_position - 25) {
-                    setValueThumb1(current_position)
-                } else if (current_position >= initial_position && current_position >= thumb2_position - 25) {
-                    setValueThumb1(thumb2_position - 25)
-                    setMove(false)
-                } else {
-                    setValueThumb1(initial_position)
-                    setMove(false)
-                }
+                slider = thumb_1_Ref.current;
 
-                if (thumb1_position - initial_position < 1) {
-                    setMinValue(initial_min_value)
-                } else {
-                    setMinValue((thumb1_position - initial_position) * 6.46)
-                }
+                slider.onpointerdown = beginSliding;
+                slider.onpointerup = stopSliding;
+                // if (current_position >= initial_position && current_position < thumb2_position - 25) {
+                //     setValueThumb1(current_position)
+                // } else if (current_position >= initial_position && current_position >= thumb2_position - 25) {
+                //     setValueThumb1(thumb2_position - 25)
+                //     setMove(false)
+                // } else {
+                //     setValueThumb1(initial_position)
+                //     setMove(false)
+                // }
+
+                // if (thumb1_position - initial_position < 1) {
+                //     setMinValue(initial_min_value)
+                // } else {
+                //     setMinValue((thumb1_position - initial_position) * 6.46)
+                // }
 
             } else if (thumb_class.includes('right-thumb')) {
                 
-                if (current_position >= thumb1_position + 25 && current_position <= end_position) {
-                    setValueThumb2(current_position)
-                } else if (current_position >= thumb1_position + 25 && current_position >= end_position) {
-                    setValueThumb2(end_position)
-                    setMove(false)
-                } else {
-                    setValueThumb2(thumb1_position + 25)
-                    setMove(false)
-                }
+                slider = thumb_2_Ref.current;
+                slider.onpointerdown = beginSliding;
+                slider.onpointerup = stopSliding;
+                // if (current_position >= thumb1_position + 25 && current_position <= end_position) {
+                //     setValueThumb2(current_position)
+                // } else if (current_position >= thumb1_position + 25 && current_position >= end_position) {
+                //     setValueThumb2(end_position)
+                //     setMove(false)
+                // } else {
+                //     setValueThumb2(thumb1_position + 25)
+                //     setMove(false)
+                // }
 
-                if (thumb2_position > end_position - 1) {
-                    setMaxValue(initial_max_value)
-                } else {
-                    setMaxValue((thumb2_position - initial_position) * 6.48)
-                }
+                // if (thumb2_position > end_position - 1) {
+                //     setMaxValue(initial_max_value)
+                // } else {
+                //     setMaxValue((thumb2_position - initial_position) * 6.48)
+                // }
             }
-        }
+        // }
 
     }
 
@@ -155,6 +200,10 @@ const Filter = props => {
     const moveOff = () => {
         setMove(false)
     }
+
+
+
+    // console.log(thumb_1_Ref.current)
 
     // Explicação em 'ProductCard'
     const selectColorHandler = (color) => {
@@ -418,16 +467,18 @@ const Filter = props => {
                                 <h6 style={{marginBottom: '35px'}}>PRICE FILTER</h6>
                                 <div className="range-container"
                                     onMouseMove={(e) => handleChange(e)}
-                                    onMouseDown={(e) => moveOn(e)}
-                                    onMouseUp={() => moveOff()}
-                                    onMouseLeave={() => moveOff()}
+                                    // onMouseDown={(e) => moveOn(e)}
+                                    // onMouseDown={(e) => handleChange(e)}
+                                    // onMouseUp={() => moveOff()}
+                                    // onMouseLeave={() => moveOff()}
 
                                     ref={sliderRef}
                                 >
                                     <div className="range"
 
                                     >
-                                        <span className="rounded-circle left-thumb"
+                                        <span 
+                                            className="rounded-circle left-thumb"
                                             style={{
                                                 width:'15px',
                                                 height: '15px',
@@ -436,8 +487,10 @@ const Filter = props => {
                                                 // left: thumb1_position - 7 + 'px'
                                                 marginLeft: thumb1_position - 7 + 'px'
                                             }}
+                                            ref={thumb_1_Ref}
                                         ></span>
-                                        <span className="rounded-circle right-thumb"
+                                        <span 
+                                            className="rounded-circle right-thumb"
                                             style={{
                                                 width:'15px',
                                                 height: '15px',
@@ -446,7 +499,7 @@ const Filter = props => {
                                                 // left: thumb2_position - 7 + 'px'
                                                 marginLeft: thumb2_position - 7 + 'px'
                                             }}
-
+                                            ref={thumb_2_Ref}
                                         ></span>
                                         <p style={{
                                             // left: thumb1_position - 4 + 'px',
