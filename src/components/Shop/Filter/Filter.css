@@ -35,7 +35,7 @@ h6 {
 .range-container {
     width: 200px;
     height: 15px;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
 .range {
@@ -48,6 +48,7 @@ h6 {
 .range span {
     width: 10px;
     height: 10px;
+    cursor: pointer;
     /* background-color: black; */
     /* margin-top: -50%; */
     position: absolute;
