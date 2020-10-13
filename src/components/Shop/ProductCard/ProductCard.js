@@ -7,12 +7,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import productsData from '../../../Data/productsData'
 import ProductsQtde from '../../Shared/UI/ProductsQtde/ProductsQtde'
 import ColorSelect from '../../Shared/UI/ColorSelect/ColorSelect'
+import wishlist from '../../../Data/wishlistData'
   
 
 const ProductCard = props => {
     
     let [imgSlide, setImgSlide] = React.useState(0)
     let [productColor, setProductColor] = React.useState('') // => Armazena cor selecionada do produto
+    let [wishlistState, setWishlist] = React.useState(wishlist)
+
+    let [qtde, setQtde] = React.useState(1)
 
     let [translateValue, setTranslateValue] = React.useState(0)
 
@@ -56,6 +60,23 @@ const ProductCard = props => {
         setProductColor(color)
         setImgSlide(i)
     }
+
+    const setQtdeHandler = value => {
+        setQtde(value)
+    }
+
+    const wishlistHandler = id => {
+
+        let list = [...wishlistState]
+        if (list.includes(id)) {
+            list = wishlistState.filter(item => item !== id)
+        } else {
+            list.push(id)
+        }
+        
+        setWishlist(list)
+    }
+
 
 
 
@@ -135,9 +156,13 @@ const ProductCard = props => {
                             </div>
                         </div>
                         <div className="product-qtde-container d-flex justify-content-between align-items-center mt-4">
-                            <ProductsQtde />
+                            <ProductsQtde changeQtdeCallBack={qtde => setQtdeHandler(qtde)}  />
                             <button type="button" className="btn btn-dark">ADD TO BAG</button>   
-                            <FontAwesomeIcon icon={["far", "heart"]} size="2x" />
+                            {   wishlistState.includes(product._id) ?
+                                    <FontAwesomeIcon onClick={() => wishlistHandler(product._id)} className="wishlist-icon-alt" icon={['fas', 'heart']} size="2x" />
+                                :
+                                    <FontAwesomeIcon onClick={() => wishlistHandler(product._id)} className="wishlist-icon-alt" icon={['far', 'heart']} size="2x" />
+                            }
                         </div>
                         <div className="product-category-container mt-3">
                             <p>Category: <span className="font-weight-bold">{product.category}</span></p>

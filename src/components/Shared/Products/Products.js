@@ -17,6 +17,7 @@ import wishlist from '../../../Data/wishlistData';
 const Products = props => {
 
     let [count, setCount] = React.useState(props.pageLimit)
+    let [pageLimit, setPageLimit] = React.useState(props.pageLimit)
     let [showProduct, setShowProduct] = React.useState(false)
     let [productIndex, setProductIndex] = React.useState(null)
 
@@ -28,6 +29,10 @@ const Products = props => {
 
     if (count === undefined) {
         setCount(8)
+    }
+
+    if (pageLimit === undefined) {
+        setPageLimit(8)
     }
 
     let tag
@@ -153,7 +158,6 @@ const Products = props => {
     }
     
 
-
     
     return (
         <Fragment>
@@ -189,7 +193,7 @@ const Products = props => {
                                                                         </div>
                                                                     </Link>
                                                                     <div className="products-description d-flex justify-content-between align-items-center">
-                                                                        <div className="d-flex flex-column align-items-start products-description-icons">
+                                                                        <div className="d-flex flex-column align-items-start products-description-name">
                                                                             <p>{product.name}</p>
                                                                             <p>$ {product.price}</p>
                                                                         </div>
@@ -234,7 +238,7 @@ const Products = props => {
                     <div className="products-show">
                         <div className="products-show-text">
                             <button 
-                                disabled={count <= props.pageLimit || products.length <= props.pageLimit} 
+                                disabled={count <= pageLimit || products.length <= pageLimit} 
                                 type="button" 
                                 className="btn border-danger" 
                                 onClick={() => setCount(count - 4)}

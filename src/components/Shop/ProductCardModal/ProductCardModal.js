@@ -8,6 +8,8 @@ import Modal from 'react-modal';
 import ProductsQtde from '../../Shared/UI/ProductsQtde/ProductsQtde'
 import ProgressBar from '../../Shared/UI/ProgressBar/ProgressBar'
 import ColorSelect from '../../Shared/UI/ColorSelect/ColorSelect';
+import wishlist from '../../../Data/wishlistData'
+
 
 const customStyles = {
     content : {
@@ -28,6 +30,9 @@ const ProductCardModal = props => {
         
     let [imgSlide, setImgSlide] = React.useState(0)
     let [productColor, setProductColor] = React.useState('')
+    let [wishlistState, setWishlist] = React.useState(wishlist)
+
+    let [qtde, setQtde] = React.useState(1) 
 
     let [translateValue, setTranslateValue] = React.useState(0)
 
@@ -78,6 +83,24 @@ const ProductCardModal = props => {
     const selectColorHandler = (color, i) => {
         setProductColor(color)
     }
+    
+    const setQtdeHandler = value => {
+        setQtde(value)
+    }
+
+    const wishlistHandler = id => {
+
+        let list = [...wishlistState]
+        if (list.includes(id)) {
+            list = wishlistState.filter(item => item !== id)
+        } else {
+            list.push(id)
+        }
+        
+        setWishlist(list)
+    }
+
+
     
 
     return (
@@ -157,9 +180,13 @@ const ProductCardModal = props => {
                             </div>
                         </div>
                         <div className="product-qtde-container-modal d-flex justify-content-between align-items-center mt-4">
-                            <ProductsQtde />
+                            <ProductsQtde changeQtdeCallBack={qtde => setQtdeHandler(qtde)} />
                             <button type="button" className="btn btn-dark">ADD TO BAG</button>   
-                            <FontAwesomeIcon icon={["far", "heart"]} size="2x" />
+                            {   wishlistState.includes(props.product._id) ?
+                                    <FontAwesomeIcon onClick={() => wishlistHandler(props.product._id)} className="wishlist-icon-alt" icon={['fas', 'heart']} size="2x" />
+                                :
+                                    <FontAwesomeIcon onClick={() => wishlistHandler(props.product._id)} className="wishlist-icon-alt" icon={['far', 'heart']} size="2x" />
+                            }
                         </div>
                         
                         <div className="d-flex justify-content-between align-items-end mt-1">

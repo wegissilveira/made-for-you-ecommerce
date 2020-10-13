@@ -22,6 +22,10 @@
     margin-left: 10%;
 }
 
+.products-description-name{
+    width: 65%;
+}
+
 .products-description-icons{
     width: 30%;
 }

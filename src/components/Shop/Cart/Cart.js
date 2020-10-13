@@ -20,10 +20,13 @@ const Cart = props => {
     // Preencho um array com um índice para cada produto no carrinho utilizando o length do array 'cartData'
     let [qtde, setQtde] = React.useState(Array(cartData.length).fill(1))
     const [pricesArrState, setPricesArrState] = React.useState(pricesArr)
-    
+    // let [finalPrice, setFinalPrice] = React.useState(0)
+    // console.log(pricesArrState)
+
     let finalPrice = 0
     pricesArrState.map(item => {
         
+        // setFinalPrice(finalPrice + parseFloat(item))
         finalPrice = finalPrice + parseFloat(item)
         return finalPrice
     })
@@ -35,9 +38,9 @@ const Cart = props => {
     // Poderia ter sido criada uma state para cada produto, mas isso, além de muito mais verboso que desta forma, só seria possível em caso do número de produtos ser fixo.
     const setQtdeHandler = (value, index) => {
         let arrQtde = [...qtde]
-        let arrPrices = [...pricesArr]
+        let arrPrices = [...pricesArrState]
 
-        let newPrice = arrPrices[index] * value
+        let newPrice = (arrPrices[index] / arrQtde[index]) * value
         arrPrices[index] = newPrice
         arrQtde[index] = value
         
@@ -86,7 +89,7 @@ const Cart = props => {
                                     <ProductQtde changeQtdeCallBack={qtde => setQtdeHandler(qtde, i)} />
                                 </div>
                                 
-                                <p className="font-weight-bold">$ {qtde[i] * parseInt(product.price)}</p>
+                                <p className="font-weight-bold">$ {(qtde[i] * parseFloat(product.price)).toFixed(2)}</p>
                             </div>
                 })
                   

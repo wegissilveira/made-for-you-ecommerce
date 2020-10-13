@@ -122,3 +122,13 @@ input {
     width: 40%;
 }
 
+
+.wishlist-icon-alt {
+    /* position: absolute;
+    right: 0;
+    margin-right: 30px;
+    margin-top: 10px; */
+    color: rgb(253, 91, 91);
+    cursor: pointer;
+}
+

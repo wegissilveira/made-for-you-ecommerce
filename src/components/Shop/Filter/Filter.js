@@ -484,9 +484,9 @@ const Filter = props => {
                                         > {Math.floor(min_value)}
                                         </p>
                                         <p style={{
-                                            marginLeft: thumb2_position - 15 + 'px',
+                                            marginLeft: thumb2_position - 20 + 'px',
                                             position: 'absolute',
-                                            marginTop: '15px'}}
+                                            marginTop: '-35px'}}
                                             ref={price_thumb_2_Ref}
                                         > {Math.floor(max_value)}
                                         </p>
