@@ -64,18 +64,10 @@ const ProductCardModal = props => {
                 setTranslateValue(0)
             }
             
-        }else if (typeof arg === 'number') {
+        } else if (typeof arg === 'number') {
             setImgSlide(arg)
             setTranslateValue(arg * -100)
         }
-
-        // if (arg === 'previous') {
-        //     imgSlide > 0 ? setImgSlide(imgSlide - 1) : setImgSlide(props.imgs.length - 1)
-        // } else if (arg === 'next') {
-        //     imgSlide < props.imgs.length - 1 ? setImgSlide(imgSlide + 1) : setImgSlide(0)
-        // } else if (typeof arg === 'number') {
-        //     setImgSlide(arg)
-        // }
     }
 
     // Aqui esta função que seleciona as cores não passará o slide, já que o slide é automático.
@@ -101,6 +93,7 @@ const ProductCardModal = props => {
     }
 
 
+
     
 
     return (
@@ -120,7 +113,6 @@ const ProductCardModal = props => {
                     </p>
                     <div className="col-6 pl-0 pr-0 mr-4" style={{overflow: 'hidden'}}>
                         <div className="main-img-slider d-flex" style={translateSlider}>
-                            {/* <img src={props.product.imgsDemo[imgSlide]} alt="img-1" /> */}
                             {props.product.imgsDemo.map((slide, i) => 
                                 <img key={i} src={slide} alt="img-1" />
                             )}
@@ -133,18 +125,9 @@ const ProductCardModal = props => {
                                 change={changeSlide}
                                 // slide={imgSlide}
                             />
-                            {/* Não consegui sincronizar as setas com as barras (também não insisti), por isso vou deixar isso suspenso por enquanto e talvez volte depois, já que gastei muito tempo com isso. */}
-                            {/* <div className="d-flex justify-content-between col-2">
-                                <FontAwesomeIcon onClick={() => changeSlide('previous')} icon="arrow-left" />
-                                <FontAwesomeIcon onClick={() => changeSlide('next')} icon="arrow-right" />
-                            </div> */}
                         </div>
                     </div>
                     <div className="col-6">
-                        {/* <div className="d-flex justify-content-between">
-                            <p>123456</p>
-                            <p>exemplo</p>
-                        </div> */}
                         <h1 className="mt-1">{props.product.name}</h1>
                         <p>A comfortable bed for the dog. It will bring a lot of pleasure to your pet. High quality material does not allow the wool to stick and easy to clean.</p>
                         <div className="product-price-container-modal d-flex justify-content-between mt-4">

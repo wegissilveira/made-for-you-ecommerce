@@ -21,21 +21,29 @@ const ProgressBar = props => {
     // Controla a velocidade de rotação da barra e muda a parra de ponto, além de passar o slide do componente parent com a função callback
     let interval
     React.useEffect(() => {
+        let mounted = true
         if (props.auto) { // => Determina se a passagem de slides e barras será automática
+
             // eslint-disable-next-line react-hooks/exhaustive-deps
             interval = setTimeout(() => {
-                percentage < 100 ? setPercentage(percentage + 1) : setPercentage(0)
+
+                if (mounted) {
+                    percentage < 100 ? setPercentage(percentage + 1) : setPercentage(0)
+                }
+
                 if (percentage === 100) {
                     barIndex < bars.length - 1 ? setBarIndex(barIndex + 1) : setBarIndex(0)
                     props.change('next')
                 }
-
+                
             }, timer / 100);
+            
         } else {
             setPercentage(100)
         }
+        return () => mounted = false;
     })
-
+    // console.log('teste')
     // Passa o slide manualmente
     const changeSlideHandler = arg => {
 

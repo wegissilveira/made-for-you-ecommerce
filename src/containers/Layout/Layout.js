@@ -92,22 +92,31 @@ class Layout extends Component {
                                 align-items-center
                             "
                         >
-                            <FontAwesomeIcon icon="bars" color="grey" size="2x" />
+                            {/* <FontAwesomeIcon icon="bars" color="grey" size="2x" /> */}
                             {/* Corrigir NavLink. Quando coloco todos os itens da lista com NavLink ao clicar em algum todos são selecionados e o efeito de highlight na página aberta se perde, funcionando somente quando estamos na homepage. Verificar isso quando as as demais páginas além de 'shop' existirem. */}
-                            <ul className="navbar-nav">
+                            <ul className="navbar-nav" style={{marginLeft: '28%'}}>
                                 {/* <li className="nav-item">
                                     <a href="/" className="nav-link">Home</a>
                                 </li> */}
                                 <li className="nav-item">
                                     <NavLink 
+                                        to="/" 
+                                        exact={true}
+                                        // tag={RRNavLink}
+                                        className="nav-link"
+                                    > Home
+                                    </NavLink>
+                                </li>
+                                <li className="nav-item">
+                                    <NavLink 
                                         to="/shop/" 
-                                        // exact={true}
+                                        exact={true}
                                         // tag={RRNavLink}
                                         className="nav-link"
                                     > Shop
                                     </NavLink>
                                 </li>
-                                <li className="nav-item">
+                                {/* <li className="nav-item">
                                     <a href="/" className="nav-link">Services</a>
                                 </li>
                                 <li className="nav-item">
@@ -115,14 +124,14 @@ class Layout extends Component {
                                 </li>
                                 <li className="nav-item">
                                     <a href="/" className="nav-link">Shopping</a>
-                                </li> 
+                                </li>  */}
                                 {/* <li className="nav-item">
                                     <a href="/" className="nav-link">Contacts</a>
                                 </li> */}
                                 <li className="nav-item">
                                     <NavLink 
                                         to="/contact/" 
-                                        // exact={true}
+                                        exact={true}
                                         // tag={RRNavLink}
                                         className="nav-link"
                                     > Contacts

@@ -3,6 +3,8 @@ import React from 'react'
 import './BestDeal.css'
 import ProgressBar from '../../Shared/UI/ProgressBar/ProgressBar'
 
+import { Link } from 'react-router-dom'
+
 const BestDeal = props => {
 
     // let [imgSlide, setImgSlide] = React.useState(0)
@@ -48,9 +50,11 @@ const BestDeal = props => {
                             if (product.deal) {
                                 return <div key={i} className="col-3" style={translateSlider}>
                                             <div className="border">
-                                                <div className="image" >
-                                                    <img className="img" src={product.img} alt="img-deal" />
-                                                </div>
+                                                <Link to={"/shop/product/" + product._id}>
+                                                    <div className="image" >
+                                                        <img className="img" src={product.img} alt="img-deal" />
+                                                    </div>
+                                                </Link>
                                                 <div className="products-description d-flex flex-column justify-content-center">
                                                     <p>{product.name}</p>
                                                     <p>{product.price}</p>

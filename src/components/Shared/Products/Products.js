@@ -68,19 +68,6 @@ const Products = props => {
         setWishlist(list)
     }
 
-    // Update da state cart quando o botão é clicado pelo usuário
-    // const cartHandler = id => {
-
-    //     let list = [...cartState]
-    //     if (list.includes(id)) {
-    //         list = cartState.filter(item => item !== id)
-    //     } else {
-    //         list.push(id)
-    //     }
-        
-    //     setCart(list)
-    // }
-
 
     // O loop para a exibição dos produtos é realizado sobre o array 'products', que possui todos os itens ou somente os produtos com a tag selecionada. 
     // Caso utilizemos diretamente o array completo quando alguma tag estiver selecionada isso fará com que só sejam mostrados os itens que ocupam indexes inferiores ao valor de 'count', 

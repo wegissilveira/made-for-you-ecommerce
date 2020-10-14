@@ -14,6 +14,8 @@ import UserSignUp from './components/User/UserSignUp/UserSignUp'
 import Contact from './components/Contact/Contact'
 import SearchProduct from './components/SearchProduct/SearchProduct'
 
+import ScrollToTop from './HOC/ScrollToTop'
+
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
@@ -79,24 +81,30 @@ library.add(
   // faSortDown
 )
 
+
+
 function App() {
   return (
-    <BrowserRouter>
-      <Layout>
-        <Switch>
-          <Route path="/" exact component={MainPageConfig} />
-          <Route path="/search/:searchKey" exact component={SearchProduct} />
-          <Route path="/shop/" exact component={ShopConfig} />
-          <Route path="/shop/:cat" exact component={Products} />
-          <Route path="/shop/product/:id" exact component={ProductCard} />
-          <Route path="/cart/" exact component={Cart} />
-          <Route path="/wishlist/" exact component={Wishlist} />
-          <Route path="/user-login/" exact component={UserLogin} />
-          <Route path="/user-signup/" exact component={UserSignUp} />
-          <Route path="/contact/" exact component={Contact} />
-        </Switch>
-      </Layout>
-    </BrowserRouter>
+    
+      <BrowserRouter >        
+        <Layout>
+          <ScrollToTop>
+            <Switch>
+              <Route path="/" exact component={MainPageConfig} />
+              <Route path="/search/:searchKey" exact component={SearchProduct} />
+              <Route path="/shop/" exact component={ShopConfig} />
+              <Route path="/shop/:cat" exact component={Products} />
+              <Route path="/shop/product/:id" exact component={ProductCard} />
+              <Route path="/cart/" exact component={Cart} />
+              <Route path="/wishlist/" exact component={Wishlist} />
+              <Route path="/user-login/" exact component={UserLogin} />
+              <Route path="/user-signup/" exact component={UserSignUp} />
+              <Route path="/contact/" exact component={Contact} />
+            </Switch>
+          </ScrollToTop>
+        </Layout>
+      </BrowserRouter>
+    
     
   );
 }
