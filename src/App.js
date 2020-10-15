@@ -88,7 +88,7 @@ function App() {
     
       <BrowserRouter >        
         <Layout>
-          <ScrollToTop>
+          <ScrollToTop />
             <Switch>
               <Route path="/" exact component={MainPageConfig} />
               <Route path="/search/:searchKey" exact component={SearchProduct} />
@@ -101,7 +101,6 @@ function App() {
               <Route path="/user-signup/" exact component={UserSignUp} />
               <Route path="/contact/" exact component={Contact} />
             </Switch>
-          </ScrollToTop>
         </Layout>
       </BrowserRouter>
     
