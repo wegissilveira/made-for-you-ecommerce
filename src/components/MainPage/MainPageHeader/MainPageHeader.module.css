@@ -1,4 +1,4 @@
-.header-text {
+.Header_text {
     /* height: 650px; */
     width: 93%;
     margin: -470px 0 350px 3.5%;
@@ -8,29 +8,31 @@
     position: relative;
 }
 
-.header-title {
+.Header_title {
     font-size: 100px;
     font-weight: bold;
     line-height: 70px;
     margin-left: 80px;
 }
 
-.icones {
+.Icons {
     margin-bottom: 14px;
 }
 
-.change-slide-setas {
+.Change_slide_arrows {
+    display: flex;
+    justify-content: space-between;
     width: 8%;
     margin-left: 86%;
     margin-top: 15px;
     line-height: 2;
 }
 
-.change-slide-setas > * {
+.Change_slide_arrows > * {
     cursor: pointer;
 }
 
-.mainSlider-container {
+.MainSlider_container {
     height: 90%;
     display: flex;
     transition: .8s ease-in-out;
@@ -40,11 +42,11 @@
     -o-transition: .8s ease-in-out;
 }
 
-.mainSlider-container img {
+.MainSlider_container img {
     height: 100%;
 }
 
-.mainSlider-link-container {
+.MainSlider_link_container {
     position: relative;
     background-color: white;
     width: 50%;
@@ -52,7 +54,7 @@
     margin-top: -70px;
 }
 
-.mainSlider-link-container > * {
+.MainSlider_link_container > * {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -63,24 +65,24 @@
     text-decoration: none;
 }
 
-.mainSlider-link-container p {
+.MainSlider_link_container p {
     margin: 0;
     color: rgb(75, 75, 75);
 }
 
-.minorSlider-container {
+.MinorSlider_container {
     height: 65%;
     width: 50%;
 
 
 }
 
-.minorSlider-container img {
+.MinorSlider_container img {
     height: 100%;
     width: 100%;
 }
 
-.minorSlider-container div {
+.MinorSlider_container div {
     position: relative;
     background-color: white;
     width: 100%;
@@ -88,7 +90,7 @@
     margin-top: -140px;
 }
 
-.minorSlider-container div > *{
+.MinorSlider_container div > *{
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -99,7 +101,7 @@
     text-decoration: none;
 }
 
-.minorSlider-container div p {
+.MinorSlider_container div p {
     margin: 0;
     color: rgb(75, 75, 75);
 }

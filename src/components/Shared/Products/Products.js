@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 
-import './Products.css'
+import classes from './Products.module.css'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from 'react-router-dom'
@@ -148,7 +148,7 @@ const Products = props => {
     
     return (
         <Fragment>
-            <div className="session-container container">
+            <div className="container">
                 {props.match ? <h1 className="text-center">{category.toUpperCase()}</h1> : null}
                 <div className="row">
                     {/* Corrigir key */}
@@ -166,9 +166,17 @@ const Products = props => {
                                                             <div className=" col-3 mt-4 pl-0">
                                                                 <div className="border p-0">
                                                                     {   wishlistState.includes(product._id) ?
-                                                                            <FontAwesomeIcon onClick={() => wishlistHandler(product._id)} className="wishlist-icon" icon={['fas', 'heart']} size="2x" />
+                                                                            <FontAwesomeIcon 
+                                                                                onClick={() => wishlistHandler(product._id)} 
+                                                                                className={classes.Wishlist_icon} 
+                                                                                icon={['fas', 'heart']} size="2x" 
+                                                                            />
                                                                         :
-                                                                            <FontAwesomeIcon onClick={() => wishlistHandler(product._id)} className="wishlist-icon" icon={['far', 'heart']} size="2x" />
+                                                                            <FontAwesomeIcon 
+                                                                                onClick={() => wishlistHandler(product._id)} 
+                                                                                className={classes.Wishlist_icon} 
+                                                                                icon={['far', 'heart']} size="2x" 
+                                                                            />
                                                                     }
                                                                     <Link to={"/shop/product/" + product._id} >
                                                                         <div style={{height: '359px'}} className="d-flex align-items-center">
@@ -179,12 +187,12 @@ const Products = props => {
                                                                             />
                                                                         </div>
                                                                     </Link>
-                                                                    <div className="products-description d-flex justify-content-between align-items-center">
-                                                                        <div className="d-flex flex-column align-items-start products-description-name">
+                                                                    <div className={classes.Products_description}>
+                                                                        <div className={classes.Products_description_name}>
                                                                             <p>{product.name}</p>
                                                                             <p>$ {product.price}</p>
                                                                         </div>
-                                                                        <div className="d-flex justify-content-between align-items-center products-description-icons">
+                                                                        <div className={classes.Products_description_icons}>
                                                                             <FontAwesomeIcon onClick={() => setCard(i)} icon="eye" />
                                                                             <FontAwesomeIcon icon="suitcase" size="2x" />
                                                                         </div>
@@ -210,9 +218,9 @@ const Products = props => {
                     : <h1 className="text-center" style={{width: '100%'}}>NENHUM ITEM NA ENCONTRADO</h1>}
 
                 </div>
-                <div className="d-flex justify-content-between products-show-container">
-                    <div className="products-show">
-                        <div className="products-show-text">
+                <div className={classes.Products_show_container}>
+                    <div className={classes.Products_show}>
+                        <div className={classes.Products_show_text}>
                             <button 
                                 disabled={count >= products.length} 
                                 type="button" 
@@ -222,8 +230,8 @@ const Products = props => {
                             </button>
                         </div>
                     </div>
-                    <div className="products-show">
-                        <div className="products-show-text">
+                    <div className={classes.Products_show}>
+                        <div className={classes.Products_show_text}>
                             <button 
                                 disabled={count <= pageLimit || products.length <= pageLimit} 
                                 type="button" 

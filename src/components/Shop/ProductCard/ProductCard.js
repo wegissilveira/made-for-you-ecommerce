@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 
-import './ProductCard.css'
+import classes from './ProductCard.module.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -83,22 +83,22 @@ const ProductCard = props => {
     return (
         
         <Fragment>
-            <div className="session-container mt-5">
-                <div className="product-card-container container-fluid d-flex">
+            <div className={`mt-5 ${classes.Session_container}`}>
+                <div className={`container-fluid ${classes.Product_card_container}`}>
                     <div className="pl-0 pr-5">
-                        <div className="main-img-slider">
+                        <div className={classes.Main_img_slider}>
                             {/* <img src={product.imgsDemo[imgSlide]} alt="img-1" /> */}
                             <div className="d-flex" style={translateSlider}>
                                 {product.imgsDemo.map((img, i) => 
                                     <img key={i} src={img} alt="img-1"/>
                                 )}
                             </div>
-                            <div className="d-flex justify-content-between change-slide-setas-corrigir-nome">
+                            <div className={classes.Change_slide_arrows_container}>
                                 <FontAwesomeIcon onClick={() => changeSlide('previous')} icon="arrow-left" />
                                 <FontAwesomeIcon onClick={() => changeSlide('next')} icon="arrow-right" />
                             </div>
                         </div>
-                        <div className="d-flex justify-content-between product-card-sub-images">
+                        <div className={classes.Product_card_sub_images}>
                             <img 
                                 onClick={() => changeSlide(0)} 
                                 src={product.imgsDemo[0]} alt="img-1" 
@@ -123,25 +123,17 @@ const ProductCard = props => {
                         </div>
                         <h1 className="mt-5">{product.name}</h1>
                         <p>A comfortable bed for the dog. It will bring a lot of pleasure to your pet. High quality material does not allow the wool to stick and easy to clean.</p>
-                        <div className="product-price-container d-flex justify-content-between mt-4">
+                        <div className={`mt-4 ${classes.Product_price_container}`}>
                             <h3 className="mb-0">$ {product.price}</h3>
-                            <div className="product-price-availability d-flex justify-content-between align-items-center text-success">
+                            <div className={`text-success ${classes.Product_price_availability}`}>
                                 <FontAwesomeIcon icon="check" />
                                 <p>Available</p>
                             </div>
                         </div>
-                        <div className="product-details-container d-flex justify-content-between mt-4">
+                        <div className={`mt-4 ${classes.Product_details_container}`}>
                             <div>
                                 <p>Size</p>
-                                <select className="
-                                        product-details-select 
-                                        mt-2 
-                                        border-left-0 
-                                        border-right-0
-                                        border-top-0
-                                        border-bottom
-                                    "
-                                >
+                                <select className={`mt-2 border-bottom ${classes.Product_details_select}`}>
                                     <option>100x100 cm</option>
                                     <option>200x200 cm</option>
                                     <option>300x300 cm</option>
@@ -155,21 +147,32 @@ const ProductCard = props => {
                                 />
                             </div>
                         </div>
-                        <div className="product-qtde-container d-flex justify-content-between align-items-center mt-4">
-                            <ProductsQtde changeQtdeCallBack={qtde => setQtdeHandler(qtde)}  />
+                        <div className={`mt-4 ${classes.Product_wishlist_container}`}>
+                            <ProductsQtde 
+                                changeQtdeCallBack={qtde => setQtdeHandler(qtde)}  
+                                max={8}
+                            />
                             <button type="button" className="btn btn-dark">ADD TO BAG</button>   
                             {   wishlistState.includes(product._id) ?
-                                    <FontAwesomeIcon onClick={() => wishlistHandler(product._id)} className="wishlist-icon-alt" icon={['fas', 'heart']} size="2x" />
+                                    <FontAwesomeIcon 
+                                        onClick={() => wishlistHandler(product._id)} 
+                                        className={classes.Wishlist_icon_alt} 
+                                        icon={['fas', 'heart']} size="2x" 
+                                    />
                                 :
-                                    <FontAwesomeIcon onClick={() => wishlistHandler(product._id)} className="wishlist-icon-alt" icon={['far', 'heart']} size="2x" />
+                                    <FontAwesomeIcon 
+                                        onClick={() => wishlistHandler(product._id)} 
+                                        className={classes.Wishlist_icon_alt} 
+                                        icon={['far', 'heart']} size="2x" 
+                                    />
                             }
                         </div>
-                        <div className="product-category-container mt-3">
+                        <div className={`mt-3 ${classes.Product_category_container}`}>
                             <p>Category: <span className="font-weight-bold">{product.category}</span></p>
                             <p>Tags: <span className="font-weight-bold">{product.tag}</span></p>
                         </div>
                         <div className="d-flex justify-content-between align-items-end mt-5">
-                            <div className="product-specifications-container d-flex flex-column">
+                            <div className={`mt-3 ${classes.Product_specifications_container}`}>
                                 <div className="d-flex justify-content-between">
                                     <h6>DETAILS</h6>
                                     <h6>SPECIFICATIONS</h6>

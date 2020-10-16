@@ -1,7 +1,7 @@
 import React from 'react'
 import { Fragment } from 'react'
 
-import './MainPageHeader.css'
+import classes from './MainPageHeader.module.css'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from 'react-router-dom'
@@ -125,7 +125,7 @@ const MainPageHeader = props => {
             <div className="container-fluid d-flex">
                 <div className="col-6 container-fluid d-flex align-items-center" style={{height:'700px'}}>
                     <div style={{height:'65%', width:'25%'}}></div>
-                    <div className="minorSlider-container">
+                    <div className={classes.MinorSlider_container}>
                         <img 
                             src={minorSlides[minorSlideImg].img}
                             alt={"img-1"} 
@@ -140,7 +140,7 @@ const MainPageHeader = props => {
                     <div style={{height:'65%', width:'40%'}}></div>
                 </div>
                 <div style={{height:'700px', overflow: 'hidden', padding: '0'}}>                
-                    <div className="mainSlider-container" style={translateSlider}>
+                    <div className={classes.MainSlider_container} style={translateSlider}>
                     
                         {mainSlides.map( (img, i) =>
                             <div key={i} style={{width: '100%'}}>
@@ -148,7 +148,7 @@ const MainPageHeader = props => {
                                     src={img.img} 
                                     alt={img.alt} 
                                 />
-                                <div className="mainSlider-link-container">
+                                <div className={classes.MainSlider_link_container}>
                                     <Link to={'/shop/' + img.cat}>
                                         <p className="font-weight-bold">{img.linkText[0]}</p>
                                         <p>{img.linkText[1]}</p>
@@ -157,7 +157,7 @@ const MainPageHeader = props => {
                             </div>
                         )}
                     </div>
-                    <div className="change-slide-setas d-flex justify-content-between">
+                    <div className={classes.Change_slide_arrows}>
                         <FontAwesomeIcon 
                             onClick={() => changeSlideHandler('previous', mainSlides, slideImg, setSlideImg, 'main')} 
                             icon="arrow-left" 
@@ -169,7 +169,7 @@ const MainPageHeader = props => {
                     </div>
                 </div>
             </div>
-            <div className="header-text row">
+            <div className={`row ${classes.Header_text}`}>
                 {/* <div> */}
                     <ProgressBar 
                         bars={minorSlides.length} // => Qtde de barras
@@ -180,15 +180,15 @@ const MainPageHeader = props => {
                         height={150} // => Altura que o bloco de pontos ocupará
                     />
                 {/* </div> */}
-                <div className="header-title col-4">
+                <div className={`col-4 ${classes.Header_title}`}>
                     <p>MADE</p>
                     <p>FOR YOU</p>
                 </div>
                 <div className="d-flex flex-column align-items-center">
-                    <FontAwesomeIcon icon={['fab', 'facebook-f']} className="icones"/>
-                    <FontAwesomeIcon icon={['fab', 'instagram']} className="icones" />
-                    <FontAwesomeIcon icon={['fab', 'vk']} className="icones" />
-                    <FontAwesomeIcon icon={['fab', 'twitter']} className="icones" />
+                    <FontAwesomeIcon icon={['fab', 'facebook-f']} className={classes.Icons}/>
+                    <FontAwesomeIcon icon={['fab', 'instagram']} className={classes.Icons} />
+                    <FontAwesomeIcon icon={['fab', 'vk']} className={classes.Icons} />
+                    <FontAwesomeIcon icon={['fab', 'twitter']} className={classes.Icons} />
                 </div>
             </div>
         </Fragment>

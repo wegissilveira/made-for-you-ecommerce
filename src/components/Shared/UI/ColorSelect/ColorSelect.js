@@ -1,5 +1,7 @@
 import React from 'react'
 
+import classes from './ColorSelect.module.css'
+
 const ColorSelect = props => {
     
     //Removi a borda do bootstrap e passei pro css para que seja possível alterá-la durante o hover. Verificar como fazer o mesmo no caso do 'focus'. Além disso transformar esse trecho em algo dinâmico que será lido provavelmente de um objeto. E também falta inserir a propriedade 'hover' nos spans, para que as cores sejam mais claras quando não estiverem selecionados. Não coloquei aqui, pois já que a lista de opções ainda não está dinâmica eu teria que criar uma classe para cada span. 
@@ -49,14 +51,15 @@ const ColorSelect = props => {
             {
                 props.colors.map((color, i) => {
                     return <div key={i} 
-                                className="
-                                    product-details-color 
-                                    mt-2 
-                                    rounded-circle 
-                                    d-flex 
-                                    justify-content-center 
-                                    align-items-center
-                                "
+                                // className="
+                                //     product-details-color 
+                                //     mt-2 
+                                //     rounded-circle 
+                                //     d-flex 
+                                //     justify-content-center 
+                                //     align-items-center
+                                // " 
+                                className={`mt-2 rounded-circle ${classes.Product_details_color}`}
                                 style={{border: border[i]}}
 
                                 onClick={() => selectColorHandler(color, i)}

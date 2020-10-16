@@ -1,10 +1,14 @@
 import React from 'react'
 
+import classes from './ProductsQtde.module.css'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const ProductsQtde = props => {
 
-    let [productQtde, setProductQtde] = React.useState(1)
+    let [productQtde, setProductQtde] = React.useState(1) // => Quantidade atual
+    let [productQtdeMax, setProductQtdeMax] = React.useState(props.max) // => Quantidade máxima
+
 
     const changeQtde = arg => {
         if (arg === "increase") {
@@ -24,10 +28,19 @@ const ProductsQtde = props => {
     
 
     return (
-        <div className="product-qtde d-flex justify-content-around align-items-center border">
+        <div className={`border ${classes.Product_qtde}`}>
             <p style={{margin: '0'}}>{productQtde}</p>
-            <div className="product-qtde-arrows d-flex flex-column justify-content-between" >
-                <FontAwesomeIcon onClick={() => changeQtde('increase')} icon="chevron-up" size="xs"/>
+            <div className={classes.Product_qtde_arrows}>
+                {/* Verificando se há um valor máximo, caso não haja a seta 'increase' estará ativada infinitamente */}
+                {productQtdeMax !== undefined ?
+                    (productQtde < productQtdeMax ?
+                            <FontAwesomeIcon onClick={() => changeQtde('increase')} icon="chevron-up" size="xs"/>
+                        :
+                            <FontAwesomeIcon style={{color: '#ccc', cursor: 'default'}} icon="chevron-up" size="xs"/>)
+                    :
+                        <FontAwesomeIcon onClick={() => changeQtde('increase')} icon="chevron-up" size="xs"/>
+                }
+                
                 {productQtde > 1 ? 
                         <FontAwesomeIcon onClick={() => changeQtde('decrease')} icon="chevron-down" size="xs"/> 
                     : 

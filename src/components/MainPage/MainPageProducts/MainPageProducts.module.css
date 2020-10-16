@@ -1,9 +1,17 @@
-.products-select-container {
+.Session_container {
+    text-align: center;
+    height: auto;
+    margin-bottom: 80px;
+}
+
+.Products_select_container {
+    display: flex;
+    justify-content: space-between;
     width: 42%;
     margin-left: 29%;
 }
 
-.products-select {
+.Products_select {
     width: 155px;
     height: 46px;
     background-color: #F5F5F5;
@@ -15,12 +23,12 @@
 
 }
 
-.products-select p {
+.Products_select p {
     display: none;
     cursor: default;
 }
 
-.products-select-active {
+.Products_select_active {
     background-color: #3A3A3A;
     color: white;
 
@@ -36,12 +44,12 @@
     border: 0;
 }
 
-.products-select-active p {
+.Products_select_active p {
     width: 100%;
     display: flex;
 }
 
-.arrow-down {
+.Arrow_down {
     width: 0; 
     height: 0; 
     border-left: 12px solid transparent;

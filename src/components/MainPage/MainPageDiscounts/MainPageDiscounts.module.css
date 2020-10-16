@@ -6,15 +6,25 @@
     width: 520px;
 } */
 
-.discounts-container {
+.Session_container {
+    height: auto;
+    margin-bottom: 80px;
+}
+
+.Discounts_container {
+    display: flex;
+    justify-content: center;
     height: 650px;
 }
 
-.discounts-quadros-container-1 p {
+.Discounts_quadros_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     margin: 0;
 }
 
-.discounts-quadros-container-2 p {
+.Discounts_quadros_container p {
     margin: 0;
 }
 
@@ -27,22 +37,30 @@ input {
     margin-top: 24px;
 }
 
-.discount-icons-container {
+.Discounts_icons_container {
+    display: flex;
+    justify-content: space-between;
     width: 1160px;
     margin-left: 210px;
     margin-top: 80px;
 }
 
-.discounts-icons h6 {
+.Discounts_icons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Discounts_icons h6 {
     margin-bottom: 0;
     margin-top: 30px;
 }
 
-.discounts-icons p {
+.Discounts_icons p {
     margin: 0;
 }
 
-.plane-icon {
+.Plane_icon {
     transform: rotate(-90deg);
     -webkit-transform: rotate(-90deg);
     -moz-transform: rotate(-90deg);

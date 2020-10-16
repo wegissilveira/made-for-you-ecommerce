@@ -1,0 +1,34 @@
+.Product_qtde {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 70px;
+    height: 45px;
+}
+
+.Product_qtde_arrows {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 65%;
+}
+
+.Product_qtde_arrows > * {
+    cursor: pointer;
+}
+
+.Product_qtde_arrows > *:hover {
+    color: #535455;
+}
+
+.Product_qtde_container button {
+    font-size: 12px;
+    height: 45px;
+    width: 160px;
+    border-radius: 0;
+    -webkit-border-radius: none;
+    -moz-border-radius: 0;
+    -ms-border-radius: 0;
+    -o-border-radius: 0;
+    -webkit-border-radius: 0;
+}

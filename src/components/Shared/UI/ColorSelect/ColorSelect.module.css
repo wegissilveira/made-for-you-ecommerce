@@ -1,0 +1,27 @@
+/* Provavelmente alterar para 'ColorSelect' */
+.Product_details_color {
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+}
+
+.Product_details_color:hover {
+    border: 2px solid black;
+}
+
+/* .product-details-color:focus {
+    border: 2px solid black;
+} */
+
+.Product_details_color span {
+    width: 18px;
+    height: 18px;
+}
+
+.Product_details_color span:hover {
+    background-color: yellow;
+}

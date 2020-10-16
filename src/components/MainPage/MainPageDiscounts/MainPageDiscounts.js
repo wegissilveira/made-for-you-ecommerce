@@ -1,15 +1,17 @@
 import React from 'react'
 
+import classes from './MainPageDiscounts.module.css'
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import './MainPageDiscounts.css'
+
 
 const mainPageDiscounts = props => {
 
     return (
-        <div className="session-container">
-            <div className="d-flex justify-content-center discounts-container">
-                <div className="discounts-quadros-container-1 pr-3 d-flex flex-column justify-content-between">
+        <div className={classes.Session_container}>
+            <div className={classes.Discounts_container}>
+                <div className={`pr-3 ${classes.Discounts_quadros_container}`}>
                     <div>
                         <h1>DISCOUNTS</h1>
                         <h1>AND SALES</h1>
@@ -19,7 +21,7 @@ const mainPageDiscounts = props => {
                     </div>
                     <img src={require('../../../assets/images/Discounts/quadro-3.png')} alt="discount-img" />
                 </div>
-                <div className="discounts-quadros-container-2 pl-3 d-flex flex-column justify-content-between">
+                <div className={`pr-3 ${classes.Discounts_quadros_container}`}>
                     <img src={require('../../../assets/images/Discounts/quadro-2.png')} alt="discount-img" />
                     <div className="border">
                         <div className="p-5">
@@ -31,23 +33,23 @@ const mainPageDiscounts = props => {
                     </div>
                 </div>
             </div>
-            <div className="d-flex justify-content-between discount-icons-container">
-                <div className="discounts-icons d-flex flex-column align-items-center">
-                    <FontAwesomeIcon icon="plane" size="3x" className="plane-icon"/>
+            <div className={classes.Discounts_icons_container}>
+                <div className={classes.Discounts_icons}>
+                    <FontAwesomeIcon icon="plane" size="3x" className={classes.Plane_icon}/>
                     <h6>FAST DELIVERY</h6>
                     <p>Same day delivery as soon as possible</p>
                 </div>
-                <div className="discounts-icons d-flex flex-column align-items-center">
+                <div className={classes.Discounts_icons}>
                     <FontAwesomeIcon icon="gift" size="3x"/>
                     <h6>SPECIAL DISCOUNT</h6>
                     <p>Get attractive offers day by day</p>
                 </div>
-                <div className="discounts-icons d-flex flex-column align-items-center">
+                <div className={classes.Discounts_icons}>
                     <FontAwesomeIcon icon="award" size="3x"/>
                     <h6>MONEY RETURNS</h6>
                     <p>100% Money back guarantee</p>
                 </div>
-                <div className="discounts-icons d-flex flex-column align-items-center">
+                <div className={classes.Discounts_icons}>
                     <FontAwesomeIcon icon="trophy" size="3x"/>
                     <h6>HIGH QUALITY</h6>
                     <p>Control at all stages of manufacturing</p>

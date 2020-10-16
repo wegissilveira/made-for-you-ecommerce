@@ -1,6 +1,6 @@
 import React from 'react'
 
-import './ProgressBar.css'
+import classes from './ProgressBar.module.css'
 
 // A barra está reaproveitável e personalizável em algumas características, como tempo de execução e quantidade de barras que serão criadas, além de ser possível decidir se a passagem de slides será automática ou manual.
 // Seria possível possível configurar outras propriedades como personalizáveis, como cores do ponto e da barra, tamanho, espessura etc. Mas como aqui não será necessário, provavelmente não farei isso, quando eu for utilizar tal componente em outra aplicação eu posso realizar as implementações necessárias.
@@ -84,7 +84,7 @@ const ProgressBar = props => {
                         >
                             { i === barIndex ?  
                                 <circle
-                                    className="circle-progress"
+                                    className={classes.Circle_progress}
                                     cx={sqSize / 2}
                                     cy={sqSize / 2}
                                     r={radius}
@@ -98,7 +98,7 @@ const ProgressBar = props => {
                                 /> 
                             : null }
                             <circle
-                                className="circle-center"
+                                className={classes.Circle_center}
                                 cx="50%"
                                 cy="50%"
                                 r="3"
