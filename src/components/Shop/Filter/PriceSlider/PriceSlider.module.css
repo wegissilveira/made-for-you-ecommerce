@@ -1,0 +1,30 @@
+h6 {
+    margin-bottom: 20px;
+}
+
+.Range_container {
+    width: 200px;
+    height: 15px;
+    /* cursor: pointer; */
+}
+
+.Range {
+    width: 100%;
+    height: 2px;
+    background-color: black;
+    margin-bottom: 50px;
+}
+
+.Range span {
+    width: 10px;
+    height: 10px;
+    cursor: pointer;
+    /* background-color: black; */
+    /* margin-top: -50%; */
+    position: absolute;
+    /* border-radius: 50%; */
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}

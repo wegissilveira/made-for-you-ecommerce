@@ -1,9 +1,10 @@
 import React, { Fragment } from 'react'
 
-import './Filter.css'
+import classes from './Filter.module.css'
 
 import ColorSelect from '../../Shared/UI/ColorSelect/ColorSelect'
 import Products from '../../Shared/Products/Products';
+import PriceSlider from './PriceSlider/PriceSlider'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {Animated} from "react-animated-css"
@@ -29,30 +30,14 @@ const Filter = props => {
     let [translateValue, setTranslateValue] = React.useState(-110)
     let [translateProductsValue, setTranslateProductsValue] = React.useState(-436)
 
-
-    /* Slider de preço */
-    const sliderRef = React.useRef() // => Div que engloba o slider
-    const thumb_1_Ref = React.useRef() // => Div que engloba o slider
-    const thumb_2_Ref = React.useRef() // => Div que engloba o slider
-    const price_thumb_1_Ref = React.useRef() // => Div que engloba o slider
-    const price_thumb_2_Ref = React.useRef() // => Div que engloba o slider
-
-    const initial_position = 0 // => Valor inicial do thumb esquerdo ***
-    //const end_position = 200 // => Valor final do thumb direito ***
+    /* Slider Price */
+    const sliderRef = React.useRef()
 
     const initial_min_value = 5 // => Valor inicial do preço mínimo
     const initial_max_value = 1290 // => Valor inicial do preço máximo
 
-    let [thumb1_position, setValueThumb1] =  React.useState(0)
-    let [thumb2_position, setValueThumb2] =  React.useState(0)
-    let [mobile_thumb1_position, setValueMobileThumb1] =  React.useState(0)
-    let [mobile_thumb2_position, setValueMobileThumb2] =  React.useState(0)
     let [min_value, setMinValue] =  React.useState(initial_min_value)
     let [max_value, setMaxValue] =  React.useState(initial_max_value)
-    
-    React.useEffect(() => {
-        setValueThumb2(sliderRef.current.offsetWidth - 5)
-    }, [])
 
     /* */
 
@@ -92,95 +77,10 @@ const Filter = props => {
         translateProductsValue < 0 ? setTranslateProductsValue(0) : setTranslateProductsValue(-436)
     }
 
-    let slider
-    let slider_price
-
-    const beginSliding = e => {
-        slider.onpointermove = slide
-        slider.setPointerCapture(e.pointerId)
+    const setPriceRange = values => {
+        setMinValue(values[0])
+        setMaxValue(values[1])
     }
-    
-    const stopSliding = e => {
-        slider.onpointermove = null
-        slider.releasePointerCapture(e.pointerId)
-    }
-    
-    const slide = e => {
-        const thumb_class = e.target.className
-
-        let rect = sliderRef.current.getBoundingClientRect()
-        let current_position = e.clientX - rect.left 
-        
-        if (thumb_class.includes('right-thumb')) {
-            // 'tight-thumb' não pode ser 200 (e.clientX - rect.left), ja que a referência é o próprio objeto, ou seja, o seu ponto 0 e onde ele está e não o início do slider, por isso é preciso subtrair o width do slider, ou seja, 200 - 200, o que equivale a 0 inicialmente, caso fosse duzentos ele ficaria 200 pontos a mais para a direita.
-            // Da maneira que está ele se inicía com 0 e ao ser movido para a direita recebe valores negativos, o oposto do 'left-thumb'.
-            current_position = current_position - sliderRef.current.offsetWidth
-
-            if (current_position >= initial_position) {
-                current_position = initial_position
-            }
-
-            if (current_position <= mobile_thumb1_position - 175) {
-                current_position = mobile_thumb1_position - 175
-            }
-            
-            setValueMobileThumb2(current_position)
-        } 
-        
-        if (thumb_class.includes('left-thumb')) {
-
-            if (current_position <= initial_position) {
-                current_position = initial_position
-            }
-
-            // estou utilizando o valor de 175 como referência, pois o 'tight-thumb' recebe um valor negativo, como o slider tem o width de 200, o 175 garante uma diferença de 25px entre os thumbs (200 - 175) independente de suas posições.
-            if (current_position >= mobile_thumb2_position + 175) {
-                current_position = mobile_thumb2_position + 175
-            }
-
-            setValueMobileThumb1(current_position)
-        }
-        
-        slider.style.transform = `translate(${current_position}px)`
-        slider_price.style.transform = `translate(${current_position}px)`
-    }
-        
-    
-    const handleChange = e => {
-
-        const thumb_class = e.target.className
-
-        if (thumb_class.includes('left-thumb')) {
-
-            slider = thumb_1_Ref.current;
-            slider_price = price_thumb_1_Ref.current;
-
-            slider.onpointerdown = beginSliding;
-            slider.onpointerup = stopSliding;
-
-            if (mobile_thumb1_position - initial_position < 1) {
-                setMinValue(initial_min_value)
-            } else {
-                setMinValue((mobile_thumb1_position - initial_position) * 6.45)
-            }
-
-        } else if (thumb_class.includes('right-thumb')) {
-            
-            slider = thumb_2_Ref.current;
-            slider_price = price_thumb_2_Ref.current;
-
-            slider.onpointerdown = beginSliding;
-            slider.onpointerup = stopSliding;
-
-            if (mobile_thumb2_position > -1) {
-                setMaxValue(initial_max_value)
-            } else {
-                setMaxValue((mobile_thumb2_position + 200) * 6.45)
-            }
-        }
-
-    }
-
 
     // Explicação em 'ProductCard'
     const selectColorHandler = (color) => {
@@ -325,39 +225,27 @@ const Filter = props => {
 
         })
 
-        setValueThumb1(initial_position)
-        // setValueThumb2(end_position)
-        setMinValue(initial_min_value)
-        setMaxValue(initial_max_value)
-
-        thumb_1_Ref.current.style.transform = `translate(0px)`
-        thumb_2_Ref.current.style.transform = `translate(0px)`
-        price_thumb_1_Ref.current.style.transform = `translate(0px)`
-        price_thumb_2_Ref.current.style.transform = `translate(0px)`
-
         setOrder('default')
         setTag('all')
         setCategory('all')
         setCheckColor(true)
         setProductColor('')
         setOffer([])
+
+        sliderRef.current.resetPriceSlider()
     }
+
+    const filterButtonStyle = [classes.Filter_button, classes.Filter_button_active]
 
 
 
 
     return (
         <Fragment>
-            <div className="filter-container">
+            <div className={classes.Filter_container}>
                 <div className="d-flex justify-content-between">
                     <div onClick={() => openFilterHandler()}
-                        className="
-                            filter-switch
-                            border
-                            d-flex
-                            justify-content-around
-                            align-items-center
-                        "
+                        className={`border ${classes.Filter_switch}`}
                     >
                         { filterOpen === false ?
                             <Fragment>
@@ -372,7 +260,7 @@ const Filter = props => {
                         }
 
                     </div>
-                    <div className="filter-sort d-flex justify-content-between align-items-center">
+                    <div className={classes.Filter_sort}>
                         {/* Decidir se esta parte ficará realmente aqui, já que depende do 'length' de 'products' que foi retornado pelo filtro. Também pensar se é necessário, talvez eu simplesmente insira o total de produtos retornados */}
                         <p>Showing 1 - 9 of 19 (ILUSTRATIVO)</p>
                         <p>Sort by</p>
@@ -394,7 +282,7 @@ const Filter = props => {
                 {/* { filterOpen ? <div> */}
                     <div style={translateFilter}>
                         <div className="mt-5 mb-5 d-flex justify-content-between row">
-                            <div className="sub-filter-type" ref={categoriesRef}>
+                            <div className={classes.Sub_filter_type} ref={categoriesRef}>
                                 <h6>CATEGORIES</h6>
                                 <p onClick={e => setFilterDetails(e, 'cat', 'all')} style={{fontWeight:'bold'}}>All categories ({categoriesTotalQtde}) </p>
                                 <p onClick={e => setFilterDetails(e, 'cat', 'bedroom')}>Bedroom ({bedRoomQtde}) </p>
@@ -403,8 +291,8 @@ const Filter = props => {
                                 <p onClick={e => setFilterDetails(e, 'cat', 'bathroom')}>Bathroom ({bathRoomQtde}) </p>
                                 <p onClick={e => setFilterDetails(e, 'cat', 'children-room')}>Children's room ({childrenRoom}) </p>
                             </div>
-                            <div className="divider"></div>
-                            <div className="sub-filter-type" ref={typesRef}>
+                            <div className={classes.Divider}></div>
+                            <div className={classes.Sub_filter_type} ref={typesRef}>
                                 <h6>TYPE</h6>
                                 <p onClick={e => setFilterDetails(e, 'type', 'all')} style={{fontWeight:'bold'}}>All tags ({typesTotalQtde}) </p>
                                 <p onClick={e => setFilterDetails(e, 'type', 'furniture')}>Furniture ({furnitureQtde}) </p>
@@ -413,7 +301,7 @@ const Filter = props => {
                                 <p onClick={e => setFilterDetails(e, 'type', 'textile')}>Textile ({textileQtde}) </p>
                                 <p onClick={e => setFilterDetails(e, 'type', 'lightning')}>Lighting ({lightingQtde}) </p>
                             </div>
-                            <div className="divider"></div>
+                            <div className={classes.Divider}></div>
                             <div className="d-flex flex-column" ref={offerRef}>
                                 <h6>OUR OFFER</h6>
                                 <div>
@@ -433,7 +321,7 @@ const Filter = props => {
                                     <label className="ml-2">Sales</label>
                                 </div>
                             </div>
-                            <div className="divider"></div>
+                            <div className={classes.Divider}></div>
                             <div className="col-3">
                                 <h6>COLOR</h6>
                                 <input type="checkbox" onChange={() => setCheckColorHandler(!checkColor)} checked={checkColor}/>
@@ -444,60 +332,19 @@ const Filter = props => {
                                     selectColorHandlerCallback={(color) => selectColorHandler(color, false)}
                                 />
                             </div>
-                            <div className="divider"></div>
-                            <div>
-                                <h6 style={{marginBottom: '35px'}}>PRICE FILTER</h6>
-                                <div className="range-container"
-                                    onMouseMove={(e) => handleChange(e)}
-                                    ref={sliderRef}
-                                >
-                                    <div className="range"
+                            <div className={classes.Divider}></div>
 
-                                    >
-                                        <span 
-                                            className="rounded-circle left-thumb"
-                                            style={{
-                                                width:'15px',
-                                                height: '15px',
-                                                backgroundColor: 'red',
-                                                marginTop: '-6px',
-                                                marginLeft: thumb1_position - 7 + 'px'
-                                            }}
-                                            ref={thumb_1_Ref}
-                                        ></span>
-                                        <span 
-                                            className="rounded-circle right-thumb"
-                                            style={{
-                                                width:'15px',
-                                                height: '15px',
-                                                backgroundColor: 'black',
-                                                marginTop: '-6px',
-                                                marginLeft: thumb2_position - 7 + 'px'
-                                            }}
-                                            ref={thumb_2_Ref}
-                                        ></span>
-                                        <p style={{
-                                            marginLeft: thumb1_position - 15 + 'px',
-                                            position: 'absolute',
-                                            marginTop: '15px'}}
-                                            ref={price_thumb_1_Ref}
-                                        > {Math.floor(min_value)}
-                                        </p>
-                                        <p style={{
-                                            marginLeft: thumb2_position - 20 + 'px',
-                                            position: 'absolute',
-                                            marginTop: '-35px'}}
-                                            ref={price_thumb_2_Ref}
-                                        > {Math.floor(max_value)}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+                            <PriceSlider 
+                                rangeValues={setPriceRange} 
+                                ref={sliderRef}
+                                minValue={initial_min_value}
+                                maxValue={initial_max_value}
+                            />
                         </div>
                     {/* criar toggle entre os botões para serem ativos ou não */}
-                    <div className="filter-button-container">
-                        <p className="filter-button filter-button-active">FILTER</p>
-                        <p className="filter-button" onClick={() => cleanFiltersHandler()}>CLEAR ALL</p>
+                    <div className={classes.Filter_button_container}>
+                        <p className={filterButtonStyle.join(' ')}>FILTER</p>
+                        <p className={classes.Filter_button} onClick={() => cleanFiltersHandler()}>CLEAR ALL</p>
                     </div>
                 {/* </div> : null} */}
                 </div>

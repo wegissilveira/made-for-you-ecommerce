@@ -1,29 +1,37 @@
-.products-container {
+.Session_container {
+    height: auto;
+    margin-bottom: 80px;
+}
+.Products_container {
+    display: flex;
     width: 75.8%;
     margin-left: 12.1%;
     overflow: hidden;
 }
 
-.products-description {
+.Products_description {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     height: 65px;
     margin-left: 10%;
 }
 
-.products-description p {
+.Products_description p {
     margin: 0;
 }
 
-.bestDeal-passaSlide {
+.BestDeal_passSlide {
     width: 7%;
 }
 
 /* Fazer com que imagem fique quadrada. Baseado na resposta: https://stackoverflow.com/questions/23400232/force-bootstrap-responsive-image-to-be-square/23518465#23518465 */
 
-.image{
+.Deal_image{
     position:relative;
     overflow:hidden;
     padding-bottom:100%;
 }
-.image img{
+.Deal_image img{
     position:absolute;
 }

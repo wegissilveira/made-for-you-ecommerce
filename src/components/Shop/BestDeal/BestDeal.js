@@ -1,6 +1,7 @@
 import React from 'react'
 
-import './BestDeal.css'
+import classes from './BestDeal.module.css'
+
 import ProgressBar from '../../Shared/UI/ProgressBar/ProgressBar'
 
 import { Link } from 'react-router-dom'
@@ -41,9 +42,9 @@ const BestDeal = props => {
 
 
     return (
-        <div className="session-container">
+        <div className={classes.Session_container}>
             <h1 className="text-center mb-5">BEST DEAL</h1>
-            <div className="products-container d-flex mb-5">
+            <div className={`mb-5 ${classes.Products_container}`}>
                 {
                     products.map((product, i) => {
                         // if (i >= imgSlide && i < imgSlide + 4) {
@@ -51,11 +52,11 @@ const BestDeal = props => {
                                 return <div key={i} className="col-3" style={translateSlider}>
                                             <div className="border">
                                                 <Link to={"/shop/product/" + product._id}>
-                                                    <div className="image" >
+                                                    <div className={classes.Deal_Image} >
                                                         <img className="img" src={product.img} alt="img-deal" />
                                                     </div>
                                                 </Link>
-                                                <div className="products-description d-flex flex-column justify-content-center">
+                                                <div className={classes.Products_description}>
                                                     <p>{product.name}</p>
                                                     <p>{product.price}</p>
                                                 </div>
