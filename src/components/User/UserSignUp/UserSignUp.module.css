@@ -1,15 +1,22 @@
-.login-img-container {
+.Session_container {
+    display: flex;
+    justify-content: space-between;
+    height: auto;
+    margin-bottom: 80px;
+}
+
+.SignUp_img_container {
     width: 50%;
     height: 600px;
     background-color: green;
 }
 
-.login-form-container {
+.SignUp_form_container {
     width: 50%;
     height: 600px;
 }
 
-.login-form {
+.SignUp_form {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -21,22 +28,22 @@
 
 }
 
-.login-form > * {
+.SignUp_form > * {
     width: 100%;
 }
 
-.login-form h3 {
+.SignUp_form h3 {
     text-align: center;
 }
 
-.login-form label {
+.SignUp_form label {
     margin-bottom: 0;
     margin-left: 2%;
     
 }
 
-.account-access-btn,
-.login-form  input {
+.Account_access_btn,
+.SignUp_form  input {
     width: 100%;
     height: 35px;
     border: 1px solid grey;
@@ -49,7 +56,7 @@
     -o-border-radius: 15px;
 }
 
-.account-access-btn {
+.Account_access_btn {
     background-color: grey;
     color: white;
     cursor: pointer;
@@ -59,23 +66,23 @@
     text-align: center;
 }
 
-.account-access-btn:hover {
+.Account_access_btn:hover {
     background-color: rgb(100, 100, 100);
 }
 
-.enter-lines {
+.Form_lines {
     width: 100%;
     height: 1px;
     background-color: grey;
 }
 
-.enter-icons-container {
+.Form_icons_container {
     width: 60%;
     display: flex;
     justify-content: space-evenly;
 }
 
-.enter-icons-container > * {
+.Form_icons_container > * {
     width: 45px;
     height: 45px;
     padding: 5px;
@@ -88,11 +95,11 @@
     -o-border-radius: 10px;
 }
 
-.enter-recover-pass {
+.Form_recover_pass {
     text-align: center;
     cursor: pointer;
 }
 
-.enter-recover-pass:hover {
+.Form_recover_pass:hover {
     text-decoration: underline;
 }

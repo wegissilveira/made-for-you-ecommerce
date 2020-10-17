@@ -1,6 +1,6 @@
 import React from 'react'
 
-import './UserSignUp.css'
+import classes from './UserSignUp.module.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'react-router-dom'
@@ -8,12 +8,12 @@ import { Link } from 'react-router-dom'
 const UserSignUp = props => {
 
     return (
-        <div className="session-container d-flex justify-content-between">
-            <div className="login-img-container">
+        <div className={classes.Session_container}>
+            <div className={classes.SignUp_img_container}>
                 {/* <img /> */}
             </div>
-            <div className="login-form-container">
-                <div className="login-form" >
+            <div className={classes.SignUp_form_container}>
+                <div className={classes.SignUp_form} >
                     <h3>Sign up</h3>
                     <div>
                         <label>Email</label>
@@ -27,13 +27,13 @@ const UserSignUp = props => {
                         <label>Repeat Password</label>
                         <input />
                     </div>
-                    <p style={{marginTop: '15px'}} className="account-access-btn">Sign up</p>
+                    <p style={{marginTop: '15px'}} className={classes.Account_access_btn}>Sign up</p>
                     <div className="mt-4 row align-items-center">
-                        <p className="col-4 enter-lines"></p>
+                        <p className={`col-4 ${classes.Form_lines}`}></p>
                         <p className="col-4 text-center">or sign up with</p>
-                        <p className="col-4 enter-lines"></p>
+                        <p className={`col-4 ${classes.Form_lines}`}></p>
                     </div>
-                    <div className="enter-icons-container">
+                    <div className={classes.Form_icons_container}>
                         <div className="border">
                             <FontAwesomeIcon icon={['fab', 'facebook-f']} size="2x" style={{color:"#2d88ff"}} />
                         </div>
@@ -45,7 +45,7 @@ const UserSignUp = props => {
                         to="/user-login/"
                         style={{color: 'grey'}}
                     >
-                        <p className="enter-recover-pass">Already have an account?</p>
+                        <p className={classes.Form_recover_pass}>Already have an account?</p>
                     </Link>
                     
                 </div>

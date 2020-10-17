@@ -1,8 +1,8 @@
 import React, {Component, Fragment} from 'react'
 
-import Footer from '../../components/Footer/Footer'
+import classes from './Layout.module.css'
 
-import './Layout.css'
+import Footer from '../../components/Footer/Footer'
 
 import { NavLink as RRNavLink, NavLink } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
@@ -55,9 +55,13 @@ class Layout extends Component {
         document.removeEventListener('keydown',this.keydownHandler);
     }
 
+    
 
 
     render () {
+
+        const enterAccountClasses = [classes.Account_icons, classes.Enter_account_container]
+
         return (
 
             <Fragment>
@@ -151,7 +155,7 @@ class Layout extends Component {
                         <div className="col-4 d-flex justify-content-between">
                             <p className="mb-0">+375 29 364-74-69</p>
 
-                            <ul className="navbar-nav account-icons">
+                            <ul className={`navbar-nav ${classes.Account_icons}`}>
                                 <li className="nav-item d-flex align-items-center" >
                                     <input onChange={this.searchProductHandler}/>
                                     {
@@ -194,18 +198,18 @@ class Layout extends Component {
                                     </NavLink>
                                 </li>
                             </ul>
-                            {/* <ul className="navbar-nav account-icons account-icons-enter">
+                            {/* <ul className={`navbar-nav ${classes.Enter_account_container}`}>
                                 <li className="nav-item">
                                     <FontAwesomeIcon icon="search" />
                                 </li>
                                 <NavLink
-                                    className="enter-btn"
+                                    className={classes.Enter_account_btn}
                                     to="/user-login/"
                                 >
                                     <p>Login</p>
                                 </NavLink>
                                 <NavLink
-                                    className="enter-btn"
+                                    className={classes.Enter_account_btn}
                                     to="/user-signup/"
                                 >
                                     <p>Sign up</p>

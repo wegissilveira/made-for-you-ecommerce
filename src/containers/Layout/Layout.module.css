@@ -11,30 +11,35 @@ p, h1, h2, h3, h4, h5, h6, label {
     color: #ffc107;
 }
 
-.account-icons {
+.Account_icons {
     width: 60%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.fonts {
+/* .fonts {
     font-family: 'Lemonada', 
     cursive;
-}
+} */
 
-.account-icons-enter {
+.Enter_account_container {
     width: 40%;
     color: grey;
+    /* width: 60%; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.enter-btn {
+.Enter_account_btn {
     width: auto;
     height: 40px;
     border: 3px solid grey;
     color: grey;
     cursor: pointer;
     font-weight: bold;
+
     border-radius: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
@@ -42,12 +47,12 @@ p, h1, h2, h3, h4, h5, h6, label {
     -o-border-radius: 5px;
 }
 
-.enter-btn:hover {
+.Enter_account_btn:hover {
     border: 3px solid #ffc107;
     color: #ffc107;
     text-decoration: none;
 }
 
-.enter-btn p {
+.Enter_account_btn p {
     margin: 5px 10px 5px 10px
 }
