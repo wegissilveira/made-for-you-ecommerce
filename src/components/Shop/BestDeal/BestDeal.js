@@ -52,8 +52,8 @@ const BestDeal = props => {
                                 return <div key={i} className="col-3" style={translateSlider}>
                                             <div className="border">
                                                 <Link to={"/shop/product/" + product._id}>
-                                                    <div className={classes.Deal_Image} >
-                                                        <img className="img" src={product.img} alt="img-deal" />
+                                                    <div className={classes.Deal_image} >
+                                                        <img src={product.img} alt="img-deal" />
                                                     </div>
                                                 </Link>
                                                 <div className={classes.Products_description}>

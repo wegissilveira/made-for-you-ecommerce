@@ -11,7 +11,8 @@ import ProductCardModal from '../../Shop/ProductCardModal/ProductCardModal'
 // Agora que decidi utilizar este componente também no 'Wishlist', talvez o fetch dos produtos não deva ser realizado aqui, já que talvez ficarão salvos em uma tabela distinta e, nesse caso, os dados que 'Products' recebem deve vir de seu parent, já que podem diferir.
 // Vou buscar uma maneira de salvar apenas a marcação de 'favorito' na tabela e referenciar o produto aqui. Escolherei a maneira mais econômica.
 import productsData from '../../../Data/productsData' 
-import wishlist from '../../../Data/wishlistData';
+import wishlist from '../../../Data/wishlistData'; // => LocalStorage
+// import Wishlist from '../../User/Wishlist/Wishlist';
 // import cart from '../../../Data/cartData';
 
 const Products = props => {
@@ -22,10 +23,6 @@ const Products = props => {
     let [productIndex, setProductIndex] = React.useState(null)
 
     let [wishlistState, setWishlist] = React.useState(wishlist)
-    // let [cartState, setCart] = React.useState(cart)
-
-    // console.log(props.tag)
-    // console.log(props.category)
 
     if (count === undefined) {
         setCount(8)
@@ -66,6 +63,8 @@ const Products = props => {
         }
         
         setWishlist(list)
+
+        localStorage.setItem('wishlist', JSON.stringify(list))
     }
 
 

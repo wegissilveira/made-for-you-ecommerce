@@ -58,10 +58,6 @@ class Layout extends Component {
 
 
     render () {
-<<<<<<< HEAD
-
-=======
->>>>>>> parent of 7e34772... Conversão css para modules - finalizado
         return (
 
             <Fragment>
