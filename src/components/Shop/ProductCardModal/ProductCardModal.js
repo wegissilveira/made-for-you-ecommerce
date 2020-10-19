@@ -31,7 +31,11 @@ const ProductCardModal = props => {
         
     let [imgSlide, setImgSlide] = React.useState(0)
     let [productColor, setProductColor] = React.useState('')
-    let [wishlistState, setWishlist] = React.useState(wishlist)
+    let [wishlistState, setWishlist] = React.useState([])
+
+    React.useEffect(() => {
+        setWishlist(props.wishlist)
+    }, [props.wishlist])
 
     let [qtde, setQtde] = React.useState(1) 
 
@@ -43,6 +47,7 @@ const ProductCardModal = props => {
         overflow: 'unset'
     }
 
+    
     const changeSlide = arg => {
 
         if (arg === 'previous') {
@@ -91,8 +96,14 @@ const ProductCardModal = props => {
         }
         
         setWishlist(list)
+
+        localStorage.setItem('wishlist', JSON.stringify(list))
     }
 
+    const showProductHandlerCallback = () => {
+
+        props.setShowProduct(false, )
+    } 
 
 
     
@@ -109,7 +120,8 @@ const ProductCardModal = props => {
             >
 
                 <div className="container-fluid d-flex" style={{paddingRight: '35px'}}>
-                    <p className={classes.Product_card_modal_exit} onClick={() => props.setShowProduct(false)}>
+                    <p className={classes.Product_card_modal_exit} onClick={() => props.setShowProduct(wishlistState)}>
+                    {/* <p className={classes.Product_card_modal_exit} onClick={() => showProductHandlerCallback()}> */}
                         <FontAwesomeIcon icon="times" />
                     </p>
                     <div className="col-6 pl-0 pr-0 mr-4" style={{overflow: 'hidden'}}>

@@ -3,17 +3,34 @@
     margin-left: 12.1%;
 } */
 
-.Wishlist_icon {
+.Wishlist_icon_heart {
     position: absolute;
     right: 0;
     margin-right: 30px;
     margin-top: 10px;
-    color: rgb(253, 91, 91);
+    color: red;
     cursor: pointer;
 }
 
-.Wishlist_icon:hover {
-    color: red;
+.Wishlist_icon_heart:hover {
+    color: rgb(253, 91, 91);
+}
+
+.Wishlist_icon_bag {
+    color: #ccc;
+    cursor: pointer;
+}
+
+.Wishlist_icon_bag:hover {
+    color: rgba(0, 128, 0, 0.39);
+}
+
+.Wishlist_icon_bag_selected {
+    color: green;
+}
+
+.Wishlist_icon_bag_selected:hover {
+    color: rgba(0, 128, 0, 0.616);
 }
 
 .Products_description{

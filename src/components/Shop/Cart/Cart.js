@@ -9,16 +9,25 @@ import { Link } from 'react-router-dom'
 import ProductQtde from '../../Shared/UI/ProductsQtde/ProductsQtde'
 
 import cartData from '../../../Data/cartData'
+import productsData from '../../../Data/productsData'
 
 
 const Cart = props => {
+    // console.log(cartData)
+    let [cartState, setCart] = React.useState(cartData)
 
-    
+    let products = []
+    productsData.map(product => {
+        if (cartState.includes(product._id)) {
+            products.push(product)
+        }
+    })
 
-    const pricesArr = cartData.map(item => parseFloat(item.price))
+    const pricesArr = products.map(item => parseFloat(item.price))
+    // const pricesArr = cartData.map(item => parseFloat(item.price))
 
     // Preencho um array com um índice para cada produto no carrinho utilizando o length do array 'cartData'
-    let [qtde, setQtde] = React.useState(Array(cartData.length).fill(1))
+    let [qtde, setQtde] = React.useState(Array(cartState.length).fill(1))
     const [pricesArrState, setPricesArrState] = React.useState(pricesArr)
     // let [finalPrice, setFinalPrice] = React.useState(0)
     // console.log(pricesArrState)
@@ -30,7 +39,6 @@ const Cart = props => {
         finalPrice = finalPrice + parseFloat(item)
         return finalPrice
     })
-
 
     // Aqui eu atualizo a quantidade de produtos do item que ocupa a posição no array que está sofrendo a alteração.
     // Ou seja, se eu altero a quantidade do produto de índice 2, somente o índice 2 receberá a alteração e somente o preço total deste será alterado, já que o índice é utilizado para realizar o cálculo => qtde[i] * parseInt(product.price)
@@ -69,7 +77,7 @@ const Cart = props => {
                     <p className="col-2">QUANTITY</p>
                     <p>TOTAL</p>
                 </div>
-                {cartData.map((product, i) => {
+                {products.map((product, i) => {
                     return  <div key={i} className={`row mt-3 ${classes.Cart_details}`}>
                                 <div className={`col-4 ${classes.Cart_details_product_container}`}>
                                     
@@ -99,6 +107,8 @@ const Cart = props => {
                                 </div>
                                 
                                 <p className="font-weight-bold">$ {(qtde[i] * parseFloat(product.price)).toFixed(2)}</p>
+                                {/* <p className="font-weight-bold">$ {qtde[i]}</p> */}
+                                {/* <p className="font-weight-bold">$ {(parseFloat(product.price))}</p> */}
                             </div>
                 })
                   

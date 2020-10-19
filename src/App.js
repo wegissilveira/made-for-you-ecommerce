@@ -41,7 +41,8 @@ import {
   faSyncAlt,
   faHeart,
   faPhoneAlt,
-  faEnvelope
+  faEnvelope,
+  faShoppingBag
   // faSortDown
 } from '@fortawesome/free-solid-svg-icons'
 
@@ -77,7 +78,8 @@ library.add(
   faSyncAlt,
   regularFaheart,
   faPhoneAlt,
-  faEnvelope
+  faEnvelope,
+  faShoppingBag
   // faSortDown
 )
 

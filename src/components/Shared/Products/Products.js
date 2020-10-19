@@ -11,8 +11,9 @@ import ProductCardModal from '../../Shop/ProductCardModal/ProductCardModal'
 // Agora que decidi utilizar este componente também no 'Wishlist', talvez o fetch dos produtos não deva ser realizado aqui, já que talvez ficarão salvos em uma tabela distinta e, nesse caso, os dados que 'Products' recebem deve vir de seu parent, já que podem diferir.
 // Vou buscar uma maneira de salvar apenas a marcação de 'favorito' na tabela e referenciar o produto aqui. Escolherei a maneira mais econômica.
 import productsData from '../../../Data/productsData' 
-import wishlist from '../../../Data/wishlistData';
-// import cart from '../../../Data/cartData';
+import wishlistData from '../../../Data/wishlistData';
+import cartData from '../../../Data/cartData';
+
 
 const Products = props => {
 
@@ -21,12 +22,10 @@ const Products = props => {
     let [showProduct, setShowProduct] = React.useState(false)
     let [productIndex, setProductIndex] = React.useState(null)
 
-    let [wishlistState, setWishlist] = React.useState(wishlist)
-    // let [cartState, setCart] = React.useState(cart)
+    let [wishlistState, setWishlist] = React.useState(wishlistData)
+    let [cartState, setCart] = React.useState(cartData)
 
-    // console.log(props.tag)
-    // console.log(props.category)
-
+    
     if (count === undefined) {
         setCount(8)
     }
@@ -54,7 +53,7 @@ const Products = props => {
         tag = 'all'
         category = 'all'
     }
-
+    
     // Update da state wishlist quando o botão é clicado pelo usuário
     const wishlistHandler = id => {
 
@@ -70,6 +69,20 @@ const Products = props => {
         localStorage.setItem('wishlist', JSON.stringify(list))
     }
 
+    // Update da state cart quando o botão é clicado pelo usuário
+    const cartHandler = id => {
+
+        let cartList = [...cartState]
+        if (cartList.includes(id)) {
+            cartList = cartState.filter(item => item !== id)
+        } else {
+            cartList.push(id)
+        }
+        
+        setCart(cartList)
+
+        localStorage.setItem('cartList', JSON.stringify(cartList))
+    }
 
     // O loop para a exibição dos produtos é realizado sobre o array 'products', que possui todos os itens ou somente os produtos com a tag selecionada. 
     // Caso utilizemos diretamente o array completo quando alguma tag estiver selecionada isso fará com que só sejam mostrados os itens que ocupam indexes inferiores ao valor de 'count', 
@@ -77,7 +90,6 @@ const Products = props => {
     // Além disso, antes de entrar nas verificações de tags e categorias é checado se se trata da página de favoritos (wishlist). Caso esse seja o caso é realizado um filter e retornado somente os produtos cujo o id exista na tabela de wishlist.
     let products 
     if (props.wishlist) {
-
         products = productsData.filter(product => wishlistState.includes(product._id))
         
     // } else if (props.cart) {
@@ -133,11 +145,16 @@ const Products = props => {
         }
     }
     
-
     // Abre e fecha o filtro
-    const setCard = i => {
+    const openModalHandler = i => {
         setShowProduct(!showProduct)
         setProductIndex(i)
+    }
+
+    // Fecha o modal e seta a nota lista de favoritos a partir do modal
+    const closeModalCallback = (arg) => {
+        setShowProduct(!showProduct)
+        setWishlist(arg)
     }
 
     if (showProduct === true) {
@@ -146,7 +163,7 @@ const Products = props => {
         document.body.style.overflow = "visible"
     }
     
-
+    
     
     return (
         <Fragment>
@@ -170,13 +187,13 @@ const Products = props => {
                                                                     {   wishlistState.includes(product._id) ?
                                                                             <FontAwesomeIcon 
                                                                                 onClick={() => wishlistHandler(product._id)} 
-                                                                                className={classes.Wishlist_icon} 
+                                                                                className={classes.Wishlist_icon_heart} 
                                                                                 icon={['fas', 'heart']} size="2x" 
                                                                             />
                                                                         :
                                                                             <FontAwesomeIcon 
                                                                                 onClick={() => wishlistHandler(product._id)} 
-                                                                                className={classes.Wishlist_icon} 
+                                                                                className={classes.Wishlist_icon_heart} 
                                                                                 icon={['far', 'heart']} size="2x" 
                                                                             />
                                                                     }
@@ -195,8 +212,23 @@ const Products = props => {
                                                                             <p>$ {product.price}</p>
                                                                         </div>
                                                                         <div className={classes.Products_description_icons}>
-                                                                            <FontAwesomeIcon onClick={() => setCard(i)} icon="eye" />
-                                                                            <FontAwesomeIcon icon="suitcase" size="2x" />
+                                                                            {/* <FontAwesomeIcon onClick={() => setCard(i)} icon="eye" /> */}
+                                                                            <FontAwesomeIcon onClick={() => openModalHandler(i)} icon="eye" />
+                                                                            
+                                                                            {
+                                                                                cartState.includes(product._id) ?
+                                                                                    <FontAwesomeIcon 
+                                                                                        onClick={() => cartHandler(product._id)}
+                                                                                        className={classes.Wishlist_icon_bag_selected} 
+                                                                                        icon="shopping-bag" size="2x"
+                                                                                    />
+                                                                                :
+                                                                                    <FontAwesomeIcon 
+                                                                                        onClick={() => cartHandler(product._id)}
+                                                                                        className={classes.Wishlist_icon_bag} 
+                                                                                        icon="shopping-bag" size="2x" 
+                                                                                    />
+                                                                            }
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -205,8 +237,10 @@ const Products = props => {
                                                             { productIndex === i ? 
                                                                 <ProductCardModal 
                                                                     showProduct={showProduct}
-                                                                    setShowProduct={setShowProduct}
+                                                                    // setShowProduct={setShowProduct}
+                                                                    setShowProduct={wishlistStateCB => closeModalCallback(wishlistStateCB)}
                                                                     product={product} 
+                                                                    wishlist={wishlistState}
                                                                     imgs={product.imgsDemo} 
                                                                     name={product.name}
                                                                 /> 
