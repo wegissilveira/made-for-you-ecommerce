@@ -1,5 +1,7 @@
 import React from 'react'
 
+import './Wishlist.css'
+
 import Products from '../../Shared/Products/Products'
 
 import wishlist from '../../../Data/wishlistData'
