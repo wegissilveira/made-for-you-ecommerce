@@ -60,8 +60,6 @@ class Layout extends Component {
 
     render () {
 
-        const enterAccountClasses = [classes.Account_icons, classes.Enter_account_container]
-
         return (
 
             <Fragment>
