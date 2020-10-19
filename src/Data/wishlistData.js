@@ -1,3 +1,8 @@
-const wishlist = ['1', '5', '14', '9', '4']
+let wishlist = []
+const wishlistStorage = JSON.parse(localStorage.getItem('wishlist'))
+
+if (wishlistStorage !== null) {
+    wishlist = wishlistStorage
+} 
 
 export default wishlist

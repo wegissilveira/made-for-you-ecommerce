@@ -66,6 +66,8 @@ const Products = props => {
         }
         
         setWishlist(list)
+
+        localStorage.setItem('wishlist', JSON.stringify(list))
     }
 
 
