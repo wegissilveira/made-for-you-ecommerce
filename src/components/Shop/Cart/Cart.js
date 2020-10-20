@@ -13,19 +13,40 @@ import productsData from '../../../Data/productsData'
 
 
 const Cart = props => {
+
+    let productsCart = JSON.parse(localStorage.getItem('teste'))
     
-    let [cartState, setCart] = React.useState(cartData)
+    let [cartState, setCart] = React.useState(productsCart)
 
     let products = []
     productsData.map(product => {
 
-        if (cartState.includes(product._id)) {
-            products.push(product)
-        }
+        cartState.map(item => {
+            if (item._id === product._id) {
+                products.push(product)
+            }
+        })
+        
     })
 
+
     // Preencho um array com um índice para cada produto no carrinho utilizando o length do array 'cartData'
-    let [qtde, setQtde] = React.useState(Array(cartState.length).fill(1))
+    let [qtde, setQtde] = React.useState([])
+    // Antes da possibilidade de salvar quantidade no carrinho 'qtde' era populada com o array abaixo. 
+    // 'qtde' recebia o número de índices de 'cartState' e todas as posições recebiam o valor 1
+    // Agora simplesmente utilizo o useEffect para inserir valores customizados
+    // let [qtde, setQtde] = React.useState(Array(cartState.length).fill(1))
+
+    React.useEffect(() => {
+        let arrQtde = [...qtde]
+        cartState.map((item, index) => {
+            arrQtde[index] = item.qtde
+        })
+
+        setQtde(arrQtde)
+    }, [])
+    
+
     const [pricesArrState, setPricesArrState] = React.useState([])
 
     let [update, setUpdate] = React.useState(0) 
@@ -59,8 +80,8 @@ const Cart = props => {
     }
 
     const removeProductCartHandler = id => {
-
-        let cartList = cartState.filter(item => item !== id)
+        
+        let cartList = cartState.filter(item => item._id !== id)
 
         setCart(cartList)
         setUpdate(++update)
@@ -108,8 +129,8 @@ const Cart = props => {
                                                 <p>Color</p>
                                             </div>
                                             <div className="ml-3">
-                                                <p className="mb-2">100 x 100</p>
-                                                <p>Pink</p>
+                                                <p className="mb-2">{cartState[i].size}</p>
+                                                <p>{cartState[i].color}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -117,7 +138,10 @@ const Cart = props => {
                                 <p className="text-center font-weight-bold col-2">0%</p>
                                 <p className="text-center font-weight-bold col-2">$ {product.price}</p>
                                 <div className="d-flex justify-content-center col-2">
-                                    <ProductQtde changeQtdeCallBack={qtde => setQtdeHandler(qtde, i)} />
+                                    <ProductQtde 
+                                        startQtde={cartState[i].qtde}
+                                        changeQtdeCallBack={qtde => setQtdeHandler(qtde, i)} 
+                                    />
                                 </div>
 
                                 <p className="text-center font-weight-bold col-2">$ {(qtde[i] * parseFloat(product.price)).toFixed(2)}</p>

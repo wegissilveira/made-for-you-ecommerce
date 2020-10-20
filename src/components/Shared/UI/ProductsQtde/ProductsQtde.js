@@ -9,6 +9,12 @@ const ProductsQtde = props => {
     let [productQtde, setProductQtde] = React.useState(1) // => Quantidade atual
     let [productQtdeMax, setProductQtdeMax] = React.useState(props.max) // => Quantidade máxima
 
+    React.useEffect(() => {
+        if (props.startQtde !== undefined) {
+            setProductQtde(props.startQtde)
+        }
+    }, [])
+
 
     const changeQtde = arg => {
         if (arg === "increase") {

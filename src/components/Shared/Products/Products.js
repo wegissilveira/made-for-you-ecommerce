@@ -23,8 +23,28 @@ const Products = props => {
     let [productIndex, setProductIndex] = React.useState(null)
 
     let [wishlistState, setWishlist] = React.useState(wishlistData)
+    
     let [cartState, setCart] = React.useState(cartData)
+    let [prodExistsCart, setProdExistsCart] = React.useState([])
 
+    React.useEffect(() => {
+        let productCartArr = [...cartState]
+
+        let productsCartIDs = []
+        productCartArr.map(item => {
+            productsData.map(product => {
+                if (item._id === product._id) {
+                    productsCartIDs.push(item._id)
+                }
+            })
+            
+        })
+
+        setProdExistsCart(productsCartIDs)
+
+    }, [])
+
+    // console.log(cartState)
     
     if (count === undefined) {
         setCount(8)
@@ -70,16 +90,34 @@ const Products = props => {
     }
 
     // Update da state cart quando o botão é clicado pelo usuário
-    const cartHandler = id => {
+    const cartHandler = product => {
 
         let cartList = [...cartState]
-        if (cartList.includes(id)) {
-            cartList = cartState.filter(item => item !== id)
+        let productsCartIDs = [...prodExistsCart]
+
+        let count = 0
+        cartList.map(item => {
+            if (item._id === product._id) count++
+        })
+        
+        if (count === 0) {
+            let productCart = {}
+
+            productCart._id = product._id
+            productCart.qtde = 1
+            productCart.color = product.colors[0]
+            productCart.size = '100x100'
+    
+            cartList.push(productCart)
+            productsCartIDs.push(product._id)
+
         } else {
-            cartList.push(id)
-        }
+            cartList = cartList.filter(item => item._id !== product._id)
+            productsCartIDs = productsCartIDs.filter(item => item !== product._id)
+        }      
         
         setCart(cartList)
+        setProdExistsCart(productsCartIDs)
 
         localStorage.setItem('cartList', JSON.stringify(cartList))
     }
@@ -91,10 +129,6 @@ const Products = props => {
     let products 
     if (props.wishlist) {
         products = productsData.filter(product => wishlistState.includes(product._id))
-        
-    // } else if (props.cart) {
-
-    //     products = productsData.filter(product => cartState.includes(product._id))
 
     } else {
 
@@ -216,15 +250,15 @@ const Products = props => {
                                                                             <FontAwesomeIcon onClick={() => openModalHandler(i)} icon="eye" />
                                                                             
                                                                             {
-                                                                                cartState.includes(product._id) ?
+                                                                                prodExistsCart.includes(product._id) ?
                                                                                     <FontAwesomeIcon 
-                                                                                        onClick={() => cartHandler(product._id)}
+                                                                                        onClick={() => cartHandler(product)}
                                                                                         className={classes.Wishlist_icon_bag_selected} 
                                                                                         icon="shopping-bag" size="2x"
                                                                                     />
                                                                                 :
                                                                                     <FontAwesomeIcon 
-                                                                                        onClick={() => cartHandler(product._id)}
+                                                                                        onClick={() => cartHandler(product)}
                                                                                         className={classes.Wishlist_icon_bag} 
                                                                                         icon="shopping-bag" size="2x" 
                                                                                     />
@@ -241,6 +275,7 @@ const Products = props => {
                                                                     setShowProduct={wishlistStateCB => closeModalCallback(wishlistStateCB)}
                                                                     product={product} 
                                                                     wishlist={wishlistState}
+                                                                    cartList={cartState}
                                                                     imgs={product.imgsDemo} 
                                                                     name={product.name}
                                                                 /> 

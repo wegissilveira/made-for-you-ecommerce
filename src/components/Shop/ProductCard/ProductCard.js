@@ -5,22 +5,42 @@ import classes from './ProductCard.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import productsData from '../../../Data/productsData'
+import cartData from '../../../Data/cartData.js'
+
 import ProductsQtde from '../../Shared/UI/ProductsQtde/ProductsQtde'
 import ColorSelect from '../../Shared/UI/ColorSelect/ColorSelect'
 import wishlist from '../../../Data/wishlistData'
   
 
 const ProductCard = props => {
+
+    // const productCartStorage = JSON.parse(localStorage.getItem('teste'))
+
+    const product = productsData.find(product => product._id === props.match.params.id)
+
+    let [cartState, setCart] = React.useState(cartData)
+
+    let [prodExists, setProdExists] = React.useState(0)
+
+    // Controla a state 'prodExists' para definir qual botão será mostrado, o de adicionar item ou o de remover. 
+    // Caso 'prodExists' sejam mantido 0 significa que o item não existe na sacola, então será mostrado o botão de adicionar.
+    React.useEffect(() => {
+        let productCartArr = [...cartState]
+
+        productCartArr.map(item => {
+            if (item._id === product._id) setProdExists(++prodExists)
+        })
+
+    }, [])
     
     let [imgSlide, setImgSlide] = React.useState(0)
     let [productColor, setProductColor] = React.useState('') // => Armazena cor selecionada do produto
     let [wishlistState, setWishlist] = React.useState(wishlist)
 
     let [qtde, setQtde] = React.useState(1)
+    let [size, setSize] = React.useState('100x100')
 
     let [translateValue, setTranslateValue] = React.useState(0)
-
-    const product = productsData.find(product => product._id === props.match.params.id)
 
     const translateSlider = {
         transform: `translateX(${translateValue}%)`,
@@ -78,7 +98,41 @@ const ProductCard = props => {
 
         localStorage.setItem('wishlist', JSON.stringify(list))
     }
+    
+   
+    const productCartHandler = () => {
+        
+        let productCartArr = [...cartState]
+        // let productCartArr = []
 
+        let count = 0
+        productCartArr.map(item => {
+            if (item._id === product._id) count++
+        })
+
+        if (count === 0) {
+            let productCart = {}
+
+            productCart._id = product._id
+            productCart.qtde = qtde
+            productCart.color = productColor
+            productCart.size = size
+    
+            productCartArr.push(productCart)
+            setProdExists(1)
+
+        } else {
+            productCartArr = productCartArr.filter(item => item._id !== product._id)
+            setProdExists(0)
+        }
+
+        setCart(productCartArr)
+
+        localStorage.setItem('cartList', JSON.stringify(productCartArr))
+    }
+
+   
+    
 
 
 
@@ -135,10 +189,13 @@ const ProductCard = props => {
                         <div className={`mt-4 ${classes.Product_details_container}`}>
                             <div>
                                 <p>Size</p>
-                                <select className={`mt-2 border-bottom ${classes.Product_details_select}`}>
-                                    <option>100x100 cm</option>
-                                    <option>200x200 cm</option>
-                                    <option>300x300 cm</option>
+                                <select 
+                                    onChange={e => setSize(e.target.value)}
+                                    className={`mt-2 border-bottom ${classes.Product_details_select}`}
+                                >
+                                    <option value="100x100">100x100 cm</option>
+                                    <option value="200x200">200x200 cm</option>
+                                    <option value="300x300">300x300 cm</option>
                                 </select>
                             </div>
                             <div>
@@ -154,7 +211,21 @@ const ProductCard = props => {
                                 changeQtdeCallBack={qtde => setQtdeHandler(qtde)}  
                                 max={8}
                             />
-                            <button type="button" className="btn btn-dark">ADD TO BAG</button>   
+                            { prodExists === 0 ?
+                                    <button 
+                                        onClick={() => productCartHandler()}
+                                        type="button"  
+                                        className="btn btn-success"
+                                    > ADD TO BAG
+                                    </button>  
+                                : 
+                                    <button 
+                                        onClick={() => productCartHandler()}
+                                        type="button"  
+                                        className="btn btn-danger"
+                                        > REMOVE FROM BAG
+                                    </button>   
+                            }
                             {   wishlistState.includes(product._id) ?
                                     <FontAwesomeIcon 
                                         onClick={() => wishlistHandler(product._id)} 

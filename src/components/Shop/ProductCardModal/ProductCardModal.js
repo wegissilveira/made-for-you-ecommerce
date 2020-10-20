@@ -11,6 +11,8 @@ import ProgressBar from '../../Shared/UI/ProgressBar/ProgressBar'
 import ColorSelect from '../../Shared/UI/ColorSelect/ColorSelect';
 import wishlist from '../../../Data/wishlistData'
 
+import cartData from '../../../Data/cartData'
+
 
 const customStyles = {
     content : {
@@ -31,6 +33,29 @@ const ProductCardModal = props => {
         
     let [imgSlide, setImgSlide] = React.useState(0)
     let [productColor, setProductColor] = React.useState('')
+
+    let [cartState, setCart] = React.useState(cartData)
+    
+    // React.useEffect(() => {
+    //     setCart(props.cartList)
+    // }, [props.cartList])
+
+
+    let [prodExists, setProdExists] = React.useState(0)
+    
+    // console.log(cartState)
+    // console.log(prodExists)
+
+    React.useEffect(() => {
+        let productCartArr = [...cartState]
+        console.log(productCartArr)
+        productCartArr.map(item => {
+            if (item._id === props.product._id) setProdExists(++prodExists)
+        })
+
+    }, [])
+
+
     let [wishlistState, setWishlist] = React.useState([])
 
     React.useEffect(() => {
@@ -38,6 +63,7 @@ const ProductCardModal = props => {
     }, [props.wishlist])
 
     let [qtde, setQtde] = React.useState(1) 
+    let [size, setSize] = React.useState('100x100') 
 
     let [translateValue, setTranslateValue] = React.useState(0)
 
@@ -99,6 +125,36 @@ const ProductCardModal = props => {
 
         localStorage.setItem('wishlist', JSON.stringify(list))
     }
+       
+    const addProductToBagHandler = () => {
+        
+        let productCartArr = [...cartState]
+
+        let count = 0
+        productCartArr.map(item => {
+            if (item._id === props.product._id) count++
+        })
+
+        if (count === 0) {
+            let productCart = {}
+
+            productCart._id = props.product._id
+            productCart.qtde = qtde
+            productCart.color = productColor
+            productCart.size = size
+    
+            productCartArr.push(productCart)
+            setProdExists(1)
+
+        } else {
+            productCartArr = productCartArr.filter(item => item._id !== props.product._id)
+            setProdExists(0)
+        }
+
+        setCart(productCartArr)
+
+        localStorage.setItem('cartList', JSON.stringify(productCartArr))
+    }
 
 
 
@@ -108,7 +164,7 @@ const ProductCardModal = props => {
         <Fragment>
             <Modal
                 isOpen={props.showProduct}
-                onRequestClose={() => props.setShowProduct(false)}
+                onRequestClose={() => props.setShowProduct(wishlistState)}
                 style={customStyles}
                 contentLabel="Product Card"
                 ariaHideApp={false}
@@ -153,10 +209,13 @@ const ProductCardModal = props => {
                         <div className={`row mt-4 ${classes.Product_details_container_modal}`}>
                             <div className="col-6">
                                 <p>Size</p>
-                                <select className={`mt-2 border-bottom ${classes.Product_details_select}`}>
-                                    <option>100x100 cm</option>
-                                    <option>200x200 cm</option>
-                                    <option>300x300 cm</option>
+                                <select 
+                                    onChange={e => setSize(e.target.value)}
+                                    className={`mt-2 border-bottom ${classes.Product_details_select}`}
+                                >
+                                    <option value="100x100">100x100 cm</option>
+                                    <option value="200x200">200x200 cm</option>
+                                    <option value="300x300">300x300 cm</option>
                                 </select>
                             </div>
                             <div className="col-6">
@@ -169,7 +228,21 @@ const ProductCardModal = props => {
                         </div>
                         <div className={`mt-4 ${classes.Product_qtde_container_modal}`}>
                             <ProductsQtde changeQtdeCallBack={qtde => setQtdeHandler(qtde)} />
-                            <button type="button" className="btn btn-dark">ADD TO BAG</button>   
+                            { prodExists === 0 ?
+                                    <button 
+                                        onClick={() => addProductToBagHandler()}
+                                        type="button" 
+                                        className="btn btn-success"
+                                    > ADD TO BAG
+                                    </button>   
+                                :
+                                    <button 
+                                        onClick={() => addProductToBagHandler()}
+                                        type="button" 
+                                        className="btn btn-danger"
+                                    > REMOVE FROM BAG
+                                    </button>
+                            }   
                             {   wishlistState.includes(props.product._id) ?
                                     <FontAwesomeIcon 
                                         onClick={() => wishlistHandler(props.product._id)} 
