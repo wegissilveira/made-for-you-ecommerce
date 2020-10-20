@@ -13,29 +13,31 @@ import productsData from '../../../Data/productsData'
 
 
 const Cart = props => {
-    // console.log(cartData)
+    
     let [cartState, setCart] = React.useState(cartData)
 
     let products = []
     productsData.map(product => {
+
         if (cartState.includes(product._id)) {
             products.push(product)
         }
     })
 
-    const pricesArr = products.map(item => parseFloat(item.price))
-    // const pricesArr = cartData.map(item => parseFloat(item.price))
-
     // Preencho um array com um índice para cada produto no carrinho utilizando o length do array 'cartData'
     let [qtde, setQtde] = React.useState(Array(cartState.length).fill(1))
-    const [pricesArrState, setPricesArrState] = React.useState(pricesArr)
-    // let [finalPrice, setFinalPrice] = React.useState(0)
-    // console.log(pricesArrState)
+    const [pricesArrState, setPricesArrState] = React.useState([])
+
+    let [update, setUpdate] = React.useState(0) 
+
+    const pricesArr = products.map(item => parseFloat(item.price))
+    React.useEffect(() => {
+        setPricesArrState(pricesArr)
+    }, [update])
 
     let finalPrice = 0
     pricesArrState.map(item => {
-        
-        // setFinalPrice(finalPrice + parseFloat(item))
+
         finalPrice = finalPrice + parseFloat(item)
         return finalPrice
     })
@@ -51,11 +53,22 @@ const Cart = props => {
         let newPrice = (arrPrices[index] / arrQtde[index]) * value
         arrPrices[index] = newPrice
         arrQtde[index] = value
-        
+
         setPricesArrState(arrPrices)
         setQtde(arrQtde)
     }
-    
+
+    const removeProductCartHandler = id => {
+
+        let cartList = cartState.filter(item => item !== id)
+
+        setCart(cartList)
+        setUpdate(++update)
+
+        localStorage.setItem('cartList', JSON.stringify(cartList))
+    }
+
+
 
 
     return (
@@ -63,24 +76,25 @@ const Cart = props => {
             <h1 className="text-center mb-5 mt-5">CART</h1>
             <div className={classes.Cart_details_container}>
                 <div className="
-                        d-flex 
-                        justify-content-between 
-                        row 
-                        order-bottom 
-                        text-secondary 
+                        d-flex
+                        justify-content-between
+                        row
+                        order-bottom
+                        text-secondary
                         font-weight-bold
                     "
                 >
-                    <p className="col-4">PRODUCT</p>
-                    <p className="col-2">DISCOUNT</p>
-                    <p className="col-2">PRICE</p>
-                    <p className="col-2">QUANTITY</p>
-                    <p>TOTAL</p>
+                    <p className="col-3">PRODUCT</p>
+                    <p className="text-center col-2">DISCOUNT</p>
+                    <p className="text-center col-2">PRICE</p>
+                    <p className="text-center col-2">QUANTITY</p>
+                    <p className="text-center col-2">TOTAL</p>
+                    <p className="col-1"></p>
                 </div>
                 {products.map((product, i) => {
                     return  <div key={i} className={`row mt-3 ${classes.Cart_details}`}>
-                                <div className={`col-4 ${classes.Cart_details_product_container}`}>
-                                    
+                                <div className={`col-3 ${classes.Cart_details_product_container}`}>
+
                                     <div className={classes.Cart_details_product_image_container}>
                                         <img className={classes.Cart_details_product_image} src={product.imgsDemo[0]} alt='img' />
                                     </div>
@@ -100,23 +114,28 @@ const Cart = props => {
                                         </div>
                                     </div>
                                 </div>
-                                <p className="font-weight-bold col-2">0%</p>
-                                <p className="font-weight-bold col-2">$ {product.price}</p>
-                                <div className="col-2">
+                                <p className="text-center font-weight-bold col-2">0%</p>
+                                <p className="text-center font-weight-bold col-2">$ {product.price}</p>
+                                <div className="d-flex justify-content-center col-2">
                                     <ProductQtde changeQtdeCallBack={qtde => setQtdeHandler(qtde, i)} />
                                 </div>
-                                
-                                <p className="font-weight-bold">$ {(qtde[i] * parseFloat(product.price)).toFixed(2)}</p>
-                                {/* <p className="font-weight-bold">$ {qtde[i]}</p> */}
-                                {/* <p className="font-weight-bold">$ {(parseFloat(product.price))}</p> */}
+
+                                <p className="text-center font-weight-bold col-2">$ {(qtde[i] * parseFloat(product.price)).toFixed(2)}</p>
+                                <p className="font-weight-bold col-1">
+                                    <FontAwesomeIcon
+                                        onClick={() => removeProductCartHandler(product._id)}
+                                        className={classes.Cart_delete_icon}
+                                        icon="times"
+                                    />
+                                </p>
                             </div>
                 })
-                  
+
                 }
                 <div className="
-                        d-flex 
-                        justify-content-between 
-                        mt-5 
+                        d-flex
+                        justify-content-between
+                        mt-5
                         border-bottom
                     "
                 >
@@ -143,7 +162,7 @@ const Cart = props => {
                         <select
                             className="
                                 select-cart
-                                border-left-0 
+                                border-left-0
                                 border-right-0
                                 border-top-0
                                 border-bottom"

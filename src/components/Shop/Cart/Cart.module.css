@@ -56,6 +56,26 @@ a:hover {
     font-size: 12px;
 }
 
+.Cart_delete_icon {
+    color: rgba(255, 0, 0, 0.705);
+    cursor: pointer;
+}
+
+.Cart_delete_icon:hover {
+    color: red;
+    transform: scale(1.5, 1.5);
+    -webkit-transform: scale(1.5, 1.5);
+    -moz-transform: scale(1.5, 1.5);
+    -ms-transform: scale(1.5, 1.5);
+    -o-transform: scale(1.5, 1.5);
+    
+    transition: transform 0.2s ease-in-out;
+    -webkit-transition: transform 0.2s ease-in-out;
+    -moz-transition: transform 0.2s ease-in-out;
+    -ms-transition: transform 0.2s ease-in-out;
+    -o-transition: transform 0.2s ease-in-out;
+}
+
 .Cart_light_button,
 .Cart_dark_button {
     display: flex;

@@ -100,10 +100,6 @@ const ProductCardModal = props => {
         localStorage.setItem('wishlist', JSON.stringify(list))
     }
 
-    const showProductHandlerCallback = () => {
-
-        props.setShowProduct(false, )
-    } 
 
 
     
