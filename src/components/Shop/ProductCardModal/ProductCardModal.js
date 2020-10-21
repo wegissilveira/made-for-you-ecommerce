@@ -9,9 +9,9 @@ import Modal from 'react-modal';
 import ProductsQtde from '../../Shared/UI/ProductsQtde/ProductsQtde'
 import ProgressBar from '../../Shared/UI/ProgressBar/ProgressBar'
 import ColorSelect from '../../Shared/UI/ColorSelect/ColorSelect';
-import wishlist from '../../../Data/wishlistData'
 
-import cartData from '../../../Data/cartData'
+// import wishlist from '../../../Data/wishlistData'
+// import cartData from '../../../Data/cartData'
 
 
 const customStyles = {
@@ -34,33 +34,30 @@ const ProductCardModal = props => {
     let [imgSlide, setImgSlide] = React.useState(0)
     let [productColor, setProductColor] = React.useState('')
 
-    let [cartState, setCart] = React.useState(cartData)
-    
-    // React.useEffect(() => {
-    //     setCart(props.cartList)
-    // }, [props.cartList])
-
-
+    let [cartState, setCart] = React.useState([])
     let [prodExists, setProdExists] = React.useState(0)
-    
-    // console.log(cartState)
-    // console.log(prodExists)
 
     React.useEffect(() => {
-        let productCartArr = [...cartState]
-        console.log(productCartArr)
+        setCart(props.cartList)
+        let productCartArr = [...props.cartList]
+        
+        let count = 0
         productCartArr.map(item => {
-            if (item._id === props.product._id) setProdExists(++prodExists)
+            if (item._id === props.product._id) count++
         })
 
-    }, [])
+        setProdExists(count)
 
+    }, [props.cartList])
+
+    // console.log(prodExists)
 
     let [wishlistState, setWishlist] = React.useState([])
 
     React.useEffect(() => {
         setWishlist(props.wishlist)
     }, [props.wishlist])
+
 
     let [qtde, setQtde] = React.useState(1) 
     let [size, setSize] = React.useState('100x100') 
@@ -164,7 +161,7 @@ const ProductCardModal = props => {
         <Fragment>
             <Modal
                 isOpen={props.showProduct}
-                onRequestClose={() => props.setShowProduct(wishlistState)}
+                onRequestClose={() => props.setShowProduct([wishlistState, cartState])}
                 style={customStyles}
                 contentLabel="Product Card"
                 ariaHideApp={false}
@@ -172,7 +169,7 @@ const ProductCardModal = props => {
             >
 
                 <div className="container-fluid d-flex" style={{paddingRight: '35px'}}>
-                    <p className={classes.Product_card_modal_exit} onClick={() => props.setShowProduct(wishlistState)}>
+                    <p className={classes.Product_card_modal_exit} onClick={() => props.setShowProduct([wishlistState, cartState])}>
                     {/* <p className={classes.Product_card_modal_exit} onClick={() => showProductHandlerCallback()}> */}
                         <FontAwesomeIcon icon="times" />
                     </p>

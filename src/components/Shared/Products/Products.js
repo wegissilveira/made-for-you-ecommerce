@@ -42,9 +42,8 @@ const Products = props => {
 
         setProdExistsCart(productsCartIDs)
 
-    }, [])
+    }, [cartState])
 
-    // console.log(cartState)
     
     if (count === undefined) {
         setCount(8)
@@ -188,7 +187,9 @@ const Products = props => {
     // Fecha o modal e seta a nota lista de favoritos a partir do modal
     const closeModalCallback = (arg) => {
         setShowProduct(!showProduct)
-        setWishlist(arg)
+        setWishlist(arg[0])
+        setCart(arg[1])
+
     }
 
     if (showProduct === true) {
@@ -246,8 +247,7 @@ const Products = props => {
                                                                             <p>$ {product.price}</p>
                                                                         </div>
                                                                         <div className={classes.Products_description_icons}>
-                                                                            {/* <FontAwesomeIcon onClick={() => setCard(i)} icon="eye" /> */}
-                                                                            <FontAwesomeIcon onClick={() => openModalHandler(i)} icon="eye" />
+                                                                            <FontAwesomeIcon onClick={() => openModalHandler(i)} icon="eye" color="grey" />
                                                                             
                                                                             {
                                                                                 prodExistsCart.includes(product._id) ?

@@ -14,8 +14,6 @@ import wishlist from '../../../Data/wishlistData'
 
 const ProductCard = props => {
 
-    // const productCartStorage = JSON.parse(localStorage.getItem('teste'))
-
     const product = productsData.find(product => product._id === props.match.params.id)
 
     let [cartState, setCart] = React.useState(cartData)
