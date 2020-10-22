@@ -43,6 +43,12 @@
 .Product_details_select {
     border: 0;
     width: 100%;
+    color: grey;
+    cursor: pointer;
+}
+
+.Product_details_select:focus {
+    outline: none;
 }
 
 .Product_qtde_container_modal {

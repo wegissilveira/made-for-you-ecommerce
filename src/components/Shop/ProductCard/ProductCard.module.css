@@ -63,6 +63,8 @@ input {
 .Product_details_select {
     border: 0;
     width: 100%;
+    color: grey;
+    cursor: pointer;
 }
 
 .Product_details_select:focus {

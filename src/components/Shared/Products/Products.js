@@ -11,8 +11,8 @@ import ProductCardModal from '../../Shop/ProductCardModal/ProductCardModal'
 // Agora que decidi utilizar este componente também no 'Wishlist', talvez o fetch dos produtos não deva ser realizado aqui, já que talvez ficarão salvos em uma tabela distinta e, nesse caso, os dados que 'Products' recebem deve vir de seu parent, já que podem diferir.
 // Vou buscar uma maneira de salvar apenas a marcação de 'favorito' na tabela e referenciar o produto aqui. Escolherei a maneira mais econômica.
 import productsData from '../../../Data/productsData' 
-import wishlistData from '../../../Data/wishlistData';
-import cartData from '../../../Data/cartData';
+import wishlistDataFn from '../../../Data/wishlistData';
+import cartDataFn from '../../../Data/cartData';
 
 
 const Products = props => {
@@ -22,11 +22,11 @@ const Products = props => {
     let [showProduct, setShowProduct] = React.useState(false)
     let [productIndex, setProductIndex] = React.useState(null)
 
-    let [wishlistState, setWishlist] = React.useState(wishlistData)
+    let [wishlistState, setWishlist] = React.useState(wishlistDataFn)
     
-    let [cartState, setCart] = React.useState(cartData)
+    let [cartState, setCart] = React.useState(cartDataFn)
     let [prodExistsCart, setProdExistsCart] = React.useState([])
-
+    
     React.useEffect(() => {
         let productCartArr = [...cartState]
 
@@ -247,7 +247,11 @@ const Products = props => {
                                                                             <p>$ {product.price}</p>
                                                                         </div>
                                                                         <div className={classes.Products_description_icons}>
-                                                                            <FontAwesomeIcon onClick={() => openModalHandler(i)} icon="eye" color="grey" />
+                                                                            <FontAwesomeIcon 
+                                                                                onClick={() => openModalHandler(i)} 
+                                                                                icon="eye" 
+                                                                                className={classes.Products_description_eye} 
+                                                                            />
                                                                             
                                                                             {
                                                                                 prodExistsCart.includes(product._id) ?

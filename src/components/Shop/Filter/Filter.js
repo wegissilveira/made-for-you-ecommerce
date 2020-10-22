@@ -264,7 +264,11 @@ const Filter = props => {
                         {/* Decidir se esta parte ficará realmente aqui, já que depende do 'length' de 'products' que foi retornado pelo filtro. Também pensar se é necessário, talvez eu simplesmente insira o total de produtos retornados */}
                         <p>Showing 1 - 9 of 19 (ILUSTRATIVO)</p>
                         <p>Sort by</p>
-                        <select onChange={e => setOrder(e.target.value)} ref={selectRef}>
+                        <select 
+                            onChange={e => setOrder(e.target.value)} 
+                            ref={selectRef}
+                            className={`border-bottom ${classes.Filter_sort_select}`}
+                        >
                             <option value="default">Default Sorting</option>
                             <option value="low-high">Price: Low to High</option>
                             <option value="high-low">Price: High to Low</option>

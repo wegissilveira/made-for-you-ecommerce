@@ -68,6 +68,14 @@
     margin: 0;
 }
 
+.Products_description_eye {
+    color: grey;
+}
+
+.Products_description_eye:hover {
+    color: rgb(0, 153, 255);
+}
+
 .Products_show_container {
     display: flex;
     justify-content: space-between;

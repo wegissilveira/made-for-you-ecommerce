@@ -3,21 +3,26 @@ import React, {Component, Fragment} from 'react'
 import classes from './Layout.module.css'
 
 import Footer from '../../components/Footer/Footer'
+import cartDataFn from '../../Data/cartData'
+import wishlistDataFn from '../../Data/wishlistData'
 
 import { NavLink as RRNavLink, NavLink } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import GoogleFontLoader from 'react-google-font-loader'
 
+
 class Layout extends Component {
     
     state = {
         searchProduct: false,
-        input: ''
+        input: '',
+        cartState: cartDataFn(),
+        wishlistState: wishlistDataFn()
     }
 
 
-
+    
     // Executa a busca com o click na lupa
     // O botão de busca só é habilitado em caso do input receber ao menos 3 caracteres
     searchProductHandler = e => {
@@ -48,11 +53,11 @@ class Layout extends Component {
     }
 
     componentDidMount(){
-        document.addEventListener('keydown',this.keydownHandler);
+        document.addEventListener('keydown',this.keydownHandler)
     }
 
     componentWillUnmount(){
-        document.removeEventListener('keydown',this.keydownHandler);
+        document.removeEventListener('keydown',this.keydownHandler)
     }
 
     
@@ -187,14 +192,22 @@ class Layout extends Component {
                                     <NavLink
                                         to="/wishlist/"
                                     >
-                                        <FontAwesomeIcon icon={['far', 'heart']} color="grey" />
+                                        {   this.state.wishlistState.length > 0 ?
+                                                <FontAwesomeIcon icon={['far', 'heart']} color="red" />
+                                            :
+                                                <FontAwesomeIcon icon={['far', 'heart']} color="grey" />
+                                        }
                                     </NavLink>
                                 </li>
                                 <li className="nav-item">
                                     <NavLink
                                         to="/cart/"
                                     >
-                                        <FontAwesomeIcon icon='suitcase' color="grey" />
+                                        {   this.state.cartState.length > 0 ?
+                                                <FontAwesomeIcon icon='shopping-bag' color="green" />
+                                            :
+                                                <FontAwesomeIcon icon='shopping-bag' color="grey" />
+                                        }
                                     </NavLink>
                                 </li>
                             </ul>

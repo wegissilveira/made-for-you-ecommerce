@@ -27,6 +27,16 @@
     margin: 0;
 }
 
+.Filter_sort_select {
+    border: 0;
+    color: grey;
+    cursor: pointer;
+}
+
+.Filter_sort_select:focus {
+    outline: none;
+}
+
 .Sub_filter_type p {
     cursor: pointer;
 }

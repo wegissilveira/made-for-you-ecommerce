@@ -5,18 +5,19 @@ import classes from './ProductCard.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import productsData from '../../../Data/productsData'
-import cartData from '../../../Data/cartData.js'
+import cartDataFn from '../../../Data/cartData.js'
+import wishlistFn from '../../../Data/wishlistData'
 
 import ProductsQtde from '../../Shared/UI/ProductsQtde/ProductsQtde'
 import ColorSelect from '../../Shared/UI/ColorSelect/ColorSelect'
-import wishlist from '../../../Data/wishlistData'
+
   
 
 const ProductCard = props => {
 
     const product = productsData.find(product => product._id === props.match.params.id)
 
-    let [cartState, setCart] = React.useState(cartData)
+    let [cartState, setCart] = React.useState(cartDataFn)
 
     let [prodExists, setProdExists] = React.useState(0)
 
@@ -33,7 +34,7 @@ const ProductCard = props => {
     
     let [imgSlide, setImgSlide] = React.useState(0)
     let [productColor, setProductColor] = React.useState('') // => Armazena cor selecionada do produto
-    let [wishlistState, setWishlist] = React.useState(wishlist)
+    let [wishlistState, setWishlist] = React.useState(wishlistFn)
 
     let [qtde, setQtde] = React.useState(1)
     let [size, setSize] = React.useState('100x100')
