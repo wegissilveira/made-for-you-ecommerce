@@ -49,8 +49,7 @@ const ProductCardModal = props => {
         setProdExists(count)
 
     }, [props.cartList])
-
-    // console.log(prodExists)
+    
 
     let [wishlistState, setWishlist] = React.useState([])
 

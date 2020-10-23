@@ -4,6 +4,7 @@ import classes from './Products.module.css'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 import ProductCardModal from '../../Shop/ProductCardModal/ProductCardModal'
 
@@ -86,6 +87,8 @@ const Products = props => {
         setWishlist(list)
 
         localStorage.setItem('wishlist', JSON.stringify(list))
+
+        props.onWishlistState() // => enviando o dispatch
     }
 
     // Update da state cart quando o botão é clicado pelo usuário
@@ -198,7 +201,7 @@ const Products = props => {
         document.body.style.overflow = "visible"
     }
     
-    
+    console.log(props.wish)
     
     return (
         <Fragment>
@@ -322,4 +325,18 @@ const Products = props => {
     )
 }
 
-export default Products
+const mapStateToProps = state => {
+    return {
+        wish: state.wishlistState
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onWishlistState: () => dispatch({type: 'WISHLIST', value: wishlistDataFn()})
+    }
+}
+
+
+// export default Products
+export default connect(mapStateToProps, mapDispatchToProps)(Products)
