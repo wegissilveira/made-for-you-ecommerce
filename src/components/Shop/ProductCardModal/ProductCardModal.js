@@ -5,12 +5,13 @@ import './Modal.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Modal from 'react-modal';
+import { connect } from 'react-redux'
 
 import ProductsQtde from '../../Shared/UI/ProductsQtde/ProductsQtde'
 import ProgressBar from '../../Shared/UI/ProgressBar/ProgressBar'
 import ColorSelect from '../../Shared/UI/ColorSelect/ColorSelect';
 
-// import wishlist from '../../../Data/wishlistData'
+import wishlistDataFn from '../../../Data/wishlistData'
 // import cartData from '../../../Data/cartData'
 
 
@@ -51,11 +52,11 @@ const ProductCardModal = props => {
     }, [props.cartList])
     
 
-    let [wishlistState, setWishlist] = React.useState([])
+    // let [wishlistState, setWishlist] = React.useState([])
 
-    React.useEffect(() => {
-        setWishlist(props.wishlist)
-    }, [props.wishlist])
+    // React.useEffect(() => {
+    //     setWishlist(props.wishlist)
+    // }, [props.wishlist])
 
 
     let [qtde, setQtde] = React.useState(1) 
@@ -110,16 +111,19 @@ const ProductCardModal = props => {
 
     const wishlistHandler = id => {
 
-        let list = [...wishlistState]
+        // let list = [...wishlistState]
+        let list = [...props.wish]
         if (list.includes(id)) {
-            list = wishlistState.filter(item => item !== id)
+            list = list.filter(item => item !== id)
         } else {
             list.push(id)
         }
         
-        setWishlist(list)
+        // setWishlist(list)
 
         localStorage.setItem('wishlist', JSON.stringify(list))
+
+        props.onWishlistState()
     }
        
     const addProductToBagHandler = () => {
@@ -160,7 +164,8 @@ const ProductCardModal = props => {
         <Fragment>
             <Modal
                 isOpen={props.showProduct}
-                onRequestClose={() => props.setShowProduct([wishlistState, cartState])}
+                // onRequestClose={() => props.setShowProduct([wishlistState, cartState])}
+                onRequestClose={() => props.setShowProduct(cartState)}
                 style={customStyles}
                 contentLabel="Product Card"
                 ariaHideApp={false}
@@ -168,7 +173,8 @@ const ProductCardModal = props => {
             >
 
                 <div className="container-fluid d-flex" style={{paddingRight: '35px'}}>
-                    <p className={classes.Product_card_modal_exit} onClick={() => props.setShowProduct([wishlistState, cartState])}>
+                    {/* <p className={classes.Product_card_modal_exit} onClick={() => props.setShowProduct([wishlistState, cartState])}> */}
+                    <p className={classes.Product_card_modal_exit} onClick={() => props.setShowProduct(cartState)}>
                     {/* <p className={classes.Product_card_modal_exit} onClick={() => showProductHandlerCallback()}> */}
                         <FontAwesomeIcon icon="times" />
                     </p>
@@ -239,7 +245,8 @@ const ProductCardModal = props => {
                                     > REMOVE FROM BAG
                                     </button>
                             }   
-                            {   wishlistState.includes(props.product._id) ?
+                            {/* {   wishlistState.includes(props.product._id) ? */}
+                            {   props.wish.includes(props.product._id) ?
                                     <FontAwesomeIcon 
                                         onClick={() => wishlistHandler(props.product._id)} 
                                         className={classes.Wishlist_icon_alt} 
@@ -271,4 +278,18 @@ const ProductCardModal = props => {
     )
 }
 
-export default ProductCardModal
+const mapStateToProps = state => {
+    return {
+        wish: state.wishlistState
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onWishlistState: () => dispatch({type: 'WISHLIST', value: wishlistDataFn()})
+    }
+}
+
+
+// export default ProductCardModal
+export default connect(mapStateToProps, mapDispatchToProps)(ProductCardModal)

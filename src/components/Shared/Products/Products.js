@@ -23,7 +23,7 @@ const Products = props => {
     let [showProduct, setShowProduct] = React.useState(false)
     let [productIndex, setProductIndex] = React.useState(null)
 
-    let [wishlistState, setWishlist] = React.useState(wishlistDataFn)
+    // let [wishlistState, setWishlist] = React.useState(wishlistDataFn)
     
     let [cartState, setCart] = React.useState(cartDataFn)
     let [prodExistsCart, setProdExistsCart] = React.useState([])
@@ -77,14 +77,15 @@ const Products = props => {
     // Update da state wishlist quando o botão é clicado pelo usuário
     const wishlistHandler = id => {
 
-        let list = [...wishlistState]
+        // let list = [...wishlistState]
+        let list = [...props.wish]
         if (list.includes(id)) {
-            list = wishlistState.filter(item => item !== id)
+            list = list.filter(item => item !== id)
         } else {
             list.push(id)
         }
         
-        setWishlist(list)
+        // setWishlist(list)
 
         localStorage.setItem('wishlist', JSON.stringify(list))
 
@@ -130,7 +131,8 @@ const Products = props => {
     // Além disso, antes de entrar nas verificações de tags e categorias é checado se se trata da página de favoritos (wishlist). Caso esse seja o caso é realizado um filter e retornado somente os produtos cujo o id exista na tabela de wishlist.
     let products 
     if (props.wishlist) {
-        products = productsData.filter(product => wishlistState.includes(product._id))
+        // products = productsData.filter(product => wishlistState.includes(product._id))
+        products = productsData.filter(product => props.wish.includes(product._id))
 
     } else {
 
@@ -187,11 +189,11 @@ const Products = props => {
         setProductIndex(i)
     }
 
-    // Fecha o modal e seta a nota lista de favoritos a partir do modal
+    // Fecha o modal e seta a nova lista de favoritos a partir do modal
     const closeModalCallback = (arg) => {
         setShowProduct(!showProduct)
-        setWishlist(arg[0])
-        setCart(arg[1])
+        // setWishlist(arg[0])
+        setCart(arg)
 
     }
 
@@ -222,7 +224,8 @@ const Products = props => {
                                         productsList = <Fragment key={product+i}>
                                                             <div className=" col-3 mt-4 pl-0">
                                                                 <div className="border p-0">
-                                                                    {   wishlistState.includes(product._id) ?
+                                                                    {/* {   wishlistState.includes(product._id) ? */}
+                                                                    {   props.wish.includes(product._id) ?
                                                                             <FontAwesomeIcon 
                                                                                 onClick={() => wishlistHandler(product._id)} 
                                                                                 className={classes.Wishlist_icon_heart} 
@@ -281,7 +284,8 @@ const Products = props => {
                                                                     // setShowProduct={setShowProduct}
                                                                     setShowProduct={wishlistStateCB => closeModalCallback(wishlistStateCB)}
                                                                     product={product} 
-                                                                    wishlist={wishlistState}
+                                                                    // wishlist={wishlistState}
+                                                                    wishlist={props.wish}
                                                                     cartList={cartState}
                                                                     imgs={product.imgsDemo} 
                                                                     name={product.name}

@@ -3,10 +3,11 @@ import React, { Fragment } from 'react'
 import classes from './ProductCard.module.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { connect } from 'react-redux'
 
 import productsData from '../../../Data/productsData'
 import cartDataFn from '../../../Data/cartData.js'
-import wishlistFn from '../../../Data/wishlistData'
+import wishlistDataFn from '../../../Data/wishlistData'
 
 import ProductsQtde from '../../Shared/UI/ProductsQtde/ProductsQtde'
 import ColorSelect from '../../Shared/UI/ColorSelect/ColorSelect'
@@ -34,7 +35,7 @@ const ProductCard = props => {
     
     let [imgSlide, setImgSlide] = React.useState(0)
     let [productColor, setProductColor] = React.useState('') // => Armazena cor selecionada do produto
-    let [wishlistState, setWishlist] = React.useState(wishlistFn)
+    // let [wishlistState, setWishlist] = React.useState(wishlistDataFn)
 
     let [qtde, setQtde] = React.useState(1)
     let [size, setSize] = React.useState('100x100')
@@ -86,16 +87,19 @@ const ProductCard = props => {
 
     const wishlistHandler = id => {
 
-        let list = [...wishlistState]
+        // let list = [...wishlistState]
+        let list = [...props.wish]
         if (list.includes(id)) {
-            list = wishlistState.filter(item => item !== id)
+            list = list.filter(item => item !== id)
         } else {
             list.push(id)
         }
         
-        setWishlist(list)
+        // setWishlist(list)
 
         localStorage.setItem('wishlist', JSON.stringify(list))
+
+        props.onWishlistState()
     }
     
    
@@ -225,7 +229,8 @@ const ProductCard = props => {
                                         > REMOVE FROM BAG
                                     </button>   
                             }
-                            {   wishlistState.includes(product._id) ?
+                            {/* {   wishlistState.includes(product._id) ? */}
+                            {   props.wish.includes(product._id) ?
                                     <FontAwesomeIcon 
                                         onClick={() => wishlistHandler(product._id)} 
                                         className={classes.Wishlist_icon_alt} 
@@ -274,4 +279,18 @@ const ProductCard = props => {
     )
 }
 
-export default ProductCard
+const mapStateToProps = state => {
+    return {
+        wish: state.wishlistState
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onWishlistState: () => dispatch({type: 'WISHLIST', value: wishlistDataFn()})
+    }
+}
+
+
+// export default ProductCard
+export default connect(mapStateToProps, mapDispatchToProps)(ProductCard)
