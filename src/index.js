@@ -10,7 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import reducer from './store/reducer'
+import reducer from './store/reducers/reducer'
 
 const store = createStore(reducer)
 

@@ -3,22 +3,19 @@ import React, {Component, Fragment} from 'react'
 import classes from './Layout.module.css'
 
 import Footer from '../../components/Footer/Footer'
-import cartDataFn from '../../Data/cartData'
-import wishlistDataFn from '../../Data/wishlistData'
 
 import { NavLink as RRNavLink, NavLink } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import GoogleFontLoader from 'react-google-font-loader'
+import { connect } from 'react-redux'
 
 
 class Layout extends Component {
     
     state = {
         searchProduct: false,
-        input: '',
-        cartState: cartDataFn(),
-        wishlistState: wishlistDataFn()
+        input: ''
     }
 
 
@@ -192,7 +189,7 @@ class Layout extends Component {
                                     <NavLink
                                         to="/wishlist/"
                                     >
-                                        {   this.state.wishlistState.length > 0 ?
+                                        {   this.props.wish.length > 0 ?
                                                 <FontAwesomeIcon icon={['far', 'heart']} color="red" />
                                             :
                                                 <FontAwesomeIcon icon={['far', 'heart']} color="grey" />
@@ -203,7 +200,7 @@ class Layout extends Component {
                                     <NavLink
                                         to="/cart/"
                                     >
-                                        {   this.state.cartState.length > 0 ?
+                                        {   this.props.cart.length > 0 ?
                                                 <FontAwesomeIcon icon='shopping-bag' color="green" />
                                             :
                                                 <FontAwesomeIcon icon='shopping-bag' color="grey" />
@@ -245,4 +242,13 @@ class Layout extends Component {
     }
 }
 
-export default withRouter(Layout)
+
+const mapStateToProps = state => {
+    return {
+        wish: state.wishlistState,
+        cart: state.cartListState
+    }
+}
+
+
+export default withRouter(connect(mapStateToProps)(Layout))

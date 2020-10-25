@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { connect } from 'react-redux'
 
 import productsData from '../../../Data/productsData'
-import cartDataFn from '../../../Data/cartData.js'
+import cartListDataFn from '../../../Data/cartData.js'
 import wishlistDataFn from '../../../Data/wishlistData'
 
 import ProductsQtde from '../../Shared/UI/ProductsQtde/ProductsQtde'
@@ -16,16 +16,18 @@ import ColorSelect from '../../Shared/UI/ColorSelect/ColorSelect'
 
 const ProductCard = props => {
 
+    console.log(props.match.params)
+    console.log(props.cart)
     const product = productsData.find(product => product._id === props.match.params.id)
 
-    let [cartState, setCart] = React.useState(cartDataFn)
+    // let [cartState, setCart] = React.useState(cartListDataFn)
 
     let [prodExists, setProdExists] = React.useState(0)
 
     // Controla a state 'prodExists' para definir qual botão será mostrado, o de adicionar item ou o de remover. 
     // Caso 'prodExists' sejam mantido 0 significa que o item não existe na sacola, então será mostrado o botão de adicionar.
     React.useEffect(() => {
-        let productCartArr = [...cartState]
+        let productCartArr = [...props.cart]
 
         productCartArr.map(item => {
             if (item._id === product._id) setProdExists(++prodExists)
@@ -105,7 +107,7 @@ const ProductCard = props => {
    
     const productCartHandler = () => {
         
-        let productCartArr = [...cartState]
+        let productCartArr = [...props.cart]
         // let productCartArr = []
 
         let count = 0
@@ -129,9 +131,11 @@ const ProductCard = props => {
             setProdExists(0)
         }
 
-        setCart(productCartArr)
+        // setCart(productCartArr)
 
         localStorage.setItem('cartList', JSON.stringify(productCartArr))
+
+        props.onCartListState()
     }
 
    
@@ -281,13 +285,15 @@ const ProductCard = props => {
 
 const mapStateToProps = state => {
     return {
-        wish: state.wishlistState
+        wish: state.wishlistState,
+        cart: state.cartListState
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onWishlistState: () => dispatch({type: 'WISHLIST', value: wishlistDataFn()})
+        onWishlistState: () => dispatch({type: 'WISHLIST', value: wishlistDataFn()}),
+        onCartListState: () => dispatch({type: 'CARTLIST', value: cartListDataFn()})
     }
 }
 

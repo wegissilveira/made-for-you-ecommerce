@@ -13,7 +13,7 @@ import ProductCardModal from '../../Shop/ProductCardModal/ProductCardModal'
 // Vou buscar uma maneira de salvar apenas a marcação de 'favorito' na tabela e referenciar o produto aqui. Escolherei a maneira mais econômica.
 import productsData from '../../../Data/productsData' 
 import wishlistDataFn from '../../../Data/wishlistData';
-import cartDataFn from '../../../Data/cartData';
+import cartListDataFn from '../../../Data/cartData';
 
 
 const Products = props => {
@@ -23,13 +23,14 @@ const Products = props => {
     let [showProduct, setShowProduct] = React.useState(false)
     let [productIndex, setProductIndex] = React.useState(null)
 
-    // let [wishlistState, setWishlist] = React.useState(wishlistDataFn)
+    // let [wishlistState, setWishlist] = React.useState(props.wish)
     
-    let [cartState, setCart] = React.useState(cartDataFn)
+    // let [cartState, setCart] = React.useState(cartListDataFn)
     let [prodExistsCart, setProdExistsCart] = React.useState([])
     
     React.useEffect(() => {
-        let productCartArr = [...cartState]
+        // let productCartArr = [...cartState]
+        let productCartArr = [...props.cart]
 
         let productsCartIDs = []
         productCartArr.map(item => {
@@ -43,7 +44,7 @@ const Products = props => {
 
         setProdExistsCart(productsCartIDs)
 
-    }, [cartState])
+    }, [props.cart])
 
     
     if (count === undefined) {
@@ -95,7 +96,8 @@ const Products = props => {
     // Update da state cart quando o botão é clicado pelo usuário
     const cartHandler = product => {
 
-        let cartList = [...cartState]
+        // let cartList = [...cartState]
+        let cartList = [...props.cart]
         let productsCartIDs = [...prodExistsCart]
 
         let count = 0
@@ -119,10 +121,12 @@ const Products = props => {
             productsCartIDs = productsCartIDs.filter(item => item !== product._id)
         }      
         
-        setCart(cartList)
+        // setCart(cartList)
         setProdExistsCart(productsCartIDs)
 
         localStorage.setItem('cartList', JSON.stringify(cartList))
+
+        props.onCartListState()
     }
 
     // O loop para a exibição dos produtos é realizado sobre o array 'products', que possui todos os itens ou somente os produtos com a tag selecionada. 
@@ -190,10 +194,12 @@ const Products = props => {
     }
 
     // Fecha o modal e seta a nova lista de favoritos a partir do modal
-    const closeModalCallback = (arg) => {
+    // const closeModalCallback = (arg) => {
+    const closeModalCallback = () => {
         setShowProduct(!showProduct)
         // setWishlist(arg[0])
-        setCart(arg)
+        // setCart(arg)
+        console.log('teste')
 
     }
 
@@ -203,7 +209,9 @@ const Products = props => {
         document.body.style.overflow = "visible"
     }
     
-    console.log(props.wish)
+    console.log(props.cart)
+    // console.log(props.wish)
+
     
     return (
         <Fragment>
@@ -282,11 +290,11 @@ const Products = props => {
                                                                 <ProductCardModal 
                                                                     showProduct={showProduct}
                                                                     // setShowProduct={setShowProduct}
-                                                                    setShowProduct={wishlistStateCB => closeModalCallback(wishlistStateCB)}
+                                                                    setShowProduct={closeModalCallback}
                                                                     product={product} 
                                                                     // wishlist={wishlistState}
                                                                     wishlist={props.wish}
-                                                                    cartList={cartState}
+                                                                    // cartList={cartState}
                                                                     imgs={product.imgsDemo} 
                                                                     name={product.name}
                                                                 /> 
@@ -329,15 +337,18 @@ const Products = props => {
     )
 }
 
+
 const mapStateToProps = state => {
     return {
-        wish: state.wishlistState
+        wish: state.wishlistState,
+        cart: state.cartListState
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onWishlistState: () => dispatch({type: 'WISHLIST', value: wishlistDataFn()})
+        onWishlistState: () => dispatch({type: 'WISHLIST', value: wishlistDataFn()}),
+        onCartListState: () => dispatch({type: 'CARTLIST', value: cartListDataFn()})
     }
 }
 
