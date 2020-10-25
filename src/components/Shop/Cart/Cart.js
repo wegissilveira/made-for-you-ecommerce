@@ -4,11 +4,12 @@ import classes from './Cart.module.css'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 
-// import Products from '../../Shared/Products/Products'
 import ProductQtde from '../../Shared/UI/ProductsQtde/ProductsQtde'
+import * as actionTypes  from '../../../store/actions/actionTypes'
 
-import cartData from '../../../Data/cartData'
+import cartListDataFn from '../../../Data/cartData'
 import productsData from '../../../Data/productsData'
 
 
@@ -16,13 +17,11 @@ const Cart = props => {
     
     let [update, setUpdate] = React.useState(0) 
 
-    let [cartState, setCart] = React.useState(cartData)
-    
 
     let products = []
     productsData.map(product => {
 
-        cartState.map(item => {
+        props.cart.map(item => {
             if (item._id === product._id) {
                 products.push(product)
             }
@@ -39,7 +38,7 @@ const Cart = props => {
 
     React.useEffect(() => {
         let arrQtde = [...qtde]
-        cartState.map((item, index) => {
+        props.cart.map((item, index) => {
             arrQtde[index] = item.qtde
         })
 
@@ -78,12 +77,13 @@ const Cart = props => {
 
     const removeProductCartHandler = id => {
         
-        let cartList = cartState.filter(item => item._id !== id)
+        let cartList = props.cart.filter(item => item._id !== id)
 
-        setCart(cartList)
         setUpdate(++update)
 
         localStorage.setItem('cartList', JSON.stringify(cartList))
+
+        props.onCartListState()
     }
 
 
@@ -127,8 +127,8 @@ const Cart = props => {
                                                 <p>Color</p>
                                             </div>
                                             <div className="ml-3">
-                                                <p className="mb-2">{cartState[i].size}</p>
-                                                <p>{cartState[i].color}</p>
+                                                <p className="mb-2">{props.cart[i].size}</p>
+                                                <p>{props.cart[i].color}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -137,7 +137,7 @@ const Cart = props => {
                                 <p className="text-center font-weight-bold col-2">$ {product.price}</p>
                                 <div className="d-flex justify-content-center col-2">
                                     <ProductQtde 
-                                        startQtde={cartState[i].qtde}
+                                        startQtde={props.cart[i].qtde}
                                         changeQtdeCallBack={qtde => setQtdeHandler(qtde, i)} 
                                     />
                                 </div>
@@ -167,10 +167,6 @@ const Cart = props => {
                             <span>CONTINUE COMPRANDO</span>
                         </p>
                     </Link>
-                    {/* <p onClick={() => updateCartHandler()} className={classes.Cart_light_button}>
-                        <FontAwesomeIcon icon="sync-alt" />
-                        <span>UPDATE CART</span>
-                    </p> */}
                 </div>
                 <div className={`row mt-4 mr-0 ml-0 ${classes.Form_cart_container}`}>
                     <div className={`col-4 pl-0 ${classes.Form_cart_first_column}`}>
@@ -224,4 +220,18 @@ const Cart = props => {
     )
 }
 
-export default Cart
+
+const mapStateToProps = state => {
+    return {
+        cart: state.cartListState
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onCartListState: () => dispatch({type: actionTypes.CARTLIST, value: cartListDataFn()})
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart)

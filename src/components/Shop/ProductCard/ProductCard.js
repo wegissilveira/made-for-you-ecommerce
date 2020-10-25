@@ -11,16 +11,13 @@ import wishlistDataFn from '../../../Data/wishlistData'
 
 import ProductsQtde from '../../Shared/UI/ProductsQtde/ProductsQtde'
 import ColorSelect from '../../Shared/UI/ColorSelect/ColorSelect'
+import * as actionTypes from '../../../store/actions/actionTypes'
 
   
 
 const ProductCard = props => {
 
-    console.log(props.match.params)
-    console.log(props.cart)
     const product = productsData.find(product => product._id === props.match.params.id)
-
-    // let [cartState, setCart] = React.useState(cartListDataFn)
 
     let [prodExists, setProdExists] = React.useState(0)
 
@@ -37,7 +34,6 @@ const ProductCard = props => {
     
     let [imgSlide, setImgSlide] = React.useState(0)
     let [productColor, setProductColor] = React.useState('') // => Armazena cor selecionada do produto
-    // let [wishlistState, setWishlist] = React.useState(wishlistDataFn)
 
     let [qtde, setQtde] = React.useState(1)
     let [size, setSize] = React.useState('100x100')
@@ -89,15 +85,12 @@ const ProductCard = props => {
 
     const wishlistHandler = id => {
 
-        // let list = [...wishlistState]
         let list = [...props.wish]
         if (list.includes(id)) {
             list = list.filter(item => item !== id)
         } else {
             list.push(id)
         }
-        
-        // setWishlist(list)
 
         localStorage.setItem('wishlist', JSON.stringify(list))
 
@@ -108,7 +101,6 @@ const ProductCard = props => {
     const productCartHandler = () => {
         
         let productCartArr = [...props.cart]
-        // let productCartArr = []
 
         let count = 0
         productCartArr.map(item => {
@@ -131,8 +123,6 @@ const ProductCard = props => {
             setProdExists(0)
         }
 
-        // setCart(productCartArr)
-
         localStorage.setItem('cartList', JSON.stringify(productCartArr))
 
         props.onCartListState()
@@ -150,7 +140,6 @@ const ProductCard = props => {
                 <div className={`container-fluid ${classes.Product_card_container}`}>
                     <div className="pl-0 pr-5">
                         <div className={classes.Main_img_slider}>
-                            {/* <img src={product.imgsDemo[imgSlide]} alt="img-1" /> */}
                             <div className="d-flex" style={translateSlider}>
                                 {product.imgsDemo.map((img, i) => 
                                     <img key={i} src={img} alt="img-1"/>
@@ -233,7 +222,6 @@ const ProductCard = props => {
                                         > REMOVE FROM BAG
                                     </button>   
                             }
-                            {/* {   wishlistState.includes(product._id) ? */}
                             {   props.wish.includes(product._id) ?
                                     <FontAwesomeIcon 
                                         onClick={() => wishlistHandler(product._id)} 
@@ -292,11 +280,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onWishlistState: () => dispatch({type: 'WISHLIST', value: wishlistDataFn()}),
-        onCartListState: () => dispatch({type: 'CARTLIST', value: cartListDataFn()})
+        onWishlistState: () => dispatch({type: actionTypes.WISHLIST, value: wishlistDataFn()}),
+        onCartListState: () => dispatch({type: actionTypes.CARTLIST, value: cartListDataFn()})
     }
 }
 
 
-// export default ProductCard
 export default connect(mapStateToProps, mapDispatchToProps)(ProductCard)

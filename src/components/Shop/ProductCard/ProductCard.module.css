@@ -31,6 +31,10 @@ input {
     position: relative;
 }
 
+.Change_slide_arrows_container > * {
+    cursor: pointer;
+}
+
 .Product_card_sub_images {
     display: flex;
     justify-content: space-between;

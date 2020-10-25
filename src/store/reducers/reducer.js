@@ -1,6 +1,8 @@
 import wishlistDataFn from '../../Data/wishlistData'
 import cartListDataFn from '../../Data/cartData'
 
+import * as actionTypes from '../actions/actionTypes'
+
 const initialState = {
     wishlistState: wishlistDataFn(),
     cartListState: cartListDataFn()
@@ -8,14 +10,14 @@ const initialState = {
 
 const reducer = ((state = initialState, action) => {
 
-    if (action.type === 'WISHLIST') {
+    if (action.type === actionTypes.WISHLIST) {
         return {
             ...state,
             wishlistState: action.value
         }
     }
 
-    if (action.type === 'CARTLIST') {
+    if (action.type === actionTypes.CARTLIST) {
         return {
             ...state,
             cartListState: action.value

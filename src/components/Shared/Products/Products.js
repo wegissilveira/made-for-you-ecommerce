@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import ProductCardModal from '../../Shop/ProductCardModal/ProductCardModal'
+import * as actionTypes from '../../../store/actions/actionTypes'
 
 // Onde utilizo tais dados era utilizado o 'props.products'
 // Agora que decidi utilizar este componente também no 'Wishlist', talvez o fetch dos produtos não deva ser realizado aqui, já que talvez ficarão salvos em uma tabela distinta e, nesse caso, os dados que 'Products' recebem deve vir de seu parent, já que podem diferir.
@@ -194,13 +195,8 @@ const Products = props => {
     }
 
     // Fecha o modal e seta a nova lista de favoritos a partir do modal
-    // const closeModalCallback = (arg) => {
     const closeModalCallback = () => {
         setShowProduct(!showProduct)
-        // setWishlist(arg[0])
-        // setCart(arg)
-        console.log('teste')
-
     }
 
     if (showProduct === true) {
@@ -209,8 +205,7 @@ const Products = props => {
         document.body.style.overflow = "visible"
     }
     
-    console.log(props.cart)
-    // console.log(props.wish)
+
 
     
     return (
@@ -232,7 +227,6 @@ const Products = props => {
                                         productsList = <Fragment key={product+i}>
                                                             <div className=" col-3 mt-4 pl-0">
                                                                 <div className="border p-0">
-                                                                    {/* {   wishlistState.includes(product._id) ? */}
                                                                     {   props.wish.includes(product._id) ?
                                                                             <FontAwesomeIcon 
                                                                                 onClick={() => wishlistHandler(product._id)} 
@@ -249,7 +243,6 @@ const Products = props => {
                                                                     <Link to={"/shop/product/" + product._id} >
                                                                         <div style={{height: '359px'}} className="d-flex align-items-center">
                                                                             <img 
-                                                                                // onClick={() => setCard(i)} 
                                                                                 src={product.img} alt="Produto" 
                                                                                 style={{maxWidth: '100%'}} 
                                                                             />
@@ -289,12 +282,9 @@ const Products = props => {
                                                             { productIndex === i ? 
                                                                 <ProductCardModal 
                                                                     showProduct={showProduct}
-                                                                    // setShowProduct={setShowProduct}
                                                                     setShowProduct={closeModalCallback}
                                                                     product={product} 
-                                                                    // wishlist={wishlistState}
                                                                     wishlist={props.wish}
-                                                                    // cartList={cartState}
                                                                     imgs={product.imgsDemo} 
                                                                     name={product.name}
                                                                 /> 
@@ -347,11 +337,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onWishlistState: () => dispatch({type: 'WISHLIST', value: wishlistDataFn()}),
-        onCartListState: () => dispatch({type: 'CARTLIST', value: cartListDataFn()})
+        onWishlistState: () => dispatch({type: actionTypes.WISHLIST, value: wishlistDataFn()}),
+        onCartListState: () => dispatch({type: actionTypes.CARTLIST, value: cartListDataFn()})
     }
 }
 
 
-// export default Products
 export default connect(mapStateToProps, mapDispatchToProps)(Products)

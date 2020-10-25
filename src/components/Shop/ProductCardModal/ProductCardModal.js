@@ -10,6 +10,7 @@ import { connect } from 'react-redux'
 import ProductsQtde from '../../Shared/UI/ProductsQtde/ProductsQtde'
 import ProgressBar from '../../Shared/UI/ProgressBar/ProgressBar'
 import ColorSelect from '../../Shared/UI/ColorSelect/ColorSelect';
+import * as actionTypes from '../../../store/actions/actionTypes'
 
 import wishlistDataFn from '../../../Data/wishlistData'
 import cartListDataFn from '../../../Data/cartData'
@@ -35,11 +36,9 @@ const ProductCardModal = props => {
     let [imgSlide, setImgSlide] = React.useState(0)
     let [productColor, setProductColor] = React.useState('')
 
-    // let [cartState, setCart] = React.useState([])
     let [prodExists, setProdExists] = React.useState(0)
 
     React.useEffect(() => {
-        // setCart(props.cartList)
         let productCartArr = [...props.cart]
         
         let count = 0
@@ -50,23 +49,6 @@ const ProductCardModal = props => {
         setProdExists(count)
 
     }, [props.cart])
-
-    // let productCartArr = [...props.cart]
-        
-    // let count = 0
-    // productCartArr.map(item => {
-    //     if (item._id === props.product._id) count++
-    // })
-
-    // setProdExists(count)
-    
-
-    // let [wishlistState, setWishlist] = React.useState([])
-
-    // React.useEffect(() => {
-    //     setWishlist(props.wishlist)
-    // }, [props.wishlist])
-
 
     let [qtde, setQtde] = React.useState(1) 
     let [size, setSize] = React.useState('100x100') 
@@ -120,15 +102,12 @@ const ProductCardModal = props => {
 
     const wishlistHandler = id => {
 
-        // let list = [...wishlistState]
         let list = [...props.wish]
         if (list.includes(id)) {
             list = list.filter(item => item !== id)
         } else {
             list.push(id)
         }
-        
-        // setWishlist(list)
 
         localStorage.setItem('wishlist', JSON.stringify(list))
 
@@ -137,7 +116,6 @@ const ProductCardModal = props => {
        
     const addProductToBagHandler = () => {
         
-        // let productCartArr = [...cartState]
         let productCartArr = [...props.cart]
 
         let count = 0
@@ -161,8 +139,6 @@ const ProductCardModal = props => {
             setProdExists(0)
         }
 
-        // setCart(productCartArr)
-
         localStorage.setItem('cartList', JSON.stringify(productCartArr))
 
         props.onCartListState()
@@ -176,7 +152,6 @@ const ProductCardModal = props => {
         <Fragment>
             <Modal
                 isOpen={props.showProduct}
-                // onRequestClose={() => props.setShowProduct([wishlistState, cartState])}
                 onRequestClose={() => props.setShowProduct()}
                 style={customStyles}
                 contentLabel="Product Card"
@@ -185,9 +160,7 @@ const ProductCardModal = props => {
             >
 
                 <div className="container-fluid d-flex" style={{paddingRight: '35px'}}>
-                    {/* <p className={classes.Product_card_modal_exit} onClick={() => props.setShowProduct([wishlistState, cartState])}> */}
                     <p className={classes.Product_card_modal_exit} onClick={() => props.setShowProduct()}>
-                    {/* <p className={classes.Product_card_modal_exit} onClick={() => showProductHandlerCallback()}> */}
                         <FontAwesomeIcon icon="times" />
                     </p>
                     <div className="col-6 pl-0 pr-0 mr-4" style={{overflow: 'hidden'}}>
@@ -257,7 +230,6 @@ const ProductCardModal = props => {
                                     > REMOVE FROM BAG
                                     </button>
                             }   
-                            {/* {   wishlistState.includes(props.product._id) ? */}
                             {   props.wish.includes(props.product._id) ?
                                     <FontAwesomeIcon 
                                         onClick={() => wishlistHandler(props.product._id)} 
@@ -299,11 +271,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onWishlistState: () => dispatch({type: 'WISHLIST', value: wishlistDataFn()}),
-        onCartListState: () => dispatch({type: 'CARTLIST', value: cartListDataFn()})
+        onWishlistState: () => dispatch({type: actionTypes.WISHLIST, value: wishlistDataFn()}),
+        onCartListState: () => dispatch({type: actionTypes.CARTLIST, value: cartListDataFn()})
     }
 }
 
 
-// export default ProductCardModal
 export default connect(mapStateToProps, mapDispatchToProps)(ProductCardModal)
