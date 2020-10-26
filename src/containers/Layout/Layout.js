@@ -15,7 +15,8 @@ class Layout extends Component {
     
     state = {
         searchProduct: false,
-        input: ''
+        input: '',
+        openSubMenu: false
     }
 
 
@@ -57,6 +58,11 @@ class Layout extends Component {
         document.removeEventListener('keydown',this.keydownHandler)
     }
 
+    openSubMenuHandler = () => {
+        let openSubMenu = this.state.openSubMenu
+        this.setState({openSubMenu: !openSubMenu})
+    }
+
     
 
 
@@ -83,7 +89,7 @@ class Layout extends Component {
                 
                 <nav className="
                         navbar 
-                        navbar-expand-sm 
+                        navbar-expand-md 
                         navbar-light 
                         
                         d-flex
@@ -100,10 +106,8 @@ class Layout extends Component {
                         >
                             {/* <FontAwesomeIcon icon="bars" color="grey" size="2x" /> */}
                             {/* Corrigir NavLink. Quando coloco todos os itens da lista com NavLink ao clicar em algum todos são selecionados e o efeito de highlight na página aberta se perde, funcionando somente quando estamos na homepage. Verificar isso quando as as demais páginas além de 'shop' existirem. */}
-                            <ul className="navbar-nav" style={{marginLeft: '28%'}}>
-                                {/* <li className="nav-item">
-                                    <a href="/" className="nav-link">Home</a>
-                                </li> */}
+                            
+                            {/* <ul className="navbar-nav" style={{marginLeft: '28%'}}>
                                 <li className="nav-item">
                                     <NavLink 
                                         to="/" 
@@ -122,18 +126,6 @@ class Layout extends Component {
                                     > Shop
                                     </NavLink>
                                 </li>
-                                {/* <li className="nav-item">
-                                    <a href="/" className="nav-link">Services</a>
-                                </li>
-                                <li className="nav-item">
-                                    <a href="/" className="nav-link">Sales</a>
-                                </li>
-                                <li className="nav-item">
-                                    <a href="/" className="nav-link">Shopping</a>
-                                </li>  */}
-                                {/* <li className="nav-item">
-                                    <a href="/" className="nav-link">Contacts</a>
-                                </li> */}
                                 <li className="nav-item">
                                     <NavLink 
                                         to="/contact/" 
@@ -143,10 +135,120 @@ class Layout extends Component {
                                     > Contacts
                                     </NavLink>
                                 </li>
-                            </ul>
+                            </ul> */}
+
+                            {/* Responsive menu */}
+                            <div className={classes.Navigation_mobile}>
+                                <FontAwesomeIcon icon="times" size="2x" />
+                                <ul className={`navbar-nav ${classes.Navigation_mobile_main_list}`}>
+                                    <li className="nav-item">
+                                        <NavLink 
+                                            to="/" 
+                                            exact={true}
+                                            // tag={RRNavLink}
+                                            className="nav-link"
+                                        > Home
+                                        </NavLink>
+                                    </li>
+                                    <li className="nav-item">
+                                        <NavLink 
+                                            to="/shop/" 
+                                            exact={true}
+                                            // tag={RRNavLink}
+                                            className="nav-link"
+                                            onClick={this.openSubMenuHandler}
+                                        > Shop
+                                        {   
+                                            this.state.openSubMenu ? 
+                                                <FontAwesomeIcon icon="chevron-up" />
+                                            :
+                                                <FontAwesomeIcon icon="chevron-down" />
+                                        }
+                                        </NavLink>
+                                        {this.state.openSubMenu ? 
+                                            <ul className={`navbar-nav ${classes.Navigation_mobile_sub_list}`}>
+                                                <li className="nav-item">
+                                                    <NavLink
+                                                        to="/shop/"
+                                                        exact={true}
+                                                        className="nav-link"
+                                                    >
+                                                        All categories
+                                                    </NavLink>
+                                                </li>
+                                                <li className="nav-item">
+                                                    <NavLink
+                                                        to="/shop/bedroom"
+                                                        exact={true}
+                                                        className="nav-link"
+                                                    >
+                                                        Bedroom
+                                                    </NavLink>
+                                                </li>
+                                                <li className="nav-item">
+                                                    <NavLink
+                                                        to="/shop/living-room"
+                                                        exact={true}
+                                                        className="nav-link"
+                                                    >
+                                                        Living-room
+                                                    </NavLink>
+                                                </li>
+                                                <li className="nav-item">
+                                                    <NavLink
+                                                        to="/shop/bathroom"
+                                                        exact={true}
+                                                        className="nav-link"
+                                                    >
+                                                        Bathroom
+                                                    </NavLink>
+                                                </li>
+                                                <li className="nav-item">
+                                                    <NavLink
+                                                        to="/shop/kitchen"
+                                                        exact={true}
+                                                        className="nav-link"
+                                                    >
+                                                        Kitchen
+                                                    </NavLink>
+                                                </li>
+                                            </ul>
+                                            :
+                                            null
+                                        }
+                                    </li>
+                                    {/* <li className="nav-item">
+                                        <NavLink 
+                                            to="/contact/" 
+                                            exact={true}
+                                            // tag={RRNavLink}
+                                            className="nav-link"
+                                        > Contacts
+                                        </NavLink>
+                                    </li> */}
+                                </ul>
+                                <div className={classes.Navigation_mobile_contacts}>
+                                    <div className="d-flex flex-column mb-4">
+                                        <h6>CONTACTS</h6>
+                                        <div>
+                                            <p>hello@myhome.com</p>
+                                            <p>+375 29 364-74-69</p>
+                                        </div>
+                                    </div>
+                                    <div className="d-flex flex-column mb-4">
+                                        <h6>STAY SOCIAL</h6>
+                                        <div className={`${classes.Navigation_mobile_staySocial_icons}`}>
+                                            <FontAwesomeIcon icon={['fab', 'twitter']} />
+                                            <FontAwesomeIcon icon={['fab', 'vk']} />
+                                            <FontAwesomeIcon icon={['fab', 'instagram']} />
+                                            <FontAwesomeIcon icon={['fab', 'facebook-f']} />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
-                        <NavLink
+                        {/* <NavLink
                             to="/" 
                             className="navbar-brand"
                             style={{ fontFamily: 'Lemonada, cursive' }}
@@ -207,7 +309,7 @@ class Layout extends Component {
                                         }
                                     </NavLink>
                                 </li>
-                            </ul>
+                            </ul> */}
                             {/* <ul className={`navbar-nav ${classes.Enter_account_container}`}>
                                 <li className="nav-item">
                                     <FontAwesomeIcon icon="search" />
@@ -225,7 +327,7 @@ class Layout extends Component {
                                     <p>Sign up</p>
                                 </NavLink>
                             </ul> */}
-                        </div>
+                        {/* </div> */}
                     </div>
                 </nav>
                 

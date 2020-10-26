@@ -56,3 +56,65 @@ p, h1, h2, h3, h4, h5, h6, label {
 .Enter_account_btn p {
     margin: 5px 10px 5px 10px
 }
+
+
+.Navigation_mobile {
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    background-color: #fff;
+    width: 50vw;
+    height: 100vw;
+    margin-left: -16px;
+    margin-top: -35px;
+    z-index: 9999;
+}
+
+.Navigation_mobile svg {
+    margin-left: 40px;
+    margin-top: 20px;
+}
+
+.Navigation_mobile_main_list {
+    flex-direction: column;
+    width: 70%;
+    margin-left: 15%;
+    margin-top: 40px;
+}
+
+.Navigation_mobile_sub_list {
+    margin-left: 20px;
+}
+
+.Navigation_mobile_main_list a {   
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Navigation_mobile_main_list svg {
+    margin: 0;
+}
+
+.Navigation_mobile_contacts {
+    margin-left: 15%;
+    margin-top: 50px;
+}
+
+.Navigation_mobile_contacts p {
+    font-size: 12px;
+    margin-bottom: 0;
+}
+
+.Navigation_mobile_staySocial_icons {
+    display: flex;
+    justify-content: space-between;
+    width: 30%;
+    font-size: 12px;
+}
+
+.Navigation_mobile_staySocial_icons svg {
+    margin-left: 0;
+    margin-top: 0;
+}
