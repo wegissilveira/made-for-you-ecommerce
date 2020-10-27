@@ -56,17 +56,13 @@ const Filter = props => {
     const offerRef = React.useRef()
     const selectRef = React.useRef()
 
-    const [display, setDisplay] = React.useState('none')
-
     const translateFilter = {
         transform: `translateY(${translateValue}%)`,
-        // display: display,
         transition: '.8s ease-in-out'
     }
 
     const translateProducts = {
-        transform: `translateY(${translateProductsValue}px)`,
-        // display: display,
+        transform: `translateY(${translateProductsValue}px)`,   
         transition: '.8s ease-in-out'
     }
 

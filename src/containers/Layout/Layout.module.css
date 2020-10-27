@@ -11,17 +11,21 @@ p, h1, h2, h3, h4, h5, h6, label {
     color: #ffc107;
 }
 
+.Logo {
+    font-family: Lemonada, cursive;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -30px;
+    margin-left: -50px;
+}
+
 .Account_icons {
     width: 60%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-
-/* .fonts {
-    font-family: 'Lemonada', 
-    cursive;
-} */
 
 .Enter_account_container {
     width: 40%;
@@ -63,17 +67,17 @@ p, h1, h2, h3, h4, h5, h6, label {
     left: 0;
     top: 0;
 
-    background-color: #fff;
+    background-color: rgb(247, 247, 247);
     width: 50vw;
     height: 100vw;
-    margin-left: -16px;
+    margin-left: -31px;
     margin-top: -35px;
     z-index: 9999;
 }
 
 .Navigation_mobile svg {
     margin-left: 40px;
-    margin-top: 20px;
+    margin-top: 60px;
 }
 
 .Navigation_mobile_main_list {
@@ -83,9 +87,6 @@ p, h1, h2, h3, h4, h5, h6, label {
     margin-top: 40px;
 }
 
-.Navigation_mobile_sub_list {
-    margin-left: 20px;
-}
 
 .Navigation_mobile_main_list a {   
     display: flex;
@@ -95,6 +96,18 @@ p, h1, h2, h3, h4, h5, h6, label {
 
 .Navigation_mobile_main_list svg {
     margin: 0;
+}
+
+.Navigation_mobile_submenu_shop {
+    position: absolute;
+    width: 70%;
+    background-color: rgb(247, 247, 247);
+    z-index: 9999;
+}
+
+.Navigation_mobile_sub_list {
+    margin-left: 20px;
+    margin-top: 35px;
 }
 
 .Navigation_mobile_contacts {
