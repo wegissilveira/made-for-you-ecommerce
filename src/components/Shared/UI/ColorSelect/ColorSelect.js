@@ -21,7 +21,6 @@ const ColorSelect = props => {
     let borderArr = Array(props.colors.length).fill('1px solid black')
     // borderArr[0] = '2px solid black' // => Ativando esta linha a primeira cor é inicialmente selecionada
 
-    let [colorState, setColorState] = React.useState('')
     let [opacity, setOpacity] = React.useState(opacityArr)
     let [border, setBorder] = React.useState(borderArr)
 
@@ -29,17 +28,16 @@ const ColorSelect = props => {
         let newBorder = [...border]
         let newOpacity = [...opacity]
         
-        newBorder.map((color, k) => {
+        newBorder.forEach((color, k) => {
             k === i ? newBorder[k] = '2px solid black' : newBorder[k] = '1px solid black' 
         })
 
-        newOpacity.map((color, k) => {
+        newOpacity.forEach((color, k) => {
             k === i ? newOpacity[k] = '1.0' : newOpacity[k] = '0.4' 
         })
 
         setBorder(newBorder)
         setOpacity(newOpacity)
-        setColorState(color)
         
         props.selectColorHandlerCallback(color, i)
     }

@@ -7,7 +7,6 @@ import Products from '../../Shared/Products/Products';
 import PriceSlider from './PriceSlider/PriceSlider'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import {Animated} from "react-animated-css"
 
 
 const Filter = props => {
@@ -109,7 +108,7 @@ const Filter = props => {
     let lightingQtde = 0
 
     // Atualizando quantidade de produtos separados por tipos e categorias
-    props.products.map(product => {
+    props.products.forEach(product => {
 
         //Categorias
         categoriesTotalQtde++
@@ -156,13 +155,19 @@ const Filter = props => {
     })
 
     // Atualiza as states de categoria e tag e torna 'bold' o item selecionado na UI para que se destaque dos não selecionados
-    const setFilterDetails = (e, block, arg) => {
+    const setProductTypeHandler = (e, block, arg) => {
 
         block === 'cat' ? setCategory(arg) : setTag(arg)
 
         let elementsArr = Array.from(e.target.parentNode.children)
 
-        elementsArr.map(element => {
+        // elementsArr.map(element => {
+        //     element.style.fontWeight = 'normal'
+        //     console.log('map:')
+        //     console.log(element)
+        // })
+
+        elementsArr.forEach(element => {
             element.style.fontWeight = 'normal'
         })
 
@@ -192,7 +197,7 @@ const Filter = props => {
         const typesList = Array.from(typesRef.current.children)
         const offerList = Array.from(offerRef.current.children)
 
-        selectList.map((element, i) => {
+        selectList.forEach((element, i) => {
             if (i === 0) {
                 element.selected = true
             } else {
@@ -200,18 +205,18 @@ const Filter = props => {
             }
         })
 
-        categoriesList.map((element, i) => {
+        categoriesList.forEach((element, i) => {
             i === 1 ? element.style.fontWeight = 'bold' : element.style.fontWeight = 'normal'
         })
 
-        typesList.map((element, i) => {
+        typesList.forEach((element, i) => {
             i === 1 ? element.style.fontWeight = 'bold' : element.style.fontWeight = 'normal'
         })
 
-        offerList.map(element => {
+        offerList.forEach(element => {
 
             if (element.tagName === 'DIV') {
-                Array.from(element.children).map(el => {
+                Array.from(element.children).forEach(el => {
 
                     if (el.tagName === 'INPUT') {
                         el.checked = false
@@ -284,22 +289,22 @@ const Filter = props => {
                         <div className="mt-5 mb-5 d-flex justify-content-between row">
                             <div className={classes.Sub_filter_type} ref={categoriesRef}>
                                 <h6>CATEGORIES</h6>
-                                <p onClick={e => setFilterDetails(e, 'cat', 'all')} style={{fontWeight:'bold'}}>All categories ({categoriesTotalQtde}) </p>
-                                <p onClick={e => setFilterDetails(e, 'cat', 'bedroom')}>Bedroom ({bedRoomQtde}) </p>
-                                <p onClick={e => setFilterDetails(e, 'cat', 'living-room')}>Living room ({livingRoomQtde}) </p>
-                                <p onClick={e => setFilterDetails(e, 'cat', 'kitchen')}>Kitchen ({kitchen}) </p>
-                                <p onClick={e => setFilterDetails(e, 'cat', 'bathroom')}>Bathroom ({bathRoomQtde}) </p>
-                                <p onClick={e => setFilterDetails(e, 'cat', 'children-room')}>Children's room ({childrenRoom}) </p>
+                                <p onClick={e => setProductTypeHandler(e, 'cat', 'all')} style={{fontWeight:'bold'}}>All categories ({categoriesTotalQtde}) </p>
+                                <p onClick={e => setProductTypeHandler(e, 'cat', 'bedroom')}>Bedroom ({bedRoomQtde}) </p>
+                                <p onClick={e => setProductTypeHandler(e, 'cat', 'living-room')}>Living room ({livingRoomQtde}) </p>
+                                <p onClick={e => setProductTypeHandler(e, 'cat', 'kitchen')}>Kitchen ({kitchen}) </p>
+                                <p onClick={e => setProductTypeHandler(e, 'cat', 'bathroom')}>Bathroom ({bathRoomQtde}) </p>
+                                <p onClick={e => setProductTypeHandler(e, 'cat', 'children-room')}>Children's room ({childrenRoom}) </p>
                             </div>
                             <div className={classes.Divider}></div>
                             <div className={classes.Sub_filter_type} ref={typesRef}>
                                 <h6>TYPE</h6>
-                                <p onClick={e => setFilterDetails(e, 'type', 'all')} style={{fontWeight:'bold'}}>All tags ({typesTotalQtde}) </p>
-                                <p onClick={e => setFilterDetails(e, 'type', 'furniture')}>Furniture ({furnitureQtde}) </p>
-                                <p onClick={e => setFilterDetails(e, 'type', 'accessories')}>Accessories ({accessoriesQtde}) </p>
-                                <p onClick={e => setFilterDetails(e, 'type', 'decorations')}>Decorations ({decorationsQtde}) </p>
-                                <p onClick={e => setFilterDetails(e, 'type', 'textile')}>Textile ({textileQtde}) </p>
-                                <p onClick={e => setFilterDetails(e, 'type', 'lightning')}>Lighting ({lightingQtde}) </p>
+                                <p onClick={e => setProductTypeHandler(e, 'type', 'all')} style={{fontWeight:'bold'}}>All tags ({typesTotalQtde}) </p>
+                                <p onClick={e => setProductTypeHandler(e, 'type', 'furniture')}>Furniture ({furnitureQtde}) </p>
+                                <p onClick={e => setProductTypeHandler(e, 'type', 'accessories')}>Accessories ({accessoriesQtde}) </p>
+                                <p onClick={e => setProductTypeHandler(e, 'type', 'decorations')}>Decorations ({decorationsQtde}) </p>
+                                <p onClick={e => setProductTypeHandler(e, 'type', 'textile')}>Textile ({textileQtde}) </p>
+                                <p onClick={e => setProductTypeHandler(e, 'type', 'lightning')}>Lighting ({lightingQtde}) </p>
                             </div>
                             <div className={classes.Divider}></div>
                             <div className="d-flex flex-column" ref={offerRef}>

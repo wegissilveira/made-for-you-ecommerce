@@ -36,19 +36,19 @@ const ProductCardModal = props => {
     let [imgSlide, setImgSlide] = React.useState(0)
     let [productColor, setProductColor] = React.useState('')
 
-    let [prodExists, setProdExists] = React.useState(0)
+    let [isProductInBag, setProdExists] = React.useState(0)
 
     React.useEffect(() => {
         let productCartArr = [...props.cart]
         
         let count = 0
-        productCartArr.map(item => {
+        productCartArr.forEach(item => {
             if (item._id === props.product._id) count++
         })
-
+        
         setProdExists(count)
 
-    }, [props.cart])
+    }, [props.cart, props.product._id])
 
     let [qtde, setQtde] = React.useState(1) 
     let [size, setSize] = React.useState('100x100') 
@@ -119,7 +119,7 @@ const ProductCardModal = props => {
         let productCartArr = [...props.cart]
 
         let count = 0
-        productCartArr.map(item => {
+        productCartArr.forEach(item => {
             if (item._id === props.product._id) count++
         })
 
@@ -215,7 +215,7 @@ const ProductCardModal = props => {
                         </div>
                         <div className={`mt-4 ${classes.Product_qtde_container_modal}`}>
                             <ProductsQtde changeQtdeCallBack={qtde => setQtdeHandler(qtde)} />
-                            { prodExists === 0 ?
+                            { isProductInBag === 0 ?
                                     <button 
                                         onClick={() => addProductToBagHandler()}
                                         type="button" 

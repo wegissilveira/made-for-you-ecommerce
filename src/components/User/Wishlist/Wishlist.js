@@ -2,8 +2,6 @@ import React from 'react'
 
 import Products from '../../Shared/Products/Products'
 
-import wishlist from '../../../Data/wishlistData'
-
 const Wishlist = props => {
 
     // Eu estou realizando o fetch dos produtos diretamente em 'Products', o que até aqui tem funcionado bem, no entanto me parece melhor realizar o fetch no parent para deixar os dados enviados como props mais dinâmicos e flexíveis.

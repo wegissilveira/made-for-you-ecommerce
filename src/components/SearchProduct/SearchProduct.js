@@ -19,7 +19,7 @@ const SearchProduct = props => {
     let products = []
     let searchKey = new RegExp(props.match.params.searchKey, 'gi') 
 
-    productsData.map(product => {
+    productsData.forEach(product => {
         for (let i in product) {
             if (i !== 'imgsDemo' && i !== 'img' && i !== 'deal') {
                 if (product[i].toString().match(searchKey)) {

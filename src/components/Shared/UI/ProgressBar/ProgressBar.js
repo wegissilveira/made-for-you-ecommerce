@@ -7,9 +7,9 @@ import classes from './ProgressBar.module.css'
 // Também personalizei a orientação (horizontal/ vertical) dos pontos e a altura, talvez fazer o mesmo para 'width'. Verificar isso no momento em que for colocar horizontal na popup e checar se é necessário.
 const ProgressBar = props => {
     
-    let [sqSize, setSqSize] = React.useState(30)
+    let [sqSize, ] = React.useState(30)
     let [percentage, setPercentage] = React.useState(0)
-    let [strokeWidth, setStrokeWidth] = React.useState(3)
+    let [strokeWidth, ] = React.useState(3)
 
     let [barIndex, setBarIndex] = React.useState(0) // => Define o ponto que recebe a barra baseado em seu index
 

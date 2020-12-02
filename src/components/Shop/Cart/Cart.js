@@ -15,45 +15,64 @@ import productsData from '../../../Data/productsData'
 
 const Cart = props => {
     
-    let [update, setUpdate] = React.useState(0) 
+    // let [update, setUpdate] = React.useState(0) 
 
 
     let products = []
-    productsData.map(product => {
-
-        props.cart.map(item => {
+    productsData.forEach(product => {
+        props.cart.forEach(item => {
             if (item._id === product._id) {
                 products.push(product)
             }
         })
-        
     })
+
+    const pricesArrState = products.map(item => parseFloat(item.price))
     
 
-    let [qtde, setQtde] = React.useState([])
+    // let [qtde, setQtde] = React.useState([])
+    let [qtde, setQtde] = React.useState(() => {
+        let arrQtde = []
+        props.cart.map((item, index) => {
+            return arrQtde[index] = item.qtde
+        })
+
+        return arrQtde
+    })
+
+
     // Antes da possibilidade de salvar quantidade no carrinho 'qtde' era populada com o array abaixo. 
     // 'qtde' recebia um índice para cada produto no carrinho utilizando o length do array 'cartData'
     // Agora simplesmente utilizo o useEffect para inserir valores customizados
     // let [qtde, setQtde] = React.useState(Array(cartState.length).fill(1))
 
-    React.useEffect(() => {
-        let arrQtde = [...qtde]
-        props.cart.map((item, index) => {
-            arrQtde[index] = item.qtde
-        })
+    // React.useEffect(() => {
+    //     let arrQtde = [...qtde]
+    //     props.cart.map((item, index) => {
+    //         arrQtde[index] = item.qtde
+    //     })
 
-        setQtde(arrQtde)
-    }, [])
+    //     setQtde(arrQtde)
+    // }, [])
 
+    // console.log(qtde)
+
+    // const [pricesArrState, setPricesArrState] = React.useState([])
+    // const [pricesArrState, setPricesArrState] = React.useState(() => {
+    //     return products.map(item => parseFloat(item.price))
+    // })
+
+    // const [pricesArr, ] = React.useState(() => {
+    //     return products.map(item => parseFloat(item.price))
+    // })
+
+    // console.log(pricesArr)
     
-
-    const [pricesArrState, setPricesArrState] = React.useState([])
-
-    const pricesArr = products.map(item => parseFloat(item.price))
     
-    React.useEffect(() => {
-        setPricesArrState(pricesArr)
-    }, [update])
+    // React.useEffect(() => {
+    //     setPricesArrState(pricesArr)
+    // }, [pricesArr]) 
+    // }, [update])
 
     let finalPrice = 0
     pricesArrState.map((item, i) => {
@@ -61,7 +80,6 @@ const Cart = props => {
         finalPrice = finalPrice + (item * qtde[i])
         return finalPrice
     })
-
 
     // Aqui eu atualizo a quantidade de produtos do item que ocupa a posição no array que está sofrendo a alteração.
     // Ou seja, se eu altero a quantidade do produto de índice 2, somente o índice 2 receberá a alteração e somente o preço total deste será alterado, já que o índice é utilizado para realizar o cálculo => qtde[i] * parseInt(product.price)
@@ -79,7 +97,7 @@ const Cart = props => {
         
         let cartList = props.cart.filter(item => item._id !== id)
 
-        setUpdate(++update)
+        // setUpdate(++update)
 
         localStorage.setItem('cartList', JSON.stringify(cartList))
 

@@ -5,8 +5,6 @@ import classes from './MainPageProducts.module.css'
 import Products from '../../Shared/Products/Products'
 import productsData from '../../../Data/productsData'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
 
 const MainPageProducts = props => {
 
@@ -22,11 +20,11 @@ const MainPageProducts = props => {
         // A verificação é para garantir que as ações ocorram somente quando as abas forem clicadas e nenhum outro elemento. 
         // Isso é necessário, pois a função 'setActiveTabHandler' está sendo ativada ao clicarmos na div que engloba as abas, portanto se clicarmos em alguma parte fora da aba, como os espaços entre elas por exemplo, as ações ocorreriam diretamente na div e não na aba, o que gera um bug, por isso garantimos que isso não aconteça caso o target seja a div, que recebe como classe a regra 'products-select-container'. Já a primeira verificação é para garantir que a arrow seja removida da equação e também não receba as ações, já que o código procura pelos children e a arrow não possui nenhum, o que retornaria um erro.
         if (target.childNodes[1] && !target.className.match('Products_select_container')) { 
-            childrenArray.map(child => {
+            childrenArray.forEach(child => {
                 child.className = classes.Products_select
 
                 // Seta a arrow e o background branco como 'none' em todos os children.
-                Array.from(child.children).map(el => {
+                Array.from(child.children).forEach(el => {
                     el.style.display = 'none'
                 })
 

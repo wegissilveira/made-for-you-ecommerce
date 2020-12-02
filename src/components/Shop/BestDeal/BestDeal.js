@@ -48,8 +48,9 @@ const BestDeal = props => {
                 {
                     products.map((product, i) => {
                         // if (i >= imgSlide && i < imgSlide + 4) {
+                            let bestDealElement
                             if (product.deal) {
-                                return <div key={i} className="col-3" style={translateSlider}>
+                                bestDealElement = <div key={i} className="col-3" style={translateSlider}>
                                             <div className="border">
                                                 <Link to={"/shop/product/" + product._id}>
                                                     <div className={classes.Deal_image} >
@@ -63,6 +64,8 @@ const BestDeal = props => {
                                             </div>
                                         </div>
                             }
+
+                            return bestDealElement
                         // }
                     })
                 }

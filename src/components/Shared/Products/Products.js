@@ -34,8 +34,8 @@ const Products = props => {
         let productCartArr = [...props.cart]
 
         let productsCartIDs = []
-        productCartArr.map(item => {
-            productsData.map(product => {
+        productCartArr.forEach(item => {
+            productsData.forEach(product => {
                 if (item._id === product._id) {
                     productsCartIDs.push(item._id)
                 }
@@ -102,7 +102,7 @@ const Products = props => {
         let productsCartIDs = [...prodExistsCart]
 
         let count = 0
-        cartList.map(item => {
+        cartList.forEach(item => {
             if (item._id === product._id) count++
         })
         

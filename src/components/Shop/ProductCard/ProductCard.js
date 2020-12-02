@@ -19,18 +19,32 @@ const ProductCard = props => {
 
     const product = productsData.find(product => product._id === props.match.params.id)
 
-    let [prodExists, setProdExists] = React.useState(0)
+    let [isProductInBag, setProdExists] = React.useState(() => {
+        let productCartArr = [...props.cart]
+        let prod = 0
+
+        productCartArr.map(item => 
+            item._id === product._id ? prod++ : null
+        )
+
+        return prod
+
+    })
+
+    // let [prodExists, setProdExists] = React.useState(0)
 
     // Controla a state 'prodExists' para definir qual botão será mostrado, o de adicionar item ou o de remover. 
     // Caso 'prodExists' sejam mantido 0 significa que o item não existe na sacola, então será mostrado o botão de adicionar.
-    React.useEffect(() => {
-        let productCartArr = [...props.cart]
+    // React.useEffect(() => {
+    //     let productCartArr = [...props.cart]
 
-        productCartArr.map(item => {
-            if (item._id === product._id) setProdExists(++prodExists)
-        })
+    //     productCartArr.map(item => {
+    //         if (item._id === product._id) setProdExists(++prodExists)
+    //     })
 
-    }, [])
+    // }, [])
+
+    
     
     let [imgSlide, setImgSlide] = React.useState(0)
     let [productColor, setProductColor] = React.useState('') // => Armazena cor selecionada do produto
@@ -103,7 +117,7 @@ const ProductCard = props => {
         let productCartArr = [...props.cart]
 
         let count = 0
-        productCartArr.map(item => {
+        productCartArr.forEach(item => {
             if (item._id === product._id) count++
         })
 
@@ -207,7 +221,7 @@ const ProductCard = props => {
                                 changeQtdeCallBack={qtde => setQtdeHandler(qtde)}  
                                 max={8}
                             />
-                            { prodExists === 0 ?
+                            { isProductInBag === 0 ?
                                     <button 
                                         onClick={() => productCartHandler()}
                                         type="button"  

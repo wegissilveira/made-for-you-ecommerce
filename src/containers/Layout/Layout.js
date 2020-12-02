@@ -4,7 +4,7 @@ import classes from './Layout.module.css'
 
 import Footer from '../../components/Footer/Footer'
 
-import { NavLink as RRNavLink, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import GoogleFontLoader from 'react-google-font-loader'
@@ -66,6 +66,7 @@ class Layout extends Component {
         this.setState({translateMenuValue: 0})
 
         this.setState({translateSubmenuValue: -100})
+        this.setState({rotateIconSubmenuValue: 0})
         this.setState({showSubMenu: false})
 
     }

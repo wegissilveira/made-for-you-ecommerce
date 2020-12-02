@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef, useImperativeHandle } from 'react'
+import React, { forwardRef, useImperativeHandle } from 'react'
 
 import classes from './PriceSlider.module.css'
 
@@ -17,7 +17,7 @@ const PriceSlider = forwardRef((props, ref) => {
     const initial_min_value = props.minValue // => Valor inicial do preço mínimo
     const initial_max_value = props.maxValue // => Valor inicial do preço máximo
 
-    let [thumb1_position, setValueThumb1] =  React.useState(0)
+    let [thumb1_position, ] =  React.useState(0)
     let [thumb2_position, setValueThumb2] =  React.useState(0)
     let [mobile_thumb1_position, setValueMobileThumb1] =  React.useState(0)
     let [mobile_thumb2_position, setValueMobileThumb2] =  React.useState(0)

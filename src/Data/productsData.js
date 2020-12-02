@@ -21,7 +21,7 @@ const productsData = [
         price: '98.99',
         img: require('../assets/images/Products/molde-furniture.png'),
         tag: 'furniture',
-        category: 'bedroom',
+        category: 'living-room',
         imgsDemo: [
             require('../assets/images/ProductCard/Furniture/img-1.png'),
             require('../assets/images/ProductCard/Furniture/img-2.png'),
