@@ -241,7 +241,7 @@ const Products = props => {
                                                                             />
                                                                     }
                                                                     <Link to={"/shop/product/" + product._id} >
-                                                                        <div style={{height: '359px'}} className="d-flex align-items-center">
+                                                                        <div style={{height: '359px', backgroundColor: '#F6F6F6'}} className="d-flex align-items-center">
                                                                             <img 
                                                                                 src={product.img} alt="Produto" 
                                                                                 style={{maxWidth: '100%'}} 
