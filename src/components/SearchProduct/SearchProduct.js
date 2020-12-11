@@ -1,9 +1,13 @@
 import React, {Fragment} from 'react'
 
+import classes from './SearchProduct.module.css'
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 import ProductCardModal from '../Shop/ProductCardModal/ProductCardModal'
+import * as actionTypes from '../../store/actions/actionTypes'
 
 import productsData from '../../Data/productsData' 
 
@@ -41,8 +45,27 @@ const SearchProduct = props => {
         document.body.style.overflow = "visible"
     }
 
+    let [prodExistsCart, setProdExistsCart] = React.useState([])
+    
+    React.useEffect(() => {
+        // let productCartArr = [...cartState]
+        let productCartArr = [...props.cart]
 
+        let productsCartIDs = []
+        productCartArr.forEach(item => {
+            productsData.forEach(product => {
+                if (item._id === product._id) {
+                    productsCartIDs.push(item._id)
+                }
+            })
+            
+        })
 
+        setProdExistsCart(productsCartIDs)
+
+    }, [props.cart])
+
+    console.log(props.match.params.searchKey)
     return (
         <Fragment>
             <div className="session-container container">
@@ -56,22 +79,55 @@ const SearchProduct = props => {
                                 productsList = <Fragment key={product+i}>
                                                     <div className=" col-3 mt-4 pl-0">
                                                         <div className="border p-0">
-                                                                    <FontAwesomeIcon className="wishlist-icon" icon={['fas', 'heart']} size="2x" />
-                                                            <Link to={"/shop/product/" + product._id} >
-                                                                <img 
-                                                                    // onClick={() => setCard(i)} 
-                                                                    src={product.img} alt="Produto" 
-                                                                    style={{maxWidth: '100%'}} 
+                                                        {   props.wish.includes(product._id) ?
+                                                                <FontAwesomeIcon 
+                                                                    // onClick={() => wishlistHandler(product._id)} 
+                                                                    className={classes.Wishlist_icon_heart} 
+                                                                    icon={['fas', 'heart']} size="2x" 
                                                                 />
+                                                            :
+                                                                <FontAwesomeIcon 
+                                                                    // onClick={() => wishlistHandler(product._id)} 
+                                                                    className={classes.Wishlist_icon_heart} 
+                                                                    icon={['far', 'heart']} size="2x" 
+                                                                />
+                                                        }
+                                                            <Link to={"/shop/product/" + product._id} >
+                                                                <div 
+                                                                    style={{height: '359px', backgroundColor: '#F6F6F6'}} 
+                                                                    className="d-flex align-items-center"
+                                                                >
+                                                                    <img 
+                                                                        src={product.img} alt="Produto" 
+                                                                        style={{maxWidth: '100%'}} 
+                                                                    />
+                                                                </div>
                                                             </Link>
-                                                            <div className="products-description d-flex justify-content-between align-items-center">
-                                                                <div className="d-flex flex-column align-items-start products-description-icons">
+                                                            <div className={classes.Products_description}>
+                                                                <div className={classes.Products_description_name}>
                                                                     <p>{product.name}</p>
                                                                     <p>$ {product.price}</p>
                                                                 </div>
-                                                                <div className="d-flex justify-content-between align-items-center products-description-icons">
-                                                                    <FontAwesomeIcon onClick={() => setCard(i)} icon="eye" />
-                                                                    <FontAwesomeIcon icon="suitcase" size="2x" />
+                                                                <div className={classes.Products_description_icons}>
+                                                                    <FontAwesomeIcon 
+                                                                        icon="eye" 
+                                                                        className={classes.Products_description_eye} 
+                                                                    />
+
+                                                                   {
+                                                                        prodExistsCart.includes(product._id) ?
+                                                                            <FontAwesomeIcon 
+                                                                                // onClick={() => cartHandler(product)}
+                                                                                className={classes.Wishlist_icon_bag_selected} 
+                                                                                icon="shopping-bag" size="2x"
+                                                                            />
+                                                                        :
+                                                                            <FontAwesomeIcon 
+                                                                                // onClick={() => cartHandler(product)}
+                                                                                className={classes.Wishlist_icon_bag} 
+                                                                                icon="shopping-bag" size="2x" 
+                                                                            />
+                                                                    }
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -93,7 +149,7 @@ const SearchProduct = props => {
                     : <h1 className="text-center" style={{width: '100%'}}>NENHUM ITEM NA WISHLIST</h1>}
 
                 </div>
-                {
+                {/* {
                     products.length >= count ?
                         <div className="d-flex justify-content-between products-show-container">
                             <div className="products-show">
@@ -120,11 +176,52 @@ const SearchProduct = props => {
                             </div>
                         </div>
                     : null
-                }
+                } */}
+                <div className={classes.Products_show_container}>
+                    <div className={classes.Products_show}>
+                        <div className={classes.Products_show_text}>
+                            <button 
+                                disabled={count >= products.length} 
+                                type="button" 
+                                className="btn border-success" 
+                                onClick={() => setCount(count + 4)}
+                                > SHOW MORE
+                            </button>
+                        </div>
+                    </div>
+                    <div className={classes.Products_show}>
+                        <div className={classes.Products_show_text}>
+                            <button 
+                                disabled={count <= pageLimit || products.length <= pageLimit} 
+                                type="button" 
+                                className="btn border-danger" 
+                                onClick={() => setCount(count - 4)}
+                                > SHOW MENOS
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </Fragment>
     )
 }
 
-export default SearchProduct
+// export default SearchProduct
+
+const mapStateToProps = state => {
+    return {
+        wish: state.wishlistState,
+        cart: state.cartListState
+    }
+}
+
+// const mapDispatchToProps = dispatch => {
+//     return {
+//         onWishlistState: () => dispatch({type: actionTypes.WISHLIST, value: wishlistDataFn()}),
+//         onCartListState: () => dispatch({type: actionTypes.CARTLIST, value: cartListDataFn()})
+//     }
+// }
+
+
+export default connect(mapStateToProps)(SearchProduct)

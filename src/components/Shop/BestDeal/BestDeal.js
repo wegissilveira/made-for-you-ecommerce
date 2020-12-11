@@ -54,7 +54,7 @@ const BestDeal = props => {
                                             <div className="border">
                                                 <Link to={"/shop/product/" + product._id}>
                                                     <div className={classes.Deal_image} >
-                                                        <img src={product.img} alt="img-deal" />
+                                                        <img src={product.img} alt="img-deal" style={{maxWidth: '100%'}} />
                                                     </div>
                                                 </Link>
                                                 <div className={classes.Products_description}>

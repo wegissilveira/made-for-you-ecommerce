@@ -134,60 +134,80 @@ const Products = props => {
     // Caso utilizemos diretamente o array completo quando alguma tag estiver selecionada isso fará com que só sejam mostrados os itens que ocupam indexes inferiores ao valor de 'count', 
     // O que é perfeito em caso de todos os produtos estarem sendo mostrados, mas que criaria fileiras incompletas quando se seleciona alguma tag
     // Além disso, antes de entrar nas verificações de tags e categorias é checado se se trata da página de favoritos (wishlist). Caso esse seja o caso é realizado um filter e retornado somente os produtos cujo o id exista na tabela de wishlist.
-    let products 
-    if (props.wishlist) {
-        // products = productsData.filter(product => wishlistState.includes(product._id))
-        products = productsData.filter(product => props.wish.includes(product._id))
+    let products = []
+
+    if (props.match && props.match.params.searchKey) {
+        let searchKey = new RegExp(props.match.params.searchKey, 'gi') 
+
+        productsData.forEach(product => {
+            for (let i in product) {
+                if (i !== 'imgsDemo' && i !== 'img' && i !== 'deal') {
+                    if (product[i].toString().match(searchKey)) {
+                        products.push(product)
+                    }
+                }
+
+            }
+        })
+        
+        category = 'all'
 
     } else {
 
-        if (tag === 'all' && category === 'all') {
-            products = productsData
-        } else if (tag === 'all' && category !== 'all') {
-            products = productsData.filter(item => item.category === category)
-        } else if (tag !== 'all' && category === 'all') {
-            products = productsData.filter(item => item.tag === tag)
-        } else if (tag !== 'all' && category !== 'all') {
-            products = productsData.filter(item => item.tag === tag)
-            products = products.filter(item => item.category === category)
+        if (props.wishlist) {
+            // products = productsData.filter(product => wishlistState.includes(product._id))
+            products = productsData.filter(product => props.wish.includes(product._id))
+
+        } else {
+
+            if (tag === 'all' && category === 'all') {
+                products = productsData
+            } else if (tag === 'all' && category !== 'all') {
+                products = productsData.filter(item => item.category === category)
+            } else if (tag !== 'all' && category === 'all') {
+                products = productsData.filter(item => item.tag === tag)
+            } else if (tag !== 'all' && category !== 'all') {
+                products = productsData.filter(item => item.tag === tag)
+                products = products.filter(item => item.category === category)
+            }
         }
-    }
 
-    //Determina o intervalo de preços que os produtos devem aparecer, por exemplo, maior que 50 e menor que 500
-    if (props.valueRange) {
-        products = products.filter(product => 
-            parseFloat(product.price) >= props.valueRange[0] && parseFloat(product.price) <= props.valueRange[1]
-        )
-    }
-
-    // Determina os produtos que devem ser exibidos baseado na cor selecionada, ou seja, serão mostrados somente os produtos que possuem uma variação da cor desejada
-    if (props.productColor && props.productColor !== '') {
-        products = products.filter(product => 
-            product.colors.includes(props.productColor)
-        )
-    }
-
-    // Seleciona os produtos pelo tipo de oferta
-    if (props.offer && props.offer.length > 0) {
-        products = products.filter(product => 
-            props.offer.includes(product.offer))
-    }
- 
-    // Ordena produtos
-    if (props.order) {
-        if (props.order === 'low-high') {
-            products.sort((a,b) => parseFloat(a.price) - parseFloat(b.price))
-        } else if (props.order === 'high-low') {
-            products.sort((a,b) => parseFloat(b.price) - parseFloat(a.price))
-        } else if (props.order === 'alphabetical') {
-            products.sort((a, b) => a.name.localeCompare(
-                b.name,
-                undefined,
-                { numeric: true, sensitivity: 'base' }
-            ));
+        //Determina o intervalo de preços que os produtos devem aparecer, por exemplo, maior que 50 e menor que 500
+        if (props.valueRange) {
+            products = products.filter(product => 
+                parseFloat(product.price) >= props.valueRange[0] && parseFloat(product.price) <= props.valueRange[1]
+            )
         }
-    }
+
+        // Determina os produtos que devem ser exibidos baseado na cor selecionada, ou seja, serão mostrados somente os produtos que possuem uma variação da cor desejada
+        if (props.productColor && props.productColor !== '') {
+            products = products.filter(product => 
+                product.colors.includes(props.productColor)
+            )
+        }
+
+        // Seleciona os produtos pelo tipo de oferta
+        if (props.offer && props.offer.length > 0) {
+            products = products.filter(product => 
+                props.offer.includes(product.offer))
+        }
     
+        // Ordena produtos
+        if (props.order) {
+            if (props.order === 'low-high') {
+                products.sort((a,b) => parseFloat(a.price) - parseFloat(b.price))
+            } else if (props.order === 'high-low') {
+                products.sort((a,b) => parseFloat(b.price) - parseFloat(a.price))
+            } else if (props.order === 'alphabetical') {
+                products.sort((a, b) => a.name.localeCompare(
+                    b.name,
+                    undefined,
+                    { numeric: true, sensitivity: 'base' }
+                ));
+            }
+        }
+    }
+
     // Abre e fecha o filtro
     const openModalHandler = i => {
         setShowProduct(!showProduct)
@@ -205,19 +225,17 @@ const Products = props => {
         document.body.style.overflow = "visible"
     }
     
-
-
     
     return (
         <Fragment>
             <div className="container">
-                {props.match ? <h1 className="text-center">{category.toUpperCase()}</h1> : null}
+                {props.match && props.match.params.cat ? <h1 className="text-center">{category.toUpperCase()}</h1> : null}
+                {props.match && props.match.params.searchKey ? <h1 className="text-center">BUSCA: '{props.match.params.searchKey.toUpperCase()}'</h1> : null}
                 <div className="row">
                     {/* Corrigir key */}
                     {/* Funcionando perfeitamente, mas ainda falta melhorar a transição quando clicamos em 'SHOW MORE' */}
                     {products.length > 0 ?
                         products.map((product, i) => {
-
                             let productsList
                             // O loop é executado somente se os itens forem menores que 'count', variável que determina quantos itens serão mostrados na tela, isso garante que não sejam exibidos todos os itens de uma vez e que o usuário tenha o controle de incrementar ou diminuir 'count'
                             if (i + 1 <= count) {

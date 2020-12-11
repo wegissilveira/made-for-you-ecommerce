@@ -17,25 +17,29 @@ const MainPageHeader = props => {
 
     let mainSlides = [
         {
-            img: require('../../../assets/images/Header/MainSlider/imgSlider1-mainpage.png'),
+            img: require('../../../assets/images/Header/MainSlider/imgSlider1-mainpage.jpg'),
+            // img: require('../../../assets/images/Header/MainSlider/imgSlider1-mainpage.png'),
             alt: 'Produto 1',
             linkText: ['LIVING ROOM DECOR COLLECTION', 'Start from $ 199.99'],
             cat: 'living-room/'
         },
         {
-            img: require('../../../assets/images/Header/MainSlider/imgSlider2-mainpage.png'),
+            img: require('../../../assets/images/Header/MainSlider/imgSlider2-mainpage.jpg'),
+            // img: require('../../../assets/images/Header/MainSlider/imgSlider2-mainpage.png'),
             alt: 'Produto 2',
             linkText: ['KITCHEN DECORATION', 'Start from $ 50.00'],
             cat: 'kitchen'
         },
         {
-            img: require('../../../assets/images/Header/MainSlider/imgSlider3-mainpage.png'),
+            img: require('../../../assets/images/Header/MainSlider/imgSlider3-mainpage.jpg'),
+            // img: require('../../../assets/images/Header/MainSlider/imgSlider3-mainpage.png'),
             alt: 'Produto 3',
             linkText: ['BATHROOM UTILITIES', 'Max price $ 200.99'],
             cat: 'bathroom'
         },
         {
-            img: require('../../../assets/images/Header/MainSlider/imgSlider4-mainpage.png'),
+            img: require('../../../assets/images/Header/MainSlider/imgSlider4-mainpage.jpg'),
+            // img: require('../../../assets/images/Header/MainSlider/imgSlider4-mainpage.png'),
             alt: 'Produto 4',
             linkText: ['BEDROOM PIECES', 'Start from $ 40.99'],
             cat: 'bedroom'
@@ -47,25 +51,29 @@ const MainPageHeader = props => {
             img: require('../../../assets/images/Header/MinorSlider/imgSolo1-mainpage.png'),
             alt: 'Produto 1',
             linkText: ['STERLING VASE GRAY', '$ 19.99'],
-            productId: 1
+            productId: 1,
+            backgroundColor: 'rgb(151, 105, 105)'
         },
         {
             img: require('../../../assets/images/Header/MinorSlider/imgSolo2-mainpage.png'),
             alt: 'Produto 2',
             linkText: ['DOG HOUSE', '$ 199.99'],
-            productId: 5
+            productId: 5,
+            backgroundColor: '#fad3e0'
         },
         {
             img: require('../../../assets/images/Header/MinorSlider/imgSolo3-mainpage.png'),
             alt: 'Produto 3',
             linkText: ['RED CHAIR', '$ 499.99'],
-            productId: 8
+            productId: 8,
+            backgroundColor: '#ccc'
         },
         {
             img: require('../../../assets/images/Header/MinorSlider/imgSolo4-mainpage.png'),
             alt: 'Produto 4',
             linkText: ['BEAUTIFUL BED', '$ 999.99'],
-            productId: 14
+            productId: 14,
+            backgroundColor: 'rgb(238, 225, 183)'
         },
     ]
     
@@ -125,7 +133,7 @@ const MainPageHeader = props => {
             <div className="container-fluid d-flex">
                 <div className="col-6 container-fluid d-flex align-items-center" style={{height:'700px'}}>
                     <div style={{height:'65%', width:'25%'}}></div>
-                    <div className={classes.MinorSlider_container}>
+                    <div className={classes.MinorSlider_container} style={{backgroundColor: minorSlides[minorSlideImg].backgroundColor}}>
                         <img 
                             src={minorSlides[minorSlideImg].img}
                             alt={"img-1"} 

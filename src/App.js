@@ -93,7 +93,8 @@ function App() {
           <ScrollToTop />
             <Switch>
               <Route path="/" exact component={MainPageConfig} />
-              <Route path="/search/:searchKey" exact component={SearchProduct} />
+              {/* <Route path="/search/:searchKey" exact component={SearchProduct} /> */}
+              <Route path="/search/:searchKey" exact component={Products} />
               <Route path="/shop/" exact component={ShopConfig} />
               <Route path="/shop/:cat" exact component={Products} />
               <Route path="/shop/product/:id" exact component={ProductCard} />
