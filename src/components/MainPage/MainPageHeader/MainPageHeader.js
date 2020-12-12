@@ -50,29 +50,29 @@ const MainPageHeader = props => {
         {
             img: require('../../../assets/images/Header/MinorSlider/imgSolo1-mainpage.png'),
             alt: 'Produto 1',
-            linkText: ['STERLING VASE GRAY', '$ 19.99'],
-            productId: 1,
+            linkText: ['PRODUTO 5', '$ 19.99'],
+            productId: 5,
             backgroundColor: 'rgb(151, 105, 105)'
         },
         {
             img: require('../../../assets/images/Header/MinorSlider/imgSolo2-mainpage.png'),
             alt: 'Produto 2',
-            linkText: ['DOG HOUSE', '$ 199.99'],
-            productId: 5,
+            linkText: ['PRODUTO 13', '$ 199.99'],
+            productId: 13,
             backgroundColor: '#fad3e0'
         },
         {
             img: require('../../../assets/images/Header/MinorSlider/imgSolo3-mainpage.png'),
             alt: 'Produto 3',
-            linkText: ['RED CHAIR', '$ 499.99'],
-            productId: 8,
+            linkText: ['PRODUTO 10', '$ 499.99'],
+            productId: 10,
             backgroundColor: '#ccc'
         },
         {
             img: require('../../../assets/images/Header/MinorSlider/imgSolo4-mainpage.png'),
             alt: 'Produto 4',
-            linkText: ['BEAUTIFUL BED', '$ 999.99'],
-            productId: 14,
+            linkText: ['PRODUTO 11', '$ 999.99'],
+            productId: 11,
             backgroundColor: 'rgb(238, 225, 183)'
         },
     ]

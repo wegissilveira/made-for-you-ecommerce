@@ -12,13 +12,13 @@ const mainPageShopByRoom  = props => {
             <div className="d-flex justify-content-center mt-5">
                 <div className={classes.Shop_img_container}>
                     <div style={{overflow: 'hidden', marginBottom: '8px'}}>
-                        <Link to={'/shop/bedroom'}>
+                        <Link to={'/shop/living-room'}>
                             {/* <img src={require("../../../assets/images/Shop/quadro-1-pequeno.png")} alt="img-1" /> */}
                             <img src={require("../../../assets/images/Shop/quadro-1-pequeno.jpg")} alt="img-1" />
                         </Link>
                     </div>
                     <div style={{height: '54%', overflow: 'hidden'}}>
-                        <Link to={'/shop/bathroom'}>
+                        <Link to={'/shop/kitchen'}>
                             <img src={require("../../../assets/images/Shop/quadro-3-grande.png")} alt="img-2" />
                             {/* <img src={require("../../../assets/images/Shop/quadro-3-grande.jpg")} alt="img-2" /> */}
                         </Link>
@@ -26,13 +26,13 @@ const mainPageShopByRoom  = props => {
                 </div>
                 <div className={classes.Shop_img_container}>
                     <div style={{height: '54%', overflow: 'hidden', marginBottom: '8px'}}>
-                        <Link to={'/shop/living-room'}>
+                        <Link to={'/shop/bathroom'}>
                             {/* <img src={require("../../../assets/images/Shop/quadro-2-grande.png")} alt="img-2" /> */}
                             <img src={require("../../../assets/images/Shop/quadro-2-grande.jpg")} alt="img-2" />
                         </Link>
                     </div>
                     <div style={{overflow: 'hidden'}}>
-                        <Link to={'/shop/kitchen'}>
+                        <Link to={'/shop/bedroom'}>
                             <img src={require("../../../assets/images/Shop/quadro-4-pequeno.png")} alt="img-4" />
                             {/* <img src={require("../../../assets/images/Shop/quadro-4-pequeno.jpg")} alt="img-4" /> */}
                         </Link>

@@ -28,6 +28,7 @@ const Filter = props => {
 
     let [translateValue, setTranslateValue] = React.useState(-110)
     let [translateProductsValue, setTranslateProductsValue] = React.useState(-436)
+    let [marginT, setMarginT] = React.useState(-436)
 
     /* Slider Price */
     const sliderRef = React.useRef()
@@ -61,8 +62,9 @@ const Filter = props => {
     }
 
     const translateProducts = {
-        transform: `translateY(${translateProductsValue}px)`,   
-        transition: '.8s ease-in-out'
+        // transform: `translateY(${translateProductsValue}px)`,   
+        transition: '.8s ease-in-out',
+        marginTop: marginT+'px'
     }
 
     const openFilterHandler = () => {
@@ -70,6 +72,7 @@ const Filter = props => {
 
         translateValue < 0 ? setTranslateValue(0) : setTranslateValue(-110)
         translateProductsValue < 0 ? setTranslateProductsValue(0) : setTranslateProductsValue(-436)
+        marginT < 0 ? setMarginT(0) : setMarginT(-436)
     }
 
     const setPriceRange = values => {
@@ -357,16 +360,16 @@ const Filter = props => {
 
                 {/* </Animated> : null} */}
                 <div style={translateProducts}>
-                <Products
-                    // products={products} // => Envia o array com os produtos que serão exibidos
-                    pageLimit={12}  // => Número limite de produtos a serem mostrados inicialmente
-                    tag={tag} // => Tag que determina quais produtos serão mostrados
-                    category={category} // => Categoria dos produtos que serão mostrados
-                    valueRange={[min_value, max_value]} // => Intervalo de preço que determinará os produtos que serão mostrados
-                    productColor={productColor} // => Filtra o produto por cor
-                    offer={offer} // => Filtra os produtos por tipo de oferta
-                    order={order}
-                />
+                    <Products
+                        // products={products} // => Envia o array com os produtos que serão exibidos
+                        pageLimit={12}  // => Número limite de produtos a serem mostrados inicialmente
+                        tag={tag} // => Tag que determina quais produtos serão mostrados
+                        category={category} // => Categoria dos produtos que serão mostrados
+                        valueRange={[min_value, max_value]} // => Intervalo de preço que determinará os produtos que serão mostrados
+                        productColor={productColor} // => Filtra o produto por cor
+                        offer={offer} // => Filtra os produtos por tipo de oferta
+                        order={order}
+                    />
                 </div>
             </div>
         </Fragment>

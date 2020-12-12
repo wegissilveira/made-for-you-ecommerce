@@ -12,7 +12,6 @@ import Products from './components/Shared/Products/Products'
 import UserLogin from './components/User/UserLogin/UserLogin'
 import UserSignUp from './components/User/UserSignUp/UserSignUp'
 import Contact from './components/Contact/Contact'
-import SearchProduct from './components/SearchProduct/SearchProduct'
 
 import ScrollToTop from './HOC/ScrollToTop'
 
@@ -93,7 +92,6 @@ function App() {
           <ScrollToTop />
             <Switch>
               <Route path="/" exact component={MainPageConfig} />
-              {/* <Route path="/search/:searchKey" exact component={SearchProduct} /> */}
               <Route path="/search/:searchKey" exact component={Products} />
               <Route path="/shop/" exact component={ShopConfig} />
               <Route path="/shop/:cat" exact component={Products} />
