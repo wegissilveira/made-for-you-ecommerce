@@ -266,7 +266,7 @@ const Filter = props => {
                     </div>
                     <div className={classes.Filter_sort}>
                         {/* Decidir se esta parte ficará realmente aqui, já que depende do 'length' de 'products' que foi retornado pelo filtro. Também pensar se é necessário, talvez eu simplesmente insira o total de produtos retornados */}
-                        <p>Showing 1 - 9 of 19 (ILUSTRATIVO)</p>
+                        {/* <p>Showing 1 - 9 of 19 (ILUSTRATIVO)</p> */}
                         <p>Sort by</p>
                         <select 
                             onChange={e => setOrder(e.target.value)} 

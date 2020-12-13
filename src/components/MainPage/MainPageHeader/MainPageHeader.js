@@ -52,28 +52,28 @@ const MainPageHeader = props => {
             alt: 'Produto 1',
             linkText: ['PRODUTO 5', '$ 19.99'],
             productId: 5,
-            backgroundColor: 'rgb(151, 105, 105)'
+            bg: 'rgb(151, 105, 105)'
         },
         {
             img: require('../../../assets/images/Header/MinorSlider/imgSolo2-mainpage.png'),
             alt: 'Produto 2',
             linkText: ['PRODUTO 13', '$ 199.99'],
             productId: 13,
-            backgroundColor: '#fad3e0'
+            bg: '#fad3e0'
         },
         {
             img: require('../../../assets/images/Header/MinorSlider/imgSolo3-mainpage.png'),
             alt: 'Produto 3',
             linkText: ['PRODUTO 10', '$ 499.99'],
             productId: 10,
-            backgroundColor: '#ccc'
+            bg: '#ccc'
         },
         {
             img: require('../../../assets/images/Header/MinorSlider/imgSolo4-mainpage.png'),
             alt: 'Produto 4',
             linkText: ['PRODUTO 11', '$ 999.99'],
             productId: 11,
-            backgroundColor: 'rgb(238, 225, 183)'
+            bg: 'rgb(238, 225, 183)'
         },
     ]
     
@@ -130,35 +130,38 @@ const MainPageHeader = props => {
 
     return (
         <Fragment>
-            <div className="container-fluid d-flex">
-                <div className="col-6 container-fluid d-flex align-items-center" style={{height:'700px'}}>
-                    <div style={{height:'65%', width:'25%'}}></div>
-                    <div className={classes.MinorSlider_container} style={{backgroundColor: minorSlides[minorSlideImg].backgroundColor}}>
+            <div className={classes.Header_container}>
+                <div className={classes.MinorSlider_container}>
+                    <div></div>
+                    <div 
+                        className={classes.MinorSlider_subContainer} 
+                        style={{backgroundColor: minorSlides[minorSlideImg].bg}}
+                    >
                         <img 
                             src={minorSlides[minorSlideImg].img}
                             alt={"img-1"} 
                         />
                         <div>
                             <Link to={'/shop/product/' + minorSlides[minorSlideImg].productId} >
-                                <p className="font-weight-bold">{minorSlides[minorSlideImg].linkText[0]}</p>
+                                <p>{minorSlides[minorSlideImg].linkText[0]}</p>
                                 <p>{minorSlides[minorSlideImg].linkText[1]}</p>
                             </Link>
                         </div>
                     </div>
-                    <div style={{height:'65%', width:'40%'}}></div>
+                    <div></div>
                 </div>
-                <div style={{height:'700px', overflow: 'hidden', padding: '0'}}>                
-                    <div className={classes.MainSlider_container} style={translateSlider}>
+                <div  className={classes.MainSlider_container}>                
+                    <div className={classes.MainSlider_subContainer} style={translateSlider}>
                     
                         {mainSlides.map( (img, i) =>
-                            <div key={i} style={{width: '100%'}}>
+                            <div>
                                 <img 
                                     src={img.img} 
                                     alt={img.alt} 
                                 />
                                 <div className={classes.MainSlider_link_container}>
                                     <Link to={'/shop/' + img.cat}>
-                                        <p className="font-weight-bold">{img.linkText[0]}</p>
+                                        <p>{img.linkText[0]}</p>
                                         <p>{img.linkText[1]}</p>
                                     </Link>
                                 </div>
@@ -177,26 +180,24 @@ const MainPageHeader = props => {
                     </div>
                 </div>
             </div>
-            <div className={`row ${classes.Header_text}`}>
-                {/* <div> */}
-                    <ProgressBar 
-                        bars={minorSlides.length} // => Qtde de barras
-                        timer={5000} // => Tempo do loop
-                        change={changeSlideCallbackHandler} // => Função que controla a passagem automática de slides
-                        auto={true} // => Determina se a passagem de slides e barras será automática
-                        direction={'column'} // => Orientação dos pontos, horizontal ou vertical
-                        height={150} // => Altura que o bloco de pontos ocupará
-                    />
-                {/* </div> */}
-                <div className={`col-4 ${classes.Header_title}`}>
+            <div className={classes.Header_text}>
+                <ProgressBar 
+                    bars={minorSlides.length} // => Qtde de barras
+                    timer={5000} // => Tempo do loop
+                    change={changeSlideCallbackHandler} // => Função que controla a passagem automática de slides
+                    auto={true} // => Determina se a passagem de slides e barras será automática
+                    direction={'column'} // => Orientação dos pontos, horizontal ou vertical
+                    height={150} // => Altura que o bloco de pontos ocupará
+                />
+                <div className={classes.Header_title}>
                     <p>MADE</p>
                     <p>FOR YOU</p>
                 </div>
-                <div className="d-flex flex-column align-items-center">
-                    <FontAwesomeIcon icon={['fab', 'facebook-f']} className={classes.Icons}/>
-                    <FontAwesomeIcon icon={['fab', 'instagram']} className={classes.Icons} />
-                    <FontAwesomeIcon icon={['fab', 'vk']} className={classes.Icons} />
-                    <FontAwesomeIcon icon={['fab', 'twitter']} className={classes.Icons} />
+                <div className={classes.Icons_container}>
+                    <FontAwesomeIcon icon={['fab', 'facebook-f']}/>
+                    <FontAwesomeIcon icon={['fab', 'instagram']} />
+                    <FontAwesomeIcon icon={['fab', 'vk']} />
+                    <FontAwesomeIcon icon={['fab', 'twitter']} />
                 </div>
             </div>
         </Fragment>

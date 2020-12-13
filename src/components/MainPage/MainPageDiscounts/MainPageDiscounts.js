@@ -21,7 +21,7 @@ const mainPageDiscounts = props => {
                     </div>
                     <img src={require('../../../assets/images/Discounts/quadro-3.png')} alt="discount-img" />
                 </div>
-                <div className={`pr-3 ${classes.Discounts_quadros_container}`}>
+                <div className={`${classes.Discounts_quadros_container}`}>
                     <img src={require('../../../assets/images/Discounts/quadro-2.png')} alt="discount-img" />
                     <div className="border">
                         <div className="p-5">

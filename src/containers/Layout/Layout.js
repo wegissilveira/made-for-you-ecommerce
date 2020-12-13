@@ -295,7 +295,7 @@ class Layout extends Component {
                                 <span className="text-warning">y</span>Home
                             </NavLink>
 
-                            {<div className="col-4 d-none d-md-block">
+                        <div className="col-4 d-none d-md-block">
                             <div className="d-flex justify-content-between">
                                 <p className="mb-0">+375 29 364-74-69</p>
 
@@ -368,7 +368,7 @@ class Layout extends Component {
                                     </NavLink>
                                 </ul> */}
                             </div>
-                        </div>}
+                        </div>
                     </div>
                 </nav>
                 
