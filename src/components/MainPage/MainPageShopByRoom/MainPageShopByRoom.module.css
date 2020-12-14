@@ -3,13 +3,57 @@
     margin-bottom: 80px;
 }
 
-.Shop_img_container {
-    width: 600px;
-    padding-left: 8px;
+.Session_container > h1 {
+    text-align: center;
 }
 
-.Shop_img_container a img {
-    /* padding-bottom: 8px; */
+.ShoppingByRoom_container {
+    display: flex;
+    justify-content: center;
+    margin-top: 48px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+@media (max-width: 991.98px) {
+    .ShoppingByRoom_container {
+        flex-direction: column;
+    }
+}
+
+.ShoppingByRoom_container > div {
+    width: 600px;
+}
+
+.ShoppingByRoom_container > div:first-of-type {
+    padding-right: 8px;
+}
+
+@media (max-width: 991.98px) {
+    .ShoppingByRoom_container > div {
+        width: 100%;
+    }
+    
+    .ShoppingByRoom_container > div:first-of-type {
+        padding-right: 0;
+        margin-bottom: 8px;
+    }
+}
+
+.ShoppingByRoom_container > div > div {
+    overflow: hidden;
+}
+
+.ShoppingByRoom_container > div > div:first-of-type {
+    margin-bottom: 8px;
+}
+
+.ShoppingByRoom_container > div:first-of-type div:nth-of-type(2),
+.ShoppingByRoom_container > div:nth-of-type(2) div:first-of-type {
+    height: 54%;
+}
+
+.ShoppingByRoom_container > div a img {
     max-width: 100%;
 
     transform: scale(1, 1);
@@ -25,12 +69,13 @@
     -o-transition: transform 0.6s ease-in-out;
 }
 
-.Shop_img_container a img:hover {
+.ShoppingByRoom_container > div a img:hover {
     transform: scale(1.1);
     -webkit-transform: scale(1.1);
     -moz-transform: scale(1.1);
     -ms-transform: scale(1.1);
     -o-transform: scale(1.1);
+
     transition: transform 0.6s ease-in-out;
     -webkit-transition: transform 0.6s ease-in-out;
     -moz-transition: transform 0.6s ease-in-out;
