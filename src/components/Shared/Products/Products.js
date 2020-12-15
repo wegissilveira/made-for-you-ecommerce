@@ -317,25 +317,23 @@ const Products = props => {
 
                 </div>
                 <div className={classes.Products_show_container}>
-                    <div className={classes.Products_show}>
-                        <div className={classes.Products_show_text}>
+                    <div className={classes.Products_show_subContainer}>
+                        <div>
                             <button 
                                 disabled={count >= products.length} 
                                 type="button" 
-                                className="btn border-success" 
                                 onClick={() => setCount(count + 4)}
                                 > SHOW MORE
                             </button>
                         </div>
                     </div>
-                    <div className={classes.Products_show}>
-                        <div className={classes.Products_show_text}>
+                    <div className={classes.Products_show_subContainer}>
+                        <div>
                             <button 
                                 disabled={count <= pageLimit || products.length <= pageLimit} 
                                 type="button" 
-                                className="btn border-danger" 
                                 onClick={() => setCount(count - 4)}
-                                > SHOW MENOS
+                                > SHOW LESS
                             </button>
                         </div>
                     </div>

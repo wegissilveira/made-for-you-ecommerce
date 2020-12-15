@@ -38,6 +38,13 @@
     margin-left: 12.5%;
 }
 
+@media (max-width: 1199.98px) {
+    .Products_container {
+        width: 90%;
+        margin-left: 5%;
+    }
+}
+
 .Products_container > h1 {
     text-align: center;
 }
@@ -50,9 +57,22 @@
 .Products_subContainer > div {
     flex-basis: 25%;
     flex-shrink: 0;
-    padding-right: 15px;
+    padding-left: 7px;
+    padding-right: 7px;
     margin-top: 24px;
     position: relative;
+}
+
+@media (max-width: 1579.98px) {
+    .Products_subContainer > div {
+        flex-basis: 33%;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .Products_subContainer > div {
+        flex-basis: 50%;
+    }
 }
 
 .Products_subContainer > div > div {
@@ -65,6 +85,12 @@
 
     height: 359px;
     background-color: #F6F6F6;
+}
+
+@media (max-width: 767.98px) {
+    .Products_img_container {
+        height: 300px;
+    }
 }
 
 .Products_img_container > img {
@@ -121,26 +147,48 @@
     margin-left: 30%;
 }
 
-.Products_show{
+@media (max-width: 991.98px) {
+    .Products_show_container {
+        width: 60%;
+        margin-left: 20%;
+    }
+}
+
+.Products_show_subContainer{
     margin-top: 50px;
     text-align: center;
     
 }
 
-.Products_show_text button {
+.Products_show_subContainer > div > button {
     width: 131px;
     height: 131px;
     margin: auto;
+    background-color: #fff;
     color: #3A3A3A;
-    border: 1px solid #bbbbbb;
-    border-radius: 50%;
     cursor: pointer;
+
+    border-radius: 50%;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
 }
 
-.Products_show_text button:focus {
+.Products_show_subContainer:first-of-type  > div> button {
+    border: solid 1px #28a745;
+}
+
+.Products_show_subContainer:nth-of-type(2) > div > button {
+    border: solid 1px #dc3545;
+}
+
+.Products_show_subContainer > div > button:focus {
     outline: none;
+}
+
+.Products_show_subContainer > div > button:disabled {
+    border: solid 1px rgb(170, 169, 169);
+    color: rgb(179, 179, 179);
+    cursor: default;
 }
