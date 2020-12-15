@@ -63,16 +63,16 @@ const Products = props => {
         category = props.category
     // } else if (props.match.params.cat !== undefined) {
     } else if (props.match) {
-        tag = 'all'
+        tag = 'all-products'
         category = props.match.params.cat
     } else if (props.tag) {
         tag = props.tag
         category = 'all'
     } else if (props.category) {
-        tag = 'all'
+        tag = 'all-products'
         category = props.category
     } else {
-        tag = 'all'
+        tag = 'all-products'
         category = 'all'
     }
     
@@ -160,13 +160,13 @@ const Products = props => {
 
         } else {
 
-            if (tag === 'all' && category === 'all') {
+            if (tag === 'all-products' && category === 'all') {
                 products = productsData
-            } else if (tag === 'all' && category !== 'all') {
+            } else if (tag === 'all-products' && category !== 'all') {
                 products = productsData.filter(item => item.category === category)
-            } else if (tag !== 'all' && category === 'all') {
+            } else if (tag !== 'all-products' && category === 'all') {
                 products = productsData.filter(item => item.tag === tag)
-            } else if (tag !== 'all' && category !== 'all') {
+            } else if (tag !== 'all-products' && category !== 'all') {
                 products = productsData.filter(item => item.tag === tag)
                 products = products.filter(item => item.category === category)
             }
@@ -240,7 +240,7 @@ const Products = props => {
                             // O loop é executado somente se os itens forem menores que 'count', variável que determina quantos itens serão mostrados na tela, isso garante que não sejam exibidos todos os itens de uma vez e que o usuário tenha o controle de incrementar ou diminuir 'count'
                             if (i + 1 <= count) {
                                 // Mostra o item relacionado à aba clicada, furniture, textile ou decorations
-                                if (tag === 'all' || product.tag === tag) {
+                                if (tag === 'all-products' || product.tag === tag) {
                                     if (category === 'all' || product.category === category) {
                                         productsList = <Fragment key={product+i}>
                                                             <div className=" col-3 mt-4 pl-0">
