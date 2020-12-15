@@ -228,10 +228,11 @@ const Products = props => {
     
     return (
         <Fragment>
-            <div className="container">
-                {props.match && props.match.params.cat ? <h1 className="text-center">{category.toUpperCase()}</h1> : null}
-                {props.match && props.match.params.searchKey ? <h1 className="text-center">BUSCA: '{props.match.params.searchKey.toUpperCase()}'</h1> : null}
-                <div className="row">
+            {/* <div className="container"> */}
+            <div className={classes.Products_container}>
+                {props.match && props.match.params.cat ? <h1>{category.toUpperCase()}</h1> : null}
+                {props.match && props.match.params.searchKey ? <h1>BUSCA: '{props.match.params.searchKey.toUpperCase()}'</h1> : null}
+                <div className={classes.Products_subContainer}>
                     {/* Corrigir key */}
                     {/* Funcionando perfeitamente, mas ainda falta melhorar a transição quando clicamos em 'SHOW MORE' */}
                     {products.length > 0 ?
@@ -243,8 +244,8 @@ const Products = props => {
                                 if (tag === 'all-products' || product.tag === tag) {
                                     if (category === 'all' || product.category === category) {
                                         productsList = <Fragment key={product+i}>
-                                                            <div className=" col-3 mt-4 pl-0">
-                                                                <div className="border p-0">
+                                                            <div>
+                                                                <div>
                                                                     {   props.wish.includes(product._id) ?
                                                                             <FontAwesomeIcon 
                                                                                 onClick={() => wishlistHandler(product._id)} 
@@ -259,23 +260,22 @@ const Products = props => {
                                                                             />
                                                                     }
                                                                     <Link to={"/shop/product/" + product._id} >
-                                                                        <div style={{height: '359px', backgroundColor: '#F6F6F6'}} className="d-flex align-items-center">
+                                                                        <div className={classes.Products_img_container}>
                                                                             <img 
-                                                                                src={product.img} alt="Produto" 
-                                                                                style={{maxWidth: '100%'}} 
+                                                                                src={product.img} 
+                                                                                alt="Produto" 
                                                                             />
                                                                         </div>
                                                                     </Link>
                                                                     <div className={classes.Products_description}>
-                                                                        <div className={classes.Products_description_name}>
+                                                                        <div>
                                                                             <p>{product.name}</p>
                                                                             <p>$ {product.price}</p>
                                                                         </div>
-                                                                        <div className={classes.Products_description_icons}>
+                                                                        <div>
                                                                             <FontAwesomeIcon 
                                                                                 onClick={() => openModalHandler(i)} 
                                                                                 icon="eye" 
-                                                                                className={classes.Products_description_eye} 
                                                                             />
                                                                             
                                                                             {
