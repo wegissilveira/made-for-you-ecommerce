@@ -14,3 +14,15 @@
 .ReactModal__Overlay--before-close{
     opacity: 0;
 }
+
+@media (max-width: 1579.98px) {
+    .ReactModal__Content {
+        width: 75% !important;
+    }
+}
+
+@media (max-width: 1199.98px) {
+    .ReactModal__Content {
+        width: 90% !important;
+    }
+}

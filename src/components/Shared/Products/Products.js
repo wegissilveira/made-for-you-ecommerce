@@ -297,7 +297,7 @@ const Products = props => {
                                                                 </div>
                                                                 
                                                             </div>
-                                                            { productIndex === i ? 
+                                                            {/* { productIndex === i ?  */}
                                                                 <ProductCardModal 
                                                                     showProduct={showProduct}
                                                                     setShowProduct={closeModalCallback}
@@ -306,7 +306,7 @@ const Products = props => {
                                                                     imgs={product.imgsDemo} 
                                                                     name={product.name}
                                                                 /> 
-                                                            : null }
+                                                            {/* : null } */}
                                                         </Fragment>
                                     }
                                 }

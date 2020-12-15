@@ -38,6 +38,11 @@ const ProductCardModal = props => {
 
     let [isProductInBag, setProdExists] = React.useState(0)
 
+    let bag_button_color = isProductInBag === 0 ? classes.Bag_button_green : classes.Bag_button_red
+    let bag_button_text = isProductInBag === 0 ? 'ADD TO BAG' : 'REMOVE FROM BAG'
+
+    let heart_Icon = props.wish.includes(props.product._id) ? 'fas' : 'far'
+
     React.useEffect(() => {
         let productCartArr = [...props.cart]
         
@@ -151,7 +156,7 @@ const ProductCardModal = props => {
     return (
         <Fragment>
             <Modal
-                isOpen={props.showProduct}
+                isOpen={!props.showProduct}
                 onRequestClose={() => props.setShowProduct()}
                 style={customStyles}
                 contentLabel="Product Card"
@@ -159,12 +164,15 @@ const ProductCardModal = props => {
                 closeTimeoutMS={500}
             >
 
-                <div className="container-fluid d-flex" style={{paddingRight: '35px'}}>
-                    <p className={classes.Product_card_modal_exit} onClick={() => props.setShowProduct()}>
+                <div className={classes.Product_card_modal_container}>
+                    <p onClick={() => props.setShowProduct()}>
                         <FontAwesomeIcon icon="times" />
                     </p>
-                    <div className="col-6 pl-0 pr-0 mr-4" style={{overflow: 'hidden'}}>
-                        <div className={classes.Main_img_slider} style={translateSlider}>
+                    <div>
+                        <div 
+                            className={classes.Main_img_slider} 
+                            style={translateSlider}
+                        >
                             {props.product.imgsDemo.map((slide, i) => 
                                 <img 
                                     key={i} 
@@ -173,7 +181,7 @@ const ProductCardModal = props => {
                                 />
                             )}
                         </div>
-                        <div className="d-flex row justify-content-between mt-4 ml-1">
+                        <div className={classes.ProgressBar_container}>
                             <ProgressBar 
                                 bars={props.product.imgsDemo.length}
                                 auto={true}
@@ -183,29 +191,29 @@ const ProductCardModal = props => {
                             />
                         </div>
                     </div>
-                    <div className="col-6">
-                        <h1 className="mt-1">{props.product.name}</h1>
+                    <div>
+                        <h1>{props.product.name}</h1>
                         <p>A comfortable bed for the dog. It will bring a lot of pleasure to your pet. High quality material does not allow the wool to stick and easy to clean.</p>
-                        <div className={`mt-4 ${classes.Product_details_container_modal}`}>
-                            <h3 className="mb-0">$ {props.product.price}</h3>
-                            <div className={`text-success ${classes.Product_price_availability}`}>
+                        <div>
+                            <h3>$ {props.product.price}</h3>
+                            <div className={classes.Product_price_availability}>
                                 <FontAwesomeIcon icon="check" />
                                 <p>Available</p>
                             </div>
                         </div>
-                        <div className={`row mt-4 ${classes.Product_details_container_modal}`}>
-                            <div className="col-6">
+                        <div>
+                            <div>
                                 <p>Size</p>
                                 <select 
                                     onChange={e => setSize(e.target.value)}
-                                    className={`mt-2 border-bottom ${classes.Product_details_select}`}
+                                    className={classes.Product_details_select}
                                 >
                                     <option value="100x100">100x100 cm</option>
                                     <option value="200x200">200x200 cm</option>
                                     <option value="300x300">300x300 cm</option>
                                 </select>
                             </div>
-                            <div className="col-6">
+                            <div>
                                 <p>Color</p>
                                 <ColorSelect
                                     colors={props.product.colors}
@@ -213,45 +221,29 @@ const ProductCardModal = props => {
                                 />
                             </div>
                         </div>
-                        <div className={`mt-4 ${classes.Product_qtde_container_modal}`}>
-                            <ProductsQtde changeQtdeCallBack={qtde => setQtdeHandler(qtde)} />
-                            { isProductInBag === 0 ?
-                                    <button 
-                                        onClick={() => addProductToBagHandler()}
-                                        type="button" 
-                                        className="btn btn-success"
-                                    > ADD TO BAG
-                                    </button>   
-                                :
-                                    <button 
-                                        onClick={() => addProductToBagHandler()}
-                                        type="button" 
-                                        className="btn btn-danger"
-                                    > REMOVE FROM BAG
-                                    </button>
-                            }   
-                            {   props.wish.includes(props.product._id) ?
-                                    <FontAwesomeIcon 
-                                        onClick={() => wishlistHandler(props.product._id)} 
-                                        className={classes.Wishlist_icon_alt} 
-                                        icon={['fas', 'heart']} size="2x" 
-                                    />
-                                :
-                                    <FontAwesomeIcon 
-                                        onClick={() => wishlistHandler(props.product._id)} 
-                                        className={classes.Wishlist_icon_alt} 
-                                        icon={['far', 'heart']} size="2x" 
-                                    />
-                            }
+                        <div>
+                            <ProductsQtde changeQtdeCallBack={qtde => setQtdeHandler(qtde)} /> 
+
+                            <button 
+                                onClick={() => addProductToBagHandler()}
+                                type="button" 
+                                className={bag_button_color}
+                            > {bag_button_text}
+                            </button> 
+
+                            <FontAwesomeIcon 
+                                onClick={() => wishlistHandler(props.product._id)} 
+                                icon={[heart_Icon, 'heart']} size="2x" 
+                            />
                         </div>
                         
-                        <div className="d-flex justify-content-between align-items-end mt-1">
-                            <div className={`mt-3 ${classes.Product_category_container}`}>
-                                <p>Category: <span className="font-weight-bold">{props.product.category}</span></p>
-                                <p>Tags: <span className="font-weight-bold">{props.product.tag}</span></p>
+                        <div>
+                            <div>
+                                <p>Category: <span>{props.product.category}</span></p>
+                                <p>Tags: <span>{props.product.tag}</span></p>
                             </div>
-                            <div className="d-flex justify-content-end align-items-center">
-                                <FontAwesomeIcon icon="share-alt" className="mr-4" />
+                            <div>
+                                <FontAwesomeIcon icon="share-alt"/>
                                 <p style={{margin: '0'}}>Share</p>
                             </div>
                         </div>
