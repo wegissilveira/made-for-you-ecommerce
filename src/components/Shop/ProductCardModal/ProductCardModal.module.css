@@ -18,6 +18,12 @@
     padding-right: 15px;
 }
 
+@media (max-width: 767.98px) {
+    .Product_card_modal_container {
+        flex-direction: column;
+    }
+}
+
 .Product_card_modal_container > p {
     position: absolute;
     right: 0;
@@ -38,8 +44,24 @@
     overflow: hidden;
 }
 
+@media (max-width: 767.98px) {
+    .Product_card_modal_container > div:first-of-type {
+        order: 1;
+    }
+}
+
 .ProgressBar_container {
     display: flex;
+}
+
+@media (max-width: 767.98px) {
+    .ProgressBar_container {
+        justify-content: center;
+    }
+
+    .ProgressBar_container > div {
+        width: 40%;
+    }
 }
 
 .Product_card_modal_container > div:nth-of-type(2) > div {
@@ -48,6 +70,22 @@
     align-items: center;
     width: 70%;
     margin-top: 24px;
+}
+
+@media (max-width: 991.98px) {
+    .Product_card_modal_container > div:nth-of-type(2) > div {
+        width: 90%;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .Product_card_modal_container > div:nth-of-type(2) > *:not(h1) {
+        display: none;
+    }
+
+    .Product_card_modal_container > div:nth-of-type(2) > h1 {
+        text-align: center;
+    }
 }
 
 .Product_card_modal_container > div:nth-of-type(2) > div > h3 {
@@ -101,6 +139,16 @@
     -webkit-border-radius: 0;
 }
 
+@media (max-width: 991.98px) {
+    .Product_card_modal_container > div > div:nth-of-type(3) > div {
+        width: 30%;
+    }
+
+    .Product_card_modal_container > div > div:nth-of-type(3) button {
+        width: 65%;
+    }
+}
+
 .Bag_button_green {
     background-color: #218838;
 }
@@ -122,9 +170,21 @@
     cursor: pointer;
 }
 
+@media (max-width: 991.98px) {
+    .Product_card_modal_container > div > div:nth-of-type(3) > svg {
+        display: none;
+    }
+}
+
 .Product_card_modal_container > div > div:nth-of-type(4) {
     width: unset;
     margin-top: 4px;
+}
+
+@media (max-width: 991.98px) {
+    .Product_card_modal_container > div > div:nth-of-type(4) {
+        display: none;
+    }
 }
 
 .Product_card_modal_container > div > div:nth-of-type(4) > div:first-of-type {

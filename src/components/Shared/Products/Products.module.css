@@ -102,11 +102,11 @@
     margin: 0;
 }
 
-.Products_description > div:nth-of-type(2) > svg {
+.Products_description > div:nth-of-type(2) > svg:first-of-type {
     color: grey;
 }
 
-.Products_description > div:nth-of-type(2) > svg:hover {
+.Products_description > div:nth-of-type(2) > svg:first-of-type:hover {
     color: rgb(0, 153, 255);
 }
 

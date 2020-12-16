@@ -38,8 +38,8 @@ const ProductCardModal = props => {
 
     let [isProductInBag, setProdExists] = React.useState(0)
 
-    let bag_button_color = isProductInBag === 0 ? classes.Bag_button_green : classes.Bag_button_red
-    let bag_button_text = isProductInBag === 0 ? 'ADD TO BAG' : 'REMOVE FROM BAG'
+    const bag_button_color = isProductInBag === 0 ? classes.Bag_button_green : classes.Bag_button_red
+    const bag_button_text = isProductInBag === 0 ? 'ADD TO BAG' : 'REMOVE FROM BAG'
 
     let heart_Icon = props.wish.includes(props.product._id) ? 'fas' : 'far'
 
@@ -156,7 +156,7 @@ const ProductCardModal = props => {
     return (
         <Fragment>
             <Modal
-                isOpen={!props.showProduct}
+                isOpen={props.showProduct}
                 onRequestClose={() => props.setShowProduct()}
                 style={customStyles}
                 contentLabel="Product Card"

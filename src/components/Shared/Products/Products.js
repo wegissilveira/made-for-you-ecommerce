@@ -23,14 +23,9 @@ const Products = props => {
     let [pageLimit, setPageLimit] = React.useState(props.pageLimit)
     let [showProduct, setShowProduct] = React.useState(false)
     let [productIndex, setProductIndex] = React.useState(null)
-
-    // let [wishlistState, setWishlist] = React.useState(props.wish)
-    
-    // let [cartState, setCart] = React.useState(cartListDataFn)
     let [prodExistsCart, setProdExistsCart] = React.useState([])
     
     React.useEffect(() => {
-        // let productCartArr = [...cartState]
         let productCartArr = [...props.cart]
 
         let productsCartIDs = []
@@ -61,7 +56,6 @@ const Products = props => {
     if (props.tag && props.category) {
         tag = props.tag
         category = props.category
-    // } else if (props.match.params.cat !== undefined) {
     } else if (props.match) {
         tag = 'all-products'
         category = props.match.params.cat
@@ -79,7 +73,6 @@ const Products = props => {
     // Update da state wishlist quando o botão é clicado pelo usuário
     const wishlistHandler = id => {
 
-        // let list = [...wishlistState]
         let list = [...props.wish]
         if (list.includes(id)) {
             list = list.filter(item => item !== id)
@@ -87,8 +80,6 @@ const Products = props => {
             list.push(id)
         }
         
-        // setWishlist(list)
-
         localStorage.setItem('wishlist', JSON.stringify(list))
 
         props.onWishlistState() // => enviando o dispatch
@@ -97,7 +88,6 @@ const Products = props => {
     // Update da state cart quando o botão é clicado pelo usuário
     const cartHandler = product => {
 
-        // let cartList = [...cartState]
         let cartList = [...props.cart]
         let productsCartIDs = [...prodExistsCart]
 
@@ -122,7 +112,6 @@ const Products = props => {
             productsCartIDs = productsCartIDs.filter(item => item !== product._id)
         }      
         
-        // setCart(cartList)
         setProdExistsCart(productsCartIDs)
 
         localStorage.setItem('cartList', JSON.stringify(cartList))
@@ -155,7 +144,6 @@ const Products = props => {
     } else {
 
         if (props.wishlist) {
-            // products = productsData.filter(product => wishlistState.includes(product._id))
             products = productsData.filter(product => props.wish.includes(product._id))
 
         } else {
@@ -228,7 +216,6 @@ const Products = props => {
     
     return (
         <Fragment>
-            {/* <div className="container"> */}
             <div className={classes.Products_container}>
                 {props.match && props.match.params.cat ? <h1>{category.toUpperCase()}</h1> : null}
                 {props.match && props.match.params.searchKey ? <h1>BUSCA: '{props.match.params.searchKey.toUpperCase()}'</h1> : null}
@@ -243,22 +230,20 @@ const Products = props => {
                                 // Mostra o item relacionado à aba clicada, furniture, textile ou decorations
                                 if (tag === 'all-products' || product.tag === tag) {
                                     if (category === 'all' || product.category === category) {
+
+                                        const wish_icon = props.wish.includes(product._id) ? 'fas' : 'far'
+                                        const bag_icon_color = prodExistsCart.includes(product._id) ?
+                                            classes.Wishlist_icon_bag_selected :
+                                            classes.Wishlist_icon_bag
+
                                         productsList = <Fragment key={product+i}>
                                                             <div>
                                                                 <div>
-                                                                    {   props.wish.includes(product._id) ?
-                                                                            <FontAwesomeIcon 
-                                                                                onClick={() => wishlistHandler(product._id)} 
-                                                                                className={classes.Wishlist_icon_heart} 
-                                                                                icon={['fas', 'heart']} size="2x" 
-                                                                            />
-                                                                        :
-                                                                            <FontAwesomeIcon 
-                                                                                onClick={() => wishlistHandler(product._id)} 
-                                                                                className={classes.Wishlist_icon_heart} 
-                                                                                icon={['far', 'heart']} size="2x" 
-                                                                            />
-                                                                    }
+                                                                    <FontAwesomeIcon 
+                                                                        onClick={() => wishlistHandler(product._id)} 
+                                                                        icon={[wish_icon, 'heart']} size="2x" 
+                                                                        className={classes.Wishlist_icon_heart} 
+                                                                    />
                                                                     <Link to={"/shop/product/" + product._id} >
                                                                         <div className={classes.Products_img_container}>
                                                                             <img 
@@ -277,27 +262,17 @@ const Products = props => {
                                                                                 onClick={() => openModalHandler(i)} 
                                                                                 icon="eye" 
                                                                             />
-                                                                            
-                                                                            {
-                                                                                prodExistsCart.includes(product._id) ?
-                                                                                    <FontAwesomeIcon 
-                                                                                        onClick={() => cartHandler(product)}
-                                                                                        className={classes.Wishlist_icon_bag_selected} 
-                                                                                        icon="shopping-bag" size="2x"
-                                                                                    />
-                                                                                :
-                                                                                    <FontAwesomeIcon 
-                                                                                        onClick={() => cartHandler(product)}
-                                                                                        className={classes.Wishlist_icon_bag} 
-                                                                                        icon="shopping-bag" size="2x" 
-                                                                                    />
-                                                                            }
+                                                                            <FontAwesomeIcon
+                                                                                onClick={() => cartHandler(product)}
+                                                                                icon="shopping-bag" size="2x"
+                                                                                className={bag_icon_color} 
+                                                                            />
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 
                                                             </div>
-                                                            {/* { productIndex === i ?  */}
+                                                            { productIndex === i ? 
                                                                 <ProductCardModal 
                                                                     showProduct={showProduct}
                                                                     setShowProduct={closeModalCallback}
@@ -306,7 +281,7 @@ const Products = props => {
                                                                     imgs={product.imgsDemo} 
                                                                     name={product.name}
                                                                 /> 
-                                                            {/* : null } */}
+                                                            : null }
                                                         </Fragment>
                                     }
                                 }
