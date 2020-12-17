@@ -1,4 +1,4 @@
-import React, { forwardRef, useImperativeHandle } from 'react'
+import React, { forwardRef, useImperativeHandle, Fragment } from 'react'
 
 import classes from './PriceSlider.module.css'
 
@@ -99,9 +99,11 @@ const PriceSlider = forwardRef((props, ref) => {
     
     const handleChange = e => {
 
+        // const thumb_id = e.target.id
         const thumb_class = e.target.className
-
+        
         if (thumb_class.includes('left-thumb')) {
+        // if (thumb_id === 'left-thumb') {
 
             slider = thumb_1_Ref.current;
             slider_price = price_thumb_1_Ref.current;
@@ -116,6 +118,7 @@ const PriceSlider = forwardRef((props, ref) => {
             }
 
         } else if (thumb_class.includes('right-thumb')) {
+        // } else if (thumb_id === 'right-thumb') {
             
             slider = thumb_2_Ref.current;
             slider_price = price_thumb_2_Ref.current;
@@ -137,47 +140,29 @@ const PriceSlider = forwardRef((props, ref) => {
     return (
             <div>
                 <h6 style={{marginBottom: '35px'}}>PRICE FILTER</h6>
-                <div className={classes.Range_container}
+                <div className={classes.Price_slider_container}
                     onMouseMove={(e) => handleChange(e)}
                     ref={sliderRef}
                 >
-                    <div className={classes.Range}
-
-                    >
+                    <div>
                         {/* 'left-thumb' e 'right-thumb' não são classes de estilos, existem simplesmente como referência para os métodos 'slide' e 'handleChange'*/}
                         <span 
-                            className="rounded-circle left-thumb"
-                            style={{
-                                width:'15px',
-                                height: '15px',
-                                backgroundColor: 'red',
-                                marginTop: '-6px',
-                                marginLeft: thumb1_position - 7 + 'px'
-                            }}
+                            // id="left-thumb"
+                            className="left-thumb"
+                            style={{marginLeft: thumb1_position - 7 + 'px'}}
                             ref={thumb_1_Ref}
                         ></span>
                         <span 
-                            className="rounded-circle right-thumb"
-                            style={{
-                                width:'15px',
-                                height: '15px',
-                                backgroundColor: 'black',
-                                marginTop: '-6px',
-                                marginLeft: thumb2_position - 7 + 'px'
-                            }}
+                            // id="right-thumb"
+                            className="right-thumb"
+                            style={{marginLeft: thumb2_position - 7 + 'px'}}
                             ref={thumb_2_Ref}
                         ></span>
-                        <p style={{
-                            marginLeft: thumb1_position - 15 + 'px',
-                            position: 'absolute',
-                            marginTop: '15px'}}
+                        <p style={{marginLeft: thumb1_position - 15 + 'px'}}
                             ref={price_thumb_1_Ref}
                         > {Math.floor(min_value)}
                         </p>
-                        <p style={{
-                            marginLeft: thumb2_position - 20 + 'px',
-                            position: 'absolute',
-                            marginTop: '-35px'}}
+                        <p style={{marginLeft: thumb2_position - 20 + 'px'}}
                             ref={price_thumb_2_Ref}
                         > {Math.floor(max_value)}
                         </p>

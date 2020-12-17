@@ -69,7 +69,7 @@ const Products = props => {
         tag = 'all-products'
         category = 'all'
     }
-    
+
     // Update da state wishlist quando o botão é clicado pelo usuário
     const wishlistHandler = id => {
 
@@ -142,21 +142,25 @@ const Products = props => {
         category = 'all'
 
     } else {
-
+        
         if (props.wishlist) {
             products = productsData.filter(product => props.wish.includes(product._id))
-
+            
         } else {
-
+            
             if (tag === 'all-products' && category === 'all') {
                 products = productsData
+    
             } else if (tag === 'all-products' && category !== 'all') {
                 products = productsData.filter(item => item.category === category)
+    
             } else if (tag !== 'all-products' && category === 'all') {
                 products = productsData.filter(item => item.tag === tag)
+            
             } else if (tag !== 'all-products' && category !== 'all') {
                 products = productsData.filter(item => item.tag === tag)
                 products = products.filter(item => item.category === category)
+    
             }
         }
 
@@ -212,11 +216,18 @@ const Products = props => {
     } else {
         document.body.style.overflow = "visible"
     }
-    
-    
+
+    const url_string = window.location.href
+    const url = new URL(url_string);
+
+    const products_container = 
+        url.pathname === '/shop/' ? 
+            {width: '100%', margin: '0'} : 
+            classes.Products_container
+        
     return (
         <Fragment>
-            <div className={classes.Products_container}>
+            <div className={products_container}>
                 {props.match && props.match.params.cat ? <h1>{category.toUpperCase()}</h1> : null}
                 {props.match && props.match.params.searchKey ? <h1>BUSCA: '{props.match.params.searchKey.toUpperCase()}'</h1> : null}
                 <div className={classes.Products_subContainer}>
@@ -230,7 +241,6 @@ const Products = props => {
                                 // Mostra o item relacionado à aba clicada, furniture, textile ou decorations
                                 if (tag === 'all-products' || product.tag === tag) {
                                     if (category === 'all' || product.category === category) {
-
                                         const wish_icon = props.wish.includes(product._id) ? 'fas' : 'far'
                                         const bag_icon_color = prodExistsCart.includes(product._id) ?
                                             classes.Wishlist_icon_bag_selected :

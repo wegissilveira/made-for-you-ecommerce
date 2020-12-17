@@ -99,6 +99,11 @@
 
     margin-top: 24px;
 }
+@media (max-width: 767.98px) {
+    .SubFooter {
+        justify-content: center;
+    }
+}
 
 .SubFooter p {
     margin: 0;
@@ -128,6 +133,5 @@
 @media (max-width: 767.98px) {
     .SubFooter div {
         display: none;
-        justify-content: center;
     }
 }

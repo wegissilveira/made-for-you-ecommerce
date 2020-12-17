@@ -154,7 +154,7 @@ const MainPageHeader = props => {
                     <div className={classes.MainSlider_subContainer} style={translateSlider}>
                     
                         {mainSlides.map( (img, i) =>
-                            <div>
+                            <div key={i}>
                                 <img 
                                     src={img.img} 
                                     alt={img.alt} 

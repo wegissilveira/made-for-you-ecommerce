@@ -26,9 +26,11 @@ const Filter = props => {
 
     let [filterOpen, setFilterOpen] =  React.useState(false)
 
-    let [translateValue, setTranslateValue] = React.useState(-110)
+    // let [translateValue, setTranslateValue] = React.useState(-110)
+    let [translateValue, setTranslateValue] = React.useState(0)
     let [translateProductsValue, setTranslateProductsValue] = React.useState(-436)
-    let [marginT, setMarginT] = React.useState(-436)
+    // let [marginT, setMarginT] = React.useState(-436)
+    let [marginT, setMarginT] = React.useState(0)
 
     /* Slider Price */
     const sliderRef = React.useRef()
@@ -42,7 +44,7 @@ const Filter = props => {
     /* */
 
     /* Demais filtros */
-    let [tag, setTag] = React.useState('all')
+    let [tag, setTag] = React.useState('all-products')
     let [category, setCategory] = React.useState('all')
     let [checkColor, setCheckColor] =  React.useState(true)
     let [productColor, setProductColor] = React.useState('') // => Armazena cor selecionada do produto
@@ -164,12 +166,6 @@ const Filter = props => {
 
         let elementsArr = Array.from(e.target.parentNode.children)
 
-        // elementsArr.map(element => {
-        //     element.style.fontWeight = 'normal'
-        //     console.log('map:')
-        //     console.log(element)
-        // })
-
         elementsArr.forEach(element => {
             element.style.fontWeight = 'normal'
         })
@@ -241,28 +237,23 @@ const Filter = props => {
 
     const filterButtonStyle = [classes.Filter_button, classes.Filter_button_active]
 
+    const filter_toggle = 
+        filterOpen === false ? 
+            ['OPEN FILTERS', 'filter'] :
+            ['CLOSE FILTERS', 'times']
+
 
 
 
     return (
         <Fragment>
             <div className={classes.Filter_container}>
-                <div className="d-flex justify-content-between">
+                <div>
                     <div onClick={() => openFilterHandler()}
-                        className={`border ${classes.Filter_switch}`}
+                        className={classes.Filter_toggle}
                     >
-                        { filterOpen === false ?
-                            <Fragment>
-                                <FontAwesomeIcon icon="filter"/>
-                                <p>OPEN FILTERS</p>
-                            </Fragment>
-                          :
-                            <Fragment>
-                                <FontAwesomeIcon icon="times" />
-                                <p>CLOSE FILTERS</p>
-                            </Fragment>
-                        }
-
+                        <FontAwesomeIcon icon={filter_toggle[1]}/>
+                        <p>{filter_toggle[0]}</p>
                     </div>
                     <div className={classes.Filter_sort}>
                         {/* Decidir se esta parte ficará realmente aqui, já que depende do 'length' de 'products' que foi retornado pelo filtro. Também pensar se é necessário, talvez eu simplesmente insira o total de produtos retornados */}
@@ -271,7 +262,6 @@ const Filter = props => {
                         <select 
                             onChange={e => setOrder(e.target.value)} 
                             ref={selectRef}
-                            className={`border-bottom ${classes.Filter_sort_select}`}
                         >
                             <option value="default">Default Sorting</option>
                             <option value="low-high">Price: Low to High</option>
@@ -280,68 +270,80 @@ const Filter = props => {
                         </select>
                     </div>
                 </div>
-                {/* { filterOpen ?
-                <Animated
-                    animationIn="fadeIn"
-                    animationOut="fadeOut"
-                    isVisible={filterOpen}
-                >  */}
-                <div style={{overflow: 'hidden', paddingLeft: '2%', paddingRight: '2%'}}>
-                {/* { filterOpen ? <div> */}
-                    <div style={translateFilter}>
-                        <div className="mt-5 mb-5 d-flex justify-content-between row">
-                            <div className={classes.Sub_filter_type} ref={categoriesRef}>
+                <div>
+                    <div className={classes.Filter_subContainer} style={translateFilter}>
+                        <div>
+                            <div ref={categoriesRef}>
                                 <h6>CATEGORIES</h6>
-                                <p onClick={e => setProductTypeHandler(e, 'cat', 'all')} style={{fontWeight:'bold'}}>All categories ({categoriesTotalQtde}) </p>
+                                <p onClick={e => setProductTypeHandler(e, 'cat', 'all')}>All categories ({categoriesTotalQtde}) </p>
                                 <p onClick={e => setProductTypeHandler(e, 'cat', 'bedroom')}>Bedroom ({bedRoomQtde}) </p>
                                 <p onClick={e => setProductTypeHandler(e, 'cat', 'living-room')}>Living room ({livingRoomQtde}) </p>
                                 <p onClick={e => setProductTypeHandler(e, 'cat', 'kitchen')}>Kitchen ({kitchen}) </p>
                                 <p onClick={e => setProductTypeHandler(e, 'cat', 'bathroom')}>Bathroom ({bathRoomQtde}) </p>
                                 <p onClick={e => setProductTypeHandler(e, 'cat', 'children-room')}>Children's room ({childrenRoom}) </p>
                             </div>
-                            <div className={classes.Divider}></div>
-                            <div className={classes.Sub_filter_type} ref={typesRef}>
+                            <div></div>
+                            <div ref={typesRef}>
                                 <h6>TYPE</h6>
-                                <p onClick={e => setProductTypeHandler(e, 'type', 'all')} style={{fontWeight:'bold'}}>All tags ({typesTotalQtde}) </p>
+                                <p onClick={e => setProductTypeHandler(e, 'type', 'all-products')}>All tags ({typesTotalQtde}) </p>
                                 <p onClick={e => setProductTypeHandler(e, 'type', 'furniture')}>Furniture ({furnitureQtde}) </p>
                                 <p onClick={e => setProductTypeHandler(e, 'type', 'accessories')}>Accessories ({accessoriesQtde}) </p>
                                 <p onClick={e => setProductTypeHandler(e, 'type', 'decorations')}>Decorations ({decorationsQtde}) </p>
                                 <p onClick={e => setProductTypeHandler(e, 'type', 'textile')}>Textile ({textileQtde}) </p>
                                 <p onClick={e => setProductTypeHandler(e, 'type', 'lightning')}>Lighting ({lightingQtde}) </p>
                             </div>
-                            <div className={classes.Divider}></div>
-                            <div className="d-flex flex-column" ref={offerRef}>
+                            <div></div>
+                            <div ref={offerRef}>
                                 <h6>OUR OFFER</h6>
                                 <div>
-                                    <input type="checkbox" value="new" onChange={e => setOfferHandler(e)}/>
-                                    <label className="ml-2">New Products</label>
+                                    <input 
+                                        type="checkbox"    
+                                        value="new" 
+                                        onChange={e => setOfferHandler(e)}
+                                    />
+                                    <label>New Products</label>
                                 </div>
                                 <div>
-                                    <input type="checkbox" value="old" onChange={e => setOfferHandler(e)}/>
-                                    <label className="ml-2">Old Products</label>
+                                    <input 
+                                        type="checkbox"    
+                                        value="old" 
+                                        onChange={e => setOfferHandler(e)}
+                                    />
+                                    <label>Old Products</label>
                                 </div>
                                 <div>
-                                    <input type="checkbox" value="best-seller" onChange={e => setOfferHandler(e)}/>
-                                    <label className="ml-2">Best Sellers</label>
+                                    <input 
+                                        type="checkbox"    
+                                        value="best-seller" 
+                                        onChange={e => setOfferHandler(e)}
+                                    />
+                                    <label>Best Sellers</label>
                                 </div>
                                 <div>
-                                    <input type="checkbox" value="sales" onChange={e => setOfferHandler(e)}/>
-                                    <label className="ml-2">Sales</label>
+                                    <input 
+                                        type="checkbox"    
+                                        value="sales" 
+                                        onChange={e => setOfferHandler(e)}
+                                    />
+                                    <label>Sales</label>
                                 </div>
                             </div>
-                            <div className={classes.Divider}></div>
-                            <div className="col-3">
+                            <div></div>
+                            <div>
                                 <h6>COLOR</h6>
-                                <input type="checkbox" onChange={() => setCheckColorHandler(!checkColor)} checked={checkColor}/>
-                                <label className="ml-2">Todas as cores</label>
+                                <input 
+                                    type="checkbox" 
+                                    onChange={() => setCheckColorHandler(!checkColor)} 
+                                    checked={checkColor}
+                                />
+                                <label>Todas as cores</label>
                                 <ColorSelect
                                     title={'COLOR'}
                                     colors={['red', 'yellow', 'blue', 'purple', 'green']}
                                     selectColorHandlerCallback={(color) => selectColorHandler(color, false)}
                                 />
                             </div>
-                            <div className={classes.Divider}></div>
-
+                            <div></div>
                             <PriceSlider 
                                 rangeValues={setPriceRange} 
                                 ref={sliderRef}
@@ -349,16 +351,18 @@ const Filter = props => {
                                 maxValue={initial_max_value}
                             />
                         </div>
-                    {/* criar toggle entre os botões para serem ativos ou não */}
-                    <div className={classes.Filter_button_container}>
-                        <p className={filterButtonStyle.join(' ')}>FILTER</p>
-                        <p className={classes.Filter_button} onClick={() => cleanFiltersHandler()}>CLEAR ALL</p>
+                        {/* criar toggle entre os botões para serem ativos ou não */}
+                        <div>
+                            <p className={filterButtonStyle.join(' ')}>FILTER</p>
+                            <p 
+                                className={classes.Filter_button} 
+                                onClick={() => cleanFiltersHandler()}
+                            > CLEAR ALL
+                            </p>
+                        </div>
                     </div>
-                {/* </div> : null} */}
-                </div>
                 </div>
 
-                {/* </Animated> : null} */}
                 <div style={translateProducts}>
                     <Products
                         // products={products} // => Envia o array com os produtos que serão exibidos
