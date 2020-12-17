@@ -9,19 +9,10 @@ const footer = props => {
     return (
         <div className={classes.Session_container}>
             <div className={classes.Footer_container}>
-                <div className="
-                        container-fluid 
-                        p-0 
-                        m-0 
-                        row 
-                        d-flex 
-                        justify-content-between 
-                        border-bottom
-                    "
-                >
-                    <div className="col-3 pl-0">
+                <div>
+                    <div>
                         <h3>MENU</h3>
-                        <div className={`mt-4 ${classes.Footer_menu}`}>
+                        <div className={classes.Footer_menu}>
                             <ul>
                                 <li>Shop</li>
                                 <li>Features</li>
@@ -36,32 +27,32 @@ const footer = props => {
                             </ul>
                         </div>
                     </div>
-                    <div className="col-5 d-flex flex-column align-items-center">
+                    <div>
                         <h3>CONTACTS</h3>
-                        <div className="mt-4">
+                        <div>
                             <p>hello@myhome.com</p>
                             <p>+375 29 364-74-69</p>
                         </div>
                     </div>
-                    <div className="col-3 pr-0 d-flex flex-column align-items-end">
+                    <div>
                         <h3>STAY SOCIAL</h3>
-                        <div className={`mt-4 ${classes.Footer_staySocial_icons}`}>
+                        <div className={classes.Footer_staySocial_icons}>
                             <FontAwesomeIcon icon={['fab', 'twitter']} />
                             <FontAwesomeIcon icon={['fab', 'vk']} />
                             <FontAwesomeIcon icon={['fab', 'instagram']} />
                             <FontAwesomeIcon icon={['fab', 'facebook-f']} />
                         </div>
-                        <div className="mt-3">
+                        <div>
                             <p>We Work All The Holidays</p>
                         </div>
                     </div>
                 </div>
-                <div className={`mt-4 ${classes.SubFooter}`}>
+                <div className={classes.SubFooter}>
                     <p>Copyright &#169; All Rights Reserved</p>
-                    <div className={classes.Footer_cards_icons}>
-                        <FontAwesomeIcon icon={['fab', 'cc-mastercard']} size="4x" />
-                        <FontAwesomeIcon icon={['fab', 'cc-visa']} size="4x" />
-                        <FontAwesomeIcon icon={['fab', 'cc-paypal']} size="4x" />
+                    <div>
+                        <FontAwesomeIcon icon={['fab', 'cc-mastercard']} size="3x" />
+                        <FontAwesomeIcon icon={['fab', 'cc-visa']} size="3x" />
+                        <FontAwesomeIcon icon={['fab', 'cc-paypal']} size="3x" />
                     </div>
                 </div>
             </div>
