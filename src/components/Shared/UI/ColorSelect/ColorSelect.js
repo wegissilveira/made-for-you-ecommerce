@@ -45,25 +45,16 @@ const ColorSelect = props => {
 
                                 
     return (
-        <div className="d-flex justify-content-between">
+        // <div className="d-flex justify-content-between">
+        <div className={classes.Color_select_container}>
             {
                 props.colors.map((color, i) => {
                     return <div key={i} 
-                                // className="
-                                //     product-details-color 
-                                //     mt-2 
-                                //     rounded-circle 
-                                //     d-flex 
-                                //     justify-content-center 
-                                //     align-items-center
-                                // " 
-                                className={`mt-2 rounded-circle ${classes.Product_details_color}`}
                                 style={{border: border[i]}}
 
                                 onClick={() => selectColorHandler(color, i)}
                             >
                                 <span 
-                                    className="rounded-circle" 
                                     style={{backgroundColor: color, opacity: opacity[i]}}
                                 >
                                 </span>

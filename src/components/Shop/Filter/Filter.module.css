@@ -145,7 +145,7 @@
 }
 
 .Filter_subContainer > div:first-of-type > div:nth-of-type(7) {
-    flex-basis: 25%;
+    flex-basis: 20%;
     flex-shrink: 0;
     flex-grow: 0;
 }
@@ -166,6 +166,15 @@
 @media (max-width: 767.98px) {
     .Filter_subContainer > div:first-of-type > div:nth-of-type(odd) {
         flex-basis: 49.5%;
+    }
+    
+    .Filter_subContainer > div:first-of-type > div:nth-of-type(5) {
+        align-items: flex-start;
+        padding-left: 11%;
+    }
+    
+    .Filter_subContainer > div:first-of-type > div:nth-of-type(5) > h6 {
+        padding-left: 11%;
     }
 }
 
@@ -233,6 +242,12 @@ h6 {
     width: 200px;
     padding-top: 10px;
     cursor: pointer;
+}
+
+@media (max-width: 767.98px) {
+    .Filter_button {
+        width: 220px;
+    }
 }
 
 .Filter_button:hover {
