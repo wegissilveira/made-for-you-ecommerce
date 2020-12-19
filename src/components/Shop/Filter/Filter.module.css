@@ -93,6 +93,10 @@
     outline: none;
 }
 
+.Filter_container > div:nth-of-type(2) {
+    overflow: hidden;
+}
+
 .Filter_subContainer p {
     cursor: pointer;
 }
@@ -100,10 +104,12 @@
 .Filter_subContainer > div:first-of-type {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+
     margin-top: 48px;
     margin-bottom: 48px;
-
-    flex-wrap: wrap;
+    padding-right: 1%;
+    padding-left: 2%;
 }
 
 @media (max-width: 991.98px) {
@@ -140,12 +146,6 @@
     }
 }
 
-@media (max-width: 991.98px) {
-    .Filter_subContainer > div:first-of-type > div:last-of-type {
-        margin-left: 25%;
-    }
-}
-
 .Filter_subContainer > div:first-of-type > div:nth-of-type(7) {
     flex-basis: 20%;
     flex-shrink: 0;
@@ -165,18 +165,30 @@
     }
 }
 
-@media (max-width: 767.98px) {
+@media (max-width: 991.98px) {
     .Filter_subContainer > div:first-of-type > div:nth-of-type(odd) {
         flex-basis: 49.5%;
     }
     
     .Filter_subContainer > div:first-of-type > div:nth-of-type(5) {
         align-items: flex-start;
-        padding-left: 11%;
+        padding-left: 14%;
     }
     
     .Filter_subContainer > div:first-of-type > div:nth-of-type(5) > h6 {
         padding-left: 11%;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .Filter_subContainer > div:first-of-type > div:nth-of-type(5) {
+        padding-left: 11%;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .Filter_subContainer > div:first-of-type > div:last-of-type {
+        flex-basis: 100%;
     }
 }
 
@@ -218,6 +230,7 @@ h6 {
 @media (max-width: 1199.98px) {
     .Filter_subContainer > div:nth-of-type(2) {
         width: 55%;
+        margin-left: 22.5%;
     }
 }
 

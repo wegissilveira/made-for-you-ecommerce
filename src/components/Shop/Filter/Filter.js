@@ -40,7 +40,9 @@ const Filter = props => {
 
     let [min_value, setMinValue] =  React.useState(initial_min_value)
     let [max_value, setMaxValue] =  React.useState(initial_max_value)
-
+    
+    // console.log(min_value)
+    // console.log(max_value)
     /* */
 
     /* Demais filtros */
@@ -72,7 +74,7 @@ const Filter = props => {
     const openFilterHandler = () => {
         filterOpen ? setFilterOpen(false) : setFilterOpen(true)
 
-        translateValue < 0 ? setTranslateValue(0) : setTranslateValue(-125)
+        translateValue < 0 ? setTranslateValue(0) : setTranslateValue(-110)
         translateProductsValue < 0 ? setTranslateProductsValue(0) : setTranslateProductsValue(-436)
         marginT < 0 ? setMarginT(0) : setMarginT(-436)
     }
@@ -226,7 +228,7 @@ const Filter = props => {
         })
 
         setOrder('default')
-        setTag('all')
+        setTag('all-products')
         setCategory('all')
         setCheckColor(true)
         setProductColor('')
