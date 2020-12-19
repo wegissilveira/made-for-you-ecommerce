@@ -72,7 +72,7 @@ const Filter = props => {
     const openFilterHandler = () => {
         filterOpen ? setFilterOpen(false) : setFilterOpen(true)
 
-        translateValue < 0 ? setTranslateValue(0) : setTranslateValue(-110)
+        translateValue < 0 ? setTranslateValue(0) : setTranslateValue(-125)
         translateProductsValue < 0 ? setTranslateProductsValue(0) : setTranslateProductsValue(-436)
         marginT < 0 ? setMarginT(0) : setMarginT(-436)
     }

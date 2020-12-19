@@ -2,6 +2,8 @@
     width: 76%;
     margin-left: 12%;
     margin-bottom: 80px;
+
+    overflow: hidden;
 }
 
 @media (max-width: 1199.98px) {
