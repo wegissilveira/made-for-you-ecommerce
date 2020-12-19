@@ -3,11 +3,66 @@
     margin-bottom: 80px;
 }
 
+.Session_container > h1 {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
 .Products_container {
     display: flex;
     width: 75.8%;
     margin-left: 12.1%;
+    margin-bottom: 48px;
     overflow: hidden;
+}
+
+.Products_subContainer {
+    flex-basis: 25%;
+    flex-shrink: 0;
+    flex-grow: 0;
+    padding-left: 15px;
+    padding-right: 15px;
+
+    transition: 2s ease-in-out;
+    -webkit-transition: 2s ease-in-out;
+    -moz-transition: 2s ease-in-out;
+    -ms-transition: 2s ease-in-out;
+    -o-transition: 2s ease-in-out;
+}
+
+@media (max-width: 1579.98px) {
+    .Products_subContainer {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+}
+
+@media (max-width: 1199.98px) {
+    .Products_subContainer {
+        flex-basis: 33.3%;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .Products_subContainer {
+        flex-basis: 50%;
+        
+        transition: 1s ease-in-out;
+        -webkit-transition: 1s ease-in-out;
+        -moz-transition: 1s ease-in-out;
+        -ms-transition: 1s ease-in-out;
+        -o-transition: 1s ease-in-out;
+}
+}
+
+@media (max-width: 767.98px) {
+    .Products_subContainer {
+        flex-basis: 100%;
+    }
+}
+
+.Products_subContainer > div {
+    border: 1px solid #dee2e6;
 }
 
 .Products_description {
@@ -28,11 +83,19 @@
 
 /* Fazer com que imagem fique quadrada. Baseado na resposta: https://stackoverflow.com/questions/23400232/force-bootstrap-responsive-image-to-be-square/23518465#23518465 */
 
-.Deal_image{
+.Deal_image {
     position:relative;
     overflow:hidden;
     padding-bottom:100%;
+    background-color: #F6F6F6;
 }
-.Deal_image img{
+
+.Deal_image img {
     position:absolute;
+    max-width: 100%;
+}
+
+.Session_container > div:nth-of-type(2) {
+    display: flex;
+    justify-content: center;
 }

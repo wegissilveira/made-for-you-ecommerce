@@ -18,8 +18,7 @@ const BestDeal = props => {
 
     
     const translateSlider = {
-        transform: `translateX(${translateValue}%)`,
-        transition: '2s ease-in-out'
+        transform: `translateX(${translateValue}%)`
     }
 
     const changeSlide = arg => {
@@ -40,41 +39,43 @@ const BestDeal = props => {
     }
 
 
-
     return (
         <div className={classes.Session_container}>
-            <h1 className="text-center mb-5">BEST DEAL</h1>
-            <div className={`mb-5 ${classes.Products_container}`}>
+            <h1>BEST DEAL</h1>
+            <div className={classes.Products_container}>
                 {
                     products.map((product, i) => {
-                        // if (i >= imgSlide && i < imgSlide + 4) {
                             let bestDealElement
                             if (product.deal) {
-                                bestDealElement = <div key={i} className="col-3" style={translateSlider}>
-                                            <div className="border">
-                                                <Link to={"/shop/product/" + product._id}>
-                                                    <div className={classes.Deal_image} >
-                                                        <img src={product.img} alt="img-deal" style={{maxWidth: '100%'}} />
-                                                    </div>
-                                                </Link>
-                                                <div className={classes.Products_description}>
-                                                    <p>{product.name}</p>
-                                                    <p>{product.price}</p>
+                                bestDealElement = 
+                                    <div    
+                                        key={i} 
+                                        className={classes.Products_subContainer} 
+                                        style={translateSlider}
+                                    >
+                                        <div>
+                                            <Link to={"/shop/product/" + product._id}>
+                                                <div className={classes.Deal_image} >
+                                                    <img src={product.img} alt="img-deal" />
                                                 </div>
+                                            </Link>
+                                            <div className={classes.Products_description}>
+                                                <p>{product.name}</p>
+                                                <p>{product.price}</p>
                                             </div>
                                         </div>
+                                    </div>
                             }
 
                             return bestDealElement
-                        // }
                     })
                 }
                 
             </div>
-            <div className="d-flex justify-content-center" >
+            <div>
                 <ProgressBar 
                     bars={products.length}
-                    auto={true}
+                    auto={false}
                     timer={5000}
                     change={changeSlide}
                 />

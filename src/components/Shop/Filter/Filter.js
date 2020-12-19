@@ -23,14 +23,20 @@ const Filter = props => {
     // Aqui eu manterei de maneira estática como já está feito e a seleção por cores será como foi descrita na primeira opção.
     /* */
 
+    const filterRef = React.useRef()
+    const [filter_height, setFilterHeight] = React.useState()
+
 
     let [filterOpen, setFilterOpen] =  React.useState(false)
-
-    // let [translateValue, setTranslateValue] = React.useState(-110)
-    let [translateValue, setTranslateValue] = React.useState(0)
-    let [translateProductsValue, setTranslateProductsValue] = React.useState(-436)
-    // let [marginT, setMarginT] = React.useState(-436)
-    let [marginT, setMarginT] = React.useState(0)
+    
+    let [translateValue, setTranslateValue] = React.useState(-110)
+    let [marginT, setMarginT] = React.useState()
+    
+    React.useEffect(() => {
+        const fHeight = -filterRef.current.offsetHeight
+        setFilterHeight(fHeight)
+        setMarginT(fHeight)
+    }, [])
 
     /* Slider Price */
     const sliderRef = React.useRef()
@@ -41,8 +47,6 @@ const Filter = props => {
     let [min_value, setMinValue] =  React.useState(initial_min_value)
     let [max_value, setMaxValue] =  React.useState(initial_max_value)
     
-    // console.log(min_value)
-    // console.log(max_value)
     /* */
 
     /* Demais filtros */
@@ -75,8 +79,8 @@ const Filter = props => {
         filterOpen ? setFilterOpen(false) : setFilterOpen(true)
 
         translateValue < 0 ? setTranslateValue(0) : setTranslateValue(-110)
-        translateProductsValue < 0 ? setTranslateProductsValue(0) : setTranslateProductsValue(-436)
-        marginT < 0 ? setMarginT(0) : setMarginT(-436)
+        // translateProductsValue < 0 ? setTranslateProductsValue(0) : setTranslateProductsValue(-filter_height)
+        marginT < 0 ? setMarginT(0) : setMarginT(filter_height)
     }
 
     const setPriceRange = values => {
@@ -272,7 +276,7 @@ const Filter = props => {
                         </select>
                     </div>
                 </div>
-                <div>
+                <div ref={filterRef}>
                     <div className={classes.Filter_subContainer} style={translateFilter}>
                         <div>
                             <div ref={categoriesRef}>
