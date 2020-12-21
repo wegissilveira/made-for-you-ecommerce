@@ -7,7 +7,7 @@ import classes from './ProgressBar.module.css'
 // Também personalizei a orientação (horizontal/ vertical) dos pontos e a altura, talvez fazer o mesmo para 'width'. Verificar isso no momento em que for colocar horizontal na popup e checar se é necessário.
 const ProgressBar = props => {
     
-    let [sqSize, ] = React.useState(30)
+    let [sqSize, ] = React.useState(props.diameter ? props.diameter : 30)
     let [percentage, setPercentage] = React.useState(0)
     let [strokeWidth, ] = React.useState(3)
 
@@ -69,7 +69,10 @@ const ProgressBar = props => {
     const style = `d-flex ${direction} justify-content-between`
     
     return (
-        <div className={style} style={{height: props.height + 'px'}}>
+        <div 
+            className={style} 
+            style={{height: props.height + 'px'}}
+        >
             { bars.map((bar, i) => {
                 return <svg
                             key={i}

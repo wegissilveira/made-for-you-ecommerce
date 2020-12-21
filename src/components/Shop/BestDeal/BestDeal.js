@@ -37,7 +37,17 @@ const BestDeal = props => {
             translateValue / -100 === products.length - 1 ? setTranslateValue(0) : setTranslateValue(translateValue - 100)
         }
     }
+    
+    const screen_width = window.screen.width
+    let circle_diameter 
 
+    if (screen_width >= 1200) {
+        circle_diameter = 30
+    } else if (screen_width < 1200 && screen_width >= 768) {
+        circle_diameter = 40
+    } else if (screen_width < 768) {
+        circle_diameter = 50
+    }
 
     return (
         <div className={classes.Session_container}>
@@ -75,7 +85,8 @@ const BestDeal = props => {
             <div>
                 <ProgressBar 
                     bars={products.length}
-                    auto={false}
+                    diameter={circle_diameter}
+                    auto={true}
                     timer={5000}
                     change={changeSlide}
                 />

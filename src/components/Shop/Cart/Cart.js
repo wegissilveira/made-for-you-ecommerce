@@ -110,58 +110,47 @@ const Cart = props => {
 
     return (
         <div className={classes.Session_container}>
-            <h1 className="text-center mb-5 mt-5">CART</h1>
-            <div className={classes.Cart_details_container}>
-                <div className="
-                        d-flex
-                        justify-content-between
-                        row
-                        order-bottom
-                        text-secondary
-                        font-weight-bold
-                    "
-                >
-                    <p className="col-3">PRODUCT</p>
-                    <p className="text-center col-2">DISCOUNT</p>
-                    <p className="text-center col-2">PRICE</p>
-                    <p className="text-center col-2">QUANTITY</p>
-                    <p className="text-center col-2">TOTAL</p>
-                    <p className="col-1"></p>
+            <h1>CART</h1>
+            <div className={classes.Cart_container}>
+                <div>
+                    <p>PRODUCT</p>
+                    <p>DISCOUNT</p>
+                    <p>PRICE</p>
+                    <p>QUANTITY</p>
+                    <p>TOTAL</p>
+                    <p></p>
                 </div>
                 {products.map((product, i) => {
-                    return  <div key={i} className={`row mt-3 ${classes.Cart_details}`}>
-                                <div className={`col-3 ${classes.Cart_details_product_container}`}>
-
-                                    <div className={classes.Cart_details_product_image_container}>
-                                        <img className={classes.Cart_details_product_image} src={product.imgsDemo[0]} alt='img' />
+                    return  <div key={i} className={classes.Cart_details}>
+                                <div>
+                                    <div>
+                                        <img src={product.imgsDemo[0]} alt='img' />
                                     </div>
 
-                                    <div className={`mb-1 ${classes.Cart_details_product_description_container}`}
-                                    >
-                                        <p className="font-weight-bold">{product.name}</p>
-                                        <div>
-                                            <div className="text-secondary">
-                                                <p className="mb-2">Size</p>
+                                    <div>
+                                        <p>{product.name}</p>
+                                        <div className={classes.Cart_details_info}>
+                                            <div>
+                                                <p>Size</p>
                                                 <p>Color</p>
                                             </div>
-                                            <div className="ml-3">
-                                                <p className="mb-2">{props.cart[i].size}</p>
+                                            <div>
+                                                <p>{props.cart[i].size}</p>
                                                 <p>{props.cart[i].color}</p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <p className="text-center font-weight-bold col-2">0%</p>
-                                <p className="text-center font-weight-bold col-2">$ {product.price}</p>
-                                <div className="d-flex justify-content-center col-2">
+                                <p>0%</p>
+                                <p>$ {product.price}</p>
+                                <div>
                                     <ProductQtde 
                                         startQtde={props.cart[i].qtde}
                                         changeQtdeCallBack={qtde => setQtdeHandler(qtde, i)} 
                                     />
                                 </div>
-
-                                <p className="text-center font-weight-bold col-2">$ {(qtde[i] * parseFloat(product.price)).toFixed(2)}</p>
-                                <p className="font-weight-bold col-1">
+                                <p>$ {(qtde[i] * parseFloat(product.price)).toFixed(2)}</p>
+                                <p>
                                     <FontAwesomeIcon
                                         onClick={() => removeProductCartHandler(product._id)}
                                         className={classes.Cart_delete_icon}
@@ -169,16 +158,10 @@ const Cart = props => {
                                     />
                                 </p>
                             </div>
-                })
-
+                    })
                 }
-                <div className="
-                        d-flex
-                        justify-content-between
-                        mt-5
-                        border-bottom
-                    "
-                >
+
+                <div>
                     <Link to="/shop/">
                         <p className={classes.Cart_dark_button}>
                             <FontAwesomeIcon icon="long-arrow-alt-left" />
@@ -186,23 +169,16 @@ const Cart = props => {
                         </p>
                     </Link>
                 </div>
-                <div className={`row mt-4 mr-0 ml-0 ${classes.Form_cart_container}`}>
-                    <div className={`col-4 pl-0 ${classes.Form_cart_first_column}`}>
+                <div className={classes.Form_cart_container}>
+                    <div>
                         <p>COUPON DISCOUNT</p>
                         <p>Enter your coupon code if you have one</p>
                         <input placeholder="Enter your code"/>
                         <p className={classes.Cart_light_button}>APPLY COUPON</p>
                     </div>
-                    <div className={`col-4 ${classes.Form_cart_second_column}`}>
+                    <div>
                         <p>CALCULATE SHIPPING</p>
-                        <select
-                            className="
-                                select-cart
-                                border-left-0
-                                border-right-0
-                                border-top-0
-                                border-bottom"
-                        >
+                        <select>
                             <option>Argentina</option>
                             <option>Brazil</option>
                             <option>Germany</option>
@@ -213,14 +189,14 @@ const Cart = props => {
                         <input placeholder="Postcode/ZIP" />
                         <p className={classes.Cart_light_button}>UPDATE</p>
                     </div>
-                    <div className={`col-4 pr-0 ${classes.Form_cart_third_column}`}>
-                        <div className="border">
-                            <div className={classes.Form_cart_total_container}>
-                                <div className="border-bottom">
+                    <div>
+                        <div>
+                            <div className={classes.Form_cart_price_container}>
+                                <div>
                                     <p>SUBTOTAL</p>
                                     <p>$ {finalPrice.toFixed(2)}</p>
                                 </div>
-                                <div className="border-bottom">
+                                <div>
                                     <p>SHIPPING</p>
                                     <p>$ 20.00</p>
                                 </div>
@@ -230,7 +206,7 @@ const Cart = props => {
                                 </div>
                             </div>
                         </div>
-                        <p className={classes.Cart_dark_button} style={{width: '100%'}}>PROCEED TO CHECKOUT</p>
+                        <p className={classes.Cart_dark_button} >PROCEED TO CHECKOUT</p>
                     </div>
                 </div>
             </div>
