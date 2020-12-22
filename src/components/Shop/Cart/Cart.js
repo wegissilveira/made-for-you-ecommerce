@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import ProductQtde from '../../Shared/UI/ProductsQtde/ProductsQtde'
+import ProductQtdeMobile from '../../Shared/UI/ProductQtdeMobile/ProductQtdeMobile'
 import * as actionTypes  from '../../../store/actions/actionTypes'
 
 import cartListDataFn from '../../../Data/cartData'
@@ -104,7 +105,22 @@ const Cart = props => {
         props.onCartListState()
     }
 
+    const toggleQtdeSelectMobileHandler = (i, qtde) => {
+        const select = document.getElementById('product_qtde-'+i)
 
+        if (select.style.display === 'flex') {
+            select.style.display = 'none'
+        } else {
+            select.style.display = 'flex'
+        }
+
+        Array.from(select.children[0].children).forEach(item => {
+
+            if (Number(item.children[1].value) === qtde) {
+                item.children[1].checked = true
+            }
+        })
+    }
 
 
 
@@ -140,6 +156,12 @@ const Cart = props => {
                                             </div>
                                         </div>
                                     </div>
+                                    <FontAwesomeIcon
+                                        onClick={() => removeProductCartHandler(product._id)}
+                                        className={classes.Cart_delete_icon}
+                                        icon="times"
+                                        size="2x"
+                                    />
                                 </div>
                                 <p>0%</p>
                                 <p>$ {product.price}</p>
@@ -157,11 +179,24 @@ const Cart = props => {
                                         icon="times"
                                     />
                                 </p>
-                                <div>
-                                    <div>
-                                        <p>1</p>
+                                <div className={classes.Cart_price_mobile}>
+                                    <div
+                                        onClick={() => toggleQtdeSelectMobileHandler(i, qtde[i])}
+                                    >
+                                        <p>{qtde[i]}</p>
+                                        <FontAwesomeIcon icon="chevron-down" size="xs"/>
                                     </div>
-                                    <p>$ {product.price}</p>
+                                    <p>$ {(qtde[i] * parseFloat(product.price)).toFixed(2)}</p>
+                                    <div 
+                                        id={'product_qtde-' + i}
+                                        className={classes.Cart_qtde_mobile}
+                                    >
+                                        <ProductQtdeMobile
+                                            changeQtdeCallBack={qtde => setQtdeHandler(qtde, i)} 
+                                            productIndex={i}
+                                            toggle={() =>toggleQtdeSelectMobileHandler(i)}
+                                        />
+                                    </div>
                                 </div>
                             </div>
                     })
