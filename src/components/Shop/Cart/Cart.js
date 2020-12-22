@@ -169,6 +169,7 @@ const Cart = props => {
                                     <ProductQtde 
                                         startQtde={props.cart[i].qtde}
                                         changeQtdeCallBack={qtde => setQtdeHandler(qtde, i)} 
+                                        max={10}
                                     />
                                 </div>
                                 <p>$ {(qtde[i] * parseFloat(product.price)).toFixed(2)}</p>

@@ -4,6 +4,11 @@
     align-items: center;
     width: 70px;
     height: 45px;
+    border: 1px solid #dee2e6;
+}
+
+.Product_qtde > p {
+    margin: 0;
 }
 
 .Product_qtde_arrows {

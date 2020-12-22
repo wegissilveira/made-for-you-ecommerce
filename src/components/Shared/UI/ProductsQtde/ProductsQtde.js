@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const ProductsQtde = props => {
 
     let [productQtde, setProductQtde] = React.useState(1) // => Quantidade atual
-    let [productQtdeMax, ] = React.useState(props.max) // => Quantidade máxima
+    let [productQtdeMax, ] = React.useState(props.max) // => Quantidade máxima. Caso não haja o a arrow up estará ativa infinitamente
 
     React.useEffect(() => {
         if (props.startQtde !== undefined) {
@@ -17,11 +17,11 @@ const ProductsQtde = props => {
 
 
     const changeQtde = arg => {
-        if (arg === "increase") {
+        if (arg === "increase" && productQtde < productQtdeMax) {
             setProductQtde(productQtde + 1)
             props.changeQtdeCallBack(productQtde + 1)
 
-        } else if (arg === 'decrease') {            
+        } else if (arg === 'decrease' && productQtde > 1) {            
             if (productQtde > 1) {
                 setProductQtde(productQtde - 1)
                 props.changeQtdeCallBack(productQtde - 1)
@@ -31,28 +31,32 @@ const ProductsQtde = props => {
             }
         }
     }
+
+    let active_up
+    productQtde < productQtdeMax ? 
+        active_up = {color: '#212529', cursor: 'pointer'} : 
+        active_up = {color: '#ccc', cursor: 'default'}
+
+    let active_down
+    productQtde > 1 ? 
+        active_down = {color: '#212529', cursor: 'pointer'} : 
+        active_down = {color: '#ccc', cursor: 'default'}
     
 
     return (
-        <div className={`border ${classes.Product_qtde}`}>
-            <p style={{margin: '0'}}>{productQtde}</p>
+        <div className={classes.Product_qtde}>
+            <p>{productQtde}</p>
             <div className={classes.Product_qtde_arrows}>
-                {/* Verificando se há um valor máximo, caso não haja a seta 'increase' estará ativada infinitamente */}
-                {productQtdeMax !== undefined ?
-                    (productQtde < productQtdeMax ?
-                            <FontAwesomeIcon onClick={() => changeQtde('increase')} icon="chevron-up" size="xs"/>
-                        :
-                            <FontAwesomeIcon style={{color: '#ccc', cursor: 'default'}} icon="chevron-up" size="xs"/>)
-                    :
-                        <FontAwesomeIcon onClick={() => changeQtde('increase')} icon="chevron-up" size="xs"/>
-                }
-                
-                {productQtde > 1 ? 
-                        <FontAwesomeIcon onClick={() => changeQtde('decrease')} icon="chevron-down" size="xs"/> 
-                    : 
-                        <FontAwesomeIcon style={{color: '#ccc', cursor: 'default'}} icon="chevron-down" size="xs"/> 
-                }
-                
+                <FontAwesomeIcon 
+                    style={active_up} 
+                    onClick={() => changeQtde('increase')} 
+                    icon="chevron-up" size="xs"
+                />
+                <FontAwesomeIcon 
+                    style={active_down} 
+                    onClick={() => changeQtde('decrease')} 
+                    icon="chevron-down" size="xs"
+                />
             </div>
         </div>
     )
