@@ -157,6 +157,12 @@ const Cart = props => {
                                         icon="times"
                                     />
                                 </p>
+                                <div>
+                                    <div>
+                                        <p>1</p>
+                                    </div>
+                                    <p>$ {product.price}</p>
+                                </div>
                             </div>
                     })
                 }
