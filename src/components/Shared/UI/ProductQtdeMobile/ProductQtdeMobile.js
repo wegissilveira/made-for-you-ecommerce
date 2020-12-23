@@ -2,7 +2,9 @@ import React from 'react'
 
 const ProductQtdeMobile = props => {
 
-    const changeQtde = (e, i) => {
+    let [initialValue, setInitialValue] = React.useState(props.initialValue)
+
+    const changeQtde = (e) => {
         const tagName = e.target.tagName
         
         let input_value
@@ -25,14 +27,16 @@ const ProductQtdeMobile = props => {
         props.changeQtdeCallBack(input_value)
 
         props.toggle()
+
+        setInitialValue(false)
     }
 
 
     return (
-        <div onClick={(e) => changeQtde(e, props.productIndex)}>
+        <div onClick={(e) => changeQtde(e)}>
             <div>
                 <label>1</label>
-                <input type="radio" value={1} />
+                <input type="radio" value={1} defaultChecked={initialValue} />
             </div>
             <div>
                 <label>2</label>

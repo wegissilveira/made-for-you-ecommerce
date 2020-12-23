@@ -10,6 +10,7 @@ import cartListDataFn from '../../../Data/cartData.js'
 import wishlistDataFn from '../../../Data/wishlistData'
 
 import ProductsQtde from '../../Shared/UI/ProductsQtde/ProductsQtde'
+import ProductQtdeMobile from '../../Shared/UI/ProductQtdeMobile/ProductQtdeMobile'
 import ColorSelect from '../../Shared/UI/ColorSelect/ColorSelect'
 import * as actionTypes from '../../../store/actions/actionTypes'
 
@@ -145,9 +146,24 @@ const ProductCard = props => {
         localStorage.setItem('cartList', JSON.stringify(productCartArr))
 
         props.onCartListState()
-    }
+    } 
 
-   
+    const toggleQtdeSelectMobileHandler = (qtde) => {
+        const select = document.getElementById('product_qtde')
+
+        if (select.style.display === 'flex') {
+            select.style.display = 'none'
+        } else {
+            select.style.display = 'flex'
+        }
+
+        Array.from(select.children[0].children).forEach(item => {
+
+            if (Number(item.children[1].value) === qtde) {
+                item.children[1].checked = true
+            }
+        })
+    }
     
 
 
@@ -157,7 +173,7 @@ const ProductCard = props => {
         <Fragment>
             <div className={classes.Session_container}>
                 <div className={classes.Product_card_container}>
-                <h1>{product.name}</h1>
+                    <h1>{product.name}</h1>
                     <div>
                         <div className={classes.Main_img_slider}>
                             <div style={translateSlider}>
@@ -220,7 +236,14 @@ const ProductCard = props => {
                             <ProductsQtde 
                                 changeQtdeCallBack={qtde => setQtdeHandler(qtde)}  
                                 max={8}
-                            />                            
+                            />
+                            <div
+                                onClick={() => toggleQtdeSelectMobileHandler()}
+                            >
+                                <p>{qtde}</p>
+                                <FontAwesomeIcon icon="chevron-down" size="xs"/>
+                            </div>
+                                                    
                             <button 
                                 onClick={() => productCartHandler()}
                                 type="button" 
@@ -233,6 +256,18 @@ const ProductCard = props => {
                                 className={classes.Wishlist_icon_alt}
                                 icon={[heart_Icon, 'heart']} size="2x" 
                             />
+
+                            <div 
+                                id="product_qtde"
+                                className={classes.Cart_qtde_mobile}
+                            >
+                                <ProductQtdeMobile
+                                    changeQtdeCallBack={qtde => setQtde(qtde)} 
+                                    // productIndex={}
+                                    initialValue={true}
+                                    toggle={() =>toggleQtdeSelectMobileHandler()}
+                                />
+                            </div>
                         </div>
                         <div className={classes.Product_category_container}>
                             <p>Category: <span>{product.category}</span></p>
