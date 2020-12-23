@@ -157,6 +157,7 @@ const ProductCard = props => {
         <Fragment>
             <div className={classes.Session_container}>
                 <div className={classes.Product_card_container}>
+                <h1>{product.name}</h1>
                     <div>
                         <div className={classes.Main_img_slider}>
                             <div style={translateSlider}>
