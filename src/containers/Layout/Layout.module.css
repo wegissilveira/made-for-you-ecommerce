@@ -46,7 +46,7 @@ input {
 .Enter_account_btn {
     width: auto;
     height: 40px;
-    border: 3px solid grey;
+    /* border: 3px solid grey; */
     color: grey;
     cursor: pointer;
     font-weight: bold;
@@ -58,11 +58,11 @@ input {
     -o-border-radius: 5px;
 }
 
-.Enter_account_btn:hover {
+/* .Enter_account_btn:hover {
     border: 3px solid #ffc107;
     color: #ffc107;
     text-decoration: none;
-}
+} */
 
 .Enter_account_btn p {
     margin: 5px 10px 5px 10px

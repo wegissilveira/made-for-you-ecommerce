@@ -3,13 +3,13 @@ import React from 'react'
 import classes from './UserLogin.module.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Link } from 'react-router-dom'
 
 const UserLogin = props => {
 
     return (
         <div className={classes.Session_container}>
-            <div className={classes.Login_img_container}>
-            </div>
+            <div className={classes.Login_img_container}></div>
             <div className={classes.Login_form_container}>
                 <div className={classes.Login_form} >
                     <h3>Log in</h3>
@@ -35,7 +35,13 @@ const UserLogin = props => {
                             <FontAwesomeIcon icon={['fab', 'google']} size="2x" style={{color:'#e94538'}} />
                         </div>
                     </div>
-                    <p className={classes.Form_recover_pass}>Forgot login or password?</p>
+                    {/* <p className={classes.Form_recover_pass}>Forgot login or password?</p> */}
+                    <Link
+                        to="/user-signup/"
+                        style={{color: 'grey'}}
+                    >
+                        <p className={classes.Form_recover_pass}>Or click here to create an account.</p>
+                    </Link>
                 </div>
             </div>
         </div>

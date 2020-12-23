@@ -15,7 +15,6 @@ const ProductsQtde = props => {
         }
     }, [props.startQtde])
 
-
     const changeQtde = arg => {
         if (arg === "increase" && productQtde < productQtdeMax) {
             setProductQtde(productQtde + 1)

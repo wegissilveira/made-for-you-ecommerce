@@ -31,6 +31,11 @@ const ProductCard = props => {
 
     })
 
+    const bag_button_color = isProductInBag === 0 ? classes.Bag_button_green : classes.Bag_button_red
+    const bag_button_text = isProductInBag === 0 ? 'ADD TO BAG' : 'REMOVE FROM BAG'
+
+    let heart_Icon = props.wish.includes(product._id) ? 'fas' : 'far'
+
     // let [prodExists, setProdExists] = React.useState(0)
 
     // Controla a state 'prodExists' para definir qual botão será mostrado, o de adicionar item ou o de remover. 
@@ -150,59 +155,53 @@ const ProductCard = props => {
     return (
         
         <Fragment>
-            <div className={`mt-5 ${classes.Session_container}`}>
-                <div className={`container-fluid ${classes.Product_card_container}`}>
-                    <div className="pl-0 pr-5">
+            <div className={classes.Session_container}>
+                <div className={classes.Product_card_container}>
+                    <div>
                         <div className={classes.Main_img_slider}>
-                            <div className="d-flex" style={translateSlider}>
+                            <div style={translateSlider}>
                                 {product.imgsDemo.map((img, i) => 
                                     <img key={i} src={img} alt="img-1"/>
                                 )}
                             </div>
-                            <div className={classes.Change_slide_arrows_container}>
+                            <div>
                                 <FontAwesomeIcon onClick={() => changeSlide('previous')} icon="arrow-left" />
                                 <FontAwesomeIcon onClick={() => changeSlide('next')} icon="arrow-right" />
                             </div>
                         </div>
-                        <div className={classes.Product_card_sub_images}>
+                        <div className={classes.Product_card_thumb_images}>
                             <img 
                                 onClick={() => changeSlide(0)} 
                                 src={product.imgsDemo[0]} alt="img-1" 
-                                style={{maxWidth: '30%', maxHeight: '30%', cursor: 'pointer'}} 
                             />
                             <img 
                                 onClick={() => changeSlide(-100)} 
                                 src={product.imgsDemo[1]} alt="img-2" 
-                                style={{maxWidth: '30%', maxHeight: '30%', cursor: 'pointer'}} 
                             />
                             <img 
                                 onClick={() => changeSlide(-200)} 
                                 src={product.imgsDemo[2]} alt="img-3" 
-                                style={{maxWidth: '30%', maxHeight: '30%', cursor: 'pointer'}} 
                             />
                         </div>
                     </div>
-                    <div className="col-6 ml-5">
-                        <div className="d-flex justify-content-between">
+                    <div>
+                        <div>
                             <p>123456</p>
                             <p>exemplo</p>
                         </div>
-                        <h1 className="mt-5">{product.name}</h1>
+                        <h1>{product.name}</h1>
                         <p>A comfortable bed for the dog. It will bring a lot of pleasure to your pet. High quality material does not allow the wool to stick and easy to clean.</p>
-                        <div className={`mt-4 ${classes.Product_price_container}`}>
-                            <h3 className="mb-0">$ {product.price}</h3>
-                            <div className={`text-success ${classes.Product_price_availability}`}>
+                        <div className={classes.Product_price_container}>
+                            <h3>$ {product.price}</h3>
+                            <div>
                                 <FontAwesomeIcon icon="check" />
                                 <p>Available</p>
                             </div>
                         </div>
-                        <div className={`mt-4 ${classes.Product_details_container}`}>
+                        <div className={classes.Product_details_container}>
                             <div>
                                 <p>Size</p>
-                                <select 
-                                    onChange={e => setSize(e.target.value)}
-                                    className={`mt-2 border-bottom ${classes.Product_details_select}`}
-                                >
+                                <select onChange={e => setSize(e.target.value)}>
                                     <option value="100x100">100x100 cm</option>
                                     <option value="200x200">200x200 cm</option>
                                     <option value="300x300">300x300 cm</option>
@@ -216,65 +215,49 @@ const ProductCard = props => {
                                 />
                             </div>
                         </div>
-                        <div className={`mt-4 ${classes.Product_wishlist_container}`}>
+                        <div className={classes.Product_wishlist_container}>
                             <ProductsQtde 
                                 changeQtdeCallBack={qtde => setQtdeHandler(qtde)}  
                                 max={8}
+                            />                            
+                            <button 
+                                onClick={() => productCartHandler()}
+                                type="button" 
+                                className={bag_button_color}
+                            > {bag_button_text}
+                            </button> 
+
+                            <FontAwesomeIcon 
+                                onClick={() => wishlistHandler(product._id)} 
+                                className={classes.Wishlist_icon_alt}
+                                icon={[heart_Icon, 'heart']} size="2x" 
                             />
-                            { isProductInBag === 0 ?
-                                    <button 
-                                        onClick={() => productCartHandler()}
-                                        type="button"  
-                                        className="btn btn-success"
-                                    > ADD TO BAG
-                                    </button>  
-                                : 
-                                    <button 
-                                        onClick={() => productCartHandler()}
-                                        type="button"  
-                                        className="btn btn-danger"
-                                        > REMOVE FROM BAG
-                                    </button>   
-                            }
-                            {   props.wish.includes(product._id) ?
-                                    <FontAwesomeIcon 
-                                        onClick={() => wishlistHandler(product._id)} 
-                                        className={classes.Wishlist_icon_alt} 
-                                        icon={['fas', 'heart']} size="2x" 
-                                    />
-                                :
-                                    <FontAwesomeIcon 
-                                        onClick={() => wishlistHandler(product._id)} 
-                                        className={classes.Wishlist_icon_alt} 
-                                        icon={['far', 'heart']} size="2x" 
-                                    />
-                            }
                         </div>
-                        <div className={`mt-3 ${classes.Product_category_container}`}>
-                            <p>Category: <span className="font-weight-bold">{product.category}</span></p>
-                            <p>Tags: <span className="font-weight-bold">{product.tag}</span></p>
+                        <div className={classes.Product_category_container}>
+                            <p>Category: <span>{product.category}</span></p>
+                            <p>Tags: <span>{product.tag}</span></p>
                         </div>
-                        <div className="d-flex justify-content-between align-items-end mt-5">
-                            <div className={`mt-3 ${classes.Product_specifications_container}`}>
-                                <div className="d-flex justify-content-between">
+                        <div className={classes.Product_specifications_container}>
+                            <div>
+                                <div>
                                     <h6>DETAILS</h6>
                                     <h6>SPECIFICATIONS</h6>
                                 </div>
-                                <div className="d-flex justify-content-between">
+                                <div>
                                     <div>
                                         <p>Material:</p>
                                         <p>Care:</p>
                                         <p>Size:</p>
                                     </div>
                                     <div>
-                                        <p className="font-weight-bold"> Polyester</p>
-                                        <p className="font-weight-bold"> 30 degree wash</p>
-                                        <p className="font-weight-bold"> 100x100 cm</p>
+                                        <p> Polyester</p>
+                                        <p> 30 degree wash</p>
+                                        <p> 100x100 cm</p>
                                     </div>
                                 </div>
                             </div>
-                            <div className="d-flex justify-content-end align-items-center">
-                                <FontAwesomeIcon icon="share-alt" className="mr-4" />
+                            <div>
+                                <FontAwesomeIcon icon="share-alt" />
                                 <p>Share</p>
                             </div>
                         </div>

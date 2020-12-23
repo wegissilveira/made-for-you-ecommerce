@@ -45,7 +45,7 @@ const UserSignUp = props => {
                         to="/user-login/"
                         style={{color: 'grey'}}
                     >
-                        <p className={classes.Form_recover_pass}>Already have an account?</p>
+                        <p className={classes.Form_recover_pass}>Already have an account? Enter here.</p>
                     </Link>
                     
                 </div>

@@ -325,7 +325,13 @@ class Layout extends Component {
                                         }
                                     </li>
                                     <li className="nav-item">
-                                        <FontAwesomeIcon icon={['far', 'user']} color="grey" />
+                                        <NavLink
+                                            className={classes.Enter_account_btn}
+                                            to="/user-login/"
+                                        >
+                                            <FontAwesomeIcon icon={['far', 'user']} color="grey" />
+                                        </NavLink>
+                                        {/* <FontAwesomeIcon icon={['far', 'user']} color="grey" /> */}
                                     </li>
                                     <li className="nav-item">
                                         <NavLink
