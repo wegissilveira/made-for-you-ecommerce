@@ -2,6 +2,8 @@ import React from 'react'
 
 import Products from '../../Shared/Products/Products'
 
+import './Wishlist.module.css'
+
 const Wishlist = props => {
 
     // Eu estou realizando o fetch dos produtos diretamente em 'Products', o que até aqui tem funcionado bem, no entanto me parece melhor realizar o fetch no parent para deixar os dados enviados como props mais dinâmicos e flexíveis.
@@ -10,7 +12,7 @@ const Wishlist = props => {
     // Pensar na opção mais econômica.
     return (
         <div>
-            <h1 className="text-center mb-5 mt-5">WISHLIST</h1>
+            <h1>WISHLIST</h1>
             <Products
                 wishlist={true}
             />

@@ -5,14 +5,35 @@
     margin-bottom: 80px;
 }
 
-.Login_img_container {
+.Session_container > div {
     width: 50%;
-    height: 600px;
-    background-color: green;
+}
+
+@media (max-width:991.98px) {
+    .Session_container {
+        flex-direction: column;
+    }
+    
+    .Session_container > div {
+        width: 100%;
+    }
+
+    .Session_container > div:first-of-type {
+        order: 1;
+    }
+}
+
+.Session_container > div:first-of-type > img {
+    max-width: 100%;
+}
+
+@media (min-width:992px) and (max-width:1199.98px) {
+    .Session_container > div:first-of-type > img {
+        margin-top: 20%;
+    }
 }
 
 .Login_form_container {
-    width: 50%;
     height: 600px;
 }
 
@@ -28,6 +49,13 @@
 
 }
 
+@media (max-width:991.98px) {
+    .Login_form {
+        width: 90%;
+        margin-left: 5%;
+    }
+}
+
 .Login_form > * {
     width: 100%;
 }
@@ -39,11 +67,10 @@
 .Login_form label {
     margin-bottom: 0;
     margin-left: 2%;
-    
 }
 
 .Account_access_btn,
-.Login_form  input {
+.Login_form input {
     width: 100%;
     height: 35px;
     border: 1px solid grey;
@@ -70,7 +97,18 @@
     background-color: rgb(100, 100, 100);
 }
 
-.Form_lines {
+.Login_form > div:nth-of-type(3) {
+    margin-top: 24px;
+    display: flex;
+    align-items: center;
+}
+
+.Login_form > div:nth-of-type(3) > p {
+    flex-basis: 33.33%;
+    text-align: center;
+}
+
+.Login_form > div:nth-of-type(3) > p:not(:nth-of-type(2)) {
     width: 100%;
     height: 1px;
     background-color: grey;
@@ -82,12 +120,20 @@
     justify-content: space-evenly;
 }
 
-.Form_icons_container > * {
+@media (max-width:991.98px) {
+    .Form_icons_container {
+        width: 30%;
+    }
+}
+
+.Form_icons_container > div {
     width: 45px;
     height: 45px;
     padding: 5px;
     text-align: center;
     cursor: pointer;
+    border: 1px solid #dee2e6;
+
     border-radius: 10px;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
@@ -95,11 +141,11 @@
     -o-border-radius: 10px;
 }
 
-.Form_recover_pass {
+.Login_form > a > p {
     text-align: center;
     cursor: pointer;
 }
 
-.Form_recover_pass:hover {
+.Login_form > a > p:hover {
     text-decoration: underline;
 }
