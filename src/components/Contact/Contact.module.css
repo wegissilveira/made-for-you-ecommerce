@@ -1,14 +1,8 @@
 .Session_container {
-    /* height: auto; */
     margin-bottom: 80px;
     background-color: #87BBE0;
     height: 100vh;
 }
-
-/* .contact-session-container {
-    background-color: #87BBE0;
-    height: 100vh;
-} */
 
 .Contact_box_container {
     background-color: #fff;
@@ -17,6 +11,7 @@
     height: 60%;
     margin-left: 7%;
     margin-top: 7%;
+
     border-radius: 15px;
     -webkit-border-radius: 15px;
     -moz-border-radius: 15px;
@@ -24,18 +19,43 @@
     -o-border-radius: 15px;
 }
 
-.Contact_box{
-    /*width: 94%;
-    margin-left: 3%;*/
+@media (max-width: 1579.98px) {
+    .Contact_box_container {
+        width: 70%;
+    }
+}
+
+@media (max-width: 1199.98px) {
+    .Contact_box_container {
+        width: 85%;
+    }
+}
+
+.Contact_box_container > div {
     margin: 0;
     height: 100%;
     display: flex;
     justify-content: space-between;
-    /* color: grey; */
+}
+
+@media (max-width: 991.98px) {
+    .Contact_box_container > div {
+        flex-direction: column;
+    }
+
+    .Contact_box_container > div > div:first-of-type {
+        order: 1;
+    }
+
+    .Contact_box_container > div > div:nth-of-type(2) {
+        margin-top: 5%;
+        height: 90%;
+    }
 }
 
 .Contact_box_info {
     background-color: rgb(252, 249, 249);
+
     border-radius: 15px 0 0 15px;
     -webkit-border-radius: 15px 0 0 15px;
     -moz-border-radius: 15px 0 0 15px;
@@ -43,7 +63,7 @@
     -o-border-radius: 15px 0 0 15px;
 }
 
-.Contact_box_info_sub {
+.Contact_box_info > div {
     height: 60%;
     width: 80%;
     margin: 15% 10%;
@@ -53,7 +73,23 @@
     justify-content: space-between;
 }
 
-.Contact_box_form_sub {
+.Contact_box_info > div > div {
+    display: flex;
+    align-items: center;
+}
+
+.Contact_box_info > div > div > p {
+    margin-left: 16px;
+    margin-bottom: 0;
+}
+
+.Contact_box_form {
+    flex-basis: 58.33%;
+    flex-shrink: 0;
+    flex-grow: 0;
+}
+
+.Contact_box_form > div {
     height: 80%;
     width: 80%;
     margin: 10% 10%;
@@ -63,8 +99,13 @@
     justify-content: space-between;
 }
 
-.Contact_box_form_sub textarea,
-.Contact_box_form_sub input {
+.Contact_box_form > div > div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.Contact_box_form > div textarea,
+.Contact_box_form > div input {
     border: 1px solid grey;
     padding-left: 10px;
     color: grey;
@@ -76,12 +117,18 @@
     -o-border-radius: 15px;
 }
 
-.Contact_box_form_sub textarea {
+@media (max-width: 991.98px) {
+    .Contact_box_form > div > div input {
+        width: 48%;
+    }
+}
+
+.Contact_box_form > div textarea {
     height: 30%;
     padding-top: 5px;
 }
 
-.Contact_box_form_sub textarea:focus {
+.Contact_box_form > div textarea:focus {
     outline: none;
 }
 
