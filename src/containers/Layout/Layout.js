@@ -84,8 +84,28 @@ class Layout extends Component {
 
     
 
+    
+
 
     render () {
+
+        let bag_color = this.props.cart.length > 0 ? 'green' : 'grey'
+        let heart_color = this.props.wish.length > 0 ? 'red' : 'grey'
+
+        let search_input = 
+            this.state.searchProduct ? 
+                <NavLink to={"/search/" + this.state.input}>
+                    <FontAwesomeIcon 
+                        icon="search" 
+                        color="grey" 
+                    />
+                </NavLink>
+            :
+                <FontAwesomeIcon 
+                    icon="search" 
+                    color="grey" 
+                    onClick={() => alert('A busca precisa ter ao menos 3 caracteres')}
+                /> 
 
         const translateMenu = {
             transform: `translateX(${this.state.translateMenuValue}%)`,
@@ -119,60 +139,41 @@ class Layout extends Component {
                     ]}
                     // subsets={['cursive']}
                 />
-                {/* navbar-expand-md  */}
-                <nav className="
-                        navbar 
-                        navbar-expand-md
-                        navbar-light 
-                        
-                        d-flex
-                        justify-content-between
-                    "
-                    style={{height: '70px'}}
-                >
-                    <div className="container-fluid">
-                        <div className="
-                                col-4 
-                                d-flex 
-                                justify-content-between 
-                                align-items-center
-                            "
-                        >
+                <nav className="navbar-light">
+                    <div className={classes.Navbar_container}>
+                        <div>
                             {/* <FontAwesomeIcon className="d-md-none" icon="bars" color="grey" size="2x" /> */}
                             {/* Corrigir NavLink. Quando coloco todos os itens da lista com NavLink ao clicar em algum todos são selecionados e o efeito de highlight na página aberta se perde, funcionando somente quando estamos na homepage. Verificar isso quando as as demais páginas além de 'shop' existirem. */}
                             
-                            <ul className="navbar-nav d-none d-md-flex" style={{marginLeft: '28%'}}>
-                                <li className="nav-item">
+                            <ul>
+                                <li >
                                     <NavLink 
                                         to="/" 
                                         exact={true}
                                         // tag={RRNavLink}
-                                        className="nav-link"
                                     > Home
                                     </NavLink>
                                 </li>
-                                <li className="nav-item">
+                                <li >
                                     <NavLink 
                                         to="/shop/" 
                                         exact={true}
                                         // tag={RRNavLink}
-                                        className="nav-link"
                                     > Shop
                                     </NavLink>
                                 </li>
-                                <li className="nav-item">
+                                <li >
                                     <NavLink 
                                         to="/contact/" 
                                         exact={true}
                                         // tag={RRNavLink}
-                                        className="nav-link"
                                     > Contacts
                                     </NavLink>
                                 </li>
                             </ul>
 
                             {/* Responsive menu */}
-                            <FontAwesomeIcon 
+                            {/* <FontAwesomeIcon 
                                 onClick={this.mobileMenuHandler}
                                 className="d-md-none" 
                                 icon="bars" color="grey" size="2x" 
@@ -188,7 +189,6 @@ class Layout extends Component {
                                             <NavLink 
                                                 to="/" 
                                                 exact={true}
-                                                // tag={RRNavLink}
                                                 className="nav-link"
                                             > Home
                                             </NavLink>
@@ -197,7 +197,6 @@ class Layout extends Component {
                                             <NavLink 
                                                 to="/shop/" 
                                                 exact={true}
-                                                // tag={RRNavLink}
                                                 className={`nav-link ${classes.Navigation_mobile_submenu_shop}`}
                                                 onClick={this.subMenuHandler}
                                             > Shop
@@ -282,106 +281,54 @@ class Layout extends Component {
                                             </div>
                                         </div>
                                     </div>
-                                </div> 
+                                </div>  */}
                         </div>
 
                         
-                            <NavLink
-                                to="/" 
-                                className={`navbar-brand ${classes.Logo}`}
-                                // className="navbar-brand"
-                                // style={{ fontFamily: 'Lemonada, cursive' }}
-                            > m
-                                <span className="text-warning">y</span>Home
-                            </NavLink>
+                        <NavLink
+                            to="/" 
+                            className={classes.Logo}
+                            // style={{ fontFamily: 'Lemonada, cursive' }}
+                        > m
+                            <span>y</span>Home
+                        </NavLink>
 
-                        <div className="col-4 d-none d-md-block">
-                            <div className="d-flex justify-content-between">
-                                <p className="mb-0">+375 29 364-74-69</p>
+                        <div>
+                            <p>+375 29 364-74-69</p>
 
-                                <ul className={`navbar-nav ${classes.Account_icons}`}>
-                                    <li className="nav-item d-flex align-items-center" >
-                                        <input onChange={this.searchProductHandler}/>
-                                        {
-                                            this.state.searchProduct ? 
-                                            
-                                                <NavLink to={"/search/" + this.state.input}>
-                                                    <FontAwesomeIcon 
-                                                        icon="search" 
-                                                        color="grey" 
-                                                        style={{cursor: 'pointer'}} 
-
-                                                        
-                                                    />
-                                                </NavLink>
-                                            :
-                                                <FontAwesomeIcon 
-                                                    icon="search" 
-                                                    color="grey" 
-                                                    style={{cursor: 'pointer'}} 
-
-                                                    onClick={() => alert('A busca precisa ter ao menos 3 caracteres')}
-                                                /> 
-                                        }
-                                    </li>
-                                    <li className="nav-item">
-                                        <NavLink
-                                            className={classes.Enter_account_btn}
-                                            to="/user-login/"
-                                        >
-                                            <FontAwesomeIcon icon={['far', 'user']} color="grey" />
-                                        </NavLink>
-                                        {/* <FontAwesomeIcon icon={['far', 'user']} color="grey" /> */}
-                                    </li>
-                                    <li className="nav-item">
-                                        <NavLink
-                                            to="/wishlist/"
-                                        >
-                                            {   this.props.wish.length > 0 ?
-                                                    <FontAwesomeIcon icon={['far', 'heart']} color="red" />
-                                                :
-                                                    <FontAwesomeIcon icon={['far', 'heart']} color="grey" />
-                                            }
-                                        </NavLink>
-                                    </li>
-                                    <li className="nav-item">
-                                        <NavLink
-                                            to="/cart/"
-                                        >
-                                            {   this.props.cart.length > 0 ?
-                                                    <FontAwesomeIcon icon='shopping-bag' color="green" />
-                                                :
-                                                    <FontAwesomeIcon icon='shopping-bag' color="grey" />
-                                            }
-                                        </NavLink>
-                                    </li>
-                                </ul>
-                                {/* <ul className={`navbar-nav ${classes.Enter_account_container}`}>
-                                    <li className="nav-item">
-                                        <FontAwesomeIcon icon="search" />
-                                    </li>
+                            <ul className={classes.Account_icons}>
+                                <li>
+                                    <input onChange={this.searchProductHandler}/>
+                                    { search_input }
+                                </li>
+                                <li>
                                     <NavLink
                                         className={classes.Enter_account_btn}
                                         to="/user-login/"
                                     >
-                                        <p>Login</p>
+                                        <FontAwesomeIcon 
+                                            icon={['far', 'user']} 
+                                            color="grey" 
+                                        />
                                     </NavLink>
-                                    <NavLink
-                                        className={classes.Enter_account_btn}
-                                        to="/user-signup/"
-                                    >
-                                        <p>Sign up</p>
+                                </li>
+                                <li>
+                                    <NavLink to="/wishlist/">
+                                        <FontAwesomeIcon icon={['far', 'heart']} color={ heart_color } />
                                     </NavLink>
-                                </ul> */}
-                            </div>
+                                </li>
+                                <li>
+                                    <NavLink to="/cart/">
+                                        <FontAwesomeIcon icon='shopping-bag' color={ bag_color } />
+                                    </NavLink>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </nav>
                 
                 <main>
-                    {
-                        this.props.children
-                    }
+                    { this.props.children }
                 </main>
                 <Footer>
 
