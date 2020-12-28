@@ -122,136 +122,140 @@ const Cart = props => {
         })
     }
 
-
+    
 
     return (
         <div className={classes.Session_container}>
             <h1>CART</h1>
-            <div className={classes.Cart_container}>
-                <div>
-                    <p>PRODUCT</p>
-                    <p>DISCOUNT</p>
-                    <p>PRICE</p>
-                    <p>QUANTITY</p>
-                    <p>TOTAL</p>
-                    <p></p>
-                </div>
-                {products.map((product, i) => {
-                    return  <div key={i} className={classes.Cart_details}>
-                                <div>
+            { products.length > 0 ?
+                <div className={classes.Cart_container}>
+                    <div>
+                        <p>PRODUCT</p>
+                        <p>DISCOUNT</p>
+                        <p>PRICE</p>
+                        <p>QUANTITY</p>
+                        <p>TOTAL</p>
+                        <p></p>
+                    </div>
+                    {products.map((product, i) => {
+                        return  <div key={i} className={classes.Cart_details}>
                                     <div>
-                                        <img src={product.imgsDemo[0]} alt='img' />
-                                    </div>
+                                        <div>
+                                            <img src={product.imgsDemo[0]} alt='img' />
+                                        </div>
 
-                                    <div>
-                                        <p>{product.name}</p>
-                                        <div className={classes.Cart_details_info}>
-                                            <div>
-                                                <p>Size</p>
-                                                <p>Color</p>
-                                            </div>
-                                            <div>
-                                                <p>{props.cart[i].size}</p>
-                                                <p>{props.cart[i].color}</p>
+                                        <div>
+                                            <p>{product.name}</p>
+                                            <div className={classes.Cart_details_info}>
+                                                <div>
+                                                    <p>Size</p>
+                                                    <p>Color</p>
+                                                </div>
+                                                <div>
+                                                    <p>{props.cart[i].size}</p>
+                                                    <p>{props.cart[i].color}</p>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <FontAwesomeIcon
-                                        onClick={() => removeProductCartHandler(product._id)}
-                                        className={classes.Cart_delete_icon}
-                                        icon="times"
-                                        size="2x"
-                                    />
-                                </div>
-                                <p>0%</p>
-                                <p>$ {product.price}</p>
-                                <div>
-                                    <ProductQtde 
-                                        startQtde={props.cart[i].qtde}
-                                        changeQtdeCallBack={qtde => setQtdeHandler(qtde, i)} 
-                                        max={10}
-                                    />
-                                </div>
-                                <p>$ {(qtde[i] * parseFloat(product.price)).toFixed(2)}</p>
-                                <p>
-                                    <FontAwesomeIcon
-                                        onClick={() => removeProductCartHandler(product._id)}
-                                        className={classes.Cart_delete_icon}
-                                        icon="times"
-                                    />
-                                </p>
-                                <div className={classes.Cart_price_mobile}>
-                                    <div
-                                        onClick={() => toggleQtdeSelectMobileHandler(i, qtde[i])}
-                                    >
-                                        <p>{qtde[i]}</p>
-                                        <FontAwesomeIcon icon="chevron-down" size="xs"/>
-                                    </div>
-                                    <p>$ {(qtde[i] * parseFloat(product.price)).toFixed(2)}</p>
-                                    <div 
-                                        id={'product_qtde-' + i}
-                                        className={classes.Cart_qtde_mobile}
-                                    >
-                                        <ProductQtdeMobile
-                                            changeQtdeCallBack={qtde => setQtdeHandler(qtde, i)} 
-                                            productIndex={i}
-                                            toggle={() =>toggleQtdeSelectMobileHandler(i)}
+                                        <FontAwesomeIcon
+                                            onClick={() => removeProductCartHandler(product._id)}
+                                            className={classes.Cart_delete_icon}
+                                            icon="times"
+                                            size="2x"
                                         />
                                     </div>
+                                    <p>0%</p>
+                                    <p>$ {product.price}</p>
+                                    <div>
+                                        <ProductQtde 
+                                            startQtde={props.cart[i].qtde}
+                                            changeQtdeCallBack={qtde => setQtdeHandler(qtde, i)} 
+                                            max={10}
+                                        />
+                                    </div>
+                                    <p>$ {(qtde[i] * parseFloat(product.price)).toFixed(2)}</p>
+                                    <p>
+                                        <FontAwesomeIcon
+                                            onClick={() => removeProductCartHandler(product._id)}
+                                            className={classes.Cart_delete_icon}
+                                            icon="times"
+                                        />
+                                    </p>
+                                    <div className={classes.Cart_price_mobile}>
+                                        <div
+                                            onClick={() => toggleQtdeSelectMobileHandler(i, qtde[i])}
+                                        >
+                                            <p>{qtde[i]}</p>
+                                            <FontAwesomeIcon icon="chevron-down" size="xs"/>
+                                        </div>
+                                        <p>$ {(qtde[i] * parseFloat(product.price)).toFixed(2)}</p>
+                                        <div 
+                                            id={'product_qtde-' + i}
+                                            className={classes.Cart_qtde_mobile}
+                                        >
+                                            <ProductQtdeMobile
+                                                changeQtdeCallBack={qtde => setQtdeHandler(qtde, i)} 
+                                                productIndex={i}
+                                                toggle={() =>toggleQtdeSelectMobileHandler(i)}
+                                            />
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                    })
-                }
+                        })
+                    }
 
-                <div>
-                    <Link to="/shop/">
-                        <p className={classes.Cart_dark_button}>
-                            <FontAwesomeIcon icon="long-arrow-alt-left" />
-                            <span>CONTINUE COMPRANDO</span>
-                        </p>
-                    </Link>
-                </div>
-                <div className={classes.Form_cart_container}>
                     <div>
-                        <p>COUPON DISCOUNT</p>
-                        <p>Enter your coupon code if you have one</p>
-                        <input placeholder="Enter your code"/>
-                        <p className={classes.Cart_light_button}>APPLY COUPON</p>
+                        <Link to="/shop/">
+                            <p className={classes.Cart_dark_button}>
+                                <FontAwesomeIcon icon="long-arrow-alt-left" />
+                                <span>CONTINUE COMPRANDO</span>
+                            </p>
+                        </Link>
                     </div>
-                    <div>
-                        <p>CALCULATE SHIPPING</p>
-                        <select>
-                            <option>Argentina</option>
-                            <option>Brazil</option>
-                            <option>Germany</option>
-                            <option>United States</option>
-                        </select>
-                        <input placeholder="State/Country" />
-                        <input placeholder="Town/City" />
-                        <input placeholder="Postcode/ZIP" />
-                        <p className={classes.Cart_light_button}>UPDATE</p>
-                    </div>
-                    <div>
+                    <div className={classes.Form_cart_container}>
                         <div>
-                            <div className={classes.Form_cart_price_container}>
-                                <div>
-                                    <p>SUBTOTAL</p>
-                                    <p>$ {finalPrice.toFixed(2)}</p>
-                                </div>
-                                <div>
-                                    <p>SHIPPING</p>
-                                    <p>$ 20.00</p>
-                                </div>
-                                <div>
-                                    <p>TOTAL</p>
-                                    <p>$ 40.00</p>
+                            <p>COUPON DISCOUNT</p>
+                            <p>Enter your coupon code if you have one</p>
+                            <input placeholder="Enter your code"/>
+                            <p className={classes.Cart_light_button}>APPLY COUPON</p>
+                        </div>
+                        <div>
+                            <p>CALCULATE SHIPPING</p>
+                            <select>
+                                <option>Argentina</option>
+                                <option>Brazil</option>
+                                <option>Germany</option>
+                                <option>United States</option>
+                            </select>
+                            <input placeholder="State/Country" />
+                            <input placeholder="Town/City" />
+                            <input placeholder="Postcode/ZIP" />
+                            <p className={classes.Cart_light_button}>UPDATE</p>
+                        </div>
+                        <div>
+                            <div>
+                                <div className={classes.Form_cart_price_container}>
+                                    <div>
+                                        <p>SUBTOTAL</p>
+                                        <p>$ {finalPrice.toFixed(2)}</p>
+                                    </div>
+                                    <div>
+                                        <p>SHIPPING</p>
+                                        <p>$ 20.00</p>
+                                    </div>
+                                    <div>
+                                        <p>TOTAL</p>
+                                        <p>$ 40.00</p>
+                                    </div>
                                 </div>
                             </div>
+                            <p className={classes.Cart_dark_button} >PROCEED TO CHECKOUT</p>
                         </div>
-                        <p className={classes.Cart_dark_button} >PROCEED TO CHECKOUT</p>
                     </div>
-                </div>
-            </div>
+                </div> :
+
+                <h1>YOUR BAG IS EMPTY</h1>
+            }
         </div>
     )
 }

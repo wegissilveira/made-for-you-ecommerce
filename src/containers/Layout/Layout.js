@@ -1,10 +1,11 @@
 import React, {Component, Fragment} from 'react'
 
 import classes from './Layout.module.css'
+import './Layout.css'
 
 import Footer from '../../components/Footer/Footer'
 
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import GoogleFontLoader from 'react-google-font-loader'
@@ -18,7 +19,8 @@ class Layout extends Component {
         input: '',
         translateMenuValue: -100,
         translateSubmenuValue:  -100,
-        rotateIconSubmenuValue: 0
+        rotateIconSubmenuValue: 0,
+        marginBottomValue: 47
     }
 
 
@@ -62,24 +64,19 @@ class Layout extends Component {
 
     mobileMenuHandler = () => {
         this.state.translateMenuValue === 0 ? 
-        this.setState({translateMenuValue: -100}) :
-        this.setState({translateMenuValue: 0})
-
-        this.setState({translateSubmenuValue: -100})
-        this.setState({rotateIconSubmenuValue: 0})
-        this.setState({showSubMenu: false})
-
+            this.setState({translateMenuValue: -100}) :
+            this.setState({translateMenuValue: 0})
     }
 
     subMenuHandler = () => {
         this.state.rotateIconSubmenuValue === 0 ?
-        this.setState({rotateIconSubmenuValue: -180}) :
-        this.setState({rotateIconSubmenuValue: 0})
+            this.setState({rotateIconSubmenuValue: -180}) :
+            this.setState({rotateIconSubmenuValue: 0})
         
 
         this.state.translateSubmenuValue === 0 ?
-        this.setState({translateSubmenuValue: -100}) :
-        this.setState({translateSubmenuValue: 0})
+            this.setState({translateSubmenuValue: -100, marginBottomValue: 47}) :
+            this.setState({translateSubmenuValue: 0, marginBottomValue: 0})
     }
 
     
@@ -114,7 +111,8 @@ class Layout extends Component {
 
         const translateSubmenu = {
             transform: `translateY(${this.state.translateSubmenuValue}%)`,
-            transition: '.8s ease-in-out'
+            transition: '.8s ease-in-out',
+            marginBottom: `-${this.state.marginBottomValue}%`
         }
 
         const rotateIconSubmenu = {
@@ -139,7 +137,7 @@ class Layout extends Component {
                     ]}
                     // subsets={['cursive']}
                 />
-                <nav className="navbar-light">
+                <nav>
                     <div className={classes.Navbar_container}>
                         <div>
                             {/* <FontAwesomeIcon className="d-md-none" icon="bars" color="grey" size="2x" /> */}
@@ -149,149 +147,35 @@ class Layout extends Component {
                                 <li >
                                     <NavLink 
                                         to="/" 
-                                        exact={true}
-                                        // tag={RRNavLink}
+                                        exact
                                     > Home
                                     </NavLink>
                                 </li>
                                 <li >
                                     <NavLink 
                                         to="/shop/" 
-                                        exact={true}
-                                        // tag={RRNavLink}
+                                        exact
                                     > Shop
                                     </NavLink>
                                 </li>
                                 <li >
                                     <NavLink 
                                         to="/contact/" 
-                                        exact={true}
-                                        // tag={RRNavLink}
+                                        exact
                                     > Contacts
                                     </NavLink>
                                 </li>
                             </ul>
-
-                            {/* Responsive menu */}
-                            {/* <FontAwesomeIcon 
-                                onClick={this.mobileMenuHandler}
-                                className="d-md-none" 
-                                icon="bars" color="grey" size="2x" 
-                            />
-                                <div className={`d-md-none ${classes.Navigation_mobile}`}
-                                style={translateMenu}>
-                                    <FontAwesomeIcon 
-                                        onClick={this.mobileMenuHandler}
-                                        icon="times" size="2x" 
-                                    />
-                                    <ul className={`navbar-nav ${classes.Navigation_mobile_main_list}`} >
-                                        <li className="nav-item">
-                                            <NavLink 
-                                                to="/" 
-                                                exact={true}
-                                                className="nav-link"
-                                            > Home
-                                            </NavLink>
-                                        </li>
-                                        <li className="nav-item" style={{overflow: 'hidden'}}>
-                                            <NavLink 
-                                                to="/shop/" 
-                                                exact={true}
-                                                className={`nav-link ${classes.Navigation_mobile_submenu_shop}`}
-                                                onClick={this.subMenuHandler}
-                                            > Shop
-                                                <FontAwesomeIcon icon="chevron-down" style={rotateIconSubmenu} />
-                                            </NavLink>
-                                                <ul 
-                                                    className={`navbar-nav ${classes.Navigation_mobile_sub_list}`} 
-                                                    style={translateSubmenu}
-                                                >
-                                                    <li className="nav-item">
-                                                        <NavLink
-                                                            to="/shop/"
-                                                            exact={true}
-                                                            className="nav-link"
-                                                        >
-                                                            All categories
-                                                        </NavLink>
-                                                    </li>
-                                                    <li className="nav-item">
-                                                        <NavLink
-                                                            to="/shop/bedroom"
-                                                            exact={true}
-                                                            className="nav-link"
-                                                        >
-                                                            Bedroom
-                                                        </NavLink>
-                                                    </li>
-                                                    <li className="nav-item">
-                                                        <NavLink
-                                                            to="/shop/living-room"
-                                                            exact={true}
-                                                            className="nav-link"
-                                                        >
-                                                            Living-room
-                                                        </NavLink>
-                                                    </li>
-                                                    <li className="nav-item">
-                                                        <NavLink
-                                                            to="/shop/bathroom"
-                                                            exact={true}
-                                                            className="nav-link"
-                                                        >
-                                                            Bathroom
-                                                        </NavLink>
-                                                    </li>
-                                                    <li className="nav-item">
-                                                        <NavLink
-                                                            to="/shop/kitchen"
-                                                            exact={true}
-                                                            className="nav-link"
-                                                        >
-                                                            Kitchen
-                                                        </NavLink>
-                                                    </li>
-                                                </ul>
-                                        </li>
-                                        <li className="nav-item">
-                                            <NavLink 
-                                                to="/contact/" 
-                                                exact={true}
-                                                // tag={RRNavLink}
-                                                className="nav-link"
-                                            > Contacts
-                                            </NavLink>
-                                        </li>
-                                    </ul>
-                                    <div className={classes.Navigation_mobile_contacts} >
-                                        <div className="d-flex flex-column mb-4">
-                                            <h6>CONTACTS</h6>
-                                            <div>
-                                                <p>hello@myhome.com</p>
-                                                <p>+375 29 364-74-69</p>
-                                            </div>
-                                        </div>
-                                        <div className="d-flex flex-column mb-4">
-                                            <h6>STAY SOCIAL</h6>
-                                            <div className={`${classes.Navigation_mobile_staySocial_icons}`}>
-                                                <FontAwesomeIcon icon={['fab', 'twitter']} />
-                                                <FontAwesomeIcon icon={['fab', 'vk']} />
-                                                <FontAwesomeIcon icon={['fab', 'instagram']} />
-                                                <FontAwesomeIcon icon={['fab', 'facebook-f']} />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>  */}
                         </div>
 
                         
-                        <NavLink
+                        <Link
                             to="/" 
                             className={classes.Logo}
                             // style={{ fontFamily: 'Lemonada, cursive' }}
                         > m
                             <span>y</span>Home
-                        </NavLink>
+                        </Link>
 
                         <div>
                             <p>+375 29 364-74-69</p>
@@ -314,17 +198,121 @@ class Layout extends Component {
                                 </li>
                                 <li>
                                     <NavLink to="/wishlist/">
-                                        <FontAwesomeIcon icon={['far', 'heart']} color={ heart_color } />
+                                        <FontAwesomeIcon 
+                                            icon={['far', 'heart']} 
+                                            color={ heart_color } 
+                                        />
                                     </NavLink>
                                 </li>
                                 <li>
                                     <NavLink to="/cart/">
-                                        <FontAwesomeIcon icon='shopping-bag' color={ bag_color } />
+                                        <FontAwesomeIcon 
+                                            icon='shopping-bag' 
+                                            color={ bag_color } 
+                                        />
                                     </NavLink>
                                 </li>
                             </ul>
                         </div>
                     </div>
+
+                    {/* Responsive menu */}
+                    <FontAwesomeIcon 
+                        onClick={this.mobileMenuHandler}
+                        className={classes.Menu_hamburger}
+                        icon="bars" color="grey" size="2x" 
+                    />
+                    <div 
+                        className={classes.Navigation_mobile_container}
+                        style={translateMenu}>
+                        <FontAwesomeIcon 
+                            onClick={this.mobileMenuHandler}
+                            icon="times" size="2x" 
+                        />
+                        <ul className={classes.Navigation_mobile_subContainer} >
+                            <li>
+                                <NavLink 
+                                    to="/" 
+                                    exact
+                                > Home
+                                </NavLink>
+                            </li>
+                            <li className={classes.Navigation_mobile_submenu}>
+                                <NavLink 
+                                    to="/shop/" 
+                                    // exact
+                                    onClick={this.subMenuHandler}
+                                > Shop
+                                    <FontAwesomeIcon 
+                                        icon="chevron-down" 
+                                        style={rotateIconSubmenu} 
+                                    />
+                                </NavLink>
+                                <ul style={translateSubmenu}>
+                                    <li>
+                                        <NavLink
+                                            to="/shop/"
+                                            exact
+                                        > All categories
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink
+                                            to="/shop/bedroom"
+                                            // exact
+                                        > Bedroom
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink
+                                            to="/shop/living-room"
+                                            // exact
+                                        > Living-room
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink
+                                            to="/shop/bathroom"
+                                            // exact
+                                        > Bathroom
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink
+                                            to="/shop/kitchen"
+                                            // exact
+                                        > Kitchen
+                                        </NavLink>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <NavLink 
+                                    to="/contact/" 
+                                    exact
+                                > Contacts
+                                </NavLink>
+                            </li>
+                        </ul>
+                        <div className={classes.Navigation_mobile_contacts} >
+                            <div>
+                                <h6>CONTACTS</h6>
+                                <div>
+                                    <p>hello@myhome.com</p>
+                                    <p>+375 29 364-74-69</p>
+                                </div>
+                            </div>
+                            <div>
+                                <h6>STAY SOCIAL</h6>
+                                <div>
+                                    <FontAwesomeIcon icon={['fab', 'twitter']} />
+                                    <FontAwesomeIcon icon={['fab', 'vk']} />
+                                    <FontAwesomeIcon icon={['fab', 'instagram']} />
+                                    <FontAwesomeIcon icon={['fab', 'facebook-f']} />
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
                 </nav>
                 
                 <main>
