@@ -50,7 +50,8 @@ nav {
 
 @media (max-width: 991.98px) {
     .Navbar_container {
-        display: none;
+        width: 90%;
+        right: 0;
     }
 }
 
@@ -62,6 +63,12 @@ nav {
     flex-basis: 33.33%;
     flex-shrink: 0;
     flex-grow: 0;
+}
+
+@media (max-width: 991.98px) {
+    .Navbar_container > div:first-of-type {
+        display: none;
+    }
 }
 
 .Navbar_container > div:first-of-type > ul {
@@ -101,6 +108,12 @@ nav {
     color: #000;
 }
 
+@media (max-width: 991.98px) {
+    .Logo {
+        left: 45%;
+    }
+}
+
 .Logo:hover {
     color: #000;
     text-decoration: none;
@@ -118,6 +131,14 @@ nav {
     flex-basis: 33.33%;
     flex-shrink: 0;
     flex-grow: 0;
+}
+
+@media (max-width: 991.98px) {
+    .Navbar_container > div:nth-of-type(2) {
+        position: absolute;
+        right: 10px;
+        width: 20%;
+    }
 }
 
 .Navbar_container > div:nth-of-type(2) > p {
@@ -146,6 +167,12 @@ nav {
 @media (max-width: 1199.98px) {
     .Account_icons {
         width: 100%;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .Account_icons > li:first-of-type {
+        display: none;
     }
 }
 

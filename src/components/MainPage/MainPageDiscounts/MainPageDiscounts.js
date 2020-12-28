@@ -16,9 +16,6 @@ const mainPageDiscounts = props => {
                         <h1>DISCOUNTS AND SALES</h1>
                         <h1>DISCOUNTS</h1>
                         <h1>AND SALES</h1>
-                        {/* <p>Follow our promotions and discounts. We constantly update them so you can buy your</p>
-                        <p>favorite home products at the best prices. And every monday a random discount on</p>
-                        <p>certain products. Hurry up to buy at an attractive price.</p> */}
                         <p>
                             Follow our promotions and discounts. We constantly update them so you can buy your
                             favorite home products at the best prices. And every monday a random discount on

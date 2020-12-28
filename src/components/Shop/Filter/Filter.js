@@ -70,7 +70,6 @@ const Filter = props => {
     }
 
     const translateProducts = {
-        // transform: `translateY(${translateProductsValue}px)`,   
         transition: '.8s ease-in-out',
         marginTop: marginT+'px'
     }
@@ -79,7 +78,6 @@ const Filter = props => {
         filterOpen ? setFilterOpen(false) : setFilterOpen(true)
 
         translateValue < 0 ? setTranslateValue(0) : setTranslateValue(-110)
-        // translateProductsValue < 0 ? setTranslateProductsValue(0) : setTranslateProductsValue(-filter_height)
         marginT < 0 ? setMarginT(0) : setMarginT(filter_height)
     }
 

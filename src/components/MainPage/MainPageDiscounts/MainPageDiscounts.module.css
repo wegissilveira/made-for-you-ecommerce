@@ -31,6 +31,12 @@
     }
 }
 
+.Discounts_container > div:first-of-type h1 {
+    text-align: unset;
+    margin-bottom: unset;
+    margin-top: unset;
+}
+
 .Discounts_container > div:first-of-type h1:first-of-type {
     display: none;
 }
