@@ -27,10 +27,6 @@ const productsData = [
             require('../assets/images/ProductCard/Furniture/Sofa-2/sofa-2-img-2.jpg'),
             require('../assets/images/ProductCard/Furniture/Sofa-2/sofa-2-img-3.jpg'),
         ],
-        //     require('../assets/images/ProductCard/Furniture/img-1.png'),
-        //     require('../assets/images/ProductCard/Furniture/img-2.png'),
-        //     require('../assets/images/ProductCard/Furniture/img-3.png'),
-        // ],
         colors: ['blue', 'green', 'purple'],
         deal: true,
         offer: 'best-seller'

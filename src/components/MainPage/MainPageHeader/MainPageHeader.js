@@ -18,28 +18,24 @@ const MainPageHeader = props => {
     let mainSlides = [
         {
             img: require('../../../assets/images/Header/MainSlider/imgSlider1-mainpage.jpg'),
-            // img: require('../../../assets/images/Header/MainSlider/imgSlider1-mainpage.png'),
             alt: 'Produto 1',
             linkText: ['LIVING ROOM DECOR COLLECTION', 'Start from $ 199.99'],
             cat: 'living-room/'
         },
         {
             img: require('../../../assets/images/Header/MainSlider/imgSlider2-mainpage.jpg'),
-            // img: require('../../../assets/images/Header/MainSlider/imgSlider2-mainpage.png'),
             alt: 'Produto 2',
             linkText: ['KITCHEN DECORATION', 'Start from $ 50.00'],
             cat: 'kitchen'
         },
         {
             img: require('../../../assets/images/Header/MainSlider/imgSlider3-mainpage.jpg'),
-            // img: require('../../../assets/images/Header/MainSlider/imgSlider3-mainpage.png'),
             alt: 'Produto 3',
             linkText: ['BATHROOM UTILITIES', 'Max price $ 200.99'],
             cat: 'bathroom'
         },
         {
             img: require('../../../assets/images/Header/MainSlider/imgSlider4-mainpage.jpg'),
-            // img: require('../../../assets/images/Header/MainSlider/imgSlider4-mainpage.png'),
             alt: 'Produto 4',
             linkText: ['BEDROOM PIECES', 'Start from $ 40.99'],
             cat: 'bedroom'
@@ -82,9 +78,6 @@ const MainPageHeader = props => {
         transform: `translateX(${translateValue}%)`
     }
 
-    // Passa os slides baseado nos argumentos
-    // O argumento 'slide' foi inserido para garantir que somente o mainSlider tenha o efeito de slideIn-out, sendo assim se verifica se a chamada da função partiu do mainSlider e não do menor.
-    // Sem tal verificação o mainSlider seria alterado ainda que a chamada partisse do minorSlider
     const changeSlideHandler = (arg, obj, img, fn, slide) => {
         if (arg === 'next') {
             
@@ -111,18 +104,14 @@ const MainPageHeader = props => {
         }
     }   
     
-    // Executa a função de passar os slides periodicamente
     React.useEffect(() => {
         const interval = setTimeout(() => {
             changeSlideHandler('next', mainSlides, slideImg, setSlideImg, 'main')
-            // changeSlide('next', minorSlides, minorSlideImg, setMinorSlideImg)
         }, 5000);
         return () => clearTimeout(interval);
     });
 
-    // É executado pelo componente 'ProgressBar' para que os slides sejam passados em sincronia com as barras
     const changeSlideCallbackHandler = arg => {
-        // changeSlide('next', mainSlides, slideImg, setSlideImg)
         changeSlideHandler(arg, minorSlides, minorSlideImg, setMinorSlideImg)
     }
     

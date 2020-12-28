@@ -95,8 +95,6 @@ const ProductCardModal = props => {
         }
     }
 
-    // Aqui esta função que seleciona as cores não passará o slide, já que o slide é automático.
-    // Simplesmente armazenará as informações sobre o produto destinado ao DB.
     const selectColorHandler = (color, i) => {
         setProductColor(color)
     }
@@ -222,6 +220,7 @@ const ProductCardModal = props => {
                             </div>
                         </div>
                         <div>
+                            
                             <ProductsQtde changeQtdeCallBack={qtde => setQtdeHandler(qtde)} /> 
 
                             <button 

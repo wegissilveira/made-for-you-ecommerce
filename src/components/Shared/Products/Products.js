@@ -9,9 +9,6 @@ import { connect } from 'react-redux'
 import ProductCardModal from '../../Shop/ProductCardModal/ProductCardModal'
 import * as actionTypes from '../../../store/actions/actionTypes'
 
-// Onde utilizo tais dados era utilizado o 'props.products'
-// Agora que decidi utilizar este componente também no 'Wishlist', talvez o fetch dos produtos não deva ser realizado aqui, já que talvez ficarão salvos em uma tabela distinta e, nesse caso, os dados que 'Products' recebem deve vir de seu parent, já que podem diferir.
-// Vou buscar uma maneira de salvar apenas a marcação de 'favorito' na tabela e referenciar o produto aqui. Escolherei a maneira mais econômica.
 import productsData from '../../../Data/productsData' 
 import wishlistDataFn from '../../../Data/wishlistData';
 import cartListDataFn from '../../../Data/cartData';
@@ -70,7 +67,6 @@ const Products = props => {
         category = 'all'
     }
 
-    // Update da state wishlist quando o botão é clicado pelo usuário
     const wishlistHandler = id => {
 
         let list = [...props.wish]
@@ -82,10 +78,9 @@ const Products = props => {
         
         localStorage.setItem('wishlist', JSON.stringify(list))
 
-        props.onWishlistState() // => enviando o dispatch
+        props.onWishlistState() 
     }
 
-    // Update da state cart quando o botão é clicado pelo usuário
     const cartHandler = product => {
 
         let cartList = [...props.cart]
@@ -119,10 +114,6 @@ const Products = props => {
         props.onCartListState()
     }
 
-    // O loop para a exibição dos produtos é realizado sobre o array 'products', que possui todos os itens ou somente os produtos com a tag selecionada. 
-    // Caso utilizemos diretamente o array completo quando alguma tag estiver selecionada isso fará com que só sejam mostrados os itens que ocupam indexes inferiores ao valor de 'count', 
-    // O que é perfeito em caso de todos os produtos estarem sendo mostrados, mas que criaria fileiras incompletas quando se seleciona alguma tag
-    // Além disso, antes de entrar nas verificações de tags e categorias é checado se se trata da página de favoritos (wishlist). Caso esse seja o caso é realizado um filter e retornado somente os produtos cujo o id exista na tabela de wishlist.
     let products = []
 
     if (props.match && props.match.params.searchKey) {
@@ -164,27 +155,23 @@ const Products = props => {
             }
         }
 
-        //Determina o intervalo de preços que os produtos devem aparecer, por exemplo, maior que 50 e menor que 500
         if (props.valueRange) {
             products = products.filter(product => 
                 parseFloat(product.price) >= props.valueRange[0] && parseFloat(product.price) <= props.valueRange[1]
             )
         }
 
-        // Determina os produtos que devem ser exibidos baseado na cor selecionada, ou seja, serão mostrados somente os produtos que possuem uma variação da cor desejada
         if (props.productColor && props.productColor !== '') {
             products = products.filter(product => 
                 product.colors.includes(props.productColor)
             )
         }
 
-        // Seleciona os produtos pelo tipo de oferta
         if (props.offer && props.offer.length > 0) {
             products = products.filter(product => 
                 props.offer.includes(product.offer))
         }
     
-        // Ordena produtos
         if (props.order) {
             if (props.order === 'low-high') {
                 products.sort((a,b) => parseFloat(a.price) - parseFloat(b.price))
@@ -200,13 +187,11 @@ const Products = props => {
         }
     }
 
-    // Abre e fecha o filtro
     const openModalHandler = i => {
         setShowProduct(!showProduct)
         setProductIndex(i)
     }
 
-    // Fecha o modal e seta a nova lista de favoritos a partir do modal
     const closeModalCallback = () => {
         setShowProduct(!showProduct)
     }
@@ -231,14 +216,10 @@ const Products = props => {
                 {props.match && props.match.params.cat ? <h1>{category.toUpperCase()}</h1> : null}
                 {props.match && props.match.params.searchKey ? <h1>BUSCA: '{props.match.params.searchKey.toUpperCase()}'</h1> : null}
                 <div className={classes.Products_subContainer}>
-                    {/* Corrigir key */}
-                    {/* Funcionando perfeitamente, mas ainda falta melhorar a transição quando clicamos em 'SHOW MORE' */}
                     {products.length > 0 ?
                         products.map((product, i) => {
                             let productsList
-                            // O loop é executado somente se os itens forem menores que 'count', variável que determina quantos itens serão mostrados na tela, isso garante que não sejam exibidos todos os itens de uma vez e que o usuário tenha o controle de incrementar ou diminuir 'count'
                             if (i + 1 <= count) {
-                                // Mostra o item relacionado à aba clicada, furniture, textile ou decorations
                                 if (tag === 'all-products' || product.tag === tag) {
                                     if (category === 'all' || product.category === category) {
                                         const wish_icon = props.wish.includes(product._id) ? 'fas' : 'far'
@@ -264,7 +245,7 @@ const Products = props => {
                                                                     </Link>
                                                                     <div className={classes.Products_description}>
                                                                         <div>
-                                                                            <p>{product.name}</p>
+                                                                            <Link to={"/shop/product/" + product._id}>{product.name}</Link>
                                                                             <p>$ {product.price}</p>
                                                                         </div>
                                                                         <div>

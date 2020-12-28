@@ -16,10 +16,9 @@ const ProductsQtde = props => {
     }, [props.startQtde])
 
     const changeQtde = arg => {
-        if (arg === "increase" && productQtde < productQtdeMax) {
+        if (arg === "increase" && (productQtde < productQtdeMax || productQtdeMax === undefined)) {
             setProductQtde(productQtde + 1)
             props.changeQtdeCallBack(productQtde + 1)
-
         } else if (arg === 'decrease' && productQtde > 1) {            
             if (productQtde > 1) {
                 setProductQtde(productQtde - 1)
@@ -29,10 +28,12 @@ const ProductsQtde = props => {
                 props.changeQtdeCallBack(1)
             }
         }
+
+        
     }
 
     let active_up
-    productQtde < productQtdeMax ? 
+    productQtde < productQtdeMax || productQtdeMax === undefined ? 
         active_up = {color: '#212529', cursor: 'pointer'} : 
         active_up = {color: '#ccc', cursor: 'default'}
 

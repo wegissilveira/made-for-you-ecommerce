@@ -8,14 +8,9 @@ import { Link } from 'react-router-dom'
 
 const BestDeal = props => {
 
-    // let [imgSlide, setImgSlide] = React.useState(0)
-
     let [translateValue, setTranslateValue] = React.useState(0)
 
-    // Array com os produtos que possuem 'deal: true'. Garante que todos sejam mostrados e que não haja fileiras incompletas. 
-    // Explicação mais detalhada no componente 'Produtos', que possui a mesma lógica para exibição de produtos com tag
     const products = props.products.filter(product => product.deal)
-
     
     const translateSlider = {
         transform: `translateX(${translateValue}%)`

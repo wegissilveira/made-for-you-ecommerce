@@ -35,22 +35,7 @@ const ProductCard = props => {
     const bag_button_color = isProductInBag === 0 ? classes.Bag_button_green : classes.Bag_button_red
     const bag_button_text = isProductInBag === 0 ? 'ADD TO BAG' : 'REMOVE FROM BAG'
 
-    let heart_Icon = props.wish.includes(product._id) ? 'fas' : 'far'
-
-    // let [prodExists, setProdExists] = React.useState(0)
-
-    // Controla a state 'prodExists' para definir qual botão será mostrado, o de adicionar item ou o de remover. 
-    // Caso 'prodExists' sejam mantido 0 significa que o item não existe na sacola, então será mostrado o botão de adicionar.
-    // React.useEffect(() => {
-    //     let productCartArr = [...props.cart]
-
-    //     productCartArr.map(item => {
-    //         if (item._id === product._id) setProdExists(++prodExists)
-    //     })
-
-    // }, [])
-
-    
+    let heart_Icon = props.wish.includes(product._id) ? 'fas' : 'far'    
     
     let [imgSlide, setImgSlide] = React.useState(0)
     let [productColor, setProductColor] = React.useState('') // => Armazena cor selecionada do produto
@@ -92,8 +77,6 @@ const ProductCard = props => {
         }
     }
 
-    // Selecionar cor do produto ao clicar nos círculos.
-    // Tal método muda a UI apresentando o slide que se refere a cor selecionada, mas também armazena os valores no objeto com todas as informações do produto enviado para o DB (ainda será criado).
     const selectColorHandler = (color, i) => {
         setProductColor(color)
         setImgSlide(i)

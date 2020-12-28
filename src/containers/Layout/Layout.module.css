@@ -50,7 +50,6 @@ nav {
 
 @media (max-width: 991.98px) {
     .Navbar_container {
-        width: 90%;
         right: 0;
     }
 }
@@ -106,12 +105,6 @@ nav {
     padding-bottom: 5px;
     font-size: 25px;
     color: #000;
-}
-
-@media (max-width: 991.98px) {
-    .Logo {
-        left: 45%;
-    }
 }
 
 .Logo:hover {
@@ -179,7 +172,6 @@ nav {
 .Enter_account_container {
     width: 40%;
     color: grey;
-    /* width: 60%; */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -188,7 +180,6 @@ nav {
 .Enter_account_btn {
     width: auto;
     height: 40px;
-    /* border: 3px solid grey; */
     color: grey;
     cursor: pointer;
     font-weight: bold;
@@ -200,12 +191,6 @@ nav {
     -o-border-radius: 5px;
 }
 
-/* .Enter_account_btn:hover {
-    border: 3px solid #ffc107;
-    color: #ffc107;
-    text-decoration: none;
-} */
-
 .Enter_account_btn p {
     margin: 5px 10px 5px 10px
 }
@@ -213,6 +198,8 @@ nav {
 .Menu_hamburger {
     display: none;
     margin-left: 12px;
+    position: fixed;
+    z-index: 9999;
 }
 
 @media (max-width: 991.98px) {
@@ -222,7 +209,7 @@ nav {
 }
 
 .Navigation_mobile_container {
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 0;
 

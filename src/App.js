@@ -42,7 +42,6 @@ import {
   faPhoneAlt,
   faEnvelope,
   faShoppingBag
-  // faSortDown
 } from '@fortawesome/free-solid-svg-icons'
 
 import {
@@ -79,7 +78,6 @@ library.add(
   faPhoneAlt,
   faEnvelope,
   faShoppingBag
-  // faSortDown
 )
 
 

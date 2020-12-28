@@ -26,7 +26,6 @@ class Layout extends Component {
 
     
     // Executa a busca com o click na lupa
-    // O botão de busca só é habilitado em caso do input receber ao menos 3 caracteres
     searchProductHandler = e => {
 
         let inputValue = e.currentTarget.parentNode.childNodes[0].value
@@ -81,8 +80,6 @@ class Layout extends Component {
 
     
 
-    
-
 
     render () {
 
@@ -130,19 +127,11 @@ class Layout extends Component {
                         font: 'Lemonada',
                         weights: [],
                         },
-                        // {
-                        // font: 'Roboto Mono',
-                        // weights: [400, 700],
-                        // },
                     ]}
-                    // subsets={['cursive']}
                 />
                 <nav>
                     <div className={classes.Navbar_container}>
-                        <div>
-                            {/* <FontAwesomeIcon className="d-md-none" icon="bars" color="grey" size="2x" /> */}
-                            {/* Corrigir NavLink. Quando coloco todos os itens da lista com NavLink ao clicar em algum todos são selecionados e o efeito de highlight na página aberta se perde, funcionando somente quando estamos na homepage. Verificar isso quando as as demais páginas além de 'shop' existirem. */}
-                            
+                        <div>                            
                             <ul>
                                 <li >
                                     <NavLink 
@@ -172,7 +161,6 @@ class Layout extends Component {
                         <Link
                             to="/" 
                             className={classes.Logo}
-                            // style={{ fontFamily: 'Lemonada, cursive' }}
                         > m
                             <span>y</span>Home
                         </Link>
@@ -240,7 +228,6 @@ class Layout extends Component {
                             <li className={classes.Navigation_mobile_submenu}>
                                 <NavLink 
                                     to="/shop/" 
-                                    // exact
                                     onClick={this.subMenuHandler}
                                 > Shop
                                     <FontAwesomeIcon 
@@ -259,28 +246,24 @@ class Layout extends Component {
                                     <li>
                                         <NavLink
                                             to="/shop/bedroom"
-                                            // exact
                                         > Bedroom
                                         </NavLink>
                                     </li>
                                     <li>
                                         <NavLink
                                             to="/shop/living-room"
-                                            // exact
                                         > Living-room
                                         </NavLink>
                                     </li>
                                     <li>
                                         <NavLink
                                             to="/shop/bathroom"
-                                            // exact
                                         > Bathroom
                                         </NavLink>
                                     </li>
                                     <li>
                                         <NavLink
                                             to="/shop/kitchen"
-                                            // exact
                                         > Kitchen
                                         </NavLink>
                                     </li>

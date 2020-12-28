@@ -9,7 +9,6 @@ class ShopConfig extends Component {
         return (
             <Fragment>
                 <ShopProducts />
-                {/* <ProductCard /> */}
             </Fragment>
         )
     }

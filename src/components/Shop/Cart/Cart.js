@@ -15,9 +15,6 @@ import productsData from '../../../Data/productsData'
 
 
 const Cart = props => {
-    
-    // let [update, setUpdate] = React.useState(0) 
-
 
     let products = []
     productsData.forEach(product => {
@@ -27,11 +24,22 @@ const Cart = props => {
             }
         })
     })
-
-    const pricesArrState = products.map(item => parseFloat(item.price))
     
+    let products_cart_merged = []
+    for(let i=0; i < products.length; i++) {
+        products_cart_merged.push({
+       ...products[i], 
+       ...(props.cart.find((item) => item._id === products[i]._id))}
+      )
+    }
 
-    // let [qtde, setQtde] = React.useState([])
+    products_cart_merged.sort((a,b) => {
+        const indexOfA = props.cart.findIndex(e => e._id === a._id)
+        const indexOfB = props.cart.findIndex(e => e._id === b._id)
+        return indexOfA - indexOfB;
+    })
+
+
     let [qtde, setQtde] = React.useState(() => {
         let arrQtde = []
         props.cart.map((item, index) => {
@@ -41,67 +49,23 @@ const Cart = props => {
         return arrQtde
     })
 
-
-    // Antes da possibilidade de salvar quantidade no carrinho 'qtde' era populada com o array abaixo. 
-    // 'qtde' recebia um índice para cada produto no carrinho utilizando o length do array 'cartData'
-    // Agora simplesmente utilizo o useEffect para inserir valores customizados
-    // let [qtde, setQtde] = React.useState(Array(cartState.length).fill(1))
-
-    // React.useEffect(() => {
-    //     let arrQtde = [...qtde]
-    //     props.cart.map((item, index) => {
-    //         arrQtde[index] = item.qtde
-    //     })
-
-    //     setQtde(arrQtde)
-    // }, [])
-
-    // console.log(qtde)
-
-    // const [pricesArrState, setPricesArrState] = React.useState([])
-    // const [pricesArrState, setPricesArrState] = React.useState(() => {
-    //     return products.map(item => parseFloat(item.price))
-    // })
-
-    // const [pricesArr, ] = React.useState(() => {
-    //     return products.map(item => parseFloat(item.price))
-    // })
-
-    // console.log(pricesArr)
-    
-    
-    // React.useEffect(() => {
-    //     setPricesArrState(pricesArr)
-    // }, [pricesArr]) 
-    // }, [update])
+    const pricesArrState = products.map(item => parseFloat(item.price))
 
     let finalPrice = 0
     pricesArrState.map((item, i) => {
-
         finalPrice = finalPrice + (item * qtde[i])
         return finalPrice
     })
 
-    // Aqui eu atualizo a quantidade de produtos do item que ocupa a posição no array que está sofrendo a alteração.
-    // Ou seja, se eu altero a quantidade do produto de índice 2, somente o índice 2 receberá a alteração e somente o preço total deste será alterado, já que o índice é utilizado para realizar o cálculo => qtde[i] * parseInt(product.price)
-    // Caso eu não tivesse um array com uma posição para cada produto, eu teria somente uma state para todos, sendo assim, quando a quantidade de um alterasse, os preços de todos acompanhariam, já que se baseariam na mesma variável.
-    // Poderia ter sido criada uma state para cada produto, mas isso, além de muito mais verboso que desta forma, só seria possível em caso do número de produtos ser fixo.
     const setQtdeHandler = (value, index) => {
         let arrQtde = [...qtde]
-
         arrQtde[index] = value
-
         setQtde(arrQtde)
     }
 
     const removeProductCartHandler = id => {
-        
         let cartList = props.cart.filter(item => item._id !== id)
-
-        // setUpdate(++update)
-
         localStorage.setItem('cartList', JSON.stringify(cartList))
-
         props.onCartListState()
     }
 
@@ -115,7 +79,6 @@ const Cart = props => {
         }
 
         Array.from(select.children[0].children).forEach(item => {
-
             if (Number(item.children[1].value) === qtde) {
                 item.children[1].checked = true
             }
@@ -123,6 +86,7 @@ const Cart = props => {
     }
 
     
+
 
     return (
         <div className={classes.Session_container}>
@@ -137,26 +101,27 @@ const Cart = props => {
                         <p>TOTAL</p>
                         <p></p>
                     </div>
-                    {products.map((product, i) => {
+                    {products_cart_merged.map((product, i) => {
                         return  <div key={i} className={classes.Cart_details}>
                                     <div>
-                                        <div>
+                                        <Link to={"/shop/product/" + product._id}>
                                             <img src={product.imgsDemo[0]} alt='img' />
-                                        </div>
+                                        </Link>
 
                                         <div>
-                                            <p>{product.name}</p>
+                                            <Link to={"/shop/product/" + product._id}>{product.name}</Link>
                                             <div className={classes.Cart_details_info}>
                                                 <div>
                                                     <p>Size</p>
                                                     <p>Color</p>
                                                 </div>
                                                 <div>
-                                                    <p>{props.cart[i].size}</p>
-                                                    <p>{props.cart[i].color}</p>
+                                                    <p>{product.size}</p>
+                                                    <p>{product.color}</p>
                                                 </div>
                                             </div>
                                         </div>
+                                        {/* Botão de remover mobile */}
                                         <FontAwesomeIcon
                                             onClick={() => removeProductCartHandler(product._id)}
                                             className={classes.Cart_delete_icon}
@@ -168,7 +133,7 @@ const Cart = props => {
                                     <p>$ {product.price}</p>
                                     <div>
                                         <ProductQtde 
-                                            startQtde={props.cart[i].qtde}
+                                            startQtde={product.qtde}
                                             changeQtdeCallBack={qtde => setQtdeHandler(qtde, i)} 
                                             max={10}
                                         />
@@ -208,7 +173,7 @@ const Cart = props => {
                         <Link to="/shop/">
                             <p className={classes.Cart_dark_button}>
                                 <FontAwesomeIcon icon="long-arrow-alt-left" />
-                                <span>CONTINUE COMPRANDO</span>
+                                <span>KEEP BUYING</span>
                             </p>
                         </Link>
                     </div>
@@ -269,7 +234,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onCartListState: () => dispatch({type: actionTypes.CARTLIST, value: cartListDataFn()})
+        onCartListState: () => dispatch({
+                type: actionTypes.CARTLIST, 
+                value: cartListDataFn()
+            })
     }
 }
 

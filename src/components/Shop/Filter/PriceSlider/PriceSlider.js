@@ -63,8 +63,6 @@ const PriceSlider = forwardRef((props, ref) => {
         let current_position = e.clientX - rect.left 
         
         if (thumb_id === 'right-thumb') {
-            // 'tight-thumb' não pode ser 200 (e.clientX - rect.left), ja que a referência é o próprio objeto, ou seja, o seu ponto 0 e onde ele está e não o início do slider, por isso é preciso subtrair o width do slider, ou seja, 200 - 200, o que equivale a 0 inicialmente, caso fosse duzentos ele ficaria 200 pontos a mais para a direita.
-            // Da maneira que está ele se inicía com 0 e ao ser movido para a direita recebe valores negativos, o oposto do 'left-thumb'.
             current_position = current_position - sliderRef.current.offsetWidth
 
             if (current_position >= initial_position) {
@@ -84,7 +82,6 @@ const PriceSlider = forwardRef((props, ref) => {
                 current_position = initial_position
             }
 
-            // estou utilizando o valor de 175 como referência, pois o 'tight-thumb' recebe um valor negativo, como o slider tem o width de 200, o 175 garante uma diferença de 25px entre os thumbs (200 - 175) independente de suas posições.
             if (current_position >= mobile_thumb2_position + (slider_width - 25)) {
                 current_position = mobile_thumb2_position + (slider_width - 25)
             }
