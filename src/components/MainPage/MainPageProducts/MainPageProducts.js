@@ -20,18 +20,14 @@ const MainPageProducts = props => {
         let children = e.currentTarget.children
         let childrenArray = Array.from(children)
 
-        if (target.childNodes[1] && !target.className.match('Products_select_container') && screen !== 'mobile') { 
+        if (!target.className.match('Products_select_container') && screen !== 'mobile') { 
             childrenArray.forEach(child => {
-                child.className = classes.Products_select
-
-                Array.from(child.children).forEach(el => {
-                    el.style.display = 'none'
-                })
-                
+                child.children[0].className = classes.Products_select
+                child.children[1].className = ''
             })
             
             target.className = [classes.Products_select, classes.Products_select_active].join(' ')
-            target.childNodes[1].style.display = 'flex'
+            target.parentNode.children[1].className = classes.Products_selectHeader_arrow
         }
 
         if (screen === 'mobile' && target.tagName === 'P') {
@@ -61,34 +57,43 @@ const MainPageProducts = props => {
                 onClick={(e) => setActiveTabHandler(e)} 
                 className={classes.Products_select_container}
             >
-                <div 
-                    onClick={() => setTag('all-products')} 
-                    className={[
-                        classes.Products_select, 
-                        classes.Products_select_active].join(' ')
-                    }
-                > ALL PRODUCTS
+                <div>
+                    <div 
+                        onClick={() => setTag('all-products')} 
+                        className={[
+                            classes.Products_select, 
+                            classes.Products_select_active].join(' ')
+                        }
+                    > ALL PRODUCTS
+                        
+                    </div>
+                    <p className={classes.Products_selectHeader_arrow}> <span></span> </p>
+                </div>
+                <div>
+                    <div 
+                        onClick={() => setTag('furniture')} 
+                        className={classes.Products_select}
+                    > FURNITURE
+                        
+                    </div>
                     <p> <span></span> </p>
                 </div>
-
-                <div 
-                    onClick={() => setTag('furniture')} 
-                    className={classes.Products_select}
-                > FURNITURE
+                <div>
+                    <div 
+                        onClick={() => setTag('decorations')} 
+                        className={classes.Products_select}
+                    > DECORATIONS
+                        
+                    </div>
                     <p> <span></span> </p>
                 </div>
-
-                <div 
-                    onClick={() => setTag('decorations')} 
-                    className={classes.Products_select}
-                > DECORATIONS
-                    <p> <span></span> </p>
-                </div>
-
-                <div 
-                    onClick={() => setTag('textile')} 
-                    className={classes.Products_select}
-                > TEXTILE
+                <div>
+                    <div 
+                        onClick={() => setTag('textile')} 
+                        className={classes.Products_select}
+                    > TEXTILE
+                        
+                    </div>
                     <p> <span></span> </p>
                 </div>
             </div>

@@ -139,9 +139,10 @@ const Products = props => {
                             }
                             return productsList
                         })
-                    : <h1 className="text-center" style={{width: '100%'}}>NENHUM ITEM NA ENCONTRADO</h1>}
-
+                    : 
+                        <h1 className="text-center" style={{width: '100%'}}>NENHUM ITEM ENCONTRADO</h1>}
                 </div>
+
                 <div className={classes.Products_show_container}>
                     <div className={classes.Products_show_subContainer}>
                         <div>

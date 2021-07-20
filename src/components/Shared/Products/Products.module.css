@@ -21,10 +21,10 @@
 }
 
 .Products_subContainer > div {
-    flex-basis: 25%;
+    flex-basis: 24%;
     flex-shrink: 0;
-    padding-left: 7px;
-    padding-right: 7px;
+    padding-left: 0.5%;
+    padding-right: 0.5%;
     margin-top: 24px;
     position: relative;
 }
@@ -44,102 +44,6 @@
 .Products_subContainer > div > div {
     border: 1px solid #dee2e6
 }
-
-/* .Products_img_container {
-    display: flex;
-    align-items: center;
-
-    height: 359px;
-    background-color: #F6F6F6;
-}
-
-@media (max-width: 767.98px) {
-    .Products_img_container {
-        height: 300px;
-    }
-}
-
-.Products_img_container > img {
-    max-width: 100%;
-} */
-/* 
-.Products_description{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 75px;
-    width: 80%;
-    margin-left: 10%;
-}
-
-.Products_description > div:first-of-type {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 65%;
-}
-
-.Products_description > div:first-of-type > a {
-    color: grey;
-    text-decoration: none;
-}
-
-.Products_description > div:first-of-type > p {
-    margin-bottom: 0;
-}
-
-.Products_description > div:nth-of-type(2) {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 30%;
-}
-
-.Products_description > div:nth-of-type(2) > * {
-    cursor: pointer;
-}
-
-.Products_description > div:nth-of-type(2) > p {
-    margin: 0;
-}
-
-.Products_description > div:nth-of-type(2) > svg:first-of-type {
-    color: grey;
-}
-
-.Products_description > div:nth-of-type(2) > svg:first-of-type:hover {
-    color: rgb(0, 153, 255);
-} */
-/* 
-.Wishlist_icon_heart {
-    position: absolute;
-    right: 0;
-    margin-right: 30px;
-    margin-top: 10px;
-    color: red;
-    cursor: pointer;
-}
-
-.Wishlist_icon_heart:hover {
-    color: rgb(253, 91, 91);
-} */
-
-/* .Wishlist_icon_bag {
-    color: #ccc;
-    cursor: pointer;
-}
-
-.Wishlist_icon_bag:hover {
-    color: rgba(0, 128, 0, 0.39);
-}
-
-.Wishlist_icon_bag_selected {
-    color: green;
-}
-
-.Wishlist_icon_bag_selected:hover {
-    color: rgba(0, 128, 0, 0.616);
-} */
 
 .Products_show_container {
     display: flex;

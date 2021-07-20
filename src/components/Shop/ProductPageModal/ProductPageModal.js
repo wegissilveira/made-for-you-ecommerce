@@ -188,6 +188,7 @@ const ProductPageModal = props => {
                             />
                         </div>
                     </div>
+                    
                     <div>
                         <h1>{props.product.name}</h1>
                         <p>A comfortable bed for the dog. It will bring a lot of pleasure to your pet. High quality material does not allow the wool to stick and easy to clean.</p>
@@ -218,10 +219,9 @@ const ProductPageModal = props => {
                                 />
                             </div>
                         </div>
-                        <div>
-                            
-                            <ProductsQtde changeQtdeCallBack={qtde => setQtdeHandler(qtde)} /> 
 
+                        <div>
+                            <ProductsQtde changeQtdeCallBack={qtde => setQtdeHandler(qtde)} /> 
                             <button 
                                 onClick={() => addProductToBagHandler()}
                                 type="button" 
