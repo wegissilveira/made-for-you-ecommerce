@@ -2,42 +2,15 @@ import React, { Fragment } from 'react'
 
 import classes from './Products.module.css'
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
-
-import ProductCardModal from '../../Shop/ProductCardModal/ProductCardModal'
-import * as actionTypes from '../../../store/actions/actionTypes'
+import ProductCard from './ProductCard/ProductCard';
 
 import productsData from '../../../Data/productsData' 
-import wishlistDataFn from '../../../Data/wishlistData';
-import cartListDataFn from '../../../Data/cartData';
 
 
 const Products = props => {
 
     let [count, setCount] = React.useState(props.pageLimit)
     let [pageLimit, setPageLimit] = React.useState(props.pageLimit)
-    let [showProduct, setShowProduct] = React.useState(false)
-    let [productIndex, setProductIndex] = React.useState(null)
-    let [prodExistsCart, setProdExistsCart] = React.useState([])
-    
-    React.useEffect(() => {
-        let productCartArr = [...props.cart]
-
-        let productsCartIDs = []
-        productCartArr.forEach(item => {
-            productsData.forEach(product => {
-                if (item._id === product._id) {
-                    productsCartIDs.push(item._id)
-                }
-            })
-            
-        })
-
-        setProdExistsCart(productsCartIDs)
-
-    }, [props.cart])
 
     
     if (count === undefined) {
@@ -67,55 +40,7 @@ const Products = props => {
         category = 'all'
     }
 
-    const wishlistHandler = id => {
-
-        let list = [...props.wish]
-        if (list.includes(id)) {
-            list = list.filter(item => item !== id)
-        } else {
-            list.push(id)
-        }
-        
-        localStorage.setItem('wishlist', JSON.stringify(list))
-
-        props.onWishlistState() 
-    }
-
-    const cartHandler = product => {
-
-        let cartList = [...props.cart]
-        let productsCartIDs = [...prodExistsCart]
-
-        let count = 0
-        cartList.forEach(item => {
-            if (item._id === product._id) count++
-        })
-        
-        if (count === 0) {
-            let productCart = {}
-
-            productCart._id = product._id
-            productCart.qtde = 1
-            productCart.color = product.colors[0]
-            productCart.size = '100x100'
-    
-            cartList.push(productCart)
-            productsCartIDs.push(product._id)
-
-        } else {
-            cartList = cartList.filter(item => item._id !== product._id)
-            productsCartIDs = productsCartIDs.filter(item => item !== product._id)
-        }      
-        
-        setProdExistsCart(productsCartIDs)
-
-        localStorage.setItem('cartList', JSON.stringify(cartList))
-
-        props.onCartListState()
-    }
-
     let products = []
-
     if (props.match && props.match.params.searchKey) {
         let searchKey = new RegExp(props.match.params.searchKey, 'gi') 
 
@@ -182,24 +107,9 @@ const Products = props => {
                     b.name,
                     undefined,
                     { numeric: true, sensitivity: 'base' }
-                ));
+                ))
             }
         }
-    }
-
-    const openModalHandler = i => {
-        setShowProduct(!showProduct)
-        setProductIndex(i)
-    }
-
-    const closeModalCallback = () => {
-        setShowProduct(!showProduct)
-    }
-
-    if (showProduct === true) {
-        document.body.style.overflow = "hidden"
-    } else {
-        document.body.style.overflow = "visible"
     }
 
     const url_string = window.location.href
@@ -209,6 +119,7 @@ const Products = props => {
         url.pathname === '/shop/' ? 
             {width: '100%', margin: '0'} : 
             classes.Products_container
+
         
     return (
         <Fragment>
@@ -222,58 +133,7 @@ const Products = props => {
                             if (i + 1 <= count) {
                                 if (tag === 'all-products' || product.tag === tag) {
                                     if (category === 'all' || product.category === category) {
-                                        const wish_icon = props.wish.includes(product._id) ? 'fas' : 'far'
-                                        const bag_icon_color = prodExistsCart.includes(product._id) ?
-                                            classes.Wishlist_icon_bag_selected :
-                                            classes.Wishlist_icon_bag
-
-                                        productsList = <Fragment key={product+i}>
-                                                            <div>
-                                                                <div>
-                                                                    <FontAwesomeIcon 
-                                                                        onClick={() => wishlistHandler(product._id)} 
-                                                                        icon={[wish_icon, 'heart']} size="2x" 
-                                                                        className={classes.Wishlist_icon_heart} 
-                                                                    />
-                                                                    <Link to={"/shop/product/" + product._id} >
-                                                                        <div className={classes.Products_img_container}>
-                                                                            <img 
-                                                                                src={product.img} 
-                                                                                alt="Produto" 
-                                                                            />
-                                                                        </div>
-                                                                    </Link>
-                                                                    <div className={classes.Products_description}>
-                                                                        <div>
-                                                                            <Link to={"/shop/product/" + product._id}>{product.name}</Link>
-                                                                            <p>$ {product.price}</p>
-                                                                        </div>
-                                                                        <div>
-                                                                            <FontAwesomeIcon 
-                                                                                onClick={() => openModalHandler(i)} 
-                                                                                icon="eye" 
-                                                                            />
-                                                                            <FontAwesomeIcon
-                                                                                onClick={() => cartHandler(product)}
-                                                                                icon="shopping-bag" size="2x"
-                                                                                className={bag_icon_color} 
-                                                                            />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                
-                                                            </div>
-                                                            { productIndex === i ? 
-                                                                <ProductCardModal 
-                                                                    showProduct={showProduct}
-                                                                    setShowProduct={closeModalCallback}
-                                                                    product={product} 
-                                                                    wishlist={props.wish}
-                                                                    imgs={product.imgsDemo} 
-                                                                    name={product.name}
-                                                                /> 
-                                                            : null }
-                                                        </Fragment>
+                                        productsList = <ProductCard key={product+i} product={product} index={i} />
                                     }
                                 }
                             }
@@ -309,20 +169,4 @@ const Products = props => {
     )
 }
 
-
-const mapStateToProps = state => {
-    return {
-        wish: state.wishlistState,
-        cart: state.cartListState
-    }
-}
-
-const mapDispatchToProps = dispatch => {
-    return {
-        onWishlistState: () => dispatch({type: actionTypes.WISHLIST, value: wishlistDataFn()}),
-        onCartListState: () => dispatch({type: actionTypes.CARTLIST, value: cartListDataFn()})
-    }
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(Products)
+export default Products

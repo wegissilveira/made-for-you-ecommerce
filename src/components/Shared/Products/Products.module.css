@@ -45,7 +45,7 @@
     border: 1px solid #dee2e6
 }
 
-.Products_img_container {
+/* .Products_img_container {
     display: flex;
     align-items: center;
 
@@ -61,8 +61,8 @@
 
 .Products_img_container > img {
     max-width: 100%;
-}
-
+} */
+/* 
 .Products_description{
     display: flex;
     justify-content: space-between;
@@ -109,8 +109,8 @@
 
 .Products_description > div:nth-of-type(2) > svg:first-of-type:hover {
     color: rgb(0, 153, 255);
-}
-
+} */
+/* 
 .Wishlist_icon_heart {
     position: absolute;
     right: 0;
@@ -122,9 +122,9 @@
 
 .Wishlist_icon_heart:hover {
     color: rgb(253, 91, 91);
-}
+} */
 
-.Wishlist_icon_bag {
+/* .Wishlist_icon_bag {
     color: #ccc;
     cursor: pointer;
 }
@@ -139,7 +139,7 @@
 
 .Wishlist_icon_bag_selected:hover {
     color: rgba(0, 128, 0, 0.616);
-}
+} */
 
 .Products_show_container {
     display: flex;

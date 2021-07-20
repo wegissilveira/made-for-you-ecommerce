@@ -5,7 +5,7 @@ import './App.css';
 import Layout from './containers/Layout/Layout'
 import MainPageConfig from './containers/MainPageConfig/MainPageConfig'
 import ShopConfig from './containers/ShopConfig/ShopConfig'
-import ProductCard from './components/Shop/ProductCard/ProductCard'
+import ProductPage from './components/Shop/ProductPage/ProductPage'
 import Cart from './components/Shop/Cart/Cart'
 import Wishlist from './components/User/Wishlist/Wishlist'
 import Products from './components/Shared/Products/Products'
@@ -93,7 +93,7 @@ function App() {
               <Route path="/search/:searchKey" exact component={Products} />
               <Route path="/shop/" exact component={ShopConfig} />
               <Route path="/shop/:cat" exact component={Products} />
-              <Route path="/shop/product/:id" exact component={ProductCard} />
+              <Route path="/shop/product/:id" exact component={ProductPage} />
               <Route path="/cart/" exact component={Cart} />
               <Route path="/wishlist/" exact component={Wishlist} />
               <Route path="/user-login/" exact component={UserLogin} />

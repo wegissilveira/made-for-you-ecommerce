@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 
-import classes from './ProductCardModal.module.css'
+import classes from './ProductPageModal.module.css'
 import './Modal.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -31,7 +31,7 @@ const customStyles = {
 };
 
 
-const ProductCardModal = props => {
+const ProductPageModal = props => {
         
     let [imgSlide, setImgSlide] = React.useState(0)
     let [productColor, setProductColor] = React.useState('')
@@ -65,7 +65,6 @@ const ProductCardModal = props => {
         transition: '.8s ease-in-out',
         overflow: 'unset'
     }
-
     
     const changeSlide = arg => {
 
@@ -136,18 +135,18 @@ const ProductCardModal = props => {
     
             productCartArr.push(productCart)
             setProdExists(1)
+            props.setProductOnCart(true)
 
         } else {
             productCartArr = productCartArr.filter(item => item._id !== props.product._id)
             setProdExists(0)
+            props.setProductOnCart(false)
         }
 
         localStorage.setItem('cartList', JSON.stringify(productCartArr))
 
         props.onCartListState()
     }
-
-
 
     
 
@@ -162,7 +161,7 @@ const ProductCardModal = props => {
                 closeTimeoutMS={500}
             >
 
-                <div className={classes.Product_card_modal_container}>
+                <div className={classes.Product_page_modal_container}>
                     <p onClick={() => props.setShowProduct()}>
                         <FontAwesomeIcon icon="times" />
                     </p>
@@ -268,4 +267,4 @@ const mapDispatchToProps = dispatch => {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductCardModal)
+export default connect(mapStateToProps, mapDispatchToProps)(ProductPageModal)

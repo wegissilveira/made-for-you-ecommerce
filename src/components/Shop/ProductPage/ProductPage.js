@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 
-import classes from './ProductCard.module.css'
+import classes from './ProductPage.module.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { connect } from 'react-redux'
@@ -16,7 +16,7 @@ import * as actionTypes from '../../../store/actions/actionTypes'
 
   
 
-const ProductCard = props => {
+const ProductPage = props => {
 
     const product = productsData.find(product => product._id === props.match.params.id)
 
@@ -155,7 +155,7 @@ const ProductCard = props => {
         
         <Fragment>
             <div className={classes.Session_container}>
-                <div className={classes.Product_card_container}>
+                <div className={classes.Product_page_container}>
                     <h1>{product.name}</h1>
                     <div>
                         <div className={classes.Main_img_slider}>
@@ -169,7 +169,7 @@ const ProductCard = props => {
                                 <FontAwesomeIcon onClick={() => changeSlide('next')} icon="arrow-right" />
                             </div>
                         </div>
-                        <div className={classes.Product_card_thumb_images}>
+                        <div className={classes.Product_page_thumb_images}>
                             <img 
                                 onClick={() => changeSlide(0)} 
                                 src={product.imgsDemo[0]} alt="img-1" 
@@ -302,4 +302,4 @@ const mapDispatchToProps = dispatch => {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductCard)
+export default connect(mapStateToProps, mapDispatchToProps)(ProductPage)

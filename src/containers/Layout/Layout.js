@@ -301,9 +301,7 @@ class Layout extends Component {
                 <main>
                     { this.props.children }
                 </main>
-                <Footer>
-
-                </Footer>
+                <Footer></Footer>
             </Fragment>
         )
     }

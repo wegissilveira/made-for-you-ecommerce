@@ -3,10 +3,10 @@ import { Fragment } from 'react'
 
 import classes from './MainPageHeader.module.css'
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link } from 'react-router-dom'
 
-import ProgressBar from '../../Shared/UI/ProgressBar/ProgressBar';
+import ProgressBar from '../../Shared/UI/ProgressBar/ProgressBar'
 
 const MainPageHeader = props => {
 
