@@ -8,82 +8,93 @@ import { Link } from 'react-router-dom'
 
 import ProgressBar from '../../Shared/UI/ProgressBar/ProgressBar'
 
+
+let mainSlides = [
+    {
+        img: require('../../../assets/images/Header/MainSlider/imgSlider1-mainpage.jpg'),
+        alt: 'Produto 1',
+        linkText: ['LIVING ROOM DECOR COLLECTION', 'Start from $ 199.99'],
+        cat: 'living-room/'
+    },
+    {
+        img: require('../../../assets/images/Header/MainSlider/imgSlider2-mainpage.jpg'),
+        alt: 'Produto 2',
+        linkText: ['KITCHEN DECORATION', 'Start from $ 50.00'],
+        cat: 'kitchen'
+    },
+    {
+        img: require('../../../assets/images/Header/MainSlider/imgSlider3-mainpage.jpg'),
+        alt: 'Produto 3',
+        linkText: ['BATHROOM UTILITIES', 'Max price $ 200.99'],
+        cat: 'bathroom'
+    },
+    {
+        img: require('../../../assets/images/Header/MainSlider/imgSlider4-mainpage.jpg'),
+        alt: 'Produto 4',
+        linkText: ['BEDROOM PIECES', 'Start from $ 40.99'],
+        cat: 'bedroom'
+    },
+]
+
+let minorSlides = [
+    {
+        img: require('../../../assets/images/Header/MinorSlider/imgSolo1-mainpage.png'),
+        alt: 'Produto 1',
+        linkText: ['PRODUTO 5', '$ 19.99'],
+        productId: 5,
+        bg: 'rgb(151, 105, 105)'
+    },
+    {
+        img: require('../../../assets/images/Header/MinorSlider/imgSolo2-mainpage.png'),
+        alt: 'Produto 2',
+        linkText: ['PRODUTO 13', '$ 199.99'],
+        productId: 13,
+        bg: '#fad3e0'
+    },
+    {
+        img: require('../../../assets/images/Header/MinorSlider/imgSolo3-mainpage.png'),
+        alt: 'Produto 3',
+        linkText: ['PRODUTO 10', '$ 499.99'],
+        productId: 10,
+        bg: '#ccc'
+    },
+    {
+        img: require('../../../assets/images/Header/MinorSlider/imgSolo4-mainpage.png'),
+        alt: 'Produto 4',
+        linkText: ['PRODUTO 11', '$ 999.99'],
+        productId: 11,
+        bg: 'rgb(238, 225, 183)'
+    },
+]
+
 const MainPageHeader = props => {
 
     let [slideImg, setSlideImg] = React.useState(0)
     let [minorSlideImg, setMinorSlideImg] = React.useState(0)
 
     let [translateValue, setTranslateValue] =  React.useState(0)
-
-    let mainSlides = [
-        {
-            img: require('../../../assets/images/Header/MainSlider/imgSlider1-mainpage.jpg'),
-            alt: 'Produto 1',
-            linkText: ['LIVING ROOM DECOR COLLECTION', 'Start from $ 199.99'],
-            cat: 'living-room/'
-        },
-        {
-            img: require('../../../assets/images/Header/MainSlider/imgSlider2-mainpage.jpg'),
-            alt: 'Produto 2',
-            linkText: ['KITCHEN DECORATION', 'Start from $ 50.00'],
-            cat: 'kitchen'
-        },
-        {
-            img: require('../../../assets/images/Header/MainSlider/imgSlider3-mainpage.jpg'),
-            alt: 'Produto 3',
-            linkText: ['BATHROOM UTILITIES', 'Max price $ 200.99'],
-            cat: 'bathroom'
-        },
-        {
-            img: require('../../../assets/images/Header/MainSlider/imgSlider4-mainpage.jpg'),
-            alt: 'Produto 4',
-            linkText: ['BEDROOM PIECES', 'Start from $ 40.99'],
-            cat: 'bedroom'
-        },
-    ]
-
-    let minorSlides = [
-        {
-            img: require('../../../assets/images/Header/MinorSlider/imgSolo1-mainpage.png'),
-            alt: 'Produto 1',
-            linkText: ['PRODUTO 5', '$ 19.99'],
-            productId: 5,
-            bg: 'rgb(151, 105, 105)'
-        },
-        {
-            img: require('../../../assets/images/Header/MinorSlider/imgSolo2-mainpage.png'),
-            alt: 'Produto 2',
-            linkText: ['PRODUTO 13', '$ 199.99'],
-            productId: 13,
-            bg: '#fad3e0'
-        },
-        {
-            img: require('../../../assets/images/Header/MinorSlider/imgSolo3-mainpage.png'),
-            alt: 'Produto 3',
-            linkText: ['PRODUTO 10', '$ 499.99'],
-            productId: 10,
-            bg: '#ccc'
-        },
-        {
-            img: require('../../../assets/images/Header/MinorSlider/imgSolo4-mainpage.png'),
-            alt: 'Produto 4',
-            linkText: ['PRODUTO 11', '$ 999.99'],
-            productId: 11,
-            bg: 'rgb(238, 225, 183)'
-        },
-    ]
     
+    const sliderRef = React.useRef()
+
 
     const translateSlider = {
         transform: `translateX(${translateValue}%)`
     }
 
+
     const changeSlideHandler = (arg, obj, img, fn, slide) => {
+        if (slide !== 'main') {
         if (arg === 'next') {
             
             if (img < obj.length - 1) {
                 fn(img + 1)
-                if (slide === 'main') setTranslateValue(translateValue - 100)
+                // if (slide !== 'main') fn(img + 1)
+                // if (slide === 'main') setTranslateValue(translateValue - 100)
+                if (slide === 'main') {
+                    setTranslateValue(translateValue - 100)
+                    // console.log(sliderRef.current.firstElementChild)
+                    // sliderRef.current.appendChild(sliderRef.current.firstElementChild)
+                }
             } else {
                 fn(0)
                 if (slide === 'main') setTranslateValue(0)
@@ -102,18 +113,77 @@ const MainPageHeader = props => {
         } else if (typeof arg !== isNaN) {
             fn(arg)
         }
+    }
     }   
     
-    React.useEffect(() => {
-        const interval = setTimeout(() => {
-            changeSlideHandler('next', mainSlides, slideImg, setSlideImg, 'main')
-        }, 5000);
-        return () => clearTimeout(interval);
-    });
+    // React.useEffect(() => {
+    //     const interval = setTimeout(() => {
+    //         changeSlideHandler('next', mainSlides, slideImg, setSlideImg, 'main')
+    //     }, 5000);
+    //     return () => clearTimeout(interval);
+    // });
 
     const changeSlideCallbackHandler = arg => {
         changeSlideHandler(arg, minorSlides, minorSlideImg, setMinorSlideImg)
     }
+
+    let [t, setT] = React.useState(0)
+
+    // let [sliderEl, setSliderEl] = React.useState()
+
+    const testSlider = () => {
+        // setTranslateValue(translateValue - 100)
+        const sliderEl = sliderRef.current
+        sliderEl.style.transform = 'translate(-100%)'
+        
+        // sliderEl = sliderRef.current
+        // setTranslateValue(-100)
+        let te = t
+        te++
+        setT(te)
+        console.log('slider')
+    }
+
+    // if (sliderRef.current) {
+    //     sliderRef.current.addEventListener('transitionend', () => {
+    //         // setTimeout(() => {
+    //             // sliderRef.current.appendChild(sliderRef.current.firstElementChild)
+    
+    //             sliderRef.current.style.transition = 'none'
+    //             sliderRef.current.style.transform = 'translate(0)'
+    //             // setTranslateValue(0)
+    //             setTimeout(() => {
+    //                 sliderRef.current.style.transition = '0.8s'
+    //             })
+    //             // sliderRef.current.style.transition = '0.8s'
+    //         console.log('end')
+            
+    //     })
+    //     // console.log('slider')
+    // }
+    
+    // console.log(translateValue)
+
+    React.useEffect(() => {
+        const sliderEl = sliderRef.current
+        sliderEl.addEventListener('transitionend', () => {
+            setTimeout(() => {
+                sliderEl.appendChild(sliderEl.firstElementChild)
+
+                sliderEl.style.transition = 'none'
+                sliderEl.style.transform = 'translate(0)'
+                // setTranslateValue(0)
+                setTimeout(() => {
+                    sliderEl.style.transition = 'all 0.8s'
+                })
+                // sliderEl.style.transition = '0.8s'
+            console.log('end')
+        }, 2000)
+            
+        })
+
+        console.log(t)
+    }, [t])
     
 
 
@@ -140,10 +210,14 @@ const MainPageHeader = props => {
                     <div></div>
                 </div>
                 <div  className={classes.MainSlider_container}>                
-                    <div className={classes.MainSlider_subContainer} style={translateSlider}>
+                    <div 
+                        className={classes.MainSlider_subContainer} 
+                        style={translateSlider}
+                        ref={sliderRef}
+                    >
                     
                         {mainSlides.map( (img, i) =>
-                            <div key={i}>
+                            <div key={i} className={`item-${i}`}>
                                 <img 
                                     src={img.img} 
                                     alt={img.alt} 
@@ -163,7 +237,8 @@ const MainPageHeader = props => {
                             icon="arrow-left" 
                         />
                         <FontAwesomeIcon 
-                            onClick={() => changeSlideHandler('next', mainSlides, slideImg, setSlideImg, 'main')} 
+                            // onClick={() => changeSlideHandler('next', mainSlides, slideImg, setSlideImg, 'main')} 
+                            onClick={() => testSlider()} 
                             icon="arrow-right" 
                         />
                     </div>

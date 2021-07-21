@@ -87,8 +87,8 @@ const ProductCard = props => {
 
     return (
         <React.Fragment>
-            <div>
-                <div>
+            <div className={classes.ProductCard_container}>
+                <div className={classes.ProductCard_subContainer}>
                     <FontAwesomeIcon 
                         onClick={() => wishlistHandler(props.product._id)} 
                         icon={[wish_icon, 'heart']} size="2x" 

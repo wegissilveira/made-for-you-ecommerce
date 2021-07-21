@@ -123,6 +123,8 @@
 
 .MainSlider_subContainer {
     display: flex;
+    justify-content: flex-start;
+
     transition: .8s ease-in-out;
     -webkit-transition: .8s ease-in-out;
     -moz-transition: .8s ease-in-out;

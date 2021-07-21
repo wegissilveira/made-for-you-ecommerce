@@ -2,9 +2,12 @@ import React, { Fragment } from 'react'
 
 import classes from './Products.module.css'
 
-import ProductCard from './ProductCard/ProductCard';
+import { connect } from 'react-redux'
 
+import ProductCard from './ProductCard/ProductCard';
 import productsData from '../../../Data/productsData' 
+import * as actionTypes from '../../../store/actions/actionTypes'
+import wishlistDataFn from '../../../Data/wishlistData';
 
 
 const Products = props => {
@@ -12,6 +15,7 @@ const Products = props => {
     let [count, setCount] = React.useState(props.pageLimit)
     let [pageLimit, setPageLimit] = React.useState(props.pageLimit)
 
+    const productsContainerRef = React.useRef()
     
     if (count === undefined) {
         setCount(8)
@@ -19,6 +23,25 @@ const Products = props => {
 
     if (pageLimit === undefined) {
         setPageLimit(8)
+    }
+
+    let [top, setTop] = React.useState()
+
+    const setProductsPageHandler = arg => {
+        const el = productsContainerRef.current
+        let elBottom = el.offsetTop + el.offsetHeight
+        let newCount
+        
+        if (arg === 'more') {
+            newCount = count + 4
+        } else {
+            elBottom = top - 460
+            newCount = count - 4
+        }
+
+        window.scrollTo({top: elBottom - 280, left: 0, behavior: 'smooth'})
+        setTop(elBottom)
+        setCount(newCount)
     }
 
     let tag
@@ -123,7 +146,7 @@ const Products = props => {
         
     return (
         <Fragment>
-            <div className={products_container}>
+            <div ref={productsContainerRef} className={products_container}>
                 {props.match && props.match.params.cat ? <h1>{category.toUpperCase()}</h1> : null}
                 {props.match && props.match.params.searchKey ? <h1>BUSCA: '{props.match.params.searchKey.toUpperCase()}'</h1> : null}
                 <div className={classes.Products_subContainer}>
@@ -133,7 +156,12 @@ const Products = props => {
                             if (i + 1 <= count) {
                                 if (tag === 'all-products' || product.tag === tag) {
                                     if (category === 'all' || product.category === category) {
-                                        productsList = <ProductCard key={product+i} product={product} index={i} />
+                                        productsList = 
+                                            <ProductCard 
+                                                key={product+i} 
+                                                product={product} 
+                                                index={i} 
+                                            />
                                     }
                                 }
                             }
@@ -149,7 +177,7 @@ const Products = props => {
                             <button 
                                 disabled={count >= products.length} 
                                 type="button" 
-                                onClick={() => setCount(count + 4)}
+                                onClick={() => setProductsPageHandler('more')}
                                 > SHOW MORE
                             </button>
                         </div>
@@ -159,7 +187,7 @@ const Products = props => {
                             <button 
                                 disabled={count <= pageLimit || products.length <= pageLimit} 
                                 type="button" 
-                                onClick={() => setCount(count - 4)}
+                                onClick={() => setProductsPageHandler('less')}
                                 > SHOW LESS
                             </button>
                         </div>
@@ -170,4 +198,21 @@ const Products = props => {
     )
 }
 
-export default Products
+// export default Products
+
+const mapStateToProps = state => {
+    return {
+        wish: state.wishlistState,
+        // cart: state.cartListState
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onWishlistState: () => dispatch({type: actionTypes.WISHLIST, value: wishlistDataFn()}),
+        // onCartListState: () => dispatch({type: actionTypes.CARTLIST, value: cartListDataFn()})
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Products)
