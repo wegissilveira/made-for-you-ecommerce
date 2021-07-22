@@ -30,7 +30,7 @@ const ProgressBar = props => {
 
                 if (percentage === 100) {
                     barIndex < bars.length - 1 ? setBarIndex(barIndex + 1) : setBarIndex(0)
-                    props.change('next')
+                    props.changeDot('next')
                 }
                 
             }, timer / 100);
@@ -41,12 +41,12 @@ const ProgressBar = props => {
         return () => mounted = false;
     })
 
-    const changeSlideHandler = arg => {
+    const changeSlideHandler = index => {
 
         setPercentage(0) // Reseta a posição da barra
-        setBarIndex(arg) // Coloca a barra no ponto clicado
+        setBarIndex(index) // Coloca a barra no ponto clicado
 
-        props.change(arg) // Passa o slide do componente parent para acompanhar o ponto que recebe a barra
+        props.changeDot(index) // Passa o slide do componente parent para acompanhar o ponto que recebe a barra
 
         clearTimeout(interval) // Limpa o tempo de 'seTimeout' para que este 0 juntamente com 'percentage'
     }

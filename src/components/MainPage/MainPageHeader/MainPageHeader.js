@@ -7,34 +7,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link } from 'react-router-dom'
 
 import ProgressBar from '../../Shared/UI/ProgressBar/ProgressBar'
+import MainSliderComponent from './MainSliderComponent/MainSliderComponent'
 
-
-let mainSlides = [
-    {
-        img: require('../../../assets/images/Header/MainSlider/imgSlider1-mainpage.jpg'),
-        alt: 'Produto 1',
-        linkText: ['LIVING ROOM DECOR COLLECTION', 'Start from $ 199.99'],
-        cat: 'living-room/'
-    },
-    {
-        img: require('../../../assets/images/Header/MainSlider/imgSlider2-mainpage.jpg'),
-        alt: 'Produto 2',
-        linkText: ['KITCHEN DECORATION', 'Start from $ 50.00'],
-        cat: 'kitchen'
-    },
-    {
-        img: require('../../../assets/images/Header/MainSlider/imgSlider3-mainpage.jpg'),
-        alt: 'Produto 3',
-        linkText: ['BATHROOM UTILITIES', 'Max price $ 200.99'],
-        cat: 'bathroom'
-    },
-    {
-        img: require('../../../assets/images/Header/MainSlider/imgSlider4-mainpage.jpg'),
-        alt: 'Produto 4',
-        linkText: ['BEDROOM PIECES', 'Start from $ 40.99'],
-        cat: 'bedroom'
-    },
-]
 
 let minorSlides = [
     {
@@ -69,201 +43,75 @@ let minorSlides = [
 
 const MainPageHeader = props => {
 
-    let [slideImg, setSlideImg] = React.useState(0)
     let [minorSlideImg, setMinorSlideImg] = React.useState(0)
 
-    let [translateValue, setTranslateValue] =  React.useState(0)
-    
-    const sliderRef = React.useRef()
 
-
-    const translateSlider = {
-        transform: `translateX(${translateValue}%)`
-    }
-
-
-    const changeSlideHandler = (arg, obj, img, fn, slide) => {
-        if (slide !== 'main') {
-        if (arg === 'next') {
-            
-            if (img < obj.length - 1) {
-                fn(img + 1)
-                // if (slide !== 'main') fn(img + 1)
-                // if (slide === 'main') setTranslateValue(translateValue - 100)
-                if (slide === 'main') {
-                    setTranslateValue(translateValue - 100)
-                    // console.log(sliderRef.current.firstElementChild)
-                    // sliderRef.current.appendChild(sliderRef.current.firstElementChild)
-                }
-            } else {
-                fn(0)
-                if (slide === 'main') setTranslateValue(0)
-            }
-            
-        } else if (arg === 'previous') {
-
-            if (img > 0) {
-                fn(img - 1)
-                if (slide === 'main') setTranslateValue(translateValue + 100)
-            } else {
-                fn(obj.length - 1)
-                if (slide === 'main') setTranslateValue((obj.length - 1) * -100)
-            }
-            
-        } else if (typeof arg !== isNaN) {
-            fn(arg)
-        }
-    }
-    }   
-    
-    // React.useEffect(() => {
-    //     const interval = setTimeout(() => {
-    //         changeSlideHandler('next', mainSlides, slideImg, setSlideImg, 'main')
-    //     }, 5000);
-    //     return () => clearTimeout(interval);
-    // });
-
-    const changeSlideCallbackHandler = arg => {
-        changeSlideHandler(arg, minorSlides, minorSlideImg, setMinorSlideImg)
-    }
-
-    let [t, setT] = React.useState(0)
-
-    // let [sliderEl, setSliderEl] = React.useState()
-
-    const testSlider = () => {
-        // setTranslateValue(translateValue - 100)
-        const sliderEl = sliderRef.current
-        sliderEl.style.transform = 'translate(-100%)'
+    const changeSlideHandler = (index) => {
         
-        // sliderEl = sliderRef.current
-        // setTranslateValue(-100)
-        let te = t
-        te++
-        setT(te)
-        console.log('slider')
+        if (typeof index !== 'string') {
+            setMinorSlideImg(index)
+            
+        } else {
+            if (minorSlideImg < minorSlides.length - 1) {
+                setMinorSlideImg(minorSlideImg + 1)
+                
+            } else {
+                setMinorSlideImg(0)
+                
+            }
+        }    
     }
-
-    // if (sliderRef.current) {
-    //     sliderRef.current.addEventListener('transitionend', () => {
-    //         // setTimeout(() => {
-    //             // sliderRef.current.appendChild(sliderRef.current.firstElementChild)
     
-    //             sliderRef.current.style.transition = 'none'
-    //             sliderRef.current.style.transform = 'translate(0)'
-    //             // setTranslateValue(0)
-    //             setTimeout(() => {
-    //                 sliderRef.current.style.transition = '0.8s'
-    //             })
-    //             // sliderRef.current.style.transition = '0.8s'
-    //         console.log('end')
-            
-    //     })
-    //     // console.log('slider')
-    // }
-    
-    // console.log(translateValue)
-
-    React.useEffect(() => {
-        const sliderEl = sliderRef.current
-        sliderEl.addEventListener('transitionend', () => {
-            setTimeout(() => {
-                sliderEl.appendChild(sliderEl.firstElementChild)
-
-                sliderEl.style.transition = 'none'
-                sliderEl.style.transform = 'translate(0)'
-                // setTranslateValue(0)
-                setTimeout(() => {
-                    sliderEl.style.transition = 'all 0.8s'
-                })
-                // sliderEl.style.transition = '0.8s'
-            console.log('end')
-        }, 2000)
-            
-        })
-
-        console.log(t)
-    }, [t])
-    
+    const changeSlideCallbackHandler = index => {
+        changeSlideHandler(index)
+    }
 
 
     return (
         <Fragment>
             <div className={classes.Header_container}>
-                <div className={classes.MinorSlider_container}>
-                    <div></div>
-                    <div 
-                        className={classes.MinorSlider_subContainer} 
-                        style={{backgroundColor: minorSlides[minorSlideImg].bg}}
-                    >
-                        <img 
-                            src={minorSlides[minorSlideImg].img}
-                            alt={"img-1"} 
-                        />
-                        <div>
-                            <Link to={'/shop/product/' + minorSlides[minorSlideImg].productId} >
-                                <p>{minorSlides[minorSlideImg].linkText[0]}</p>
-                                <p>{minorSlides[minorSlideImg].linkText[1]}</p>
-                            </Link>
+                <div className={classes.Header_block_1}>
+                    <ProgressBar 
+                        bars={minorSlides.length} // => Qtde de barras
+                        timer={5000} // => Tempo do loop
+                        changeDot={changeSlideCallbackHandler} // => Função que controla a passagem automática de slides
+                        auto={true} // => Determina se a passagem de slides e barras será automática
+                        direction={'column'} // => Orientação dos pontos, horizontal ou vertical
+                        height={150} // => Altura que o bloco de pontos ocupará
+                    />
+                    <div className={classes.MinorSlider_container}>
+                        <div 
+                            className={classes.MinorSlider_subContainer} 
+                            style={{backgroundColor: minorSlides[minorSlideImg].bg}}
+                        >
+                            <img 
+                                src={minorSlides[minorSlideImg].img}
+                                alt={"img-1"} 
+                            />
+                            <div>
+                                <Link to={'/shop/product/' + minorSlides[minorSlideImg].productId} >
+                                    <p>{minorSlides[minorSlideImg].linkText[0]}</p>
+                                    <p>{minorSlides[minorSlideImg].linkText[1]}</p>
+                                </Link>
+                            </div>
                         </div>
                     </div>
-                    <div></div>
                 </div>
-                <div  className={classes.MainSlider_container}>                
-                    <div 
-                        className={classes.MainSlider_subContainer} 
-                        style={translateSlider}
-                        ref={sliderRef}
-                    >
-                    
-                        {mainSlides.map( (img, i) =>
-                            <div key={i} className={`item-${i}`}>
-                                <img 
-                                    src={img.img} 
-                                    alt={img.alt} 
-                                />
-                                <div className={classes.MainSlider_link_container}>
-                                    <Link to={'/shop/' + img.cat}>
-                                        <p>{img.linkText[0]}</p>
-                                        <p>{img.linkText[1]}</p>
-                                    </Link>
-                                </div>
-                            </div>
-                        )}
-                    </div>
-                    <div className={classes.Change_slide_arrows}>
-                        <FontAwesomeIcon 
-                            onClick={() => changeSlideHandler('previous', mainSlides, slideImg, setSlideImg, 'main')} 
-                            icon="arrow-left" 
-                        />
-                        <FontAwesomeIcon 
-                            // onClick={() => changeSlideHandler('next', mainSlides, slideImg, setSlideImg, 'main')} 
-                            onClick={() => testSlider()} 
-                            icon="arrow-right" 
-                        />
+                <div className={classes.Header_block_2}>
+                    <MainSliderComponent />
+                    <div className={classes.Icons_container}>
+                        <FontAwesomeIcon icon={['fab', 'facebook-f']}/>
+                        <FontAwesomeIcon icon={['fab', 'instagram']} />
+                        <FontAwesomeIcon icon={['fab', 'vk']} />
+                        <FontAwesomeIcon icon={['fab', 'twitter']} />
                     </div>
                 </div>
-            </div>
-            <div className={classes.Header_text}>
-                <ProgressBar 
-                    bars={minorSlides.length} // => Qtde de barras
-                    timer={5000} // => Tempo do loop
-                    change={changeSlideCallbackHandler} // => Função que controla a passagem automática de slides
-                    auto={true} // => Determina se a passagem de slides e barras será automática
-                    direction={'column'} // => Orientação dos pontos, horizontal ou vertical
-                    height={150} // => Altura que o bloco de pontos ocupará
-                />
                 <div className={classes.Header_title}>
                     <p>MADE</p>
                     <p>FOR YOU</p>
                 </div>
-                <div className={classes.Icons_container}>
-                    <FontAwesomeIcon icon={['fab', 'facebook-f']}/>
-                    <FontAwesomeIcon icon={['fab', 'instagram']} />
-                    <FontAwesomeIcon icon={['fab', 'vk']} />
-                    <FontAwesomeIcon icon={['fab', 'twitter']} />
-                </div>
             </div>
+
         </Fragment>
     )
 }

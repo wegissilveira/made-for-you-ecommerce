@@ -1,0 +1,111 @@
+.MainSlider_container {
+    height: 700px;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+}
+
+@media (max-width: 1579.98px) {
+    .MainSlider_container {
+        height: 500px;
+    }
+}
+
+@media (max-width: 1199.98px) {
+    .MainSlider_container {
+        height: 400px;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .MainSlider_container {
+        height: unset;
+    }
+}
+
+.MainSlider_container a > p:first-of-type {
+    font-weight: bold;
+}
+
+.MainSlider_subContainer {
+    display: flex;
+    justify-content: flex-start
+    ;
+    transition: all 0.8s;
+    -webkit-transition: all 0.8s;
+    -moz-transition: all 0.8s;
+    -ms-transition: all 0.8s;
+    -o-transition: all 0.8s;
+}
+
+.MainSlider_subContainer > div {
+    width: 100%;
+    /* position: relative; */
+    flex-shrink: 0;
+}
+                
+.MainSlider_subContainer img {
+    max-width: 100%;
+}
+
+.MainSlider_subContainer > div > div {
+    position: absolute;
+    background-color: white;
+    width: 50%;
+    height: 70px;
+    bottom: 0;
+}
+
+@media (max-width: 1199.98px) {
+    .MainSlider_subContainer > div > div {
+        position: absolute;
+        width: 100%;
+        bottom: 20px;
+        background-color: rgba(255, 255, 255, 0.733);
+    }
+}
+
+.MainSlider_subContainer > div > div > * {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    height: 100%;
+    width: 100%;
+    padding-left: 25px;
+    text-decoration: none;
+}
+
+.MainSlider_subContainer > div > div p {
+    margin: 0;
+    color: rgb(75, 75, 75);
+}
+
+.Change_slide_arrows {
+    display: flex;
+    justify-content: space-between;
+    width: 12%;
+    line-height: 2;
+    position: absolute;
+    bottom: 0;
+    
+    font-size: 25px;
+    right: 50px;
+}
+
+@media (max-width: 1579px) {
+    .Change_slide_arrows {
+        width: 12%;
+        right: 10px;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .Change_slide_arrows {
+        display: none;
+    }
+}
+
+.Change_slide_arrows > * {
+    cursor: pointer;
+}
