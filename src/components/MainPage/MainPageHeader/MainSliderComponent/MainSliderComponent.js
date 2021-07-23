@@ -67,9 +67,7 @@ const MainSliderComponent = props => {
                 sliderEl.style.justifyContent = 'flex-end'
             }
 
-            setTimeout(() => {
-                setTranslateValue(100)
-            }, 10)
+            setTranslateValue(100)
         }
 
         setTimeout(() => {
@@ -79,21 +77,23 @@ const MainSliderComponent = props => {
                 sliderEl.prepend(sliderEl.lastElementChild)
 
             sliderEl.style.transition = 'none'
-            setTranslateValue(0)
-
-            setTimeout(() => {
-                sliderRef.current.style.transition = '0.8s'
-            },10)
-
+            setTranslateValue(0)            
         }, 800)
     }
+
+    React.useEffect(() => {
+        setTimeout(() => {
+            sliderRef.current.style.transition = '0.8s'
+        },30)
+    }, [translateValue]);
     
-    // React.useEffect(() => {
-    //     const interval = setTimeout(() => {
-    //         mainSliderHandler('next')
-    //     }, 2500);
-    //     return () => clearTimeout(interval);
-    // });
+    React.useEffect(() => {
+        const interval = setTimeout(() => {
+            mainSliderHandler('next')
+        }, 2500);
+        return () => clearTimeout(interval);
+    });   
+   
 
 
 
@@ -106,7 +106,7 @@ const MainSliderComponent = props => {
             >
             
                 {mainSlides.map( (img, i) =>
-                    <div key={i}>
+                    <div key={i} className={'image-'+i}>
                         <img 
                             src={img.img} 
                             alt={img.alt} 

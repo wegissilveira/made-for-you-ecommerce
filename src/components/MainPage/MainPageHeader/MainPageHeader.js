@@ -80,21 +80,28 @@ const MainPageHeader = props => {
                         height={150} // => Altura que o bloco de pontos ocupará
                     />
                     <div className={classes.MinorSlider_container}>
-                        <div 
-                            className={classes.MinorSlider_subContainer} 
-                            style={{backgroundColor: minorSlides[minorSlideImg].bg}}
-                        >
-                            <img 
-                                src={minorSlides[minorSlideImg].img}
-                                alt={"img-1"} 
-                            />
-                            <div>
-                                <Link to={'/shop/product/' + minorSlides[minorSlideImg].productId} >
-                                    <p>{minorSlides[minorSlideImg].linkText[0]}</p>
-                                    <p>{minorSlides[minorSlideImg].linkText[1]}</p>
-                                </Link>
-                            </div>
-                        </div>
+                        {minorSlides.map((item, i) => {
+                            return (
+                                <div 
+                                    className={classes.MinorSlider_subContainer} 
+                                    style={{
+                                        backgroundColor: item.bg, 
+                                        display: i === minorSlideImg ? 'block' : 'none'
+                                    }}
+                                >
+                                    <img 
+                                        src={item.img}
+                                        alt={"img-1"} 
+                                    />
+                                    <div>
+                                        <Link to={'/shop/product/' + item.productId} >
+                                            <p>{item.linkText[0]}</p>
+                                            <p>{item.linkText[1]}</p>
+                                        </Link>
+                                    </div>
+                                </div>
+                            )
+                        })}
                     </div>
                 </div>
                 <div className={classes.Header_block_2}>
@@ -111,7 +118,6 @@ const MainPageHeader = props => {
                     <p>FOR YOU</p>
                 </div>
             </div>
-
         </Fragment>
     )
 }

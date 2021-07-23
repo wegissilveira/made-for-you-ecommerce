@@ -83,7 +83,7 @@ const BestDeal = props => {
                     diameter={circle_diameter}
                     auto={true}
                     timer={5000}
-                    change={changeSlide}
+                    changeDot={changeSlide}
                 />
             </div>
         </div>

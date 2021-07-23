@@ -1,5 +1,5 @@
 .MainSlider_container {
-    height: 700px;
+    height: 645px;
     overflow: hidden;
     padding: 0;
     position: relative;
@@ -29,8 +29,8 @@
 
 .MainSlider_subContainer {
     display: flex;
-    justify-content: flex-start
-    ;
+    justify-content: flex-start;
+    
     transition: all 0.8s;
     -webkit-transition: all 0.8s;
     -moz-transition: all 0.8s;
