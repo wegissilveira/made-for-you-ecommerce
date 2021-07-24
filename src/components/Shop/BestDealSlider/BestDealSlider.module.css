@@ -1,6 +1,10 @@
 .Session_container {
     height: auto;
     margin-bottom: 80px;
+
+    width: 75%;
+    margin-left: 12.5%;
+    overflow: hidden;
 }
 
 .Session_container > h1 {
@@ -10,24 +14,24 @@
 
 .Products_container {
     display: flex;
-    width: 75.8%;
-    margin-left: 12.1%;
+    width: 100%;
     margin-bottom: 48px;
-    overflow: hidden;
+
+    transition: 2s;
+    -webkit-transition: 2s;
+    -moz-transition: 2s;
+    -ms-transition: 2s;
+    -o-transition: 2s;
+
+   
 }
 
 .Products_subContainer {
-    flex-basis: 25%;
+    flex-basis: 24%;
     flex-shrink: 0;
     flex-grow: 0;
-    padding-left: 15px;
-    padding-right: 15px;
-
-    transition: 2s ease-in-out;
-    -webkit-transition: 2s ease-in-out;
-    -moz-transition: 2s ease-in-out;
-    -ms-transition: 2s ease-in-out;
-    -o-transition: 2s ease-in-out;
+    padding-left: 0.5%;
+    padding-right: 0.5%;
 }
 
 @media (max-width: 1579.98px) {

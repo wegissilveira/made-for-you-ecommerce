@@ -60,6 +60,8 @@ const ProgressBar = props => {
     let direction = props.direction === 'column' ? 'flex-column' : 'flex-row'
     const style = `d-flex ${direction} justify-content-between`
     
+
+    
     return (
         <div 
             className={style} 
@@ -68,14 +70,11 @@ const ProgressBar = props => {
             { bars.map((bar, i) => {
                 return <svg
                             key={i}
-
                             width={sqSize}
                             height={sqSize}
                             viewBox={viewBox}
-
-                            style={{cursor: 'pointer'}}
-
-                            onClick={() => changeSlideHandler(i)}
+                            style={{cursor: props.clickable === false ? 'default' : 'pointer'}}
+                            onClick={props.clickable === false ? null : () => changeSlideHandler(i)}
                         >
                             { i === barIndex ?  
                                 <circle

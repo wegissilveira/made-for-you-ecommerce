@@ -96,7 +96,6 @@ const MainSliderComponent = props => {
    
 
 
-
     return (
         <div className={classes.MainSlider_container}>                
             <div 

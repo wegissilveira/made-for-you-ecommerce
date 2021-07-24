@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Filter from '../Filter/Filter'
-import BestDeal from '../BestDeal/BestDeal'
+import BestDealSlider from '../BestDealSlider/BestDealSlider'
 import products from '../../../Data/productsData'
 
 import './ShopProducts.module.css'
@@ -14,7 +14,7 @@ const ShopProducts = props => {
             <Filter 
                 products={products}
             />
-            <BestDeal products={products} />
+            <BestDealSlider products={products} />
         </div>
     )
 }
