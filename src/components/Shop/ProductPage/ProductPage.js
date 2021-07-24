@@ -12,6 +12,7 @@ import wishlistDataFn from '../../../Data/wishlistData'
 import ProductsQtde from '../../Shared/UI/ProductsQtde/ProductsQtde'
 import ProductQtdeMobile from '../../Shared/UI/ProductQtdeMobile/ProductQtdeMobile'
 import ColorSelect from '../../Shared/UI/ColorSelect/ColorSelect'
+import ProductSlider from './ProductSlider/ProductSlider'
 import * as actionTypes from '../../../store/actions/actionTypes'
 
   
@@ -43,40 +44,6 @@ const ProductPage = props => {
     let [qtde, setQtde] = React.useState(1)
     let [size, setSize] = React.useState('100x100')
 
-    let [translateValue, setTranslateValue] = React.useState(0)
-
-    const translateSlider = {
-        transform: `translateX(${translateValue}%)`,
-        transition: '.8s ease-in-out'
-    }
-
-    const changeSlide = arg => {
-        if (arg === 'previous') {
-             
-            if (imgSlide > 0) {
-                setImgSlide(imgSlide - 1)
-                setTranslateValue(translateValue + 100)
-            } else {
-                setImgSlide(product.imgsDemo.length - 1)
-                setTranslateValue((product.imgsDemo.length - 1) * -100)
-            }
-            
-        } else if (arg === 'next') {
-
-            if (imgSlide < product.imgsDemo.length - 1) {
-                setImgSlide(imgSlide + 1)
-                setTranslateValue(translateValue -100)
-            } else {
-                setImgSlide(0)
-                setTranslateValue(0)
-            }
-            
-        }else if (typeof arg === 'number') {
-            setImgSlide(arg / (-100))
-            setTranslateValue(arg)
-        }
-    }
-
     const selectColorHandler = (color, i) => {
         setProductColor(color)
         setImgSlide(i)
@@ -100,7 +67,6 @@ const ProductPage = props => {
         props.onWishlistState()
     }
     
-   
     const productCartHandler = () => {
         
         let productCartArr = [...props.cart]
@@ -157,33 +123,7 @@ const ProductPage = props => {
             <div className={classes.Session_container}>
                 <div className={classes.Product_page_container}>
                     <h1>{product.name}</h1>
-                    <div>
-                        <div className={classes.Main_img_slider}>
-                            <div style={translateSlider}>
-                                {product.imgsDemo.map((img, i) => 
-                                    <img key={i} src={img} alt="img-1"/>
-                                )}
-                            </div>
-                            <div>
-                                <FontAwesomeIcon onClick={() => changeSlide('previous')} icon="arrow-left" />
-                                <FontAwesomeIcon onClick={() => changeSlide('next')} icon="arrow-right" />
-                            </div>
-                        </div>
-                        <div className={classes.Product_page_thumb_images}>
-                            <img 
-                                onClick={() => changeSlide(0)} 
-                                src={product.imgsDemo[0]} alt="img-1" 
-                            />
-                            <img 
-                                onClick={() => changeSlide(-100)} 
-                                src={product.imgsDemo[1]} alt="img-2" 
-                            />
-                            <img 
-                                onClick={() => changeSlide(-200)} 
-                                src={product.imgsDemo[2]} alt="img-3" 
-                            />
-                        </div>
-                    </div>
+                    <ProductSlider product={product} />
                     <div>
                         <div>
                             <p>123456</p>

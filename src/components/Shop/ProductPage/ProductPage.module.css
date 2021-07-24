@@ -55,7 +55,7 @@ input {
     margin: 0;
 }
 
-.Main_img_slider {
+/* .Main_img_slider {
     overflow: hidden;
     padding-bottom: 30px;
     position: relative;
@@ -94,9 +94,9 @@ input {
 
 .Main_img_slider > div:nth-of-type(2) > * {
     cursor: pointer;
-}
+} */
 
-.Product_page_thumb_images {
+/* .Product_page_thumb_images {
     display: flex;
     justify-content: space-between;
     margin-top: 25px;
@@ -111,7 +111,7 @@ input {
 .Product_page_thumb_images > img {
     max-width: 30%;
     cursor: pointer;
-}
+} */
 
 .Product_page_container > div:nth-of-type(2) {
     flex-basis: 50%;
