@@ -37,7 +37,7 @@ const ProductCart = props => {
 
     return (
         <div className={classes.Cart_details}>
-            <div>
+            <div className={classes.Cart_details_img}>
                 <Link to={"/shop/product/" + props.product._id}>
                     <img src={props.product.imgsDemo[0]} alt='img' />
                 </Link>
@@ -65,7 +65,7 @@ const ProductCart = props => {
             </div>
             <p>0%</p>
             <p>$ {props.product.price}</p>
-            <div>
+            <div className={classes.Cart_details_qtde}>
                 <ProductQtde 
                     startQtde={props.product.qtde}
                     changeQtdeCallBack={qtde => setQtde(qtde, props.prodIndex)} 

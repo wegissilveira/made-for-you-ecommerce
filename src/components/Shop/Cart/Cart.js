@@ -76,7 +76,7 @@ const Cart = props => {
             <h1>CART</h1>
             { products.length > 0 ?
                 <div className={classes.Cart_container}>
-                    <div>
+                    <div className={classes.Cart_header}>
                         <p>PRODUCT</p>
                         <p>DISCOUNT</p>
                         <p>PRICE</p>
@@ -97,7 +97,7 @@ const Cart = props => {
                         })
                     }
                     
-                    <div>
+                    <div className={classes.Cart_keepBuy_button}>
                         <Link to="/shop/">
                             <p className={classes.Cart_dark_button}>
                                 <FontAwesomeIcon icon="long-arrow-alt-left" />
