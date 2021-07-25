@@ -12,31 +12,27 @@ import wishlistDataFn from '../../../Data/wishlistData';
 
 const Products = props => {
 
-    let [count, setCount] = React.useState(props.pageLimit)
-    let [pageLimit, setPageLimit] = React.useState(props.pageLimit)
-
-    const productsContainerRef = React.useRef()
-    
-    if (count === undefined) {
-        setCount(8)
-    }
-
-    if (pageLimit === undefined) {
-        setPageLimit(8)
-    }
-
+    let [count, setCount] = React.useState(0)
+    let [pageLimit, setPageLimit] = React.useState(0)    
     let [top, setTop] = React.useState()
 
+    const productsContainerRef = React.useRef()
+    const productsSubContainerRef = React.useRef()
+
     const setProductsPageHandler = arg => {
-        const el = productsContainerRef.current
-        let elBottom = el.offsetTop + el.offsetHeight
+        const containerEl = productsContainerRef.current
+        let elBottom = containerEl.offsetTop + containerEl.offsetHeight
         let newCount
+
+        const subContainerEl = productsSubContainerRef.current
+        const basis = Number((window.getComputedStyle(subContainerEl.children[0]).flexBasis).replace(/[^0-9.]+/g,""))
+        const itemsPerRow = Math.floor(100/basis)
         
         if (arg === 'more') {
-            newCount = count + 4
+            newCount = count + itemsPerRow
         } else {
             elBottom = top - 460
-            newCount = count - 4
+            newCount = count - itemsPerRow
         }
 
         window.scrollTo({top: elBottom - 280, left: 0, behavior: 'smooth'})
@@ -143,13 +139,26 @@ const Products = props => {
             {width: '100%', margin: '0'} : 
             classes.Products_container
 
+    React.useEffect(() => {
+        if (props.pageLimit === undefined) {
+            setPageLimit(8)
+            setCount(8)
+        } else {
+            setPageLimit(props.pageLimit)
+            setCount(props.pageLimit)
+        }
+        
+    },[props.pageLimit])
+    
+    
+
         
     return (
         <Fragment>
             <div ref={productsContainerRef} className={products_container}>
                 {props.match && props.match.params.cat ? <h1>{category.toUpperCase()}</h1> : null}
                 {props.match && props.match.params.searchKey ? <h1>BUSCA: '{props.match.params.searchKey.toUpperCase()}'</h1> : null}
-                <div className={classes.Products_subContainer}>
+                <div ref={productsSubContainerRef} className={classes.Products_subContainer}>
                     {products.length > 0 ?
                         products.map((product, i) => {
                             let productsList

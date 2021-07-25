@@ -90,7 +90,7 @@ const MainSliderHeader = props => {
     React.useEffect(() => {
         const interval = setTimeout(() => {
             mainSliderHandler('next')
-        }, 2500);
+        }, 5000);
         return () => clearTimeout(interval);
     });   
    

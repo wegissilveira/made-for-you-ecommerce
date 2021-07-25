@@ -11,7 +11,8 @@ const MainPageProducts = props => {
     
     let [tag, setTag] = React.useState('all-products')
     let [menuTitleWidth, setMenuTitleWidth] = React.useState('55')
-
+    let [pageLimit, setPageLimit ] = React.useState(8)
+    
     let menuTitle = tag !== 'all-products' ? tag : 'all products'
 
     const setActiveTabHandler = (e, screen) => {
@@ -48,6 +49,16 @@ const MainPageProducts = props => {
             menu.style.display = 'none' :
             menu.style.display = 'flex'
     }
+
+    React.useEffect(() => {
+        if (window.outerWidth <= 768) {
+            setPageLimit(6)
+        } else if (window.outerWidth <= 1200) {
+            setPageLimit(9)
+        }
+    }, [pageLimit])
+
+    
     
     return (
         <div className={classes.Session_container}>
@@ -120,7 +131,7 @@ const MainPageProducts = props => {
 
             <Products 
                 products={productsData} 
-                pageLimit={8} 
+                pageLimit={pageLimit} 
                 tag={tag}
             />
         </div>

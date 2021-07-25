@@ -14,13 +14,21 @@
 
 @media (max-width: 1579.98px) {
     .ProductCard_container {
-        flex-basis: 33%;
+        flex-basis: 32.3%;
     }
 }
 
-@media (max-width: 991.98px) {
+@media (max-width: 768px) {
     .ProductCard_container {
-        flex-basis: 50%;
+        flex-basis: 48%;
+        padding-left: 1%;
+        padding-right: 1%;
+    }
+}
+
+@media (max-width: 480px) {
+    .ProductCard_container {
+        flex-basis: 78%;
     }
 }
 
