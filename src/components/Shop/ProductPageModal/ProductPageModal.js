@@ -183,8 +183,7 @@ const ProductPageModal = props => {
                                 bars={props.product.imgsDemo.length}
                                 auto={true}
                                 timer={5000}
-                                change={changeSlide}
-                                // slide={imgSlide}
+                                changeDot={changeSlide}
                             />
                         </div>
                     </div>

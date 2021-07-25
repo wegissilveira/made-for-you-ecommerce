@@ -55,64 +55,6 @@ input {
     margin: 0;
 }
 
-/* .Main_img_slider {
-    overflow: hidden;
-    padding-bottom: 30px;
-    position: relative;
-}
-
-.Main_img_slider > div:first-of-type {
-    display: flex;
-}
-
-.Main_img_slider img {
-    max-width: 100%;
-}
-
-.Main_img_slider > div:nth-of-type(2) { 
-    display: flex;
-    justify-content: space-between;
-    width: 11%;
-    right: 5%;
-    bottom: 10%;
-    line-height: 2;
-    position: absolute;
-}
-
-@media (max-width: 1579.98px) {
-    .Main_img_slider > div:nth-of-type(2) { 
-        width: 15%;
-    }
-}
-
-@media (max-width: 767.98px) {
-    .Main_img_slider > div:nth-of-type(2) { 
-        width: 20%;
-        font-size: 30px;
-    }
-}
-
-.Main_img_slider > div:nth-of-type(2) > * {
-    cursor: pointer;
-} */
-
-/* .Product_page_thumb_images {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 25px;
-}
-
-@media (max-width: 767.98px) {
-    .Product_page_thumb_images {
-        display: none;
-    }
-}
-
-.Product_page_thumb_images > img {
-    max-width: 30%;
-    cursor: pointer;
-} */
-
 .Product_page_container > div:nth-of-type(2) {
     flex-basis: 50%;
     flex-shrink: 0;
