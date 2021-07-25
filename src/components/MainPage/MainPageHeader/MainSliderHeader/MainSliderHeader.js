@@ -1,6 +1,6 @@
 import React from 'react'
 
-import classes from './MainSliderComponent.module.css'
+import classes from './MainSliderHeader.module.css'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link } from 'react-router-dom'
@@ -34,7 +34,7 @@ let mainSlides = [
 ]
 
 
-const MainSliderComponent = props => {
+const MainSliderHeader = props => {
 
     let [translateValue, setTranslateValue] =  React.useState(0)
     
@@ -133,4 +133,4 @@ const MainSliderComponent = props => {
     )
 }
 
-export default MainSliderComponent
+export default MainSliderHeader

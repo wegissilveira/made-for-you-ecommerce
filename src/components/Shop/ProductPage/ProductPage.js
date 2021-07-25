@@ -38,7 +38,6 @@ const ProductPage = props => {
 
     let heart_Icon = props.wish.includes(product._id) ? 'fas' : 'far'    
     
-    let [imgSlide, setImgSlide] = React.useState(0)
     let [productColor, setProductColor] = React.useState('') // => Armazena cor selecionada do produto
 
     let [qtde, setQtde] = React.useState(1)
@@ -46,7 +45,6 @@ const ProductPage = props => {
 
     const selectColorHandler = (color, i) => {
         setProductColor(color)
-        setImgSlide(i)
     }
 
     const setQtdeHandler = value => {

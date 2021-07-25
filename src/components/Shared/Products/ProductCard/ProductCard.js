@@ -82,7 +82,7 @@ const ProductCard = props => {
                                   
     React.useEffect(() => {
         cartHandler('load')
-    }, [])
+    })
 
 
     return (

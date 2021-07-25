@@ -65,7 +65,6 @@ const BestDealSlider = props => {
                         if (product.deal) {
                             bestDealElement = 
                                 <div    
-                                    id={'item-'+i}
                                     key={i} 
                                     className={classes.Products_subContainer} 
                                 >

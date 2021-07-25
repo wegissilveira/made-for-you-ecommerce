@@ -202,15 +202,13 @@ const Products = props => {
 
 const mapStateToProps = state => {
     return {
-        wish: state.wishlistState,
-        // cart: state.cartListState
+        wish: state.wishlistState
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onWishlistState: () => dispatch({type: actionTypes.WISHLIST, value: wishlistDataFn()}),
-        // onCartListState: () => dispatch({type: actionTypes.CARTLIST, value: cartListDataFn()})
+        onWishlistState: () => dispatch({type: actionTypes.WISHLIST, value: wishlistDataFn()})
     }
 }
 

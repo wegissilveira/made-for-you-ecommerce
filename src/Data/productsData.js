@@ -45,7 +45,8 @@ const productsData = [
         ],
         colors: ['red', 'yellow', 'purple'],
         deal: false,
-        offer: 'best-seller'
+        offer: 'best-seller',
+        slide: [true, '#fad3e0']
     },
     {
         _id: '4',
@@ -77,7 +78,8 @@ const productsData = [
         ],
         colors: ['red', 'green', 'purple'],
         deal: true,
-        offer: 'new'
+        offer: 'new',
+        slide: [true, 'rgb(151, 105, 105)']
     },
     {
         _id: '6',
@@ -157,7 +159,8 @@ const productsData = [
         ],
         colors: ['red', 'green', 'purple'],
         deal: true,
-        offer: 'best-seller'
+        offer: 'best-seller',
+        slide: [true, '#ccc']
     },
     {
         _id: '11',
@@ -173,7 +176,8 @@ const productsData = [
         ],
         colors: ['red', 'green', 'purple'],
         deal: false,
-        offer: 'new'
+        offer: 'new',
+        slide: [true, 'rgb(238, 225, 183)']
     },
     {
         _id: '12',
