@@ -57,15 +57,18 @@ const ProgressBar = props => {
     const dashArray = radius * Math.PI * 2
     const dashOffset = dashArray - dashArray * percentage / 100
 
-    let direction = props.direction === 'column' ? 'flex-column' : 'flex-row'
-    const style = `d-flex ${direction} justify-content-between`
+    let direction = props.direction === 'column' ? 'column' : 'row'
+    const barStyle = {
+        flexDirection: direction,
+        height: props.height + 'px'
+    }
     
 
     
     return (
         <div 
-            className={style} 
-            style={{height: props.height + 'px'}}
+            className={classes.ProgressBar_container} 
+            style={barStyle}
         >
             { bars.map((bar, i) => {
                 return <svg

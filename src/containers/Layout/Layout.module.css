@@ -32,6 +32,12 @@ nav {
     padding: 16px 0;
 }
 
+@media (max-width:768px) {
+    nav {
+        height: auto;
+    }
+}
+
 .Navbar_container {
     display: flex;
     align-items: center;
@@ -49,7 +55,7 @@ nav {
     top: 0;
 }
 
-@media (max-width: 991.98px) {
+@media (max-width: 992px) {
     .Navbar_container {
         right: 0;
     }
@@ -65,7 +71,7 @@ nav {
     flex-grow: 0;
 }
 
-@media (max-width: 991.98px) {
+@media (max-width: 768px) {
     .Navbar_container > div:first-of-type {
         display: none;
     }
@@ -79,7 +85,7 @@ nav {
     margin-left: 28%;
 }
 
-@media (max-width: 1199.98px) {
+@media (max-width: 1200px) {
     .Navbar_container > div:first-of-type > ul {
         margin-left: 10%;
     }
@@ -127,7 +133,7 @@ nav {
     flex-grow: 0;
 }
 
-@media (max-width: 991.98px) {
+@media (max-width: 992px) {
     .Navbar_container > div:nth-of-type(2) {
         position: absolute;
         right: 10px;
@@ -135,11 +141,25 @@ nav {
     }
 }
 
+@media (max-width: 480px) {
+    .Navbar_container > div:nth-of-type(2) {
+        font-size: 2em;
+        width: 8%;
+        right: 0;
+    }
+}
+
+@media (max-width: 360px) {
+    .Navbar_container > div:nth-of-type(2) {
+        right: 5px;
+    }
+}
+
 .Navbar_container > div:nth-of-type(2) > p {
     margin-bottom: 0;
 }
 
-@media (max-width: 1579.98px) {
+@media (max-width: 1200px) {
     .Navbar_container > div:nth-of-type(2) > p {
         display: none;
     }
@@ -152,20 +172,33 @@ nav {
     align-items: center;
 }
 
-@media (max-width: 1579.98px) {
+/* @media (max-width: 1579.98px) {
     .Account_icons {
         width: 80%;
     }
-}
+} */
 
-@media (max-width: 1199.98px) {
+@media (max-width: 1200px) {
     .Account_icons {
-        width: 100%;
+        width: 80%;
+        margin-left: 15%;
     }
 }
 
-@media (max-width: 991.98px) {
+@media (max-width: 480px) {
+    .Account_icons {
+        margin: 0;
+    }
+}
+
+@media (max-width: 992px) {
     .Account_icons > li:first-of-type {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .Account_icons > li:not(:last-of-type) {
         display: none;
     }
 }
@@ -203,7 +236,7 @@ nav {
     z-index: 9999;
 }
 
-@media (max-width: 991.98px) {
+@media (max-width: 768px) {
     .Menu_hamburger {
         display: inline-block;
     }

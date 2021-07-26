@@ -21,14 +21,18 @@ const BestDealSlider = props => {
     const screen_width = window.screen.width
     let circle_diameter 
 
-    if (screen_width >= 1200) {
+    if (screen_width <= 360) {
         circle_diameter = 30
-    } else if (screen_width < 1200 && screen_width >= 768) {
+    } else if (screen_width <= 480) {
         circle_diameter = 40
-    } else if (screen_width < 768) {
+    } else if (screen_width <= 768) {
         circle_diameter = 50
-    }
-
+    } else if (screen_width <= 1200) {
+        circle_diameter = 40
+    } else if (screen_width > 1200) {
+        circle_diameter = 30
+    } 
+    
     const changeSlide = arg => {
 
         const bestDealEl = bestDealRef.current
@@ -91,7 +95,7 @@ const BestDealSlider = props => {
                 <ProgressBar 
                     bars={products.length}
                     diameter={circle_diameter}
-                    auto={true}
+                    auto={false}
                     timer={2500}
                     changeDot={changeSlide}
                     clickable={false}

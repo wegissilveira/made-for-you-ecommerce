@@ -2,50 +2,58 @@
     display: flex;
 }
 
-@media (max-width: 1199.98px) {
+@media (max-width: 992px) {
     .Header_container {
         width: 95%;
     }
 }
 
-@media (max-width: 991.98px) {
+@media (max-width: 768px) {
     .Header_container {
         margin-left: 2.5%;
         margin-bottom: 50px;
+        flex-direction: column;
     }
-}
-
-.MinorSlider_container {
-    position: relative;
 }
 
 .Header_block_1 {
     width: 50%;
-}
-
-.Header_block_1 {
     display: flex;
     position: relative;
+}
+
+@media (max-width:768px) {
+    .Header_block_1 {
+        display: none;
+    }
 }
 
 .Header_block_1 > div {
     position: absolute;
 }
 
-.Header_block_1 > div:first-of-type {
-    left: 5%;
-    top: 49%;
+
+.Header_block_1 > div:first-of-type { /*ProgressBar*/
+    left: 13%;
+    top: 40%;
 }
 
-.Header_block_1 > div:nth-of-type(2) {
+.Header_block_1 > div:nth-of-type(2) { /*MinorSlider*/
     left: 21%;
-    top: 20%;
+    top: 19%;
     height: 80%;
 }
 
 .Header_block_2 {
     width: 50%;
     position: relative;
+}
+
+@media (max-width: 768px) {
+    .Header_block_2 {
+        order: 2;
+        width: 100%;
+    }
 }
 
 .Header_title {
@@ -59,15 +67,60 @@
     transform: translateX(-50%);
 }
 
-@media (max-width: 1579.98px) {
+@media (max-width: 1200px) {
     .Header_title {
-        font-size: 80px;
+        font-size: 70px;
+        top: 20%;
     }
 }
 
-@media (max-width: 1199.98px) {
+@media (max-width: 992px) {
     .Header_title {
-        font-size: 70px;
+        top: 10%;
+    }
+}
+
+@media (max-width: 768px) {
+    .Header_title {
+        width: 100%;
+        text-align: center;
+        font-size: 60px;
+        order: 1;
+        position: unset;
+
+        transform: translateX(0);
+        -webkit-transform: translateX(0);
+        -moz-transform: translateX(0);
+        -ms-transform: translateX(0);
+        -o-transform: translateX(0);
+}
+}
+
+.Header_title > p:nth-of-type(3) {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .Header_title > p:nth-of-type(3) {
+        display: block;
+        margin-bottom: 0;
+        margin-top: 40px;
+    }
+
+    .Header_title > p:not(:nth-of-type(3)) {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .Header_title > p:nth-of-type(3) {
+        font-size: 50px;
+    }
+}
+
+@media (max-width: 360px) {
+    .Header_title > p:nth-of-type(3) {
+        font-size: 40px;
     }
 }
 
@@ -81,7 +134,7 @@
     top: 50%;
 }
 
-@media (max-width: 991.98px) {
+@media (max-width: 992px) {
     .Icons_container {
         display: none;
     }

@@ -175,7 +175,7 @@
     display: none;
 }
 
-@media (max-width: 767.98px) {
+@media (max-width: 480px) {
     .Cart_price_mobile {
         display: flex!important;
         justify-content: space-between;
@@ -197,6 +197,10 @@
         -moz-border-radius: 3px;
         -ms-border-radius: 3px;
         -o-border-radius: 3px;
+    }
+
+    .Cart_price_mobile > div:first-of-type > p {
+        margin: 0;
     }
     
     .Cart_qtde_mobile {

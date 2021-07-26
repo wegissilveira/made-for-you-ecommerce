@@ -116,6 +116,7 @@
 @media (max-width: 991.98px) {
     .Products_select_container_mobile {
         display: flex;
+        display: none; /*PROVISÓRIO PARA TESTAR O HEADER*/
     }
 }
 

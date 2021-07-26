@@ -1,3 +1,8 @@
+.ProgressBar_container {
+    display: flex;
+    justify-content: space-between;
+}
+
 .Circle_progress {
     fill: none;
 }
