@@ -150,8 +150,7 @@ const Products = props => {
         
     },[props.pageLimit])
     
-    
-    // console.log(props.pageLimit)
+
         
     return (
         <Fragment>
@@ -206,8 +205,6 @@ const Products = props => {
         </Fragment>
     )
 }
-
-// export default Products
 
 const mapStateToProps = state => {
     return {

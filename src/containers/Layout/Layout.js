@@ -18,8 +18,6 @@ class Layout extends Component {
         searchProduct: false,
         input: '',
         translateMenuValue: -100,
-        translateSubmenuValue:  -100,
-        rotateIconSubmenuValue: 0,
         marginBottomValue: 47
     }
 
@@ -48,7 +46,7 @@ class Layout extends Component {
             if (this.state.input.length >= 3) {
                 this.props.history.push("/search/" + this.state.input)
             } else {
-                alert('A busca precisa ter ao menos 3 caracteres')
+                alert('Search requires at least three letters')
             }
         }
     }
@@ -62,22 +60,16 @@ class Layout extends Component {
     }
 
     mobileMenuHandler = () => {
-        this.state.translateMenuValue === 0 ? 
-            this.setState({translateMenuValue: -100}) :
+        const body = document.getElementsByTagName('BODY')[0]
+
+        if (this.state.translateMenuValue === 0) {
+            this.setState({translateMenuValue: -100}) 
+            body.style.overflow = 'scroll'
+        } else {
             this.setState({translateMenuValue: 0})
+            body.style.overflow = 'hidden'
+        }
     }
-
-    subMenuHandler = () => {
-        this.state.rotateIconSubmenuValue === 0 ?
-            this.setState({rotateIconSubmenuValue: -180}) :
-            this.setState({rotateIconSubmenuValue: 0})
-        
-
-        this.state.translateSubmenuValue === 0 ?
-            this.setState({translateSubmenuValue: -100, marginBottomValue: 47}) :
-            this.setState({translateSubmenuValue: 0, marginBottomValue: 0})
-    }
-
     
 
 
@@ -104,17 +96,6 @@ class Layout extends Component {
         const translateMenu = {
             transform: `translateX(${this.state.translateMenuValue}%)`,
             transition: '.8s ease-in-out'
-        }
-
-        const translateSubmenu = {
-            transform: `translateY(${this.state.translateSubmenuValue}%)`,
-            transition: '.8s ease-in-out',
-            marginBottom: `-${this.state.marginBottomValue}%`
-        }
-
-        const rotateIconSubmenu = {
-            transform: `rotate(${this.state.rotateIconSubmenuValue}deg)`,
-            transition: `transform 1s`
         }
 
 
@@ -157,7 +138,6 @@ class Layout extends Component {
                             </ul>
                         </div>
 
-                        
                         <Link
                             to="/" 
                             className={classes.Logo}
@@ -212,86 +192,49 @@ class Layout extends Component {
                     />
                     <div 
                         className={classes.Navigation_mobile_container}
-                        style={translateMenu}>
-                        <FontAwesomeIcon 
-                            onClick={this.mobileMenuHandler}
-                            icon="times" size="2x" 
-                        />
-                        <ul className={classes.Navigation_mobile_subContainer} >
-                            <li>
-                                <NavLink 
-                                    to="/" 
-                                    exact
-                                > Home
-                                </NavLink>
-                            </li>
-                            <li className={classes.Navigation_mobile_submenu}>
-                                <NavLink 
-                                    to="/shop/" 
-                                    onClick={this.subMenuHandler}
-                                > Shop
-                                    <FontAwesomeIcon 
-                                        icon="chevron-down" 
-                                        style={rotateIconSubmenu} 
-                                    />
-                                </NavLink>
-                                <ul style={translateSubmenu}>
-                                    <li>
+                        style={translateMenu}
+                    >
+                        <div className={classes.Navigation_mobile_subContainer}>
+                            <FontAwesomeIcon 
+                                onClick={this.mobileMenuHandler}
+                                icon="times" size="2x" 
+                            />
+                            <ul className={classes.Navigation_mobile_list} >
+                                <li>
+                                    <NavLink 
+                                        to="/" 
+                                        exact
+                                    > Home
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink 
+                                        to="/shop/" 
+                                    > Shop
+                                    </NavLink>
+                                </li>
+                            </ul>
+                            <div className={classes.Navigation_mobile_contacts} >
+                                <div>
+                                    <h6>CONTACTS</h6>
+                                    <div>
+                                        <p>hello@myhome.com</p>
+                                        <p>+375 29 364-74-69</p>
                                         <NavLink
-                                            to="/shop/"
+                                            to="/contact/" 
                                             exact
-                                        > All categories
+                                        > Form
                                         </NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink
-                                            to="/shop/bedroom"
-                                        > Bedroom
-                                        </NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink
-                                            to="/shop/living-room"
-                                        > Living-room
-                                        </NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink
-                                            to="/shop/bathroom"
-                                        > Bathroom
-                                        </NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink
-                                            to="/shop/kitchen"
-                                        > Kitchen
-                                        </NavLink>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <NavLink 
-                                    to="/contact/" 
-                                    exact
-                                > Contacts
-                                </NavLink>
-                            </li>
-                        </ul>
-                        <div className={classes.Navigation_mobile_contacts} >
-                            <div>
-                                <h6>CONTACTS</h6>
-                                <div>
-                                    <p>hello@myhome.com</p>
-                                    <p>+375 29 364-74-69</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div>
-                                <h6>STAY SOCIAL</h6>
                                 <div>
-                                    <FontAwesomeIcon icon={['fab', 'twitter']} />
-                                    <FontAwesomeIcon icon={['fab', 'vk']} />
-                                    <FontAwesomeIcon icon={['fab', 'instagram']} />
-                                    <FontAwesomeIcon icon={['fab', 'facebook-f']} />
+                                    <h6>STAY SOCIAL</h6>
+                                    <div>
+                                        <FontAwesomeIcon icon={['fab', 'twitter']} />
+                                        <FontAwesomeIcon icon={['fab', 'vk']} />
+                                        <FontAwesomeIcon icon={['fab', 'instagram']} />
+                                        <FontAwesomeIcon icon={['fab', 'facebook-f']} />
+                                    </div>
                                 </div>
                             </div>
                         </div>

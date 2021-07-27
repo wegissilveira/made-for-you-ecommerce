@@ -32,7 +32,7 @@ const ProductCard = props => {
         props.onWishlistState() 
     }
 
-    const cartHandler = (arg) => {
+    const cartHandler = arg => {
 
         let cartList = [...props.cart]
 
@@ -55,8 +55,9 @@ const ProductCard = props => {
                 
                 cartList.push(productCart)
                 setProdExistsCart(true)
-    
+                
             } else {
+                
                 cartList = cartList.filter(item => item._id !== props.product._id)
                 setProdExistsCart(false)
             }  
@@ -66,7 +67,6 @@ const ProductCard = props => {
         }
     }
 
-    
     const openModalHandler = i => {
         setShowProduct(!showProduct)
         document.body.style.overflow = "hidden"
@@ -82,7 +82,7 @@ const ProductCard = props => {
                                   
     React.useEffect(() => {
         cartHandler('load')
-    })
+    }, [])
 
 
     return (

@@ -61,6 +61,12 @@ nav {
     }
 }
 
+@media (max-width: 768px) {
+    .Navbar_container {
+        box-sizing: unset;
+    }
+}
+
 .Navbar_container > div:first-of-type {
     display: flex;
     align-items: center;
@@ -144,14 +150,12 @@ nav {
 @media (max-width: 480px) {
     .Navbar_container > div:nth-of-type(2) {
         font-size: 2em;
-        width: 8%;
-        right: 0;
     }
 }
 
 @media (max-width: 360px) {
     .Navbar_container > div:nth-of-type(2) {
-        right: 5px;
+        right: 10px;
     }
 }
 
@@ -185,6 +189,12 @@ nav {
     }
 }
 
+@media (max-width: 992px) {
+    .Account_icons {
+        width: 100%;
+    }
+}
+
 @media (max-width: 480px) {
     .Account_icons {
         margin: 0;
@@ -198,9 +208,12 @@ nav {
 }
 
 @media (max-width: 480px) {
-    .Account_icons > li:not(:last-of-type) {
+    .Account_icons > li:nth-of-type(2) {
         display: none;
     }
+    /* .Account_icons > li:not(:last-of-type) {
+        display: none;
+    } */
 }
 
 .Enter_account_container {
@@ -249,32 +262,50 @@ nav {
 
     background-color: rgb(247, 247, 247);
     width: 50vw;
-    height: 100vw;
+    height: 100vh;
     margin-left: -31px;
-    margin-top: -35px;
     z-index: 9999;
 }
 
-.Navigation_mobile_container svg {
-    margin-left: 60px;
-    margin-top: 60px;
+@media (max-width: 480px) {
+    .Navigation_mobile_container {
+        width: 80vw;
+    }
+}
+
+@media (max-width: 360px) {
+    .Navigation_mobile_container {
+        width: 90vw;
+    }
 }
 
 .Navigation_mobile_subContainer {
+    position: relative;
+    margin-left: 15%;
+    margin-top: 5%;
+}
+
+.Navigation_mobile_list {
     flex-direction: column;
     width: 70%;
-    margin-left: 15%;
     margin-top: 40px;
 }
 
-.Navigation_mobile_subContainer a {   
+@media (max-width: 480px) {
+    .Navigation_mobile_list {
+        font-size: 1.5em;
+    }
+}
+
+.Navigation_mobile_list a {   
     display: flex;
     justify-content: space-between;
     align-items: center;
     color: grey;
+    margin-bottom: 10px;
 }
 
-.Navigation_mobile_subContainer svg {
+.Navigation_mobile_list svg {
     margin: 0;
 }
 
@@ -295,8 +326,14 @@ nav {
 }
 
 .Navigation_mobile_contacts {
-    margin-left: 15%;
     margin-top: 50px;
+    font-size: 12px;
+}
+
+@media (max-width:360px) {
+    .Navigation_mobile_contacts {
+        font-size: 1em;
+    }
 }
 
 .Navigation_mobile_contacts > div {
@@ -305,9 +342,10 @@ nav {
     margin-bottom: 24px;
 }
 
-.Navigation_mobile_contacts p {
-    font-size: 12px;
-    margin-bottom: 0;
+.Navigation_mobile_contacts p,
+.Navigation_mobile_contacts a {
+    color: grey;
+    margin-top: 0;
 }
 
 .Navigation_mobile_contacts > div:nth-of-type(2) > div {

@@ -15,7 +15,7 @@ const Filter = props => {
     const [filter_height, setFilterHeight] = React.useState()
 
 
-    let [filterOpen, setFilterOpen] =  React.useState(false)
+    let [filterOpen, setFilterOpen] =  React.useState(true)
     
     let [translateValue, setTranslateValue] = React.useState(-110)
     let [marginT, setMarginT] = React.useState()
@@ -256,7 +256,7 @@ const Filter = props => {
                 </div>
                 <div ref={filterRef}>
                     <div className={classes.Filter_subContainer} style={translateFilter}>
-                        <div>
+                        <div className={classes.Filter_Blocks}>
                             <div ref={categoriesRef}>
                                 <h6>CATEGORIES</h6>
                                 <p onClick={e => setProductTypeHandler(e, 'cat', 'all')}>All categories ({categoriesTotalQtde}) </p>
@@ -313,14 +313,16 @@ const Filter = props => {
                                 </div>
                             </div>
                             <div></div>
-                            <div>
+                            <div className={classes.FilterColor_container}>
                                 <h6>COLOR</h6>
-                                <input 
-                                    type="checkbox" 
-                                    onChange={() => setCheckColorHandler(!checkColor)} 
-                                    checked={checkColor}
-                                />
-                                <label>Todas as cores</label>
+                                <div>
+                                    <input 
+                                        type="checkbox" 
+                                        onChange={() => setCheckColorHandler(!checkColor)} 
+                                        checked={checkColor}
+                                    />
+                                    <label>All available colors</label>
+                                </div>
                                 <ColorSelect
                                     title={'COLOR'}
                                     colors={['red', 'yellow', 'blue', 'purple', 'green']}
@@ -335,7 +337,7 @@ const Filter = props => {
                                 maxValue={initial_max_value}
                             />
                         </div>
-                        <div>
+                        <div className={classes.Filter_buttons_container}>
                             <p className={filterButtonStyle.join(' ')}>FILTER</p>
                             <p 
                                 className={classes.Filter_button} 

@@ -145,7 +145,7 @@ const ProductPage = props => {
                                     <option value="300x300">300x300 cm</option>
                                 </select>
                             </div>
-                            <div>
+                            <div className={classes.ProductPage_colors}>
                                 <p>Color</p>
                                 <ColorSelect 
                                     colors={product.colors}
