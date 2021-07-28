@@ -5,6 +5,7 @@
 .Price_slider_subContainer {
     width: 200px;
     height: 15px;
+    touch-action: none;
 }
 
 @media (max-width: 1199.98px) {

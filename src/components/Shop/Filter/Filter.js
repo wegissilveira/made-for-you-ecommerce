@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 const Filter = props => {
 
+    let [pageLimit, setPageLimit ] = React.useState(12)
     const filterRef = React.useRef()
     const [filter_height, setFilterHeight] = React.useState()
 
@@ -228,6 +229,15 @@ const Filter = props => {
             ['OPEN FILTERS', 'filter'] :
             ['CLOSE FILTERS', 'times']
 
+    React.useEffect(() => {
+        if (window.matchMedia('(max-width: 480px)').matches) {
+            setPageLimit(6)
+        } else if (window.matchMedia('(max-width: 768px)').matches) {
+            setPageLimit(8)
+        }
+
+    }, [pageLimit])
+
 
 
 
@@ -351,7 +361,7 @@ const Filter = props => {
                 <div style={translateProducts}>
                     <Products
                         // products={products} // => Envia o array com os produtos que serão exibidos
-                        pageLimit={12}  // => Número limite de produtos a serem mostrados inicialmente
+                        pageLimit={pageLimit}  // => Número limite de produtos a serem mostrados inicialmente
                         tag={tag} // => Tag que determina quais produtos serão mostrados
                         category={category} // => Categoria dos produtos que serão mostrados
                         valueRange={[min_value, max_value]} // => Intervalo de preço que determinará os produtos que serão mostrados

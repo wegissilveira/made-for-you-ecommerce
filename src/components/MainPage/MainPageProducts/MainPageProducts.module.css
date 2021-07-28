@@ -4,6 +4,14 @@
     margin-bottom: 80px;
 }
 
+@media (max-width: 480px) {
+    .Session_container > h1 {
+        width: 90%;
+        margin-left: 5%;
+        margin-bottom: 20px;
+    }
+}
+
 .Products_select_container {
     display: flex;
     justify-content: space-between;

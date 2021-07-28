@@ -21,15 +21,9 @@ const PriceSlider = forwardRef((props, ref) => {
     let [mobile_thumb2_position, setValueMobileThumb2] =  React.useState(0)
     let [min_value, setMinValue] =  React.useState(initial_min_value)
     let [max_value, setMaxValue] =  React.useState(initial_max_value)
-    
-    React.useEffect(() => {
-        setSliderWidth(sliderRef.current.offsetWidth)
-    }, [])
-
-    
+        
 
     useImperativeHandle(ref, () => ({
-
         resetPriceSlider() {
             thumb_1_Ref.current.style.transform = `translate(0px)`
             thumb_2_Ref.current.style.transform = `translate(0px)`
@@ -43,21 +37,25 @@ const PriceSlider = forwardRef((props, ref) => {
         }
     }));
 
-    let slider
-    let slider_price
 
     const beginSliding = e => {
-        slider.onpointermove = slide
-        slider.setPointerCapture(e.pointerId)
+        // slider.target.onpointermove = slide
+        e.target.onpointermove = slide
+        // slider.ontouchmove = slide
+        // slider.target.setPointerCapture(e.pointerId)
+        e.target.setPointerCapture(e.pointerId)
     }
     
     const stopSliding = e => {
-        slider.onpointermove = null
-        slider.releasePointerCapture(e.pointerId)
+        // slider.onpointermove = null
+        e.target.onpointermove = null
+        // slider.releasePointerCapture(e.pointerId)
+        e.target.releasePointerCapture(e.pointerId)
     }
     
     const slide = e => {
         const thumb_id = e.target.id
+        let priceThumb = thumb_id === 'left-thumb' ? price_thumb_1_Ref : price_thumb_2_Ref
 
         let rect = sliderRef.current.getBoundingClientRect()
         let current_position = e.clientX - rect.left 
@@ -89,22 +87,24 @@ const PriceSlider = forwardRef((props, ref) => {
             setValueMobileThumb1(current_position)
         }
         
-        slider.style.transform = `translate(${current_position}px)`
-        slider_price.style.transform = `translate(${current_position}px)`
+        // slider.style.transform = `translate(${current_position}px)`
+        e.target.style.transform = `translate(${current_position}px)`
+        // slider_price.style.transform = `translate(${current_position}px)`
+        priceThumb.current.style.transform = `translate(${current_position}px)`
     }
         
     
     const handleChange = e => {
-
+        
         const thumb_id = e.target.id
 
         if (thumb_id === 'left-thumb') {
 
-            slider = thumb_1_Ref.current;
-            slider_price = price_thumb_1_Ref.current;
-
-            slider.onpointerdown = beginSliding;
-            slider.onpointerup = stopSliding;
+            // slider = thumb_1_Ref.current
+            // slider_price = price_thumb_1_Ref.current
+            
+            // slider.onpointerdown = beginSliding
+            // slider.onpointerup = stopSliding
 
             if (mobile_thumb1_position - initial_position < 1) {
                 setMinValue(initial_min_value)
@@ -114,11 +114,11 @@ const PriceSlider = forwardRef((props, ref) => {
 
         } else if (thumb_id === 'right-thumb') {
             
-            slider = thumb_2_Ref.current;
-            slider_price = price_thumb_2_Ref.current;
+            // slider = thumb_2_Ref.current
+            // slider_price = price_thumb_2_Ref.current
 
-            slider.onpointerdown = beginSliding;
-            slider.onpointerup = stopSliding;
+            // slider.onpointerdown = beginSliding
+            // slider.onpointerup = stopSliding
 
             if (mobile_thumb2_position > -1) {
                 setMaxValue(initial_max_value)
@@ -128,24 +128,37 @@ const PriceSlider = forwardRef((props, ref) => {
         }
 
         props.rangeValues([min_value, max_value])
-
     }
+    
+    React.useEffect(() => {
+        setSliderWidth(sliderRef.current.offsetWidth)
+    }, [])
+
+
+
 
     return (
             <div className={classes.Price_slider_container}>
                 <h6>PRICE FILTER</h6>
                 <div className={classes.Price_slider_subContainer}
-                    onMouseMove={(e) => handleChange(e)}
+                    // onMouseMove={(e) => handleChange(e)}
+                    // onMouseDown={(e) => handleChange(e)}
+                    onPointerMove={(e) => handleChange(e)}
+                    // onTouchMove={(e) => handleChange(e)}
                     ref={sliderRef}
                 >
                     <div>
                         <span 
                             id="left-thumb"
                             ref={thumb_1_Ref}
+                            onPointerDown={e => beginSliding(e)}
+                            onPointerUp={e => stopSliding(e)}
                         ></span>
                         <span 
                             id="right-thumb"
                             ref={thumb_2_Ref}
+                            onPointerDown={e => beginSliding(e)}
+                            onPointerUp={e => stopSliding(e)}
                         ></span>
                         <p ref={price_thumb_1_Ref}> {Math.floor(min_value)} </p>
                         <p ref={price_thumb_2_Ref}> {Math.floor(max_value)} </p>

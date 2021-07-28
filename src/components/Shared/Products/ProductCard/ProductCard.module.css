@@ -1,9 +1,4 @@
 .ProductCard_container {
-
-}
-
-
-.ProductCard_container {
     flex-basis: 24%;
     flex-shrink: 0;
     padding-left: 0.5%;
@@ -12,7 +7,7 @@
     position: relative;
 }
 
-@media (max-width: 1579.98px) {
+@media (max-width: 1200px) {
     .ProductCard_container {
         flex-basis: 32.3%;
     }
@@ -26,11 +21,11 @@
     }
 }
 
-@media (max-width: 480px) {
+/* @media (max-width: 480px) {
     .ProductCard_container {
         flex-basis: 78%;
     }
-}
+} */
 
 .ProductCard_subContainer {
     border: 1px solid #dee2e6
@@ -44,9 +39,15 @@
     background-color: #F6F6F6;
 }
 
-@media (max-width: 767.98px) {
+@media (max-width: 480px) {
     .Products_img_container {
-        height: 300px;
+        height: 250px;
+    }
+}
+
+@media (max-width: 360px) {
+    .Products_img_container {
+        height: 200px;
     }
 }
 
@@ -62,6 +63,13 @@
     height: 75px;
     width: 80%;
     margin-left: 10%;
+}
+
+@media (max-width: 480px) {
+    .Products_description {
+        width: 90%;
+        margin-left: 5%;
+    }
 }
 
 .Products_description > div:first-of-type {
@@ -87,6 +95,12 @@
     width: 30%;
 }
 
+@media (max-width: 480px) {
+    .Products_description > div:nth-of-type(2) {
+        width: 40%;
+    }
+}
+
 .Products_description > div:nth-of-type(2) > * {
     cursor: pointer;
 }
@@ -103,14 +117,20 @@
     color: rgb(0, 153, 255);
 }
 
-
 .Wishlist_icon_heart {
     position: absolute;
     right: 0;
-    margin-right: 30px;
-    margin-top: 10px;
+    right: 15px;
+    top: 10px;
     color: red;
     cursor: pointer;
+}
+
+@media (max-width:480px) {
+    .Wishlist_icon_heart {
+        right: 10px;
+        top: 5px;
+    }
 }
 
 .Wishlist_icon_heart:hover {

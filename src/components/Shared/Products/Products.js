@@ -22,8 +22,12 @@ const Products = props => {
     const setProductsPageHandler = arg => {
         const containerEl = productsContainerRef.current
         let elBottom = containerEl.offsetTop + containerEl.offsetHeight
+        const containerStyle = window.getComputedStyle(containerEl.children[0].children[0])
+        const containerHeight = parseInt((containerStyle.height).match(/\d+/)[0])
+        const containerMarginTop = parseInt((containerStyle.marginTop).match(/\d+/)[0])
+        const containerFullHeight = containerHeight + containerMarginTop
+        
         let newCount
-
         const subContainerEl = productsSubContainerRef.current
         const basis = Number((window.getComputedStyle(subContainerEl.children[0]).flexBasis).replace(/[^0-9.]+/g,""))
         const itemsPerRow = Math.floor(100/basis)
@@ -31,13 +35,15 @@ const Products = props => {
         if (arg === 'more') {
             newCount = count + itemsPerRow
         } else {
-            elBottom = top - 460
+            elBottom = top - containerFullHeight
             newCount = count - itemsPerRow
+            
         }
 
-        window.scrollTo({top: elBottom - 280, left: 0, behavior: 'smooth'})
+        window.scrollTo({top: elBottom - 290, left: 0, behavior: 'smooth'})
         setTop(elBottom)
         setCount(newCount)
+        
     }
 
     let tag
@@ -147,8 +153,8 @@ const Products = props => {
             setPageLimit(props.pageLimit)
             setCount(props.pageLimit)
         }
-        
     },[props.pageLimit])
+
     
 
         

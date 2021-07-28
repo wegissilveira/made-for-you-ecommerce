@@ -51,7 +51,9 @@ const MainPageProducts = props => {
     }
 
     React.useEffect(() => {
-        if (window.matchMedia('(max-width: 768px)').matches) {
+        if (window.matchMedia('(max-width: 480px)').matches) {
+            setPageLimit(4)
+        } else if (window.matchMedia('(max-width: 768px)').matches) {
             setPageLimit(6)
         } else if (window.matchMedia('(max-width: 1200px)').matches) {
             setPageLimit(9)
