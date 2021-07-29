@@ -1,11 +1,15 @@
-
-.teste {
-    color: grey;
+:root {
+    --nav-height: 60px;
 }
 
-.teste:hover {
-    text-decoration: none;
-    color: #ffc107;
+@media (max-width:992px) {
+    :root {
+        --nav-height: 50px;
+    }
+}
+
+main {
+    padding-top: var(--nav-height);
 }
 
 p, h1, h2, h3, h4, h5, h6, label {
@@ -17,6 +21,7 @@ ul {
     color: black;
     margin-bottom: 0;
     padding: 0;
+    margin: 0;
 }
 
 input {
@@ -27,15 +32,11 @@ input {
 }
 
 nav {
-    height: 70px;
-    position: relative;
-    padding: 16px 0;
-}
-
-@media (max-width:768px) {
-    nav {
-        height: auto;
-    }
+    position: fixed;
+    width: 100%;
+    background-color: #fff;
+    height: var(--nav-height);
+    z-index: 9999;
 }
 
 .Navbar_container {
@@ -44,15 +45,10 @@ nav {
     justify-content: space-between;
 
     width: 100%;
-    height: 60px;
+    height: 100%;
     padding-left: 15px;
     padding-right: 15px;
     box-sizing: border-box;
-
-    position: fixed;
-    z-index: 9999;
-    background-color: #fff;
-    top: 0;
 }
 
 @media (max-width: 992px) {
@@ -89,6 +85,7 @@ nav {
     justify-content: space-between;
 
     margin-left: 28%;
+    margin-top: 0;
 }
 
 @media (max-width: 1200px) {
@@ -113,9 +110,9 @@ nav {
     top: 50%;
     left: 50%;
     margin-top: -30px;
-    margin-left: -50px;
     padding-top: 5px;
     padding-bottom: 5px;
+    transform: translateX(-50%);
     font-size: 25px;
     color: #000;
 }
@@ -159,10 +156,6 @@ nav {
     }
 }
 
-.Navbar_container > div:nth-of-type(2) > p {
-    margin-bottom: 0;
-}
-
 @media (max-width: 1200px) {
     .Navbar_container > div:nth-of-type(2) > p {
         display: none;
@@ -175,12 +168,6 @@ nav {
     justify-content: space-between;
     align-items: center;
 }
-
-/* @media (max-width: 1579.98px) {
-    .Account_icons {
-        width: 80%;
-    }
-} */
 
 @media (max-width: 1200px) {
     .Account_icons {
@@ -211,9 +198,6 @@ nav {
     .Account_icons > li:nth-of-type(2) {
         display: none;
     }
-    /* .Account_icons > li:not(:last-of-type) {
-        display: none;
-    } */
 }
 
 .Enter_account_container {
@@ -245,8 +229,9 @@ nav {
 .Menu_hamburger {
     display: none;
     margin-left: 12px;
-    position: fixed;
-    z-index: 9999;
+    position: absolute;
+    top: 10px;
+    left: 10px;
 }
 
 @media (max-width: 768px) {

@@ -21,7 +21,6 @@ class Layout extends Component {
         marginBottomValue: 47
     }
 
-
     
     // Executa a busca com o click na lupa
     searchProductHandler = e => {

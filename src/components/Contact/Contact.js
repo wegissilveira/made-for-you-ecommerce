@@ -38,8 +38,9 @@ const Contact = props => {
                             <div>
                                 <input placeholder="First name"/>
                                 <input placeholder="Last name"/>
+                                <input type='email' placeholder="Email"/>
                             </div>
-                            <input placeholder="Email" />
+                            <input type='email' placeholder="Email" />
                             <textarea placeholder="Message"></textarea>
                             <p className={classes.Contact_submit_btn}>Submit</p>
                         </div>
