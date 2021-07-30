@@ -39,7 +39,6 @@ const Cart = props => {
         return indexOfA - indexOfB;
     })
 
-
     let [qtde, setQtde] = React.useState(() => {
         let arrQtde = []
         props.cart.map((item, index) => {
@@ -68,7 +67,8 @@ const Cart = props => {
         localStorage.setItem('cartList', JSON.stringify(cartList))
         props.onCartListState()
     }
-
+    // console.log('cart')
+    // console.log(products_cart_details)
 
 
     return (
@@ -90,7 +90,7 @@ const Cart = props => {
                                         key={i}
                                         product={product} 
                                         prodIndex={i}
-                                        qtde={qtde[i]}
+                                        // qtde={qtde[i]}
                                         setQtdeCallback={(value, index) => setQtdeHandler(value, index)}
                                         removeProductCallback={id => removeProductCartHandler(id)}
                                     />

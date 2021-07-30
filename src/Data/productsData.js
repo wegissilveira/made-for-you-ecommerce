@@ -1,7 +1,7 @@
 const productsData = [
     {
         _id: '16',
-        name: 'Produto-16',
+        name: 'Produto-16 roduto-16 roduto-16 roduto-16',
         price: '48.99',
         img: require('../assets/images/ProductCard/Textile/Cortina-1/cortina-1-img-1.jpg'),
         tag: 'textile',

@@ -11,24 +11,32 @@ const ColorSelect = props => {
     let [opacity, setOpacity] = React.useState(opacityArr)
     let [border, setBorder] = React.useState(borderArr)
 
-    const selectColorHandler = (color, i) => {
+    const selectColorHandler = (color, load) => {
         let newBorder = [...border]
         let newOpacity = [...opacity]
-        
-        newBorder.forEach((color, k) => {
-            k === i ? newBorder[k] = '2px solid black' : newBorder[k] = '1px solid black' 
-        })
 
-        newOpacity.forEach((color, k) => {
-            k === i ? newOpacity[k] = '1.0' : newOpacity[k] = '0.4' 
+        props.colors.forEach((bColor, k) => {
+            if (color === bColor) {
+                newBorder[k] = '2px solid black'
+                newOpacity[k] = '1.0'
+            } else {
+                newBorder[k] = '1px solid black'
+                newOpacity[k] = '0.4'
+            }
         })
 
         setBorder(newBorder)
         setOpacity(newOpacity)
         
-        props.selectColorHandlerCallback(color, i)
+        if (load !== true) props.selectColorHandlerCallback(color)
     }
  
+    React.useEffect(() => {
+        if (props.selectedColor !== undefined) {
+            selectColorHandler(props.selectedColor, true)
+        }
+    }, [])
+
 
                                 
     return (
@@ -38,7 +46,7 @@ const ColorSelect = props => {
                     return <div key={i} 
                                 style={{border: border[i]}}
 
-                                onClick={() => selectColorHandler(color, i)}
+                                onClick={() => selectColorHandler(color)}
                             >
                                 <span 
                                     style={{backgroundColor: color, opacity: opacity[i]}}

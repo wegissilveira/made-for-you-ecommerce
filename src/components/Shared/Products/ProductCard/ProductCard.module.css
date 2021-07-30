@@ -1,4 +1,5 @@
 .ProductCard_container {
+    max-width: 24%;
     flex-basis: 24%;
     flex-shrink: 0;
     padding-left: 0.5%;
@@ -9,12 +10,14 @@
 
 @media (max-width: 1200px) {
     .ProductCard_container {
+        max-width: 32.3%;
         flex-basis: 32.3%;
     }
 }
 
 @media (max-width: 768px) {
     .ProductCard_container {
+        max-width: 48%;
         flex-basis: 48%;
         padding-left: 1%;
         padding-right: 1%;
@@ -82,6 +85,11 @@
 .Products_description > div:first-of-type > a {
     color: grey;
     text-decoration: none;
+
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 100%;
 }
 
 .Products_description > div:first-of-type > p {

@@ -9,12 +9,6 @@ const ProductsQtde = props => {
     let [productQtde, setProductQtde] = React.useState(1) // => Quantidade atual
     let [productQtdeMax, ] = React.useState(props.max) // => Quantidade máxima. Caso não haja o a arrow up estará ativa infinitamente
 
-    React.useEffect(() => {
-        if (props.startQtde !== undefined) {
-            setProductQtde(props.startQtde)
-        }
-    }, [props.startQtde])
-
     const changeQtde = arg => {
         if (arg === "increase" && (productQtde < productQtdeMax || productQtdeMax === undefined)) {
             setProductQtde(productQtde + 1)
@@ -28,10 +22,14 @@ const ProductsQtde = props => {
                 props.changeQtdeCallBack(1)
             }
         }
-
-        
     }
 
+    React.useEffect(() => {
+        if (props.startQtde !== undefined) {
+            setProductQtde(props.startQtde)
+        }
+    }, [props.startQtde])
+    
     let active_up
     productQtde < productQtdeMax || productQtdeMax === undefined ? 
         active_up = {color: '#212529', cursor: 'pointer'} : 
@@ -42,6 +40,8 @@ const ProductsQtde = props => {
         active_down = {color: '#212529', cursor: 'pointer'} : 
         active_down = {color: '#ccc', cursor: 'default'}
     
+
+
 
     return (
         <div className={classes.Product_qtde}>

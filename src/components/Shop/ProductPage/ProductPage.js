@@ -30,25 +30,39 @@ const ProductPage = props => {
         )
 
         return prod
-
-    })
-
-    const bag_button_color = isProductInBag === 0 ? classes.Bag_button_green : classes.Bag_button_red
-    const bag_button_text = isProductInBag === 0 ? 'ADD TO BAG' : 'REMOVE FROM BAG'
+    })    
 
     let heart_Icon = props.wish.includes(product._id) ? 'fas' : 'far'    
     
-    let [productColor, setProductColor] = React.useState('') // => Armazena cor selecionada do produto
+    let [productColor, setProductColor] = React.useState('')
+    let [productQtde, setQtde] = React.useState(1)
+    let [productSize, setSize] = React.useState('100x100')
+    let [productUpdated, setProductUpdated] = React.useState(false)
 
-    let [qtde, setQtde] = React.useState(1)
-    let [size, setSize] = React.useState('100x100')
 
-    const selectColorHandler = (color, i) => {
+    let bag_button_color
+    let bag_button_text
+    if (productUpdated === true && isProductInBag === 1) {
+        bag_button_color = classes.Bag_button_orange
+        bag_button_text = 'UPDATE BAG'
+    } else {
+        bag_button_color = isProductInBag === 0 ? classes.Bag_button_green : classes.Bag_button_red
+        bag_button_text = isProductInBag === 0 ? 'ADD TO BAG' : 'REMOVE FROM BAG'
+    }
+    
+    const selectColorHandler = color => {
         setProductColor(color)
+        setProductUpdated(true)
     }
 
     const setQtdeHandler = value => {
         setQtde(value)
+        setProductUpdated(true)
+    }
+
+    const setSizeHandler = size => {
+        setSize(size)
+        setProductUpdated(true)
     }
 
     const wishlistHandler = id => {
@@ -74,21 +88,27 @@ const ProductPage = props => {
             if (item._id === product._id) count++
         })
 
-        if (count === 0) {
+        
+        if (count === 0 || productUpdated) {
             let productCart = {}
 
             productCart._id = product._id
-            productCart.qtde = qtde
+            productCart.qtde = productQtde
             productCart.color = productColor
-            productCart.size = size
+            productCart.size = productSize
+
+            if (productUpdated === true) {
+                productCartArr = productCartArr.filter(item => item._id !== product._id)
+            }
     
             productCartArr.push(productCart)
             setProdExists(1)
-
         } else {
             productCartArr = productCartArr.filter(item => item._id !== product._id)
             setProdExists(0)
         }
+
+        setProductUpdated(false)
 
         localStorage.setItem('cartList', JSON.stringify(productCartArr))
 
@@ -111,16 +131,37 @@ const ProductPage = props => {
             }
         })
     }
+
+    let product_cart_details = {}
+    for (let i=0; i < props.cart.length; i++) {
+        if (props.cart[i]._id === product._id){
+            product_cart_details = {
+                ...product, 
+                ...props.cart[i]
+            }
+        }
+    }
+
+    const selectRef = React.useRef()
     
+    React.useEffect(() => {
+        const selectArray = Array.from(selectRef.current.children)
+        selectArray.forEach((select, i) => {
+            if (select.value === product_cart_details.size) {
+                selectRef.current.children[i].selected = true
+            } else {
+                selectRef.current.children[i].selected = false
+            }
+        })
+    }, [product_cart_details.size])
 
-
+    console.log(product_cart_details)
 
     return (
         
         <Fragment>
             <div className={classes.Session_container}>
                 <div className={classes.Product_page_container}>
-                    <h1>{product.name}</h1>
                     <ProductSlider product={product} />
                     <div>
                         <div>
@@ -139,15 +180,16 @@ const ProductPage = props => {
                         <div className={classes.Product_details_container}>
                             <div>
                                 <p>Size</p>
-                                <select onChange={e => setSize(e.target.value)}>
+                                <select ref={selectRef} onChange={e => setSizeHandler(e.target.value)}>
                                     <option value="100x100">100x100 cm</option>
-                                    <option value="200x200">200x200 cm</option>
+                                    <option selected value="200x200">200x200 cm</option>
                                     <option value="300x300">300x300 cm</option>
                                 </select>
                             </div>
                             <div className={classes.ProductPage_colors}>
                                 <p>Color</p>
                                 <ColorSelect 
+                                    selectedColor={product_cart_details.color}
                                     colors={product.colors}
                                     selectColorHandlerCallback={(color, i) => selectColorHandler(color, i)}
                                 />
@@ -155,16 +197,21 @@ const ProductPage = props => {
                         </div>
                         <div className={classes.Product_wishlist_container}>
                             <ProductsQtde 
+                                startQtde={product_cart_details.qtde}
                                 changeQtdeCallBack={qtde => setQtdeHandler(qtde)}  
                                 max={8}
                             />
-                            <div
-                                onClick={() => toggleQtdeSelectMobileHandler()}
-                            >
-                                <p>{qtde}</p>
+                            {/* <div onClick={() => toggleQtdeSelectMobileHandler()}>
+                                <p>{product_cart_details.qtde}</p>
                                 <FontAwesomeIcon icon="chevron-down" size="xs"/>
-                            </div>
-                                                    
+                            </div> */}
+                            <ProductQtdeMobile
+                                changeQtdeCallBack={qtde => setQtde(qtde)} 
+                                startQtde={product_cart_details.qtde}
+                                // productIndex={}
+                                initialValue={true}
+                                toggle={() =>toggleQtdeSelectMobileHandler()}
+                            />        
                             <button 
                                 onClick={() => productCartHandler()}
                                 type="button" 
@@ -178,17 +225,18 @@ const ProductPage = props => {
                                 icon={[heart_Icon, 'heart']} size="2x" 
                             />
 
-                            <div 
+                            {/* <div 
                                 id="product_qtde"
                                 className={classes.Cart_qtde_mobile}
-                            >
-                                <ProductQtdeMobile
+                            > */}
+                                {/* <ProductQtdeMobile
                                     changeQtdeCallBack={qtde => setQtde(qtde)} 
+                                    startQtde={product_cart_details.qtde}
                                     // productIndex={}
                                     initialValue={true}
                                     toggle={() =>toggleQtdeSelectMobileHandler()}
-                                />
-                            </div>
+                                /> */}
+                            {/* </div> */}
                         </div>
                         <div className={classes.Product_category_container}>
                             <p>Category: <span>{product.category}</span></p>

@@ -35,6 +35,8 @@ const ProductCart = props => {
         })
     }
 
+
+
     return (
         <div className={classes.Cart_details}>
             <div className={classes.Cart_details_img}>
@@ -72,7 +74,7 @@ const ProductCart = props => {
                     max={10}
                 />
             </div>
-            <p>$ {(props.qtde * parseFloat(props.product.price)).toFixed(2)}</p>
+            <p>$ {(props.product.qtde * parseFloat(props.product.price)).toFixed(2)}</p>
             <p>
                 <FontAwesomeIcon
                     onClick={() => removeProductCart(props.product._id)}
@@ -82,13 +84,13 @@ const ProductCart = props => {
             </p>
             <div className={classes.Cart_price_mobile}>
                 <div
-                    onClick={() => toggleQtdeSelectMobile(props.prodIndex, props.qtde)}
+                    onClick={() => toggleQtdeSelectMobile(props.prodIndex, props.product.qtde)}
                 >
-                    <p>{props.qtde}</p>
+                    <p>{props.product.qtde}</p>
                     <FontAwesomeIcon icon="chevron-down" size="xs"/>
                 </div>
-                <p>$ {(props.qtde * parseFloat(props.product.price)).toFixed(2)}</p>
-                <div 
+                <p>$ {(props.product.qtde * parseFloat(props.product.price)).toFixed(2)}</p>
+                {/* <div 
                     id={'product_qtde-' + props.prodIndex}
                     className={classes.Cart_qtde_mobile}
                 >
@@ -97,7 +99,7 @@ const ProductCart = props => {
                         productIndex={props.prodIndex}
                         toggle={() =>toggleQtdeSelectMobile(props.prodIndex)}
                     />
-                </div>
+                </div> */}
             </div>
         </div>
     )
