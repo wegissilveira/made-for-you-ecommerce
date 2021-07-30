@@ -16,7 +16,7 @@ const Filter = props => {
     const [filter_height, setFilterHeight] = React.useState()
 
 
-    let [filterOpen, setFilterOpen] =  React.useState(true)
+    let [filterOpen, setFilterOpen] =  React.useState(false)
     
     let [translateValue, setTranslateValue] = React.useState(-110)
     let [marginT, setMarginT] = React.useState()

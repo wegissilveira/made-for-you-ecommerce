@@ -209,11 +209,6 @@
     }
 }
 
-
-.Filter_Blocks > div p:first-of-type {
-    font-weight: bold;
-}
-
 .Filter_Blocks label {
     margin-left: 8px;
 }

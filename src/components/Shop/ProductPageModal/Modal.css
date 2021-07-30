@@ -15,13 +15,14 @@
     opacity: 0;
 }
 
-@media (max-width: 1579.98px) {
+@media (max-width: 1200px) {
     .ReactModal__Content {
         width: 75% !important;
+        border: none !important;
     }
 }
 
-@media (max-width: 1199.98px) {
+@media (max-width: 992px) {
     .ReactModal__Content {
         width: 90% !important;
     }

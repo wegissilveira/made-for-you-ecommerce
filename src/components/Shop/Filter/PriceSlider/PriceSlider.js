@@ -142,9 +142,7 @@ const PriceSlider = forwardRef((props, ref) => {
                 <h6>PRICE FILTER</h6>
                 <div className={classes.Price_slider_subContainer}
                     // onMouseMove={(e) => handleChange(e)}
-                    // onMouseDown={(e) => handleChange(e)}
                     onPointerMove={(e) => handleChange(e)}
-                    // onTouchMove={(e) => handleChange(e)}
                     ref={sliderRef}
                 >
                     <div>
