@@ -152,14 +152,14 @@ const ProductPageModal = props => {
     return (
         <Fragment>
             <Modal
-                isOpen={props.showProduct}
+                // isOpen={props.showProduct}
+                isOpen={true}
                 onRequestClose={() => props.setShowProduct()}
                 style={customStyles}
                 contentLabel="Product Card"
                 ariaHideApp={false}
                 closeTimeoutMS={500}
             >
-
                 <div className={classes.Product_page_modal_container}>
                     <p onClick={() => props.setShowProduct()}>
                         <FontAwesomeIcon icon="times" />
