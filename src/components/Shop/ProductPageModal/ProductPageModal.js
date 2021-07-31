@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Modal from 'react-modal';
 import { connect } from 'react-redux'
 
+import ProductInfoComponent from '../ProductPage/ProductInfoComponent/ProductInfoComponent';
 import ProductsQtde from '../../Shared/UI/ProductsQtde/ProductsQtde'
 import ProgressBar from '../../Shared/UI/ProgressBar/ProgressBar'
 import ColorSelect from '../../Shared/UI/ColorSelect/ColorSelect';
@@ -147,13 +148,13 @@ const ProductPageModal = props => {
         props.onCartListState()
     }
 
-    
+    // console.log(props.product)
 
     return (
         <Fragment>
             <Modal
                 // isOpen={props.showProduct}
-                isOpen={true}
+                isOpen={props.product._id === '16'}
                 onRequestClose={() => props.setShowProduct()}
                 style={customStyles}
                 contentLabel="Product Card"
@@ -186,8 +187,9 @@ const ProductPageModal = props => {
                             />
                         </div>
                     </div>
-                    
-                    <div>
+                    {/* ******* */}
+                    <ProductInfoComponent product={props.product}/>
+                    {/* <div>
                         <h1>{props.product.name}</h1>
                         <p>A comfortable bed for the dog. It will bring a lot of pleasure to your pet. High quality material does not allow the wool to stick and easy to clean.</p>
                         <div>
@@ -219,7 +221,9 @@ const ProductPageModal = props => {
                         </div>
 
                         <div>
-                            <ProductsQtde changeQtdeCallBack={qtde => setQtdeHandler(qtde)} /> 
+                            <ProductsQtde 
+                                changeQtdeCallBack={qtde => setQtdeHandler(qtde)} 
+                            /> 
                             <button 
                                 onClick={() => addProductToBagHandler()}
                                 type="button" 
@@ -243,7 +247,7 @@ const ProductPageModal = props => {
                                 <p style={{margin: '0'}}>Share</p>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>            
             </Modal>
         </Fragment>
