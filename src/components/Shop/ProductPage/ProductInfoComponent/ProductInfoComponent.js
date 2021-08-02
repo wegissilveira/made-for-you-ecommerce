@@ -133,11 +133,28 @@ const ProductInfoComponent = props => {
         })
     }, [product_cart_details.size])
 
+    let modalStyle = {
+        specificDisplay: null,
+        containerMargin: null,
+        wishWidth: null,
+        colorWidth: null
+    }
+
+    if (props.modal) {
+        modalStyle.specificDisplay = 'none'
+        modalStyle.containerMargin = '0'
+        modalStyle.wishWidth = '90%'
+        modalStyle.colorWidth = '50%'
+    }
+
 
 
     return (
-        <div className={classes.ProductInfo_container}>
-            <div>
+        <div 
+            className={classes.ProductInfo_container}
+            style={{marginLeft: modalStyle.containerMargin}}
+        >
+            <div style={{display: modalStyle.specificDisplay}}>
                 <p>123456</p>
                 <p>exemplo</p>
             </div>
@@ -159,7 +176,10 @@ const ProductInfoComponent = props => {
                         <option value="300x300">300x300 cm</option>
                     </select>
                 </div>
-                <div className={classes.ProductPage_colors}>
+                <div 
+                    className={classes.ProductPage_colors}
+                    style={{width: modalStyle.colorWidth}}
+                >
                     <p>Color</p>
                     <ColorSelect 
                         selectedColor={product_cart_details.color}
@@ -168,7 +188,10 @@ const ProductInfoComponent = props => {
                     />
                 </div>
             </div>
-            <div className={classes.Product_wishlist_container}>
+            <div 
+                className={classes.Product_wishlist_container}
+                style={{width: modalStyle.wishWidth}}
+            >
                 <ProductsQtde 
                     startQtde={product_cart_details.qtde}
                     changeQtdeCallBack={qtde => setQtdeHandler(qtde)}  
@@ -192,11 +215,17 @@ const ProductInfoComponent = props => {
                     icon={[heart_Icon, 'heart']} size="2x" 
                 />
             </div>
-            <div className={classes.Product_category_container}>
+            <div 
+                className={classes.Product_category_container}
+                style={{display: modalStyle.specificDisplay}}
+            >
                 <p>Category: <span>{props.product.category}</span></p>
                 <p>Tags: <span>{props.product.tag}</span></p>
             </div>
-            <div className={classes.Product_specifications_container}>
+            <div 
+                className={classes.Product_specifications_container}
+                style={{display: modalStyle.specificDisplay}}
+            >
                 <div>
                     <div>
                         <h6>DETAILS</h6>

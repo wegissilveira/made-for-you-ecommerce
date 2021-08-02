@@ -5,17 +5,9 @@ import './Modal.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Modal from 'react-modal';
-import { connect } from 'react-redux'
 
 import ProductInfoComponent from '../ProductPage/ProductInfoComponent/ProductInfoComponent';
-import ProductsQtde from '../../Shared/UI/ProductsQtde/ProductsQtde'
 import ProgressBar from '../../Shared/UI/ProgressBar/ProgressBar'
-import ColorSelect from '../../Shared/UI/ColorSelect/ColorSelect';
-import * as actionTypes from '../../../store/actions/actionTypes'
-
-import wishlistDataFn from '../../../Data/wishlistData'
-import cartListDataFn from '../../../Data/cartData'
-
 
 const customStyles = {
     content : {
@@ -24,7 +16,7 @@ const customStyles = {
         left: '50%',
         right: 'auto',
         bottom: 'auto',
-        transform: 'translate(-50%, -50%)',
+        transform: 'translate(-50%, -45%)',
         transition: 'transform 3s ease-in-out 3s',
         overflow: 'hidden',
     }
@@ -34,30 +26,6 @@ const customStyles = {
 const ProductPageModal = props => {
         
     let [imgSlide, setImgSlide] = React.useState(0)
-    let [productColor, setProductColor] = React.useState('')
-
-    let [isProductInBag, setProdExists] = React.useState(0)
-
-    const bag_button_color = isProductInBag === 0 ? classes.Bag_button_green : classes.Bag_button_red
-    const bag_button_text = isProductInBag === 0 ? 'ADD TO BAG' : 'REMOVE FROM BAG'
-
-    let heart_Icon = props.wish.includes(props.product._id) ? 'fas' : 'far'
-
-    React.useEffect(() => {
-        let productCartArr = [...props.cart]
-        
-        let count = 0
-        productCartArr.forEach(item => {
-            if (item._id === props.product._id) count++
-        })
-        
-        setProdExists(count)
-
-    }, [props.cart, props.product._id])
-
-    let [qtde, setQtde] = React.useState(1) 
-    let [size, setSize] = React.useState('100x100') 
-
     let [translateValue, setTranslateValue] = React.useState(0)
 
     const translateSlider = {
@@ -94,67 +62,15 @@ const ProductPageModal = props => {
         }
     }
 
-    const selectColorHandler = (color, i) => {
-        setProductColor(color)
-    }
-    
-    const setQtdeHandler = value => {
-        setQtde(value)
+    if (window.innerWidth <= 768) {
+        customStyles.content.paddingTop = '40px'
     }
 
-    const wishlistHandler = id => {
-
-        let list = [...props.wish]
-        if (list.includes(id)) {
-            list = list.filter(item => item !== id)
-        } else {
-            list.push(id)
-        }
-
-        localStorage.setItem('wishlist', JSON.stringify(list))
-
-        props.onWishlistState()
-    }
-       
-    const addProductToBagHandler = () => {
-        
-        let productCartArr = [...props.cart]
-
-        let count = 0
-        productCartArr.forEach(item => {
-            if (item._id === props.product._id) count++
-        })
-
-        if (count === 0) {
-            let productCart = {}
-
-            productCart._id = props.product._id
-            productCart.qtde = qtde
-            productCart.color = productColor
-            productCart.size = size
-    
-            productCartArr.push(productCart)
-            setProdExists(1)
-            props.setProductOnCart(true)
-
-        } else {
-            productCartArr = productCartArr.filter(item => item._id !== props.product._id)
-            setProdExists(0)
-            props.setProductOnCart(false)
-        }
-
-        localStorage.setItem('cartList', JSON.stringify(productCartArr))
-
-        props.onCartListState()
-    }
-
-    // console.log(props.product)
 
     return (
         <Fragment>
             <Modal
-                // isOpen={props.showProduct}
-                isOpen={props.product._id === '16'}
+                isOpen={props.showProduct}
                 onRequestClose={() => props.setShowProduct()}
                 style={customStyles}
                 contentLabel="Product Card"
@@ -165,7 +81,7 @@ const ProductPageModal = props => {
                     <p onClick={() => props.setShowProduct()}>
                         <FontAwesomeIcon icon="times" />
                     </p>
-                    <div>
+                    <div className={classes.Product_modal_slider}>
                         <div 
                             className={classes.Main_img_slider} 
                             style={translateSlider}
@@ -187,86 +103,14 @@ const ProductPageModal = props => {
                             />
                         </div>
                     </div>
-                    {/* ******* */}
-                    <ProductInfoComponent product={props.product}/>
-                    {/* <div>
-                        <h1>{props.product.name}</h1>
-                        <p>A comfortable bed for the dog. It will bring a lot of pleasure to your pet. High quality material does not allow the wool to stick and easy to clean.</p>
-                        <div>
-                            <h3>$ {props.product.price}</h3>
-                            <div className={classes.Product_price_availability}>
-                                <FontAwesomeIcon icon="check" />
-                                <p>Available</p>
-                            </div>
-                        </div>
-                        <div>
-                            <div>
-                                <p>Size</p>
-                                <select 
-                                    onChange={e => setSize(e.target.value)}
-                                    className={classes.Product_details_select}
-                                >
-                                    <option value="100x100">100x100 cm</option>
-                                    <option value="200x200">200x200 cm</option>
-                                    <option value="300x300">300x300 cm</option>
-                                </select>
-                            </div>
-                            <div>
-                                <p>Color</p>
-                                <ColorSelect
-                                    colors={props.product.colors}
-                                    selectColorHandlerCallback={(color, i) => selectColorHandler(color, i)}
-                                />
-                            </div>
-                        </div>
-
-                        <div>
-                            <ProductsQtde 
-                                changeQtdeCallBack={qtde => setQtdeHandler(qtde)} 
-                            /> 
-                            <button 
-                                onClick={() => addProductToBagHandler()}
-                                type="button" 
-                                className={bag_button_color}
-                            > {bag_button_text}
-                            </button> 
-
-                            <FontAwesomeIcon 
-                                onClick={() => wishlistHandler(props.product._id)} 
-                                icon={[heart_Icon, 'heart']} size="2x" 
-                            />
-                        </div>
-                        
-                        <div>
-                            <div>
-                                <p>Category: <span>{props.product.category}</span></p>
-                                <p>Tags: <span>{props.product.tag}</span></p>
-                            </div>
-                            <div>
-                                <FontAwesomeIcon icon="share-alt"/>
-                                <p style={{margin: '0'}}>Share</p>
-                            </div>
-                        </div>
-                    </div> */}
+                    <ProductInfoComponent 
+                        product={props.product}
+                        modal={true}
+                    />
                 </div>            
             </Modal>
         </Fragment>
     )
 }
 
-const mapStateToProps = state => {
-    return {
-        wish: state.wishlistState,
-        cart: state.cartListState
-    }
-}
-
-const mapDispatchToProps = dispatch => {
-    return {
-        onWishlistState: () => dispatch({type: actionTypes.WISHLIST, value: wishlistDataFn()}),
-        onCartListState: () => dispatch({type: actionTypes.CARTLIST, value: cartListDataFn()})
-    }
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProductPageModal)
+export default ProductPageModal
