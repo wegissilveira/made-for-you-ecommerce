@@ -6,7 +6,7 @@
     height: 350px;
 }
 
-@media (max-width: 991.98px) {
+@media (max-width: 768px) {
     .Form_cart_container {
         flex-direction: column;
         height: fit-content;
@@ -24,7 +24,7 @@
     padding-left: 0;
 }
 
-@media (max-width: 991.98px) {
+@media (max-width: 768px) {
     .Form_cart_container > div {
         padding: 0;
         margin-top: 20px;
@@ -58,7 +58,7 @@
     padding-left: 15px;
 }
 
-@media (max-width: 991.98px) {
+@media (max-width: 768px) {
     .Form_cart_container > div:nth-of-type(3) {
         padding-left: 0;
     }
@@ -69,7 +69,7 @@
     border: 1px solid #dee2e6;
 }
 
-@media (max-width: 991.98px) {
+@media (max-width: 768px) {
     .Form_cart_container > div:nth-of-type(3) > div > div > * {
         height: 50px;
     }
@@ -94,7 +94,7 @@
     font-weight: bold;
 }
 
-@media (max-width: 991.98px) {
+@media (max-width: 768px) {
     .Cart_light_button,
     .Cart_dark_button {
         margin-top: 20px;

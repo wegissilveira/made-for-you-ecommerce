@@ -88,9 +88,9 @@ nav {
     margin-top: 0;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1366px) {
     .Navbar_container > div:first-of-type > ul {
-        margin-left: 10%;
+        margin-left: 15%;
     }
 }
 
@@ -156,7 +156,7 @@ nav {
     }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 992px) {
     .Navbar_container > div:nth-of-type(2) > p {
         display: none;
     }
@@ -167,13 +167,6 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-@media (max-width: 1200px) {
-    .Account_icons {
-        width: 80%;
-        margin-left: 15%;
-    }
 }
 
 @media (max-width: 992px) {

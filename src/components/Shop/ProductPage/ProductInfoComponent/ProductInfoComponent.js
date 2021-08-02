@@ -137,7 +137,8 @@ const ProductInfoComponent = props => {
         specificDisplay: null,
         containerMargin: null,
         wishWidth: null,
-        colorWidth: null
+        colorWidth: null,
+
     }
 
     if (props.modal) {
@@ -215,10 +216,7 @@ const ProductInfoComponent = props => {
                     icon={[heart_Icon, 'heart']} size="2x" 
                 />
             </div>
-            <div 
-                className={classes.Product_category_container}
-                style={{display: modalStyle.specificDisplay}}
-            >
+            <div className={classes.Product_category_container}>
                 <p>Category: <span>{props.product.category}</span></p>
                 <p>Tags: <span>{props.product.tag}</span></p>
             </div>

@@ -15,7 +15,7 @@
     padding-right: 8px;
 }
 
-@media (max-width: 991.98px) {
+@media (max-width: 768px) {
     .ShoppingByRoom_container {
         flex-direction: column;
     }
@@ -29,7 +29,7 @@
     padding-right: 8px;
 }
 
-@media (max-width: 991.98px) {
+@media (max-width: 768px) {
     .ShoppingByRoom_container > div {
         width: 100%;
     }

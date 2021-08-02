@@ -1,15 +1,22 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 
-import ShopProducts from '../../components/Shop/ShopProducts/ShopProducts'
+import classes from './ShopConfig.module.css'
+
+import Filter from '../../components/Shop/Filter/Filter'
+import BestDealSlider from '../../components/Shop/BestDealSlider/BestDealSlider'
+
+import products from '../../Data/productsData'
 
 
 class ShopConfig extends Component {
 
     render () {
         return (
-            <Fragment>
-                <ShopProducts />
-            </Fragment>
+            <div>
+                <h1>SHOP</h1>
+                <Filter products={products}/>
+                <BestDealSlider products={products} />
+            </div>
         )
     }
 }

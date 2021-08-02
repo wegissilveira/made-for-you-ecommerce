@@ -34,7 +34,7 @@ input {
     justify-content: space-between;
 }
 
-@media (max-width: 767.99px) {
+@media (max-width: 480px) {
     .ProductInfo_container > div:first-of-type {
         display: none;
     }
@@ -44,7 +44,7 @@ input {
     margin-top: 48px;
 }
 
-@media (max-width: 767.99px) {
+@media (max-width: 480px) {
     .ProductInfo_container > h1 {
         margin-top: 0;
         margin-bottom: 10px;

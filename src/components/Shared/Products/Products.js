@@ -160,7 +160,10 @@ const Products = props => {
         
     return (
         <Fragment>
-            <div ref={productsContainerRef} className={products_container}>
+            <div 
+                ref={productsContainerRef} 
+                className={products_container}
+            >
                 {props.match && props.match.params.cat ? <h1>{category.toUpperCase()}</h1> : null}
                 {props.match && props.match.params.searchKey ? <h1>BUSCA: '{props.match.params.searchKey.toUpperCase()}'</h1> : null}
                 <div ref={productsSubContainerRef} className={classes.Products_subContainer}>

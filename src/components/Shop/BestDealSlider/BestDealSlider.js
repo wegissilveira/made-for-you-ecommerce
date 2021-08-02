@@ -95,7 +95,7 @@ const BestDealSlider = props => {
                 <ProgressBar 
                     bars={products.length}
                     diameter={circle_diameter}
-                    auto={false}
+                    auto={true}
                     timer={2500}
                     changeDot={changeSlide}
                     clickable={false}

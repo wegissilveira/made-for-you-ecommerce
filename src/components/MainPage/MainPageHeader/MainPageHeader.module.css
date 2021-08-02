@@ -67,10 +67,9 @@
     transform: translateX(-50%);
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1366px) {
     .Header_title {
-        font-size: 70px;
-        top: 20%;
+        top: 15%;
     }
 }
 

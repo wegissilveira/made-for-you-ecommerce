@@ -32,7 +32,7 @@
     -o-border-radius: 15px;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1366px) {
     .Contact_box_container {
         width: 70%;
     }

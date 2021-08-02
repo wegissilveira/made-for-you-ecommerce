@@ -157,7 +157,7 @@
     }
 }
 
-@media (max-width: 1199.98px) {
+@media (max-width: 1366px) {
     .Discounts_icons_container {
         width: 80%;
         margin-left: 10%;
@@ -179,8 +179,8 @@
     margin: 0;
 }
 
-@media (max-width: 1199.98px) {
-    .Discounts_icons_container > div p{
+@media (max-width: 1366px) {
+    .Discounts_icons_container > div p {
         display: none;
     }
 }

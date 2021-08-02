@@ -5,7 +5,7 @@
     width: 75.8%;
 }
 
-@media (max-width: 1199.98px) {
+@media (max-width: 962px) {
     .Session_container {
         margin-left: 7.5%;
         width: 85%;
@@ -30,7 +30,7 @@
     border-bottom: 1px solid #dee2e6;
 }
 
-@media (max-width: 991.98px) {
+@media (max-width: 768px) {
     .Cart_header {
         display: none;
     }
@@ -45,7 +45,7 @@
     flex-basis: 25%;
 }
 
-@media (max-width: 991.98px) {
+@media (max-width: 768px) {
     .Cart_header > p:first-of-type {
         flex-basis: 33.33%;
     }
@@ -56,7 +56,7 @@
     flex-basis: 16.66%;
 }
 
-@media (max-width: 1199.98px) {
+@media (max-width: 992px) {
     .Cart_header > p:nth-of-type(2) {
         display: none;
     }
@@ -66,7 +66,7 @@
     }
 } 
 
-@media (max-width: 991.98px) {
+@media (max-width: 768px) {
     .Cart_header > p:nth-of-type(3) {
         display: none;
     }
@@ -83,7 +83,7 @@
     margin-top: 48px;
 }
 
-@media (max-width: 991.98px) {
+@media (max-width: 768px) {
     .Cart_keepBuy_button {
         margin-top: unset;
     }
@@ -104,7 +104,7 @@
     font-weight: bold;
 }
 
-@media (max-width: 991.98px) {
+@media (max-width: 768px) {
     .Cart_light_button,
     .Cart_dark_button {
         margin-top: 20px;
