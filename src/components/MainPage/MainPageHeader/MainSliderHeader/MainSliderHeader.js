@@ -37,18 +37,19 @@ let mainSlides = [
 const MainSliderHeader = props => {
 
     let [translateValue, setTranslateValue] =  React.useState(0)
-    
-    const sliderRef = React.useRef()
+    let [clickEnabled, setClickEnabled] = React.useState(true)
 
+    const sliderRef = React.useRef()
 
     const translateSlider = {
         transform: `translate(${translateValue}%)`
     }
-
-
+    
     const mainSliderHandler = arg => {
-        const sliderEl = sliderRef.current
+        setClickEnabled(false)
 
+        const sliderEl = sliderRef.current
+        
         const flexStyle = window.getComputedStyle(sliderEl)
         const justifyContent = flexStyle.getPropertyValue('justify-content')
 
@@ -59,7 +60,7 @@ const MainSliderHeader = props => {
                 sliderEl.prepend(sliderEl.lastElementChild)
                 sliderEl.style.justifyContent = 'flex-start'
             }  
-
+            
         } else {
             
             if (justifyContent === 'flex-start' ) {
@@ -77,15 +78,15 @@ const MainSliderHeader = props => {
                 sliderEl.prepend(sliderEl.lastElementChild)
 
             sliderEl.style.transition = 'none'
-            setTranslateValue(0)            
-        }, 800)
-    }
+            setTranslateValue(0)
+            
+            setTimeout(() => {
+                sliderRef.current.style.transition = '0.8s'
+                setClickEnabled(true)
+            },30)
 
-    React.useEffect(() => {
-        setTimeout(() => {
-            sliderRef.current.style.transition = '0.8s'
-        },30)
-    }, [translateValue]);
+        }, 800)        
+    }
     
     React.useEffect(() => {
         const interval = setTimeout(() => {
@@ -121,12 +122,14 @@ const MainSliderHeader = props => {
             </div>
             <div className={classes.Change_slide_arrows}>
                 <FontAwesomeIcon 
-                    onClick={translateValue === 0 ? () => mainSliderHandler('previous') : null} 
+                    onClick={clickEnabled ? () => mainSliderHandler('previous') : null} 
                     icon="arrow-left" 
+                    color={clickEnabled ? '#000' : "#ccc"}
                 />
                 <FontAwesomeIcon 
-                    onClick={translateValue === 0 ? () => mainSliderHandler('next') : null} 
+                    onClick={clickEnabled ? () => mainSliderHandler('next') : null} 
                     icon="arrow-right" 
+                    color={clickEnabled ? '#000' : "#ccc"}
                 />
             </div>
         </div>

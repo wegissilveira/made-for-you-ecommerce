@@ -37,13 +37,13 @@ const Products = props => {
         } else {
             elBottom = top - containerFullHeight
             newCount = count - itemsPerRow
-            
         }
 
-        window.scrollTo({top: elBottom - 290, left: 0, behavior: 'smooth'})
+        let btnBottom = window.screen.height === 768 ? 210 : 290
+        
+        window.scrollTo({top: elBottom - btnBottom, left: 0, behavior: 'smooth'})
         setTop(elBottom)
         setCount(newCount)
-        
     }
 
     let tag

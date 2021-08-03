@@ -5,8 +5,6 @@ import './Layout.css'
 
 import Footer from '../../components/Footer/Footer'
 
-import ParentComponent from '../ParentComponent'
-
 import { NavLink, Link } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -26,7 +24,6 @@ class Layout extends Component {
     
     // Executa a busca com o click na lupa
     searchProductHandler = e => {
-
         let inputValue = e.currentTarget.parentNode.childNodes[0].value
 
         if (inputValue.length >= 3) {
@@ -203,6 +200,7 @@ class Layout extends Component {
                             <ul className={classes.Navigation_mobile_list} >
                                 <li>
                                     <NavLink 
+                                        onClick={this.mobileMenuHandler}
                                         to="/" 
                                         exact
                                     > Home
@@ -210,12 +208,14 @@ class Layout extends Component {
                                 </li>
                                 <li>
                                     <NavLink 
+                                        onClick={this.mobileMenuHandler}
                                         to="/shop/" 
                                     > Shop
                                     </NavLink>
                                 </li>
                                 <li>
                                     <NavLink 
+                                        onClick={this.mobileMenuHandler}
                                         to="/user-login/" 
                                     > Login
                                     </NavLink>
@@ -228,6 +228,7 @@ class Layout extends Component {
                                         <p>hello@myhome.com</p>
                                         <p>+375 29 364-74-69</p>
                                         <NavLink
+                                            onClick={this.mobileMenuHandler}
                                             to="/contact/" 
                                             exact
                                         > Form
@@ -252,7 +253,6 @@ class Layout extends Component {
                     { this.props.children }
                 </main>
                 <Footer></Footer>
-                <ParentComponent />
             </Fragment>
         )
     }

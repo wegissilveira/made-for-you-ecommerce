@@ -38,7 +38,7 @@ const MinorSliderHeader = props => {
         let sliderProducts = productsData.filter(prod => prod.slide !== undefined)
         setSliderProducts(sliderProducts)
     }, [])
-
+    
     
     return (
         <React.Fragment>
@@ -66,7 +66,7 @@ const MinorSliderHeader = props => {
                                 alt={"img-1"} 
                             />
                             <div>
-                                <Link to={'/shop/product/' + item.productId} >
+                                <Link to={'/shop/product/' + item._id} >
                                     <p>{item.name}</p>
                                     <p>{item.price}</p>
                                 </Link>

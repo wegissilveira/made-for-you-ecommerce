@@ -12,7 +12,7 @@ const ProductPage = props => {
 
     const product = productsData.find(product => product._id === props.match.params.id)
 
-
+    
     return (
         <div className={classes.Product_page_container}>
             <ProductSlider product={product} />
