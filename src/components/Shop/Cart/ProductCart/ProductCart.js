@@ -11,30 +11,22 @@ import ProductQtdeMobile from '../../../Shared/UI/ProductQtdeMobile/ProductQtdeM
 
 const ProductCart = props => {
 
-    const setQtde = (value, index) => {
-        props.setQtdeCallback(value, index)
+    let [productQtde, setQtde] = React.useState(1)
+
+    const setQtdeHandler = (value) => {
+        setQtde(value)
+        props.setQtdeCallback(value, props.prodIndex)
     }
 
     const removeProductCart = id => {
         props.removeProductCallback(id)
     }
 
-    const toggleQtdeSelectMobile = (i, qtde) => {
-        const select = document.getElementById('product_qtde-'+i)
+    React.useEffect(() => {
+        setQtde(props.product.qtde)
+    }, [])
 
-        if (select.style.display === 'flex') {
-            select.style.display = 'none'
-        } else {
-            select.style.display = 'flex'
-        }
-
-        Array.from(select.children[0].children).forEach(item => {
-            if (Number(item.children[1].value) === qtde) {
-                item.children[1].checked = true
-            }
-        })
-    }
-
+    
 
 
     return (
@@ -70,7 +62,7 @@ const ProductCart = props => {
             <div className={classes.Cart_details_qtde}>
                 <ProductQtde 
                     startQtde={props.product.qtde}
-                    changeQtdeCallBack={qtde => setQtde(qtde, props.prodIndex)} 
+                    changeQtdeCallBack={qtde => setQtde(qtde)} 
                     max={10}
                 />
             </div>
@@ -83,23 +75,13 @@ const ProductCart = props => {
                 />
             </p>
             <div className={classes.Cart_price_mobile}>
-                <div
-                    onClick={() => toggleQtdeSelectMobile(props.prodIndex, props.product.qtde)}
-                >
-                    <p>{props.product.qtde}</p>
-                    <FontAwesomeIcon icon="chevron-down" size="xs"/>
-                </div>
-                <p>$ {(props.product.qtde * parseFloat(props.product.price)).toFixed(2)}</p>
-                {/* <div 
-                    id={'product_qtde-' + props.prodIndex}
-                    className={classes.Cart_qtde_mobile}
-                >
-                    <ProductQtdeMobile
-                        changeQtdeCallBack={qtde => setQtde(qtde, props.prodIndex)} 
-                        productIndex={props.prodIndex}
-                        toggle={() =>toggleQtdeSelectMobile(props.prodIndex)}
-                    />
-                </div> */}
+                <ProductQtdeMobile 
+                    changeQtdeCallBack={setQtdeHandler} 
+                    startQtde={productQtde}
+                    index={props.prodIndex}
+                    id={props.product._id}
+                />
+                <p>$ {(productQtde * parseFloat(props.product.price)).toFixed(2)}</p>
             </div>
         </div>
     )

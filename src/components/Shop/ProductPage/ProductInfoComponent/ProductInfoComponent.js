@@ -25,25 +25,15 @@ const ProductInfoComponent = props => {
         )
 
         return prod
-    })    
-
-    let heart_Icon = props.wish.includes(props.product._id) ? 'fas' : 'far'    
+    })     
     
     let [productColor, setProductColor] = React.useState('')
     let [productQtde, setQtde] = React.useState(undefined)
     let [productSize, setSize] = React.useState('100x100')
     let [productUpdated, setProductUpdated] = React.useState(false)
 
+    const selectRef = React.useRef()
 
-    let bag_button_color
-    let bag_button_text
-    if (productUpdated === true && isProductInBag === 1) {
-        bag_button_color = classes.Bag_button_orange
-        bag_button_text = 'UPDATE BAG'
-    } else {
-        bag_button_color = isProductInBag === 0 ? classes.Bag_button_green : classes.Bag_button_red
-        bag_button_text = isProductInBag === 0 ? 'ADD TO BAG' : 'REMOVE FROM BAG'
-    }
     
     const selectColorHandler = color => {
         setProductColor(color)
@@ -61,7 +51,6 @@ const ProductInfoComponent = props => {
     }
 
     const wishlistHandler = id => {
-
         let list = [...props.wish]
         if (list.includes(id)) {
             list = list.filter(item => item !== id)
@@ -73,7 +62,7 @@ const ProductInfoComponent = props => {
 
         props.onWishlistState()
     }
-    
+
     const productCartHandler = () => {
         
         let productCartArr = [...props.cart]
@@ -95,9 +84,10 @@ const ProductInfoComponent = props => {
             if (productUpdated === true) {
                 productCartArr = productCartArr.filter(item => item._id !== props.product._id)
             }
-    
+
             productCartArr.push(productCart)
             setProdExists(1)
+
         } else {
             productCartArr = productCartArr.filter(item => item._id !== props.product._id)
             setProdExists(0)
@@ -119,8 +109,6 @@ const ProductInfoComponent = props => {
             }
         }
     }
-
-    const selectRef = React.useRef()
     
     React.useEffect(() => {
         const selectArray = Array.from(selectRef.current.children)
@@ -132,6 +120,30 @@ const ProductInfoComponent = props => {
             }
         })
     }, [product_cart_details.size])
+
+    React.useEffect(() => {
+        let productCartArr = [...props.cart]
+        productCartArr.forEach(prod => {
+            if (prod._id === props.product._id) {
+                setProductColor(prod.color)
+                setQtde(prod.qtde)
+                setSize(prod.size)
+            }
+        })
+    }, [])
+
+
+    const heart_Icon = props.wish.includes(props.product._id) ? 'fas' : 'far'
+
+    let bag_button_color
+    let bag_button_text
+    if (productUpdated === true && isProductInBag === 1) {
+        bag_button_color = classes.Bag_button_orange
+        bag_button_text = 'UPDATE BAG'
+    } else {
+        bag_button_color = isProductInBag === 0 ? classes.Bag_button_green : classes.Bag_button_red
+        bag_button_text = isProductInBag === 0 ? 'ADD TO BAG' : 'REMOVE FROM BAG'
+    }
 
     let modalStyle = {
         specificDisplay: null,
@@ -147,8 +159,9 @@ const ProductInfoComponent = props => {
         modalStyle.wishWidth = '90%'
         modalStyle.colorWidth = '50%'
     }
+    
 
-
+    
 
     return (
         <div 
@@ -202,6 +215,7 @@ const ProductInfoComponent = props => {
                     changeQtdeCallBack={qtde => setQtdeHandler(qtde)} 
                     startQtde={productQtde !== undefined ? productQtde : product_cart_details.qtde}
                     initialValue={true}
+                    id={props.product._id}
                 />        
                 <button 
                     onClick={() => productCartHandler()}

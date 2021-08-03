@@ -14,7 +14,17 @@ import cartListDataFn from '../../../Data/cartData'
 import productsData from '../../../Data/productsData'
 
 
+
 const Cart = props => {
+
+    let [qtde, setQtde] = React.useState(() => {
+        let arrQtde = []
+        props.cart.map((item, index) => {
+            return arrQtde[index] = item.qtde
+        })
+
+        return arrQtde
+    })
 
     let products = []
     productsData.forEach(product => {
@@ -39,17 +49,8 @@ const Cart = props => {
         return indexOfA - indexOfB;
     })
 
-    let [qtde, setQtde] = React.useState(() => {
-        let arrQtde = []
-        props.cart.map((item, index) => {
-            return arrQtde[index] = item.qtde
-        })
-
-        return arrQtde
-    })
-
     const pricesArrState = products.map(item => parseFloat(item.price))
-
+    
     let finalPrice = 0
     pricesArrState.map((item, i) => {
         finalPrice = finalPrice + (item * qtde[i])
@@ -67,8 +68,7 @@ const Cart = props => {
         localStorage.setItem('cartList', JSON.stringify(cartList))
         props.onCartListState()
     }
-    // console.log('cart')
-    // console.log(products_cart_details)
+    
 
 
     return (
@@ -90,8 +90,7 @@ const Cart = props => {
                                         key={i}
                                         product={product} 
                                         prodIndex={i}
-                                        // qtde={qtde[i]}
-                                        setQtdeCallback={(value, index) => setQtdeHandler(value, index)}
+                                        setQtdeCallback={setQtdeHandler}
                                         removeProductCallback={id => removeProductCartHandler(id)}
                                     />
                         })
@@ -113,7 +112,6 @@ const Cart = props => {
         </div>
     )
 }
-
 
 const mapStateToProps = state => {
     return {

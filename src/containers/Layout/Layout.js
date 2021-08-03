@@ -5,6 +5,8 @@ import './Layout.css'
 
 import Footer from '../../components/Footer/Footer'
 
+import ParentComponent from '../ParentComponent'
+
 import { NavLink, Link } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -250,6 +252,7 @@ class Layout extends Component {
                     { this.props.children }
                 </main>
                 <Footer></Footer>
+                <ParentComponent />
             </Fragment>
         )
     }

@@ -30,6 +30,7 @@
 .selectList_container {
     width: 100%;
     display: none;
+    /* display: flex; */
     flex-direction: column;
 
     background-color: rgba(0, 0, 0, 0.616);
@@ -97,10 +98,6 @@
     padding-right: 10px;
     padding-left: 10px;
     border-bottom: 1px solid #dee2e6;
-}
-
-.selectList_items > div:last-of-type {
-    border: 0;
 }
 
 .selectList_items > div > label {

@@ -6,7 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const ProductQtdeMobile = props => {
 
-    let [productQtde, setProductQtde] = React.useState()
+    let [productQtde, setProductQtde] = React.useState(1)
+    let [id, setId] = React.useState('product_qtde')
 
     const changeQtdeHandler = e => {
         const tagName = e.target.tagName
@@ -25,14 +26,12 @@ const ProductQtdeMobile = props => {
     }
 
     const toggleQtdeSelectMobileHandler = () => {
-        const select = document.getElementById('product_qtde')
+        const select = document.getElementById(id)
 
         if (select.style.display === 'flex') {
             select.style.display = 'none'
-            console.log('FLEX -> NONE')
         } else {
             select.style.display = 'flex'
-            console.log('NONE -> FLEX')
         }
     }
 
@@ -42,7 +41,13 @@ const ProductQtdeMobile = props => {
         }
     }, [props.startQtde])
 
-    
+    React.useEffect(() => {
+        if (props.id) {
+            setId(`product_qtde-${props.id}`)
+        }
+    }, [])
+
+      
 
     return (
         <div className={classes.ProductQtde_mobile_container}>
@@ -54,14 +59,14 @@ const ProductQtdeMobile = props => {
                 <FontAwesomeIcon icon="chevron-down" size="xs"/>
             </div>
             <div 
-                id="product_qtde"
+                id={id}
                 className={classes.selectList_container}
             >
                 <div 
                     className={classes.selectList_subContainer}
                 >
                     <div className={classes.SelectList_header}>
-                        <h3>Select Quantity</h3>
+                        <h3>Select Quantity: {props.index}</h3>
                         <FontAwesomeIcon 
                             onClick={() => toggleQtdeSelectMobileHandler()}
                             icon="times" 
