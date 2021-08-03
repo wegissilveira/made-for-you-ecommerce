@@ -8,6 +8,7 @@ const ProductQtdeMobile = props => {
 
     let [productQtde, setProductQtde] = React.useState(1)
     let [id, setId] = React.useState('product_qtde')
+    let [maxQtde, setMaxQtde] = React.useState([])
 
     const changeQtdeHandler = e => {
         const tagName = e.target.tagName
@@ -47,7 +48,19 @@ const ProductQtdeMobile = props => {
         }
     }, [])
 
-      
+    React.useEffect(() => {
+        let listArray 
+        if (props.max) {
+            listArray = Array.from(Array(props.max).keys())
+        } else {
+            listArray = Array.from(Array(10).keys())
+        }
+
+        setMaxQtde(listArray)
+    }, [])
+
+
+
 
     return (
         <div className={classes.ProductQtde_mobile_container}>
@@ -66,7 +79,7 @@ const ProductQtdeMobile = props => {
                     className={classes.selectList_subContainer}
                 >
                     <div className={classes.SelectList_header}>
-                        <h3>Select Quantity: {props.index}</h3>
+                        <h3>Select Quantity</h3>
                         <FontAwesomeIcon 
                             onClick={() => toggleQtdeSelectMobileHandler()}
                             icon="times" 
@@ -74,51 +87,24 @@ const ProductQtdeMobile = props => {
                         />
                     </div>
                     <div  onClick={e => changeQtdeHandler(e)} className={classes.selectList_items}>
-                        <div>
-                            <label>1</label>
-                            <input type="radio" value={1} checked={productQtde === 1}/>
-                        </div>
-                        <div>
-                            <label>2</label>
-                            <input type="radio" value={2} checked={productQtde === 2}/>
-                        </div>
-                        <div>
-                            <label>3</label>
-                            <input type="radio" value={3} checked={productQtde === 3}/>
-                        </div>
-                        <div>
-                            <label>4</label>
-                            <input type="radio" value={4} checked={productQtde === 4}/>
-                        </div>
-                        <div>
-                            <label>5</label>
-                            <input type="radio" value={5} checked={productQtde === 5}/>
-                        </div>
-                        <div>
-                            <label>6</label>
-                            <input type="radio" value={6} checked={productQtde === 6}/>
-                        </div>
-                        <div>
-                            <label>7</label>
-                            <input type="radio" value={7} checked={productQtde === 7}/>
-                        </div>
-                        <div>
-                            <label>8</label>
-                            <input type="radio" value={8} checked={productQtde === 8}/>
-                        </div>
-                        <div>
-                            <label>9</label>
-                            <input type="radio" value={9} checked={productQtde === 9}/>
-                        </div>
-                        <div>
-                            <label>10</label>
-                            <input type="radio" value={10} checked={productQtde === 10}/>
-                        </div>
+                        {
+                            maxQtde.map((item, i) => {
+                                return (
+                                    <div key={item+i}>
+                                        <label>{i+1}</label>
+                                        <input 
+                                            type="radio" 
+                                            value={i+1} 
+                                            checked={productQtde === i+1}
+                                        />
+                                    </div>
+                                )
+                            })
+                        }
                     </div>
                 </div>
             </div>
         </div>
-        
     )
 }
 

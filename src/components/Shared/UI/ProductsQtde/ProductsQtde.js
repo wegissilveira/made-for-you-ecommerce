@@ -42,7 +42,6 @@ const ProductsQtde = props => {
     
 
 
-
     return (
         <div className={classes.Product_qtde}>
             <p>{productQtde}</p>

@@ -13,7 +13,7 @@ const ProductCart = props => {
 
     let [productQtde, setQtde] = React.useState(1)
 
-    const setQtdeHandler = (value) => {
+    const setQtdeHandler = value => {
         setQtde(value)
         props.setQtdeCallback(value, props.prodIndex)
     }
@@ -26,7 +26,6 @@ const ProductCart = props => {
         setQtde(props.product.qtde)
     }, [])
 
-    
 
 
     return (
@@ -35,7 +34,6 @@ const ProductCart = props => {
                 <Link to={"/shop/product/" + props.product._id}>
                     <img src={props.product.imgsDemo[0]} alt='img' />
                 </Link>
-
                 <div>
                     <Link to={"/shop/product/" + props.product._id}>{props.product.name}</Link>
                     <div className={classes.Cart_details_info}>
@@ -62,11 +60,11 @@ const ProductCart = props => {
             <div className={classes.Cart_details_qtde}>
                 <ProductQtde 
                     startQtde={props.product.qtde}
-                    changeQtdeCallBack={qtde => setQtde(qtde)} 
+                    changeQtdeCallBack={setQtdeHandler} 
                     max={10}
                 />
             </div>
-            <p>$ {(props.product.qtde * parseFloat(props.product.price)).toFixed(2)}</p>
+            <p>$ {(productQtde * parseFloat(props.product.price)).toFixed(2)}</p>
             <p>
                 <FontAwesomeIcon
                     onClick={() => removeProductCart(props.product._id)}
@@ -80,6 +78,7 @@ const ProductCart = props => {
                     startQtde={productQtde}
                     index={props.prodIndex}
                     id={props.product._id}
+                    max={10}
                 />
                 <p>$ {(productQtde * parseFloat(props.product.price)).toFixed(2)}</p>
             </div>
