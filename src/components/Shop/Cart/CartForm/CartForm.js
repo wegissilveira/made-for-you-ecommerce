@@ -38,7 +38,7 @@ const CartForm = props => {
                         </div>
                         <div>
                             <p>TOTAL</p>
-                            <p>$ 40.00</p>
+                            <p>$ {(props.finalPrice + 20).toFixed(2)}</p>
                         </div>
                     </div>
                 </div>

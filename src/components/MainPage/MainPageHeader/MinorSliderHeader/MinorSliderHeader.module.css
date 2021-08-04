@@ -40,14 +40,14 @@
     height: 65px;
 }
 
-.MinorSlider_subContainer div > *{
+.MinorSlider_subContainer div > * {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
 
-    width: 100%;
+    width: 94%;
+    margin-left: 3%;
     height: 100%;
-    padding-left: 25px;
     text-decoration: none;
 }
 
