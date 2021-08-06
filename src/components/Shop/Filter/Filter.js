@@ -8,35 +8,27 @@ import PriceSlider from './PriceSlider/PriceSlider'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
+import useResponsiveBreakpoints from '../../../hooks/useResponsiveBreakpoints';
+
+
+const initial_min_value = 5 // => Valor inicial do preço mínimo
+const initial_max_value = 1290 // => Valor inicial do preço máximo
 
 const Filter = props => {
 
-    let [pageLimit, setPageLimit ] = React.useState(12)
-    const filterRef = React.useRef()
-    const [filter_height, setFilterHeight] = React.useState()
+    
 
+    let [pageLimit, setPageLimit ] = React.useState(12)
+    const [filter_height, setFilterHeight] = React.useState()
+    const [containerHeight, setContainerHeight] = React.useState()
 
     let [filterOpen, setFilterOpen] =  React.useState(false)
     
-    let [translateValue, setTranslateValue] = React.useState(-110)
-    let [marginT, setMarginT] = React.useState()
+    let [translateValue, setTranslateValue] = React.useState()
     
-    React.useEffect(() => {
-        const fHeight = -filterRef.current.offsetHeight
-        setFilterHeight(fHeight)
-        setMarginT(fHeight)
-    }, [])
-
     /* Slider Price */
-    const sliderRef = React.useRef()
-
-    const initial_min_value = 5 // => Valor inicial do preço mínimo
-    const initial_max_value = 1290 // => Valor inicial do preço máximo
-
     let [min_value, setMinValue] =  React.useState(initial_min_value)
     let [max_value, setMaxValue] =  React.useState(initial_max_value)
-    
-    /* */
 
     /* Demais filtros */
     let [tag, setTag] = React.useState('all-products')
@@ -47,27 +39,79 @@ const Filter = props => {
     let [offer, setOffer] = React.useState([])
     let [order, setOrder] = React.useState('default')
     /* */
-
+    
+    const containerRef = React.useRef()
+    const filterRef = React.useRef()
+    const sliderRef = React.useRef()
     const categoriesRef = React.useRef()
     const typesRef = React.useRef()
     const offerRef = React.useRef()
     const selectRef = React.useRef()
 
+    /* TENTATIVA DE APLICAR O OBSERVER OU O HOOK */
+    let [resize, setResize] = React.useState(
+        useResponsiveBreakpoints(containerRef, [
+            { small: 360 },
+            { medium: 480 },
+            { large: 768 }
+        ])
+    )
+    // const size = useResponsiveBreakpoints(containerRef, [
+    //     { small: 360 },
+    //     { medium: 480 },
+    //     { large: 768 }
+    // ]);
+
+    // console.log(size)
+
+    React.useEffect(() => {
+        console.log('resize')
+    }, [resize])
+
+    const observer = React.useRef(
+        new ResizeObserver(entries => {
+            console.log(entries[0].contentRect.width)
+        })
+    );
+
+    React.useEffect(() => {
+        if (containerRef.current) {
+          observer.current.observe(containerRef.current);
+        }
+    })
+
+    // console.log(resize)
+
+    /* **** */
+
     const translateFilter = {
-        transform: `translateY(${translateValue}%)`,
+        transform: `translateY(${translateValue}px)`,
         transition: '.8s ease-in-out'
     }
 
-    const translateProducts = {
-        transition: '.8s ease-in-out',
-        marginTop: marginT+'px'
+    const containerStyle = {
+        height: containerHeight+'px'
     }
+    
+    const containerHeightHandler = (cHeight=containerHeight, fHeight=filter_height, open=filterOpen, addRow) => {
+        let height
+        if (addRow) {
+            height = addRow[0] === 'more' ? containerHeight + addRow[1] : containerHeight - addRow[1]
+        } else {
+            height = open ? containerHeight + fHeight : cHeight - fHeight
+        }
 
+        setContainerHeight(height)
+    }
+    
     const openFilterHandler = () => {
-        filterOpen ? setFilterOpen(false) : setFilterOpen(true)
-
-        translateValue < 0 ? setTranslateValue(0) : setTranslateValue(-110)
-        marginT < 0 ? setMarginT(0) : setMarginT(filter_height)
+        const open = filterOpen ? false : true
+        const translate = translateValue < 0 ? 0 : -filter_height
+        const _ = undefined
+        
+        setFilterOpen(open)   
+        setTranslateValue(translate)    
+        containerHeightHandler(_,_,open) 
     }
 
     const setPriceRange = values => {
@@ -75,17 +119,18 @@ const Filter = props => {
         setMaxValue(values[1])
     }
 
-    const selectColorHandler = (color) => {
+    const selectColorHandler = color => {
         setProductColorStep(color)
         setProductColor(color)
         setCheckColor(false)
     }
 
-    const setCheckColorHandler = (check) => {
-        check ? setProductColor('') : setProductColor(productColorStep)
-        setCheckColor(check)
-    }
+    const setCheckColorHandler = check => {
+        const checked = check ? '' : productColorStep
 
+        setCheckColor(check)
+        setProductColor(checked)
+    }
 
     // Categorias
     let categoriesTotalQtde = 0
@@ -104,7 +149,6 @@ const Filter = props => {
     let lightingQtde = 0
 
     props.products.forEach(product => {
-
         //Categorias
         categoriesTotalQtde++
 
@@ -128,7 +172,6 @@ const Filter = props => {
 
         // Tipos
         typesTotalQtde++
-
         for (let i in product) {
             if (product[i].toString().match('furniture')) {
                 furnitureQtde++
@@ -238,13 +281,51 @@ const Filter = props => {
 
     }, [pageLimit])
 
+    const reportWindowSize = (arg) => {
+        // alert(arg)
+        // console.log(arg)
+        const fHeight = filterRef.current.offsetHeight
+
+        setTranslateValue(-fHeight)
+        setFilterHeight(fHeight)
+
+        setTimeout(() => {
+            const containerHeight = containerRef.current.offsetHeight
+            containerHeightHandler(containerHeight, fHeight)
+            // setContainerHeight(containerHeight)
+        }, 30)
+        
+    }
+    
+    React.useEffect(() => {
+        reportWindowSize('effect')
+    }, [])
+
+    const [teste, _] = React.useState()
+
+    // React.useLayoutEffect(() => {
+    //     // alert('resize')
+    //     window.addEventListener('resize', () => reportWindowSize('resize'))
+        
+    //     return () =>
+    //       window.removeEventListener('resize', () => reportWindowSize());
+    // }, []) 
+    // React.useEffect(() => {
+    //     // alert('resize')
+    //     window.addEventListener('resize', () => reportWindowSize('resize'))
+        
+    //     return () =>
+    //       window.removeEventListener('resize', () => reportWindowSize());
+    // }, []) 
+
+    const test = () => alert('teste')
 
 
 
     return (
         <Fragment>
-            <div className={classes.Filter_container}>
-                <div>
+            <div className={classes.Filter_container} ref={containerRef} style={containerStyle}>
+                <div className={classes.FilterHeader}>
                     <div onClick={() => openFilterHandler()}
                         className={classes.Filter_toggle}
                     >
@@ -264,8 +345,11 @@ const Filter = props => {
                         </select>
                     </div>
                 </div>
-                <div ref={filterRef}>
-                    <div className={classes.Filter_subContainer} style={translateFilter}>
+                <div style={translateFilter}>
+                    <div 
+                        className={classes.Filter_subContainer} 
+                        ref={filterRef}
+                    >
                         <div className={classes.Filter_Blocks}>
                             <div ref={categoriesRef}>
                                 <h6>CATEGORIES</h6>
@@ -336,7 +420,7 @@ const Filter = props => {
                                 <ColorSelect
                                     title={'COLOR'}
                                     colors={['red', 'yellow', 'blue', 'purple', 'green']}
-                                    selectColorHandlerCallback={(color) => selectColorHandler(color, false)}
+                                    selectColorHandlerCallback={color => selectColorHandler(color, false)}
                                 />
                             </div>
                             <div></div>
@@ -356,9 +440,6 @@ const Filter = props => {
                             </p>
                         </div>
                     </div>
-                </div>
-
-                <div style={translateProducts}>
                     <Products
                         // products={products} // => Envia o array com os produtos que serão exibidos
                         pageLimit={pageLimit}  // => Número limite de produtos a serem mostrados inicialmente
@@ -368,6 +449,7 @@ const Filter = props => {
                         productColor={productColor} // => Filtra o produto por cor
                         offer={offer} // => Filtra os produtos por tipo de oferta
                         order={order}
+                        filterOpen={containerHeightHandler}
                     />
                 </div>
             </div>

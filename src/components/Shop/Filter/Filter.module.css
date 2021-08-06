@@ -20,9 +20,13 @@
     }
 }
 
-.Filter_container > div:first-of-type {
+.FilterHeader {
     display: flex;
     justify-content: space-between;
+    
+    background-color: #fff;
+    position: relative;
+    z-index: 8888;
 }
 
 .Filter_toggle {
@@ -108,7 +112,8 @@
 }
 
 .Filter_container > div:nth-of-type(2) {
-    overflow: hidden;
+    /* overflow: hidden; */
+    /* display: none; */
 }
 
 .Filter_subContainer p {
@@ -120,7 +125,8 @@
     justify-content: space-between;
     flex-wrap: wrap;
 
-    margin-top: 48px;
+    /* margin-top: 48px; */
+    margin-top: 10px;
     margin-bottom: 48px;
     padding-right: 1%;
     padding-left: 2%;

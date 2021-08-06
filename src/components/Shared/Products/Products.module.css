@@ -17,8 +17,10 @@
 }
 
 .Products_subContainer {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(48%, 17rem), 1fr));
+    gap: 0.5rem;
+    margin-top: 20px;
 }
 
 .Products_show_container {

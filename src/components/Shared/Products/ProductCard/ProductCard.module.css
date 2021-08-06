@@ -1,27 +1,5 @@
 .ProductCard_container {
-    max-width: 24%;
-    flex-basis: 24%;
-    flex-shrink: 0;
-    padding-left: 0.5%;
-    padding-right: 0.5%;
-    margin-top: 24px;
     position: relative;
-}
-
-@media (max-width: 1366px) {
-    .ProductCard_container {
-        max-width: 32.3%;
-        flex-basis: 32.3%;
-    }
-}
-
-@media (max-width: 768px) {
-    .ProductCard_container {
-        max-width: 48%;
-        flex-basis: 48%;
-        padding-left: 1%;
-        padding-right: 1%;
-    }
 }
 
 .ProductCard_subContainer {

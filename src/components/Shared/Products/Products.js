@@ -21,21 +21,24 @@ const Products = props => {
 
     const setProductsPageHandler = arg => {
         const containerEl = productsContainerRef.current
+        const subContainerEl = productsSubContainerRef.current
+
         let elBottom = containerEl.offsetTop + containerEl.offsetHeight
-        const containerStyle = window.getComputedStyle(containerEl.children[0].children[0])
-        const containerHeight = parseInt((containerStyle.height).match(/\d+/)[0])
-        const containerMarginTop = parseInt((containerStyle.marginTop).match(/\d+/)[0])
-        const containerFullHeight = containerHeight + containerMarginTop
+        
+        const productCardStyle = window.getComputedStyle(containerEl.children[0].children[0])
+        const productCardHeight = parseInt((productCardStyle.height).match(/\d+/)[0])
+        const productCardMarginTop = parseInt((productCardStyle.marginTop).match(/\d+/)[0])
+        const productCardFullHeight = productCardHeight + productCardMarginTop
         
         let newCount
-        const subContainerEl = productsSubContainerRef.current
-        const basis = Number((window.getComputedStyle(subContainerEl.children[0]).flexBasis).replace(/[^0-9.]+/g,""))
-        const itemsPerRow = Math.floor(100/basis)
+        const subContainerWidth = Number((window.getComputedStyle(subContainerEl).inlineSize).replace(/[^0-9.]+/g,""))
+        const productCardWidth = Number((window.getComputedStyle(subContainerEl.children[0]).inlineSize).replace(/[^0-9.]+/g,""))
+        const itemsPerRow = Math.floor(subContainerWidth/productCardWidth)
         
         if (arg === 'more') {
             newCount = count + itemsPerRow
         } else {
-            elBottom = top - containerFullHeight
+            elBottom = top - productCardFullHeight
             newCount = count - itemsPerRow
         }
 
@@ -44,6 +47,11 @@ const Products = props => {
         window.scrollTo({top: elBottom - btnBottom, left: 0, behavior: 'smooth'})
         setTop(elBottom)
         setCount(newCount)
+
+        const _ = undefined
+        if (props.filterOpen) {
+            props.filterOpen(_,_,_, [arg, productCardFullHeight+20])
+        }
     }
 
     let tag
@@ -153,11 +161,11 @@ const Products = props => {
             setPageLimit(props.pageLimit)
             setCount(props.pageLimit)
         }
+
     },[props.pageLimit])
 
     
-
-        
+         
     return (
         <Fragment>
             <div 
@@ -166,7 +174,10 @@ const Products = props => {
             >
                 {props.match && props.match.params.cat ? <h1>{category.toUpperCase()}</h1> : null}
                 {props.match && props.match.params.searchKey ? <h1>BUSCA: '{props.match.params.searchKey.toUpperCase()}'</h1> : null}
-                <div ref={productsSubContainerRef} className={classes.Products_subContainer}>
+                <div 
+                    ref={productsSubContainerRef} 
+                    className={classes.Products_subContainer}
+                >
                     {products.length > 0 ?
                         products.map((product, i) => {
                             let productsList
@@ -189,7 +200,7 @@ const Products = props => {
                 </div>
 
                 <div className={classes.Products_show_container}>
-                    <div className={classes.Products_show_subContainer}>
+                    <div className={classes.Products_show_subContainer}>    
                         <div>
                             <button 
                                 disabled={count >= products.length} 
