@@ -2,21 +2,25 @@ import React, { Fragment } from 'react'
 
 import classes from './Filter.module.css'
 
+import Toastify from '../../Shared/UI/Toastify/Toastify'
 import ColorSelect from '../../Shared/UI/ColorSelect/ColorSelect'
 import Products from '../../Shared/Products/Products';
 import PriceSlider from './PriceSlider/PriceSlider'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
-import useResponsiveBreakpoints from '../../../hooks/useResponsiveBreakpoints';
-
 
 const initial_min_value = 5 // => Valor inicial do preço mínimo
 const initial_max_value = 1290 // => Valor inicial do preço máximo
 
-const Filter = props => {
+const _ = undefined
 
-    
+const toastifyMsg = [
+    'Reload The Page',
+    'In order for all components to adjust to the new screen dimensions, the page should be reloaded.'
+]
+
+const Filter = props => {
 
     let [pageLimit, setPageLimit ] = React.useState(12)
     const [filter_height, setFilterHeight] = React.useState()
@@ -25,6 +29,8 @@ const Filter = props => {
     let [filterOpen, setFilterOpen] =  React.useState(false)
     
     let [translateValue, setTranslateValue] = React.useState()
+
+    let [resize, setResize] = React.useState(true)
     
     /* Slider Price */
     let [min_value, setMinValue] =  React.useState(initial_min_value)
@@ -48,41 +54,6 @@ const Filter = props => {
     const offerRef = React.useRef()
     const selectRef = React.useRef()
 
-    /* TENTATIVA DE APLICAR O OBSERVER OU O HOOK */
-    let [resize, setResize] = React.useState(
-        useResponsiveBreakpoints(containerRef, [
-            { small: 360 },
-            { medium: 480 },
-            { large: 768 }
-        ])
-    )
-    // const size = useResponsiveBreakpoints(containerRef, [
-    //     { small: 360 },
-    //     { medium: 480 },
-    //     { large: 768 }
-    // ]);
-
-    // console.log(size)
-
-    React.useEffect(() => {
-        console.log('resize')
-    }, [resize])
-
-    const observer = React.useRef(
-        new ResizeObserver(entries => {
-            console.log(entries[0].contentRect.width)
-        })
-    );
-
-    React.useEffect(() => {
-        if (containerRef.current) {
-          observer.current.observe(containerRef.current);
-        }
-    })
-
-    // console.log(resize)
-
-    /* **** */
 
     const translateFilter = {
         transform: `translateY(${translateValue}px)`,
@@ -92,12 +63,12 @@ const Filter = props => {
     const containerStyle = {
         height: containerHeight+'px'
     }
-    
+
     const containerHeightHandler = (cHeight=containerHeight, fHeight=filter_height, open=filterOpen, addRow) => {
         let height
         if (addRow) {
             height = addRow[0] === 'more' ? containerHeight + addRow[1] : containerHeight - addRow[1]
-        } else {
+        }  else {
             height = open ? containerHeight + fHeight : cHeight - fHeight
         }
 
@@ -107,7 +78,6 @@ const Filter = props => {
     const openFilterHandler = () => {
         const open = filterOpen ? false : true
         const translate = translateValue < 0 ? 0 : -filter_height
-        const _ = undefined
         
         setFilterOpen(open)   
         setTranslateValue(translate)    
@@ -270,20 +240,20 @@ const Filter = props => {
     const filter_toggle = 
         filterOpen === false ? 
             ['OPEN FILTERS', 'filter'] :
-            ['CLOSE FILTERS', 'times']
+            ['CLOSE FILTERS', 'times']    
 
-    React.useEffect(() => {
-        if (window.matchMedia('(max-width: 480px)').matches) {
-            setPageLimit(6)
-        } else if (window.matchMedia('(max-width: 768px)').matches) {
-            setPageLimit(8)
-        }
+    let [openToastify, setOpenToastify] = React.useState(false)
 
-    }, [pageLimit])
+    const callResizeAlert = () => {// alert('Atualize a página para que todos os componentes se ajustem às novas dimensões. Essa mensagem não aparecerá novamente nesta sessão.')
+        setOpenToastify(true)
+        setTimeout(() => {
+            setOpenToastify(false)
+        }, 5000)
+        setResize(false)
+        sessionStorage.setItem('warned', true)
+    }
 
-    const reportWindowSize = (arg) => {
-        // alert(arg)
-        // console.log(arg)
+    const reportWindowSize = () => {    
         const fHeight = filterRef.current.offsetHeight
 
         setTranslateValue(-fHeight)
@@ -292,38 +262,66 @@ const Filter = props => {
         setTimeout(() => {
             const containerHeight = containerRef.current.offsetHeight
             containerHeightHandler(containerHeight, fHeight)
-            // setContainerHeight(containerHeight)
         }, 30)
-        
     }
     
     React.useEffect(() => {
-        reportWindowSize('effect')
+        reportWindowSize()
     }, [])
 
-    const [teste, _] = React.useState()
+    React.useEffect(() => {
 
-    // React.useLayoutEffect(() => {
-    //     // alert('resize')
-    //     window.addEventListener('resize', () => reportWindowSize('resize'))
-        
-    //     return () =>
-    //       window.removeEventListener('resize', () => reportWindowSize());
-    // }, []) 
-    // React.useEffect(() => {
-    //     // alert('resize')
-    //     window.addEventListener('resize', () => reportWindowSize('resize'))
-        
-    //     return () =>
-    //       window.removeEventListener('resize', () => reportWindowSize());
-    // }, []) 
+        sessionStorage.removeItem('rendered')
 
-    const test = () => alert('teste')
+        setTimeout(() => {
+            sessionStorage.setItem('rendered', true)
+        }, 1000)
+    }, [])
+    
+    React.useEffect(() => {
+        const warned = sessionStorage.getItem('warned')
+        if (warned) {
+            setResize(false)
+        }
+    }, [])
+    
 
+    const observer = React.useRef(
+        new ResizeObserver(() => {
+            let rendered = sessionStorage.getItem('rendered')
+            if (rendered) {
+                callResizeAlert()
+            }
+        })
+    )
 
+    React.useEffect(() => {
+        if (containerRef.current) {
+            const body = document.getElementsByTagName('BODY')[0]
+            if (resize) {
+                observer.current.observe(body)
+            } else {
+                observer.current.unobserve(body) 
+            }
+        }
+    })
+
+    React.useEffect(() => {
+        if (window.matchMedia('(max-width: 480px)').matches) {
+            setPageLimit(6)
+        } else if (window.matchMedia('(max-width: 768px)').matches) {
+            setPageLimit(8)
+        }
+    }, [])
+
+   
 
     return (
         <Fragment>
+            <Toastify 
+                toastifyDetails={toastifyMsg}
+                open={openToastify}
+            />
             <div className={classes.Filter_container} ref={containerRef} style={containerStyle}>
                 <div className={classes.FilterHeader}>
                     <div onClick={() => openFilterHandler()}

@@ -164,7 +164,7 @@ const Products = props => {
 
     },[props.pageLimit])
 
-    
+    // console.log(props.pageLimit)
          
     return (
         <Fragment>
