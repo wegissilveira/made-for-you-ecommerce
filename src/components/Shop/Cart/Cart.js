@@ -14,7 +14,6 @@ import cartListDataFn from '../../../Data/cartData'
 import productsData from '../../../Data/productsData'
 
 
-
 const Cart = props => {
 
     let [qtde, setQtde] = React.useState(() => {

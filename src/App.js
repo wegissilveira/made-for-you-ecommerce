@@ -13,6 +13,8 @@ import UserLogin from './components/User/UserLogin/UserLogin'
 import UserSignUp from './components/User/UserSignUp/UserSignUp'
 import Contact from './components/Contact/Contact'
 
+
+
 import ScrollToTop from './HOC/ScrollToTop'
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
@@ -49,8 +51,6 @@ import {
   faHeart as regularFaheart
 } from '@fortawesome/free-regular-svg-icons'
 
-
-
 library.add(
   fab,
   faBars,
@@ -81,11 +81,9 @@ library.add(
 )
 
 
-
 function App() {
   return (
-    
-      <BrowserRouter >        
+      <BrowserRouter >    
         <Layout>
           <ScrollToTop />
             <Switch>
@@ -102,8 +100,6 @@ function App() {
             </Switch>
         </Layout>
       </BrowserRouter>
-    
-    
   );
 }
 

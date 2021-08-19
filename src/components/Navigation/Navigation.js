@@ -170,8 +170,6 @@ const Navigation = props => {
     )
 }
 
-// export default Navigation
-
 const mapStateToProps = state => {
     return {
         wish: state.wishlistState,

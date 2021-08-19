@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 
-import classes from './ShopConfig.module.css'
-
 import Filter from '../../components/Shop/Filter/Filter'
 import BestDealSlider from '../../components/Shop/BestDealSlider/BestDealSlider'
 
@@ -16,7 +14,7 @@ class ShopConfig extends Component {
                 <h1>SHOP</h1>
                 <Filter products={products}/>
                 <BestDealSlider products={products} />
-            </div>
+            </div> 
         )
     }
 }
