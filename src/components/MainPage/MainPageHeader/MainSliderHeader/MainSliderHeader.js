@@ -80,10 +80,13 @@ const MainSliderHeader = props => {
             sliderEl.style.transition = 'none'
             setTranslateValue(0)
             
-            setTimeout(() => {
-                sliderRef.current.style.transition = '0.8s'
-                setClickEnabled(true)
-            },30)
+            if (sliderRef.current) {
+                setTimeout(() => {
+                    sliderRef.current.style.transition = '0.8s'
+                    setClickEnabled(true)
+                },30)
+            }
+            
 
         }, 800)        
     }

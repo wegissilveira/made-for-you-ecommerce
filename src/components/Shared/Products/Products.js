@@ -72,19 +72,20 @@ const Products = props => {
         tag = 'all-products'
         category = 'all'
     }
-
+    
     let products = []
+    let productsId = []
     if (props.match && props.match.params.searchKey) {
         let searchKey = new RegExp(props.match.params.searchKey, 'gi') 
 
         productsData.forEach(product => {
             for (let i in product) {
                 if (i !== 'imgsDemo' && i !== 'img' && i !== 'deal') {
-                    if (product[i].toString().match(searchKey)) {
+                    if (product[i].toString().match(searchKey) && !productsId.includes(product._id)) {
                         products.push(product)
+                        productsId.push(product._id)
                     }
                 }
-
             }
         })
         
@@ -144,7 +145,7 @@ const Products = props => {
             }
         }
     }
-
+    
     const url_string = window.location.href
     const url = new URL(url_string);
 
@@ -164,7 +165,6 @@ const Products = props => {
 
     },[props.pageLimit])
 
-    // console.log(props.pageLimit)
          
     return (
         <Fragment>
@@ -172,13 +172,13 @@ const Products = props => {
                 ref={productsContainerRef} 
                 className={products_container}
             >
-                {props.match && props.match.params.cat ? <h1>{category.toUpperCase()}</h1> : null}
-                {props.match && props.match.params.searchKey ? <h1>BUSCA: '{props.match.params.searchKey.toUpperCase()}'</h1> : null}
+                {props.match && props.match.params.cat && <h1>{category.toUpperCase()}</h1>}
+                {props.match && props.match.params.searchKey && <h1>SEARCH: '{props.match.params.searchKey.toUpperCase()}'</h1>}
                 <div 
                     ref={productsSubContainerRef} 
                     className={classes.Products_subContainer}
                 >
-                    {products.length > 0 ?
+                    {products.length > 0 &&
                         products.map((product, i) => {
                             let productsList
                             if (i + 1 <= count) {
@@ -195,8 +195,14 @@ const Products = props => {
                             }
                             return productsList
                         })
-                    : 
-                        <h1 className="text-center" style={{width: '100%'}}>NENHUM ITEM ENCONTRADO</h1>}
+                    }
+                    {products.length <= 0 && 
+                        <h1 
+                            className="text-center" 
+                            style={{width: '100%', gridColumn: '1/-1'}}
+                        > YOUR SEARCH DID NOT RETURN ANY PRODUCT
+                        </h1>
+                    }
                 </div>
 
                 <div className={classes.Products_show_container}>
