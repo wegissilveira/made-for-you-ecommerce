@@ -86,8 +86,6 @@ const MainSliderHeader = props => {
                     setClickEnabled(true)
                 },30)
             }
-            
-
         }, 800)        
     }
     

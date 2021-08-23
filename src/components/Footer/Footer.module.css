@@ -109,6 +109,10 @@
     margin: 0;
 }
 
+.SubFooter a {
+    color: grey;
+}
+
 .SubFooter div {
     width: 20%;
     display: flex;

@@ -70,6 +70,18 @@
     -o-border-radius: 50%;
 }
 
+@media (min-width: 768px) and (max-width: 1599px) {
+    .Products_show_subContainer {
+        width: 60%;
+        margin-top: 15px;
+    }
+
+    .Products_show_subContainer > div > button {
+        width: 100px;
+        height: 100px;
+    }
+}
+
 @media (max-width: 480px) {
     .Products_show_subContainer > div > button {
         width: 100px;

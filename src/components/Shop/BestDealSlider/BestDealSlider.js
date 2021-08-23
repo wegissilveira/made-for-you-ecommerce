@@ -48,9 +48,11 @@ const BestDealSlider = props => {
     }
 
     React.useEffect(() => {
-        setTimeout(() => {
-            bestDealRef.current.style.transition = '2s'
-        },30)
+        if (bestDealRef.current) {
+            setTimeout(() => {
+                bestDealRef.current.style.transition = '2s'
+            },30)
+        }
     }, [translateValue]);   
 
 

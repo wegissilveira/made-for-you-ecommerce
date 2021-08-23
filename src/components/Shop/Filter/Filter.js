@@ -45,6 +45,8 @@ const Filter = props => {
     let [offer, setOffer] = React.useState([])
     let [order, setOrder] = React.useState('default')
     /* */
+
+    let [openToastify, setOpenToastify] = React.useState(false)
     
     const containerRef = React.useRef()
     const filterRef = React.useRef()
@@ -242,13 +244,11 @@ const Filter = props => {
             ['OPEN FILTERS', 'filter'] :
             ['CLOSE FILTERS', 'times']    
 
-    let [openToastify, setOpenToastify] = React.useState(false)
-
     const callResizeAlert = () => {// alert('Atualize a página para que todos os componentes se ajustem às novas dimensões. Essa mensagem não aparecerá novamente nesta sessão.')
         setOpenToastify(true)
         setTimeout(() => {
             setOpenToastify(false)
-        }, 5000)
+        }, 8000)
         setResize(false)
         sessionStorage.setItem('warned', true)
     }
@@ -264,17 +264,30 @@ const Filter = props => {
             containerHeightHandler(containerHeight, fHeight)
         }, 30)
     }
+
+    const observer = React.useRef(
+        new ResizeObserver(() => {
+            const windowWidth = window.innerWidth
+            const loadWidth = sessionStorage.getItem('windowWidth')
+            const rendered = sessionStorage.getItem('rendered')
+
+            if (rendered && windowWidth != loadWidth) {
+                callResizeAlert()
+            }
+        })
+    )
     
     React.useEffect(() => {
         reportWindowSize()
     }, [])
 
     React.useEffect(() => {
-
         sessionStorage.removeItem('rendered')
-
+        const loadWidth = window.innerWidth
+        
         setTimeout(() => {
             sessionStorage.setItem('rendered', true)
+            sessionStorage.setItem('windowWidth', loadWidth)
         }, 1000)
     }, [])
     
@@ -284,16 +297,6 @@ const Filter = props => {
             setResize(false)
         }
     }, [])
-    
-
-    const observer = React.useRef(
-        new ResizeObserver(() => {
-            let rendered = sessionStorage.getItem('rendered')
-            if (rendered) {
-                callResizeAlert()
-            }
-        })
-    )
 
     React.useEffect(() => {
         if (containerRef.current) {
@@ -447,7 +450,8 @@ const Filter = props => {
                         productColor={productColor} // => Filtra o produto por cor
                         offer={offer} // => Filtra os produtos por tipo de oferta
                         order={order}
-                        filterOpen={containerHeightHandler}
+                        containerHeight={containerHeightHandler}
+                        isFilterOpen={[filterOpen, filter_height]}
                     />
                 </div>
             </div>

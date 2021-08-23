@@ -23,7 +23,12 @@ const Products = props => {
         const containerEl = productsContainerRef.current
         const subContainerEl = productsSubContainerRef.current
 
-        let elBottom = containerEl.offsetTop + containerEl.offsetHeight
+        let containerBottom
+        if (props.containerHeight) {
+            containerBottom = containerEl.offsetHeight
+        } else {
+            containerBottom = containerEl.offsetTop + containerEl.offsetHeight
+        }
         
         const productCardStyle = window.getComputedStyle(containerEl.children[0].children[0])
         const productCardHeight = parseInt((productCardStyle.height).match(/\d+/)[0])
@@ -38,19 +43,46 @@ const Products = props => {
         if (arg === 'more') {
             newCount = count + itemsPerRow
         } else {
-            elBottom = top - productCardFullHeight
+            containerBottom = top - productCardFullHeight
             newCount = count - itemsPerRow
         }
-
-        let btnBottom = window.screen.height === 768 ? 210 : 290
         
-        window.scrollTo({top: elBottom - btnBottom, left: 0, behavior: 'smooth'})
-        setTop(elBottom)
-        setCount(newCount)
+        let btnBottom 
+        if (props.containerHeight) {
+            btnBottom = 290
 
+            if (window.screen.width >= 768 && window.screen.width <= 1365) {
+                btnBottom = 210
+            } else if (window.screen.width >= 1366 && window.screen.width <= 1599) {
+                btnBottom = -70
+            } else if (window.screen.width <= 360) {
+                btnBottom = 0
+            }
+
+        } else {
+            btnBottom = 560
+
+            if (window.screen.width >= 1366 && window.screen.width <= 1599) {
+                btnBottom = 200
+            } else if (window.screen.width <= 360) {
+                btnBottom = 300
+            }
+        }
+        
+        let windowTop = containerBottom - btnBottom
+        if (props.isFilterOpen) {
+            if (props.isFilterOpen[0]) {
+                windowTop = windowTop + props.isFilterOpen[1]
+            }
+        }
+        
+        window.scrollTo({top: windowTop, left: 0, behavior: 'smooth'})
+        setTop(containerBottom)
+        setCount(newCount)
+        
         const _ = undefined
-        if (props.filterOpen) {
-            props.filterOpen(_,_,_, [arg, productCardFullHeight+20])
+        if (props.containerHeight) {
+            props.containerHeight(_,_,_, [arg, productCardFullHeight+20])
         }
     }
 
@@ -200,7 +232,8 @@ const Products = props => {
                         <h1 
                             className="text-center" 
                             style={{width: '100%', gridColumn: '1/-1'}}
-                        > YOUR SEARCH DID NOT RETURN ANY PRODUCT
+                        > 
+                            {!props.wishlist ? 'YOUR SEARCH DID NOT RETURN ANY PRODUCT' : 'YOUR WISHLIST IS EMPTY'}
                         </h1>
                     }
                 </div>

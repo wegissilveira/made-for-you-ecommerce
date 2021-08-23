@@ -86,18 +86,18 @@ function App() {
       <BrowserRouter >    
         <Layout>
           <ScrollToTop />
-            <Switch>
-              <Route path="/" exact component={MainPageConfig} />
-              <Route path="/search/:searchKey" exact component={Products} />
-              <Route path="/shop/" exact component={ShopConfig} />
-              <Route path="/shop/:cat" exact component={Products} />
-              <Route path="/shop/product/:id" exact component={ProductPage} />
-              <Route path="/cart/" exact component={Cart} />
-              <Route path="/wishlist/" exact component={Wishlist} />
-              <Route path="/user-login/" exact component={UserLogin} />
-              <Route path="/user-signup/" exact component={UserSignUp} />
-              <Route path="/contact/" exact component={Contact} />
-            </Switch>
+          <Switch>
+            <Route path="/" exact component={MainPageConfig} />
+            <Route path="/search/:searchKey" exact component={Products} />
+            <Route path="/shop/" exact component={ShopConfig} />
+            <Route path="/shop/:cat" exact component={Products} />
+            <Route path="/shop/product/:id" exact component={ProductPage} />
+            <Route path="/cart/" exact component={Cart} />
+            <Route path="/wishlist/" exact component={Wishlist} />
+            <Route path="/user-login/" exact component={UserLogin} />
+            <Route path="/user-signup/" exact component={UserSignUp} />
+            <Route path="/contact/" exact component={Contact} />
+          </Switch>
         </Layout>
       </BrowserRouter>
   );
