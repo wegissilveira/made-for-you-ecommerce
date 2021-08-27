@@ -28,7 +28,7 @@ Here is a working live demo :  https://www.wegis.com.br/made-for-you
 ![](https://github.com/wegissilveira/made-for-you-ecommerce/blob/master/images-demo/shop.png)
 
 ### Shopping Bag
-![](https://github.com/wegissilveira/made-for-you-ecommerce/blob/master/images-demo/shop.png)
+![](https://github.com/wegissilveira/made-for-you-ecommerce/blob/master/images-demo/bag.png)
 
 
 ## Mobile support
