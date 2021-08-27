@@ -48,7 +48,7 @@ const footer = props => {
                     </div>
                 </div>
                 <div className={classes.SubFooter}>
-                    <p>Developed by <a href="https://www.wegis.com.br">Wegis Silveira</a></p>
+                    <p>Developed by <a href="https://www.wegis.com.br" target="_blank" rel="noopener noreferrer">Wegis Silveira</a></p>
                     <div>
                         <FontAwesomeIcon icon={['fab', 'cc-mastercard']} size="3x" />
                         <FontAwesomeIcon icon={['fab', 'cc-visa']} size="3x" />

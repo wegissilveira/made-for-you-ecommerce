@@ -316,7 +316,6 @@ const Filter = props => {
             setPageLimit(8)
         }
     }, [])
-
    
 
     return (
