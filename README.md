@@ -15,7 +15,8 @@
 - Products Page with a dynamic filter;
 - Search product by typing;
 - Modal with product details;
-- Products separated by rooms.
+- Products separated by rooms;
+- Responsive.
 
 ## Demo
 Here is a working live demo :  https://www.wegis.com.br/made-for-you
