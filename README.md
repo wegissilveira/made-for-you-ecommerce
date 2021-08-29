@@ -11,7 +11,7 @@
 ## Main Features
 - Multiple sliders displaying available products;
 - Editable shopping bag;
-- Favorites page;
+- Wishlist page;
 - Products Page with a dynamic filter;
 - Search product by typing;
 - Modal with product details;
