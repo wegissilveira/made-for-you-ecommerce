@@ -80,8 +80,7 @@ library.add(
 
 function App() {
   return (
-      // <BrowserRouter basename={'/made-for-you'}>
-      <BrowserRouter> {/*No servidor não estou utilizando basename, pois isso cria uma segunda aba 'made-for-you' na barra de endereços, ou seja, um made-for-you pra subpasta e outro pro basename.*/}
+      <BrowserRouter>
         <Layout>
           <ScrollToTop />
           <Switch>
