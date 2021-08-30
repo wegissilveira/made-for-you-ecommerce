@@ -29,7 +29,7 @@ const NavigationMobile = props => {
                     <li>
                         <NavLink 
                             onClick={() => props.toggleMenu()}
-                            to="/" 
+                            to={`${process.env.PUBLIC_URL}/`}
                             exact
                         > Home
                         </NavLink>
@@ -37,14 +37,14 @@ const NavigationMobile = props => {
                     <li>
                         <NavLink 
                             onClick={() => props.toggleMenu()}
-                            to="/shop/" 
+                            to={`${process.env.PUBLIC_URL}/shop`}
                         > Shop
                         </NavLink>
                     </li>
                     <li>
                         <NavLink 
                             onClick={() => props.toggleMenu()}
-                            to="/user-login/" 
+                            to={`${process.env.PUBLIC_URL}/user-login`}
                         > Login
                         </NavLink>
                     </li>
@@ -57,7 +57,7 @@ const NavigationMobile = props => {
                             <p>+375 29 364-74-69</p>
                             <NavLink
                                 onClick={() => props.toggleMenu()}
-                                to="/contact/" 
+                                to={`${process.env.PUBLIC_URL}/contact`}
                                 exact
                             > Form
                             </NavLink>

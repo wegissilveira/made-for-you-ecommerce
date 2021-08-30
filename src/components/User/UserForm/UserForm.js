@@ -5,8 +5,6 @@ import classes from './UserForm.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'react-router-dom'
 
-
-
 const loginForm = {
     title: 'Log in',
     inputs: ['Email', 'Password'],
@@ -73,7 +71,7 @@ const UserForm = props => {
                             />
                         </div>
                     </div>
-                    <Link to={form.redirectLink}>
+                    <Link to={`${process.env.PUBLIC_URL}/${form.redirectLink}`}>
                         <p>{form.redirectMsg}</p>
                     </Link>
                 </div>

@@ -66,7 +66,7 @@ const MinorSliderHeader = props => {
                                 alt={"img-1"} 
                             />
                             <div>
-                                <Link to={'/shop/product/' + item._id} >
+                                <Link to={`${process.env.PUBLIC_URL}/shop/product/${item._id}`} >
                                     <p>{item.name}</p>
                                     <p>{item.price}</p>
                                 </Link>

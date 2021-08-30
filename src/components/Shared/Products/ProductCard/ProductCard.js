@@ -100,7 +100,7 @@ const ProductCard = props => {
                         icon={[wish_icon, 'heart']} size="2x" 
                         className={classes.Wishlist_icon_heart} 
                     />
-                    <Link to={"/shop/product/" + props.product._id} >
+                    <Link to={`${process.env.PUBLIC_URL}/shop/product/${props.product._id}`} >
                         <div className={classes.Products_img_container}>
                             <img 
                                 src={props.product.img} 
@@ -110,7 +110,7 @@ const ProductCard = props => {
                     </Link>
                     <div className={classes.Products_description}>
                         <div>
-                            <Link to={"/shop/product/" + props.product._id}>{props.product.name}</Link>
+                            <Link to={`${process.env.PUBLIC_URL}/shop/product/${props.product._id}`}>{props.product.name}</Link>
                             <p>$ {props.product.price}</p>
                         </div>
                         <div>

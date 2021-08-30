@@ -97,7 +97,6 @@ const MainSliderHeader = props => {
     });   
    
 
-
     return (
         <div className={classes.MainSlider_container}>                
             <div 
@@ -113,7 +112,7 @@ const MainSliderHeader = props => {
                             alt={img.alt} 
                         />
                         <div className={classes.MainSlider_link_container}>
-                            <Link to={'/shop/' + img.cat}>
+                            <Link to={`${process.env.PUBLIC_URL}/shop/${img.cat}`}>
                                 <p>{img.linkText[0]}</p>
                                 <p>{img.linkText[1]}</p>
                             </Link>

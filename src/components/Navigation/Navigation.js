@@ -69,7 +69,7 @@ const Navigation = props => {
     
     let search_input = 
         searchProduct ? 
-            <NavLink to={"/search/" + input}>
+            <NavLink to={`${process.env.PUBLIC_URL}/search/${input}`}>
                 <FontAwesomeIcon 
                     icon="search" 
                     color="grey" 
@@ -90,21 +90,21 @@ const Navigation = props => {
                     <ul>
                         <li >
                             <NavLink 
-                                to="/" 
+                                to={`${process.env.PUBLIC_URL}/`}
                                 exact
                             > Home
                             </NavLink>
                         </li>
                         <li >
                             <NavLink 
-                                to="/shop/" 
+                                to={`${process.env.PUBLIC_URL}/shop`}
                                 exact
                             > Shop
                             </NavLink>
                         </li>
                         <li >
                             <NavLink 
-                                to="/contact/" 
+                                to={`${process.env.PUBLIC_URL}/contact`}
                                 exact
                             > Contacts
                             </NavLink>
@@ -113,7 +113,7 @@ const Navigation = props => {
                 </div>
 
                 <Link
-                    to="/" 
+                    to={`${process.env.PUBLIC_URL}/`}
                     className={classes.Logo}
                 > m
                     <span>y</span>Home
@@ -130,7 +130,7 @@ const Navigation = props => {
                         <li>
                             <NavLink
                                 className={classes.Enter_account_btn}
-                                to="/user-login/"
+                                to={`${process.env.PUBLIC_URL}/user-login`}
                             >
                                 <FontAwesomeIcon 
                                     icon={['far', 'user']} 
@@ -139,7 +139,7 @@ const Navigation = props => {
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to="/wishlist/">
+                            <NavLink to={`${process.env.PUBLIC_URL}/wishlist`}>
                                 <FontAwesomeIcon 
                                     icon={['far', 'heart']} 
                                     color={ heart_color } 
@@ -147,7 +147,7 @@ const Navigation = props => {
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to="/cart/">
+                            <NavLink to={`${process.env.PUBLIC_URL}/cart`}>
                                 <FontAwesomeIcon 
                                     icon='shopping-bag' 
                                     color={ bag_color } 

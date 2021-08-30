@@ -5,7 +5,6 @@ import classes from './MainPageDiscounts.module.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
-
 const mainPageDiscounts = props => {
 
     return (

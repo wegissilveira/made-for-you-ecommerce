@@ -75,7 +75,7 @@ const BestDealSlider = props => {
                                     className={classes.Products_subContainer} 
                                 >
                                     <div>
-                                        <Link to={"/shop/product/" + product._id}>
+                                        <Link to={`${process.env.PUBLIC_URL}/shop/product/${product._id}`}>
                                             <div className={classes.Deal_image} >
                                                 <img src={product.img} alt="img-deal" />
                                             </div>

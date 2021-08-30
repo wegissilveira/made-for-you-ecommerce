@@ -96,7 +96,7 @@ const Cart = props => {
                     }
                     
                     <div className={classes.Cart_keepBuy_button}>
-                        <Link to="/shop/">
+                        <Link to={`${process.env.PUBLIC_URL}/shop`}>
                             <p className={classes.Cart_dark_button}>
                                 <FontAwesomeIcon icon="long-arrow-alt-left" />
                                 <span>KEEP BUYING</span>
