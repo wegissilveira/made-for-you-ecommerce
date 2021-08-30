@@ -159,9 +159,7 @@ const ProductInfoComponent = props => {
         modalStyle.wishWidth = '90%'
         modalStyle.colorWidth = '50%'
     }
-    
-
-    
+       
 
     return (
         <div 

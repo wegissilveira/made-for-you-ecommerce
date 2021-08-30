@@ -1,11 +1,11 @@
-:root {
+html:root {
     --thumb-radius: 15px;
     --thumb-top: calc((var(--thumb-radius) - 2px)/-2);
     --thumb-end: calc(var(--thumb-radius) / -2);
 }
 
 @media (max-width:768px) {
-    :root {
+    html:root {
         --thumb-radius: 20px;
     }
 }

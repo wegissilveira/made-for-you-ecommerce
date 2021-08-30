@@ -32,6 +32,7 @@
     font-size: 22px;
     cursor: pointer;
     color: red;
+    z-index: 9999;
 }
 
 @media (max-width: 480px) {

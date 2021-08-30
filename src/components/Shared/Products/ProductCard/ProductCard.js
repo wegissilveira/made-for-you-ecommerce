@@ -12,7 +12,6 @@ import wishlistDataFn from '../../../../Data/wishlistData';
 import cartListDataFn from '../../../../Data/cartData';
 
 
-
 const ProductCard = props => {
 
     let [showProduct, setShowProduct] = React.useState(false)
@@ -33,16 +32,22 @@ const ProductCard = props => {
     }
 
     const cartHandler = arg => {
-
         let cartList = [...props.cart]
+        let cartItemsList = []
 
         let count = 0
         cartList.forEach(item => {
             if (item._id === props.product._id) count++
-            if ( arg === 'load' && item._id === props.product._id) {
-                setProdExistsCart(true)
-            }
+            cartItemsList.push(item._id)
         })
+
+        if (arg === 'load') {
+            if (cartItemsList.includes(props.product._id)) {
+                setProdExistsCart(true)
+            } else {
+                setProdExistsCart(false)
+            }
+        }
         
         if (arg !== 'load') {
             if (count === 0) {
@@ -82,9 +87,10 @@ const ProductCard = props => {
                                   
     React.useEffect(() => {
         cartHandler('load')
-    }, [])
-
-
+        
+    }, [props.cart])
+    
+    
     return (
         <React.Fragment>
             <div className={classes.ProductCard_container}>

@@ -1,5 +1,6 @@
 {
   "name": "ecommerce",
+  "homepage": "https://wegis.com.br/made-for-you/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

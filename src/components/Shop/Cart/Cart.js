@@ -72,7 +72,7 @@ const Cart = props => {
 
     return (
         <div className={classes.Session_container}>
-            <h1>CART</h1>
+            <h1>SHOPPING BAG</h1>
             { products.length > 0 ?
                 <div className={classes.Cart_container}>
                     <div className={classes.Cart_header}>
