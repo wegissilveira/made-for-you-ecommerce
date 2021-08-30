@@ -1,68 +1,54 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# ![Made For You](https://github.com/wegissilveira/made-for-you-ecommerce/blob/master/images-demo/home.png)
+# Made For You
+<table>
+<tr>
+<td>
+ A beautiful and functional ecommerce built with React. It has all frontend functionalities needed in order to make an ecommerce work properly, from a product grid with a dynamic filter to an editable cart.
+</td>
+</tr>
+</table>
 
-## Available Scripts
+## Main Features
+- Multiple sliders displaying available products;
+- Editable shopping bag;
+- Wishlist page;
+- Products Page with a dynamic filter;
+- Search product by typing;
+- Modal with product details;
+- Products separated by rooms;
+- Responsive.
 
-In the project directory, you can run:
+## Demo
+Here is a working live demo :  https://www.wegis.com.br/made-for-you
 
-### `yarn start`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Site
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### Shop Page
 
-### `yarn test`
+![](https://github.com/wegissilveira/made-for-you-ecommerce/blob/master/images-demo/shop.png)
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Shopping Bag
+![](https://github.com/wegissilveira/made-for-you-ecommerce/blob/master/images-demo/bag.png)
 
-### `yarn build`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Mobile support
+<em>Made For You</em> is compatible with devices of all sizes.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+![](https://github.com/wegissilveira/made-for-you-ecommerce/blob/master/images-demo/mobile.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `yarn eject`
+## Sources
+- Layout partially inspired by [Vladislav Berg](https://www.behance.net/gallery/98180195/All-for-your-home-Online-Store-E-commerce) and [Magdalena Figura](https://www.behance.net/gallery/84904331/Login-page-UIUX-design) work.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Bug / Feature Request
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+If you find a bug (the website couldn't handle the query and / or gave undesired results), kindly open an issue [here](https://github.com/wegissilveira/made-for-you-ecommerce/issues).
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+If you'd like to request a new function, feel free to do so by opening an issue [here](https://github.com/wegissilveira/made-for-you-ecommerce/issues).
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+## Built with 
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- [React](https://reactjs.org/) - React makes it painless to create interactive UIs.
+- [CSS](https://www.w3schools.com/css/) - Cascading Style Sheets is a style sheet language used for describing the presentation of a document written in a markup language.
