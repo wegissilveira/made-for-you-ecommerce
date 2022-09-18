@@ -15,31 +15,17 @@ const MainPageProducts = props => {
     
     let menuTitle = tag !== 'all-products' ? tag : 'all products'
 
-    const setActiveTabHandler = (e, screen) => {
+    const setActiveTabHandler = (e, tag) => {
+        const target = e.target
 
-        let target = e.target
-        let children = e.currentTarget.children
-        let childrenArray = Array.from(children)
+        const container = target.closest('div[class^=MainPageProducts_Products_select_container]')
+        Array.from(container.children).forEach(child => {
+            child.querySelector('div[class^=MainPageProducts_Products_select]').className = classes.Products_select
+        })
 
-        if (!target.className.match('Products_select_container') && screen !== 'mobile') { 
-            childrenArray.forEach(child => {
-                child.children[0].className = classes.Products_select
-                child.children[1].className = ''
-            })
-            
-            target.className = [classes.Products_select, classes.Products_select_active].join(' ')
-            target.parentNode.children[1].className = classes.Products_selectHeader_arrow
-        }
+        target.className = [classes.Products_select, classes.Products_select_active].join(' ')
 
-        if (screen === 'mobile' && target.tagName === 'P') {
-            childrenArray.forEach(child => {
-                child.className = ''    
-            })
-            
-            target.className = classes.Products_select_mobile_active
-            
-            setMenuTitleWidth(target.children[0].offsetWidth / 2)
-        }        
+        setTag(tag)
     }
 
     const toggleMenu = e => {
@@ -65,48 +51,37 @@ const MainPageProducts = props => {
         <div className={classes.Session_container}>
             <h1>FEATURED PRODUCTS</h1>
             <p>Select a category using special switches or go to the section with a convenient filter by product</p>
-            <div 
-                onClick={(e) => setActiveTabHandler(e)} 
-                className={classes.Products_select_container}
-            >
+            <div className={classes.Products_select_container}>
                 <div>
                     <div 
-                        onClick={() => setTag('all-products')} 
+                        onClick={(e) => setActiveTabHandler(e, 'all-products')} 
                         className={[
                             classes.Products_select, 
                             classes.Products_select_active].join(' ')
                         }
                     > ALL PRODUCTS
-                        
                     </div>
-                    <p className={classes.Products_selectHeader_arrow}> <span></span> </p>
                 </div>
                 <div>
                     <div 
-                        onClick={() => setTag('furniture')} 
+                        onClick={(e) => setActiveTabHandler(e, 'furniture')} 
                         className={classes.Products_select}
                     > FURNITURE
-                        
                     </div>
-                    <p> <span></span> </p>
                 </div>
                 <div>
                     <div 
-                        onClick={() => setTag('decorations')} 
+                        onClick={(e) => setActiveTabHandler(e, 'decorations')} 
                         className={classes.Products_select}
                     > DECORATIONS
-                        
                     </div>
-                    <p> <span></span> </p>
                 </div>
                 <div>
                     <div 
-                        onClick={() => setTag('textile')} 
+                        onClick={(e) => setActiveTabHandler(e, 'textile')} 
                         className={classes.Products_select}
                     > TEXTILE
-                        
                     </div>
-                    <p> <span></span> </p>
                 </div>
             </div>
 

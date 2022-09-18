@@ -38,7 +38,7 @@ const Navigation = props => {
     const keydownSearchHandler = e => {
         if (e.keyCode === 13) {
             if (input.length >= 3) {
-                props.history.push("/search/" + input)
+                props.history.push("/made-for-you/search/" + input)
             } else {
                 alert('Search requires at least three letters')
             }
