@@ -97,7 +97,10 @@ const MainSliderHeader = props => {
     });   
    
 
-
+    // Transformar o primeiro bloco em um componente separado
+    // O segundo bloco provavelmente será convertido em um componente também
+    // Avaliar se converto FontAwesomeIcon em um componente que usa o ícone para evitar passar tantas props. Em um novo componente seriam passadas apenas o ícone e o parâmetro da função callback
+    // Talvez utilizar uma das técnicas de componentes como props como mostrado no artigo 4 dos estudos dos artigos da makerevich.
     return (
         <div className={classes.MainSlider_container}>                
             <div 

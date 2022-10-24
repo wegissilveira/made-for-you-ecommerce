@@ -39,7 +39,9 @@ const MinorSliderHeader = props => {
         setSliderProducts(sliderProducts)
     }, [])
     
-    
+    // Transformar o segundo bloco em um componente separado
+    // Entender as funções que estão sendo utilizadas e validar se precisam ser trabalhadas de alguma forma
+    // ProgressBar será avaliado separadamente por se tratar de um componente compartilhado. O mesmo ocorrerá com todos os componentes compartilhados.
     return (
         <React.Fragment>
             <ProgressBar 

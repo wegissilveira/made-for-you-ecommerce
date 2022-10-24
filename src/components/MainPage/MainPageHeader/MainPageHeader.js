@@ -10,6 +10,9 @@ import MainSliderHeader from './MainSliderHeader/MainSliderHeader'
 
 
 const MainPageHeader = props => {
+    // Configurar import absoluto sem essa série de '../../'
+    // Remover Fragment, não faz sentido aqui já que há uma div wrapper
+    // Transformar cada um dos blocos 'div' em um componente e analisar se o que já é componente precisa ser englobado nesses novos componentes ou podem simplesmente serem adaptados para se enquadrarem na estrutura
     return (
         <Fragment>
             <div className={classes.Header_container}>
