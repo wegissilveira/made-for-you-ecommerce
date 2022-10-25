@@ -4,39 +4,27 @@ import classes from './MainPageShopByRoom.module.css'
 
 import { Link } from 'react-router-dom'
 
-const mainPageShopByRoom  = props => {
+const mainPageShopByRoom = props => {
 
-    return (
-        <div className={classes.Session_container}>
-            <h1>SHOP BY ROOM</h1>
-            <div className={classes.ShoppingByRoom_container}>
-                <div>
-                    <div>
-                        <Link to={'/shop/living-room'}>
-                            <img src={require("../../../assets/images/Shop/quadro-1-pequeno.jpg")} alt="img-1" />
-                        </Link>
-                    </div>
-                    <div>
-                        <Link to={'/shop/kitchen'}>
-                            <img src={require("../../../assets/images/Shop/quadro-3-grande.png")} alt="img-2" />
-                        </Link>
-                    </div>
-                </div>
-                <div>
-                    <div>
-                        <Link to={'/shop/bathroom'}>
-                            <img src={require("../../../assets/images/Shop/quadro-2-grande.jpg")} alt="img-2" />
-                        </Link>
-                    </div>
-                    <div>
-                        <Link to={'/shop/bedroom'}>
-                            <img src={require("../../../assets/images/Shop/quadro-4-pequeno.png")} alt="img-4" />
-                        </Link>
-                    </div>
-                </div>
-            </div>
-        </div>
-    )
+   return (
+      <div className={classes.Session_container}>
+         <h1>SHOP BY ROOM</h1>
+         <div className={classes.ShoppingByRoom_container}>
+            <Link className={classes.ShoppingByRoom_image1} to={'/shop/living-room'}>
+               <img src={require("../../../assets/images/Shop/quadro-1-pequeno.jpg")} alt="img-1" />
+            </Link>
+            <Link className={classes.ShoppingByRoom_image3} to={'/shop/kitchen'}>
+               <img src={require("../../../assets/images/Shop/quadro-3-grande.png")} alt="img-2" />
+            </Link>
+            <Link className={classes.ShoppingByRoom_image2} to={'/shop/bathroom'}>
+               <img src={require("../../../assets/images/Shop/quadro-2-grande.jpg")} alt="img-2" />
+            </Link>
+            <Link className={classes.ShoppingByRoom_image4} to={'/shop/bedroom'}>
+               <img src={require("../../../assets/images/Shop/quadro-4-pequeno.png")} alt="img-4" />
+            </Link>
+         </div>
+      </div>
+   )
 }
 
 export default mainPageShopByRoom

@@ -1,84 +1,80 @@
 .Session_container {
-    height: auto;
-    margin-bottom: 80px;
+   height: auto;
+   margin-bottom: 80px;
+   width: 88%;
+   max-width: 1200px;
+   margin-left: 6%;
+   overflow: hidden;
 }
 
-.Session_container > h1 {
-    text-align: center;
+.Session_container>h1 {
+   text-align: center;
 }
 
 .ShoppingByRoom_container {
-    display: flex;
-    justify-content: center;
-    margin-top: 48px;
-    padding-left: 8px;
-    padding-right: 8px;
+   max-height: 990px;
+   overflow: hidden;
+
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   grid-template-rows: 1fr 0.5fr 1fr;
+   gap: 1px 5px;
+   grid-template-areas:
+      "image1 image2"
+      "image3 image2"
+      "image3 image4";
 }
 
-@media (max-width: 768px) {
-    .ShoppingByRoom_container {
-        flex-direction: column;
-    }
+.ShoppingByRoom_container img {
+   max-width: 600px;
 }
 
-.ShoppingByRoom_container > div {
-    width: 600px;
+.ShoppingByRoom_image1 {
+   grid-area: image1;
 }
 
-.ShoppingByRoom_container > div:first-of-type {
-    padding-right: 8px;
+.ShoppingByRoom_image2 {
+   grid-area: image2;
 }
 
-@media (max-width: 768px) {
-    .ShoppingByRoom_container > div {
-        width: 100%;
-    }
-    
-    .ShoppingByRoom_container > div:first-of-type {
-        padding-right: 0;
-        margin-bottom: 8px;
-    }
+.ShoppingByRoom_image3 {
+   grid-area: image3;
 }
 
-.ShoppingByRoom_container > div > div {
-    overflow: hidden;
+.ShoppingByRoom_image4 {
+   grid-area: image4;
 }
 
-.ShoppingByRoom_container > div > div:first-of-type {
-    margin-bottom: 8px;
+.ShoppingByRoom_container > a {
+   overflow: hidden;
 }
 
-.ShoppingByRoom_container > div:first-of-type div:nth-of-type(2),
-.ShoppingByRoom_container > div:nth-of-type(2) div:first-of-type {
-    height: 54%;
+.ShoppingByRoom_container> a img {
+   max-width: 100%;
+
+   transform: scale(1, 1);
+   -webkit-transform: scale(1, 1);
+   -moz-transform: scale(1, 1);
+   -ms-transform: scale(1, 1);
+   -o-transform: scale(1, 1);
+
+   transition: transform 0.6s ease-in-out;
+   -webkit-transition: transform 0.6s ease-in-out;
+   -moz-transition: transform 0.6s ease-in-out;
+   -ms-transition: transform 0.6s ease-in-out;
+   -o-transition: transform 0.6s ease-in-out;
 }
 
-.ShoppingByRoom_container > div a img {
-    max-width: 100%;
+.ShoppingByRoom_container> a img:hover {
+   transform: scale(1.1);
+   -webkit-transform: scale(1.1);
+   -moz-transform: scale(1.1);
+   -ms-transform: scale(1.1);
+   -o-transform: scale(1.1);
 
-    transform: scale(1, 1);
-    -webkit-transform: scale(1, 1);
-    -moz-transform: scale(1, 1);
-    -ms-transform: scale(1, 1);
-    -o-transform: scale(1, 1);
-
-    transition: transform 0.6s ease-in-out;
-    -webkit-transition: transform 0.6s ease-in-out;
-    -moz-transition: transform 0.6s ease-in-out;
-    -ms-transition: transform 0.6s ease-in-out;
-    -o-transition: transform 0.6s ease-in-out;
-}
-
-.ShoppingByRoom_container > div a img:hover {
-    transform: scale(1.1);
-    -webkit-transform: scale(1.1);
-    -moz-transform: scale(1.1);
-    -ms-transform: scale(1.1);
-    -o-transform: scale(1.1);
-
-    transition: transform 0.6s ease-in-out;
-    -webkit-transition: transform 0.6s ease-in-out;
-    -moz-transition: transform 0.6s ease-in-out;
-    -ms-transition: transform 0.6s ease-in-out;
-    -o-transition: transform 0.6s ease-in-out;
+   transition: transform 0.6s ease-in-out;
+   -webkit-transition: transform 0.6s ease-in-out;
+   -moz-transition: transform 0.6s ease-in-out;
+   -ms-transition: transform 0.6s ease-in-out;
+   -o-transition: transform 0.6s ease-in-out;
 }
