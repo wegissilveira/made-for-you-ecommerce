@@ -1,135 +1,65 @@
 .ProductCard_container {
-    position: relative;
-}
-
-.ProductCard_subContainer {
-    border: 1px solid #dee2e6
+   position: relative;
+   border: 1px solid #dee2e6
 }
 
 .Products_img_container {
-    display: flex;
-    align-items: center;
+   display: flex;
+   align-items: center;
 
-    height: 359px;
-    background-color: #F6F6F6;
+   height: 359px;
+   background-color: #F6F6F6;
 }
 
 @media (max-width: 480px) {
-    .Products_img_container {
-        height: 250px;
-    }
+   .Products_img_container {
+      height: 250px;
+   }
 }
 
 @media (max-width: 360px) {
-    .Products_img_container {
-        height: 200px;
-    }
+   .Products_img_container {
+      height: 200px;
+   }
 }
 
-.Products_img_container > img {
-    max-width: 100%;
-}
-
-
-.Products_description{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 75px;
-    width: 80%;
-    margin-left: 10%;
-}
-
-@media (max-width: 480px) {
-    .Products_description {
-        width: 90%;
-        margin-left: 5%;
-    }
-}
-
-.Products_description > div:first-of-type {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 65%;
-}
-
-.Products_description > div:first-of-type > a {
-    color: grey;
-    text-decoration: none;
-
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-    max-width: 100%;
-}
-
-.Products_description > div:first-of-type > p {
-    margin-bottom: 0;
-}
-
-.Products_description > div:nth-of-type(2) {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 30%;
-}
-
-@media (max-width: 480px) {
-    .Products_description > div:nth-of-type(2) {
-        width: 40%;
-    }
-}
-
-.Products_description > div:nth-of-type(2) > * {
-    cursor: pointer;
-}
-
-.Products_description > div:nth-of-type(2) > p {
-    margin: 0;
-}
-
-.Products_description > div:nth-of-type(2) > svg:first-of-type {
-    color: grey;
-}
-
-.Products_description > div:nth-of-type(2) > svg:first-of-type:hover {
-    color: rgb(0, 153, 255);
+.Products_img_container>img {
+   max-width: 100%;
 }
 
 .Wishlist_icon_heart {
-    position: absolute;
-    right: 0;
-    right: 15px;
-    top: 10px;
-    color: red;
-    cursor: pointer;
+   position: absolute;
+   right: 0;
+   right: 15px;
+   top: 10px;
+   color: red;
+   cursor: pointer;
 }
 
 @media (max-width:480px) {
-    .Wishlist_icon_heart {
-        right: 10px;
-        top: 5px;
-    }
+   .Wishlist_icon_heart {
+      right: 10px;
+      top: 5px;
+   }
 }
 
 .Wishlist_icon_heart:hover {
-    color: rgb(253, 91, 91);
+   color: rgb(253, 91, 91);
 }
 
 .Wishlist_icon_bag {
-    color: #ccc;
-    cursor: pointer;
+   color: #ccc;
+   cursor: pointer;
 }
 
 .Wishlist_icon_bag:hover {
-    color: rgba(0, 128, 0, 0.39);
+   color: rgba(0, 128, 0, 0.39);
 }
 
 .Wishlist_icon_bag_selected {
-    color: green;
+   color: green;
 }
 
 .Wishlist_icon_bag_selected:hover {
-    color: rgba(0, 128, 0, 0.616);
+   color: rgba(0, 128, 0, 0.616);
 }

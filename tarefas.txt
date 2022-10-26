@@ -1,0 +1,24 @@
+ETAPAS DO REFATORAMENTO
+
+FASE 1 - Melhorias estruturais e funcionais:
+
+1- Refatorar JSX e estruturação dos componentes:
+   - MainPageHeader: OK
+   - MainSliderHeader: OK
+   - MinorSliderHeader: OK
+   - ProgressBar: 
+   - Products:
+   - ProductCard: OK 
+
+2- Implementar o Portals nos modais:
+   - ProductPageModal:
+
+3- Analisar Redux e identificar melhorias, tanto na store quanto nos componentes
+   3.1- Analisar distribuição de props para identificar os pontos desnecessários que possam ser substituídos pelo contexto do redux
+
+4- Analisar Funções dentro dos componentes e identificar melhorias
+
+5- Análise de e correção de renderizações desnecessárias
+
+
+FASE 2 - Implementação do TypeScript
