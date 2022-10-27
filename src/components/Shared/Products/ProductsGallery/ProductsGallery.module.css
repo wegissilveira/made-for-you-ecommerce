@@ -1,0 +1,10 @@
+.Products_subContainer {
+   display: grid;
+   grid-template-columns: repeat(auto-fill, minmax(min(48%, 17rem), 1fr));
+   gap: 0.5rem;
+   margin-top: 35px;
+}
+
+.Products_subContainer h1 {
+   grid-column: 1/-1;
+}

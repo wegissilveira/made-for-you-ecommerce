@@ -7,7 +7,7 @@ FASE 1 - Melhorias estruturais e funcionais:
    - MainSliderHeader: OK
    - MinorSliderHeader: OK
    - ProgressBar: 
-   - Products:
+   - Products: OK
    - ProductCard: OK 
 
 2- Implementar o Portals nos modais:

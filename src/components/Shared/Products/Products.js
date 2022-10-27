@@ -4,10 +4,14 @@ import classes from './Products.module.css'
 
 import { connect } from 'react-redux'
 
-import ProductCard from 'components/Shared/Products/ProductCard/ProductCard';
-import productsData from 'Data/productsData'
-import wishlistDataFn from 'Data/wishlistData';
 import * as actionTypes from 'store/actions/actionTypes'
+
+import productsData from 'Data/productsData'
+import wishlistDataFn from 'Data/wishlistData'
+import LoadMoreProducts from './LoadMoreProducts/LoadMoreProducts'
+import ProductsGallery from './ProductsGallery/ProductsGallery'
+import CategoryHeader from './CategoryHeader/CategoryHeader'
+
 
 const Products = props => {
 
@@ -196,72 +200,31 @@ const Products = props => {
 
    }, [props.pageLimit])
 
+   console.log('PROPS: ', props)
 
    return (
       <div
          ref={productsContainerRef}
          className={products_container}
       >
-         {/* MELHORAR ESTAS DUAS LINHAS, TALVEZ ORGANIZAR ISSO EM UMA VARIÁVEL OU STATE */}
-         {props.match && props.match.params.cat && <h1>{category.toUpperCase()}</h1>}
-         {props.match && props.match.params.searchKey && <h1>SEARCH: '{props.match.params.searchKey.toUpperCase()}'</h1>}
-
-         {/* BUSCAR ESTRUTURA MELHOR PARA ESTE BLOCO, TALVEZ EXTRAÍ-LO PARA UM COMPONENTE SEPARADO */}
-         <div
-            ref={productsSubContainerRef}
-            className={classes.Products_subContainer}
-         >
-            {products.length > 0 &&
-               products.map((product, i) => {
-                  let productsList
-                  if (i + 1 <= count) {
-                     if (tag === 'all-products' || product.tag === tag) {
-                        if (category === 'all' || product.category === category) {
-                           productsList =
-                              <ProductCard
-                                 key={product + i}
-                                 product={product}
-                                 index={i}
-                              />
-                        }
-                     }
-                  }
-                  return productsList
-               })
-            }
-            {products.length <= 0 &&
-               <h1
-                  className="text-center"
-                  style={{ width: '100%', gridColumn: '1/-1' }}
-               >
-                  {!props.wishlist ? 'YOUR SEARCH DID NOT RETURN ANY PRODUCT' : 'YOUR WISHLIST IS EMPTY'}
-               </h1>
-            }
-         </div>
-
-         {/* ESTE BLOCO SE TORNARÁ UM COMPONENTE SEPARADA */}
-         <div className={classes.Products_show_container}>
-            <div className={classes.Products_show_subContainer}>
-               <div>
-                  <button
-                     disabled={count >= products.length}
-                     type="button"
-                     onClick={() => setProductsPageHandler('more')}
-                  > SHOW MORE
-                  </button>
-               </div>
-            </div>
-            <div className={classes.Products_show_subContainer}>
-               <div>
-                  <button
-                     disabled={count <= pageLimit || products.length <= pageLimit}
-                     type="button"
-                     onClick={() => setProductsPageHandler('less')}
-                  > SHOW LESS
-                  </button>
-               </div>
-            </div>
-         </div>
+         {/* ANALISAR ALÉM DAS PROPS COMUNS, A MELHOR MANEIRA DE PASSAR O HISTORY DO ROUTER PARA ESTE CHILDREN NA RESPECTIVA ETAPA - ELE NÃO ESTÁ RECEBENDO ROUTER NO APP.JS */}
+         <CategoryHeader 
+            category={category} 
+            match={props.match}  
+         />
+         <ProductsGallery 
+            products={products}
+            count={count}
+            tag={tag}
+            category={category}
+            productsSubContainerRef={productsSubContainerRef}
+         />
+         <LoadMoreProducts 
+            products={products}
+            count={count}
+            pageLimit={pageLimit}
+            setProductsPageHandlerCB={(action) => setProductsPageHandler(action)}
+         />
       </div>
    )
 }
