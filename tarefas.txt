@@ -9,14 +9,19 @@ FASE 1 - Melhorias estruturais e funcionais:
    - ProgressBar: 
    - Products: OK
    - ProductCard: OK 
+   - ProductPageModal (ProductModal): OK
+   - ProductInfoComponent: 
+   - ProgressBar: Não mexer por enquanto
+   - ProductQtde: Não mexer por enquanto
 
 2- Implementar o Portals nos modais:
    - ProductPageModal:
 
-3- Analisar Redux e identificar melhorias, tanto na store quanto nos componentes
-   3.1- Analisar distribuição de props para identificar os pontos desnecessários que possam ser substituídos pelo contexto do redux
+3- Analisar Funções dentro dos componentes e identificar melhorias
+   - Ver se é possível transformar o slider da pdp e o do modal dos produtos em um único componente
 
-4- Analisar Funções dentro dos componentes e identificar melhorias
+4- Analisar Redux e identificar melhorias, tanto na store quanto nos componentes
+   3.1- Analisar distribuição de props para identificar os pontos desnecessários que possam ser substituídos pelo contexto do redux
 
 5- Análise de e correção de renderizações desnecessárias
 

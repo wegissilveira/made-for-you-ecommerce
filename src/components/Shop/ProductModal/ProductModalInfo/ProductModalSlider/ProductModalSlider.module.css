@@ -1,0 +1,23 @@
+.Product_modal_slider {
+   flex-basis: 50%;
+   flex-shrink: 0;
+   margin-right: 20px;
+   overflow: hidden;
+}
+
+@media (max-width: 480px) {
+   .Product_modal_slider {
+      order: 1;
+      margin-right: 0;
+   }
+}
+
+.Product_modal_slider > div:nth-of-type(2) {
+   justify-content: flex-start;
+}
+
+@media (max-width: 480px) {
+   .Product_modal_slider > div:nth-of-type(2) {
+      justify-content: center;
+   }
+}

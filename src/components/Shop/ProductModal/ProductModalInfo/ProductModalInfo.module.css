@@ -1,0 +1,34 @@
+.Product_page_modal_container {
+   display: flex;
+   padding-left: 15px;
+   padding-right: 15px;
+}
+
+@media (max-width: 480px) {
+   .Product_page_modal_container {
+      flex-direction: column;
+   }
+}
+
+.Product_page_modal_container > svg {
+   position: absolute;
+   right: 15px;
+   top: 10px;
+   margin: 0;
+   font-size: 22px;
+   cursor: pointer;
+   color: red;
+   z-index: 9999;
+}
+
+@media (max-width: 480px) {
+   .Product_page_modal_container > svg {
+      top: 0;
+      right: 20px;
+      font-size: 30px;
+   }
+
+   .Product_page_modal_container > div:nth-of-type(2) {
+      display: none;
+   }
+}
