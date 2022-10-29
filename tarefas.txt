@@ -14,17 +14,24 @@ FASE 1 - Melhorias estruturais e funcionais:
    - ProgressBar: Não mexer por enquanto
    - ProductQtde: Não mexer por enquanto
    - Filter: OK
+   - BestDeal (BestDealSession): OK
+   - Cart: OK
+   - ProductCart: Analisar posteriormente - talvez transformar em uma tabela ou algo semelhante. Está muito estranho da maneira atual
+   - CartForm: OK
 
 2- Implementar o Portals nos modais:
    - ProductPageModal:
 
 3- Analisar Funções dentro dos componentes e identificar melhorias
    - Ver se é possível transformar o slider da pdp e o do modal dos produtos em um único componente
+   - (BUG) O terceiro produto da lista do Cart está sempre retornando NaN no preço - aparentemente, depois de criar CartList o NaN ocorre com o primeiro produto
 
 4- Analisar Redux e identificar melhorias, tanto na store quanto nos componentes
    3.1- Analisar distribuição de props para identificar os pontos desnecessários que possam ser substituídos pelo contexto do redux
 
 5- Análise de e correção de renderizações desnecessárias
+
+EXTRAS - Reestruturar o UserForm para que receba as informações como props e seja, de fato, um componente dinâmico. Em UserLogin, ao invés de importar usar um UserForm que renderiza ambos os forma internamente, usará dois, onde cada um receberá as respectivas informações de cada formulário. Talvez setar onde componente (a ser criado) como o componente base, já que o componente par renderizará os forms de sign in e sign up. Esta última parte por questões de semântica
 
 
 FASE 2 - Implementação do TypeScript

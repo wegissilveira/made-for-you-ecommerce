@@ -1,0 +1,53 @@
+.Cart_header {
+   display: flex;
+   justify-content: space-between;
+   color: #6c757d;
+   font-weight: bold;
+   border-bottom: 1px solid #dee2e6;
+}
+
+@media (max-width: 768px) {
+   .Cart_header {
+      display: none;
+   }
+}
+
+.Cart_header>p {
+   /* padding-right: 15px; */
+   padding-left: 15px;
+}
+
+.Cart_header>p:first-of-type {
+   flex-basis: 25%;
+}
+
+@media (max-width: 768px) {
+   .Cart_header>p:first-of-type {
+      flex-basis: 33.33%;
+   }
+}
+
+.Cart_header>p:nth-child(n+2):nth-child(-n+5) {
+   text-align: center;
+   flex-basis: 16.66%;
+}
+
+@media (max-width: 992px) {
+   .Cart_header>p:nth-of-type(2) {
+      display: none;
+   }
+
+   .Cart_header>p:nth-child(n+2):nth-child(-n+5) {
+      flex-basis: 22.22%;
+   }
+}
+
+@media (max-width: 768px) {
+   .Cart_header>p:nth-of-type(3) {
+      display: none;
+   }
+}
+
+.Cart_header>p:last-of-type {
+   flex-basis: 8.33%;
+}

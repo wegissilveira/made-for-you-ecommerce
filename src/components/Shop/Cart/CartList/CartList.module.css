@@ -1,0 +1,16 @@
+.Cart_container > * {
+   max-width: 100%;
+}
+
+.Cart_keepBuy_button {
+   display: flex;
+   justify-content: space-between;
+   border-bottom: 1px solid #dee2e6;
+   margin-top: 48px;
+}
+
+@media (max-width: 768px) {
+   .Cart_keepBuy_button {
+       margin-top: unset;
+   }
+} 

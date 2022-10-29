@@ -79,74 +79,8 @@
     }
 }
 
-.Cart_light_button,
-.Cart_dark_button {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-
-    background-color: #3A3A3A;
-    color: white;
-    border: 1px solid #3A3A3A;
-    height: 45px;
-    width: 220px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-@media (max-width: 768px) {
-    .Cart_light_button,
-    .Cart_dark_button {
-        margin-top: 20px;
-    }
-}
-
-.Cart_light_button {
-    background-color: white;
-    color: #3A3A3A;
-    width: 170px;
-}
-
-.Cart_light_button span,
-.Cart_dark_button span {
-    font-size: 12px;
-}
-
-.Cart_dark_button:hover {
-    background-color: #4e4e4e;
-}
-
 .Cart_light_button:hover {
     background-color: rgb(235, 235, 235);
-}
-
-.Form_cart_price_container {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.Form_cart_price_container > * {
-    height: 33%;
-    width: 90%;
-    margin-left: 5%;
-    border-bottom: 1px solid #dee2e6;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.Form_cart_container > div:nth-of-type(3) > .Cart_dark_button {
-    width: 100%;
-}
-
-.Form_cart_price_container > :last-child {
-    border: 0;
-    font-weight: bold;
-}
-
-.Form_cart_price_container > * > :first-child {
-    font-weight: bold;
 }
 
 .Form_cart_container .cart-light_button,
