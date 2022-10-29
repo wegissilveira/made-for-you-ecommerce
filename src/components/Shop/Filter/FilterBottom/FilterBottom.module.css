@@ -1,0 +1,76 @@
+button {
+
+}
+
+.Filter_buttons_container {
+   display: flex;
+   justify-content: space-between;
+   overflow: hidden;
+   padding-left: 1%;
+   padding-right: 1%;
+   width: 36%;
+}
+
+.Filter_buttons_container button {
+   cursor: pointer;
+}
+
+@media (max-width: 1366px) {
+   .Filter_buttons_container {
+       width: 50%;
+   }
+}
+
+@media (max-width: 992px) {
+   .Filter_buttons_container {
+       width: 55%;
+       margin-left: 22.5%;
+   }
+}
+
+@media (max-width: 768px) {
+   .Filter_buttons_container {
+       width: 70%;
+       margin-left: 15%;
+   }
+}
+
+@media (max-width: 480px) {
+   .Filter_buttons_container {
+       width: 100%;
+       margin-left: 0;
+       padding: 0;
+   }
+}
+
+.Filter_button {
+   background-color: white;
+   color: #3A3A3A;
+   border: 1px solid #3A3A3A;
+   text-align: center;
+   height: 50px;
+   width: 200px;
+   cursor: pointer;
+   font-size: 16px;
+   box-sizing: border-box;
+   margin: 16px 0;
+}
+
+@media (max-width: 480px) {
+   .Filter_button {
+       width: 45%;
+   }
+}
+
+.Filter_button:hover {
+   background-color: rgb(235, 235, 235);
+}
+
+.Filter_button_active {
+   background-color: #3A3A3A;
+   color: white;
+}
+
+.Filter_button_active:hover {
+   background-color: #4e4e4e;
+}

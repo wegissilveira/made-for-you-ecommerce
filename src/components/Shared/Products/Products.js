@@ -14,9 +14,23 @@ import CategoryHeader from './CategoryHeader/CategoryHeader'
 
 
 const Products = props => {
+   const {
+      containerHeight,
+      isFilterOpen,
+      tag,
+      category,
+      match,
+      wishlist,
+      wish,
+      valueRange,
+      productColor,
+      offer,
+      order,
+      pageLimit
+   } = props
 
    const [count, setCount] = useState(0)
-   const [pageLimit, setPageLimit] = useState(0)
+   const [pageLimitState, setPageLimit] = useState(0)
    const [top, setTop] = useState()
 
    const productsContainerRef = useRef()
@@ -27,7 +41,7 @@ const Products = props => {
       const subContainerEl = productsSubContainerRef.current
 
       let containerBottom
-      if (props.containerHeight) {
+      if (containerHeight) {
          containerBottom = containerEl.offsetHeight
       } else {
          containerBottom = containerEl.offsetTop + containerEl.offsetHeight
@@ -51,7 +65,7 @@ const Products = props => {
       }
 
       let btnBottom
-      if (props.containerHeight) {
+      if (containerHeight) {
          btnBottom = 290
 
          if (window.screen.width >= 768 && window.screen.width <= 1365) {
@@ -73,9 +87,9 @@ const Products = props => {
       }
 
       let windowTop = containerBottom - btnBottom
-      if (props.isFilterOpen) {
-         if (props.isFilterOpen[0]) {
-            windowTop = windowTop + props.isFilterOpen[1]
+      if (isFilterOpen) {
+         if (isFilterOpen[0]) {
+            windowTop = windowTop + isFilterOpen[1]
          }
       }
 
@@ -84,34 +98,34 @@ const Products = props => {
       setCount(newCount)
 
       const _ = undefined
-      if (props.containerHeight) {
+      if (containerHeight) {
          props.containerHeight(_, _, _, [arg, productCardFullHeight + 20])
       }
    }
 
-   let tag
-   let category
-   if (props.tag && props.category) {
-      tag = props.tag
-      category = props.category
-   } else if (props.match) {
-      tag = 'all-products'
-      category = props.match.params.cat
-   } else if (props.tag) {
-      tag = props.tag
-      category = 'all'
-   } else if (props.category) {
-      tag = 'all-products'
-      category = props.category
+   let tagVar
+   let categoryVar
+   if (tag && category) {
+      tagVar = tag
+      categoryVar = category
+   } else if (match) {
+      tagVar = 'all-products'
+      categoryVar = match.params.cat
+   } else if (tag) {
+      tagVar = tag
+      categoryVar = 'all'
+   } else if (category) {
+      tagVar = 'all-products'
+      categoryVar = category
    } else {
-      tag = 'all-products'
-      category = 'all'
+      tagVar = 'all-products'
+      categoryVar = 'all'
    }
 
    let products = []
    let productsId = []
-   if (props.match && props.match.params.searchKey) {
-      let searchKey = new RegExp(props.match.params.searchKey, 'gi')
+   if (match && match.params.searchKey) {
+      let searchKey = new RegExp(match.params.searchKey, 'gi')
 
       productsData.forEach(product => {
          for (let i in product) {
@@ -124,54 +138,54 @@ const Products = props => {
          }
       })
 
-      category = 'all'
+      categoryVar = 'all'
 
    } else {
 
-      if (props.wishlist) {
-         products = productsData.filter(product => props.wish.includes(product._id))
+      if (wishlist) {
+         products = productsData.filter(product => wish.includes(product._id))
 
       } else {
 
-         if (tag === 'all-products' && category === 'all') {
+         if (tagVar === 'all-products' && categoryVar === 'all') {
             products = productsData
 
-         } else if (tag === 'all-products' && category !== 'all') {
-            products = productsData.filter(item => item.category === category)
+         } else if (tagVar === 'all-products' && categoryVar !== 'all') {
+            products = productsData.filter(item => item.category === categoryVar)
 
-         } else if (tag !== 'all-products' && category === 'all') {
-            products = productsData.filter(item => item.tag === tag)
+         } else if (tagVar !== 'all-products' && categoryVar === 'all') {
+            products = productsData.filter(item => item.tag === tagVar)
 
-         } else if (tag !== 'all-products' && category !== 'all') {
-            products = productsData.filter(item => item.tag === tag)
-            products = products.filter(item => item.category === category)
+         } else if (tagVar !== 'all-products' && categoryVar !== 'all') {
+            products = productsData.filter(item => item.tag === tagVar)
+            products = products.filter(item => item.category === categoryVar)
 
          }
       }
 
-      if (props.valueRange) {
+      if (valueRange) {
          products = products.filter(product =>
-            parseFloat(product.price) >= props.valueRange[0] && parseFloat(product.price) <= props.valueRange[1]
+            parseFloat(product.price) >= valueRange[0] && parseFloat(product.price) <= valueRange[1]
          )
       }
 
-      if (props.productColor && props.productColor !== '') {
+      if (productColor && productColor !== '') {
          products = products.filter(product =>
-            product.colors.includes(props.productColor)
+            product.colors.includes(productColor)
          )
       }
 
-      if (props.offer && props.offer.length > 0) {
+      if (offer && offer.length > 0) {
          products = products.filter(product =>
-            props.offer.includes(product.offer))
+            offer.includes(product.offer))
       }
 
-      if (props.order) {
-         if (props.order === 'low-high') {
+      if (order) {
+         if (order === 'low-high') {
             products.sort((a, b) => parseFloat(a.price) - parseFloat(b.price))
-         } else if (props.order === 'high-low') {
+         } else if (order === 'high-low') {
             products.sort((a, b) => parseFloat(b.price) - parseFloat(a.price))
-         } else if (props.order === 'alphabetical') {
+         } else if (order === 'alphabetical') {
             products.sort((a, b) => a.name.localeCompare(
                b.name,
                undefined,
@@ -190,17 +204,16 @@ const Products = props => {
          classes.Products_container
 
    useEffect(() => {
-      if (props.pageLimit === undefined) {
+      if (pageLimit === undefined) {
          setPageLimit(8)
          setCount(8)
       } else {
-         setPageLimit(props.pageLimit)
-         setCount(props.pageLimit)
+         setPageLimit(pageLimit)
+         setCount(pageLimit)
       }
 
-   }, [props.pageLimit])
+   }, [pageLimit])
 
-   console.log('PROPS: ', props)
 
    return (
       <div
@@ -209,20 +222,20 @@ const Products = props => {
       >
          {/* ANALISAR ALÉM DAS PROPS COMUNS, A MELHOR MANEIRA DE PASSAR O HISTORY DO ROUTER PARA ESTE CHILDREN NA RESPECTIVA ETAPA - ELE NÃO ESTÁ RECEBENDO ROUTER NO APP.JS */}
          <CategoryHeader 
-            category={category} 
+            category={categoryVar} 
             match={props.match}  
          />
          <ProductsGallery 
             products={products}
             count={count}
-            tag={tag}
-            category={category}
+            tag={tagVar}
+            category={categoryVar}
             productsSubContainerRef={productsSubContainerRef}
          />
          <LoadMoreProducts 
             products={products}
             count={count}
-            pageLimit={pageLimit}
+            pageLimit={pageLimitState}
             setProductsPageHandlerCB={(action) => setProductsPageHandler(action)}
          />
       </div>

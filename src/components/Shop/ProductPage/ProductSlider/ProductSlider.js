@@ -51,6 +51,7 @@ const ProductSlider = props => {
                     <FontAwesomeIcon onClick={() => changeSlide('next')} icon="arrow-right" />
                 </div>
             </div>
+            {/* Transformar este bloco em um loop - somente após análise da possibilidade de junção deste componente com o ProductModalSlider */}
             <div className={classes.Product_page_thumb_images}>
                 <img 
                     onClick={() => changeSlide(0)} 

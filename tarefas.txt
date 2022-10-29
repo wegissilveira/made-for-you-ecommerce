@@ -10,9 +10,10 @@ FASE 1 - Melhorias estruturais e funcionais:
    - Products: OK
    - ProductCard: OK 
    - ProductPageModal (ProductModal): OK
-   - ProductInfoComponent: 
+   - ProductInfoComponent: OK
    - ProgressBar: Não mexer por enquanto
    - ProductQtde: Não mexer por enquanto
+   - Filter: OK
 
 2- Implementar o Portals nos modais:
    - ProductPageModal:
