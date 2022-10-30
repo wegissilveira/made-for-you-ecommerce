@@ -18,6 +18,9 @@ FASE 1 - Melhorias estruturais e funcionais:
    - Cart: OK
    - ProductCart: Analisar posteriormente - talvez transformar em uma tabela ou algo semelhante. Está muito estranho da maneira atual
    - CartForm: OK
+   - Navigation (Header): OK
+   - NavigationMobile: 
+   - Contact: 
 
 2- Implementar o Portals nos modais:
    - ProductPageModal:
@@ -29,7 +32,7 @@ FASE 1 - Melhorias estruturais e funcionais:
    - (BUG) O terceiro produto da lista do Cart está sempre retornando NaN no preço - aparentemente, depois de criar CartList o NaN ocorre com o primeiro produto
 
 4- Analisar Redux e identificar melhorias, tanto na store quanto nos componentes
-   3.1- Analisar distribuição de props para identificar os poWntos desnecessários que possam ser substituídos pelo contexto do redux
+   3.1- Analisar distribuição de props para identificar os pontos desnecessários que possam ser substituídos pelo contexto do redux
 
 5- Análise de e correção de renderizações desnecessárias
 

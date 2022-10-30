@@ -1,4 +1,5 @@
 import React from "react"
+import { withRouter } from "react-router-dom"
 
 const CategoryHeader = (props) => {
    const {
@@ -14,4 +15,4 @@ const CategoryHeader = (props) => {
    )
 }
 
-export default CategoryHeader
+export default withRouter(CategoryHeader)

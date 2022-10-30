@@ -220,10 +220,8 @@ const Products = props => {
          ref={productsContainerRef}
          className={products_container}
       >
-         {/* ANALISAR ALÉM DAS PROPS COMUNS, A MELHOR MANEIRA DE PASSAR O HISTORY DO ROUTER PARA ESTE CHILDREN NA RESPECTIVA ETAPA - ELE NÃO ESTÁ RECEBENDO ROUTER NO APP.JS */}
          <CategoryHeader 
             category={categoryVar} 
-            match={props.match}  
          />
          <ProductsGallery 
             products={products}
