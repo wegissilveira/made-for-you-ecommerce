@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import ProductPageModal from 'components/Shop/ProductModal/ProductModal'
+import ProductPageModal from 'components/Shop/ProductModal/ProductPageModal'
 import * as actionTypes from 'store/actions/actionTypes'
 import wishlistDataFn from 'Data/wishlistData';
 import cartListDataFn from 'Data/cartData';
