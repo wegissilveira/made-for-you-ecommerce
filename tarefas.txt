@@ -19,8 +19,10 @@ FASE 1 - Melhorias estruturais e funcionais:
    - ProductCart: Analisar posteriormente - talvez transformar em uma tabela ou algo semelhante. Está muito estranho da maneira atual
    - CartForm: OK
    - Navigation (Header): OK
-   - NavigationMobile: 
+   - NavigationMobile (DrawerMenu): OK
    - Contact: 
+   - MainPageProducts: 
+   - mainPageDiscounts: 
 
 2- Implementar o Portals nos modais:
    - ProductPageModal:

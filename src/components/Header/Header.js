@@ -6,7 +6,7 @@ import './Header.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { connect } from 'react-redux'
 
-import NavigationMobile from './NavigationMobile/NavigationMobile'
+import DrawerMenu from './DrawerMenu/DrawerMenu'
 import NavigationDesk from './NavigationDesk/NavigationDesk'
 import HeaderLogo from './HeaderLogo/HeaderLogo'
 import HeaderUserOptions from './HeaderUserOptions/HeaderUserOptions'
@@ -48,7 +48,7 @@ const Header = props => {
             className={classes.Menu_hamburger}
             icon="bars" color="grey" size="2x"
          />
-         <NavigationMobile
+         <DrawerMenu
             toggleMenu={mobileMenuHandler}
             translateValue={translateMenuValue}
          />

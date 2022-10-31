@@ -9,7 +9,7 @@
 }
 
 @media (max-width: 992px) {
-   User-options--container {
+   .User-options--container {
       position: absolute;
       right: 10px;
       width: 20%;
