@@ -1,0 +1,41 @@
+.Contacts--wrapper {
+   flex-basis: 41%;
+   flex-shrink: 0;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.Contacts--wrapper > div {
+   margin-top: 24px;
+}
+
+.Contacts-social--wrapper {
+   flex-basis: 25%;
+   flex-shrink: 0;
+
+   display: flex;
+   flex-direction: column;
+   align-items: flex-end;
+}
+
+@media (max-width: 991.98px) {
+   .Contacts-social--wrapper {
+      align-items: center;
+   }
+
+   .Contacts-social--wrapper h3 {
+      display: none;
+   }
+}
+
+.Footer_staySocial_icons {
+   display: flex;
+   justify-content: space-between;
+   width: 50%;
+   margin-top: 24px;
+}
+
+.Contacts-social--wrapper > div:nth-of-type(2) {
+   margin-top: 16px;
+}

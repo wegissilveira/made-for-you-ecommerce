@@ -20,11 +20,12 @@ FASE 1 - Melhorias estruturais e funcionais:
    - CartForm: OK
    - Navigation (Header): OK
    - NavigationMobile (DrawerMenu): OK
-   - Contact: 
-   - MainPageProducts: 
-   - mainPageDiscounts: 
+   - Contact: OK
+   - MainPageProducts: OK
+   - mainPageDiscounts: OK
+   - Footer: OK
 
-2- Implementar o Portals nos modais:
+2- Implementar o Portals nos modais: OK
    - ProductPageModal:
       -> Faz uso da lib react-modal que já aplica o portal de maneira nativa
    - Toastify: OK
@@ -32,6 +33,7 @@ FASE 1 - Melhorias estruturais e funcionais:
 3- Analisar Funções dentro dos componentes e identificar melhorias
    - Ver se é possível transformar o slider da pdp e o do modal dos produtos em um único componente
    - (BUG) O terceiro produto da lista do Cart está sempre retornando NaN no preço - aparentemente, depois de criar CartList o NaN ocorre com o primeiro produto
+   - (MELHORIA) Considerar habilitar o header da galeria da home no mobile. Caso isso aconteça, criar um componente para compartilhar a lógica dos header mobile e desk
 
 4- Analisar Redux e identificar melhorias, tanto na store quanto nos componentes
    3.1- Analisar distribuição de props para identificar os pontos desnecessários que possam ser substituídos pelo contexto do redux

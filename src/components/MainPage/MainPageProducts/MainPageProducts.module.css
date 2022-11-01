@@ -12,7 +12,7 @@
     }
 }
 
-.Products_select_container {
+/* .Products_select_container {
     display: flex;
     justify-content: space-between;
     width: 43%;
@@ -42,9 +42,9 @@
     .Products_select_container {
         display: none;
     }
-}
+} */
 
-.Products_select {
+/* .Products_select {
     width: 155px;width: 100%;
     height: 53px;
     background-color: #F5F5F5;
@@ -70,9 +70,9 @@
     margin-bottom: 0;
     background-color: #fff;
     cursor: default;
-}
+} */
 
-.Products_select_active {
+/* .Products_select_active {
     background-color: #3A3A3A;
     color: white;
 
@@ -105,9 +105,9 @@
     left: 50%;
     transform: translateX(-50%);
     bottom: -11px;
-}
+} */
 
-.Products_select_container_mobile {
+/* .Products_select_container_mobile {
     display: none;
     flex-direction: column;
     width: 90%;
@@ -117,7 +117,7 @@
 @media (max-width: 991.98px) {
     .Products_select_container_mobile {
         display: flex;
-        display: none; /*PROVISÓRIO PARA TESTAR O HEADER*/
+        display: none; 
     }
 }
 
@@ -158,4 +158,4 @@
 .Products_select_mobile_active {
     background-color: #3A3A3A;
     color: white;
-}
+} */
