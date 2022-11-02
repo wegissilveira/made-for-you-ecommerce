@@ -1,0 +1,9 @@
+@media (max-width: 992px) {
+   .SearchProducts--wrapper {
+      display: none;
+   }
+}
+
+.SearchProducts--wrapper svg {
+   cursor: pointer;
+}

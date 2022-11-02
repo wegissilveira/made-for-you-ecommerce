@@ -53,14 +53,8 @@
    }
 }
 
-@media (max-width: 992px) {
-   .Account_icons>li:first-of-type {
-      display: none;
-   }
-}
-
 @media (max-width: 480px) {
-   .Account_icons>li:nth-of-type(2) {
+   .Account_icons>li:first-of-type {
       display: none;
    }
 }
