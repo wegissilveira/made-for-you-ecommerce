@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react'
 
-import classes from './BestDealSession.module.css'
+import classes from './BestDealSection.module.css'
 
 import BestDealSlider from './BestDealSlider/BestDealSlider'
 import ProgressBar from 'components/Shared/UI/ProgressBar/ProgressBar'
 
 
-const BestDealSession = props => {
+const BestDealSection = props => {
    const {
       products
    } = props
@@ -80,4 +80,4 @@ const BestDealSession = props => {
    )
 }
 
-export default BestDealSession
+export default BestDealSection

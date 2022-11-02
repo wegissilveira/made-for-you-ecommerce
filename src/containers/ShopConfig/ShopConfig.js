@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import Filter from 'components/Shop/Filter/Filter'
-import BestDealSession from 'components/Shop/BestDealSession/BestDealSession'
+import BestDealSession from 'components/Shop/BestDealSection/BestDealSection'
 
 import products from 'Data/productsData'
 
