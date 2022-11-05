@@ -8,9 +8,7 @@ const Wishlist = props => {
     return (
         <div>
             <h1>WISHLIST</h1>
-            <Products
-                wishlist={true}
-            />
+            <Products />
         </div>
     )
 }

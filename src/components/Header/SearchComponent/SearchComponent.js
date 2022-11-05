@@ -11,8 +11,8 @@ const SearchComponent = (props) => {
    const searchProducts = () => {
       const searchValue = inputRef.current.value
       if (searchValue.length >= 3) {
-         // props.history.push("/search/" + searchValue) // => Versão de desenvolvimento
-         props.history.push("/made-for-you/search/" + searchValue)
+         props.history.push("/search/" + searchValue) // => Versão de desenvolvimento
+         // props.history.push("/made-for-you/search/" + searchValue)
       } else {
          alert('Search requires at least three letters')
       }

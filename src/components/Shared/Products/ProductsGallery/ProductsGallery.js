@@ -13,7 +13,7 @@ const ProductsGallery = (props) => {
       category,
       productsSubContainerRef
    } = props
-
+   
    return (
       <div
          ref={productsSubContainerRef}

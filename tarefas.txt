@@ -52,3 +52,6 @@ EXTRAS - Reestruturar o UserForm para que receba as informações como props e s
 
 
 FASE 2 - Implementação do TypeScript
+
+FASE 3 - Subir para produção
+   - OBS.: Alterar script de busca para versão em prod

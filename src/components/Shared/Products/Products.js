@@ -3,6 +3,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import classes from './Products.module.css'
 
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 import * as actionTypes from 'store/actions/actionTypes'
 
@@ -15,26 +16,29 @@ import CategoryHeader from './CategoryHeader/CategoryHeader'
 
 const Products = props => {
    const {
-      containerHeight,
-      isFilterOpen,
-      tag,
-      category,
-      match,
-      wishlist,
-      wish,
-      valueRange,
-      productColor,
-      offer,
-      order,
-      pageLimit
+      containerHeight, // Função recebida de 'Filter' que seta a altura do filtro. Usado para setar a altura dinamicamente em caso do filtro estar aberto ou fechado
+      isFilterOpen, // Complemento da função de cima - identificar exatamente o que faz, mas acredito que altera a altura da janela para subir ou descer e garantir que os botão de load more estejam sempre no bottom da janela.
+      tag, // Tag que determina o tipo de produtos que serão mostrados (all products, furniture. decorations, textile)
+      category, // Categoria definida pelas abas de categoria na home
+      match, // Match params - utilizado para montar as prateleiras baseada na categoria ou no termo de busca. Ambos são inseridos dentro do objeto 'params'  
+      history, // Histórico do router - utilizado para identificar a página (rota) atual. sendo utilizado para identificar se o usuário está na 'shop' ou na wishlist, já que isso determina os produtos que serão inseridos na galeria.
+      wish, // Recebido do redux - Array de ids dos produtos que estão na wishlist. Monta a prateleira com os produtos correspondentes.
+      valueRange, // Recebido de Filter para definir a janela de preços dos produtos que serão mostrados. Definido pelo slider de preços
+      productColor, // Cor do produto definido no Filter
+      offer, // Oferta na qual o produto se encaixa definido no Filter
+      order, // Ordem em que os produtos devem ser exibidos
+      pageLimit = 8
    } = props
-
+   
    const [count, setCount] = useState(0)
    const [pageLimitState, setPageLimit] = useState(0)
    const [top, setTop] = useState()
+   const [galleryClass, setGalleryClass] = useState('ProductsContainer')
 
    const productsContainerRef = useRef()
    const productsSubContainerRef = useRef()
+
+   const pathname = history.location.pathname
 
    const setProductsPageHandler = arg => {
       const containerEl = productsContainerRef.current
@@ -102,14 +106,15 @@ const Products = props => {
          props.containerHeight(_, _, _, [arg, productCardFullHeight + 20])
       }
    }
-
+   console.log('HISTORY: ', history);
+   console.log('MATCH: ', match);
+   console.log('*****');
    let tagVar
    let categoryVar
    if (tag && category) {
       tagVar = tag
       categoryVar = category
-   } else if (match) {
-      tagVar = 'all-products'
+   } else if (match.params.cat) {
       categoryVar = match.params.cat
    } else if (tag) {
       tagVar = tag
@@ -126,7 +131,7 @@ const Products = props => {
    let productsId = []
    if (match && match.params.searchKey) {
       let searchKey = new RegExp(match.params.searchKey, 'gi')
-
+      
       productsData.forEach(product => {
          for (let i in product) {
             if (i !== 'imgsDemo' && i !== 'img' && i !== 'deal') {
@@ -141,25 +146,19 @@ const Products = props => {
       categoryVar = 'all'
 
    } else {
-
-      if (wishlist) {
+      if (pathname.match('wishlist')) {
          products = productsData.filter(product => wish.includes(product._id))
-
       } else {
 
          if (tagVar === 'all-products' && categoryVar === 'all') {
             products = productsData
-
          } else if (tagVar === 'all-products' && categoryVar !== 'all') {
             products = productsData.filter(item => item.category === categoryVar)
-
          } else if (tagVar !== 'all-products' && categoryVar === 'all') {
             products = productsData.filter(item => item.tag === tagVar)
-
          } else if (tagVar !== 'all-products' && categoryVar !== 'all') {
             products = productsData.filter(item => item.tag === tagVar)
             products = products.filter(item => item.category === categoryVar)
-
          }
       }
 
@@ -195,30 +194,20 @@ const Products = props => {
       }
    }
 
-   const url_string = window.location.href
-   const url = new URL(url_string);
-
-   const products_container =
-      url.pathname === '/shop/' ?
-         { width: '100%', margin: '0' } :
-         classes.Products_container
+   useEffect(() => {
+      setPageLimit(pageLimit)
+      setCount(pageLimit)
+   }, [pageLimit])
 
    useEffect(() => {
-      if (pageLimit === undefined) {
-         setPageLimit(8)
-         setCount(8)
-      } else {
-         setPageLimit(pageLimit)
-         setCount(pageLimit)
-      }
-
-   }, [pageLimit])
+      pathname === '/shop/' && setGalleryClass('ProductsContainer-shop')
+   }, [])
 
 
    return (
       <div
          ref={productsContainerRef}
-         className={products_container}
+         className={classes[galleryClass]}
       >
          <CategoryHeader 
             category={categoryVar} 
@@ -253,4 +242,4 @@ const mapDispatchToProps = dispatch => {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Products)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Products))
