@@ -22,7 +22,7 @@
 Here is a working live demo :  https://www.wegis.com.br/made-for-you
 
 
-## Site
+## Website
 
 ### Shop Page
 
