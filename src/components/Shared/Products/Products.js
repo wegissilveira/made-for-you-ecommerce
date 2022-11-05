@@ -106,30 +106,28 @@ const Products = props => {
          props.containerHeight(_, _, _, [arg, productCardFullHeight + 20])
       }
    }
-   console.log('HISTORY: ', history);
-   console.log('MATCH: ', match);
-   console.log('*****');
-   let tagVar
-   let categoryVar
+   // console.log('HISTORY: ', history);
+   // console.log('MATCH: ', match);
+   // console.log(' ');
+
+   // Bloco que determina os valores das variáveis 'tagVar' e 'categoryVar'
+   // São tais variáveis que servem como referência para definir quais produtos serão inseridos em cada respectiva galeria
+   let tagVar = 'all-products'
+   let categoryVar = 'all'   
    if (tag && category) {
       tagVar = tag
       categoryVar = category
-   } else if (match.params.cat) {
-      categoryVar = match.params.cat
    } else if (tag) {
       tagVar = tag
-      categoryVar = 'all'
-   } else if (category) {
-      tagVar = 'all-products'
-      categoryVar = category
-   } else {
-      tagVar = 'all-products'
-      categoryVar = 'all'
-   }
-
+   } else if (match.params.cat) {
+      categoryVar = match.params.cat
+   } 
+   
+   // Bloco responsável por montar a galeria de produtos em cada respectiva situação
    let products = []
    let productsId = []
-   if (match && match.params.searchKey) {
+   // Se for busca
+   if (match.params.searchKey) {
       let searchKey = new RegExp(match.params.searchKey, 'gi')
       
       productsData.forEach(product => {
@@ -145,40 +143,79 @@ const Products = props => {
 
       categoryVar = 'all'
 
+   // Se for diferente de busca
+   // Home, Shop, Wishlist
    } else {
+      // Wishlist
+      console.log('PRODUCTS-1: ', products.length);
       if (pathname.match('wishlist')) {
          products = productsData.filter(product => wish.includes(product._id))
+      
+      // Shop e Home
+      // A lógica aqui está um pouco estranha, me parece anti-performática
+      // A cada vez que o filtro é utilizado o array 'products' é totalmente reconstruído do primeiro passo ao último
+      // Então o array recebe os produtos que estão de acordo com a tag e a categoria e depois vai sendo filtrado de acordo com os filtros
+      // A cada uma dessas etapas ele passa por um filtro até chegar ao estado final
+      // Talvez não seja a melhor maneira, já que, ao menos no caso dos filtros, não há a necessidade de remontar o array baseado na categoria e tag novamente
+      // Ele deveria ser reconstruído somente no caso de alterar a tag ou a categoria, já que nesses casos é necessário a base completa de produtos
+      // No entanto, no caso dos filtros, talvez fosse melhor armazenar o array de produtos em uma state
+      // Assim a referência para os filtros seria a state e não a variável que é recriada todas as vezes desde o início
+      // O que eu devo fazer é remover a variável 'products' e criar uma state para no lugar
+      // inserir a lógica desse switch case dentro de uma função que será chamada no useEffect, que receberá como dependência as props tag e category
+      // Já os filtros serão alterados tendo como base a state
+      // Provavelmente uma função fará isso e terá como dependência as props referentes aos filtros
+      // OBS.: Eu penso que em algum ponto de toda essa lógica um reducer se encaixe melhor do que todas essas verificações
+      // Talvez o filtro possa ser encaixado em um reducer. - ANALISAR ISSO ANTES DE DAR SEGUIMENTO
       } else {
-
-         if (tagVar === 'all-products' && categoryVar === 'all') {
-            products = productsData
-         } else if (tagVar === 'all-products' && categoryVar !== 'all') {
-            products = productsData.filter(item => item.category === categoryVar)
-         } else if (tagVar !== 'all-products' && categoryVar === 'all') {
-            products = productsData.filter(item => item.tag === tagVar)
-         } else if (tagVar !== 'all-products' && categoryVar !== 'all') {
-            products = productsData.filter(item => item.tag === tagVar)
-            products = products.filter(item => item.category === categoryVar)
+         switch(true) {
+            case (tagVar === 'all-products' && categoryVar === 'all') :
+               products = productsData
+               break
+            case (tagVar === 'all-products' && categoryVar !== 'all') :
+               products = productsData.filter(item => item.category === categoryVar)
+               break
+            case (tagVar !== 'all-products' && categoryVar === 'all') :
+               products = productsData.filter(item => item.tag === tagVar)
+               break
+            case (tagVar !== 'all-products' && categoryVar !== 'all') :
+               products = productsData.filter(item => item.tag === tagVar)
+               products = products.filter(item => item.category === categoryVar)
+               break
+            default:
          }
+         console.log('PRODUCTS-2: ', products.length);
       }
 
+      // console.log('valueRange: ', valueRange);
+      // console.log('productColor: ', productColor);
+      // console.log('offer: ', offer);
+      // console.log('order: ', order);
+
+      // => Filtros (só existem em Shop)
+      // Valor
       if (valueRange) {
          products = products.filter(product =>
             parseFloat(product.price) >= valueRange[0] && parseFloat(product.price) <= valueRange[1]
          )
       }
+      console.log('PRODUCTS-3: ', products.length);
 
+      // Cor
       if (productColor && productColor !== '') {
          products = products.filter(product =>
             product.colors.includes(productColor)
          )
       }
+      console.log('PRODUCTS-4: ', products.length);
 
+      // Tipo de oferta
       if (offer && offer.length > 0) {
          products = products.filter(product =>
             offer.includes(product.offer))
       }
+      console.log('PRODUCTS-5: ', products.length);
 
+      // Ordenação
       if (order) {
          if (order === 'low-high') {
             products.sort((a, b) => parseFloat(a.price) - parseFloat(b.price))
@@ -192,8 +229,12 @@ const Products = props => {
             ))
          }
       }
-   }
 
+      console.log('PRODUCTS-6 FINAL: ', products.length);
+   }
+   console.log(' ');
+   console.log('*****');
+   console.log(' ');
    useEffect(() => {
       setPageLimit(pageLimit)
       setCount(pageLimit)

@@ -55,3 +55,28 @@ FASE 2 - Implementação do TypeScript
 
 FASE 3 - Subir para produção
    - OBS.: Alterar script de busca para versão em prod
+
+
+
+/* ********** */
+MONTAGEM DAS PRATELEIRAS NO IF/else
+REFERÊNCIA EM CASO DE PRECISAR
+REMOVER DEPOIS QUE NÃO FOR MAIS NECESSÁRIO
+// Mostrar todos os produtos
+if (tagVar === 'all-products' && categoryVar === 'all') {
+   products = productsData
+
+// Mostrar todos produtos da respectiva categoria (kitchen, bedroom etc)
+} else if (tagVar === 'all-products' && categoryVar !== 'all') {
+   products = productsData.filter(item => item.category === categoryVar)
+
+// Mostrar todos os produtos com a respectiva tag (furniture, decorations, textile)
+} else if (tagVar !== 'all-products' && categoryVar === 'all') {
+   products = productsData.filter(item => item.tag === tagVar)
+
+// Mostrar produtos dentro da categoria escolhida e que tenha a tag determinada
+// Ex.: Bedroom + furniture (Somente os produtos com tag 'furniture' que pertencem a categoria 'bedroom')
+} else if (tagVar !== 'all-products' && categoryVar !== 'all') {
+   products = productsData.filter(item => item.tag === tagVar)
+   products = products.filter(item => item.category === categoryVar)
+}
