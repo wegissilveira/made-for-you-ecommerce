@@ -27,19 +27,24 @@ const Products = props => {
       productColor, // Cor do produto definido no Filter
       offer, // Oferta na qual o produto se encaixa definido no Filter
       order, // Ordem em que os produtos devem ser exibidos
+      isFilterOn,
+      isFilterTagOn,
       pageLimit = 8
    } = props
    
+   const [productsState, setProductsState] = useState([])
    const [count, setCount] = useState(0)
    const [pageLimitState, setPageLimit] = useState(0)
    const [top, setTop] = useState()
    const [galleryClass, setGalleryClass] = useState('ProductsContainer')
 
+   const initialRender = useRef(true)
    const productsContainerRef = useRef()
    const productsSubContainerRef = useRef()
 
    const pathname = history.location.pathname
 
+   // Melhorar esta função e provavelmente converter em Hook
    const setProductsPageHandler = arg => {
       const containerEl = productsContainerRef.current
       const subContainerEl = productsSubContainerRef.current
@@ -106,99 +111,82 @@ const Products = props => {
          props.containerHeight(_, _, _, [arg, productCardFullHeight + 20])
       }
    }
-   // console.log('HISTORY: ', history);
-   // console.log('MATCH: ', match);
-   // console.log(' ');
 
-   // Bloco que determina os valores das variáveis 'tagVar' e 'categoryVar'
-   // São tais variáveis que servem como referência para definir quais produtos serão inseridos em cada respectiva galeria
    let tagVar = 'all-products'
-   let categoryVar = 'all'   
-   if (tag && category) {
-      tagVar = tag
-      categoryVar = category
-   } else if (tag) {
-      tagVar = tag
-   } else if (match.params.cat) {
-      categoryVar = match.params.cat
-   } 
-   
-   // Bloco responsável por montar a galeria de produtos em cada respectiva situação
-   let products = []
-   let productsId = []
-   // Se for busca
-   if (match.params.searchKey) {
-      let searchKey = new RegExp(match.params.searchKey, 'gi')
+   let categoryVar = 'all'  
+   const mountProducts = (productsFiltered) => {
+      // Bloco que determina os valores das variáveis 'tagVar' e 'categoryVar'
+      // São tais variáveis que servem como referência para definir quais produtos serão inseridos em cada respectiva galeria
+      if (tag && category) {
+         tagVar = tag
+         categoryVar = category
+      } else if (tag) {
+         tagVar = tag
+      } else if (match.params.cat) {
+         categoryVar = match.params.cat
+      } 
       
-      productsData.forEach(product => {
-         for (let i in product) {
-            if (i !== 'imgsDemo' && i !== 'img' && i !== 'deal') {
-               if (product[i].toString().match(searchKey) && !productsId.includes(product._id)) {
-                  products.push(product)
-                  productsId.push(product._id)
+      // Bloco responsável por montar a galeria de produtos em cada respectiva situação - possui utilidade somente em Shop
+      const currentProducts = isFilterOn ? (productsFiltered ? [...productsFiltered] : mountFilters(true) ) : [...productsData]
+
+      let products = []
+      const productsId = []
+      // Se for busca
+      if (match.params.searchKey) {
+         let searchKey = new RegExp(match.params.searchKey, 'gi')
+         
+         currentProducts.forEach(product => {
+            for (let i in product) {
+               if (i !== 'imgsDemo' && i !== 'img' && i !== 'deal') {
+                  if (product[i].toString().match(searchKey) && !productsId.includes(product._id)) {
+                     products.push(product)
+                     productsId.push(product._id)
+                  }
                }
             }
-         }
-      })
+         })
 
-      categoryVar = 'all'
+         categoryVar = 'all'
 
-   // Se for diferente de busca
-   // Home, Shop, Wishlist
-   } else {
-      // Wishlist
-      console.log('PRODUCTS-1: ', products.length);
-      if (pathname.match('wishlist')) {
-         products = productsData.filter(product => wish.includes(product._id))
-      
-      // Shop e Home
-      // A lógica aqui está um pouco estranha, me parece anti-performática
-      // A cada vez que o filtro é utilizado o array 'products' é totalmente reconstruído do primeiro passo ao último
-      // Então o array recebe os produtos que estão de acordo com a tag e a categoria e depois vai sendo filtrado de acordo com os filtros
-      // A cada uma dessas etapas ele passa por um filtro até chegar ao estado final
-      // Talvez não seja a melhor maneira, já que, ao menos no caso dos filtros, não há a necessidade de remontar o array baseado na categoria e tag novamente
-      // Ele deveria ser reconstruído somente no caso de alterar a tag ou a categoria, já que nesses casos é necessário a base completa de produtos
-      // No entanto, no caso dos filtros, talvez fosse melhor armazenar o array de produtos em uma state
-      // Assim a referência para os filtros seria a state e não a variável que é recriada todas as vezes desde o início
-      // O que eu devo fazer é remover a variável 'products' e criar uma state para no lugar
-      // inserir a lógica desse switch case dentro de uma função que será chamada no useEffect, que receberá como dependência as props tag e category
-      // Já os filtros serão alterados tendo como base a state
-      // Provavelmente uma função fará isso e terá como dependência as props referentes aos filtros
-      // OBS.: Eu penso que em algum ponto de toda essa lógica um reducer se encaixe melhor do que todas essas verificações
-      // Talvez o filtro possa ser encaixado em um reducer. - ANALISAR ISSO ANTES DE DAR SEGUIMENTO
+      // Se for diferente de busca
+      // Home, Shop, Wishlist
       } else {
-         switch(true) {
-            case (tagVar === 'all-products' && categoryVar === 'all') :
-               products = productsData
-               break
-            case (tagVar === 'all-products' && categoryVar !== 'all') :
-               products = productsData.filter(item => item.category === categoryVar)
-               break
-            case (tagVar !== 'all-products' && categoryVar === 'all') :
-               products = productsData.filter(item => item.tag === tagVar)
-               break
-            case (tagVar !== 'all-products' && categoryVar !== 'all') :
-               products = productsData.filter(item => item.tag === tagVar)
-               products = products.filter(item => item.category === categoryVar)
-               break
-            default:
+         // Wishlist
+         if (pathname.match('wishlist')) {
+            products = currentProducts.filter(product => wish.includes(product._id))
+         } else {
+            switch(true) {
+               case (tagVar === 'all-products' && categoryVar === 'all') :
+                  products = currentProducts
+                  break
+               case (tagVar === 'all-products' && categoryVar !== 'all') :
+                  products = currentProducts.filter(item => item.category === categoryVar)
+                  break
+               case (tagVar !== 'all-products' && categoryVar === 'all') :
+                  products = currentProducts.filter(item => item.tag === tagVar)
+                  break
+               case (tagVar !== 'all-products' && categoryVar !== 'all') :
+                  products = currentProducts.filter(item => item.tag === tagVar)
+                  products = products.filter(item => item.category === categoryVar)
+                  break
+               default:
+            }            
          }
-         console.log('PRODUCTS-2: ', products.length);
       }
+      
+      setProductsState(products)
+   }
 
-      // console.log('valueRange: ', valueRange);
-      // console.log('productColor: ', productColor);
-      // console.log('offer: ', offer);
-      // console.log('order: ', order);
-
+   const mountFilters = (sendBackForMounting) => {
+      const currentProducts = [...productsData]
+      let products
       // => Filtros (só existem em Shop)
       // Valor
       if (valueRange) {
-         products = products.filter(product =>
+         products = currentProducts.filter(product =>
             parseFloat(product.price) >= valueRange[0] && parseFloat(product.price) <= valueRange[1]
          )
       }
-      console.log('PRODUCTS-3: ', products.length);
 
       // Cor
       if (productColor && productColor !== '') {
@@ -206,14 +194,12 @@ const Products = props => {
             product.colors.includes(productColor)
          )
       }
-      console.log('PRODUCTS-4: ', products.length);
 
       // Tipo de oferta
       if (offer && offer.length > 0) {
          products = products.filter(product =>
             offer.includes(product.offer))
       }
-      console.log('PRODUCTS-5: ', products.length);
 
       // Ordenação
       if (order) {
@@ -230,11 +216,27 @@ const Products = props => {
          }
       }
 
-      console.log('PRODUCTS-6 FINAL: ', products.length);
-   }
-   console.log(' ');
-   console.log('*****');
-   console.log(' ');
+      if(sendBackForMounting) return products
+      
+      if (isFilterTagOn) {
+         mountProducts(products)
+      } else {
+         setProductsState(products)
+      }
+   } 
+
+   useEffect(() => {
+      mountProducts()
+   }, [tag, category])
+
+   useEffect(() => {
+      if(initialRender.current) {
+         initialRender.current = false
+      } else {
+         mountFilters()
+      }
+   }, [JSON.stringify(valueRange), productColor, JSON.stringify(offer), order])
+
    useEffect(() => {
       setPageLimit(pageLimit)
       setCount(pageLimit)
@@ -254,14 +256,14 @@ const Products = props => {
             category={categoryVar} 
          />
          <ProductsGallery 
-            products={products}
+            products={productsState}
             count={count}
             tag={tagVar}
             category={categoryVar}
             productsSubContainerRef={productsSubContainerRef}
          />
          <LoadMoreProducts 
-            products={products}
+            products={productsState}
             count={count}
             pageLimit={pageLimitState}
             setProductsPageHandlerCB={(action) => setProductsPageHandler(action)}

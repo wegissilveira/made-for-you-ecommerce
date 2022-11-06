@@ -43,6 +43,8 @@ const Filter = props => {
    const [productColorStep, setProductColorStep] = useState('') // => Armazena cor selecionada do produto
    const [offer, setOffer] = useState([])
    const [order, setOrder] = useState('default')
+   const [isFilterOn, setIsFilterOn] = useState(false)
+   const [isFilterTagOn, setIsFilterTagOn] = useState(false)
    /* */
 
    const [openToastify, setOpenToastify] = useState(false)
@@ -88,12 +90,14 @@ const Filter = props => {
    const setPriceRange = values => {
       setMinValue(values[0])
       setMaxValue(values[1])
+      setIsFilterOn(true)
    }
 
    const selectColorHandler = color => {
       setProductColorStep(color)
       setProductColor(color)
       setCheckColor(false)
+      setIsFilterOn(true)
    }
 
    const setCheckColorHandler = check => {
@@ -101,6 +105,7 @@ const Filter = props => {
 
       setCheckColor(check)
       setProductColor(checked)
+      setIsFilterOn(true)
    }
 
    const setProductTypeHandler = (e, block, arg) => {
@@ -114,6 +119,8 @@ const Filter = props => {
       })
 
       e.target.style.fontWeight = 'bold'
+
+      setIsFilterTagOn(true)
    }
 
    const setOfferHandler = e => {
@@ -128,6 +135,7 @@ const Filter = props => {
       }
 
       setOffer(inputValuesArr)
+      setIsFilterOn(true)
    }
 
    const cleanFiltersHandler = () => {
@@ -165,6 +173,8 @@ const Filter = props => {
          }
 
       })
+      console.log('CHAMOU CLEAN');
+
 
       setOrder('default')
       setTag('all-products')
@@ -172,8 +182,11 @@ const Filter = props => {
       setCheckColor(true)
       setProductColor('')
       setOffer([])
-
+      
       sliderRef.current.resetPriceSlider()
+
+      setIsFilterOn(false)
+      setIsFilterTagOn(false)
    }
 
    const callResizeAlert = () => {// alert('Atualize a página para que todos os componentes se ajustem às novas dimensões. Essa mensagem não aparecerá novamente nesta sessão.')
@@ -297,6 +310,8 @@ const Filter = props => {
                   order={order}
                   containerHeight={containerHeightHandler}
                   isFilterOpen={[filterOpen, filter_height]}
+                  isFilterOn={isFilterOn}
+                  isFilterTagOn={isFilterTagOn}
                />
             </div>
          </div>
