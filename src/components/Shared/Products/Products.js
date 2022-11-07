@@ -7,6 +7,8 @@ import { withRouter } from 'react-router-dom'
 
 import * as actionTypes from 'store/actions/actionTypes'
 
+import useSetPageTop from 'hooks/useSetPageTop'
+
 import productsData from 'Data/productsData'
 import wishlistDataFn from 'Data/wishlistData'
 import LoadMoreProducts from './LoadMoreProducts/LoadMoreProducts'
@@ -33,84 +35,16 @@ const Products = props => {
    } = props
    
    const [productsState, setProductsState] = useState([])
-   const [count, setCount] = useState(0)
    const [pageLimitState, setPageLimit] = useState(0)
-   const [top, setTop] = useState()
    const [galleryClass, setGalleryClass] = useState('ProductsContainer')
 
    const initialRender = useRef(true)
    const productsContainerRef = useRef()
    const productsSubContainerRef = useRef()
 
+   const { setProductsPageHandler, setCount, count } = useSetPageTop()
+
    const pathname = history.location.pathname
-
-   // Melhorar esta função e provavelmente converter em Hook
-   const setProductsPageHandler = arg => {
-      const containerEl = productsContainerRef.current
-      const subContainerEl = productsSubContainerRef.current
-
-      let containerBottom
-      if (containerHeight) {
-         containerBottom = containerEl.offsetHeight
-      } else {
-         containerBottom = containerEl.offsetTop + containerEl.offsetHeight
-      }
-
-      const productCardStyle = window.getComputedStyle(containerEl.children[0].children[0])
-      const productCardHeight = parseInt((productCardStyle.height).match(/\d+/)[0])
-      const productCardMarginTop = parseInt((productCardStyle.marginTop).match(/\d+/)[0])
-      const productCardFullHeight = productCardHeight + productCardMarginTop
-
-      let newCount
-      const subContainerWidth = Number((window.getComputedStyle(subContainerEl).inlineSize).replace(/[^0-9.]+/g, ""))
-      const productCardWidth = Number((window.getComputedStyle(subContainerEl.children[0]).inlineSize).replace(/[^0-9.]+/g, ""))
-      const itemsPerRow = Math.floor(subContainerWidth / productCardWidth)
-
-      if (arg === 'more') {
-         newCount = count + itemsPerRow
-      } else {
-         containerBottom = top - productCardFullHeight
-         newCount = count - itemsPerRow
-      }
-
-      let btnBottom
-      if (containerHeight) {
-         btnBottom = 290
-
-         if (window.screen.width >= 768 && window.screen.width <= 1365) {
-            btnBottom = 210
-         } else if (window.screen.width >= 1366 && window.screen.width <= 1599) {
-            btnBottom = -70
-         } else if (window.screen.width <= 360) {
-            btnBottom = 0
-         }
-
-      } else {
-         btnBottom = 560
-
-         if (window.screen.width >= 1366 && window.screen.width <= 1599) {
-            btnBottom = 200
-         } else if (window.screen.width <= 360) {
-            btnBottom = 300
-         }
-      }
-
-      let windowTop = containerBottom - btnBottom
-      if (isFilterOpen) {
-         if (isFilterOpen[0]) {
-            windowTop = windowTop + isFilterOpen[1]
-         }
-      }
-
-      window.scrollTo({ top: windowTop, left: 0, behavior: 'smooth' })
-      setTop(containerBottom)
-      setCount(newCount)
-
-      const _ = undefined
-      if (containerHeight) {
-         props.containerHeight(_, _, _, [arg, productCardFullHeight + 20])
-      }
-   }
 
    let tagVar = 'all-products'
    let categoryVar = 'all'  
@@ -266,7 +200,7 @@ const Products = props => {
             products={productsState}
             count={count}
             pageLimit={pageLimitState}
-            setProductsPageHandlerCB={(action) => setProductsPageHandler(action)}
+            setProductsPageHandlerCB={(action) => setProductsPageHandler(action, productsContainerRef, productsSubContainerRef, containerHeight, isFilterOpen)}
          />
       </div>
    )
