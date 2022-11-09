@@ -13,7 +13,6 @@ const checkboxItems = [
 ]
 
 
-
 const FilterBody = props => {
    const {
       products,
@@ -21,11 +20,10 @@ const FilterBody = props => {
       typesRef,
       offerRef,
       setOfferCB,
-      checkColor,
       sliderRef,
       minValue,
       maxValue,
-      setCheckColorHandlerCB,
+      lastSelectedColorHandlerCB,
       selectColorHandlerCB,
       setPriceRangeCB,
       setProductTypeHandlerCB
@@ -97,7 +95,7 @@ const FilterBody = props => {
          <div ref={categoriesRef}>
             <h6>CATEGORIES</h6>
             {/* Considerar transformar estas funções em um único componente que recebe os valores como props, talvez um array, onde o componente seria chamado uma única vez para cara filtro ou passar os valores individualmente, onde o componente seria chamado uma vez para cada item do filtro */}
-            <p onClick={e => setProductTypeHandlerCB(e, 'cat', 'all')}>All categories ({categoriesTotalQtde}) </p>
+            <p className={classes.Selected} onClick={e => setProductTypeHandlerCB(e, 'cat', 'all')}>All categories ({categoriesTotalQtde}) </p>
             <p onClick={e => setProductTypeHandlerCB(e, 'cat', 'bedroom')}>Bedroom ({bedRoomQtde}) </p>
             <p onClick={e => setProductTypeHandlerCB(e, 'cat', 'living-room')}>Living room ({livingRoomQtde}) </p>
             <p onClick={e => setProductTypeHandlerCB(e, 'cat', 'kitchen')}>Kitchen ({kitchen}) </p>
@@ -107,7 +105,7 @@ const FilterBody = props => {
          <span></span>
          <div ref={typesRef}>
             <h6>TYPE</h6>
-            <p onClick={e => setProductTypeHandlerCB(e, 'type', 'all-products')}>All tags ({typesTotalQtde}) </p>
+            <p className={classes.Selected} onClick={e => setProductTypeHandlerCB(e, 'type', 'all-products')}>All tags ({typesTotalQtde}) </p>
             <p onClick={e => setProductTypeHandlerCB(e, 'type', 'furniture')}>Furniture ({furnitureQtde}) </p>
             <p onClick={e => setProductTypeHandlerCB(e, 'type', 'accessories')}>Accessories ({accessoriesQtde}) </p>
             <p onClick={e => setProductTypeHandlerCB(e, 'type', 'decorations')}>Decorations ({decorationsQtde}) </p>
@@ -122,8 +120,7 @@ const FilterBody = props => {
          />
          <span></span>
          <FilterColorSelector
-            checkColor={checkColor}
-            setCheckColorHandlerCB={setCheckColorHandlerCB}
+            lastSelectedColorHandlerCB={lastSelectedColorHandlerCB}
             selectColorHandlerCB={selectColorHandlerCB}
          />
          <span></span>

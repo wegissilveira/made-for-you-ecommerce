@@ -1,6 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useReducer } from 'react'
 
 import classes from './Filter.module.css'
+
+import productsData from 'Data/productsData'
+import { mountProducts, mountFilters } from 'helpers/functions'
 
 import Toastify from 'components/Shared/UI/Toastify/Toastify'
 import Products from 'components/Shared/Products/Products'
@@ -19,6 +22,107 @@ const toastifyMsg = [
    'In order for all components to adjust to the new screen dimensions, the page should be reloaded.'
 ]
 
+const initialFilter = {
+   productsState: productsData,
+   tag: 'all-products',
+   category: 'all',
+   color:  {
+      currentColor: '',
+      lastSelectedColor: ''
+   },
+   offer: [],
+   order: 'default',
+   priceRange: {
+      minValue: initial_min_value,
+      maxValue: initial_max_value
+   }
+}
+
+// Próxima etapa é tentar montar a lista de produtos aqui e já enviar pronta para 'Products' como props
+const filterReducer = (state, action) => {
+   switch (action.type) {
+      case 'setTag':
+         return {
+            ...state,
+            tag: action.tag,
+            productsState: mountProducts(productsData, action.tag, state.category)
+         }
+      case 'setCategory':
+         return {
+            ...state,
+            category: action.category,
+            productsState: mountProducts(productsData, state.tag, action.category)
+         }
+      case 'setColor':
+         return {
+            ...state,
+            color: action.color,
+            productsState: mountFilters(
+               productsData, 
+               [state.priceRange.minValue, state.priceRange.maxValue], 
+               action.color,
+               state.offer,
+               state.order
+            )
+         }
+      case 'setOffer':
+         return {
+            ...state,
+            offer: action.offer,
+            productsState: mountFilters(
+               productsData, 
+               [state.priceRange.minValue, state.priceRange.maxValue], 
+               state.color.currentColor,
+               action.offer,
+               state.order
+            )
+         }
+      case 'setOrder':
+         return {
+            ...state,
+            order: action.order,
+            productsState: mountFilters(
+               productsData, 
+               [state.priceRange.minValue, state.priceRange.maxValue], 
+               state.color.currentColor,
+               state.offer,
+               action.order
+            )
+         }
+      case 'setPrice':
+         return {
+            ...state,
+            priceRange: action.priceRange,
+            productsState: mountFilters(
+               productsData, 
+               action.priceRange, 
+               state.color.currentColor,
+               state.offer,
+               state.order
+            )
+         }
+      case 'resetFilter':
+         return {
+            tag: 'all-products',
+            category: 'all',
+            color: {
+               currentColor: '',
+               lastSelectedColor: ''
+            },
+            offer: [],
+            order: 'default',
+            priceRange: {
+               minValue: initial_min_value,
+               maxValue: initial_max_value
+            },
+            productsState: productsData
+         }
+      default:
+         return state
+   }
+}
+
+
 const Filter = props => {
    const {
       products
@@ -31,23 +135,13 @@ const Filter = props => {
    const [translateValue, setTranslateValue] = useState()
    const [resize, setResize] = useState(true)
 
-   /* Slider Price */
-   const [min_value, setMinValue] = useState(initial_min_value)
-   const [max_value, setMaxValue] = useState(initial_max_value)
-
-   /* Demais filtros */
-   const [tag, setTag] = useState('all-products')
-   const [category, setCategory] = useState('all')
-   const [checkColor, setCheckColor] = useState(true)
-   const [productColor, setProductColor] = useState('') // => Armazena cor selecionada do produto
-   const [productColorStep, setProductColorStep] = useState('') // => Armazena cor selecionada do produto
-   const [offer, setOffer] = useState([])
-   const [order, setOrder] = useState('default')
    const [isFilterOn, setIsFilterOn] = useState(false)
    const [isFilterTagOn, setIsFilterTagOn] = useState(false)
    /* */
 
    const [openToastify, setOpenToastify] = useState(false)
+
+   const [filterReducerState, dispatch] = useReducer(filterReducer, initialFilter)
 
    const containerRef = useRef()
    const filterRef = useRef()
@@ -57,6 +151,7 @@ const Filter = props => {
    const offerRef = useRef()
    const selectRef = useRef()
 
+   console.log('productsState: ', filterReducerState.productsState);
 
    const translateFilter = {
       transform: `translateY(${translateValue}px)`,
@@ -88,44 +183,49 @@ const Filter = props => {
    }
 
    const setPriceRange = values => {
-      setMinValue(values[0])
-      setMaxValue(values[1])
+      dispatch({type: 'setPrice', priceRange: {
+         minValue: values[0],
+         maxValue: values[1]
+      }})
       setIsFilterOn(true)
    }
 
    const selectColorHandler = color => {
-      setProductColorStep(color)
-      setProductColor(color)
-      setCheckColor(false)
+      const colorInput = document.getElementById('all-colors-input')
+
+      dispatch({type: 'setColor', color: {
+         currentColor: color,
+         lastSelectedColor: color
+      }})
+
+      colorInput.checked = false
       setIsFilterOn(true)
    }
 
-   const setCheckColorHandler = check => {
-      const checked = check ? '' : productColorStep
-
-      setCheckColor(check)
-      setProductColor(checked)
+   const lastSelectedColorHandler = (e) => {
+      const isAllColorsChecked = e.target.checked
+      const checked = {
+         currentColor: isAllColorsChecked ? '' : filterReducerState.color.lastSelectedColor,
+         lastSelectedColor: filterReducerState.color.lastSelectedColor
+      }
+      dispatch({type: 'setColor', color: checked})
       setIsFilterOn(true)
    }
 
    const setProductTypeHandler = (e, block, arg) => {
-
-      block === 'cat' ? setCategory(arg) : setTag(arg)
+      block === 'cat' ? dispatch({type: 'setCategory', category: arg}) : dispatch({type: 'setTag', tag: arg})
 
       let elementsArr = Array.from(e.target.parentNode.children)
-
-      elementsArr.forEach(element => {
-         element.style.fontWeight = 'normal'
+      elementsArr.forEach((element, i) => {
+         if (i !== 0) element.className = classes.Not_Selected
       })
 
-      e.target.style.fontWeight = 'bold'
-
+      e.target.className = classes.Selected
       setIsFilterTagOn(true)
    }
 
    const setOfferHandler = e => {
-
-      let inputValuesArr = [...offer]
+      let inputValuesArr = [...filterReducerState.offer]
       const input = e.target
 
       if (input.checked) {
@@ -133,17 +233,17 @@ const Filter = props => {
       } else {
          inputValuesArr = inputValuesArr.filter(value => value !== input.value)
       }
-
-      setOffer(inputValuesArr)
+      
+      dispatch({type: 'setOffer', offer: inputValuesArr})
       setIsFilterOn(true)
    }
 
    const cleanFiltersHandler = () => {
-
       const selectList = Array.from(selectRef.current.children)
       const categoriesList = Array.from(categoriesRef.current.children)
       const typesList = Array.from(typesRef.current.children)
       const offerList = Array.from(offerRef.current.children)
+      const colorInput = document.getElementById('all-colors-input')
 
       selectList.forEach((element, i) => {
          if (i === 0) {
@@ -153,40 +253,35 @@ const Filter = props => {
          }
       })
 
+      const resetFilters = (el, i) => {
+         if (i !== 0) i === 1 ? el.className = classes.Selected : el.className = classes.Not_Selected
+      }
+
       categoriesList.forEach((element, i) => {
-         i === 1 ? element.style.fontWeight = 'bold' : element.style.fontWeight = 'normal'
+         resetFilters(element, i)
       })
 
       typesList.forEach((element, i) => {
-         i === 1 ? element.style.fontWeight = 'bold' : element.style.fontWeight = 'normal'
+         resetFilters(element, i)
       })
 
       offerList.forEach(element => {
-
          if (element.tagName === 'DIV') {
             Array.from(element.children).forEach(el => {
-
                if (el.tagName === 'INPUT') {
                   el.checked = false
                }
             })
          }
-
       })
-      console.log('CHAMOU CLEAN');
 
-
-      setOrder('default')
-      setTag('all-products')
-      setCategory('all')
-      setCheckColor(true)
-      setProductColor('')
-      setOffer([])
+      dispatch({type: 'resetFilter'}) 
       
       sliderRef.current.resetPriceSlider()
 
       setIsFilterOn(false)
       setIsFilterTagOn(false)
+      colorInput.checked = false
    }
 
    const callResizeAlert = () => {// alert('Atualize a página para que todos os componentes se ajustem às novas dimensões. Essa mensagem não aparecerá novamente nesta sessão.')
@@ -275,7 +370,7 @@ const Filter = props => {
                selectRef={selectRef}
                filterOpen={filterOpen}
                openFilterHandlerCB={openFilterHandler}
-               setOrderCB={(value) => setOrder(value)}
+               setOrderCB={(value) => dispatch({type: 'setOrder', order: value})}
             />
             <div style={translateFilter}>
                <div
@@ -287,12 +382,11 @@ const Filter = props => {
                      categoriesRef={categoriesRef}
                      typesRef={typesRef}
                      offerRef={offerRef}
-                     checkColor={checkColor}
                      sliderRef={sliderRef}
                      minValue={initial_min_value}
                      maxValue={initial_max_value}
                      setOfferCB={e => setOfferHandler(e)}
-                     setCheckColorHandlerCB={setCheckColorHandler}
+                     lastSelectedColorHandlerCB={lastSelectedColorHandler}
                      selectColorHandlerCB={selectColorHandler}
                      setPriceRangeCB={setPriceRange}
                      setProductTypeHandlerCB={(e, type, value) => setProductTypeHandler(e, type, value)}
@@ -302,12 +396,12 @@ const Filter = props => {
                <Products
                   // products={products} // => Envia o array com os produtos que serão exibidos
                   pageLimit={pageLimit}  // => Número limite de produtos a serem mostrados inicialmente
-                  tag={tag} // => Tag que determina quais produtos serão mostrados
-                  category={category} // => Categoria dos produtos que serão mostrados
-                  valueRange={[min_value, max_value]} // => Intervalo de preço que determinará os produtos que serão mostrados
-                  productColor={productColor} // => Filtra o produto por cor
-                  offer={offer} // => Filtra os produtos por tipo de oferta
-                  order={order}
+                  tag={filterReducerState.tag} // => Tag que determina quais produtos serão mostrados
+                  category={filterReducerState.category} // => Categoria dos produtos que serão mostrados
+                  valueRange={[filterReducerState.priceRange.minValue, filterReducerState.priceRange.maxValue]} // => Intervalo de preço que determinará os produtos que serão mostrados
+                  productColor={filterReducerState.color.currentColor} // => Filtra o produto por cor
+                  offer={filterReducerState.offer} // => Filtra os produtos por tipo de oferta
+                  order={filterReducerState.order}
                   containerHeight={containerHeightHandler}
                   isFilterOpen={[filterOpen, filter_height]}
                   isFilterOn={isFilterOn}

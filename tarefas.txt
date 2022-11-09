@@ -44,6 +44,12 @@ FASE 1 - Melhorias estruturais e funcionais:
       -> (BUG): Corrigir mensagem de wishlist vazia, está usando a mesma mensagem de busca vazia
       -> (BUG): Scroll de show more/less parece funcionar bem somente em telas com 1366px, telas maiores o cálculo não parece estar correto - OBS.: A função foi removida de 'Products' e convertida no hook 'useSetPageTop'. Corrigir o bug e analisar possíveis melhorias no código.
       -> O código de montar a prateleira foi reorganizado, mas acredito que ainda caiba melhorias. Analisar as possibilidades após reorganizar/refatorar código de Filter.
+      -> (BUG): Bullets de cores do filtro continuam selecionados após o filtro ser resetado
+      -> (BUG/MELHORIA): Na hora de resetar o filtro o dispatch de filtros de preço está sendo executado duas vezes, uma pela função de limpar filtros e outra pela função 'setPriceRange', que é chamada como callback a partir do slider de preço:
+         - A função é necessária por ora pois o cálculo do preço é feito no slider baseado na posição dos bullets, no entanto não há a necessidade de se executar tal função no momento de limpar o filtro, já que o dispatch de resetar o filtro já ajusta a propriedade de preços;
+         - Mas limpar filtros também executa a função que reposiciona os bullets no slider, caso tal função seja removida os bullets não são reposicionados e caso seja mantida ela executa o slider e chama 'setPriceRange';
+         - Buscar uma maneira de não executar 'setPriceRange' no momento de limpar o filtro, mas ao mesmo tempo reposicionar os bullets do slider de preço.
+      -> (MELHORIA): Botão 'FILTER' no filtro não tem nenhuma função - removê-lo caso não tenha nenhuma utilidade
    
    3.1- Analisar warnings no terminal
 
@@ -52,7 +58,8 @@ FASE 1 - Melhorias estruturais e funcionais:
 
 5- Análise de e correção de renderizações desnecessárias
 
-EXTRAS - Reestruturar o UserForm para que receba as informações como props e seja, de fato, um componente dinâmico. Em UserLogin, ao invés de importar usar um UserForm que renderiza ambos os forma internamente, usará dois, onde cada um receberá as respectivas informações de cada formulário. Talvez setar onde componente (a ser criado) como o componente base, já que o componente par renderizará os forms de sign in e sign up. Esta última parte por questões de semântica.
+EXTRAS: 
+1- Reestruturar o UserForm para que receba as informações como props e seja, de fato, um componente dinâmico. Em UserLogin, ao invés de importar usar um UserForm que renderiza ambos os forma internamente, usará dois, onde cada um receberá as respectivas informações de cada formulário. Talvez setar onde componente (a ser criado) como o componente base, já que o componente par renderizará os forms de sign in e sign up. Esta última parte por questões de semântica.
 
 
 FASE 2 - Implementação do TypeScript

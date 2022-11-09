@@ -32,3 +32,11 @@
 h6 {
     margin-bottom: 20px;
 }
+
+.Selected {
+    font-weight: bold;
+}
+
+.Not_Selected {
+    font-weight: normal;
+}

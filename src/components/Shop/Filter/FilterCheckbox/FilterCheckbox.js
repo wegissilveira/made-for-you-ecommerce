@@ -1,4 +1,5 @@
 import React from "react"
+import classes from './FilterCheckbox.module.css'
 
 const FilterCheckbox = props => {
    const {
@@ -9,8 +10,8 @@ const FilterCheckbox = props => {
 
 
    return (
-      <div ref={offerRef}>
-         <h6>OUR OFFER</h6>
+      <div ref={offerRef} className={classes['Offers-container']}>
+         <h6>OUR OFFERS</h6>
          {checkboxItems.map((item, i) => {
             return (
                <div key={item.value+i}>
@@ -18,8 +19,9 @@ const FilterCheckbox = props => {
                      type="checkbox"
                      value={item.value}
                      onChange={e => setOfferCB(e)}
+                     id={item.value+i}
                   />
-                  <label>{item.title}</label>
+                  <label htmlFor={item.value+i} >{item.title}</label>
                </div>)
          })}
       </div>

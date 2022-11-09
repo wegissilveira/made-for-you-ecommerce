@@ -6,8 +6,7 @@ import ColorSelect from 'components/Shared/UI/ColorSelect/ColorSelect'
 
 const FilterColorSelector = props => {
    const {
-      checkColor,
-      setCheckColorHandlerCB,
+      lastSelectedColorHandlerCB,
       selectColorHandlerCB
    } = props
 
@@ -17,10 +16,10 @@ const FilterColorSelector = props => {
          <div>
             <input
                type="checkbox"
-               onChange={() => setCheckColorHandlerCB(!checkColor)}
-               checked={checkColor}
+               onChange={(e) => lastSelectedColorHandlerCB(e)}
+               id="all-colors-input"
             />
-            <label>All available colors</label>
+            <label htmlFor="all-colors-input">All available colors</label>
          </div>
          <ColorSelect
             title={'COLOR'}

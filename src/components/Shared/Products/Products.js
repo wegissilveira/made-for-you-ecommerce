@@ -107,7 +107,7 @@ const Products = props => {
             }            
          }
       }
-      
+      console.log('PRODUCTS TAG/CAT: ', products);
       setProductsState(products)
    }
 
@@ -149,6 +149,8 @@ const Products = props => {
             ))
          }
       }
+
+      console.log('PRODUCTS FILTER: ', products);
 
       if(sendBackForMounting) return products
       

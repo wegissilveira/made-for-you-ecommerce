@@ -80,3 +80,11 @@
 .Filter_Blocks label {
    margin-left: 8px;
 }
+
+.Selected {
+   font-weight: bold;
+}
+
+.Not_Selected {
+   font-weight: normal;
+}
