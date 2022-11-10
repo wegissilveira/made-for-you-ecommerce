@@ -36,7 +36,7 @@ const PriceSlider = forwardRef((props, ref) => {
             props.rangeValues([initial_min_value, initial_max_value])
         }
     }));
-
+    // console.log('TESTE PRICE');
 
     const beginSliding = e => {
         // slider.target.onpointermove = slide

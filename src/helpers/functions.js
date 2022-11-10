@@ -1,5 +1,7 @@
-export const mountProducts = (productsArg, tag, category) => {
-   const currentProducts = [...productsArg]
+export const mountProducts = (productsArg, tag, category, isFilterOn, filtersObj) => {
+   // const currentProducts = [...productsArg]
+   console.log('isFilterOn: ', isFilterOn);
+   const currentProducts = isFilterOn ? mountFilters(productsArg, filtersObj) : [...productsArg]
    let products = []
 
    switch(true) {
@@ -19,27 +21,40 @@ export const mountProducts = (productsArg, tag, category) => {
       default:
    }
 
-   // console.log('PRODUCTS HELPER: ', products);
+   console.log('PRODUCTS HELPER: ', products);
 
    return products
 }
 
-// Há alguns problemas aqui.
-// QUando misturei cor e oferta o produto da state no Filter veio vazio
 // Após ajustar isso vai faltar unir as duas funções que estão aqui
-export const mountFilters = (productsArg, valueRange, productColor, offer, order) => {
+// A etapa agora é aplicar ambos os filtros em conjunto. 
+// A ideia é passar o objeto state inteiro ao invés de parâmetros isolados, mas é preciso buscar uma maneira de passar o parâmetro atual dos filtros atualizados, no objeto inteiro ele está sempre 'um passo atrás',
+// Exemplo, quando for 'setColor' passar o vaor atualizado de color
+// export const mountFilters = (productsArg, valueRange, productColor, offer, order, isFilterTagOn) => {
+export const mountFilters = (productsArg, filtersObj) => {
+
+   const {
+      priceRange,
+      color,
+      offer,
+      order
+   } = filtersObj
+
+   // console.log('COLOR: ', color);
+
    const currentProducts = [...productsArg]
    let products
-
-   if (valueRange) {
-      products = currentProducts.filter(product =>
-         parseFloat(product.price) >= valueRange[0] && parseFloat(product.price) <= valueRange[1]
+   // console.log('currentProducts: ', currentProducts);
+   // console.log('valueRange: ', valueRange);
+   if (priceRange) {
+      products = currentProducts.filter(product => 
+         parseFloat(product.price) >= priceRange.minValue && parseFloat(product.price) <= priceRange.maxValue
       )
    }
-
-   if (productColor && productColor !== '') {
+   
+   if (color.currentColor && color.currentColor !== '') {
       products = products.filter(product =>
-         product.colors.includes(productColor)
+         product.colors.includes(color.currentColor)
       )
    }
 
@@ -61,6 +76,14 @@ export const mountFilters = (productsArg, valueRange, productColor, offer, order
          ))
       }
    }
-
+   console.log('PRODUCTS HELPER FILTER: ', products);
    return products
+
+   if(sendBackForMounting) return products
+      
+   if (isFilterTagOn) {
+      mountProducts(products)
+   } else {
+      return products
+   }
 } 

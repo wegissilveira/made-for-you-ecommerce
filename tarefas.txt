@@ -50,6 +50,7 @@ FASE 1 - Melhorias estruturais e funcionais:
          - Mas limpar filtros também executa a função que reposiciona os bullets no slider, caso tal função seja removida os bullets não são reposicionados e caso seja mantida ela executa o slider e chama 'setPriceRange';
          - Buscar uma maneira de não executar 'setPriceRange' no momento de limpar o filtro, mas ao mesmo tempo reposicionar os bullets do slider de preço.
       -> (MELHORIA): Botão 'FILTER' no filtro não tem nenhuma função - removê-lo caso não tenha nenhuma utilidade
+      -> (BUG): Só de passar o cursor sobre o slider de preço a função está sendo chamada. O msm ocorre com todo o ciclo de funções ligadas a priceSlider
    
    3.1- Analisar warnings no terminal
 

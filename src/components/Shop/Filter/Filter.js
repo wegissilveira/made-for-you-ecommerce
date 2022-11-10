@@ -35,7 +35,9 @@ const initialFilter = {
    priceRange: {
       minValue: initial_min_value,
       maxValue: initial_max_value
-   }
+   },
+   isFilterOn: false,
+   isFilterTagOn: false
 }
 
 // Próxima etapa é tentar montar a lista de produtos aqui e já enviar pronta para 'Products' como props
@@ -45,25 +47,30 @@ const filterReducer = (state, action) => {
          return {
             ...state,
             tag: action.tag,
-            productsState: mountProducts(productsData, action.tag, state.category)
+            productsState: mountProducts(productsData, action.tag, state.category, state.isFilterOn, state),
+            isFilterTagOn: true
          }
       case 'setCategory':
          return {
             ...state,
             category: action.category,
-            productsState: mountProducts(productsData, state.tag, action.category)
+            productsState: mountProducts(productsData, state.tag, action.category, state.isFilterOn, state),
+            isFilterTagOn: true
          }
       case 'setColor':
          return {
             ...state,
             color: action.color,
-            productsState: mountFilters(
-               productsData, 
-               [state.priceRange.minValue, state.priceRange.maxValue], 
-               action.color,
-               state.offer,
-               state.order
-            )
+            // productsState: mountFilters(
+            //    productsData, 
+            //    state.priceRange, 
+            //    action.color.currentColor,
+            //    state.offer,
+            //    state.order,
+            //    state.isFilterTagOn,
+            // ),
+            productsState: mountFilters(productsData, state),
+            isFilterOn: true
          }
       case 'setOffer':
          return {
@@ -71,11 +78,13 @@ const filterReducer = (state, action) => {
             offer: action.offer,
             productsState: mountFilters(
                productsData, 
-               [state.priceRange.minValue, state.priceRange.maxValue], 
+               state.priceRange, 
                state.color.currentColor,
                action.offer,
-               state.order
-            )
+               state.order,
+               state.isFilterTagOn,
+            ),
+            isFilterOn: true
          }
       case 'setOrder':
          return {
@@ -83,11 +92,13 @@ const filterReducer = (state, action) => {
             order: action.order,
             productsState: mountFilters(
                productsData, 
-               [state.priceRange.minValue, state.priceRange.maxValue], 
+               state.priceRange, 
                state.color.currentColor,
                state.offer,
-               action.order
-            )
+               action.order,
+               state.isFilterTagOn,
+            ),
+            isFilterOn: true
          }
       case 'setPrice':
          return {
@@ -98,8 +109,10 @@ const filterReducer = (state, action) => {
                action.priceRange, 
                state.color.currentColor,
                state.offer,
-               state.order
-            )
+               state.order,
+               state.isFilterTagOn,
+            ),
+            isFilterOn: true
          }
       case 'resetFilter':
          return {
@@ -115,7 +128,9 @@ const filterReducer = (state, action) => {
                minValue: initial_min_value,
                maxValue: initial_max_value
             },
-            productsState: productsData
+            productsState: productsData,
+            isFilterOn: false,
+            isFilterTagOn: false
          }
       default:
          return state
@@ -151,7 +166,7 @@ const Filter = props => {
    const offerRef = useRef()
    const selectRef = useRef()
 
-   console.log('productsState: ', filterReducerState.productsState);
+   // console.log('productsState: ', filterReducerState.productsState);
 
    const translateFilter = {
       transform: `translateY(${translateValue}px)`,
