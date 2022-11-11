@@ -1,9 +1,15 @@
-export const mountProducts = (productsArg, tag, category, isFilterOn, filtersObj) => {
-   // const currentProducts = [...productsArg]
-   console.log('isFilterOn: ', isFilterOn);
+export const mountProducts = (productsArg, filtersObj, currentFilterValue, currentFilter, isFilterOn) => {
+   let {
+      tag,
+      category
+   } = filtersObj
+
+   if (currentFilter === 'tag') tag = currentFilterValue
+   if (currentFilter === 'category') category = currentFilterValue
+
    const currentProducts = isFilterOn ? mountFilters(productsArg, filtersObj) : [...productsArg]
    let products = []
-
+   
    switch(true) {
       case (tag === 'all-products' && category === 'all') :
          products = currentProducts
@@ -20,38 +26,32 @@ export const mountProducts = (productsArg, tag, category, isFilterOn, filtersObj
          break
       default:
    }
-
-   console.log('PRODUCTS HELPER: ', products);
-
+   
    return products
 }
 
-// Após ajustar isso vai faltar unir as duas funções que estão aqui
-// A etapa agora é aplicar ambos os filtros em conjunto. 
-// A ideia é passar o objeto state inteiro ao invés de parâmetros isolados, mas é preciso buscar uma maneira de passar o parâmetro atual dos filtros atualizados, no objeto inteiro ele está sempre 'um passo atrás',
-// Exemplo, quando for 'setColor' passar o vaor atualizado de color
-// export const mountFilters = (productsArg, valueRange, productColor, offer, order, isFilterTagOn) => {
-export const mountFilters = (productsArg, filtersObj) => {
-
-   const {
+export const mountFilters = (productsArg, filtersObj, currentFilterValue, currentFilter, isFilterTagOn) => {
+   let {
       priceRange,
       color,
       offer,
       order
    } = filtersObj
 
-   // console.log('COLOR: ', color);
+   if (currentFilter === 'priceRange') priceRange = currentFilterValue
+   if (currentFilter === 'color') color = currentFilterValue
+   if (currentFilter === 'offer') offer = currentFilterValue
+   if (currentFilter === 'order') order = currentFilterValue
 
    const currentProducts = [...productsArg]
    let products
-   // console.log('currentProducts: ', currentProducts);
-   // console.log('valueRange: ', valueRange);
+
    if (priceRange) {
       products = currentProducts.filter(product => 
          parseFloat(product.price) >= priceRange.minValue && parseFloat(product.price) <= priceRange.maxValue
       )
    }
-   
+
    if (color.currentColor && color.currentColor !== '') {
       products = products.filter(product =>
          product.colors.includes(color.currentColor)
@@ -76,13 +76,9 @@ export const mountFilters = (productsArg, filtersObj) => {
          ))
       }
    }
-   console.log('PRODUCTS HELPER FILTER: ', products);
-   return products
 
-   if(sendBackForMounting) return products
-      
    if (isFilterTagOn) {
-      mountProducts(products)
+      return mountProducts(products, filtersObj)
    } else {
       return products
    }

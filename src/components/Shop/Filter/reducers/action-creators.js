@@ -1,0 +1,7 @@
+export const setTag = (tag) => ({type: 'setTag', tag })
+export const setCategory = (category) => ({type: 'setCategory', category })
+export const setColor = (color) => ({type: 'setColor', color })
+export const setOffer = (offer) => ({type: 'setOffer', offer })
+export const setOrder = (order) => ({type: 'setOrder', order })
+export const setPrice = (priceRange) => ({type: 'setPrice', priceRange })
+export const resetFilter = () => ({type: 'resetFilter' })

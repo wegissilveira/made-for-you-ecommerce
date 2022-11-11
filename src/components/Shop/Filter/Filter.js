@@ -3,7 +3,18 @@ import React, { useState, useEffect, useRef, useReducer } from 'react'
 import classes from './Filter.module.css'
 
 import productsData from 'Data/productsData'
-import { mountProducts, mountFilters } from 'helpers/functions'
+
+import filterReducer from './reducers/reducer'
+
+import { 
+   setTag,
+   setCategory,
+   setColor,
+   setOffer,
+   setOrder,
+   setPrice,
+   resetFilter
+} from './reducers/action-creators'
 
 import Toastify from 'components/Shared/UI/Toastify/Toastify'
 import Products from 'components/Shared/Products/Products'
@@ -40,103 +51,6 @@ const initialFilter = {
    isFilterTagOn: false
 }
 
-// Próxima etapa é tentar montar a lista de produtos aqui e já enviar pronta para 'Products' como props
-const filterReducer = (state, action) => {
-   switch (action.type) {
-      case 'setTag':
-         return {
-            ...state,
-            tag: action.tag,
-            productsState: mountProducts(productsData, action.tag, state.category, state.isFilterOn, state),
-            isFilterTagOn: true
-         }
-      case 'setCategory':
-         return {
-            ...state,
-            category: action.category,
-            productsState: mountProducts(productsData, state.tag, action.category, state.isFilterOn, state),
-            isFilterTagOn: true
-         }
-      case 'setColor':
-         return {
-            ...state,
-            color: action.color,
-            // productsState: mountFilters(
-            //    productsData, 
-            //    state.priceRange, 
-            //    action.color.currentColor,
-            //    state.offer,
-            //    state.order,
-            //    state.isFilterTagOn,
-            // ),
-            productsState: mountFilters(productsData, state),
-            isFilterOn: true
-         }
-      case 'setOffer':
-         return {
-            ...state,
-            offer: action.offer,
-            productsState: mountFilters(
-               productsData, 
-               state.priceRange, 
-               state.color.currentColor,
-               action.offer,
-               state.order,
-               state.isFilterTagOn,
-            ),
-            isFilterOn: true
-         }
-      case 'setOrder':
-         return {
-            ...state,
-            order: action.order,
-            productsState: mountFilters(
-               productsData, 
-               state.priceRange, 
-               state.color.currentColor,
-               state.offer,
-               action.order,
-               state.isFilterTagOn,
-            ),
-            isFilterOn: true
-         }
-      case 'setPrice':
-         return {
-            ...state,
-            priceRange: action.priceRange,
-            productsState: mountFilters(
-               productsData, 
-               action.priceRange, 
-               state.color.currentColor,
-               state.offer,
-               state.order,
-               state.isFilterTagOn,
-            ),
-            isFilterOn: true
-         }
-      case 'resetFilter':
-         return {
-            tag: 'all-products',
-            category: 'all',
-            color: {
-               currentColor: '',
-               lastSelectedColor: ''
-            },
-            offer: [],
-            order: 'default',
-            priceRange: {
-               minValue: initial_min_value,
-               maxValue: initial_max_value
-            },
-            productsState: productsData,
-            isFilterOn: false,
-            isFilterTagOn: false
-         }
-      default:
-         return state
-   }
-}
-
 
 const Filter = props => {
    const {
@@ -165,8 +79,6 @@ const Filter = props => {
    const typesRef = useRef()
    const offerRef = useRef()
    const selectRef = useRef()
-
-   // console.log('productsState: ', filterReducerState.productsState);
 
    const translateFilter = {
       transform: `translateY(${translateValue}px)`,
@@ -198,20 +110,23 @@ const Filter = props => {
    }
 
    const setPriceRange = values => {
-      dispatch({type: 'setPrice', priceRange: {
+      const priceRange = {
          minValue: values[0],
          maxValue: values[1]
-      }})
+      }
+      dispatch(setPrice(priceRange))
       setIsFilterOn(true)
    }
 
    const selectColorHandler = color => {
       const colorInput = document.getElementById('all-colors-input')
 
-      dispatch({type: 'setColor', color: {
+      const colorObj = {
          currentColor: color,
          lastSelectedColor: color
-      }})
+      }
+
+      dispatch(setColor(colorObj))
 
       colorInput.checked = false
       setIsFilterOn(true)
@@ -223,12 +138,13 @@ const Filter = props => {
          currentColor: isAllColorsChecked ? '' : filterReducerState.color.lastSelectedColor,
          lastSelectedColor: filterReducerState.color.lastSelectedColor
       }
-      dispatch({type: 'setColor', color: checked})
+      
+      dispatch(setColor(checked))
       setIsFilterOn(true)
    }
 
    const setProductTypeHandler = (e, block, arg) => {
-      block === 'cat' ? dispatch({type: 'setCategory', category: arg}) : dispatch({type: 'setTag', tag: arg})
+      block === 'cat' ? dispatch(setCategory(arg)) : dispatch(setTag(arg))
 
       let elementsArr = Array.from(e.target.parentNode.children)
       elementsArr.forEach((element, i) => {
@@ -249,7 +165,7 @@ const Filter = props => {
          inputValuesArr = inputValuesArr.filter(value => value !== input.value)
       }
       
-      dispatch({type: 'setOffer', offer: inputValuesArr})
+      dispatch(setOffer(inputValuesArr))
       setIsFilterOn(true)
    }
 
@@ -289,8 +205,8 @@ const Filter = props => {
             })
          }
       })
-
-      dispatch({type: 'resetFilter'}) 
+ 
+      dispatch(resetFilter()) 
       
       sliderRef.current.resetPriceSlider()
 
@@ -385,7 +301,7 @@ const Filter = props => {
                selectRef={selectRef}
                filterOpen={filterOpen}
                openFilterHandlerCB={openFilterHandler}
-               setOrderCB={(value) => dispatch({type: 'setOrder', order: value})}
+               setOrderCB={(value) => dispatch(setOrder(value))}
             />
             <div style={translateFilter}>
                <div
@@ -409,7 +325,7 @@ const Filter = props => {
                   <FilterBottom cleanFiltersHandlerCB={cleanFiltersHandler} />
                </div>
                <Products
-                  // products={products} // => Envia o array com os produtos que serão exibidos
+                  productsProps={filterReducerState.productsState} // => Envia o array com os produtos que serão exibidos
                   pageLimit={pageLimit}  // => Número limite de produtos a serem mostrados inicialmente
                   tag={filterReducerState.tag} // => Tag que determina quais produtos serão mostrados
                   category={filterReducerState.category} // => Categoria dos produtos que serão mostrados

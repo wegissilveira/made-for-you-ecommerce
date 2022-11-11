@@ -35,7 +35,7 @@ const MainPageProducts = props => {
             tag={tag}
          />
          <Products
-            products={productsData}
+            productsProps={productsData}
             pageLimit={pageLimit}
             tag={tag}
          />
