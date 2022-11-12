@@ -1,4 +1,4 @@
-import { mountProducts, mountFilters } from 'components/Shop/Filter/helpers/functions'
+import { mountProducts, mountFilters } from 'helpers/functions'
 import productsData from 'Data/productsData'
 
 const filterReducer = (state, action) => {

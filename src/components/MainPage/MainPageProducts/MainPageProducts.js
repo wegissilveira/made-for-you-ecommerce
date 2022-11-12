@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
-
 import classes from './MainPageProducts.module.css'
+
+import { mountProducts } from "helpers/functions"
 
 import Products from 'components/Shared/Products/Products'
 import productsData from 'Data/productsData'
@@ -10,6 +11,7 @@ import MainPageProductsHeaderMobile from './MainPageProductsHeaderMobile/MainPag
 
 const MainPageProducts = props => {
    const [tag, setTag] = useState('all-products')
+   const [products, setProducts] = useState([])
    const [pageLimit, setPageLimit] = useState(8)
 
    useEffect(() => {
@@ -21,6 +23,16 @@ const MainPageProducts = props => {
          setPageLimit(9)
       }
    }, [pageLimit])
+
+   useEffect(() => {
+      const filterObj = {
+         tag,
+         category: 'all'
+      }
+
+      const mountedProducts = mountProducts(productsData, filterObj)
+      setProducts(mountedProducts)
+   }, [tag])
 
 
    return (
@@ -35,7 +47,7 @@ const MainPageProducts = props => {
             tag={tag}
          />
          <Products
-            productsProps={productsData}
+            productsProps={products}
             pageLimit={pageLimit}
             tag={tag}
          />

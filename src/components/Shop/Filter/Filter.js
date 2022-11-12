@@ -63,9 +63,6 @@ const Filter = props => {
    const [filterOpen, setFilterOpen] = useState(false)
    const [translateValue, setTranslateValue] = useState()
    const [resize, setResize] = useState(true)
-
-   const [isFilterOn, setIsFilterOn] = useState(false)
-   const [isFilterTagOn, setIsFilterTagOn] = useState(false)
    /* */
 
    const [openToastify, setOpenToastify] = useState(false)
@@ -115,7 +112,6 @@ const Filter = props => {
          maxValue: values[1]
       }
       dispatch(setPrice(priceRange))
-      setIsFilterOn(true)
    }
 
    const selectColorHandler = color => {
@@ -129,7 +125,6 @@ const Filter = props => {
       dispatch(setColor(colorObj))
 
       colorInput.checked = false
-      setIsFilterOn(true)
    }
 
    const lastSelectedColorHandler = (e) => {
@@ -140,7 +135,6 @@ const Filter = props => {
       }
       
       dispatch(setColor(checked))
-      setIsFilterOn(true)
    }
 
    const setProductTypeHandler = (e, block, arg) => {
@@ -152,7 +146,6 @@ const Filter = props => {
       })
 
       e.target.className = classes.Selected
-      setIsFilterTagOn(true)
    }
 
    const setOfferHandler = e => {
@@ -166,7 +159,6 @@ const Filter = props => {
       }
       
       dispatch(setOffer(inputValuesArr))
-      setIsFilterOn(true)
    }
 
    const cleanFiltersHandler = () => {
@@ -210,8 +202,6 @@ const Filter = props => {
       
       sliderRef.current.resetPriceSlider()
 
-      setIsFilterOn(false)
-      setIsFilterTagOn(false)
       colorInput.checked = false
    }
 
@@ -335,8 +325,6 @@ const Filter = props => {
                   order={filterReducerState.order}
                   containerHeight={containerHeightHandler}
                   isFilterOpen={[filterOpen, filter_height]}
-                  isFilterOn={isFilterOn}
-                  isFilterTagOn={isFilterTagOn}
                />
             </div>
          </div>

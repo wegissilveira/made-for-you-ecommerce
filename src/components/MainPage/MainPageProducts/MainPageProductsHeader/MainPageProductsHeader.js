@@ -1,6 +1,7 @@
 import React from "react"
 import classes from './MainPageProductsHeader.module.css'
 
+
 const MainPageProductsHeader = (props) => {
    const { 
       setTagCB

@@ -41,7 +41,6 @@ FASE 1 - Melhorias estruturais e funcionais:
       -> Ver se é possível transformar o slider da pdp e o do modal dos produtos em um único componente
       -> (BUG) O terceiro produto da lista do Cart está sempre retornando NaN no preço - aparentemente, depois de criar CartList o NaN ocorre com o primeiro produto
       -> (MELHORIA) Considerar habilitar o header da galeria da home no mobile. Caso isso aconteça, criar um componente para compartilhar a lógica dos header mobile e desk
-      -> (BUG): Corrigir mensagem de wishlist vazia, está usando a mesma mensagem de busca vazia
       -> (BUG): Scroll de show more/less parece funcionar bem somente em telas com 1366px, telas maiores o cálculo não parece estar correto - OBS.: A função foi removida de 'Products' e convertida no hook 'useSetPageTop'. Corrigir o bug e analisar possíveis melhorias no código.
       -> O código de montar a prateleira foi reorganizado, mas acredito que ainda caiba melhorias. Analisar as possibilidades após reorganizar/refatorar código de Filter.
       -> (BUG): Bullets de cores do filtro continuam selecionados após o filtro ser resetado
