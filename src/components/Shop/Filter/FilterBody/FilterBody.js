@@ -1,6 +1,8 @@
 import React from "react"
 import classes from './FilterBody.module.css'
 
+import productsData from 'Data/productsData'
+
 import PriceSlider from 'components/Shop/Filter/PriceSlider/PriceSlider'
 import FilterCheckbox from 'components/Shop/Filter/FilterCheckbox/FilterCheckbox'
 import FilterColorSelector from 'components/Shop/Filter/FilterColorSelector/FilterColorSelector'
@@ -15,14 +17,11 @@ const checkboxItems = [
 
 const FilterBody = props => {
    const {
-      products,
       categoriesRef,
       typesRef,
       offerRef,
       setOfferCB,
       sliderRef,
-      minValue,
-      maxValue,
       lastSelectedColorHandlerCB,
       selectColorHandlerCB,
       setPriceRangeCB,
@@ -45,7 +44,7 @@ const FilterBody = props => {
    let textileQtde = 0
    let lightingQtde = 0
 
-   products.forEach(product => {
+   productsData.forEach(product => {
       //Categorias
       categoriesTotalQtde++
 
@@ -127,8 +126,6 @@ const FilterBody = props => {
          <PriceSlider
             rangeValues={setPriceRangeCB}
             ref={sliderRef}
-            minValue={minValue}
-            maxValue={maxValue}
          />
       </div>
    )

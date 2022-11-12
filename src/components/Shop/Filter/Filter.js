@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef, useReducer } from 'react'
-
 import classes from './Filter.module.css'
 
-import productsData from 'Data/productsData'
+import useCallResizeWarning from 'hooks/useCallResizeWarning'
 
 import filterReducer from './reducers/reducer'
+import { initialFilter } from './helpers/values'
 
 import { 
    setTag,
@@ -22,10 +22,6 @@ import FilterHeader from './FilterHeader/FilterHeader'
 import FilterBottom from './FilterBottom/FilterBottom'
 import FilterBody from './FilterBody/FilterBody'
 
-
-const initial_min_value = 5 // => Valor inicial do preço mínimo
-const initial_max_value = 1290 // => Valor inicial do preço máximo
-
 const _ = undefined
 
 const toastifyMsg = [
@@ -33,39 +29,16 @@ const toastifyMsg = [
    'In order for all components to adjust to the new screen dimensions, the page should be reloaded.'
 ]
 
-const initialFilter = {
-   productsState: productsData,
-   tag: 'all-products',
-   category: 'all',
-   color:  {
-      currentColor: '',
-      lastSelectedColor: ''
-   },
-   offer: [],
-   order: 'default',
-   priceRange: {
-      minValue: initial_min_value,
-      maxValue: initial_max_value
-   },
-   isFilterOn: false,
-   isFilterTagOn: false
-}
 
-
-const Filter = props => {
-   const {
-      products
-   } = props
-
+// Considerando transformar a lógica de state do Filter em um contexto
+// Posso usar o mesmo reducer que já criei, mas transformando a filterReducerState em uma state global
+// Isso permitirá a remoção de várias das funções que estão sendo usadas aqui simplesmente como callback
+// O que por consequência fará com que muitas das props deixem de existir
+// O contexto será restrito a filters, já que que todos os filtros convertem em Filter, que envia filterReducerState para o componente products
+const Filter = () => {
    const [pageLimit, setPageLimit] = useState(12)
-   const [filter_height, setFilterHeight] = useState()
-   const [containerHeight, setContainerHeight] = useState()
    const [filterOpen, setFilterOpen] = useState(false)
-   const [translateValue, setTranslateValue] = useState()
-   const [resize, setResize] = useState(true)
-   /* */
-
-   const [openToastify, setOpenToastify] = useState(false)
+   const [translateValueState, setTranslateValue] = useState()
 
    const [filterReducerState, dispatch] = useReducer(filterReducer, initialFilter)
 
@@ -77,29 +50,26 @@ const Filter = props => {
    const offerRef = useRef()
    const selectRef = useRef()
 
+   const { 
+      containerHeightHandler, 
+      translateValue,
+      filter_height,
+      openToastify,
+      containerHeight
+   } = useCallResizeWarning(filterRef, containerRef, filterOpen)
+
    const translateFilter = {
-      transform: `translateY(${translateValue}px)`,
+      transform: `translateY(${translateValueState}px)`,
       transition: '.8s ease-in-out'
    }
 
    const containerStyle = {
       height: containerHeight + 'px'
    }
-
-   const containerHeightHandler = (cHeight = containerHeight, fHeight = filter_height, open = filterOpen, addRow) => {
-      let height
-      if (addRow) {
-         height = addRow[0] === 'more' ? containerHeight + addRow[1] : containerHeight - addRow[1]
-      } else {
-         height = open ? containerHeight + fHeight : cHeight - fHeight
-      }
-
-      setContainerHeight(height)
-   }
-
+   
    const openFilterHandler = () => {
       const open = filterOpen ? false : true
-      const translate = translateValue < 0 ? 0 : -filter_height
+      const translate = translateValueState < 0 ? 0 : -filter_height
 
       setFilterOpen(open)
       setTranslateValue(translate)
@@ -205,70 +175,9 @@ const Filter = props => {
       colorInput.checked = false
    }
 
-   const callResizeAlert = () => {// alert('Atualize a página para que todos os componentes se ajustem às novas dimensões. Essa mensagem não aparecerá novamente nesta sessão.')
-      setOpenToastify(true)
-      setTimeout(() => {
-         setOpenToastify(false)
-      }, 8000)
-      setResize(false)
-      sessionStorage.setItem('warned', true)
-   }
-
-   const reportWindowSize = () => {
-      const fHeight = filterRef.current.offsetHeight
-
-      setTranslateValue(-fHeight)
-      setFilterHeight(fHeight)
-
-      setTimeout(() => {
-         const containerHeight = containerRef.current.offsetHeight
-         containerHeightHandler(containerHeight, fHeight)
-      }, 30)
-   }
-
-   const observer = useRef(
-      new ResizeObserver(() => {
-         const windowWidth = window.innerWidth
-         const loadWidth = sessionStorage.getItem('windowWidth')
-         const rendered = sessionStorage.getItem('rendered')
-
-         if (rendered && windowWidth != loadWidth) {
-            callResizeAlert()
-         }
-      })
-   )
-
    useEffect(() => {
-      reportWindowSize()
-   }, [])
-
-   useEffect(() => {
-      sessionStorage.removeItem('rendered')
-      const loadWidth = window.innerWidth
-
-      setTimeout(() => {
-         sessionStorage.setItem('rendered', true)
-         sessionStorage.setItem('windowWidth', loadWidth)
-      }, 1000)
-   }, [])
-
-   useEffect(() => {
-      const warned = sessionStorage.getItem('warned')
-      if (warned) {
-         setResize(false)
-      }
-   }, [])
-
-   useEffect(() => {
-      if (containerRef.current) {
-         const body = document.getElementsByTagName('BODY')[0]
-         if (resize) {
-            observer.current.observe(body)
-         } else {
-            observer.current.unobserve(body)
-         }
-      }
-   })
+      setTranslateValue(translateValue)
+   }, [translateValue])
 
    useEffect(() => {
       if (window.matchMedia('(max-width: 480px)').matches) {
@@ -299,13 +208,10 @@ const Filter = props => {
                   ref={filterRef}
                >
                   <FilterBody 
-                     products={products}
                      categoriesRef={categoriesRef}
                      typesRef={typesRef}
                      offerRef={offerRef}
                      sliderRef={sliderRef}
-                     minValue={initial_min_value}
-                     maxValue={initial_max_value}
                      setOfferCB={e => setOfferHandler(e)}
                      lastSelectedColorHandlerCB={lastSelectedColorHandler}
                      selectColorHandlerCB={selectColorHandler}
@@ -317,12 +223,6 @@ const Filter = props => {
                <Products
                   productsProps={filterReducerState.productsState} // => Envia o array com os produtos que serão exibidos
                   pageLimit={pageLimit}  // => Número limite de produtos a serem mostrados inicialmente
-                  tag={filterReducerState.tag} // => Tag que determina quais produtos serão mostrados
-                  category={filterReducerState.category} // => Categoria dos produtos que serão mostrados
-                  valueRange={[filterReducerState.priceRange.minValue, filterReducerState.priceRange.maxValue]} // => Intervalo de preço que determinará os produtos que serão mostrados
-                  productColor={filterReducerState.color.currentColor} // => Filtra o produto por cor
-                  offer={filterReducerState.offer} // => Filtra os produtos por tipo de oferta
-                  order={filterReducerState.order}
                   containerHeight={containerHeightHandler}
                   isFilterOpen={[filterOpen, filter_height]}
                />

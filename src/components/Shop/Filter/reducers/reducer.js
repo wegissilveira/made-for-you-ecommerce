@@ -1,4 +1,5 @@
 import { mountProducts, mountFilters } from 'helpers/functions'
+import { initialFilter } from '../helpers/values'
 import productsData from 'Data/productsData'
 
 const filterReducer = (state, action) => {
@@ -47,21 +48,7 @@ const filterReducer = (state, action) => {
          }
       case 'resetFilter':
          return {
-            productsState: productsData,
-            tag: 'all-products',
-            category: 'all',
-            color:  {
-               currentColor: '',
-               lastSelectedColor: ''
-            },
-            offer: [],
-            order: 'default',
-            priceRange: {
-               minValue: 5,
-               maxValue: 1290
-            },
-            isFilterOn: false,
-            isFilterTagOn: false
+            ...initialFilter
          }
       default:
          return state
