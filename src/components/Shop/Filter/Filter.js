@@ -3,7 +3,7 @@ import classes from './Filter.module.css'
 
 import useCallResizeWarning from 'hooks/useCallResizeWarning'
 
-import filterReducer from './reducers/reducer'
+import filterReducer from './context/filterReducer'
 import { initialFilter } from './helpers/values'
 
 import { 
@@ -14,7 +14,7 @@ import {
    setOrder,
    setPrice,
    resetFilter
-} from './reducers/action-creators'
+} from './context/action-creators'
 
 import Toastify from 'components/Shared/UI/Toastify/Toastify'
 import Products from 'components/Shared/Products/Products'

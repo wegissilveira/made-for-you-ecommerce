@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+import FilterContext from 'components/Shop/Filter/context/FilterProvider'
+
 import Filter from 'components/Shop/Filter/Filter'
 import BestDealSession from 'components/Shop/BestDealSection/BestDealSection'
 
@@ -12,7 +14,9 @@ class ShopConfig extends Component {
       return (
          <div>
             <h1>SHOP</h1>
-            <Filter products={products} />
+            <FilterContext>
+               <Filter products={products} />
+            </FilterContext>            
             <BestDealSession products={products} />
          </div>
       )

@@ -1,7 +1,9 @@
-import React from "react"
+import React, { useContext } from "react"
 import classes from './FilterBody.module.css'
 
 import productsData from 'Data/productsData'
+
+import { UpdateProductsListContext } from "../context/FilterContext"
 
 import PriceSlider from 'components/Shop/Filter/PriceSlider/PriceSlider'
 import FilterCheckbox from 'components/Shop/Filter/FilterCheckbox/FilterCheckbox'
@@ -27,6 +29,8 @@ const FilterBody = props => {
       setPriceRangeCB,
       setProductTypeHandlerCB
    } = props
+
+   const { updateTag } = useContext(UpdateProductsListContext)
 
    // Categorias
    let categoriesTotalQtde = 0
@@ -89,6 +93,12 @@ const FilterBody = props => {
 
    })
 
+   const setProductTeste = (e, type, tag) => {
+      console.log('chamou filter');
+      setProductTypeHandlerCB(e, type, tag)
+      updateTag(tag)
+   }
+
    return (
       <div className={classes.Filter_Blocks}>
          <div ref={categoriesRef}>
@@ -104,12 +114,12 @@ const FilterBody = props => {
          <span></span>
          <div ref={typesRef}>
             <h6>TYPE</h6>
-            <p className={classes.Selected} onClick={e => setProductTypeHandlerCB(e, 'type', 'all-products')}>All tags ({typesTotalQtde}) </p>
-            <p onClick={e => setProductTypeHandlerCB(e, 'type', 'furniture')}>Furniture ({furnitureQtde}) </p>
-            <p onClick={e => setProductTypeHandlerCB(e, 'type', 'accessories')}>Accessories ({accessoriesQtde}) </p>
-            <p onClick={e => setProductTypeHandlerCB(e, 'type', 'decorations')}>Decorations ({decorationsQtde}) </p>
-            <p onClick={e => setProductTypeHandlerCB(e, 'type', 'textile')}>Textile ({textileQtde}) </p>
-            <p onClick={e => setProductTypeHandlerCB(e, 'type', 'lightning')}>Lighting ({lightingQtde}) </p>
+            <p className={classes.Selected} onClick={e => setProductTeste(e, 'type', 'all-products')}>All tags ({typesTotalQtde}) </p>
+            <p onClick={e => setProductTeste(e, 'type', 'furniture')}>Furniture ({furnitureQtde}) </p>
+            <p onClick={e => setProductTeste(e, 'type', 'accessories')}>Accessories ({accessoriesQtde}) </p>
+            <p onClick={e => setProductTeste(e, 'type', 'decorations')}>Decorations ({decorationsQtde}) </p>
+            <p onClick={e => setProductTeste(e, 'type', 'textile')}>Textile ({textileQtde}) </p>
+            <p onClick={e => setProductTeste(e, 'type', 'lightning')}>Lighting ({lightingQtde}) </p>
          </div>
          <span></span>
          <FilterCheckbox
