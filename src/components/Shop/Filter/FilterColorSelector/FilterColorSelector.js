@@ -1,14 +1,26 @@
-import React from "react"
+import React, { useContext } from "react"
 import classes from './FilterColorSelector.module.css'
+
+import { UpdateProductsListContext, FilterDataContext } from "../context/FilterContext"
 
 import ColorSelect from 'components/Shared/UI/ColorSelect/ColorSelect'
 
 
-const FilterColorSelector = props => {
-   const {
-      lastSelectedColorHandlerCB,
-      selectColorHandlerCB
-   } = props
+const FilterColorSelector = () => {
+   const { updateColor } = useContext(UpdateProductsListContext)
+   const filterReducerState = useContext(FilterDataContext)
+
+   // Temporário para testes. Ajustar após a configuração do contexto
+   const lastSelectedColorHandler = (e) => {
+      const isAllColorsChecked = e.target.checked
+      const checked = {
+         currentColor: isAllColorsChecked ? '' : filterReducerState.color.lastSelectedColor,
+         lastSelectedColor: filterReducerState.color.lastSelectedColor
+      }
+      
+      updateColor(checked)
+   }
+
 
    return (
       <div className={classes.FilterColor_container}>
@@ -16,7 +28,7 @@ const FilterColorSelector = props => {
          <div>
             <input
                type="checkbox"
-               onChange={(e) => lastSelectedColorHandlerCB(e)}
+               onChange={(e) => lastSelectedColorHandler(e)}
                id="all-colors-input"
             />
             <label htmlFor="all-colors-input">All available colors</label>
@@ -24,7 +36,6 @@ const FilterColorSelector = props => {
          <ColorSelect
             title={'COLOR'}
             colors={['red', 'yellow', 'blue', 'purple', 'green']}
-            selectColorHandlerCallback={color => selectColorHandlerCB(color, false)}
          />
       </div>
    )

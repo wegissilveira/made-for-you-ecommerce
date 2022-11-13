@@ -1,5 +1,7 @@
-import React from "react"
+import React, { useContext } from "react"
 import classes from './FilterHeader.module.css'
+
+import { UpdateProductsListContext } from "../context/FilterContext"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
@@ -11,6 +13,8 @@ const FilterHeader = props => {
       openFilterHandlerCB,
       setOrderCB
    } = props
+
+   const { updateOrder } = useContext(UpdateProductsListContext)
 
    const filterToggle =
       filterOpen === false ?
@@ -29,7 +33,7 @@ const FilterHeader = props => {
          <div className={classes.Filter_sort}>
             <p>Sort by</p>
             <select
-               onChange={e => setOrderCB(e.target.value)}
+               onChange={e => updateOrder(e.target.value)}
                ref={selectRef}
             >
                <option value="default">Default Sorting</option>

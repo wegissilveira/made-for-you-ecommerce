@@ -1,6 +1,7 @@
-import React from 'react'
-
+import React, { useContext } from 'react'
 import classes from './ColorSelect.module.css'
+
+import { UpdateProductsListContext } from 'components/Shop/Filter/context/FilterContext'
 
 const ColorSelect = props => {
 
@@ -10,6 +11,22 @@ const ColorSelect = props => {
 
    let [opacity, setOpacity] = React.useState(opacityArr)
    let [border, setBorder] = React.useState(borderArr)
+
+   const { updateColor } = useContext(UpdateProductsListContext)
+
+   // Temporário para testes. Ajustar após a configuração do contexto
+   const selectColorHandlerTeste = color => {
+      const colorInput = document.getElementById('all-colors-input')
+
+      const colorObj = {
+         currentColor: color,
+         lastSelectedColor: color
+      }
+
+      updateColor(colorObj)
+
+      colorInput.checked = false
+   }
 
    const selectColorHandler = (color, load) => {
       let newBorder = [...border]
@@ -28,7 +45,8 @@ const ColorSelect = props => {
       setBorder(newBorder)
       setOpacity(newOpacity)
 
-      if (load !== true) props.selectColorHandlerCallback(color)
+      // if (load !== true) props.selectColorHandlerCallback(color)
+      if (load !== true) selectColorHandlerTeste(color)
    }
 
    React.useEffect(() => {
@@ -45,7 +63,6 @@ const ColorSelect = props => {
             props.colors.map((color, i) => {
                return <div key={i}
                   style={{ border: border[i] }}
-
                   onClick={() => selectColorHandler(color)}
                >
                   <span

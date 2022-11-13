@@ -1,5 +1,7 @@
-import React, { forwardRef, useImperativeHandle } from 'react'
+import React, { forwardRef, useImperativeHandle, useContext } from 'react'
 import classes from './PriceSlider.module.css'
+
+import { UpdateProductsListContext } from "../context/FilterContext"
 
 import { initial_min_value, initial_max_value } from '../helpers/values'
 
@@ -19,6 +21,8 @@ const PriceSlider = forwardRef((props, ref) => {
    let [min_value, setMinValue] = React.useState(initial_min_value)
    let [max_value, setMaxValue] = React.useState(initial_max_value)
 
+   const { updatePrice } = useContext(UpdateProductsListContext)
+
 
    useImperativeHandle(ref, () => ({
       resetPriceSlider() {
@@ -30,7 +34,12 @@ const PriceSlider = forwardRef((props, ref) => {
          setMinValue(initial_min_value)
          setMaxValue(initial_max_value)
 
-         props.rangeValues([initial_min_value, initial_max_value])
+         // props.rangeValues([initial_min_value, initial_max_value])
+         const priceRange = {
+            minValue: initial_min_value,
+            maxValue: initial_max_value
+         }
+         updatePrice(priceRange)
       }
    }));
    // console.log('TESTE PRICE');
@@ -124,7 +133,14 @@ const PriceSlider = forwardRef((props, ref) => {
          }
       }
 
-      props.rangeValues([min_value, max_value])
+      // props.rangeValues([min_value, max_value])
+      // updatePrice([min_value, max_value])
+
+      const priceRange = {
+         minValue: min_value,
+         maxValue: max_value
+      }
+      updatePrice(priceRange)
    }
 
    React.useEffect(() => {

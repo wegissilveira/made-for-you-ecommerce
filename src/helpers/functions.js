@@ -63,18 +63,22 @@ export const mountFilters = (productsArg, filtersObj, currentFilterValue, curren
          offer.includes(product.offer))
    }
 
-   if (order) {
-      if (order === 'low-high') {
+   switch(order) {
+      case 'low-high':
          products.sort((a, b) => parseFloat(a.price) - parseFloat(b.price))
-      } else if (order === 'high-low') {
+         break
+      case 'high-low':
          products.sort((a, b) => parseFloat(b.price) - parseFloat(a.price))
-      } else if (order === 'alphabetical') {
+         break
+      case 'alphabetical':
          products.sort((a, b) => a.name.localeCompare(
             b.name,
             undefined,
             { numeric: true, sensitivity: 'base' }
          ))
-      }
+         break
+      default:
+         break
    }
 
    if (isFilterTagOn) {

@@ -1,20 +1,9 @@
-import React, { useState, useEffect, useRef, useReducer } from 'react'
+import React, { useState, useEffect, useRef, useContext } from 'react'
 import classes from './Filter.module.css'
 
+import { FilterDataContext, UpdateProductsListContext } from './context/FilterContext'
+
 import useCallResizeWarning from 'hooks/useCallResizeWarning'
-
-import filterReducer from './context/filterReducer'
-import { initialFilter } from './helpers/values'
-
-import { 
-   setTag,
-   setCategory,
-   setColor,
-   setOffer,
-   setOrder,
-   setPrice,
-   resetFilter
-} from './context/action-creators'
 
 import Toastify from 'components/Shared/UI/Toastify/Toastify'
 import Products from 'components/Shared/Products/Products'
@@ -30,17 +19,14 @@ const toastifyMsg = [
 ]
 
 
-// Considerando transformar a lógica de state do Filter em um contexto
-// Posso usar o mesmo reducer que já criei, mas transformando a filterReducerState em uma state global
-// Isso permitirá a remoção de várias das funções que estão sendo usadas aqui simplesmente como callback
-// O que por consequência fará com que muitas das props deixem de existir
-// O contexto será restrito a filters, já que que todos os filtros convertem em Filter, que envia filterReducerState para o componente products
+// Falta configurar a função de limpar filtro dentro do bottom
+// Está aqui por ora pon conta das refs
 const Filter = () => {
    const [pageLimit, setPageLimit] = useState(12)
    const [filterOpen, setFilterOpen] = useState(false)
    const [translateValueState, setTranslateValue] = useState()
 
-   const [filterReducerState, dispatch] = useReducer(filterReducer, initialFilter)
+   const { setDefaultValues } = useContext(UpdateProductsListContext)
 
    const containerRef = useRef()
    const filterRef = useRef()
@@ -49,6 +35,8 @@ const Filter = () => {
    const typesRef = useRef()
    const offerRef = useRef()
    const selectRef = useRef()
+
+   const filterReducerState = useContext(FilterDataContext)
 
    const { 
       containerHeightHandler, 
@@ -74,61 +62,6 @@ const Filter = () => {
       setFilterOpen(open)
       setTranslateValue(translate)
       containerHeightHandler(_, _, open)
-   }
-
-   const setPriceRange = values => {
-      const priceRange = {
-         minValue: values[0],
-         maxValue: values[1]
-      }
-      dispatch(setPrice(priceRange))
-   }
-
-   const selectColorHandler = color => {
-      const colorInput = document.getElementById('all-colors-input')
-
-      const colorObj = {
-         currentColor: color,
-         lastSelectedColor: color
-      }
-
-      dispatch(setColor(colorObj))
-
-      colorInput.checked = false
-   }
-
-   const lastSelectedColorHandler = (e) => {
-      const isAllColorsChecked = e.target.checked
-      const checked = {
-         currentColor: isAllColorsChecked ? '' : filterReducerState.color.lastSelectedColor,
-         lastSelectedColor: filterReducerState.color.lastSelectedColor
-      }
-      
-      dispatch(setColor(checked))
-   }
-
-   const setProductTypeHandler = (e, block, arg) => {
-      block === 'cat' ? dispatch(setCategory(arg)) : dispatch(setTag(arg))
-
-      let elementsArr = Array.from(e.target.parentNode.children)
-      elementsArr.forEach((element, i) => {
-         if (i !== 0) element.className = classes.Not_Selected
-      })
-
-      e.target.className = classes.Selected
-   }
-
-   const setOfferHandler = e => {
-      let inputValuesArr = [...filterReducerState.offer]
-      const input = e.target
-
-      if (input.checked) {
-         inputValuesArr.push(input.value)
-      } else {
-         inputValuesArr = inputValuesArr.filter(value => value !== input.value)
-      }
-      
-      dispatch(setOffer(inputValuesArr))
    }
 
    const cleanFiltersHandler = () => {
@@ -168,7 +101,7 @@ const Filter = () => {
          }
       })
  
-      dispatch(resetFilter()) 
+      setDefaultValues()
       
       sliderRef.current.resetPriceSlider()
 
@@ -200,7 +133,6 @@ const Filter = () => {
                selectRef={selectRef}
                filterOpen={filterOpen}
                openFilterHandlerCB={openFilterHandler}
-               setOrderCB={(value) => dispatch(setOrder(value))}
             />
             <div style={translateFilter}>
                <div
@@ -212,11 +144,6 @@ const Filter = () => {
                      typesRef={typesRef}
                      offerRef={offerRef}
                      sliderRef={sliderRef}
-                     setOfferCB={e => setOfferHandler(e)}
-                     lastSelectedColorHandlerCB={lastSelectedColorHandler}
-                     selectColorHandlerCB={selectColorHandler}
-                     setPriceRangeCB={setPriceRange}
-                     setProductTypeHandlerCB={(e, type, value) => setProductTypeHandler(e, type, value)}
                   />
                   <FilterBottom cleanFiltersHandlerCB={cleanFiltersHandler} />
                </div>

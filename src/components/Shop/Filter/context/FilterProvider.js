@@ -13,7 +13,10 @@ import {
    resetFilter
 } from "./action-creators"
 
-import { UpdateProductsListContext } from "./FilterContext"
+import { 
+   UpdateProductsListContext,
+   FilterDataContext
+} from "./FilterContext"
 
 
 const FilterProvider = (props) => {
@@ -22,17 +25,52 @@ const FilterProvider = (props) => {
    const updateProductsListHandler = useMemo(() => {
       const updateTag = (tag) => {
          dispatch(setTag(tag))
-         console.log('TAG CONTEXT: ', tag);
+      }
+      
+      const updateCategory = (cat) => {
+         dispatch(setCategory(cat))
       }
 
-      return { updateTag }
+      const updateColor = (color) => {
+         dispatch(setColor(color))
+      }
+
+      const updateOffer = (offer) => {
+         dispatch(setOffer(offer))
+      }
+
+      const updateOrder = (order) => {
+         dispatch(setOrder(order))
+      }
+
+      const updatePrice = (priceRange) => {
+         // console.log('priceRange: ', priceRange);
+         dispatch(setPrice(priceRange))
+      }
+
+      const setDefaultValues = () => {
+         dispatch(resetFilter())
+      }
+
+      return { 
+         updateTag, 
+         updateCategory, 
+         updateColor, 
+         updateOffer, 
+         updateOrder, 
+         updatePrice, 
+         setDefaultValues 
+      }
+
    }, [])
 
-   console.log('filterReducerState: ', filterReducerState);
+   // console.log('filterReducerState: ', filterReducerState);
 
    return (
       <UpdateProductsListContext.Provider value={updateProductsListHandler}>
-         {props.children}
+         <FilterDataContext.Provider value={filterReducerState}>
+            {props.children}
+         </FilterDataContext.Provider>
       </UpdateProductsListContext.Provider>
    )
 } 

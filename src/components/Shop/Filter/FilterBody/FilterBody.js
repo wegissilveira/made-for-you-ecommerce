@@ -22,15 +22,10 @@ const FilterBody = props => {
       categoriesRef,
       typesRef,
       offerRef,
-      setOfferCB,
-      sliderRef,
-      lastSelectedColorHandlerCB,
-      selectColorHandlerCB,
-      setPriceRangeCB,
-      setProductTypeHandlerCB
+      sliderRef
    } = props
 
-   const { updateTag } = useContext(UpdateProductsListContext)
+   const { updateTag, updateCategory } = useContext(UpdateProductsListContext)
 
    // Categorias
    let categoriesTotalQtde = 0
@@ -49,54 +44,60 @@ const FilterBody = props => {
    let lightingQtde = 0
 
    productsData.forEach(product => {
-      //Categorias
       categoriesTotalQtde++
-
-      // Mudar esses 'ifs' pra um switch-case
-      for (let i in product) {
-         if (product[i].toString().match('living-room')) {
-            livingRoomQtde++
-         }
-         if (product[i].toString().match('bedroom')) {
-            bedRoomQtde++
-         }
-         if (product[i].toString().match('bathroom')) {
-            bathRoomQtde++
-         }
-         if (product[i].toString().match('kitchen')) {
-            kitchen++
-         }
-         if (product[i].toString().match('children-room')) {
-            childrenRoom++
-         }
-      }
-
-      // Tipos
       typesTotalQtde++
-      for (let i in product) {
-         if (product[i].toString().match('furniture')) {
-            furnitureQtde++
-         }
-         if (product[i].toString().match('accessories')) {
-            accessoriesQtde++
-         }
-         if (product[i].toString().match('decorations')) {
-            decorationsQtde++
-         }
-         if (product[i].toString().match('textile')) {
-            textileQtde++
-         }
-         if (product[i].toString().match('lightning')) {
-            lightingQtde++
-         }
+         
+      switch(product.category) {
+         case 'living-room':
+            livingRoomQtde++
+            break
+         case 'bedroom':
+            bedRoomQtde++
+            break
+         case 'bathroom':
+            bathRoomQtde++
+            break
+         case 'kitchen':
+            kitchen++
+            break
+         case 'children-room':
+            childrenRoom++
+            break
+         default:
+            return
       }
 
+      switch(product.tag) {
+         case 'furniture':
+            furnitureQtde++
+            break
+         case 'accessories':
+            accessoriesQtde++
+            break
+         case 'decorations':
+            decorationsQtde++
+            break
+         case 'textile':
+            textileQtde++
+            break
+         case 'lightning':
+            lightingQtde++
+            break
+         default:
+            return
+      }
    })
 
+   // Temporário para testes. Ajustar após a configuração do contexto
    const setProductTeste = (e, type, tag) => {
-      console.log('chamou filter');
-      setProductTypeHandlerCB(e, type, tag)
-      updateTag(tag)
+      type === 'cat' ? updateCategory(tag) : updateTag(tag)
+
+      let elementsArr = Array.from(e.target.parentNode.children)
+      elementsArr.forEach((element, i) => {
+         if (i !== 0) element.className = classes.Not_Selected
+      })
+
+      e.target.className = classes.Selected
    }
 
    return (
@@ -104,12 +105,13 @@ const FilterBody = props => {
          <div ref={categoriesRef}>
             <h6>CATEGORIES</h6>
             {/* Considerar transformar estas funções em um único componente que recebe os valores como props, talvez um array, onde o componente seria chamado uma única vez para cara filtro ou passar os valores individualmente, onde o componente seria chamado uma vez para cada item do filtro */}
-            <p className={classes.Selected} onClick={e => setProductTypeHandlerCB(e, 'cat', 'all')}>All categories ({categoriesTotalQtde}) </p>
-            <p onClick={e => setProductTypeHandlerCB(e, 'cat', 'bedroom')}>Bedroom ({bedRoomQtde}) </p>
-            <p onClick={e => setProductTypeHandlerCB(e, 'cat', 'living-room')}>Living room ({livingRoomQtde}) </p>
-            <p onClick={e => setProductTypeHandlerCB(e, 'cat', 'kitchen')}>Kitchen ({kitchen}) </p>
-            <p onClick={e => setProductTypeHandlerCB(e, 'cat', 'bathroom')}>Bathroom ({bathRoomQtde}) </p>
-            <p onClick={e => setProductTypeHandlerCB(e, 'cat', 'children-room')}>Children's room ({childrenRoom}) </p>
+            {/* O manter várias chamadas. O certo é que esta parte será extraída para um componente separado */}
+            <p className={classes.Selected} onClick={e => setProductTeste(e, 'cat', 'all')}>All categories ({categoriesTotalQtde}) </p>
+            <p onClick={e => setProductTeste(e, 'cat', 'bedroom')}>Bedroom ({bedRoomQtde}) </p>
+            <p onClick={e => setProductTeste(e, 'cat', 'living-room')}>Living room ({livingRoomQtde}) </p>
+            <p onClick={e => setProductTeste(e, 'cat', 'kitchen')}>Kitchen ({kitchen}) </p>
+            <p onClick={e => setProductTeste(e, 'cat', 'bathroom')}>Bathroom ({bathRoomQtde}) </p>
+            <p onClick={e => setProductTeste(e, 'cat', 'children-room')}>Children's room ({childrenRoom}) </p>
          </div>
          <span></span>
          <div ref={typesRef}>
@@ -125,16 +127,11 @@ const FilterBody = props => {
          <FilterCheckbox
             checkboxItems={checkboxItems}
             offerRef={offerRef}
-            setOfferCB={e => setOfferCB(e)}
          />
          <span></span>
-         <FilterColorSelector
-            lastSelectedColorHandlerCB={lastSelectedColorHandlerCB}
-            selectColorHandlerCB={selectColorHandlerCB}
-         />
+         <FilterColorSelector />
          <span></span>
          <PriceSlider
-            rangeValues={setPriceRangeCB}
             ref={sliderRef}
          />
       </div>

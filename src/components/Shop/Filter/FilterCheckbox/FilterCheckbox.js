@@ -1,12 +1,31 @@
-import React from "react"
+import React, { useContext } from "react"
 import classes from './FilterCheckbox.module.css'
+
+import { UpdateProductsListContext, FilterDataContext } from "../context/FilterContext"
+
 
 const FilterCheckbox = props => {
    const {
       checkboxItems,
-      offerRef,
-      setOfferCB
+      offerRef
    } = props
+
+   const { updateOffer } = useContext(UpdateProductsListContext)
+   const filterReducerState = useContext(FilterDataContext)
+
+   // Temporário para testes. Ajustar após a configuração do contexto
+   const setOfferHandler = e => {
+      let inputValuesArr = [...filterReducerState.offer]
+      const input = e.target
+
+      if (input.checked) {
+         inputValuesArr.push(input.value)
+      } else {
+         inputValuesArr = inputValuesArr.filter(value => value !== input.value)
+      }
+      
+      updateOffer(inputValuesArr)
+   }  
 
 
    return (
@@ -18,7 +37,7 @@ const FilterCheckbox = props => {
                   <input
                      type="checkbox"
                      value={item.value}
-                     onChange={e => setOfferCB(e)}
+                     onChange={e => setOfferHandler(e)}
                      id={item.value+i}
                   />
                   <label htmlFor={item.value+i} >{item.title}</label>
