@@ -10,7 +10,6 @@ const FilterColorSelector = () => {
    const { updateColor } = useContext(UpdateProductsListContext)
    const filterReducerState = useContext(FilterDataContext)
 
-   // Temporário para testes. Ajustar após a configuração do contexto
    const lastSelectedColorHandler = (e) => {
       const isAllColorsChecked = e.target.checked
       const checked = {

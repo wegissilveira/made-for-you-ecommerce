@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useContext } from 'react'
 import classes from './Filter.module.css'
 
-import { FilterDataContext, UpdateProductsListContext } from './context/FilterContext'
+import { FilterDataContext } from './context/FilterContext'
 
 import useCallResizeWarning from 'hooks/useCallResizeWarning'
 
@@ -19,22 +19,14 @@ const toastifyMsg = [
 ]
 
 
-// Falta configurar a função de limpar filtro dentro do bottom
-// Está aqui por ora pon conta das refs
 const Filter = () => {
    const [pageLimit, setPageLimit] = useState(12)
    const [filterOpen, setFilterOpen] = useState(false)
    const [translateValueState, setTranslateValue] = useState()
 
-   const { setDefaultValues } = useContext(UpdateProductsListContext)
-
    const containerRef = useRef()
    const filterRef = useRef()
    const sliderRef = useRef()
-   const categoriesRef = useRef()
-   const typesRef = useRef()
-   const offerRef = useRef()
-   const selectRef = useRef()
 
    const filterReducerState = useContext(FilterDataContext)
 
@@ -64,48 +56,8 @@ const Filter = () => {
       containerHeightHandler(_, _, open)
    }
 
-   const cleanFiltersHandler = () => {
-      const selectList = Array.from(selectRef.current.children)
-      const categoriesList = Array.from(categoriesRef.current.children)
-      const typesList = Array.from(typesRef.current.children)
-      const offerList = Array.from(offerRef.current.children)
-      const colorInput = document.getElementById('all-colors-input')
-
-      selectList.forEach((element, i) => {
-         if (i === 0) {
-            element.selected = true
-         } else {
-            element.selected = false
-         }
-      })
-
-      const resetFilters = (el, i) => {
-         if (i !== 0) i === 1 ? el.className = classes.Selected : el.className = classes.Not_Selected
-      }
-
-      categoriesList.forEach((element, i) => {
-         resetFilters(element, i)
-      })
-
-      typesList.forEach((element, i) => {
-         resetFilters(element, i)
-      })
-
-      offerList.forEach(element => {
-         if (element.tagName === 'DIV') {
-            Array.from(element.children).forEach(el => {
-               if (el.tagName === 'INPUT') {
-                  el.checked = false
-               }
-            })
-         }
-      })
- 
-      setDefaultValues()
-      
+   const resetPriceFilter = () => {      
       sliderRef.current.resetPriceSlider()
-
-      colorInput.checked = false
    }
 
    useEffect(() => {
@@ -130,7 +82,6 @@ const Filter = () => {
          />
          <div className={classes.Filter_container} ref={containerRef} style={containerStyle}>
             <FilterHeader 
-               selectRef={selectRef}
                filterOpen={filterOpen}
                openFilterHandlerCB={openFilterHandler}
             />
@@ -140,12 +91,9 @@ const Filter = () => {
                   ref={filterRef}
                >
                   <FilterBody 
-                     categoriesRef={categoriesRef}
-                     typesRef={typesRef}
-                     offerRef={offerRef}
                      sliderRef={sliderRef}
                   />
-                  <FilterBottom cleanFiltersHandlerCB={cleanFiltersHandler} />
+                  <FilterBottom resetPriceFilterCB={resetPriceFilter} />
                </div>
                <Products
                   productsProps={filterReducerState.productsState} // => Envia o array com os produtos que serão exibidos

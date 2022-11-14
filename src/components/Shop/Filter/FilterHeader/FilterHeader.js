@@ -9,9 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 const FilterHeader = props => {
    const {
       filterOpen,
-      selectRef,
       openFilterHandlerCB,
-      setOrderCB
    } = props
 
    const { updateOrder } = useContext(UpdateProductsListContext)
@@ -34,7 +32,7 @@ const FilterHeader = props => {
             <p>Sort by</p>
             <select
                onChange={e => updateOrder(e.target.value)}
-               ref={selectRef}
+               id="order-filter-wrapper"
             >
                <option value="default">Default Sorting</option>
                <option value="low-high">Price: Low to High</option>

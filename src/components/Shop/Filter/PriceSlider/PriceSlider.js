@@ -23,7 +23,7 @@ const PriceSlider = forwardRef((props, ref) => {
 
    const { updatePrice } = useContext(UpdateProductsListContext)
 
-
+   // Entender o que este hook faz para conseguir passar a função de limpar o filtro totalmente para FilterBottom
    useImperativeHandle(ref, () => ({
       resetPriceSlider() {
          thumb_1_Ref.current.style.transform = `translate(0px)`

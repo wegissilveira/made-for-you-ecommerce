@@ -19,9 +19,6 @@ const checkboxItems = [
 
 const FilterBody = props => {
    const {
-      categoriesRef,
-      typesRef,
-      offerRef,
       sliderRef
    } = props
 
@@ -88,8 +85,7 @@ const FilterBody = props => {
       }
    })
 
-   // Temporário para testes. Ajustar após a configuração do contexto
-   const setProductTeste = (e, type, tag) => {
+   const setProductTag = (e, type, tag) => {
       type === 'cat' ? updateCategory(tag) : updateTag(tag)
 
       let elementsArr = Array.from(e.target.parentNode.children)
@@ -102,31 +98,30 @@ const FilterBody = props => {
 
    return (
       <div className={classes.Filter_Blocks}>
-         <div ref={categoriesRef}>
+         <div id="categories-wrapper">
             <h6>CATEGORIES</h6>
             {/* Considerar transformar estas funções em um único componente que recebe os valores como props, talvez um array, onde o componente seria chamado uma única vez para cara filtro ou passar os valores individualmente, onde o componente seria chamado uma vez para cada item do filtro */}
             {/* O manter várias chamadas. O certo é que esta parte será extraída para um componente separado */}
-            <p className={classes.Selected} onClick={e => setProductTeste(e, 'cat', 'all')}>All categories ({categoriesTotalQtde}) </p>
-            <p onClick={e => setProductTeste(e, 'cat', 'bedroom')}>Bedroom ({bedRoomQtde}) </p>
-            <p onClick={e => setProductTeste(e, 'cat', 'living-room')}>Living room ({livingRoomQtde}) </p>
-            <p onClick={e => setProductTeste(e, 'cat', 'kitchen')}>Kitchen ({kitchen}) </p>
-            <p onClick={e => setProductTeste(e, 'cat', 'bathroom')}>Bathroom ({bathRoomQtde}) </p>
-            <p onClick={e => setProductTeste(e, 'cat', 'children-room')}>Children's room ({childrenRoom}) </p>
+            <p className={classes.Selected} onClick={e => setProductTag(e, 'cat', 'all')}>All categories ({categoriesTotalQtde}) </p>
+            <p onClick={e => setProductTag(e, 'cat', 'bedroom')}>Bedroom ({bedRoomQtde}) </p>
+            <p onClick={e => setProductTag(e, 'cat', 'living-room')}>Living room ({livingRoomQtde}) </p>
+            <p onClick={e => setProductTag(e, 'cat', 'kitchen')}>Kitchen ({kitchen}) </p>
+            <p onClick={e => setProductTag(e, 'cat', 'bathroom')}>Bathroom ({bathRoomQtde}) </p>
+            <p onClick={e => setProductTag(e, 'cat', 'children-room')}>Children's room ({childrenRoom}) </p>
          </div>
          <span></span>
-         <div ref={typesRef}>
+         <div id="types-wrapper">
             <h6>TYPE</h6>
-            <p className={classes.Selected} onClick={e => setProductTeste(e, 'type', 'all-products')}>All tags ({typesTotalQtde}) </p>
-            <p onClick={e => setProductTeste(e, 'type', 'furniture')}>Furniture ({furnitureQtde}) </p>
-            <p onClick={e => setProductTeste(e, 'type', 'accessories')}>Accessories ({accessoriesQtde}) </p>
-            <p onClick={e => setProductTeste(e, 'type', 'decorations')}>Decorations ({decorationsQtde}) </p>
-            <p onClick={e => setProductTeste(e, 'type', 'textile')}>Textile ({textileQtde}) </p>
-            <p onClick={e => setProductTeste(e, 'type', 'lightning')}>Lighting ({lightingQtde}) </p>
+            <p className={classes.Selected} onClick={e => setProductTag(e, 'type', 'all-products')}>All tags ({typesTotalQtde}) </p>
+            <p onClick={e => setProductTag(e, 'type', 'furniture')}>Furniture ({furnitureQtde}) </p>
+            <p onClick={e => setProductTag(e, 'type', 'accessories')}>Accessories ({accessoriesQtde}) </p>
+            <p onClick={e => setProductTag(e, 'type', 'decorations')}>Decorations ({decorationsQtde}) </p>
+            <p onClick={e => setProductTag(e, 'type', 'textile')}>Textile ({textileQtde}) </p>
+            <p onClick={e => setProductTag(e, 'type', 'lightning')}>Lighting ({lightingQtde}) </p>
          </div>
          <span></span>
          <FilterCheckbox
             checkboxItems={checkboxItems}
-            offerRef={offerRef}
          />
          <span></span>
          <FilterColorSelector />

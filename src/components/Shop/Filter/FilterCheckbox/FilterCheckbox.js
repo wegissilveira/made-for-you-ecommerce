@@ -6,14 +6,12 @@ import { UpdateProductsListContext, FilterDataContext } from "../context/FilterC
 
 const FilterCheckbox = props => {
    const {
-      checkboxItems,
-      offerRef
+      checkboxItems
    } = props
 
    const { updateOffer } = useContext(UpdateProductsListContext)
    const filterReducerState = useContext(FilterDataContext)
 
-   // Temporário para testes. Ajustar após a configuração do contexto
    const setOfferHandler = e => {
       let inputValuesArr = [...filterReducerState.offer]
       const input = e.target
@@ -29,7 +27,7 @@ const FilterCheckbox = props => {
 
 
    return (
-      <div ref={offerRef} className={classes['Offers-container']}>
+      <div id="our-offers-wrapper" className={classes['Offers-container']}>
          <h6>OUR OFFERS</h6>
          {checkboxItems.map((item, i) => {
             return (
