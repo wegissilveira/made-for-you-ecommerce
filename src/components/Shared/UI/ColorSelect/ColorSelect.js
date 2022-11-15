@@ -1,20 +1,17 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import classes from './ColorSelect.module.css'
 
 import { UpdateProductsListContext } from 'components/Shop/Filter/context/FilterContext'
 
+const _ = undefined
+
 const ColorSelect = props => {
    const {
       colors,
-      selectedColor
+      selectedColor,
+      selectColorHandlerCallback,
+      isFilter
    } = props
-
-   let opacityArr = Array(colors.length).fill('0.4')
-
-   let borderArr = Array(colors.length).fill('1px solid black')
-
-   let [opacity, setOpacity] = useState(opacityArr)
-   let [border, setBorder] = useState(borderArr)
 
    const { updateColor } = useContext(UpdateProductsListContext)
 
@@ -27,58 +24,47 @@ const ColorSelect = props => {
       }
 
       updateColor(colorObj)
-
       colorInput.checked = false
    }
 
-   // Quando o modal do produto na prateleira abre ele está atualizando o contexto com o código novo
-   // Isso não pode ocorrer. As cores no modal, assim como em qualquer lugar fora do filtro não deve atualizar o contexto
-   // Isso está acontecendo através da chamada de 'updateColorStateHandler', que aciona o contexto com 'updateColor'
-   // Corrigir isso juntamente com o destaque da cor selecionada feita de nova maneira através do script comentado
-   const selectColorHandler = (e, color, load) => {
-      let newBorder = [...border]
-      let newOpacity = [...opacity]
+   const selectColorHandler = (e, color, load) => {      
+      if (isFilter || !load) {
+         const bulletBorder = e.currentTarget      
+         const colorsBullets = e.currentTarget.parentElement.childNodes
+   
+         colorsBullets.forEach((bullet) => {
+            bullet.style.border = '1px solid black'
+            bullet.children[0].style.opacity = 0.4  
+         })     
+   
+         bulletBorder.style.border = '2px solid black'
+         bulletBorder.children[0].style.opacity =  1.0
+   
+         if (isFilter) updateColorStateHandler(color)
+         if (!isFilter) selectColorHandlerCallback(color)
+         
+      } else {
+         const currentPage =  window.location.pathname
+         let colorsBullets = Array.from(document.querySelectorAll('#colors-selector-bullets'))
+         colorsBullets = currentPage === '/shop/' ? colorsBullets[1].childNodes :  colorsBullets[0].childNodes 
 
-      colors.forEach((bColor, k) => {
-         if (color === bColor) {
-            // console.log('color loop: ', color);
-            newBorder[k] = '2px solid black'
-            newOpacity[k] = '1.0'
-         } else {
-            // console.log('color loop ELSE: ', color);
-            newBorder[k] = '1px solid black'
-            newOpacity[k] = '0.4'
-         }
-      })
-
-      setBorder(newBorder)
-      setOpacity(newOpacity)
-
-      if (load !== true) updateColorStateHandler(color)
-
-      // const colorsBullets = Array.from(document.getElementById('colors-selector-bullets').childNodes)
-      // const bulletBorder = e.currentTarget
-      // const currentPage = window.location.pathname
-
-      // colorsBullets.forEach((bullet) => {
-      //    bullet.style.border = '1px solid black'
-      //    bullet.children[0].style.opacity = 0.4  
-      // })     
-
-      // bulletBorder.style.border = '2px solid black'
-      // bulletBorder.children[0].style.opacity =  '1.0'
-
-      // if (load !== true && currentPage === '/shop/') updateColorStateHandler(color)
+         colorsBullets.forEach((bullet) => {
+            if (bullet.children[0].style.backgroundColor === selectedColor) {
+               bullet.style.border = '2px solid black'
+               bullet.children[0].style.opacity = 1.0  
+            } else {
+               bullet.style.border = '1px solid black'
+               bullet.children[0].style.opacity = 0.4  
+            }
+         }) 
+      }
    }
 
    useEffect(() => {
       if (selectedColor !== undefined) {
-         selectColorHandler(selectedColor, true)
+         selectColorHandler(_, _, true)
       }
    }, [])
-
-   // console.log('border: ', border);
-   // console.log('opacity: ', opacity);
 
 
    return (
@@ -87,11 +73,11 @@ const ColorSelect = props => {
             colors.map((color, i) => {
                return <div 
                   key={color+'-'+i}
-                  style={{ border: border[i] }}
+                  style={{ border: '1px solid black' }}
                   onClick={(e) => selectColorHandler(e, color)}
                >
                   <span
-                     style={{ backgroundColor: color, opacity: opacity[i] }}
+                     style={{ backgroundColor: color, opacity: 0.4 }}
                   >
                   </span>
                </div>

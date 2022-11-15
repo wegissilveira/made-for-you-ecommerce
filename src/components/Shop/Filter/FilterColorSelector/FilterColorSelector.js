@@ -35,6 +35,7 @@ const FilterColorSelector = () => {
          <ColorSelect
             title={'COLOR'}
             colors={['red', 'yellow', 'blue', 'purple', 'green']}
+            isFilter={true}
          />
       </div>
    )

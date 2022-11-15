@@ -168,7 +168,8 @@ const ProductInfoBody = props => {
                <ColorSelect
                   selectedColor={productCartDetails.color}
                   colors={product.colors}
-                  selectColorHandlerCallback={(color, i) => selectColorHandler(color, i)}
+                  selectColorHandlerCallback={(color) => selectColorHandler(color)}
+                  isFilter={false}
                />
             </div>
          </div>

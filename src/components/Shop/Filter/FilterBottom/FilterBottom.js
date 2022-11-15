@@ -23,7 +23,6 @@ const FilterBottom = props => {
       const colorInput = document.getElementById('all-colors-input')
       const colorsBullets = Array.from(document.getElementById('colors-selector-bullets').childNodes)
       
-
       selectList.forEach((element, i) => {
          if (i === 0) {
             element.selected = true

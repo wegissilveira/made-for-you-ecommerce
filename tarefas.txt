@@ -62,6 +62,8 @@ FASE 1 - Melhorias estruturais e funcionais:
          - Provavelmente tem a ver com renderizações desnecessárias. Se for muito complexo analisar na etapa 5, caso contrário já ajustar.
          - OBS.: Se resolveu após todo o contexto ser configurado. Acredito que havia algum conflito entre a lógica original e a nova enquanto estava em desenvolvimento.
       -> (MELHORIA): Função de limpar filtro do preço ainda não foi para 'FilterBottom' por conta de algumas limitações descritas em ambos os componentes envolvidos. Verificar isso e buscar uma maneira para passar tudo para FilterBottom;
+      -> (BUG): Quando não há cor selecionada o na hora de inserir o produto no carrinho a cor é uma string vazia, colocar uma verificação para evitar que isso ocorra ou setar a primeira cor como default.
+      -> (BUG): Ícones de elementos que estão no carrinho bugados na prateleira quando o filtro é acionado
    
    3.1- Analisar warnings no terminal
 
