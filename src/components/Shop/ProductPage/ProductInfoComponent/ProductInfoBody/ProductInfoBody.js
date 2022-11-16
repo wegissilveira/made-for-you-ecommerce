@@ -192,6 +192,7 @@ const ProductInfoBody = props => {
                onClick={() => productCartHandler()}
                type="button"
                className={bagButtonColor}
+               disabled={productColor === ''}
             > {bagButtonText}
             </button>
 

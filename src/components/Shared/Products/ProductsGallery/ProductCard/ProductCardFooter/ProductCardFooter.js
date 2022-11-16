@@ -16,6 +16,7 @@ const ProductCardFooter = (props) => {
       openModalHandlerCB
    } = props
 
+
    return (
       <div className={classes.Products_description}>
          <div>

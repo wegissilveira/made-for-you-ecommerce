@@ -157,7 +157,13 @@
 }
 
 .Bag_button_green {
+   cursor: pointer;
    background-color: #218838;
+}
+
+.Bag_button_green:disabled {
+   background-color: #32a34b;
+   cursor: default;
 }
 
 .Bag_button_green:hover {
@@ -166,6 +172,7 @@
 
 .Bag_button_red {
    background-color: #c82333;
+   cursor: pointer;
 }
 
 .Bag_button_red:hover {
@@ -174,6 +181,7 @@
 
 .Bag_button_orange {
    background-color: rgb(255, 94, 0);
+   cursor: pointer;
 }
 
 .Bag_button_orange:hover {

@@ -96,8 +96,7 @@ const ProductCard = props => {
 
    useEffect(() => {
       cartHandler('load')
-
-   }, [cart])
+   }, [cart, product])
 
 
    return (
