@@ -12,7 +12,6 @@ const ProductsGallery = (props) => {
       productsSubContainerRef
    } = props
 
-   console.log('PRODUCTS: ', products);
 
    return (
       <div

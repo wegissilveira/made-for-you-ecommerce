@@ -1,48 +1,37 @@
-import React, { forwardRef, useImperativeHandle, useContext } from 'react'
+import React, { 
+   useContext, 
+   useEffect, 
+   useState, 
+   useRef
+} from 'react'
+
 import classes from './PriceSlider.module.css'
+
+import { FilterDataContext } from '../context/FilterContext'
 
 import { UpdateProductsListContext } from "../context/FilterContext"
 
 import { initial_min_value, initial_max_value } from '../helpers/values'
 
 
-const PriceSlider = forwardRef((props, ref) => {
-   const sliderRef = React.useRef() // => Div que engloba o slider
-   const thumb_1_Ref = React.useRef()
-   const thumb_2_Ref = React.useRef()
-   const price_thumb_1_Ref = React.useRef()
-   const price_thumb_2_Ref = React.useRef()
+const initial_position = 0 // => Valor inicial do thumb esquerdo ***
 
-   const initial_position = 0 // => Valor inicial do thumb esquerdo ***
-   const [slider_width, setSliderWidth] = React.useState(0)
+const PriceSlider = () => {
+   const [slider_width, setSliderWidth] = useState(0)
+   const [min_value, setMinValue] = useState(initial_min_value)
+   const [max_value, setMaxValue] = useState(initial_max_value)
+   const [mobile_thumb1_position, setValueMobileThumb1] = React.useState(0)
+   const [mobile_thumb2_position, setValueMobileThumb2] = React.useState(0)
 
-   let [mobile_thumb1_position, setValueMobileThumb1] = React.useState(0)
-   let [mobile_thumb2_position, setValueMobileThumb2] = React.useState(0)
-   let [min_value, setMinValue] = React.useState(initial_min_value)
-   let [max_value, setMaxValue] = React.useState(initial_max_value)
+   const sliderRef = useRef() // => Div que engloba o slider
+   const thumb_1_Ref = useRef()
+   const thumb_2_Ref = useRef()
+   const price_thumb_1_Ref = useRef()
+   const price_thumb_2_Ref = useRef()
 
    const { updatePrice } = useContext(UpdateProductsListContext)
+   const {isFilterOn, isFilterTagOn} = useContext(FilterDataContext)
 
-   // Entender o que este hook faz para conseguir passar a função de limpar o filtro totalmente para FilterBottom
-   useImperativeHandle(ref, () => ({
-      resetPriceSlider() {
-         thumb_1_Ref.current.style.transform = `translate(0px)`
-         thumb_2_Ref.current.style.transform = `translate(0px)`
-         price_thumb_1_Ref.current.style.transform = `translate(0px)`
-         price_thumb_2_Ref.current.style.transform = `translate(0px)`
-
-         setMinValue(initial_min_value)
-         setMaxValue(initial_max_value)
-
-         // props.rangeValues([initial_min_value, initial_max_value])
-         const priceRange = {
-            minValue: initial_min_value,
-            maxValue: initial_max_value
-         }
-         updatePrice(priceRange)
-      }
-   }));
-   // console.log('TESTE PRICE');
 
    const beginSliding = e => {
       // slider.target.onpointermove = slide
@@ -67,6 +56,8 @@ const PriceSlider = forwardRef((props, ref) => {
       let current_position = e.clientX - rect.left
 
       if (thumb_id === 'right-thumb') {
+         let maxValue
+
          current_position = current_position - sliderRef.current.offsetWidth
 
          if (current_position >= initial_position) {
@@ -77,11 +68,24 @@ const PriceSlider = forwardRef((props, ref) => {
             current_position = mobile_thumb1_position - (slider_width - 25)
          }
 
+         if (current_position > -1) {
+            maxValue = initial_max_value
+         } else {
+            maxValue = (current_position + slider_width) * (initial_max_value / slider_width)
+         }
+
+         const priceRange = {
+            minValue: min_value,
+            maxValue: maxValue
+         }
+
+         updatePrice(priceRange)
+         setMaxValue(maxValue)
          setValueMobileThumb2(current_position)
       }
 
       if (thumb_id === 'left-thumb') {
-
+         let minValue
          if (current_position <= initial_position) {
             current_position = initial_position
          }
@@ -90,6 +94,19 @@ const PriceSlider = forwardRef((props, ref) => {
             current_position = mobile_thumb2_position + (slider_width - 25)
          }
 
+         if (current_position - initial_position < 1) {
+            minValue = initial_min_value
+         } else {
+            minValue = (current_position - initial_position) * (initial_max_value / slider_width)            
+         }
+
+         const priceRange = {
+            minValue: minValue,
+            maxValue: max_value
+         }
+
+         updatePrice(priceRange)
+         setMinValue(minValue)
          setValueMobileThumb1(current_position)
       }
 
@@ -99,63 +116,33 @@ const PriceSlider = forwardRef((props, ref) => {
       priceThumb.current.style.transform = `translate(${current_position}px)`
    }
 
+   const resetPriceSlider = () => {
+      thumb_1_Ref.current.style.transform = `translate(0px)`
+      thumb_2_Ref.current.style.transform = `translate(0px)`
+      price_thumb_1_Ref.current.style.transform = `translate(0px)`
+      price_thumb_2_Ref.current.style.transform = `translate(0px)`
 
-   const handleChange = e => {
-
-      const thumb_id = e.target.id
-
-      if (thumb_id === 'left-thumb') {
-
-         // slider = thumb_1_Ref.current
-         // slider_price = price_thumb_1_Ref.current
-
-         // slider.onpointerdown = beginSliding
-         // slider.onpointerup = stopSliding
-
-         if (mobile_thumb1_position - initial_position < 1) {
-            setMinValue(initial_min_value)
-         } else {
-            setMinValue((mobile_thumb1_position - initial_position) * (initial_max_value / slider_width))
-         }
-
-      } else if (thumb_id === 'right-thumb') {
-
-         // slider = thumb_2_Ref.current
-         // slider_price = price_thumb_2_Ref.current
-
-         // slider.onpointerdown = beginSliding
-         // slider.onpointerup = stopSliding
-
-         if (mobile_thumb2_position > -1) {
-            setMaxValue(initial_max_value)
-         } else {
-            setMaxValue((mobile_thumb2_position + slider_width) * (initial_max_value / slider_width))
-         }
-      }
-
-      // props.rangeValues([min_value, max_value])
-      // updatePrice([min_value, max_value])
-
-      const priceRange = {
-         minValue: min_value,
-         maxValue: max_value
-      }
-      updatePrice(priceRange)
+      setMinValue(initial_min_value)
+      setMaxValue(initial_max_value)
    }
 
-   React.useEffect(() => {
+   useEffect(() => {
       setSliderWidth(sliderRef.current.offsetWidth)
    }, [])
 
+   useEffect(() => {      
+      if (!isFilterOn && !isFilterTagOn) {
+         resetPriceSlider()
+      }
 
+   }, [isFilterOn, isFilterTagOn])
 
 
    return (
       <div className={classes.Price_slider_container}>
          <h6>PRICE FILTER</h6>
-         <div className={classes.Price_slider_subContainer}
-            // onMouseMove={(e) => handleChange(e)}
-            onPointerMove={(e) => handleChange(e)}
+         <div 
+            className={classes.Price_slider_subContainer}
             ref={sliderRef}
          >
             <div>
@@ -177,6 +164,6 @@ const PriceSlider = forwardRef((props, ref) => {
          </div>
       </div>
    )
-})
+}
 
 export default PriceSlider

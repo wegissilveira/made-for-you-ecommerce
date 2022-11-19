@@ -17,11 +17,7 @@ const checkboxItems = [
 ]
 
 
-const FilterBody = props => {
-   const {
-      sliderRef
-   } = props
-
+const FilterBody = () => {
    const { updateTag, updateCategory } = useContext(UpdateProductsListContext)
 
    // Categorias
@@ -126,9 +122,7 @@ const FilterBody = props => {
          <span></span>
          <FilterColorSelector />
          <span></span>
-         <PriceSlider
-            ref={sliderRef}
-         />
+         <PriceSlider />
       </div>
    )
 }

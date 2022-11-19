@@ -5,16 +5,9 @@ import { UpdateProductsListContext } from "../context/FilterContext"
 
 const filterButtonStyle = [classes.Filter_button, classes.Filter_button_active]
 
-const FilterBottom = props => {
-   const {
-      resetPriceFilterCB
-   } = props
-
+const FilterBottom = () => {
    const { setDefaultValues } = useContext(UpdateProductsListContext)
 
-   // Faltando função de resetar o slider de preço.
-   // Está sendo feito com uma ref e usando um hook que desconheço
-   // Analisar isso antes de trazer a função pra cá
    const cleanFiltersHandler = () => {
       const selectList = Array.from(document.getElementById('order-filter-wrapper').childNodes)
       const categoriesList = Array.from(document.getElementById('categories-wrapper').childNodes)
@@ -59,12 +52,7 @@ const FilterBottom = props => {
       })
 
       colorInput.checked = false      
- 
       setDefaultValues()
-      // sliderRef.current.resetPriceSlider()
-      resetPriceFilterCB()
-
-      
    }
 
 

@@ -26,7 +26,6 @@ const Filter = () => {
 
    const containerRef = useRef()
    const filterRef = useRef()
-   const sliderRef = useRef()
 
    const filterReducerState = useContext(FilterDataContext)
 
@@ -54,10 +53,6 @@ const Filter = () => {
       setFilterOpen(open)
       setTranslateValue(translate)
       containerHeightHandler(_, _, open)
-   }
-
-   const resetPriceFilter = () => {      
-      sliderRef.current.resetPriceSlider()
    }
 
    useEffect(() => {
@@ -90,10 +85,8 @@ const Filter = () => {
                   className={classes.Filter_subContainer}
                   ref={filterRef}
                >
-                  <FilterBody 
-                     sliderRef={sliderRef}
-                  />
-                  <FilterBottom resetPriceFilterCB={resetPriceFilter} />
+                  <FilterBody />
+                  <FilterBottom/>
                </div>
                <Products
                   productsProps={filterReducerState.productsState} // => Envia o array com os produtos que serão exibidos

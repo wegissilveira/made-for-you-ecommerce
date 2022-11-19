@@ -44,7 +44,6 @@ const FilterProvider = (props) => {
       }
 
       const updatePrice = (priceRange) => {
-         // console.log('priceRange: ', priceRange);
          dispatch(setPrice(priceRange))
       }
 

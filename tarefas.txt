@@ -35,13 +35,13 @@ FASE 1 - Melhorias estruturais e funcionais:
       -> NavigationDesk: Sem alterações
       -> HeaderUserOptions: OK
          - SearchProducts: OK
-      -> Filter
+      -> Filter - OK
          - FilterHeader - OK
          - FilterBody - OK
             - FilterCheckbox - OK
             - FilterColorSelector - OK
                - ColorSelector - OK
-            - PriceSlider
+            - PriceSlider - OK
          - FilterBottom - OK
       
 
@@ -50,18 +50,20 @@ FASE 1 - Melhorias estruturais e funcionais:
       -> (BUG) O terceiro produto da lista do Cart está sempre retornando NaN no preço - aparentemente, depois de criar CartList o NaN ocorre com o primeiro produto
       -> (MELHORIA) Considerar habilitar o header da galeria da home no mobile. Caso isso aconteça, criar um componente para compartilhar a lógica dos header mobile e desk
       -> (BUG): Scroll de show more/less parece funcionar bem somente em telas com 1366px, telas maiores o cálculo não parece estar correto - OBS.: A função foi removida de 'Products' e convertida no hook 'useSetPageTop'. Corrigir o bug e analisar possíveis melhorias no código.
-      -> O código de montar a prateleira foi reorganizado, mas acredito que ainda caiba melhorias. Analisar as possibilidades após reorganizar/refatorar código de Filter. - FALTA ANALISAR O CÓDIGO DO SLIDER E PASSAR LIMPAR FILTRO PARA FILTERBOTTOM
-      -> (BUG): Bullets de cores do filtro continuam selecionados após o filtro ser resetado
-      -> (BUG/MELHORIA): Na hora de resetar o filtro o dispatch de filtros de preço está sendo executado duas vezes, uma pela função de limpar filtros e outra pela função 'setPriceRange', que é chamada como callback a partir do slider de preço:
+
+      *****FEITOS*****
+      -> O código de montar a prateleira foi reorganizado, mas acredito que ainda caiba melhorias. Analisar as possibilidades após reorganizar/refatorar código de Filter. - FALTA ANALISAR O CÓDIGO DO SLIDER E PASSAR LIMPAR FILTRO PARA FILTERBOTTOM - OK
+      -> (BUG): Bullets de cores do filtro continuam selecionados após o filtro ser resetado - OK
+      -> (BUG/MELHORIA): Na hora de resetar o filtro o dispatch de filtros de preço está sendo executado duas vezes, uma pela função de limpar filtros e outra pela função 'setPriceRange', que é chamada como callback a partir do slider de preço: - OK
          - A função é necessária por ora pois o cálculo do preço é feito no slider baseado na posição dos bullets, no entanto não há a necessidade de se executar tal função no momento de limpar o filtro, já que o dispatch de resetar o filtro já ajusta a propriedade de preços;
          - Mas limpar filtros também executa a função que reposiciona os bullets no slider, caso tal função seja removida os bullets não são reposicionados e caso seja mantida ela executa o slider e chama 'setPriceRange';
          - Buscar uma maneira de não executar 'setPriceRange' no momento de limpar o filtro, mas ao mesmo tempo reposicionar os bullets do slider de preço.
-      -> (BUG): Só de passar o cursor sobre o slider de preço a função está sendo chamada. O msm ocorre com todo o ciclo de funções ligadas a priceSlider
+      -> (BUG): Só de passar o cursor sobre o slider de preço a função está sendo chamada. O msm ocorre com todo o ciclo de funções ligadas a priceSlider - OK
       -> (MELHORIA): Botão 'FILTER' no filtro não tem nenhuma função - removê-lo caso não tenha nenhuma utilidade - OK      
       -> (BUG) Filtro 'agarrando' na hora de abrir e fechar após a configuração do contexto. Não abre com fluidez. - OK
          - Provavelmente tem a ver com renderizações desnecessárias. Se for muito complexo analisar na etapa 5, caso contrário já ajustar.
          - OBS.: Se resolveu após todo o contexto ser configurado. Acredito que havia algum conflito entre a lógica original e a nova enquanto estava em desenvolvimento.
-      -> (MELHORIA): Função de limpar filtro do preço ainda não foi para 'FilterBottom' por conta de algumas limitações descritas em ambos os componentes envolvidos. Verificar isso e buscar uma maneira para passar tudo para FilterBottom;
+      -> (MELHORIA): Função de limpar filtro do preço ainda não foi para 'FilterBottom' por conta de algumas limitações descritas em ambos os componentes envolvidos. Verificar isso e buscar uma maneira para passar tudo para FilterBottom; - OK
       -> (BUG): Quando não há cor selecionada o na hora de inserir o produto no carrinho a cor é uma string vazia, colocar uma verificação para evitar que isso ocorra ou setar a primeira cor como default. - OK
       -> (BUG): Ícones de elementos que estão no carrinho bugados na prateleira quando o filtro é acionado. - OK
    
