@@ -49,7 +49,7 @@ FASE 1 - Melhorias estruturais e funcionais:
       -> ProductInfoComponent
          - ProductInfoHeader
          - ProductInfoBody
-         - ProductInfoFooter
+         - ProductInfoFooter: Sem alterações
       
 
    - Ajustes pontuais:
@@ -57,7 +57,16 @@ FASE 1 - Melhorias estruturais e funcionais:
       -> (BUG) O terceiro produto da lista do Cart está sempre retornando NaN no preço - aparentemente, depois de criar CartList o NaN ocorre com o primeiro produto
       -> (MELHORIA) Considerar habilitar o header da galeria da home no mobile. Caso isso aconteça, criar um componente para compartilhar a lógica dos header mobile e desk
       -> (BUG): Scroll de show more/less parece funcionar bem somente em telas com 1366px, telas maiores o cálculo não parece estar correto - OBS.: A função foi removida de 'Products' e convertida no hook 'useSetPageTop'. Corrigir o bug e analisar possíveis melhorias no código.
-      ->(MELHORIA): ANALISAR A PASSAGEM DO TOASTIFY PARA UM PORTAL
+      -> (MELHORIA): ANALISAR A PASSAGEM DO TOASTIFY PARA UM PORTAL
+      -> (BUG): Corrigir versão mobile do filtro que sofreu alterações após refatoração. Analisar PDP e modal do produto também
+      -> (MELHORIA): Botão para limpar busca
+      -> (BUG): Quantidade não sendo inserida no minicart quando o usuário não escolhe no selector. Semelhante ao que ocorria com o selector de cores antes de haver validação
+
+      *****EM EXECUÇÃO****
+      -> (MELHORIA): Identificar pontos onde as props de 'products' possam seer substituídas por useProducs ou mesmo removidas.
+      -> (MELHORIA): Analisar se é possível setar um parâmetro na url para que possa ser capturado pelo useProduct hook e retornar o produto. Isso porque como não há id na url a partir da galeria, tive que adaptar o hook para receber um id como parâmetro quando não houver id na url:
+         - Eu consegui inserir um parâmetro ao location do history usando o history.replace, mas não uma valor ao params. Talvez eu possa utilizar o parÂmetro do location ao invés do useparams. Para isso eu teria que acrescentar esse parâmetro a PDP.
+
 
       *****FEITOS*****
       -> O código de montar a prateleira foi reorganizado, mas acredito que ainda caiba melhorias. Analisar as possibilidades após reorganizar/refatorar código de Filter. - FALTA ANALISAR O CÓDIGO DO SLIDER E PASSAR LIMPAR FILTRO PARA FILTERBOTTOM - OK
@@ -74,6 +83,11 @@ FASE 1 - Melhorias estruturais e funcionais:
       -> (MELHORIA): Função de limpar filtro do preço ainda não foi para 'FilterBottom' por conta de algumas limitações descritas em ambos os componentes envolvidos. Verificar isso e buscar uma maneira para passar tudo para FilterBottom; - OK
       -> (BUG): Quando não há cor selecionada o na hora de inserir o produto no carrinho a cor é uma string vazia, colocar uma verificação para evitar que isso ocorra ou setar a primeira cor como default. - OK
       -> (BUG): Ícones de elementos que estão no carrinho bugados na prateleira quando o filtro é acionado. - OK
+      -> (BUG) Product page e modal page não estão identificando produto no minicart com o product do useProduct: - OK
+         - Botão não reconhecendo produto no carrinho e  se mantendo verde - OK
+         - a cor que está no carrinho não fica selecionada a não ser que o rerender de ColorSelect seja forçado - OK
+         - O size também não fica selecionado. O problema é o mesmo do selector de cor - OK
+         - Update ocorrendo no elemento errado, aparentemente no último item do array do minicart - OK
    
    3.1- Analisar warnings no terminal
 
@@ -83,6 +97,8 @@ FASE 1 - Melhorias estruturais e funcionais:
 5- Análise de e correção de renderizações desnecessárias
 
 6- Estudar os hooks, tanto documentação quando o curso referência da lista de estudos, antes de fechar esta fase. O intuito é identificar se há alguma melhoria que possa ser feita usando os hooks que ainda não tenho conhecimento.
+
+OBS.: Criei o useProduct para retornar o produto do contexto baseado no id, no entanto foi necessária uma adaptação passando o id como props no caso do modal, já que não o parâmetro de id não existe quando o modal é aberto através da galeria.
 
 EXTRAS: 
 1- Reestruturar o UserForm para que receba as informações como props e seja, de fato, um componente dinâmico. Em UserLogin, ao invés de importar usar um UserForm que renderiza ambos os forma internamente, usará dois, onde cada um receberá as respectivas informações de cada formulário. Talvez setar onde componente (a ser criado) como o componente base, já que o componente par renderizará os forms de sign in e sign up. Esta última parte por questões de semântica.

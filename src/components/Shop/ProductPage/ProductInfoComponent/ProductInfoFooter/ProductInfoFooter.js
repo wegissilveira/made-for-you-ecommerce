@@ -11,10 +11,7 @@ const ProductInfoFooter = (props) => {
    } = props
 
    return (
-      <div
-         className={classes.Product_specifications_container}
-         style={{ display: modalStyle.specificDisplay }}
-      >
+      <div className={classes.Product_specifications_container}>
          <div>
             <div>
                <h6>DETAILS</h6>

@@ -5,12 +5,13 @@ import classes from './ProductCard.module.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 
 import ProductPageModal from 'components/Shop/ProductModal/ProductPageModal'
 import * as actionTypes from 'store/actions/actionTypes'
-import wishlistDataFn from 'Data/wishlistData';
-import cartListDataFn from 'Data/cartData';
-import ProductCardFooter from './ProductCardFooter/ProductCardFooter';
+import wishlistDataFn from 'Data/wishlistData'
+import cartListDataFn from 'Data/cartData'
+import ProductCardFooter from './ProductCardFooter/ProductCardFooter'
 
 
 const ProductCard = props => {
@@ -25,6 +26,8 @@ const ProductCard = props => {
       onWishlistState,
       onCartListState
    } = props
+
+   const history = useHistory()
 
    const wishlistHandler = id => {
 
@@ -84,6 +87,8 @@ const ProductCard = props => {
    const openModalHandler = i => {
       setShowProduct(!showProduct)
       document.body.style.overflow = "hidden"
+      // history.push("/modal/" + product._id)
+      history.replace({search: product._id})
    }
 
    const closeModalCallback = () => {
@@ -116,7 +121,6 @@ const ProductCard = props => {
                </div>
             </Link>
             <ProductCardFooter 
-               productId={product._id}
                productName={product.name}
                productPrice={product.price}
                productIndex={index}

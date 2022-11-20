@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import classes from './ColorSelect.module.css'
 
 import { UpdateProductsListContext } from 'components/Shop/Filter/context/FilterContext'
@@ -7,13 +7,16 @@ const _ = undefined
 
 const ColorSelect = props => {
    const {
-      colors,
+      // colors,
+      product,
       selectedColor,
       selectColorHandlerCallback,
       isFilter,
       title
    } = props
 
+   const [currentColors, setCurrentColors] = useState(['red', 'yellow', 'blue', 'purple', 'green'])
+   
    const { updateColor } = useContext(UpdateProductsListContext)
 
    const updateColorStateHandler = color => {
@@ -27,7 +30,7 @@ const ColorSelect = props => {
       updateColor(colorObj)
       colorInput.checked = false
    }
-
+   
    const selectColorHandler = (e, color, load) => {      
       if (isFilter || !load) {
          const bulletBorder = e.currentTarget      
@@ -65,7 +68,11 @@ const ColorSelect = props => {
       if (selectedColor !== undefined) {
          selectColorHandler(_, _, true)
       }
-   }, [])
+   }, [selectedColor])
+
+   useEffect(() => {
+      if (product && product.colors) setCurrentColors(product.colors)
+   }, [product])
 
 
    return (
@@ -73,7 +80,7 @@ const ColorSelect = props => {
          { title ? <p>Color</p> : null }
          <div className={classes['Color-bullets--wrapper']} id="colors-selector-bullets">
             {
-               colors.map((color, i) => {
+               currentColors.map((color, i) => {
                   return <div 
                      key={color+'-'+i}
                      style={{ border: '1px solid black' }}

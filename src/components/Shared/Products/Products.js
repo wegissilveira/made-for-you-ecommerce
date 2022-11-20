@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 
 import classes from './Products.module.css'
 
-import { withRouter } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 import useSetPageTop from 'hooks/useSetPageTop'
 
@@ -17,7 +17,6 @@ const Products = props => {
       productsProps,
       containerHeight, // Função recebida de 'Filter' que seta a altura do filtro. Usado para setar a altura dinamicamente em caso do filtro estar aberto ou fechado
       isFilterOpen, // Complemento da função de cima - identificar exatamente o que faz, mas acredito que altera a altura da janela para subir ou descer e garantir que os botão de load more estejam sempre no bottom da janela.
-      match,  
       pageLimit = 8
    } = props
    
@@ -29,13 +28,14 @@ const Products = props => {
    const productsSubContainerRef = useRef()
 
    const { setProductsPageHandler, setCount, count } = useSetPageTop()
+   const params = useParams()
 
    const mountProducts = (urlArg) => {      
       const currentProducts = [...productsData]
 
       let products = []
       const productsId = []
-      const key = new RegExp(match.params[urlArg], 'gi')
+      const key = new RegExp(params[urlArg], 'gi')
       
       currentProducts.forEach(product => {
          for (let i in product) {
@@ -52,9 +52,9 @@ const Products = props => {
    }
 
    useEffect(() => {
-      if (match.params.searchKey) mountProducts('searchKey')
-      if (match.params.cat) mountProducts('cat')
-   }, [match.params.searchKey])
+      if (params.searchKey) mountProducts('searchKey')
+      if (params.cat) mountProducts('cat')
+   }, [params.searchKey])
 
    useEffect(() => {
       setPageLimit(pageLimit)
@@ -88,4 +88,4 @@ const Products = props => {
    )
 }
 
-export default withRouter(Products)
+export default Products

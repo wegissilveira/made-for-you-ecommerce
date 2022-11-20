@@ -4,6 +4,14 @@ import classes from './ProductInfoBody.module.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+import { connect } from 'react-redux'
+import * as actionTypes from 'store/actions/actionTypes'
+
+import cartListDataFn from 'Data/cartData.js'
+import wishlistDataFn from 'Data/wishlistData'
+
+import useProduct from "hooks/useProduct"
+
 import ColorSelect from 'components/Shared/UI/ColorSelect/ColorSelect'
 import ProductsQtde from 'components/Shared/UI/ProductsQtde/ProductsQtde'
 import ProductQtdeMobile from 'components/Shared/UI/ProductQtdeMobile/ProductQtdeMobile'
@@ -12,31 +20,22 @@ import SKUSizeSelector from "./SKUSizeSelector/SKUSizeSelector"
 
 const ProductInfoBody = props => {
    const {
-      product,
+      // product,
+      productId,
       cart,
       wish,
-      onWishlistStateCB,
-      onCartListStateCB
-   } = props
+      onWishlistState,
+      onCartListState
+   } = props   
 
-   const [isProductInBag, setProdExists] = useState(() => {
-      let productCartArr = [...cart]
-      let prod = 0
-
-      productCartArr.map(item =>
-         item._id === product._id ? prod++ : null
-      )
-
-      return prod
-   })
+   const [isProductInBag, setProdExists] = useState(0)   
    const [productColor, setProductColor] = useState('')
    const [productQtde, setQtde] = useState(undefined)
    const [productSize, setSize] = useState('100x100')
    const [productUpdated, setProductUpdated] = useState(false)
 
-   const selectRef = useRef()
-
-
+   const product = useProduct(productId)
+ 
    const selectColorHandler = color => {
       setProductColor(color)
       setProductUpdated(true)
@@ -62,7 +61,7 @@ const ProductInfoBody = props => {
 
       localStorage.setItem('wishlist', JSON.stringify(list))
 
-      onWishlistStateCB()
+      onWishlistState()
    }
 
    const productCartHandler = () => {
@@ -99,7 +98,7 @@ const ProductInfoBody = props => {
 
       localStorage.setItem('cartList', JSON.stringify(productCartArr))
 
-      onCartListStateCB()
+      onCartListState()
    }
 
    let productCartDetails = {}
@@ -113,17 +112,6 @@ const ProductInfoBody = props => {
    }
 
    useEffect(() => {
-      const selectArray = Array.from(selectRef.current.children)
-      selectArray.forEach((select, i) => {
-         if (select.value === productCartDetails.size) {
-            selectRef.current.children[i].selected = true
-         } else {
-            selectRef.current.children[i].selected = false
-         }
-      })
-   }, [productCartDetails.size])
-
-   useEffect(() => {
       let productCartArr = [...cart]
       productCartArr.forEach(prod => {
          if (prod._id === product._id) {
@@ -132,8 +120,18 @@ const ProductInfoBody = props => {
             setSize(prod.size)
          }
       })
-   }, [])
+   }, [product])
 
+   useEffect(() => {
+      const productCartArr = [...cart]
+      let prod = 0
+      
+      productCartArr.forEach(item =>
+         item._id === product._id ? prod++ : null
+      )
+
+      setProdExists(prod)
+   }, [product])
 
    const heartIcon = wish.includes(product._id) ? 'fas' : 'far'
 
@@ -147,23 +145,22 @@ const ProductInfoBody = props => {
       bagButtonText = isProductInBag === 0 ? 'ADD TO BAG' : 'REMOVE FROM BAG'
    }
 
-
    return (
       <>
-         {/* Estes blocos são sku selectors, um para tamanho e outro para cores. Extrair isso em um componente e dividir os selectors em um componente para cada tipo de sku */}
          <div className={classes.Product_details_container}>
-            <SKUSizeSelector selectRef={selectRef} setSizeHandlerCB={setSizeHandler} />
+            <SKUSizeSelector productCartDetails={productCartDetails} setSizeHandlerCB={setSizeHandler} />
             <ColorSelect
-               selectedColor={productCartDetails.color}
-               colors={product.colors}
+               // selectedColor={productCartDetails.color}
+               selectedColor={productColor}
+               // colors={product.colors}
+               // colors={['blue', 'green', 'purple']}
                selectColorHandlerCallback={(color) => selectColorHandler(color)}
                isFilter={false}
                title={'Color'}
+               product={product}
             />
          </div>
-         <div
-            className={classes.Product_wishlist_container}
-         >
+         <div className={classes.Product_wishlist_container} >
             <ProductsQtde
                startQtde={productCartDetails.qtde}
                changeQtdeCallBack={qtde => setQtdeHandler(qtde)}
@@ -197,4 +194,18 @@ const ProductInfoBody = props => {
    )
 }
 
-export default ProductInfoBody
+const mapStateToProps = state => {
+   return {
+      wish: state.wishlistState,
+      cart: state.cartListState
+   }
+}
+
+const mapDispatchToProps = dispatch => {
+   return {
+      onWishlistState: () => dispatch({ type: actionTypes.WISHLIST, value: wishlistDataFn() }),
+      onCartListState: () => dispatch({ type: actionTypes.CARTLIST, value: cartListDataFn() })
+   }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductInfoBody)

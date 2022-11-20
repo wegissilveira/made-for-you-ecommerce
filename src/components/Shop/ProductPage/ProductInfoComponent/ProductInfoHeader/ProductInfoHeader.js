@@ -7,13 +7,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const ProductInfoHeader = props => {
    const {
-      modalStyle,
       product
    } = props
 
    return (
       <>
-         <div style={{ display: modalStyle.specificDisplay }}>
+         <div className={classes['Product-info-header--wrapper']}>
             <p>123456</p>
             <p>exemplo</p>
          </div>

@@ -1,18 +1,19 @@
 import React, { useRef } from 'react'
 import classes from './SearchComponent.module.css'
 
-import { withRouter } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 
-const SearchComponent = (props) => {
+const SearchComponent = () => {
    const inputRef = useRef()
+   const history = useHistory()
 
    const searchProducts = () => {
       const searchValue = inputRef.current.value
       if (searchValue.length >= 3) {
-         props.history.push("/search/" + searchValue) // => Versão de desenvolvimento
-         // props.history.push("/made-for-you/search/" + searchValue)
+         history.push("/search/" + searchValue) // => Versão de desenvolvimento
+         // history.push("/made-for-you/search/" + searchValue)
       } else {
          alert('Search requires at least three letters')
       }
@@ -33,4 +34,4 @@ const SearchComponent = (props) => {
    )
 }
 
-export default withRouter(SearchComponent)
+export default SearchComponent

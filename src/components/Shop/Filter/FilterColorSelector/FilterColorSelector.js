@@ -33,7 +33,7 @@ const FilterColorSelector = () => {
             <label htmlFor="all-colors-input">All available colors</label>
          </div>
          <ColorSelect
-            colors={['red', 'yellow', 'blue', 'purple', 'green']}
+            // colors={['red', 'yellow', 'blue', 'purple', 'green']}
             isFilter={true}
          />
       </div>

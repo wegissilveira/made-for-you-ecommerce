@@ -1,17 +1,15 @@
 import React from "react"
-import { withRouter } from "react-router-dom"
+import { useParams } from "react-router-dom"
 
-const CategoryHeader = (props) => {
-   const {
-      match
-   } = props
+const CategoryHeader = () => {
+   const params = useParams()
 
    return (
       <>
-         {match && match.params.cat && <h1>{match.params.cat.toUpperCase()}</h1>}
-         {match && match.params.searchKey && <h1>SEARCH: '{match.params.searchKey.toUpperCase()}'</h1>}
+         {params.cat && <h1>{params.cat.toUpperCase()}</h1>}
+         {params.searchKey && <h1>SEARCH: '{params.searchKey.toUpperCase()}'</h1>}
       </>
    )
 }
 
-export default withRouter(CategoryHeader)
+export default CategoryHeader

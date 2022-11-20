@@ -1,11 +1,24 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import classes from './SKUSizeSelector.module.css'
 
 const SKUSizeSelector = (props) => {
    const {
-      selectRef,
-      setSizeHandlerCB
+      setSizeHandlerCB,
+      productCartDetails
    } = props
+
+   const selectRef = useRef()
+
+   useEffect(() => {
+      const selectArray = Array.from(selectRef.current.children)
+      selectArray.forEach((select, i) => {
+         if (select.value === productCartDetails.size) {
+            selectRef.current.children[i].selected = true
+         } else {
+            selectRef.current.children[i].selected = false
+         }
+      })
+   }, [productCartDetails])
 
    return (
       <div className={classes['SKUSelector--container']}>

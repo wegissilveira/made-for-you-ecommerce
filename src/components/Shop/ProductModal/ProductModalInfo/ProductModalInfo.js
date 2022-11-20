@@ -23,10 +23,7 @@ const ProductModalInfo = (props) => {
             product={product}
             imgs={imgs}
          />
-         <ProductInfoComponent
-            product={product}
-            modal={true}
-         />
+         <ProductInfoComponent product={product} />
       </div>
    )
 }

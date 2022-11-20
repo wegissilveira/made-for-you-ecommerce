@@ -29,11 +29,6 @@ input {
    }
 }
 
-.ProductInfo_container>div:first-of-type {
-   display: flex;
-   justify-content: space-between;
-}
-
 @media (max-width: 480px) {
    .ProductInfo_container>div:first-of-type {
       display: none;

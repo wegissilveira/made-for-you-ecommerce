@@ -1,3 +1,8 @@
+.Product-info-header--wrapper {
+   display: flex;
+   justify-content: space-between;
+}
+
 .Product_price_container {
    display: flex;
    justify-content: space-between;
