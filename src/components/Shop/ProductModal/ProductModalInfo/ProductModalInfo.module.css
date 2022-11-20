@@ -32,3 +32,11 @@
       display: none;
    }
 }
+
+.Product_page_modal_container :global(.ColorSelect_Color-SKUSelector--wrapper__1Ik90) {
+   width: 50%;
+}
+
+.Product_page_modal_container :global(.ProductInfoBody_Product_wishlist_container__YEDAu) {
+   width: 90%;
+}

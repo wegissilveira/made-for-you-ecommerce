@@ -11,6 +11,7 @@ FASE 1 - Melhorias estruturais e funcionais:
    - ProductCard: OK 
    - ProductPageModal (ProductModal): OK
    - ProductInfoComponent: OK
+   - ProductInfoBody: 
    - ProgressBar: Não mexer por enquanto
    - ProductQtde: Não mexer por enquanto
    - Filter: OK
@@ -35,14 +36,20 @@ FASE 1 - Melhorias estruturais e funcionais:
       -> NavigationDesk: Sem alterações
       -> HeaderUserOptions: OK
          - SearchProducts: OK
-      -> Filter - OK
-         - FilterHeader - OK
-         - FilterBody - OK
-            - FilterCheckbox - OK
-            - FilterColorSelector - OK
-               - ColorSelector - OK
-            - PriceSlider - OK
-         - FilterBottom - OK
+   - Filter - OK
+      -> FilterHeader - OK
+      -> FilterBody - OK
+         - FilterCheckbox - OK
+         - FilterColorSelector - OK
+            - ColorSelector - OK
+         - PriceSlider - OK
+      -> FilterBottom - OK
+   - PDP
+      -> ProductSlider
+      -> ProductInfoComponent
+         - ProductInfoHeader
+         - ProductInfoBody
+         - ProductInfoFooter
       
 
    - Ajustes pontuais:
@@ -50,6 +57,7 @@ FASE 1 - Melhorias estruturais e funcionais:
       -> (BUG) O terceiro produto da lista do Cart está sempre retornando NaN no preço - aparentemente, depois de criar CartList o NaN ocorre com o primeiro produto
       -> (MELHORIA) Considerar habilitar o header da galeria da home no mobile. Caso isso aconteça, criar um componente para compartilhar a lógica dos header mobile e desk
       -> (BUG): Scroll de show more/less parece funcionar bem somente em telas com 1366px, telas maiores o cálculo não parece estar correto - OBS.: A função foi removida de 'Products' e convertida no hook 'useSetPageTop'. Corrigir o bug e analisar possíveis melhorias no código.
+      ->(MELHORIA): ANALISAR A PASSAGEM DO TOASTIFY PARA UM PORTAL
 
       *****FEITOS*****
       -> O código de montar a prateleira foi reorganizado, mas acredito que ainda caiba melhorias. Analisar as possibilidades após reorganizar/refatorar código de Filter. - FALTA ANALISAR O CÓDIGO DO SLIDER E PASSAR LIMPAR FILTRO PARA FILTERBOTTOM - OK
@@ -74,36 +82,13 @@ FASE 1 - Melhorias estruturais e funcionais:
 
 5- Análise de e correção de renderizações desnecessárias
 
+6- Estudar os hooks, tanto documentação quando o curso referência da lista de estudos, antes de fechar esta fase. O intuito é identificar se há alguma melhoria que possa ser feita usando os hooks que ainda não tenho conhecimento.
+
 EXTRAS: 
 1- Reestruturar o UserForm para que receba as informações como props e seja, de fato, um componente dinâmico. Em UserLogin, ao invés de importar usar um UserForm que renderiza ambos os forma internamente, usará dois, onde cada um receberá as respectivas informações de cada formulário. Talvez setar onde componente (a ser criado) como o componente base, já que o componente par renderizará os forms de sign in e sign up. Esta última parte por questões de semântica.
 
 
-FASE 2 - Implementação do TypeScript
+FASE 2 - Implementação do TypeScript - Estudar os artigos de typescript da makerevich antes de iniciar esta fase
 
 FASE 3 - Subir para produção
    - OBS.: Alterar script de busca para versão em prod
-
-
-
-/* ********** */
-MONTAGEM DAS PRATELEIRAS NO IF/else
-REFERÊNCIA EM CASO DE PRECISAR
-REMOVER DEPOIS QUE NÃO FOR MAIS NECESSÁRIO
-// Mostrar todos os produtos
-if (tagVar === 'all-products' && categoryVar === 'all') {
-   products = productsData
-
-// Mostrar todos produtos da respectiva categoria (kitchen, bedroom etc)
-} else if (tagVar === 'all-products' && categoryVar !== 'all') {
-   products = productsData.filter(item => item.category === categoryVar)
-
-// Mostrar todos os produtos com a respectiva tag (furniture, decorations, textile)
-} else if (tagVar !== 'all-products' && categoryVar === 'all') {
-   products = productsData.filter(item => item.tag === tagVar)
-
-// Mostrar produtos dentro da categoria escolhida e que tenha a tag determinada
-// Ex.: Bedroom + furniture (Somente os produtos com tag 'furniture' que pertencem a categoria 'bedroom')
-} else if (tagVar !== 'all-products' && categoryVar !== 'all') {
-   products = productsData.filter(item => item.tag === tagVar)
-   products = products.filter(item => item.category === categoryVar)
-}

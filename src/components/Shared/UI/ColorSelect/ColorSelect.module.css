@@ -1,17 +1,37 @@
-.Color_select_container {
+@media (max-width: 768px) {
+    .Color-SKUSelector--wrapper {
+        width: 50%;
+    }
+}
+
+@media (max-width: 480px) {
+    .Color-SKUSelector--wrapper>div {
+        margin-left: 0;
+        width: 40%;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 360px) {
+    .Color-SKUSelector--wrapper>div {
+        width: 80%;
+    }
+}
+
+.Color-bullets--wrapper {
     display: flex;
     flex-wrap: wrap;
-    
+
     margin-left: -5px;
 }
 
 @media (max-width: 480px) {
-    .Color_select_container {
+    .Color-bullets--wrapper {
         margin-left: 20%;
     }
 }
 
-.Color_select_container > div {
+.Color-bullets--wrapper>div {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -27,11 +47,11 @@
     -o-border-radius: 50%;
 }
 
-.Color_select_container > div:hover {
+.Color-bullets--wrapper>div:hover {
     border: 2px solid black;
 }
 
-.Color_select_container > div > span {
+.Color-bullets--wrapper>div>span {
     width: 18px;
     height: 18px;
 
@@ -43,24 +63,24 @@
 }
 
 @media (max-width: 768px) {
-    .Color_select_container > div {
+    .Color-bullets--wrapper>div {
         width: 35px;
         height: 35px;
     }
 
-    .Color_select_container > div > span {
+    .Color-bullets--wrapper>div>span {
         width: 22px;
         height: 22px;
     }
 }
 
 @media (max-width: 480px) {
-    .Color_select_container > div {
+    .Color-bullets--wrapper>div {
         width: 40px;
         height: 40px;
     }
 
-    .Color_select_container > div > span {
+    .Color-bullets--wrapper>div>span {
         width: 26px;
         height: 26px;
     }

@@ -7,12 +7,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ColorSelect from 'components/Shared/UI/ColorSelect/ColorSelect'
 import ProductsQtde from 'components/Shared/UI/ProductsQtde/ProductsQtde'
 import ProductQtdeMobile from 'components/Shared/UI/ProductQtdeMobile/ProductQtdeMobile'
+import SKUSizeSelector from "./SKUSizeSelector/SKUSizeSelector"
 
 
 const ProductInfoBody = props => {
    const {
       product,
-      modalStyle,
       cart,
       wish,
       onWishlistStateCB,
@@ -152,30 +152,17 @@ const ProductInfoBody = props => {
       <>
          {/* Estes blocos são sku selectors, um para tamanho e outro para cores. Extrair isso em um componente e dividir os selectors em um componente para cada tipo de sku */}
          <div className={classes.Product_details_container}>
-            <div>
-               <p>Size</p>
-               <select ref={selectRef} onChange={e => setSizeHandler(e.target.value)}>
-                  <option value="100x100">100x100 cm</option>
-                  <option value="200x200">200x200 cm</option>
-                  <option value="300x300">300x300 cm</option>
-               </select>
-            </div>
-            <div
-               className={classes.ProductPage_colors}
-               style={{ width: modalStyle.colorWidth }}
-            >
-               <p>Color</p>
-               <ColorSelect
-                  selectedColor={productCartDetails.color}
-                  colors={product.colors}
-                  selectColorHandlerCallback={(color) => selectColorHandler(color)}
-                  isFilter={false}
-               />
-            </div>
+            <SKUSizeSelector selectRef={selectRef} setSizeHandlerCB={setSizeHandler} />
+            <ColorSelect
+               selectedColor={productCartDetails.color}
+               colors={product.colors}
+               selectColorHandlerCallback={(color) => selectColorHandler(color)}
+               isFilter={false}
+               title={'Color'}
+            />
          </div>
          <div
             className={classes.Product_wishlist_container}
-            style={{ width: modalStyle.wishWidth }}
          >
             <ProductsQtde
                startQtde={productCartDetails.qtde}

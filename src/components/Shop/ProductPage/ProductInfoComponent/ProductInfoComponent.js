@@ -16,8 +16,8 @@ import ProductInfoHeader from './ProductInfoHeader/ProductInfoHeader'
 const modalStyle = {
    specificDisplay: null,
    containerMargin: null,
-   wishWidth: null,
-   colorWidth: null,
+   // wishWidth: null,
+   // colorWidth: null,
 }
 
 const ProductInfoComponent = props => {
@@ -33,8 +33,8 @@ const ProductInfoComponent = props => {
    if (modal) {
       modalStyle.specificDisplay = 'none'
       modalStyle.containerMargin = '0'
-      modalStyle.wishWidth = '90%'
-      modalStyle.colorWidth = '50%'
+      // modalStyle.wishWidth = '90%'
+      // modalStyle.colorWidth = '50%'
    }
 
    return (

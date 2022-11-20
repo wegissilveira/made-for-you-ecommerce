@@ -45,45 +45,6 @@
    }
 }
 
-.Product_details_container select {
-   border: 0;
-   border-bottom: 1px solid #dee2e6;
-   margin-top: 8px;
-   width: 100%;
-   color: grey;
-   cursor: pointer;
-}
-
-@media (max-width: 480px) {
-   .Product_details_container select {
-      margin-top: 0;
-      width: 40%;
-   }
-}
-
-.Product_details_container select:focus {
-   outline: none;
-}
-@media (max-width: 768px) {
-   .ProductPage_colors {
-      width: 50%;
-   }
-}
-
-@media (max-width: 480px) {
-   .ProductPage_colors>div {
-      margin-left: 0;
-      width: 40%;
-      justify-content: space-between;
-   }
-}
-
-@media (max-width: 360px) {
-   .ProductPage_colors>div {
-      width: 80%;
-   }
-}
-
 .Product_wishlist_container {
    display: flex;
    justify-content: space-between;

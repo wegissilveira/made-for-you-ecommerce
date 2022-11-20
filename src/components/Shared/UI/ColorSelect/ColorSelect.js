@@ -10,7 +10,8 @@ const ColorSelect = props => {
       colors,
       selectedColor,
       selectColorHandlerCallback,
-      isFilter
+      isFilter,
+      title
    } = props
 
    const { updateColor } = useContext(UpdateProductsListContext)
@@ -68,21 +69,24 @@ const ColorSelect = props => {
 
 
    return (
-      <div className={classes.Color_select_container} id="colors-selector-bullets">
-         {
-            colors.map((color, i) => {
-               return <div 
-                  key={color+'-'+i}
-                  style={{ border: '1px solid black' }}
-                  onClick={(e) => selectColorHandler(e, color)}
-               >
-                  <span
-                     style={{ backgroundColor: color, opacity: 0.4 }}
+      <div className={classes['Color-SKUSelector--wrapper']}>
+         { title ? <p>Color</p> : null }
+         <div className={classes['Color-bullets--wrapper']} id="colors-selector-bullets">
+            {
+               colors.map((color, i) => {
+                  return <div 
+                     key={color+'-'+i}
+                     style={{ border: '1px solid black' }}
+                     onClick={(e) => selectColorHandler(e, color)}
                   >
-                  </span>
-               </div>
-            })
-         }
+                     <span
+                        style={{ backgroundColor: color, opacity: 0.4 }}
+                     >
+                     </span>
+                  </div>
+               })
+            }
+         </div>
       </div>
    )
 }
