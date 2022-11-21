@@ -87,13 +87,13 @@ const ProductCard = props => {
    const openModalHandler = i => {
       setShowProduct(!showProduct)
       document.body.style.overflow = "hidden"
-      // history.push("/modal/" + product._id)
-      history.replace({search: product._id})
+      history.push("/shop/?productId=" + product._id)
    }
 
    const closeModalCallback = () => {
       setShowProduct(!showProduct)
       document.body.style.overflow = "visible"
+      history.replace({search: ''})
    }
 
    const wish_icon = wish.includes(product._id) ? 'fas' : 'far'
@@ -112,7 +112,7 @@ const ProductCard = props => {
                icon={[wish_icon, 'heart']} size="2x"
                className={classes.Wishlist_icon_heart}
             />
-            <Link to={"/shop/product/" + product._id} >
+            <Link to={"/shop/product/" + product._id + '/?productId=' + product._id} >
                <div className={classes.Products_img_container}>
                   <img
                      src={product.img}

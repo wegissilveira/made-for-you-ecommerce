@@ -21,7 +21,6 @@ import SKUSizeSelector from "./SKUSizeSelector/SKUSizeSelector"
 const ProductInfoBody = props => {
    const {
       // product,
-      productId,
       cart,
       wish,
       onWishlistState,
@@ -34,7 +33,7 @@ const ProductInfoBody = props => {
    const [productSize, setSize] = useState('100x100')
    const [productUpdated, setProductUpdated] = useState(false)
 
-   const product = useProduct(productId)
+   const product = useProduct()
  
    const selectColorHandler = color => {
       setProductColor(color)

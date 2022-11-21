@@ -61,11 +61,11 @@ FASE 1 - Melhorias estruturais e funcionais:
       -> (BUG): Corrigir versão mobile do filtro que sofreu alterações após refatoração. Analisar PDP e modal do produto também
       -> (MELHORIA): Botão para limpar busca
       -> (BUG): Quantidade não sendo inserida no minicart quando o usuário não escolhe no selector. Semelhante ao que ocorria com o selector de cores antes de haver validação
+      -> (MELHORIA): Corrigir url para que na pdp o id só apareça no parâmetro:
+         - Talvez substituir o id que não é parâmetro pelo nome do produto
 
       *****EM EXECUÇÃO****
-      -> (MELHORIA): Identificar pontos onde as props de 'products' possam seer substituídas por useProducs ou mesmo removidas.
-      -> (MELHORIA): Analisar se é possível setar um parâmetro na url para que possa ser capturado pelo useProduct hook e retornar o produto. Isso porque como não há id na url a partir da galeria, tive que adaptar o hook para receber um id como parâmetro quando não houver id na url:
-         - Eu consegui inserir um parâmetro ao location do history usando o history.replace, mas não uma valor ao params. Talvez eu possa utilizar o parÂmetro do location ao invés do useparams. Para isso eu teria que acrescentar esse parâmetro a PDP.
+      -> (MELHORIA): Identificar pontos onde as props de 'products' possam ser substituídas por useProducs ou mesmo removidas.
 
 
       *****FEITOS*****
@@ -88,6 +88,8 @@ FASE 1 - Melhorias estruturais e funcionais:
          - a cor que está no carrinho não fica selecionada a não ser que o rerender de ColorSelect seja forçado - OK
          - O size também não fica selecionado. O problema é o mesmo do selector de cor - OK
          - Update ocorrendo no elemento errado, aparentemente no último item do array do minicart - OK
+      -> (MELHORIA): Analisar se é possível setar um parâmetro na url para que possa ser capturado pelo useProduct hook e retornar o produto. Isso porque como não há id na url a partir da galeria, tive que adaptar o hook para receber um id como parâmetro quando não houver id na url: - OK
+         - Eu consegui inserir um parâmetro ao location do history usando o history.replace, mas não uma valor ao params. Talvez eu possa utilizar o parÂmetro do location ao invés do useparams. Para isso eu teria que acrescentar esse parâmetro a PDP.
    
    3.1- Analisar warnings no terminal
 
