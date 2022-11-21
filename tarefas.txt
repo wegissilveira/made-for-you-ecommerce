@@ -58,14 +58,22 @@ FASE 1 - Melhorias estruturais e funcionais:
       -> (MELHORIA) Considerar habilitar o header da galeria da home no mobile. Caso isso aconteça, criar um componente para compartilhar a lógica dos header mobile e desk
       -> (BUG): Scroll de show more/less parece funcionar bem somente em telas com 1366px, telas maiores o cálculo não parece estar correto - OBS.: A função foi removida de 'Products' e convertida no hook 'useSetPageTop'. Corrigir o bug e analisar possíveis melhorias no código.
       -> (MELHORIA): ANALISAR A PASSAGEM DO TOASTIFY PARA UM PORTAL
-      -> (BUG): Corrigir versão mobile do filtro que sofreu alterações após refatoração. Analisar PDP e modal do produto também
       -> (MELHORIA): Botão para limpar busca
-      -> (BUG): Quantidade não sendo inserida no minicart quando o usuário não escolhe no selector. Semelhante ao que ocorria com o selector de cores antes de haver validação
       -> (MELHORIA): Corrigir url para que na pdp o id só apareça no parâmetro:
          - Talvez substituir o id que não é parâmetro pelo nome do produto
+      -> (BUG/MELHORIA): Na PDP, inicialmente imagens é undefined, o que faz com que por uma fração de segundos apareçam as imagens quebradas:
+         - Buscar uma maneira de corrigir isso, inicialmente tentar reverter o erro, caso não seja possível, inserir um loader até as imagens serem válidas.
+      -> (MELHORIAS): Analisar a possibilidade e a utilidade de se criar um hook para os bullets de cores
+
+
+      *****PRÓXIMOS NA FILA****
+      -> (BUG): Select de product sendo atualizado com um render de atraso
+      -> (BUG): Quantidade não sendo inserida no minicart quando o usuário não escolhe no selector. Semelhante ao que ocorria com o selector de cores antes de haver validação
+      -> (BUG): Corrigir versão mobile do layout do filtro que sofreu alterações após refatoração. Analisar PDP e modal do produto também
+
 
       *****EM EXECUÇÃO****
-      -> (MELHORIA): Identificar pontos onde as props de 'products' possam ser substituídas por useProducs ou mesmo removidas.
+      
 
 
       *****FEITOS*****
@@ -90,6 +98,7 @@ FASE 1 - Melhorias estruturais e funcionais:
          - Update ocorrendo no elemento errado, aparentemente no último item do array do minicart - OK
       -> (MELHORIA): Analisar se é possível setar um parâmetro na url para que possa ser capturado pelo useProduct hook e retornar o produto. Isso porque como não há id na url a partir da galeria, tive que adaptar o hook para receber um id como parâmetro quando não houver id na url: - OK
          - Eu consegui inserir um parâmetro ao location do history usando o history.replace, mas não uma valor ao params. Talvez eu possa utilizar o parÂmetro do location ao invés do useparams. Para isso eu teria que acrescentar esse parâmetro a PDP.
+      -> (MELHORIA): Identificar pontos onde as props de 'products' possam ser substituídas por useProducs ou mesmo removidas. - OK
    
    3.1- Analisar warnings no terminal
 

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import productsData from 'Data/productsData'
 import { useHistory } from "react-router-dom"
 
-const useProduct = (id) => {
+const useProduct = () => {
    const [product, setProducts] = useState({})
    const history = useHistory()
    

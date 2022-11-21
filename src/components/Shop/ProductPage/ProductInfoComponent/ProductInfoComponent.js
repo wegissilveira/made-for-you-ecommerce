@@ -15,7 +15,7 @@ const ProductInfoComponent = props => {
    return (
       <div className={classes.ProductInfo_container}>
          <ProductInfoHeader product={product} />
-         <ProductInfoBody />
+         <ProductInfoBody product={product} />
          <ProductInfoFooter />
       </div>
    )

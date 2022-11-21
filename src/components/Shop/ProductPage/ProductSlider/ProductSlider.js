@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 import classes from './ProductSlider.module.css'
 
@@ -6,7 +6,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
 const ProductSlider = props => {
-	let [imgSlide, setImgSlide] = React.useState(0)
+	const {
+		imgs
+	} = props
+
+	const [images, setImages] = useState([])
+	const [imgSlide, setImgSlide] = useState(0)
 
 	const changeSlide = arg => {
 		if (arg === 'previous') {
@@ -14,12 +19,12 @@ const ProductSlider = props => {
 			if (imgSlide > 0) {
 				setImgSlide(imgSlide - 1)
 			} else {
-				setImgSlide(props.product.imgsDemo.length - 1)
+				setImgSlide(imgs.length - 1)
 			}
 
 		} else if (arg === 'next') {
 
-			if (imgSlide < props.product.imgsDemo.length - 1) {
+			if (imgSlide < imgs.length - 1) {
 				setImgSlide(imgSlide + 1)
 			} else {
 				setImgSlide(0)
@@ -30,12 +35,16 @@ const ProductSlider = props => {
 		}
 	}
 
+	useEffect(() => {
+		if(imgs) setImages(imgs)
+	}, [imgs])
+
 
 	return (
 		<div>
 			<div className={classes.Main_img_slider}>
 				<div>
-					{props.product.imgsDemo.map((img, i) =>
+					{images.map((img, i) =>
 						<img
 							key={i}
 							src={img}
@@ -53,15 +62,15 @@ const ProductSlider = props => {
 			<div className={classes.Product_page_thumb_images}>
 				<img
 					onClick={() => changeSlide(0)}
-					src={props.product.imgsDemo[0]} alt="img-1"
+					src={images[0]} alt="img-1"
 				/>
 				<img
 					onClick={() => changeSlide(1)}
-					src={props.product.imgsDemo[1]} alt="img-2"
+					src={images[1]} alt="img-2"
 				/>
 				<img
 					onClick={() => changeSlide(2)}
-					src={props.product.imgsDemo[2]} alt="img-3"
+					src={images[2]} alt="img-3"
 				/>
 			</div>
 		</div>

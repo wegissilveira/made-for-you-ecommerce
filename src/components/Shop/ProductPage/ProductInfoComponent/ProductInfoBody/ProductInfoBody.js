@@ -10,8 +10,6 @@ import * as actionTypes from 'store/actions/actionTypes'
 import cartListDataFn from 'Data/cartData.js'
 import wishlistDataFn from 'Data/wishlistData'
 
-import useProduct from "hooks/useProduct"
-
 import ColorSelect from 'components/Shared/UI/ColorSelect/ColorSelect'
 import ProductsQtde from 'components/Shared/UI/ProductsQtde/ProductsQtde'
 import ProductQtdeMobile from 'components/Shared/UI/ProductQtdeMobile/ProductQtdeMobile'
@@ -20,7 +18,7 @@ import SKUSizeSelector from "./SKUSizeSelector/SKUSizeSelector"
 
 const ProductInfoBody = props => {
    const {
-      // product,
+      product,
       cart,
       wish,
       onWishlistState,
@@ -32,8 +30,6 @@ const ProductInfoBody = props => {
    const [productQtde, setQtde] = useState(undefined)
    const [productSize, setSize] = useState('100x100')
    const [productUpdated, setProductUpdated] = useState(false)
-
-   const product = useProduct()
  
    const selectColorHandler = color => {
       setProductColor(color)
