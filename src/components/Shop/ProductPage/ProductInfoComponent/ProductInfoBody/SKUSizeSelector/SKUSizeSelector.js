@@ -18,7 +18,8 @@ const SKUSizeSelector = (props) => {
             selectRef.current.children[i].selected = false
          }
       })
-   }, [productCartDetails])
+   }, [JSON.stringify(productCartDetails)])
+
 
    return (
       <div className={classes['SKUSelector--container']}>
@@ -28,6 +29,7 @@ const SKUSizeSelector = (props) => {
             <option value="200x200">200x200 cm</option>
             <option value="300x300">300x300 cm</option>
          </select>
+
       </div>
    )
 }

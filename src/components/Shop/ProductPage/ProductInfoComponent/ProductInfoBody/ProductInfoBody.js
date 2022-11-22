@@ -27,7 +27,7 @@ const ProductInfoBody = props => {
 
    const [isProductInBag, setProdExists] = useState(0)   
    const [productColor, setProductColor] = useState('')
-   const [productQtde, setQtde] = useState(undefined)
+   const [productQtde, setQtde] = useState(1)
    const [productSize, setSize] = useState('100x100')
    const [productUpdated, setProductUpdated] = useState(false)
  
@@ -90,7 +90,6 @@ const ProductInfoBody = props => {
       }
 
       setProductUpdated(false)
-
       localStorage.setItem('cartList', JSON.stringify(productCartArr))
 
       onCartListState()
