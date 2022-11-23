@@ -63,8 +63,6 @@ const FilterProvider = (props) => {
 
    }, [])
 
-   // console.log('filterReducerState: ', filterReducerState);
-
    return (
       <UpdateProductsListContext.Provider value={updateProductsListHandler}>
          <FilterDataContext.Provider value={filterReducerState}>
