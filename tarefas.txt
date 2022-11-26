@@ -48,7 +48,9 @@ FASE 1 - Melhorias estruturais e funcionais:
       -> ProductSlider
       -> ProductInfoComponent
          - ProductInfoHeader
-         - ProductInfoBody
+         - ProductInfoBody - OK
+            -> SKUSizeSelector
+            -> ProductsQtde
          - ProductInfoFooter: Sem alterações
       
 
@@ -71,7 +73,7 @@ FASE 1 - Melhorias estruturais e funcionais:
 
 
       *****PRÓXIMOS NA FILA****
-
+      -> Refatorar ProductsQtde
 
 
       *****EM EXECUÇÃO****
@@ -110,6 +112,7 @@ FASE 1 - Melhorias estruturais e funcionais:
    3.1- Analisar distribuição de props para identificar os pontos desnecessários que possam ser substituídos pelo contexto do redux
 
 5- Análise de e correção de renderizações desnecessárias
+   -> O update dos valores dos skus e quantidade da pdp atualiza states a cada alteração (mudei para um reducer) e a cada mudança de valor o componente pai (ProductInfoBody), que é o responsável pelo gerenciamento dos valores é renderizado. Eu quero que ele seja atualizado somente quando a requisição (localStorage) é realizada, talvez nem nesse caso e não a cada alteração de valor. Eu poderia setar um valor no elemento, mas no caso da quantidade não é possível, já que o valor é criado com uma state. Busca uma maneira de fazer isso. 
 
 6- Estudar os hooks, tanto documentação quando o curso referência da lista de estudos, antes de fechar esta fase. O intuito é identificar se há alguma melhoria que possa ser feita usando os hooks que ainda não tenho conhecimento.
 

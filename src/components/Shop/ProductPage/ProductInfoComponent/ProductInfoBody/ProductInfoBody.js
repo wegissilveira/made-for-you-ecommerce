@@ -51,30 +51,31 @@ const ProductInfoBody = props => {
       onCartListState
    } = props   
 
-   const [isProductInBag, setProdExists] = useState(0)   
+   const [productCart, setProductCart] = useState({})
+   const [isProductInBag, setProdExists] = useState(0) // => state é utilizada para atualizar as cores do botão de adicionar ao carrinho  
+   const [wishIcon, setWishIcon] = useState('fas')
    const [productUpdated, setProductUpdated] = useState(false)
-   const [productColor, setProductColor] = useState('')
-   const [productQtde, setQtde] = useState(1)
-   const [productSize, setSize] = useState('100x100')   
+   const [bagButton, setBagButton] = useState({
+      color: 'Bag_button_green',
+      text: 'ADD TO BAG'
+   })
 
-   // A IDEIA AQUI É ENCONTRAR UMA MANEIRA DE NÃO RENDERIZAR ESTE COMPONENTE A CADA UPDATE DE CADA ITEM
-   // EU QUERO FAZER O RERENDER SOMENTE QUANDO O BOTÃO DE ADICIONAR AO CARRINHO FOR CLICADO
-   // APARENTEMENTE É POSSÍVEL COLOCAR CONDIÇÕES DE RERENDER EM COMPONENTES DE CLASSE COM O SHOULDCOMPONENTUPDATE
-   // SEGUNDO ESTE POST É POSSÍVEL FAZER ALGO SEMELHANTE EM COMPONENTES DE FUNÇÃO USANDO REACT.MEMO + ARESTATESEQUAL
-   // => https://forum.freecodecamp.org/t/react-shouldcomponentupdate-example-with-functional-components/426246
    const [productReducerState, dispatch] = useReducer(productReducer, initialValue)
 
    const updateCurrentProduct = useMemo(() => {
       const updateColor = (color) => {
          dispatch({type: 'updateColor', productColor: color})
+         setProductUpdated(true)
       }
 
       const updateSize = (size) => {
          dispatch({type: 'updateSize', size: size})
+         setProductUpdated(true)
       }
 
       const updateQty = (qty) => {
          dispatch({type: 'updateQty', qty: qty})
+         setProductUpdated(true)
       }
 
       return { 
@@ -83,23 +84,6 @@ const ProductInfoBody = props => {
          updateQty
       }
    }, [])
-
-   console.log('productReducerState: ', productReducerState);
- 
-   const selectColorHandler = color => {
-      setProductColor(color)
-      setProductUpdated(true)
-   }
-
-   const setQtdeHandler = value => {
-      setQtde(value)
-      setProductUpdated(true)
-   }
-
-   const setSizeHandler = size => {
-      setSize(size)
-      setProductUpdated(true)
-   }
 
    const wishlistHandler = id => {
       let list = [...wish]
@@ -115,58 +99,67 @@ const ProductInfoBody = props => {
    }
 
    const productCartHandler = () => {
-
       let productCartArr = [...cart]
 
       let count = 0
+      // Checa se o produto existe no carrinho
       productCartArr.forEach(item => {
          if (item._id === product._id) count++
       })
 
-
+      // Adiciona produto no cart e atualiza o produto que já existe
+      // count = 0 significa que o produto ainda não está no carrinho
+      // productUpdate significa que ele está no carrinho, mas que teve seus valores atualizados
       if (count === 0 || productUpdated) {
          let productCart = {}
 
          productCart._id = product._id
-         productCart.qtde = productQtde
-         productCart.color = productColor
-         productCart.size = productSize
+         productCart.qtde = productReducerState.productQty
+         productCart.color = productReducerState.productColor
+         productCart.size = productReducerState.productSize
 
+         // Se o item já existe no carrinho e está sofrendo atualização a sua versão antiga é removida do array do carrinho e a nova adicionada com o push que está logo abaixo
          if (productUpdated === true) {
             productCartArr = productCartArr.filter(item => item._id !== product._id)
-         }
+         }        
+
+         console.log('productCartArr: ', productCartArr);
 
          productCartArr.push(productCart)
          setProdExists(1)
 
+      // Remove produto do carrinho
       } else {
          productCartArr = productCartArr.filter(item => item._id !== product._id)
          setProdExists(0)
       }
-
+      
       setProductUpdated(false)
       localStorage.setItem('cartList', JSON.stringify(productCartArr))
 
       onCartListState()
    }
 
-   let productCartDetails = {}
-   for (let i = 0; i < cart.length; i++) {
-      if (cart[i]._id === product._id) {
-         productCartDetails = {
-            ...product,
-            ...cart[i]
+   useEffect(() => {
+      let productCartDetails = {}
+      cart.forEach(cartProd => {
+         if (cartProd._id === product._id) {
+            productCartDetails = {
+               ...product,
+               ...cartProd
+            }
          }
-      }
-   }
-
+      })
+      setProductCart(productCartDetails)
+   }, [product])
+   
    useEffect(() => {
       let productCartArr = [...cart]
       productCartArr.forEach(prod => {
          if (prod._id === product._id) {
-            setProductColor(prod.color)
-            setQtde(prod.qtde)
-            setSize(prod.size)
+            dispatch({type: 'updateColor', productColor: prod.color})
+            dispatch({type: 'updateSize', size: prod.size})
+            dispatch({type: 'updateQty', qty: prod.qtde})
          }
       })
    }, [product])
@@ -182,32 +175,40 @@ const ProductInfoBody = props => {
       setProdExists(prod)
    }, [product])
 
-   const heartIcon = wish.includes(product._id) ? 'fas' : 'far'
+   useEffect(() => {
+      let icon = 'fas'
+      if (wish.includes(product._id)) icon = 'far'
 
-   let bagButtonColor
-   let bagButtonText
-   if (productUpdated === true && isProductInBag === 1) {
-      bagButtonColor = classes.Bag_button_orange
-      bagButtonText = 'UPDATE BAG'
-   } else {
-      bagButtonColor = isProductInBag === 0 ? classes.Bag_button_green : classes.Bag_button_red
-      bagButtonText = isProductInBag === 0 ? 'ADD TO BAG' : 'REMOVE FROM BAG'
-   }
+      setWishIcon(icon)
+   }, [wish])
+
+   useEffect(() => {
+      const obj = {}
+      if (productUpdated === true && isProductInBag === 1) {
+         obj.color = 'Bag_button_orange'
+         obj.text = 'UPDATE BAG'
+      } else {
+         if (isProductInBag) {
+            obj.color = 'Bag_button_red'
+            obj.text = 'REMOVE FROM BAG'
+         } else {
+            obj.color = 'Bag_button_green'
+            obj.text = 'ADD TO BAG'
+         }
+      }
+
+      setBagButton(obj)
+   }, [productUpdated, isProductInBag])
 
    return (
       <>
          <div className={classes.Product_details_container}>
             <SKUSizeSelector 
-               productCartDetails={productCartDetails} 
-               // setSizeHandlerCB={setSizeHandler} 
+               productCartDetails={productCart} 
                setSizeHandlerCB={updateCurrentProduct.updateSize} 
             />
             <ColorSelect
-               // selectedColor={productCartDetails.color}
-               selectedColor={productColor}
-               // colors={product.colors}
-               // colors={['blue', 'green', 'purple']}
-               // selectColorHandlerCallback={(color) => selectColorHandler(color)}
+               selectedColor={productReducerState.productColor}
                selectColorHandlerCallback={(color) => updateCurrentProduct.updateColor(color)}
                isFilter={false}
                title={'Color'}
@@ -216,29 +217,28 @@ const ProductInfoBody = props => {
          </div>
          <div className={classes.Product_wishlist_container} >
             <ProductsQtde
-               startQtde={productCartDetails.qtde}
-               // changeQtdeCallBack={qtde => setQtdeHandler(qtde)}
+               startQtde={productCart.qtde}
                changeQtdeCallBack={qtde => updateCurrentProduct.updateQty(qtde)}
                max={8}
             />
             <ProductQtdeMobile
-               changeQtdeCallBack={qtde => setQtdeHandler(qtde)}
-               startQtde={productQtde !== undefined ? productQtde : productCartDetails.qtde}
+               changeQtdeCallBack={qtde => updateCurrentProduct.updateQty(qtde)}
+               startQtde={productReducerState.productQty !== undefined ? productReducerState.productQty : productCart.qtde}
                initialValue={true}
                id={product._id}
             />
             <button
                onClick={() => productCartHandler()}
                type="button"
-               className={bagButtonColor}
-               disabled={productColor === ''}
-            > {bagButtonText}
+               className={classes[bagButton.color]}
+               disabled={productReducerState.productColor === ''}
+            > {bagButton.text}
             </button>
 
             <FontAwesomeIcon
                onClick={() => wishlistHandler(product._id)}
                className={classes.Wishlist_icon_alt}
-               icon={[heartIcon, 'heart']} size="2x"
+               icon={[wishIcon, 'heart']} size="2x"
             />
          </div>
          <div className={classes.Product_category_container}>
