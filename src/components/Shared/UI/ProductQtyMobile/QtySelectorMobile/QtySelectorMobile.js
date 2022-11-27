@@ -11,7 +11,6 @@ const QtySelectorMobile = (props) => {
    const {
       qtyListRef,
       maxQty,
-      startQty,
       toggleQtySelectMobileCB,
       changeQtyCB,
    } = props
@@ -34,7 +33,6 @@ const QtySelectorMobile = (props) => {
                <h2>Select Quantity</h2>
                <QtySelectorInput 
                   maxQty={maxQty}
-                  startQty={startQty}
                   changeQtyCB={changeQtyCB}
                />
             </div>

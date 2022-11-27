@@ -2,22 +2,22 @@ import React, { useContext, useEffect, useState } from 'react'
 import classes from './ColorSelect.module.css'
 
 import { UpdateProductsListContext } from 'components/Shop/Filter/context/FilterContext'
+import { UpdateProductValuesContext, ProductDataContext } from "components/Shop/ProductPage/context/ProductContext"
 
 const _ = undefined
 
 const ColorSelect = props => {
    const {
-      // colors,
       product,
-      selectedColor,
-      selectColorHandlerCallback,
       isFilter,
       title
    } = props
 
    const [currentColors, setCurrentColors] = useState(['red', 'yellow', 'blue', 'purple', 'green'])
    
-   const { updateColor } = useContext(UpdateProductsListContext)
+   const { updateFilterColor } = useContext(UpdateProductsListContext)
+   const { updateColor } = useContext(UpdateProductValuesContext)
+   const { productColor } = useContext(ProductDataContext)
 
    const updateColorStateHandler = color => {
       const colorInput = document.getElementById('all-colors-input')
@@ -27,7 +27,7 @@ const ColorSelect = props => {
          lastSelectedColor: color
       }
 
-      updateColor(colorObj)
+      updateFilterColor(colorObj)
       colorInput.checked = false
    }
    
@@ -45,7 +45,7 @@ const ColorSelect = props => {
          bulletBorder.children[0].style.opacity =  1.0
    
          if (isFilter) updateColorStateHandler(color)
-         if (!isFilter) selectColorHandlerCallback(color)
+         if (!isFilter) updateColor(color, true)
          
       } else {
          const currentPage =  window.location.pathname
@@ -53,7 +53,7 @@ const ColorSelect = props => {
          colorsBullets = currentPage === '/shop/' ? colorsBullets[1].childNodes :  colorsBullets[0].childNodes 
 
          colorsBullets.forEach((bullet) => {
-            if (bullet.children[0].style.backgroundColor === selectedColor) {
+            if (bullet.children[0].style.backgroundColor === productColor) {
                bullet.style.border = '2px solid black'
                bullet.children[0].style.opacity = 1.0  
             } else {
@@ -65,10 +65,10 @@ const ColorSelect = props => {
    }
 
    useEffect(() => {
-      if (selectedColor !== undefined) {
+      if (productColor !== undefined) {
          selectColorHandler(_, _, true)
       }
-   }, [selectedColor])
+   }, [productColor])
 
    useEffect(() => {
       if (product && product.colors) setCurrentColors(product.colors)

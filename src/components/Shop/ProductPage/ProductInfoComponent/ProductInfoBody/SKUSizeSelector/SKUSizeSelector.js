@@ -1,11 +1,15 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useContext } from 'react'
 import classes from './SKUSizeSelector.module.css'
+
+import { UpdateProductValuesContext } from "components/Shop/ProductPage/context/ProductContext"
 
 const SKUSizeSelector = (props) => {
    const {
-      setSizeHandlerCB,
+      // setSizeHandlerCB,
       productCartDetails
    } = props
+
+   const { updateSize } = useContext(UpdateProductValuesContext)
 
    const selectRef = useRef()
 
@@ -24,7 +28,8 @@ const SKUSizeSelector = (props) => {
    return (
       <div className={classes['SKUSelector--container']}>
          <p>Size</p>
-         <select ref={selectRef} onChange={e => setSizeHandlerCB(e.target.value)}>
+         <select ref={selectRef} onChange={e => updateSize(e.target.value, true)}>
+         {/* <select ref={selectRef} onChange={e => setSizeHandlerCB(e.target.value, true)}> */}
             <option value="100x100">100x100 cm</option>
             <option value="200x200">200x200 cm</option>
             <option value="300x300">300x300 cm</option>

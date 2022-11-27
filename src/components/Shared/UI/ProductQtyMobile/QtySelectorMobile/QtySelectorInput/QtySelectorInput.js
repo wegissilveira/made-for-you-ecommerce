@@ -1,12 +1,15 @@
-import React from "react"
+import React, { useContext } from "react"
 import classes from  './QtySelectorInput.module.css'
+
+import { ProductDataContext } from "components/Shop/ProductPage/context/ProductContext"
 
 const QtySelectorInput = props => {
    const  {
       maxQty,
-      startQty,
       changeQtyCB
    } = props
+
+   const { productQty } = useContext(ProductDataContext)
 
    return (
       <div onClick={e => changeQtyCB(e)} className={classes.selectList_items}>
@@ -18,7 +21,7 @@ const QtySelectorInput = props => {
                      <input
                         type="radio"
                         value={i + 1}
-                        checked={startQty === i + 1}
+                        defaultChecked={productQty === i + 1}
                      />
                   </div>
                )

@@ -1,6 +1,7 @@
 import React from 'react'
-
 import classes from './ProductInfoComponent.module.css'
+
+import ProductContext from 'components/Shop/ProductPage/context/ProductProvider'
 
 import ProductInfoFooter from './ProductInfoFooter/ProductInfoFooter'
 import ProductInfoBody from './ProductInfoBody/ProductInfoBody'
@@ -14,8 +15,10 @@ const ProductInfoComponent = props => {
 
    return (
       <div className={classes.ProductInfo_container}>
-         <ProductInfoHeader product={product} />
-         <ProductInfoBody product={product} />
+         <ProductContext>
+            <ProductInfoHeader product={product} />
+            <ProductInfoBody product={product} />
+         </ProductContext>
          <ProductInfoFooter />
       </div>
    )

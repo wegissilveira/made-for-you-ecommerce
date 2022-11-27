@@ -31,7 +31,7 @@ const FilterProvider = (props) => {
          dispatch(setCategory(cat))
       }
 
-      const updateColor = (color) => {
+      const updateFilterColor = (color) => {
          dispatch(setColor(color))
       }
 
@@ -54,7 +54,7 @@ const FilterProvider = (props) => {
       return { 
          updateTag, 
          updateCategory, 
-         updateColor, 
+         updateFilterColor, 
          updateOffer, 
          updateOrder, 
          updatePrice, 

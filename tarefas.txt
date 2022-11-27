@@ -84,12 +84,23 @@ FASE 1 - Melhorias estruturais e funcionais:
 
 
       *****PRÓXIMOS NA FILA****
-      
+      -> (MELHORIA) Melhorar a maneira de setar o valor inicial do contexto do produto:
+         - Atualmente faço no useEffect inicial dentro do ProductInfoBody
+         - A ideia é deixar separado e tratar como se fosse uma requisição
+      -> (BUG): O valor setado no modal de quantidade de produtos do mobile é sempre 1. Corrigir para que seja o valor real. 
+      -> (MELHORIA): Buscar uma maneira de melhorar a chamada de toggleQtySelectMobileHandler em ProductQtyMobile para que não seja necessário ficar passando a função como callback:
+         - Talvez inserir a função em um helper ou criar um hook para fazer o toggle do modal
+         - Analisar a possibilidade de se compartilhar o hook ou o helper com outros modais
+         - OBS.: ?Por que estou usando uma biblioteca de modal para o modal do produto, mas não para o modal de quantidades do mobile???
+         
 
 
       *****EM EXECUÇÃO****
-      -> (MELHORIA): Talvez criar um contexto para administrar as states da pdp e do modal de produtos
       
+
+
+      *****ABORTADOS****      
+
 
 
       *****FEITOS*****
@@ -117,8 +128,9 @@ FASE 1 - Melhorias estruturais e funcionais:
       -> (MELHORIA): Identificar pontos onde as props de 'products' possam ser substituídas por useProducs ou mesmo removidas. - OK
       -> (BUG): Select de product sendo atualizado com um render de atraso - OK
       -> (BUG): Quantidade não sendo inserida no minicart quando o usuário não escolhe no selector. Semelhante ao que ocorria com o selector de cores antes de haver validação - OK
-      -> (BUG): Quantidade do produto não sendo atualizada no carrinho após lógica dos componentes de quantidade ser refatorada. Provavelmente o problema está nas funções callback que não estão atualizando as states necessárias
-      -> (BUG): Rota do carrinho para a PDP não está na estrutura nova com o parÂmetro 'productID'
+      -> (BUG): Quantidade do produto não sendo atualizada no carrinho após lógica dos componentes de quantidade ser refatorada. Provavelmente o problema está nas funções callback que não estão atualizando as states necessárias - OK
+      -> (BUG): Rota do carrinho para a PDP não está na estrutura nova com o parÂmetro 'productID' - OK
+      -> (MELHORIA): Talvez criar um contexto para administrar as states da pdp e do modal de produtos - OK
    
 
    3.1- Analisar warnings no terminal

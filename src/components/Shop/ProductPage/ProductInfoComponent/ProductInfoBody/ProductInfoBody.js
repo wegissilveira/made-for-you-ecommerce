@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useReducer, useMemo } from "react"
-
+import React, { useState, useEffect, useContext } from "react"
 import classes from './ProductInfoBody.module.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+import { UpdateProductValuesContext, ProductDataContext } from "components/Shop/ProductPage/context/ProductContext"
 
 import { connect } from 'react-redux'
 import * as actionTypes from 'store/actions/actionTypes'
@@ -16,32 +17,6 @@ import ProductQtyMobile from 'components/Shared/UI/ProductQtyMobile/ProductQtyMo
 import SKUSizeSelector from "./SKUSizeSelector/SKUSizeSelector"
 
 
-const initialValue = {
-   productColor: '',
-   productQty: 1,
-   productSize: '100x100'
-}
-
-const productReducer = (state, action) => {
-   switch(action.type) {
-      case 'updateColor':
-         return {
-            ...state,
-            productColor: action.productColor
-         }
-      case 'updateSize':
-         return {
-            ...state,
-            productSize: action.size
-         }
-      case 'updateQty':
-         return {
-            ...state,
-            productQty: action.qty
-         }
-   }
-}
-
 const ProductInfoBody = props => {
    const {
       product,
@@ -54,36 +29,13 @@ const ProductInfoBody = props => {
    const [productCart, setProductCart] = useState({})
    const [isProductInBag, setProdExists] = useState(0) // => state é utilizada para atualizar as cores do botão de adicionar ao carrinho  
    const [wishIcon, setWishIcon] = useState('fas')
-   const [productUpdated, setProductUpdated] = useState(false)
    const [bagButton, setBagButton] = useState({
       color: 'Bag_button_green',
       text: 'ADD TO BAG'
    })
 
-   const [productReducerState, dispatch] = useReducer(productReducer, initialValue)
-
-   const updateCurrentProduct = useMemo(() => {
-      const updateColor = (color) => {
-         dispatch({type: 'updateColor', productColor: color})
-         setProductUpdated(true)
-      }
-
-      const updateSize = (size) => {
-         dispatch({type: 'updateSize', size: size})
-         setProductUpdated(true)
-      }
-
-      const updateQty = (qty) => {
-         dispatch({type: 'updateQty', qty: qty})
-         setProductUpdated(true)
-      }
-
-      return { 
-         updateColor, 
-         updateSize, 
-         updateQty
-      }
-   }, [])
+   const { updateColor, updateSize, updateQty, finishUpdate } = useContext(UpdateProductValuesContext)
+   const productReducerState = useContext(ProductDataContext)
 
    const wishlistHandler = id => {
       let list = [...wish]
@@ -110,7 +62,7 @@ const ProductInfoBody = props => {
       // Adiciona produto no cart e atualiza o produto que já existe
       // count = 0 significa que o produto ainda não está no carrinho
       // productUpdate significa que ele está no carrinho, mas que teve seus valores atualizados
-      if (count === 0 || productUpdated) {
+      if (count === 0 || productReducerState.productUpdated) {
          let productCart = {}
 
          productCart._id = product._id
@@ -119,11 +71,9 @@ const ProductInfoBody = props => {
          productCart.size = productReducerState.productSize
 
          // Se o item já existe no carrinho e está sofrendo atualização a sua versão antiga é removida do array do carrinho e a nova adicionada com o push que está logo abaixo
-         if (productUpdated === true) {
+         if (productReducerState.productUpdated === true) {
             productCartArr = productCartArr.filter(item => item._id !== product._id)
          }        
-
-         console.log('productCartArr: ', productCartArr);
 
          productCartArr.push(productCart)
          setProdExists(1)
@@ -134,7 +84,7 @@ const ProductInfoBody = props => {
          setProdExists(0)
       }
       
-      setProductUpdated(false)
+      finishUpdate()
       localStorage.setItem('cartList', JSON.stringify(productCartArr))
 
       onCartListState()
@@ -157,9 +107,9 @@ const ProductInfoBody = props => {
       let productCartArr = [...cart]
       productCartArr.forEach(prod => {
          if (prod._id === product._id) {
-            dispatch({type: 'updateColor', productColor: prod.color})
-            dispatch({type: 'updateSize', size: prod.size})
-            dispatch({type: 'updateQty', qty: prod.qtde})
+            updateColor(prod.color, false)
+            updateSize(prod.size, false)
+            updateQty(prod.qtde, false)
          }
       })
    }, [product])
@@ -184,7 +134,7 @@ const ProductInfoBody = props => {
 
    useEffect(() => {
       const obj = {}
-      if (productUpdated === true && isProductInBag === 1) {
+      if (productReducerState.productUpdated === true && isProductInBag === 1) {
          obj.color = 'Bag_button_orange'
          obj.text = 'UPDATE BAG'
       } else {
@@ -198,34 +148,22 @@ const ProductInfoBody = props => {
       }
 
       setBagButton(obj)
-   }, [productUpdated, isProductInBag])
+   }, [productReducerState.productUpdated, isProductInBag])
+
    
    return (
       <>
          <div className={classes.Product_details_container}>
-            <SKUSizeSelector 
-               productCartDetails={productCart} 
-               setSizeHandlerCB={updateCurrentProduct.updateSize} 
-            />
+            <SKUSizeSelector productCartDetails={productCart} />
             <ColorSelect
-               selectedColor={productReducerState.productColor}
-               selectColorHandlerCallback={(color) => updateCurrentProduct.updateColor(color)}
                isFilter={false}
                title={'Color'}
                product={product}
             />
          </div>
          <div className={classes.Product_wishlist_container} >
-            <ProductsQty
-               productQty={productReducerState.productQty}
-               changeQtyCallBack={qtde => updateCurrentProduct.updateQty(qtde)}
-               max={8}
-            />
-            <ProductQtyMobile
-               changeQtyCallBack={qtde => updateCurrentProduct.updateQty(qtde)}
-               productQty={productReducerState.productQty}
-               max={8}
-            />
+            <ProductsQty max={8} />
+            <ProductQtyMobile max={8} />
             <button
                onClick={() => productCartHandler()}
                type="button"

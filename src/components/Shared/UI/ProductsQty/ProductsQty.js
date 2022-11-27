@@ -1,37 +1,55 @@
-import React from 'react'
-
+import React, { useContext, useEffect, useState } from 'react'
 import classes from './ProductsQty.module.css'
 
+import { UpdateProductValuesContext, ProductDataContext } from "components/Shop/ProductPage/context/ProductContext"
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 
 const ProductsQty = props => {
    const {
       max,
-      productQty,
-      changeQtyCallBack
+      isCheckout,
+      changeQtyCallBack,
+      productQtyCheckout
    } = props
 
-   const changeQty = arg => {
-      let qty = productQty
-      
-      if (arg === "increase" && (productQty < max || max === undefined)) qty++
-      if (arg === 'decrease' && productQty > 1) qty--
+   const [ productQtyState, setProductQtyState ] = useState(1)
 
-      changeQtyCallBack(qty)
+   const { updateQty } = useContext(UpdateProductValuesContext)
+   const { productQty } = useContext(ProductDataContext)
+
+   const changeQty = arg => {
+      let qty = productQtyState
+      
+      if (arg === "increase" && (productQtyState < max || max === undefined)) qty++
+      if (arg === 'decrease' && productQtyState > 1) qty--
+
+      if(!isCheckout) updateQty(qty, true)
+      if(isCheckout) changeQtyCallBack(qty)
    }
+
+   useEffect(() => {
+      let qty = 1
+      if (!isCheckout) qty = productQty
+      if (isCheckout) qty = productQtyCheckout
+
+      setProductQtyState(qty)
+   }, [productQtyCheckout, productQty])
+
    
    return (
       <div className={classes.Product_qtde}>
-         <p>{productQty}</p>
+         <p>{productQtyState}</p>
          <div className={classes.Product_qtde_arrows}>
             <FontAwesomeIcon 
-               className={classes[productQty < max || max === undefined ? 'active' : 'disabled']}
-               onClick={productQty < max || max === undefined ? () => changeQty('increase') : null}
+               className={classes[productQtyState < max || max === undefined ? 'active' : 'disabled']}
+               onClick={productQtyState < max || max === undefined ? () => changeQty('increase') : null}
                icon="chevron-up" size="xs"
             />
             <FontAwesomeIcon
-               className={classes[productQty > 1 ? 'active' : 'disabled']}
-               onClick={productQty > 1 ? () => changeQty('decrease') : null}
+               className={classes[productQtyState > 1 ? 'active' : 'disabled']}
+               onClick={productQtyState > 1 ? () => changeQty('decrease') : null}
                icon="chevron-down" size="xs"
             />
          </div>

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-
 import classes from './ProductCart.module.css'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -64,7 +63,8 @@ const ProductCart = props => {
          <p>$ {product.price}</p>
          <div className={classes.Cart_details_qtde}>
             <ProductsQty
-               productQty={productQty}
+               productQtyCheckout={productQty}
+               isCheckout={true}
                changeQtyCallBack={setQtdeHandler}
                max={8}
             />
@@ -80,7 +80,8 @@ const ProductCart = props => {
          <div className={classes.Cart_price_mobile}>
             <ProductQtyMobile
                changeQtyCallBack={setQtdeHandler}
-               productQty={productQty}
+               productQtyCheckout={productQty}
+               isCheckout={true}
                index={prodIndex}
                id={product._id}
                max={8}
