@@ -11,10 +11,10 @@ FASE 1 - Melhorias estruturais e funcionais:
    - ProductCard: OK 
    - ProductPageModal (ProductModal): OK
    - ProductInfoComponent: OK
-   - ProductInfoBody: 
+   - ProductInfoBody: OK
    - ProgressBar: Não mexer por enquanto
    - ProductQtde: OK
-   - ProductQtdeMobile: 
+   - ProductQtdeMobile: OK
    - Filter: OK
    - BestDeal (BestDealSession): OK
    - Cart: OK
@@ -34,9 +34,9 @@ FASE 1 - Melhorias estruturais e funcionais:
 
 3- Analisar Funções dentro dos componentes e identificar melhorias
    - Header
-      -> NavigationDesk: Sem alterações
-      -> HeaderUserOptions: OK
-         - SearchProducts: OK
+      -> NavigationDesk - Sem alterações
+      -> HeaderUserOptions - OK
+         - SearchProducts - OK
    - Filter - OK
       -> FilterHeader - OK
       -> FilterBody - OK
@@ -48,12 +48,18 @@ FASE 1 - Melhorias estruturais e funcionais:
    - PDP
       -> ProductSlider
       -> ProductInfoComponent
-         - ProductInfoHeader
+         - ProductInfoHeader - Sem alterações
          - ProductInfoBody - OK
-            -> SKUSizeSelector
+            -> SKUSizeSelector - OK
             -> ProductsQtde - OK
             -> ProductQtdeMobile - OK
          - ProductInfoFooter: Sem alterações
+   - CARINHO
+      -> Cart
+         - CartList
+            -CartHeader
+            -ProductCart
+            -CartForm
       
 
    - Ajustes pontuais:
@@ -69,7 +75,7 @@ FASE 1 - Melhorias estruturais e funcionais:
          - Buscar uma maneira de corrigir isso, inicialmente tentar reverter o erro, caso não seja possível, inserir um loader até as imagens serem válidas.
       -> (MELHORIAS): Analisar a possibilidade e a utilidade de se criar um hook para os bullets de cores
       -> (MELHORIA): Inserir estoque no objeto de productsData e passar o 'max' que está sendo recebido nos componentes de quantidade dos produtos para o valor do estoque.
-      -> (BUG): Quantidade do produto não sendo atualizada no carrinho após lógica dos componentes de quantidade ser refatorada. Provavelmente o problema está nas funções callback que não estão atualizando as states necessárias
+      -> (MELHORIA): Talvez criar um contexto para administrar as states da pdp e do modal de produtos
 
 
       *****APÓS REFATORAMENTO*****
@@ -78,12 +84,10 @@ FASE 1 - Melhorias estruturais e funcionais:
 
 
       *****PRÓXIMOS NA FILA****
-      -> Passar minicart para próximo, para corrigir bug de alteração de quantidade
       
 
 
       *****EM EXECUÇÃO****
-      -> Refatorar JSX ProductQtdeMobile
       
 
 
@@ -112,6 +116,8 @@ FASE 1 - Melhorias estruturais e funcionais:
       -> (MELHORIA): Identificar pontos onde as props de 'products' possam ser substituídas por useProducs ou mesmo removidas. - OK
       -> (BUG): Select de product sendo atualizado com um render de atraso - OK
       -> (BUG): Quantidade não sendo inserida no minicart quando o usuário não escolhe no selector. Semelhante ao que ocorria com o selector de cores antes de haver validação - OK
+      -> (BUG): Quantidade do produto não sendo atualizada no carrinho após lógica dos componentes de quantidade ser refatorada. Provavelmente o problema está nas funções callback que não estão atualizando as states necessárias
+      -> (BUG): Rota do carrinho para a PDP não está na estrutura nova com o parÂmetro 'productID'
    
    3.1- Analisar warnings no terminal
 

@@ -4,9 +4,12 @@ import classes from './ProductQtyMobile.module.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+import QtySelectorMobile from './QtySelectorMobile/QtySelectorMobile'
+
+
 const ProductQtyMobile = props => {
 	const {
-		startQty,
+		productQty,
 		max,
 		changeQtyCallBack
 	} = props
@@ -14,7 +17,7 @@ const ProductQtyMobile = props => {
 	const [maxQty, setMaxQty] = useState([])
 	const qtyListRef = useRef()
 
-	const changeQtdeHandler = e => {
+	const changeQtyHandler = e => {
 		const inputValue = e.target.closest('DIV').getElementsByTagName('INPUT')[0].value
 
 		changeQtyCallBack(inputValue)
@@ -37,42 +40,16 @@ const ProductQtyMobile = props => {
 				onClick={() => toggleQtySelectMobileHandler()}
 				className={classes.OpenSelect_btn}
 			>
-				<p>{startQty}</p>
+				<p>{productQty}</p>
 				<FontAwesomeIcon icon="chevron-down" size="xs" />
 			</div>
-			<div
-				ref={qtyListRef}
-				className={classes.selectList_container}
-			>
-				<div
-					className={classes.selectList_subContainer}
-				>
-					<div className={classes.SelectList_header}>
-						<h3>Select Quantity</h3>
-						<FontAwesomeIcon
-							onClick={() => toggleQtySelectMobileHandler()}
-							icon="times"
-							size="2x"
-						/>
-					</div>
-					<div onClick={e => changeQtdeHandler(e)} className={classes.selectList_items}>
-						{
-							maxQty.map((item, i) => {
-								return (
-									<div key={item + i}>
-										<label>{i + 1}</label>
-										<input
-											type="radio"
-											value={i + 1}
-											checked={startQty === i + 1}
-										/>
-									</div>
-								)
-							})
-						}
-					</div>
-				</div>
-			</div>
+			<QtySelectorMobile 
+				qtyListRef={qtyListRef}
+				maxQty={maxQty}
+				startQty={productQty}
+				toggleQtySelectMobileCB={toggleQtySelectMobileHandler}
+				changeQtyCB={changeQtyHandler}
+			/>
 		</div>
 	)
 }

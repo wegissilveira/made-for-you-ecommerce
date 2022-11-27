@@ -13,13 +13,13 @@ const ProductsQty = props => {
 
    const changeQty = arg => {
       let qty = productQty
-
+      
       if (arg === "increase" && (productQty < max || max === undefined)) qty++
       if (arg === 'decrease' && productQty > 1) qty--
 
       changeQtyCallBack(qty)
    }
-
+   
    return (
       <div className={classes.Product_qtde}>
          <p>{productQty}</p>

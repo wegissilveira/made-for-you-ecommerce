@@ -199,7 +199,7 @@ const ProductInfoBody = props => {
 
       setBagButton(obj)
    }, [productUpdated, isProductInBag])
-   // console.log('productReducerState: ', productReducerState);
+   
    return (
       <>
          <div className={classes.Product_details_container}>

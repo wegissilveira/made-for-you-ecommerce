@@ -27,7 +27,7 @@ const Toastify = props => {
             <h3>{header}</h3>
             <p>{msg}</p>
          </div>,
-         document.getElementById('porta-root')
+         document.getElementById('toastify-root')
       )
    )
 }
