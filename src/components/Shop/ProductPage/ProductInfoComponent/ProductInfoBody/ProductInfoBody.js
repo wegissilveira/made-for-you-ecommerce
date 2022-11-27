@@ -223,7 +223,7 @@ const ProductInfoBody = props => {
             />
             <ProductQtyMobile
                changeQtyCallBack={qtde => updateCurrentProduct.updateQty(qtde)}
-               startQty={productReducerState.productQty}
+               productQty={productReducerState.productQty}
                max={8}
             />
             <button

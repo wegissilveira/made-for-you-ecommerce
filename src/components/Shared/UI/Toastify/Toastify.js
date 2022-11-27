@@ -1,6 +1,7 @@
 import React from 'react'
-import ReactDOM from 'react-dom'  
 import classes from './Toastify.module.css'
+
+import ReactDOM from 'react-dom' 
 
 const Toastify = props => {
 

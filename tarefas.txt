@@ -75,7 +75,7 @@ FASE 1 - Melhorias estruturais e funcionais:
          - Buscar uma maneira de corrigir isso, inicialmente tentar reverter o erro, caso não seja possível, inserir um loader até as imagens serem válidas.
       -> (MELHORIAS): Analisar a possibilidade e a utilidade de se criar um hook para os bullets de cores
       -> (MELHORIA): Inserir estoque no objeto de productsData e passar o 'max' que está sendo recebido nos componentes de quantidade dos produtos para o valor do estoque.
-      -> (MELHORIA): Talvez criar um contexto para administrar as states da pdp e do modal de produtos
+      
 
 
       *****APÓS REFATORAMENTO*****
@@ -88,6 +88,7 @@ FASE 1 - Melhorias estruturais e funcionais:
 
 
       *****EM EXECUÇÃO****
+      -> (MELHORIA): Talvez criar um contexto para administrar as states da pdp e do modal de produtos
       
 
 
@@ -119,15 +120,16 @@ FASE 1 - Melhorias estruturais e funcionais:
       -> (BUG): Quantidade do produto não sendo atualizada no carrinho após lógica dos componentes de quantidade ser refatorada. Provavelmente o problema está nas funções callback que não estão atualizando as states necessárias
       -> (BUG): Rota do carrinho para a PDP não está na estrutura nova com o parÂmetro 'productID'
    
+
    3.1- Analisar warnings no terminal
 
 4- Analisar Redux e identificar melhorias, tanto na store quanto nos componentes
    3.1- Analisar distribuição de props para identificar os pontos desnecessários que possam ser substituídos pelo contexto do redux
 
-5- Análise de e correção de renderizações desnecessárias
-   -> O update dos valores dos skus e quantidade da pdp atualiza states a cada alteração (mudei para um reducer) e a cada mudança de valor o componente pai (ProductInfoBody), que é o responsável pelo gerenciamento dos valores é renderizado. Eu quero que ele seja atualizado somente quando a requisição (localStorage) é realizada, talvez nem nesse caso e não a cada alteração de valor. Eu poderia setar um valor no elemento, mas no caso da quantidade não é possível, já que o valor é criado com uma state. Busca uma maneira de fazer isso. 
+5- Análise e correção de renderizações desnecessárias
+   -> O update dos valores dos skus e quantidade da pdp atualiza states a cada alteração (mudei para um reducer) e a cada mudança de valor o componente pai (ProductInfoBody), que é o responsável pelo gerenciamento dos valores é renderizado. Eu quero que ele seja atualizado somente quando a requisição (localStorage) é realizada, talvez nem nesse caso, e não a cada alteração de valor. Eu poderia setar um valor no elemento, mas no caso da quantidade não é possível, já que o valor é criado com uma state. Buscar uma maneira de fazer isso. 
 
-6- Estudar os hooks, tanto documentação quando o curso referência da lista de estudos, antes de fechar esta fase. O intuito é identificar se há alguma melhoria que possa ser feita usando os hooks que ainda não tenho conhecimento.
+6- Estudar os hooks, tanto documentação quanto o curso referência da lista de estudos, antes de fechar esta fase. O intuito é identificar se há alguma melhoria que possa ser feita usando os hooks que ainda não tenho conhecimento.
 
 OBS.: Criei o useProduct para retornar o produto do contexto baseado no id, no entanto foi necessária uma adaptação passando o id como props no caso do modal, já que não o parâmetro de id não existe quando o modal é aberto através da galeria.
 

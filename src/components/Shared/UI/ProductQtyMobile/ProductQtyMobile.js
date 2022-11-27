@@ -33,7 +33,7 @@ const ProductQtyMobile = props => {
 		const listQty = Array.from(Array(max).keys())
 		setMaxQty(listQty)
 	}, [])
-
+	
 	return (
 		<div className={classes.ProductQtde_mobile_container}>
 			<div
