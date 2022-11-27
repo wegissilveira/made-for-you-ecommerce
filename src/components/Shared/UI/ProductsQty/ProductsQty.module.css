@@ -18,12 +18,18 @@
     height: 65%;
 }
 
-.Product_qtde_arrows > * {
-    cursor: pointer;
-}
-
 .Product_qtde_arrows > *:hover {
     color: #535455;
+}
+
+.Product_qtde_arrows > .active {
+    cursor: pointer;
+    color: #212529;
+}
+
+.Product_qtde_arrows > .disabled {
+    cursor: default;
+    color: #ccc;
 }
 
 .Product_qtde_container button {

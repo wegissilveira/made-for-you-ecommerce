@@ -13,7 +13,8 @@ FASE 1 - Melhorias estruturais e funcionais:
    - ProductInfoComponent: OK
    - ProductInfoBody: 
    - ProgressBar: Não mexer por enquanto
-   - ProductQtde: Não mexer por enquanto
+   - ProductQtde: OK
+   - ProductQtdeMobile: 
    - Filter: OK
    - BestDeal (BestDealSession): OK
    - Cart: OK
@@ -50,7 +51,8 @@ FASE 1 - Melhorias estruturais e funcionais:
          - ProductInfoHeader
          - ProductInfoBody - OK
             -> SKUSizeSelector
-            -> ProductsQtde
+            -> ProductsQtde - OK
+            -> ProductQtdeMobile - OK
          - ProductInfoFooter: Sem alterações
       
 
@@ -66,17 +68,22 @@ FASE 1 - Melhorias estruturais e funcionais:
       -> (BUG/MELHORIA): Na PDP, inicialmente imagens é undefined, o que faz com que por uma fração de segundos apareçam as imagens quebradas:
          - Buscar uma maneira de corrigir isso, inicialmente tentar reverter o erro, caso não seja possível, inserir um loader até as imagens serem válidas.
       -> (MELHORIAS): Analisar a possibilidade e a utilidade de se criar um hook para os bullets de cores
+      -> (MELHORIA): Inserir estoque no objeto de productsData e passar o 'max' que está sendo recebido nos componentes de quantidade dos produtos para o valor do estoque.
+      -> (BUG): Quantidade do produto não sendo atualizada no carrinho após lógica dos componentes de quantidade ser refatorada. Provavelmente o problema está nas funções callback que não estão atualizando as states necessárias
 
 
       *****APÓS REFATORAMENTO*****
       -> (BUG): Corrigir versão mobile do layout do filtro que sofreu alterações após refatoração. Analisar PDP e modal do produto também
+      
 
 
       *****PRÓXIMOS NA FILA****
-      -> Refatorar ProductsQtde
+      -> Passar minicart para próximo, para corrigir bug de alteração de quantidade
+      
 
 
       *****EM EXECUÇÃO****
+      -> Refatorar JSX ProductQtdeMobile
       
 
 

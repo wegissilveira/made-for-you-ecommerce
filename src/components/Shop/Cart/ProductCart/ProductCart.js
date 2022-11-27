@@ -5,8 +5,8 @@ import classes from './ProductCart.module.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from 'react-router-dom'
 
-import ProductQtde from '../../../Shared/UI/ProductsQtde/ProductsQtde'
-import ProductQtdeMobile from '../../../Shared/UI/ProductQtdeMobile/ProductQtdeMobile'
+import ProductsQty from "components/Shared/UI/ProductsQty/ProductsQty"
+import ProductQtyMobile from 'components/Shared/UI/ProductQtyMobile/ProductQtyMobile'
 
 
 const ProductCart = props => {
@@ -58,10 +58,10 @@ const ProductCart = props => {
             <p>0%</p>
             <p>$ {props.product.price}</p>
             <div className={classes.Cart_details_qtde}>
-                <ProductQtde 
-                    startQtde={props.product.qtde}
-                    changeQtdeCallBack={setQtdeHandler} 
-                    max={10}
+                <ProductsQty 
+                    productQty={props.product.qtde}
+                    changeQtyCallBack={setQtdeHandler} 
+                    max={8}
                 />
             </div>
             <p>$ {(productQtde * parseFloat(props.product.price)).toFixed(2)}</p>
@@ -73,12 +73,12 @@ const ProductCart = props => {
                 />
             </p>
             <div className={classes.Cart_price_mobile}>
-                <ProductQtdeMobile 
-                    changeQtdeCallBack={setQtdeHandler} 
-                    startQtde={productQtde}
+                <ProductQtyMobile 
+                    changeQtyCallBack={setQtdeHandler} 
+                    productQty={productQtde}
                     index={props.prodIndex}
                     id={props.product._id}
-                    max={10}
+                    max={8}
                 />
                 <p>$ {(productQtde * parseFloat(props.product.price)).toFixed(2)}</p>
             </div>

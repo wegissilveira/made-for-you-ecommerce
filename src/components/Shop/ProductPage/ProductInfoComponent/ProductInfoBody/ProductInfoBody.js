@@ -11,8 +11,8 @@ import cartListDataFn from 'Data/cartData.js'
 import wishlistDataFn from 'Data/wishlistData'
 
 import ColorSelect from 'components/Shared/UI/ColorSelect/ColorSelect'
-import ProductsQtde from 'components/Shared/UI/ProductsQtde/ProductsQtde'
-import ProductQtdeMobile from 'components/Shared/UI/ProductQtdeMobile/ProductQtdeMobile'
+import ProductsQty from "components/Shared/UI/ProductsQty/ProductsQty"
+import ProductQtyMobile from 'components/Shared/UI/ProductQtyMobile/ProductQtyMobile'
 import SKUSizeSelector from "./SKUSizeSelector/SKUSizeSelector"
 
 
@@ -199,7 +199,7 @@ const ProductInfoBody = props => {
 
       setBagButton(obj)
    }, [productUpdated, isProductInBag])
-
+   // console.log('productReducerState: ', productReducerState);
    return (
       <>
          <div className={classes.Product_details_container}>
@@ -216,16 +216,15 @@ const ProductInfoBody = props => {
             />
          </div>
          <div className={classes.Product_wishlist_container} >
-            <ProductsQtde
-               startQtde={productCart.qtde}
-               changeQtdeCallBack={qtde => updateCurrentProduct.updateQty(qtde)}
+            <ProductsQty
+               productQty={productReducerState.productQty}
+               changeQtyCallBack={qtde => updateCurrentProduct.updateQty(qtde)}
                max={8}
             />
-            <ProductQtdeMobile
-               changeQtdeCallBack={qtde => updateCurrentProduct.updateQty(qtde)}
-               startQtde={productReducerState.productQty !== undefined ? productReducerState.productQty : productCart.qtde}
-               initialValue={true}
-               id={product._id}
+            <ProductQtyMobile
+               changeQtyCallBack={qtde => updateCurrentProduct.updateQty(qtde)}
+               startQty={productReducerState.productQty}
+               max={8}
             />
             <button
                onClick={() => productCartHandler()}
