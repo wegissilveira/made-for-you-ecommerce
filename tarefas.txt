@@ -47,7 +47,7 @@ FASE 1 - Melhorias estruturais e funcionais:
       -> FilterBottom - OK
    - PDP
       -> ProductSlider
-      -> ProductInfoComponent
+      -> ProductInfoComponent - Há um ponto a ser analisado que está anotado no componente
          - ProductInfoHeader - Sem alterações
          - ProductInfoBody - OK
             -> SKUSizeSelector - OK
@@ -75,6 +75,7 @@ FASE 1 - Melhorias estruturais e funcionais:
          - Buscar uma maneira de corrigir isso, inicialmente tentar reverter o erro, caso não seja possível, inserir um loader até as imagens serem válidas.
       -> (MELHORIAS): Analisar a possibilidade e a utilidade de se criar um hook para os bullets de cores
       -> (MELHORIA): Inserir estoque no objeto de productsData e passar o 'max' que está sendo recebido nos componentes de quantidade dos produtos para o valor do estoque.
+      -> (MELHORIA): Quando chegar no checkout analisar se é possível atualizar o valor do input diretamente de QtySelectorInput sem ter que ficar passando uma função callback como props
       
 
 
@@ -86,12 +87,9 @@ FASE 1 - Melhorias estruturais e funcionais:
       *****PRÓXIMOS NA FILA****
       -> (MELHORIA) Melhorar a maneira de setar o valor inicial do contexto do produto:
          - Atualmente faço no useEffect inicial dentro do ProductInfoBody
-         - A ideia é deixar separado e tratar como se fosse uma requisição
-      -> (BUG): O valor setado no modal de quantidade de produtos do mobile é sempre 1. Corrigir para que seja o valor real. 
-      -> (MELHORIA): Buscar uma maneira de melhorar a chamada de toggleQtySelectMobileHandler em ProductQtyMobile para que não seja necessário ficar passando a função como callback:
-         - Talvez inserir a função em um helper ou criar um hook para fazer o toggle do modal
-         - Analisar a possibilidade de se compartilhar o hook ou o helper com outros modais
-         - OBS.: ?Por que estou usando uma biblioteca de modal para o modal do produto, mas não para o modal de quantidades do mobile???
+         - A ideia é deixar separado e tratar como se fosse uma requisição 
+         OBS.: Está sendo feito assim porque eu estou usando a props 'product' recebida desde 'ProductPage' e setada através do hook 'useProduct. Na pokemon store eu uso o hook dentro do contexto para fazer a requisição e atualizar a state global lá dentro. Talvez aqui eu possa fazer algo semelhante, uso o hook dentro do context e atualizo a state lá.
+         OBS.: Pensar nos efeitos colaterais aqui, lembro que estou usando o hook em ProductPage e passando o valor como props para não precisar executar o hook várias vezes, já que também uso o valor em outros children. Talvez eu possa usar o próprio contexto para corrigir isso. Em caso de falta de solução imediata deixar esse ponto das renderizações extras para a etapa 5, que é isso onde isso será tratado com mais atenção.
          
 
 
@@ -100,6 +98,10 @@ FASE 1 - Melhorias estruturais e funcionais:
 
 
       *****ABORTADOS****      
+      -> (MELHORIA): Buscar uma maneira de melhorar a chamada de toggleQtySelectMobileHandler em ProductQtyMobile para que não seja necessário ficar passando a função como callback:
+         - Talvez inserir a função em um helper ou criar um hook para fazer o toggle do modal
+         - Analisar a possibilidade de se compartilhar o hook ou o helper com outros modais
+         => MOTIVO: Está sendo passado só em um nível após atualizações
 
 
 
@@ -129,8 +131,9 @@ FASE 1 - Melhorias estruturais e funcionais:
       -> (BUG): Select de product sendo atualizado com um render de atraso - OK
       -> (BUG): Quantidade não sendo inserida no minicart quando o usuário não escolhe no selector. Semelhante ao que ocorria com o selector de cores antes de haver validação - OK
       -> (BUG): Quantidade do produto não sendo atualizada no carrinho após lógica dos componentes de quantidade ser refatorada. Provavelmente o problema está nas funções callback que não estão atualizando as states necessárias - OK
-      -> (BUG): Rota do carrinho para a PDP não está na estrutura nova com o parÂmetro 'productID' - OK
       -> (MELHORIA): Talvez criar um contexto para administrar as states da pdp e do modal de produtos - OK
+      -> (BUG): O valor setado no modal de quantidade de produtos do mobile é sempre 1. Corrigir para que seja o valor real - OK
+      -> (BUG): Rota do carrinho para a PDP não está na estrutura nova com o parÂmetro 'productID' - OK
    
 
    3.1- Analisar warnings no terminal

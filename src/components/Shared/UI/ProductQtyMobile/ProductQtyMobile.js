@@ -1,17 +1,20 @@
 import React, { useState, useEffect, useRef, useContext } from 'react'
 import classes from './ProductQtyMobile.module.css'
 
-import { UpdateProductValuesContext, ProductDataContext } from "components/Shop/ProductPage/context/ProductContext"
+import { verifyCheckout } from "helpers/functions"
+
+import { ProductDataContext } from "components/Shop/ProductPage/context/ProductContext"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import QtySelectorMobile from './QtySelectorMobile/QtySelectorMobile'
 
+const isCheckout = verifyCheckout()
+
 
 const ProductQtyMobile = props => {
 	const {
 		max,
-		isCheckout,
       changeQtyCallBack,
       productQtyCheckout
 	} = props
@@ -22,16 +25,6 @@ const ProductQtyMobile = props => {
 	const qtyListRef = useRef()
 
 	const { productQty } = useContext(ProductDataContext)
-	const { updateQty } = useContext(UpdateProductValuesContext)
-
-	const changeQtyHandler = e => {
-		const inputValue = e.target.closest('DIV').getElementsByTagName('INPUT')[0].value
-
-		if(!isCheckout) updateQty(inputValue, true)
-      if(isCheckout) changeQtyCallBack(inputValue)
-
-		toggleQtySelectMobileHandler()
-	}
 
 	const toggleQtySelectMobileHandler = () => {
 		const selectStatus = qtyListRef.current.style.display
@@ -64,7 +57,8 @@ const ProductQtyMobile = props => {
 				qtyListRef={qtyListRef}
 				maxQty={maxQty}
 				toggleQtySelectMobileCB={toggleQtySelectMobileHandler}
-				changeQtyCB={changeQtyHandler}
+				changeQtyCheckoutCB={changeQtyCallBack}
+				productQtyCheckout={productQtyCheckout}
 			/>
 		</div>
 	)

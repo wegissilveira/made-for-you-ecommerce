@@ -35,7 +35,7 @@ const ProductCart = props => {
    return (
       <div className={classes.Cart_details}>
          <div className={classes.Cart_details_img}>
-            <Link to={"/shop/product/" + product._id}>
+            <Link to={"/shop/product/" + product._id + '/?productId=' + product._id}>
                <img src={product.imgsDemo[0]} alt='img' />
             </Link>
             <div>
@@ -64,7 +64,6 @@ const ProductCart = props => {
          <div className={classes.Cart_details_qtde}>
             <ProductsQty
                productQtyCheckout={productQty}
-               isCheckout={true}
                changeQtyCallBack={setQtdeHandler}
                max={8}
             />
@@ -81,7 +80,6 @@ const ProductCart = props => {
             <ProductQtyMobile
                changeQtyCallBack={setQtdeHandler}
                productQtyCheckout={productQty}
-               isCheckout={true}
                index={prodIndex}
                id={product._id}
                max={8}

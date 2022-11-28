@@ -87,3 +87,8 @@ export const mountFilters = (productsArg, filtersObj, currentFilterValue, curren
       return products
    }
 } 
+
+export const verifyCheckout = () => {
+   const isCheckout = window.location.search.match('productId') ? false : true
+   return isCheckout
+}

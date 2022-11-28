@@ -1,15 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react'
 import classes from './ProductsQty.module.css'
 
+import { verifyCheckout } from "helpers/functions"
+
 import { UpdateProductValuesContext, ProductDataContext } from "components/Shop/ProductPage/context/ProductContext"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+const isCheckout = verifyCheckout()
 
 
 const ProductsQty = props => {
    const {
       max,
-      isCheckout,
       changeQtyCallBack,
       productQtyCheckout
    } = props
@@ -36,7 +39,6 @@ const ProductsQty = props => {
 
       setProductQtyState(qty)
    }, [productQtyCheckout, productQty])
-
    
    return (
       <div className={classes.Product_qtde}>

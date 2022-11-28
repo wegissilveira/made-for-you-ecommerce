@@ -1,18 +1,43 @@
-import React, { useContext } from "react"
+import React, { useContext, useState, useEffect } from "react"
 import classes from  './QtySelectorInput.module.css'
 
-import { ProductDataContext } from "components/Shop/ProductPage/context/ProductContext"
+import { verifyCheckout } from "helpers/functions"
+
+import { UpdateProductValuesContext, ProductDataContext } from "components/Shop/ProductPage/context/ProductContext"
+
+const isCheckout = verifyCheckout()
+
 
 const QtySelectorInput = props => {
    const  {
       maxQty,
-      changeQtyCB
+      changeQtyCheckoutCB,
+      productQtyCheckout
    } = props
 
+   const [ productQtyState, setProductQtyState ] = useState(1)
+
    const { productQty } = useContext(ProductDataContext)
+   const { updateQty } = useContext(UpdateProductValuesContext)
+
+   const changeQtyHandler = e => {
+		const inputValue = e.target.closest('DIV').getElementsByTagName('INPUT')[0].value
+      
+		if(!isCheckout) updateQty(inputValue, true)
+      if(isCheckout) changeQtyCheckoutCB(inputValue)
+	}
+   
+   useEffect(() => {
+      let qty = 1
+      if (!isCheckout) qty = productQty
+      if (isCheckout) qty = productQtyCheckout
+
+      setProductQtyState(qty)
+   }, [productQtyCheckout, productQty])
+
 
    return (
-      <div onClick={e => changeQtyCB(e)} className={classes.selectList_items}>
+      <div onClick={e => changeQtyHandler(e)} className={classes.selectList_items}>
          {
             maxQty.map((item, i) => {
                return (
@@ -21,7 +46,8 @@ const QtySelectorInput = props => {
                      <input
                         type="radio"
                         value={i + 1}
-                        defaultChecked={productQty === i + 1}
+                        checked={Number(productQtyState) === i + 1}
+                        readOnly
                      />
                   </div>
                )
