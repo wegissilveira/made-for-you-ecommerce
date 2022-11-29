@@ -63,17 +63,14 @@ FASE 1 - Melhorias estruturais e funcionais:
       
 
    - Ajustes pontuais:
-      -> (MELHORIA) Ver se é possível transformar o slider da pdp e o do modal dos produtos em um único componente
       -> (BUG) O terceiro produto da lista do Cart está sempre retornando NaN no preço - aparentemente, depois de criar CartList o NaN ocorre com o primeiro produto
       -> (MELHORIA) Considerar habilitar o header da galeria da home no mobile. Caso isso aconteça, criar um componente para compartilhar a lógica dos header mobile e desk
       -> (BUG): Scroll de show more/less parece funcionar bem somente em telas com 1366px, telas maiores o cálculo não parece estar correto - OBS.: A função foi removida de 'Products' e convertida no hook 'useSetPageTop'. Corrigir o bug e analisar possíveis melhorias no código.
-      -> (MELHORIA): ANALISAR A PASSAGEM DO TOASTIFY PARA UM PORTAL
       -> (MELHORIA): Botão para limpar busca
       -> (MELHORIA): Corrigir url para que na pdp o id só apareça no parâmetro:
          - Talvez substituir o id que não é parâmetro pelo nome do produto
       -> (BUG/MELHORIA): Na PDP, inicialmente imagens é undefined, o que faz com que por uma fração de segundos apareçam as imagens quebradas:
          - Buscar uma maneira de corrigir isso, inicialmente tentar reverter o erro, caso não seja possível, inserir um loader até as imagens serem válidas.
-      -> (MELHORIAS): Analisar a possibilidade e a utilidade de se criar um hook para os bullets de cores
       -> (MELHORIA): Inserir estoque no objeto de productsData e passar o 'max' que está sendo recebido nos componentes de quantidade dos produtos para o valor do estoque.
       -> (MELHORIA): Quando chegar no checkout analisar se é possível atualizar o valor do input diretamente de QtySelectorInput sem ter que ficar passando uma função callback como props
       
@@ -85,11 +82,9 @@ FASE 1 - Melhorias estruturais e funcionais:
 
 
       *****PRÓXIMOS NA FILA****
-      -> (MELHORIA) Melhorar a maneira de setar o valor inicial do contexto do produto:
-         - Atualmente faço no useEffect inicial dentro do ProductInfoBody
-         - A ideia é deixar separado e tratar como se fosse uma requisição 
-         OBS.: Está sendo feito assim porque eu estou usando a props 'product' recebida desde 'ProductPage' e setada através do hook 'useProduct. Na pokemon store eu uso o hook dentro do contexto para fazer a requisição e atualizar a state global lá dentro. Talvez aqui eu possa fazer algo semelhante, uso o hook dentro do context e atualizo a state lá.
-         OBS.: Pensar nos efeitos colaterais aqui, lembro que estou usando o hook em ProductPage e passando o valor como props para não precisar executar o hook várias vezes, já que também uso o valor em outros children. Talvez eu possa usar o próprio contexto para corrigir isso. Em caso de falta de solução imediata deixar esse ponto das renderizações extras para a etapa 5, que é isso onde isso será tratado com mais atenção.
+      -> (MELHORIA) Ver se é possível transformar o slider da pdp e o do modal dos produtos em um único componente
+      -> (MELHORIAS): Analisar a possibilidade e a utilidade de se criar um hook para os bullets de cores
+
          
 
 
@@ -134,6 +129,8 @@ FASE 1 - Melhorias estruturais e funcionais:
       -> (MELHORIA): Talvez criar um contexto para administrar as states da pdp e do modal de produtos - OK
       -> (BUG): O valor setado no modal de quantidade de produtos do mobile é sempre 1. Corrigir para que seja o valor real - OK
       -> (BUG): Rota do carrinho para a PDP não está na estrutura nova com o parÂmetro 'productID' - OK
+      -> (MELHORIA) Melhorar a maneira de setar o valor inicial do contexto do produto - Passou a ser setado no contexto - OK
+      -> (MELHORIA): ANALISAR A PASSAGEM DO TOASTIFY PARA UM PORTAL - OK
    
 
    3.1- Analisar warnings no terminal

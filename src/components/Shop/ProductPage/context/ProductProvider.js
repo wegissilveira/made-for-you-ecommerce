@@ -1,4 +1,4 @@
-import { useReducer, useMemo } from "react"
+import { useReducer, useMemo, useEffect } from "react"
 
 import productReducer from "./productReducer"
 import {
@@ -15,9 +15,18 @@ import {
 
 import { initialValue } from "../helpers/values"
 
+import { connect } from 'react-redux'
+import useProduct from 'hooks/useProduct'
+
 
 const ProductProvider = props => {
+   const {
+      cart
+   } = props
+
    const [productReducerState, dispatch] = useReducer(productReducer, initialValue)
+
+   const product = useProduct()
 
    const updateCurrentProduct = useMemo(() => {
       const updateColor = (color, update) => dispatch(setColor(color, update))
@@ -33,6 +42,17 @@ const ProductProvider = props => {
       }
    }, [])
 
+   useEffect(() => {
+      let productCartArr = [...cart]
+      productCartArr.forEach(prod => {
+         if (prod._id === product._id) {
+            dispatch(setColor(prod.color, false))
+            dispatch(setSize(prod.size, false))
+            dispatch(setQty(prod.qtde, false))
+         }
+      })
+   }, [product])
+
    return (
       <UpdateProductValuesContext.Provider value={updateCurrentProduct}>
          <ProductDataContext.Provider value={productReducerState}>
@@ -42,4 +62,10 @@ const ProductProvider = props => {
    )
 }
 
-export default ProductProvider
+const mapStateToProps = state => {
+   return {
+      cart: state.cartListState
+   }
+}
+
+export default connect(mapStateToProps)(ProductProvider)

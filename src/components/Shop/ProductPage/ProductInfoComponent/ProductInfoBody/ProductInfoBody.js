@@ -34,7 +34,7 @@ const ProductInfoBody = props => {
       text: 'ADD TO BAG'
    })
 
-   const { updateColor, updateSize, updateQty, finishUpdate } = useContext(UpdateProductValuesContext)
+   const { finishUpdate } = useContext(UpdateProductValuesContext)
    const productReducerState = useContext(ProductDataContext)
 
    const wishlistHandler = id => {
@@ -102,17 +102,6 @@ const ProductInfoBody = props => {
       })
       setProductCart(productCartDetails)
    }, [product])
-   
-   useEffect(() => {
-      let productCartArr = [...cart]
-      productCartArr.forEach(prod => {
-         if (prod._id === product._id) {
-            updateColor(prod.color, false)
-            updateSize(prod.size, false)
-            updateQty(prod.qtde, false)
-         }
-      })
-   }, [product])
 
    useEffect(() => {
       const productCartArr = [...cart]
@@ -149,7 +138,6 @@ const ProductInfoBody = props => {
 
       setBagButton(obj)
    }, [productReducerState.productUpdated, isProductInBag])
-
    
    return (
       <>
