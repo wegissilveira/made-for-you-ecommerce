@@ -24,6 +24,13 @@
       "image3 image4";
 }
 
+@media (max-width: 767px) {
+   .ShoppingByRoom_container {
+      display: block;
+      max-height: unset;
+   }
+}
+
 .ShoppingByRoom_container img {
    max-width: 600px;
 }

@@ -24,7 +24,7 @@ const FilterColorSelector = () => {
    return (
       <div className={classes.FilterColor_container}>
          <h6>COLOR</h6>
-         <div>
+         <div className={classes.FilterColor_subContainer}>
             <input
                type="checkbox"
                onChange={(e) => lastSelectedColorHandler(e)}

@@ -73,18 +73,15 @@ FASE 1 - Melhorias estruturais e funcionais:
          - Buscar uma maneira de corrigir isso, inicialmente tentar reverter o erro, caso não seja possível, inserir um loader até as imagens serem válidas.
       -> (MELHORIA): Inserir estoque no objeto de productsData e passar o 'max' que está sendo recebido nos componentes de quantidade dos produtos para o valor do estoque.
       -> (MELHORIA): Quando chegar no checkout analisar se é possível atualizar o valor do input diretamente de QtySelectorInput sem ter que ficar passando uma função callback como props
+      -> (BUG): Na galeria no mobile na home, quando se clica no olho para abrir o modal se direciona para a categorias logo após a ação de abrir o modal,
       
 
 
       *****APÓS REFATORAMENTO*****
-      -> (BUG): Corrigir versão mobile do layout do filtro que sofreu alterações após refatoração. Analisar PDP e modal do produto também
       
 
 
-      *****PRÓXIMOS NA FILA****
-      -> (MELHORIA) Ver se é possível transformar o slider da pdp e o do modal dos produtos em um único componente
-      -> (MELHORIAS): Analisar a possibilidade e a utilidade de se criar um hook para os bullets de cores
-
+      *****PRÓXIMOS NA FILA****    
          
 
 
@@ -97,6 +94,8 @@ FASE 1 - Melhorias estruturais e funcionais:
          - Talvez inserir a função em um helper ou criar um hook para fazer o toggle do modal
          - Analisar a possibilidade de se compartilhar o hook ou o helper com outros modais
          => MOTIVO: Está sendo passado só em um nível após atualizações
+      -> (MELHORIAS): Analisar a possibilidade e a utilidade de se criar um hook para os bullets de cores
+      -> (MELHORIA) Ver se é possível transformar o slider da pdp e o do modal dos produtos em um único componente
 
 
 
@@ -131,6 +130,7 @@ FASE 1 - Melhorias estruturais e funcionais:
       -> (BUG): Rota do carrinho para a PDP não está na estrutura nova com o parÂmetro 'productID' - OK
       -> (MELHORIA) Melhorar a maneira de setar o valor inicial do contexto do produto - Passou a ser setado no contexto - OK
       -> (MELHORIA): ANALISAR A PASSAGEM DO TOASTIFY PARA UM PORTAL - OK
+      -> (BUG): Corrigir versão mobile do layout do filtro que sofreu alterações após refatoração. Analisar PDP e modal do produto também - OK
    
 
    3.1- Analisar warnings no terminal

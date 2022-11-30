@@ -33,7 +33,6 @@ const ProductPageModal = props => {
       customStyles.content.paddingTop = '40px'
    }
 
-   // ENTENDER O FUNCIONAMENTO DESSE 'Modal'. Eu nem lembrava da existência desse componente. É de uma lib externa
    return (
       <Modal
          isOpen={showProduct}

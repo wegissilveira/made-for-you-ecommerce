@@ -5,8 +5,7 @@
 
 @media (max-width: 991.98px) {
    .Footer_menu__wrapper {
-      flex-basis: 33%;
-      flex-shrink: 0;
+      display: none;
    }
 }
 

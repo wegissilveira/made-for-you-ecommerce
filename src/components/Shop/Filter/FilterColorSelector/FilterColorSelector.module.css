@@ -14,3 +14,11 @@
        margin-left: 10%;
    }
 }
+
+@media (max-width: 767px) {
+   .FilterColor_subContainer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+   }
+}

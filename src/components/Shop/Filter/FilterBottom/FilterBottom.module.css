@@ -11,10 +11,6 @@ button {
    width: 36%;
 }
 
-.Filter_buttons_container button {
-   cursor: pointer;
-}
-
 @media (max-width: 1366px) {
    .Filter_buttons_container {
        width: 50%;
@@ -43,6 +39,10 @@ button {
    }
 }
 
+.Filter_buttons_container button {
+   cursor: pointer;
+}
+
 .Filter_button {
    background-color: white;
    color: #3A3A3A;
@@ -58,7 +58,7 @@ button {
 
 @media (max-width: 480px) {
    .Filter_button {
-       width: 45%;
+       width: 100%;
    }
 }
 
