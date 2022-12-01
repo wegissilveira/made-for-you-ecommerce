@@ -1,5 +1,5 @@
 import React from "react"
-import classes from './CartList.module.css'
+import classes from './CartList.module.scss'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from 'react-router-dom'
@@ -20,7 +20,19 @@ const CartList = props => {
 
    return (
       <div className={classes.Cart_container}>
-         <CartHeader />
+         {/* <CartHeader /> */}
+         <table className={classes['Cart-table']}>
+            <thead>
+               <tr>
+                  <th>PRODUCT</th>
+                  <th>DISCOUNT</th>
+                  <th>PRICE</th>
+                  <th>QUANTITY</th>
+                  <th>TOTAL</th>
+                  <th></th>
+               </tr>
+            </thead>
+            <tbody>
          {
             productsCartDetails.map((product, i) => {
                return <ProductCart
@@ -32,6 +44,8 @@ const CartList = props => {
                />
             })
          }
+                  </tbody>
+      </table>
 
          <div className={classes.Cart_keepBuy_button}>
             <Link to="/shop/">
