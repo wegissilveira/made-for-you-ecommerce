@@ -12,10 +12,10 @@ const ProductCartDetails = props => {
    return (
       <div className={classes.Cart_details_img}>
          <Link to={"/shop/product/" + product._id + '/?productId=' + product._id}>
-            <img src={product.imgsDemo[0]} alt='img' />
+            <img src={product.prodImg} alt='img' />
          </Link>
          <div>
-            <Link to={"/shop/product/" + product._id + '/?productId=' + product._id}>{product.name}</Link>
+            <Link to={"/shop/product/" + product._id + '/?productId=' + product._id}>{product.prodName}</Link>
             <div className={classes.Cart_details_info}>
                <div>
                   <p>Size</p>

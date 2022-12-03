@@ -5,7 +5,7 @@ import { verifyCheckout } from "helpers/functions"
 
 import { UpdateProductValuesContext, ProductDataContext } from "components/Shop/ProductPage/context/ProductContext"
 
-const isCheckout = verifyCheckout()
+import { useLocation } from "react-router-dom"
 
 
 const QtySelectorInput = props => {
@@ -16,24 +16,32 @@ const QtySelectorInput = props => {
    } = props
 
    const [ productQtyState, setProductQtyState ] = useState(1)
+   const [ isCheckoutRoute, setIsCheckout ] = useState(false)
 
    const { productQty } = useContext(ProductDataContext)
    const { updateQty } = useContext(UpdateProductValuesContext)
 
+   const location = useLocation()
+
    const changeQtyHandler = e => {
 		const inputValue = e.target.closest('DIV').getElementsByTagName('INPUT')[0].value
       
-		if(!isCheckout) updateQty(inputValue, true)
-      if(isCheckout) changeQtyCheckoutCB(inputValue)
+		if(!isCheckoutRoute) updateQty(inputValue, true)
+      if(isCheckoutRoute) changeQtyCheckoutCB(inputValue)
 	}
    
    useEffect(() => {
       let qty = 1
-      if (!isCheckout) qty = productQty
-      if (isCheckout) qty = productQtyCheckout
+      if (!isCheckoutRoute) qty = productQty
+      if (isCheckoutRoute) qty = productQtyCheckout
 
       setProductQtyState(qty)
    }, [productQtyCheckout, productQty])
+
+   useEffect(() => {
+      const isCheckout = verifyCheckout()
+      setIsCheckout(isCheckout)
+   }, [location])
 
 
    return (

@@ -6,8 +6,7 @@ import { verifyCheckout } from "helpers/functions"
 import { UpdateProductValuesContext, ProductDataContext } from "components/Shop/ProductPage/context/ProductContext"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
-const isCheckout = verifyCheckout()
+import { useLocation } from "react-router-dom"
 
 
 const ProductsQty = props => {
@@ -18,9 +17,11 @@ const ProductsQty = props => {
    } = props
 
    const [ productQtyState, setProductQtyState ] = useState(1)
+   const [ isCheckoutRoute, setIsCheckout ] = useState(false)
 
    const { updateQty } = useContext(UpdateProductValuesContext)
    const { productQty } = useContext(ProductDataContext)
+   const location = useLocation()
 
    const changeQty = arg => {
       let qty = productQtyState
@@ -28,17 +29,23 @@ const ProductsQty = props => {
       if (arg === "increase" && (productQtyState < max || max === undefined)) qty++
       if (arg === 'decrease' && productQtyState > 1) qty--
 
-      if(!isCheckout) updateQty(qty, true)
-      if(isCheckout) changeQtyCallBack(qty)
+      if(!isCheckoutRoute) updateQty(qty, true)
+      if(isCheckoutRoute) changeQtyCallBack(qty)
    }
 
    useEffect(() => {
+      const isCheckout = verifyCheckout()
+      setIsCheckout(isCheckout)
+   }, [location])
+
+   useEffect(() => {
       let qty = 1
-      if (!isCheckout) qty = productQty
-      if (isCheckout) qty = productQtyCheckout
+      if (!isCheckoutRoute) qty = productQty
+      if (isCheckoutRoute) qty = productQtyCheckout
 
       setProductQtyState(qty)
-   }, [productQtyCheckout, productQty])
+   }, [productQtyCheckout, productQty, isCheckoutRoute])
+   
    
    return (
       <div className={classes.Product_qtde}>

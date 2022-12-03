@@ -5,7 +5,6 @@ import { UpdateProductValuesContext } from "components/Shop/ProductPage/context/
 
 const SKUSizeSelector = (props) => {
    const {
-      // setSizeHandlerCB,
       productCartDetails
    } = props
 

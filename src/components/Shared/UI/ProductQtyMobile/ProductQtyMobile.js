@@ -6,10 +6,9 @@ import { verifyCheckout } from "helpers/functions"
 import { ProductDataContext } from "components/Shop/ProductPage/context/ProductContext"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useLocation } from "react-router-dom"
 
 import QtySelectorMobile from './QtySelectorMobile/QtySelectorMobile'
-
-const isCheckout = verifyCheckout()
 
 
 const ProductQtyMobile = props => {
@@ -21,10 +20,11 @@ const ProductQtyMobile = props => {
 
 	const [ productQtyState, setProductQtyState ] = useState(1)
 	const [maxQty, setMaxQty] = useState([])
+	const [ isCheckoutRoute, setIsCheckout ] = useState(false)
 
 	const qtyListRef = useRef()
-
 	const { productQty } = useContext(ProductDataContext)
+	const location = useLocation()
 
 	const toggleQtySelectMobileHandler = () => {
 		const selectStatus = qtyListRef.current.style.display
@@ -38,11 +38,16 @@ const ProductQtyMobile = props => {
 
 	useEffect(() => {
       let qty = 1
-      if (!isCheckout) qty = productQty
-      if (isCheckout) qty = productQtyCheckout
+      if (!isCheckoutRoute) qty = productQty
+      if (isCheckoutRoute) qty = productQtyCheckout
 
       setProductQtyState(qty)
    }, [productQtyCheckout, productQty])
+
+	useEffect(() => {
+      const isCheckout = verifyCheckout()
+      setIsCheckout(isCheckout)
+   }, [location])
 	
 	return (
 		<div className={classes.ProductQtde_mobile_container}>

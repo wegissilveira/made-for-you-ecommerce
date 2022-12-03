@@ -4,7 +4,6 @@ import classes from './Cart.module.scss'
 
 import { connect } from 'react-redux'
 
-import productsData from 'Data/productsData'
 import CartList from './CartList/CartList'
 import KeepBuyingBtn from './KeepBuyingBtn/KeepBuyingBtn'
 
@@ -25,34 +24,6 @@ const Cart = props => {
       setQty(arrQty)
    }
 
-   let products = []
-   productsData.forEach(product => {
-      cart.forEach(item => {
-         if (item._id === product._id) {
-            products.push(product)
-         }
-      })
-   })
-
-   let productsCartDetails = []
-   for (let i = 0; i < products.length; i++) {
-      productsCartDetails.push({
-         ...products[i],
-         ...(cart.find((item) => item._id === products[i]._id))
-      }
-      )
-   }
-
-   productsCartDetails.sort((a, b) => {
-      const indexOfA = cart.findIndex(e => e._id === a._id)
-      const indexOfB = cart.findIndex(e => e._id === b._id)
-      return indexOfA - indexOfB;
-   })
-
-   console.log('productsData: ', productsData);
-   console.log('products: ', products);
-   console.log('cart: ', cart);
-
    useEffect(() => {
       const arrQty = []      
       cart.map((item) => {
@@ -69,7 +40,7 @@ const Cart = props => {
       let fullPrice = 0
       const prodQty = [...qty]
 
-      products.forEach(prod => {
+      cart.forEach(prod => {
          prodQty.forEach(p => {
             if (p.id === prod._id) {
                fullPrice = fullPrice + (Number(p.qty) * parseFloat(prod.price))
@@ -78,15 +49,15 @@ const Cart = props => {
       }) 
 
       setFinalPrice(fullPrice)
-   }, [JSON.stringify(qty)])
+   }, [JSON.stringify(qty), cart])
 
 
    return (
       <div className={classes.Session_container}>
          <h1>SHOPPING BAG</h1>
-         {products.length > 0 ?
+         {cart.length > 0 ?
             <CartList 
-               productsCartDetails={productsCartDetails}
+               productsCartDetails={cart}
                setQtdeHandlerCB={setQtdeHandler}
                finalPrice={finalPrice}
             />

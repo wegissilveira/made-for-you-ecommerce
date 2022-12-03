@@ -68,6 +68,9 @@ const ProductCard = props => {
             productCart.qtde = 1
             productCart.color = product.colors[0]
             productCart.size = '100x100'
+            productCart.price = product.price
+            productCart.prodName = product.name
+            productCart.prodImg = product.imgsDemo[0]
 
             cartList.push(productCart)
             setProdExistsCart(true)

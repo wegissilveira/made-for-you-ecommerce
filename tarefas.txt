@@ -55,11 +55,12 @@ FASE 1 - Melhorias estruturais e funcionais:
             -> ProductQtdeMobile - OK
          - ProductInfoFooter: Sem alterações
    - CARINHO
-      -> Cart
-         - CartList
-            -CartHeader
-            -ProductCart
-            -CartForm
+      -> Cart - OK
+         - CartList - OK
+            -ProductCart - OK
+            -CartForm - OK
+   - HOME
+      -> MainPageConfig
       
 
    - Ajustes pontuais:
@@ -76,8 +77,6 @@ FASE 1 - Melhorias estruturais e funcionais:
       -> (BUG): Na galeria no mobile na home, quando se clica no olho para abrir o modal se direciona para a categorias logo após a ação de abrir o modal
       -> (MELHORIA): Adicionar mensagem de erro na PDP para alertar que é necessário selecionar uma cor antes de adicionar o produto no carrinho
       -> (MELHORIA): Passar finalPrice para o redux
-      -> (BUG): Quando se altera a quantidade de produtos e vai do checkout pra pdp e vice-versa o dropdown de quantidade fica com erro
-      -> (BUG): Preço total do checkout não atualizando quando se remove produtos do carrinho
       
 
 
@@ -86,15 +85,11 @@ FASE 1 - Melhorias estruturais e funcionais:
 
 
       *****PRÓXIMOS NA FILA****  
-      
+      -> Refatorar lógica da home (MainPageConfig)
+
 
 
       *****EM EXECUÇÃO****
-      -> Refatoramento das funções de 'Cart.js':
-         - Alterar informações salvas no carrinho para que todos os dados necessários estejam disponíveis em uma única requisição, que é a de produtos no carrinho;
-         - No momento estou fazendo duas 'requisições', uma para pegar todos os produtos e outra para pegar os produtos do carrinho, que só possuem alguns dados, depois faço um loop sobre todos os produtos para retornar somente os que estão no carrinho. Algo totalmente desnecessário e uma péssima lógica.
-         - Salvando as informações necessárias no carrinho eu posso usar somente os dados retornados dele para montar o checkout, sem nenhum passo extra;
-         - Vai ser necessário alterar o objeto que está sendo setado através do contexto do produto para que possua todos os dados.
 
 
 
@@ -140,6 +135,9 @@ FASE 1 - Melhorias estruturais e funcionais:
       -> (MELHORIA) Melhorar a maneira de setar o valor inicial do contexto do produto - Passou a ser setado no contexto - OK
       -> (MELHORIA): ANALISAR A PASSAGEM DO TOASTIFY PARA UM PORTAL - OK
       -> (BUG): Corrigir versão mobile do layout do filtro que sofreu alterações após refatoração. Analisar PDP e modal do produto também - OK
+      -> (BUG): Quando se altera a quantidade de produtos e vai do checkout pra pdp e vice-versa o dropdown de quantidade fica com erro - OK
+      -> (BUG): Preço total do checkout não atualizando quando se remove produtos do carrinho - OK
+      -> (BUG): Só o primeiro produto do carrinho está tendo a quantidade exibida - OK
    
 
    3.1- Analisar warnings no terminal

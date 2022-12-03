@@ -49,7 +49,7 @@ const ProductInfoBody = props => {
 
       onWishlistState()
    }
-
+   
    const productCartHandler = () => {
       let productCartArr = [...cart]
       
@@ -64,11 +64,14 @@ const ProductInfoBody = props => {
       // productUpdate significa que ele está no carrinho, mas que teve seus valores atualizados
       if (count === 0 || productReducerState.productUpdated) {
          let productCart = {}
-         console.log('productReducerState: ', productReducerState);
+         
          productCart._id = product._id
          productCart.qtde = productReducerState.productQty
          productCart.color = productReducerState.productColor
          productCart.size = productReducerState.productSize
+         productCart.price = product.price
+         productCart.prodName = product.name
+         productCart.prodImg = product.imgsDemo[0]
 
          // Se o item já existe no carrinho e está sofrendo atualização a sua versão antiga é removida do array do carrinho e a nova adicionada com o push que está logo abaixo
          if (productReducerState.productUpdated === true) {
