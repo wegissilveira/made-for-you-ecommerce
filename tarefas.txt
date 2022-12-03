@@ -18,7 +18,7 @@ FASE 1 - Melhorias estruturais e funcionais:
    - Filter: OK
    - BestDeal (BestDealSession): OK
    - Cart: OK
-   - ProductCart: Analisar posteriormente - talvez transformar em uma tabela ou algo semelhante. Está muito estranho da maneira atual
+   - ProductCart: OK
    - CartForm: OK
    - Navigation (Header): OK
    - NavigationMobile (DrawerMenu): OK

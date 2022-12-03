@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import classes from './Cart.module.css'
+import classes from './Cart.module.scss'
 
 import { connect } from 'react-redux'
 
@@ -9,6 +9,7 @@ import * as actionTypes from 'store/actions/actionTypes'
 import cartListDataFn from 'Data/cartData'
 import productsData from 'Data/productsData'
 import CartList from './CartList/CartList'
+import KeepBuyingBtn from './KeepBuyingBtn/KeepBuyingBtn'
 
 
 const Cart = props => {
@@ -77,7 +78,11 @@ const Cart = props => {
                finalPrice={finalPrice}
             />
             :
-            <h1>YOUR BAG IS EMPTY</h1>
+            <>
+               <h1>YOUR BAG IS EMPTY</h1>
+               <KeepBuyingBtn btnText={'GO SHOP'} />
+            </>
+            
          }
       </div>
    )

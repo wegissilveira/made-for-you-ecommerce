@@ -1,38 +1,5 @@
-.Cart_container > * {
-   max-width: 100%;
-}
-
-.Cart_keepBuy_button {
-   display: flex;
-   justify-content: space-between;
-   border-bottom: 1px solid #dee2e6;
-   margin-top: 48px;
-}
-
-@media (max-width: 768px) {
-   .Cart_keepBuy_button {
-       margin-top: unset;
+.Cart_container {
+   :global(.KeepBuyingBtn_Cart_keepBuy_button__0OU0Z) {
+      justify-content: flex-start;
    }
 } 
-
-.Cart-table {
-   width: 100%;
-   border-collapse: collapse;
-   thead {
-      height: 53px;
-      tr {
-         border-bottom: 1px solid #dee2e6;
-         th {
-            width: 17%;
-            color: grey;
-            &:first-child {
-               width: 24%;
-               text-align: start;
-            }
-            &:last-child {
-               width: 8%;
-            }
-         }
-      }
-   }
-}

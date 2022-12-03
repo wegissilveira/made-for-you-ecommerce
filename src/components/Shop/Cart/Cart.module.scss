@@ -3,19 +3,16 @@
     margin-bottom: 80px;
     margin-left: 12.1%;
     width: 75.8%;
-}
-
-@media (max-width: 962px) {
-    .Session_container {
+    @media (max-width: 962px) {
         margin-left: 7.5%;
         width: 85%;
     }
-}
-
-.Session_container > h1 {
-    text-align: center;
-    margin-bottom: 48px;
-    margin-top: 48px;
+    
+    h1 {
+        text-align: center;
+        margin-bottom: 48px;
+        margin-top: 48px;
+    }
 }
 
 .Cart_light_button,

@@ -1,0 +1,24 @@
+.Cart-table {
+   width: 100%;
+   border-collapse: collapse;
+   thead {
+      height: 53px;
+      @media (max-width: 1024px) {
+         display: none;
+      }
+      tr {
+         border-bottom: 1px solid #dee2e6;
+         th {
+            width: 17%;
+            color: grey;
+            &:first-child {
+               width: 24%;
+               text-align: start;
+            }
+            &:last-child {
+               width: 8%;
+            }
+         }
+      }
+   }
+}
