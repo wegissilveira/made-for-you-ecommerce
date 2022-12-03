@@ -6,13 +6,14 @@ const CartPaymentForm = (props) => {
       finalPrice
    } = props
 
+
    return (
       <div>
          <div>
             <div className={classes.Form_cart_price_container}>
                <div>
                   <p>SUBTOTAL</p>
-                  <p>$ {props.finalPrice.toFixed(2)}</p>
+                  <p>$ {finalPrice.toFixed(2)}</p>
                </div>
                <div>
                   <p>SHIPPING</p>
@@ -20,7 +21,7 @@ const CartPaymentForm = (props) => {
                </div>
                <div>
                   <p>TOTAL</p>
-                  <p>$ {(props.finalPrice + 20).toFixed(2)}</p>
+                  <p>$ {(finalPrice + 20).toFixed(2)}</p>
                </div>
             </div>
          </div>

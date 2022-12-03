@@ -1,30 +1,33 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import classes from './Cart.module.scss'
 
 import { connect } from 'react-redux'
 
-import * as actionTypes from 'store/actions/actionTypes'
-
-import cartListDataFn from 'Data/cartData'
 import productsData from 'Data/productsData'
 import CartList from './CartList/CartList'
 import KeepBuyingBtn from './KeepBuyingBtn/KeepBuyingBtn'
 
 
 const Cart = props => {
-   const [qtde, setQtde] = useState(() => {
-      let arrQtde = []
-      props.cart.map((item, index) => {
-         return arrQtde[index] = item.qtde
-      })
+   const {
+      cart
+   } = props
 
-      return arrQtde
-   })
+   const [qty, setQty] = useState([])
+   const [finalPrice, setFinalPrice] = useState(0)
+
+   const setQtdeHandler = (value, prodId) => {
+      const arrQty = [...qty]
+      arrQty.forEach((prod) => {
+         if (prod.id === prodId) prod.qty = value
+      })
+      setQty(arrQty)
+   }
 
    let products = []
    productsData.forEach(product => {
-      props.cart.forEach(item => {
+      cart.forEach(item => {
          if (item._id === product._id) {
             products.push(product)
          }
@@ -35,36 +38,47 @@ const Cart = props => {
    for (let i = 0; i < products.length; i++) {
       productsCartDetails.push({
          ...products[i],
-         ...(props.cart.find((item) => item._id === products[i]._id))
+         ...(cart.find((item) => item._id === products[i]._id))
       }
       )
    }
 
    productsCartDetails.sort((a, b) => {
-      const indexOfA = props.cart.findIndex(e => e._id === a._id)
-      const indexOfB = props.cart.findIndex(e => e._id === b._id)
+      const indexOfA = cart.findIndex(e => e._id === a._id)
+      const indexOfB = cart.findIndex(e => e._id === b._id)
       return indexOfA - indexOfB;
    })
 
-   const pricesArrState = products.map(item => parseFloat(item.price))
+   console.log('productsData: ', productsData);
+   console.log('products: ', products);
+   console.log('cart: ', cart);
 
-   let finalPrice = 0
-   pricesArrState.map((item, i) => {
-      finalPrice = finalPrice + (item * qtde[i])
-      return finalPrice
-   })
+   useEffect(() => {
+      const arrQty = []      
+      cart.map((item) => {
+         const productsQty = {}
+         productsQty.qty = item.qtde
+         productsQty.id = item._id
+         arrQty.push(productsQty)
+      })
 
-   const setQtdeHandler = (value, index) => {
-      let arrQtde = [...qtde]
-      arrQtde[index] = value
-      setQtde(arrQtde)
-   }
+      setQty(arrQty)
+   }, [])
 
-   const removeProductCartHandler = id => {
-      let cartList = props.cart.filter(item => item._id !== id)
-      localStorage.setItem('cartList', JSON.stringify(cartList))
-      props.onCartListState()
-   }
+   useEffect(() => {
+      let fullPrice = 0
+      const prodQty = [...qty]
+
+      products.forEach(prod => {
+         prodQty.forEach(p => {
+            if (p.id === prod._id) {
+               fullPrice = fullPrice + (Number(p.qty) * parseFloat(prod.price))
+            } 
+         })
+      }) 
+
+      setFinalPrice(fullPrice)
+   }, [JSON.stringify(qty)])
 
 
    return (
@@ -74,13 +88,12 @@ const Cart = props => {
             <CartList 
                productsCartDetails={productsCartDetails}
                setQtdeHandlerCB={setQtdeHandler}
-               removeProductCartHandlerCB={removeProductCartHandler}
                finalPrice={finalPrice}
             />
             :
             <>
                <h1>YOUR BAG IS EMPTY</h1>
-               <KeepBuyingBtn btnText={'GO SHOP'} />
+               <KeepBuyingBtn btnText={'GO SHOPPING'} />
             </>
             
          }
@@ -94,14 +107,5 @@ const mapStateToProps = state => {
    }
 }
 
-const mapDispatchToProps = dispatch => {
-   return {
-      onCartListState: () => dispatch({
-         type: actionTypes.CARTLIST,
-         value: cartListDataFn()
-      })
-   }
-}
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(Cart)
+export default connect(mapStateToProps)(Cart)

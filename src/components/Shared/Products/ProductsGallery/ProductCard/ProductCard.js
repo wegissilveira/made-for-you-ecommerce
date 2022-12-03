@@ -46,7 +46,6 @@ const ProductCard = props => {
    const cartHandler = arg => {
       let cartList = [...cart]
       let cartItemsList = []
-
       let count = 0
       cartList.forEach(item => {
          if (item._id === product._id) count++

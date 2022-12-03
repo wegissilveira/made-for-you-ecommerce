@@ -73,7 +73,11 @@ FASE 1 - Melhorias estruturais e funcionais:
          - Buscar uma maneira de corrigir isso, inicialmente tentar reverter o erro, caso não seja possível, inserir um loader até as imagens serem válidas.
       -> (MELHORIA): Inserir estoque no objeto de productsData e passar o 'max' que está sendo recebido nos componentes de quantidade dos produtos para o valor do estoque.
       -> (MELHORIA): Quando chegar no checkout analisar se é possível atualizar o valor do input diretamente de QtySelectorInput sem ter que ficar passando uma função callback como props
-      -> (BUG): Na galeria no mobile na home, quando se clica no olho para abrir o modal se direciona para a categorias logo após a ação de abrir o modal,
+      -> (BUG): Na galeria no mobile na home, quando se clica no olho para abrir o modal se direciona para a categorias logo após a ação de abrir o modal
+      -> (MELHORIA): Adicionar mensagem de erro na PDP para alertar que é necessário selecionar uma cor antes de adicionar o produto no carrinho
+      -> (MELHORIA): Passar finalPrice para o redux
+      -> (BUG): Quando se altera a quantidade de produtos e vai do checkout pra pdp e vice-versa o dropdown de quantidade fica com erro
+      -> (BUG): Preço total do checkout não atualizando quando se remove produtos do carrinho
       
 
 
@@ -82,12 +86,15 @@ FASE 1 - Melhorias estruturais e funcionais:
 
 
       *****PRÓXIMOS NA FILA****  
-         
+      
 
 
       *****EM EXECUÇÃO****
-      -> Refatorar checkout:
-         -> Refatorando o JSX. O desk já foi refatorado e convertido em tabela, mas o mobile ainda não foi considerado e alguns de seus componentes nem foram inseridos nos blocos.
+      -> Refatoramento das funções de 'Cart.js':
+         - Alterar informações salvas no carrinho para que todos os dados necessários estejam disponíveis em uma única requisição, que é a de produtos no carrinho;
+         - No momento estou fazendo duas 'requisições', uma para pegar todos os produtos e outra para pegar os produtos do carrinho, que só possuem alguns dados, depois faço um loop sobre todos os produtos para retornar somente os que estão no carrinho. Algo totalmente desnecessário e uma péssima lógica.
+         - Salvando as informações necessárias no carrinho eu posso usar somente os dados retornados dele para montar o checkout, sem nenhum passo extra;
+         - Vai ser necessário alterar o objeto que está sendo setado através do contexto do produto para que possua todos os dados.
 
 
 

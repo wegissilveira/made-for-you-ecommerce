@@ -52,7 +52,7 @@ const ProductInfoBody = props => {
 
    const productCartHandler = () => {
       let productCartArr = [...cart]
-
+      
       let count = 0
       // Checa se o produto existe no carrinho
       productCartArr.forEach(item => {
@@ -64,7 +64,7 @@ const ProductInfoBody = props => {
       // productUpdate significa que ele está no carrinho, mas que teve seus valores atualizados
       if (count === 0 || productReducerState.productUpdated) {
          let productCart = {}
-
+         console.log('productReducerState: ', productReducerState);
          productCart._id = product._id
          productCart.qtde = productReducerState.productQty
          productCart.color = productReducerState.productColor

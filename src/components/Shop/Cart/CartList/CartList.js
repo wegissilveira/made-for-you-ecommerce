@@ -10,7 +10,6 @@ const CartList = props => {
    const {
       productsCartDetails,
       setQtdeHandlerCB,
-      removeProductCartHandlerCB,
       finalPrice
    } = props
 
@@ -20,7 +19,6 @@ const CartList = props => {
          <ProductCartTable 
             productsCartDetails={productsCartDetails}
             setQtdeHandlerCB={setQtdeHandlerCB}
-            removeProductCartHandlerCB={removeProductCartHandlerCB}
          />
          <KeepBuyingBtn btnText={'KEEP BUYING'} />
          <CartForm finalPrice={finalPrice} />

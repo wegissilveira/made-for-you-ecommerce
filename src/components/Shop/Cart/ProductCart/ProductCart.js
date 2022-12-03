@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react'
 import classes from './ProductCart.module.scss'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from 'react-router-dom'
+
+import { connect } from 'react-redux'
+import * as actionTypes from 'store/actions/actionTypes'
+
+import cartListDataFn from 'Data/cartData'
 
 import ProductsQty from "components/Shared/UI/ProductsQty/ProductsQty"
 import ProductQtyMobile from 'components/Shared/UI/ProductQtyMobile/ProductQtyMobile'
@@ -12,20 +16,22 @@ import ProductCartDetails from './ProductCartDetails/ProductCartDetails'
 const ProductCart = props => {
    const {
       product,
-      prodIndex,
       setQtdeCallback,
-      removeProductCallback
+      onCartListState,
+      cart
    } = props
 
    const [productQty, setQty] = useState(1)
 
    const setQtdeHandler = value => {
       setQty(value)
-      setQtdeCallback(value, prodIndex)
+      setQtdeCallback(value, product._id)
    }
 
    const removeProductCart = id => {
-      removeProductCallback(id)
+      let cartList = cart.filter(item => item._id !== id)
+      localStorage.setItem('cartList', JSON.stringify(cartList))
+      onCartListState()
    }
 
    useEffect(() => {
@@ -48,7 +54,6 @@ const ProductCart = props => {
             <ProductQtyMobile
                changeQtyCallBack={setQtdeHandler}
                productQtyCheckout={productQty}
-               index={prodIndex}
                id={product._id}
                max={8}
             />
@@ -71,4 +76,20 @@ const ProductCart = props => {
    )
 }
 
-export default ProductCart
+const mapStateToProps = state => {
+   return {
+      cart: state.cartListState
+   }
+}
+
+const mapDispatchToProps = dispatch => {
+   return {
+      onCartListState: () => dispatch({
+         type: actionTypes.CARTLIST,
+         value: cartListDataFn()
+      })
+   }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductCart)
