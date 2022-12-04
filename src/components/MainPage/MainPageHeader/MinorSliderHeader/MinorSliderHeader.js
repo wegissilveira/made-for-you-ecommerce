@@ -1,49 +1,44 @@
-import React from 'react'
-
+import React, { useState, useEffect } from 'react'
 import classes from './MinorSliderHeader.module.css'
 
 import ProgressBar from '../../../Shared/UI/ProgressBar/ProgressBar'
-import productsData from '../../../../Data/productsData'
+import { MinorSliderData } from 'Data/minorSliderData'
+
 import MinorSlider from './MinorSlider/MinorSlider'
 
 
-const MinorSliderHeader = props => {
-   const [minorSlideImg, setMinorSlideImg] = React.useState(0)
-   const [sliderProducts, setSliderProducts] = React.useState([])
+const MinorSliderHeader = () => {
+   const [minorSlideImg, setMinorSlideImg] = useState(0)
 
    const changeSlideHandler = (index) => {
+      let sliderToShow
       if (typeof index !== 'string') {
-         setMinorSlideImg(index)
+         sliderToShow = index
       } else {
-         if (minorSlideImg < sliderProducts.length - 1) {
-            setMinorSlideImg(minorSlideImg + 1)
+         if (minorSlideImg < MinorSliderData.length - 1) {
+            sliderToShow = minorSlideImg + 1
          } else {
-            setMinorSlideImg(0)
+            sliderToShow = 0
          }
       }
+      setMinorSlideImg(sliderToShow)
    }
-
-   const changeSlideCallbackHandler = index => {
-      changeSlideHandler(index)
-   }
-
-   React.useEffect(() => {
-      let sliderProducts = productsData.filter(prod => prod.slide !== undefined)
-      setSliderProducts(sliderProducts)
-   }, [])
 
    // ProgressBar será avaliado separadamente por se tratar de um componente compartilhado. O mesmo ocorrerá com todos os componentes compartilhados.
    return (
       <div className={classes.Header_block_1}>
          <ProgressBar
-            bars={sliderProducts.length} // => Qtde de barras
+            bars={MinorSliderData.length} // => Qtde de barras
             timer={5000} // => Tempo do loop
-            changeDot={changeSlideCallbackHandler} // => Função que controla a passagem automática de slides
+            changeDot={changeSlideHandler} // => Função que controla a passagem automática de slides
             auto={true} // => Determina se a passagem de slides e barras será automática
             direction={'column'} // => Orientação dos pontos, horizontal ou vertical
             height={150} // => Altura que o bloco de pontos ocupará
          />         
-         <MinorSlider sliderProducts={sliderProducts} minorSlideImg={minorSlideImg} />
+         <MinorSlider 
+            sliderProducts={MinorSliderData} 
+            minorSlideImg={minorSlideImg} 
+         />
       </div>
    )
 }

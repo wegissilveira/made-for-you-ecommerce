@@ -8,7 +8,7 @@ const MinorSlider = (props) => {
       sliderProducts,
       minorSlideImg
    } = props
-
+   
    return (
       <div className={classes.MinorSlider_container}>
          {sliderProducts.map((item, i) => {
@@ -17,7 +17,7 @@ const MinorSlider = (props) => {
                   key={`${item}-${i}`}
                   className={classes.MinorSlider_subContainer}
                   style={{
-                     backgroundColor: item.slide[1],
+                     backgroundColor: item.bgColor,
                      display: i === minorSlideImg ? 'block' : 'none'
                   }}
                >

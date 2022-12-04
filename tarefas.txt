@@ -61,6 +61,16 @@ FASE 1 - Melhorias estruturais e funcionais:
             -CartForm - OK
    - HOME
       -> MainPageConfig
+         - MainPageHeader
+            -MinorSliderHeader - OK
+            -
+            -
+         - MainPageShopByRoom - Sem alterações
+         - MainPageProducts - OK
+            -MainPageProductsHeader - OK
+            -MainPageProductsHeaderMobile - ESTÁ DESATIVADO (REATIVAÇÃO SENDO ANALISADA)
+         - mainPageDiscounts - Sem alterações
+         - mainPageBenefits - Sem alterações
       
 
    - Ajustes pontuais:
@@ -150,7 +160,6 @@ FASE 1 - Melhorias estruturais e funcionais:
 
 6- Estudar os hooks, tanto documentação quanto o curso referência da lista de estudos, antes de fechar esta fase. O intuito é identificar se há alguma melhoria que possa ser feita usando os hooks que ainda não tenho conhecimento.
 
-OBS.: Criei o useProduct para retornar o produto do contexto baseado no id, no entanto foi necessária uma adaptação passando o id como props no caso do modal, já que não o parâmetro de id não existe quando o modal é aberto através da galeria.
 
 EXTRAS: 
 1- Reestruturar o UserForm para que receba as informações como props e seja, de fato, um componente dinâmico. Em UserLogin, ao invés de importar usar um UserForm que renderiza ambos os forma internamente, usará dois, onde cada um receberá as respectivas informações de cada formulário. Talvez setar onde componente (a ser criado) como o componente base, já que o componente par renderizará os forms de sign in e sign up. Esta última parte por questões de semântica.

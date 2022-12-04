@@ -42,7 +42,7 @@ const ProductQtyMobile = props => {
       if (isCheckoutRoute) qty = productQtyCheckout
 
       setProductQtyState(qty)
-   }, [productQtyCheckout, productQty])
+   }, [productQtyCheckout, productQty, isCheckoutRoute])
 
 	useEffect(() => {
       const isCheckout = verifyCheckout()
