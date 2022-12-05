@@ -70,10 +70,6 @@
 }
 
 @media (max-width: 768px) {
-    .Form_cart_container > div:nth-of-type(3) > div > div > * {
-        height: 50px;
-    }
-
     .Form_cart_container > div:nth-of-type(3) > div > div p {
         margin: 0;
     }

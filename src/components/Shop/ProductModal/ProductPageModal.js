@@ -1,10 +1,9 @@
 import React from 'react'
 
 import './Modal.css'
+import Modal from 'react-modal'
 
-import Modal from 'react-modal';
-
-import ProductModalInfo from './ProductModalInfo/ProductModalInfo';
+import ProductModalInfo from './ProductModalInfo/ProductModalInfo'
 
 const customStyles = {
    content: {
@@ -19,6 +18,9 @@ const customStyles = {
    }
 }
 
+if (window.innerWidth <= 768) {
+   customStyles.content.paddingTop = '40px'
+}
 
 const ProductPageModal = props => {
    const {
@@ -27,11 +29,6 @@ const ProductPageModal = props => {
       setShowProduct,
       product
    } = props
-
-   // ANALISAR SE ESTE BLOCO SERÁ ATUALIZADO ASSIM MESMO OU SE SE TORNARÁ ALGO A PARTE, COMO UM REDUCER, POR EXEMPLO
-   if (window.innerWidth <= 768) {
-      customStyles.content.paddingTop = '40px'
-   }
 
    return (
       <Modal

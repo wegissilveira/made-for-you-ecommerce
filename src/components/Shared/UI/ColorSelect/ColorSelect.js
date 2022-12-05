@@ -31,6 +31,8 @@ const ColorSelect = props => {
       colorInput.checked = false
    }
    
+   // Um ponto que já notei aqui é que muitas dessas estilizações podem ser inseridas através de classes
+   // As classes seriam aplicadas aqui e não os estilos 
    const selectColorHandler = (e, color, load) => {      
       if (isFilter || !load) {
          const bulletBorder = e.currentTarget      

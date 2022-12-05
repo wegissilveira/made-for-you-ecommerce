@@ -2,6 +2,11 @@
    height: 100%;
    display: flex;
    flex-direction: column;
+   div {
+      @media (max-width: 768px) {
+         height: 50px;
+      }
+   }
 }
 
 .Form_cart_price_container>* {

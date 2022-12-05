@@ -1,33 +1,27 @@
 import React, { useState, useEffect, useRef } from 'react'
-
 import classes from './MainSliderHeader.module.css'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+
 import MainSlider from './MainSlider/MainSlider'
 import MainSliderArrows from './MainSliderArrows/MainSliderArrows'
 
 
-const MainSliderHeader = props => {
+const MainSliderHeader = () => {
    const [translateValue, setTranslateValue] = useState(0)
    const [clickEnabled, setClickEnabled] = useState(true)
 
    const sliderRef = useRef()
 
-   const translateSlider = {
-      transform: `translate(${translateValue}%)`
-   }
-
    const mainSliderHandler = arg => {
       setClickEnabled(false)
 
       const sliderEl = sliderRef.current
-
       const flexStyle = window.getComputedStyle(sliderEl)
       const justifyContent = flexStyle.getPropertyValue('justify-content')
 
       if (arg === 'next') {
          setTranslateValue(-100)
-         
          if (justifyContent === 'flex-end') {
             sliderEl.prepend(sliderEl.lastElementChild)
             sliderEl.style.justifyContent = 'flex-start'
@@ -41,10 +35,12 @@ const MainSliderHeader = props => {
          setTranslateValue(100)
       }
 
-      setTimeout(() => {
-         arg === 'next' ?
-            sliderEl.appendChild(sliderEl.firstElementChild) :
+      setTimeout(() => {         
+         if (arg === 'next') {
+            sliderEl.appendChild(sliderEl.firstElementChild)
+         } else {
             sliderEl.prepend(sliderEl.lastElementChild)
+         }
 
          sliderEl.style.transition = 'none'
          setTranslateValue(0)
@@ -61,16 +57,21 @@ const MainSliderHeader = props => {
    useEffect(() => {
       const interval = setTimeout(() => {
          mainSliderHandler('next')
-      }, 5000);
-      return () => clearTimeout(interval);
-   });
-
+      }, 5000)
+      return () => clearTimeout(interval)
+   })
 
    return (
       <div className={classes.Header_block_2}>
          <div className={classes.MainSlider_container}>
-            <MainSlider translateStyle={translateSlider} sliderRef={sliderRef}/>
-            <MainSliderArrows clickEnabled={clickEnabled} mainSliderHandlerCB={mainSliderHandler} />
+            <MainSlider 
+               translateValue={translateValue} 
+               sliderRef={sliderRef}
+            />
+            <MainSliderArrows 
+               clickEnabled={clickEnabled}
+               mainSliderHandlerCB={mainSliderHandler} 
+            />
          </div>
          <div className={classes.Icons_container}>
             <FontAwesomeIcon icon={['fab', 'facebook-f']} />

@@ -1,9 +1,0 @@
-.Main_img_slider {
-   display: flex;
-   overflow: hidden;
-   padding-bottom: 30px;
-}
-
-.Main_img_slider img {
-   max-width: 100%;
-}

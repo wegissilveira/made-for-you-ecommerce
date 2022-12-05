@@ -14,7 +14,7 @@
       height: 45px;
       width: 220px;
       cursor: pointer;
-      font-weight: 700;
+      
       text-decoration: none;
       &:hover {
          background: #4e4e4e;
@@ -22,12 +22,16 @@
       @media (max-width: 768px) {
          width: 100%;
       }
-      p {
+      button {
          display: flex;
          justify-content: space-between;
          width: 100%;
          justify-content: space-around;
          align-items: center;
+         background: unset;
+         border: none;
+         cursor: pointer;
+         font-weight: 700;
 
          svg, span {
             color: #fff;

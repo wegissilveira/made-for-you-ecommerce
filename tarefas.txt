@@ -42,11 +42,10 @@ FASE 1 - Melhorias estruturais e funcionais:
       -> FilterBody - OK
          - FilterCheckbox - OK
          - FilterColorSelector - OK
-            - ColorSelector - OK
          - PriceSlider - OK
       -> FilterBottom - OK
    - PDP
-      -> ProductSlider
+      -> ProductSlider - OK
       -> ProductInfoComponent - Há um ponto a ser analisado que está anotado no componente
          - ProductInfoHeader - Sem alterações
          - ProductInfoBody - OK
@@ -63,14 +62,24 @@ FASE 1 - Melhorias estruturais e funcionais:
       -> MainPageConfig
          - MainPageHeader
             -MinorSliderHeader - OK
-            -
-            -
+            -MainSliderHeader - OK
          - MainPageShopByRoom - Sem alterações
          - MainPageProducts - OK
             -MainPageProductsHeader - OK
             -MainPageProductsHeaderMobile - ESTÁ DESATIVADO (REATIVAÇÃO SENDO ANALISADA)
          - mainPageDiscounts - Sem alterações
          - mainPageBenefits - Sem alterações
+   - BestDeal
+      -> 
+   - Compartilhado
+      -> ProductPageModal - OK
+         -ProductModalSlider - OK
+      -> ProgressBar
+      -> ColorSelect
+      -> ProductQty
+      -> ProductQtyMobile
+      -> ProgressBar
+      -> Toastify
       
 
    - Ajustes pontuais:
@@ -95,7 +104,7 @@ FASE 1 - Melhorias estruturais e funcionais:
 
 
       *****PRÓXIMOS NA FILA****  
-      -> Refatorar lógica da home (MainPageConfig)
+      -> Refatorar lógica do ColorSelect
 
 
 

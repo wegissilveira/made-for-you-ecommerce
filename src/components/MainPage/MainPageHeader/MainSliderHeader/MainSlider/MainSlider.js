@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
-
+import React from 'react'
 import classes from './MainSlider.module.css'
 
 import { Link } from 'react-router-dom'
@@ -8,14 +7,14 @@ import { MainSliderData } from 'Data/mainSliderData'
 
 const MainSlider = (props) => {
    const {
-      translateStyle,
+      translateValue,
       sliderRef
    } = props
 
    return (
       <div
          className={classes.MainSlider_subContainer}
-         style={translateStyle}
+         style={{transform: `translate(${translateValue}%)`}}
          ref={sliderRef}
       >
          {MainSliderData.map((img, i) =>

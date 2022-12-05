@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-
-import classes from './ProductModalSlider.module.css'
+import classes from './ProductModalSlider.module.scss'
 
 import ProgressBar from 'components/Shared/UI/ProgressBar/ProgressBar'
 import ProductModalImages from './ProductModalImages/ProductModalImages'
@@ -15,36 +14,36 @@ const ProductModalSlider = props => {
       imgs
    } = props
 
-   // ANALISAR SE ESTE BLOCO FICA AQUI, SE SE TORNA UMA STATE OU TALVEZ ATÉ MESMO UM REDUCER
-   const translateSlider = {
-      transform: `translateX(${translateValue}%)`,
-      transition: '.8s ease-in-out',
-      overflow: 'unset'
-   }
-
    const changeSlide = arg => {
+      let newImgSlide = imgSlide
+      let newTranslateValue = translateValue
       if (arg === 'previous') {
          if (imgSlide > 0) {
-            setImgSlide(imgSlide - 1)
-            setTranslateValue(translateValue + 100)
+            newImgSlide = imgSlide - 1
+            newTranslateValue = translateValue + 100
          } else {
-            setImgSlide(imgs.length - 1)
-            setTranslateValue((imgs.length - 1) * -100)
+            newImgSlide = imgs.length - 1
+            newTranslateValue = (imgs.length - 1) * -100
          }
-
-      } else if (arg === 'next') {
+      } 
+      
+      if (arg === 'next') {
          if (imgSlide < imgs.length - 1) {
-            setImgSlide(imgSlide + 1)
-            setTranslateValue(translateValue - 100)
+            newImgSlide = imgSlide + 1
+            newTranslateValue = translateValue - 100
          } else {
-            setImgSlide(0)
-            setTranslateValue(0)
+            newImgSlide = 0
+            newTranslateValue = 0
          }
-
-      } else if (typeof arg === 'number') {
-         setImgSlide(arg)
-         setTranslateValue(arg * -100)
       }
+      
+      if (typeof arg === 'number') {
+         newImgSlide = arg
+         newTranslateValue = arg * -100
+      }
+
+      setImgSlide(newImgSlide)
+      setTranslateValue(newTranslateValue)
    }
       
 
@@ -52,7 +51,7 @@ const ProductModalSlider = props => {
       <div className={classes.Product_modal_slider}>
          <ProductModalImages 
             productImgs={product.imgsDemo} 
-            translateSlider={translateSlider} 
+            translateValue={translateValue} 
          />
          <ProgressBar
             bars={product.imgsDemo.length}

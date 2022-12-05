@@ -1,18 +1,17 @@
 import React from 'react'
-
-import classes from './ProductModalImages.module.css'
+import classes from './ProductModalImages.module.scss'
 
 
 const ProductModalImages = props => {
    const {
       productImgs,
-      translateSlider
+      translateValue
    } = props
 
    return (
       <div
          className={classes.Main_img_slider}
-         style={translateSlider}
+         style={{transform: `translateX(${translateValue}%)`}}
       >
          {productImgs.map((slide, i) =>
             <img

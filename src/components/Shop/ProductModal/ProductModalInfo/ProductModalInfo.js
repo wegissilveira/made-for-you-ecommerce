@@ -15,7 +15,6 @@ const ProductModalInfo = (props) => {
       setShowProductCB,
    } = props
 
-
    return (
       <div className={classes.Product_page_modal_container}>
          <FontAwesomeIcon icon="times" onClick={setShowProductCB}/>

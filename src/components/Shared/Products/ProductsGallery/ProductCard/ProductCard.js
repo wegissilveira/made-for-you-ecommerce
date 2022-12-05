@@ -76,7 +76,6 @@ const ProductCard = props => {
             setProdExistsCart(true)
 
          } else {
-
             cartList = cartList.filter(item => item._id !== product._id)
             setProdExistsCart(false)
          }
