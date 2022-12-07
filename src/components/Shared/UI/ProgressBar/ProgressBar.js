@@ -1,38 +1,45 @@
-import React from 'react'
-
+import React, {useEffect, useState} from 'react'
 import classes from './ProgressBar.module.css'
 
 
+const strokeWidth = 3
+let interval
 const ProgressBar = props => {
+   const {
+      diameter = 30,
+      bars,
+      timer,
+      auto,
+      direction,
+      height,
+      clickable,
+      changeDot
+   } = props
 
-   let [sqSize,] = React.useState(props.diameter ? props.diameter : 30)
-   let [percentage, setPercentage] = React.useState(0)
-   let [strokeWidth,] = React.useState(3)
+   const [percentage, setPercentage] = useState(0)
+   const [barIndex, setBarIndex] = useState(0) // => Ponto ativo inicialmente
 
-   let [barIndex, setBarIndex] = React.useState(0) // => Define o ponto que recebe a barra baseado em seu index
+   const barsArray = Array(bars).fill(1) // => Quantidade de círculos que serão criadas
 
-   let bars = Array(props.bars).fill(1) // => Quantidade de barras que serão criadas
-
-   let timer = props.timer // => Intervalo que se levará para que a barra seja completada e para que ela vá para o ponto seguinte
-
-
-   let interval
-   React.useEffect(() => {
+   const changeSlideHandler = index => {
+      setPercentage(0) // Reseta a posição do círculo
+      setBarIndex(index) // Coloca a barra no ponto clicado
+      changeDot(index) // Passa o slide do componente parent para acompanhar o ponto que recebe a barra
+      clearTimeout(interval) // Limpa o tempo de 'seTimeout' para que este 0 juntamente com 'percentage'
+   }
+   
+   useEffect(() => {
       let mounted = true
-      if (props.auto) {
-
+      if (auto) {
          // eslint-disable-next-line react-hooks/exhaustive-deps
          interval = setTimeout(() => {
-
             if (mounted) {
                percentage < 100 ? setPercentage(percentage + 1) : setPercentage(0)
             }
-
             if (percentage === 100) {
-               barIndex < bars.length - 1 ? setBarIndex(barIndex + 1) : setBarIndex(0)
-               props.changeDot('next')
+               barIndex < barsArray.length - 1 ? setBarIndex(barIndex + 1) : setBarIndex(0)
+               changeDot('next')
             }
-
          }, timer / 100);
 
       } else {
@@ -41,52 +48,38 @@ const ProgressBar = props => {
       return () => mounted = false;
    })
 
-   const changeSlideHandler = index => {
-
-      setPercentage(0) // Reseta a posição da barra
-      setBarIndex(index) // Coloca a barra no ponto clicado
-
-      props.changeDot(index) // Passa o slide do componente parent para acompanhar o ponto que recebe a barra
-
-      clearTimeout(interval) // Limpa o tempo de 'seTimeout' para que este 0 juntamente com 'percentage'
-   }
-
-
-   const radius = (sqSize - strokeWidth) / 2
-   const viewBox = `0 0 ${sqSize} ${sqSize}`
+   const radius = (diameter - strokeWidth) / 2
+   const viewBox = `0 0 ${diameter} ${diameter}`
    const dashArray = radius * Math.PI * 2
    const dashOffset = dashArray - dashArray * percentage / 100
 
-   let direction = props.direction === 'column' ? 'column' : 'row'
    const barStyle = {
-      flexDirection: direction,
-      height: props.height + 'px'
+      flexDirection: direction === 'column' ? 'column' : 'row',
+      height: height + 'px'
    }
-
-
 
    return (
       <div
          className={classes.ProgressBar_container}
          style={barStyle}
       >
-         {bars.map((bar, i) => {
+         {barsArray.map((bar, i) => {
             return <svg
-               key={i}
-               width={sqSize}
-               height={sqSize}
+               key={bar + '-' + i}
+               width={diameter}
+               height={diameter}
                viewBox={viewBox}
-               style={{ cursor: props.clickable === false ? 'default' : 'pointer' }}
-               onClick={props.clickable === false ? null : () => changeSlideHandler(i)}
+               style={{ cursor: clickable === false ? 'default' : 'pointer' }}
+               onClick={clickable === false ? null : () => changeSlideHandler(i)}
             >
                {i === barIndex ?
                   <circle
                      className={classes.Circle_progress}
-                     cx={sqSize / 2}
-                     cy={sqSize / 2}
+                     cx={diameter / 2}
+                     cy={diameter / 2}
                      r={radius}
                      strokeWidth={`${strokeWidth}px`}
-                     transform={`rotate(-90 ${sqSize / 2} ${sqSize / 2})`}
+                     transform={`rotate(-90 ${diameter / 2} ${diameter / 2})`}
                      style={{
                         strokeDasharray: dashArray,
                         strokeDashoffset: dashOffset

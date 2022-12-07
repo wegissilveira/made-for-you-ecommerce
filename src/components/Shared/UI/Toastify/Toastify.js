@@ -4,17 +4,21 @@ import classes from './Toastify.module.css'
 import ReactDOM from 'react-dom' 
 
 const Toastify = props => {
+   const {
+      open,
+      toastifyDetails
+   } = props
 
    let translateX = -110
 
-   if (props.open === true) {
+   if (open === true) {
       translateX = 0
    } else {
       translateX = -110
    }
 
-   const header = props.toastifyDetails[0]
-   const msg = props.toastifyDetails[1]
+   const header = toastifyDetails[0]
+   const msg = toastifyDetails[1]
 
 
    return (

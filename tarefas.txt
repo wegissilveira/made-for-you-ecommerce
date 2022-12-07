@@ -69,17 +69,16 @@ FASE 1 - Melhorias estruturais e funcionais:
             -MainPageProductsHeaderMobile - ESTÁ DESATIVADO (REATIVAÇÃO SENDO ANALISADA)
          - mainPageDiscounts - Sem alterações
          - mainPageBenefits - Sem alterações
-   - BestDeal
+   - BestDealSection
       -> 
    - Compartilhado
       -> ProductPageModal - OK
          -ProductModalSlider - OK
-      -> ProgressBar
-      -> ColorSelect
-      -> ProductQty
-      -> ProductQtyMobile
-      -> ProgressBar
-      -> Toastify
+      -> ProgressBar - OK
+      -> ColorSelect - OK
+      -> ProductQty - OK
+      -> ProductQtyMobile - OK
+      -> Toastify - OK
       
 
    - Ajustes pontuais:
@@ -96,6 +95,8 @@ FASE 1 - Melhorias estruturais e funcionais:
       -> (BUG): Na galeria no mobile na home, quando se clica no olho para abrir o modal se direciona para a categorias logo após a ação de abrir o modal
       -> (MELHORIA): Adicionar mensagem de erro na PDP para alertar que é necessário selecionar uma cor antes de adicionar o produto no carrinho
       -> (MELHORIA): Passar finalPrice para o redux
+      -> (MELHORIA): No ProgressBar o componente é renderizado sem para em decorrência da atualização constante dos bullets e da movimentação dos círculos:
+         - Na fase de renderização analisar se é possível contornar isso e diminui a constância de renderização
       
 
 

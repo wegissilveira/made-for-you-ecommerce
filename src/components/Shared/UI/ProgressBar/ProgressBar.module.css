@@ -1,20 +1,20 @@
 .ProgressBar_container {
-    display: flex;
-    justify-content: space-between;
+   display: flex;
+   justify-content: space-between;
 }
 
 .Circle_progress {
-    fill: none;
+   fill: none;
 }
 
 .Circle_progress {
-    stroke: rgb(151, 151, 151);
-    stroke-linecap: butt;
-    stroke-linejoin: butt;
+   stroke: rgb(151, 151, 151);
+   stroke-linecap: butt;
+   stroke-linejoin: butt;
 }
 
 .Circle_center {
-    stroke:black;
-    stroke-width: 2 ;
-    fill:black;
-} 
+   stroke: black;
+   stroke-width: 2;
+   fill: black;
+}

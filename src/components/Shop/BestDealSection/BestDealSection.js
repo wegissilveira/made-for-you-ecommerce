@@ -36,8 +36,7 @@ const BestDealSection = props => {
       circle_diameter = 30
    }
 
-   const changeSlide = arg => {
-
+   const changeSlide = () => {
       const bestDealEl = bestDealRef.current
       let newTransValue = (bestDealEl.children[0].offsetWidth / bestDealEl.offsetWidth) * 100
       setTranslateValue(-newTransValue)
@@ -56,8 +55,7 @@ const BestDealSection = props => {
             bestDealRef.current.style.transition = '2s'
          }, 30)
       }
-   }, [translateValue]);
-
+   }, [translateValue])
 
 
    return (

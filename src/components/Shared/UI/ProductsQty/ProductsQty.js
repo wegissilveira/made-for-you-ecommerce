@@ -26,7 +26,7 @@ const ProductsQty = props => {
    const changeQty = arg => {
       let qty = productQtyState
       
-      if (arg === "increase" && (productQtyState < max || max === undefined)) qty++
+      if (arg === 'increase' && (productQtyState < max || max === undefined)) qty++
       if (arg === 'decrease' && productQtyState > 1) qty--
 
       if(!isCheckoutRoute) updateQty(qty, true)

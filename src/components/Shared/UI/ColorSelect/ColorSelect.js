@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import classes from './ColorSelect.module.css'
+import classes from './ColorSelect.module.scss'
 
 import { UpdateProductsListContext } from 'components/Shop/Filter/context/FilterContext'
 import { UpdateProductValuesContext, ProductDataContext } from "components/Shop/ProductPage/context/ProductContext"
@@ -31,20 +31,16 @@ const ColorSelect = props => {
       colorInput.checked = false
    }
    
-   // Um ponto que já notei aqui é que muitas dessas estilizações podem ser inseridas através de classes
-   // As classes seriam aplicadas aqui e não os estilos 
    const selectColorHandler = (e, color, load) => {      
       if (isFilter || !load) {
          const bulletBorder = e.currentTarget      
          const colorsBullets = e.currentTarget.parentElement.childNodes
    
          colorsBullets.forEach((bullet) => {
-            bullet.style.border = '1px solid black'
-            bullet.children[0].style.opacity = 0.4  
+            bullet.className = classes['Color-bullet']
          })     
    
-         bulletBorder.style.border = '2px solid black'
-         bulletBorder.children[0].style.opacity =  1.0
+         bulletBorder.className = [classes['Color-bullet'], classes['Active-bullet']].join(' ')
    
          if (isFilter) updateColorStateHandler(color)
          if (!isFilter) updateColor(color, true)
@@ -56,11 +52,9 @@ const ColorSelect = props => {
 
          colorsBullets.forEach((bullet) => {
             if (bullet.children[0].style.backgroundColor === productColor) {
-               bullet.style.border = '2px solid black'
-               bullet.children[0].style.opacity = 1.0  
+               bullet.className = [classes['Color-bullet'], classes['Active-bullet']].join(' ')
             } else {
-               bullet.style.border = '1px solid black'
-               bullet.children[0].style.opacity = 0.4  
+               bullet.className = classes['Color-bullet']
             }
          }) 
       }
@@ -80,18 +74,18 @@ const ColorSelect = props => {
    return (
       <div className={classes['Color-SKUSelector--wrapper']}>
          { title ? <p>Color</p> : null }
-         <div className={classes['Color-bullets--wrapper']} id="colors-selector-bullets">
+         <div 
+            className={classes['Color-bullets--wrapper']} 
+            id="colors-selector-bullets"
+         >
             {
                currentColors.map((color, i) => {
                   return <div 
+                     className={classes['Color-bullet']}
                      key={color+'-'+i}
-                     style={{ border: '1px solid black' }}
                      onClick={(e) => selectColorHandler(e, color)}
                   >
-                     <span
-                        style={{ backgroundColor: color, opacity: 0.4 }}
-                     >
-                     </span>
+                     <span style={{ backgroundColor: color }}></span>
                   </div>
                })
             }
