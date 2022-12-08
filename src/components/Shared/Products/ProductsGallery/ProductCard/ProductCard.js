@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
+import { formatUrlName } from 'helpers/functions';
+
 import ProductPageModal from 'components/Shop/ProductModal/ProductPageModal'
 import * as actionTypes from 'store/actions/actionTypes'
 import wishlistDataFn from 'Data/wishlistData'
@@ -88,7 +90,7 @@ const ProductCard = props => {
    const openModalHandler = i => {
       setShowProduct(!showProduct)
       document.body.style.overflow = "hidden"
-      history.push("/shop/?productId=" + product._id)
+      history.push("?productId=" + product._id)
    }
 
    const closeModalCallback = () => {
@@ -113,7 +115,7 @@ const ProductCard = props => {
                icon={[wish_icon, 'heart']} size="2x"
                className={classes.Wishlist_icon_heart}
             />
-            <Link to={"/shop/product/" + product._id + '/?productId=' + product._id} >
+            <Link to={formatUrlName(product.name, product._id)}>
                <div className={classes.Products_img_container}>
                   <img
                      src={product.img}

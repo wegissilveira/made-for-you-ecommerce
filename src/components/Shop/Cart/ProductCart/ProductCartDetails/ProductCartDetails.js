@@ -3,6 +3,8 @@ import classes from './ProductCartDetails.module.scss'
 
 import { Link } from 'react-router-dom'
 
+import { formatUrlName } from 'helpers/functions'
+
 
 const ProductCartDetails = props => {
    const  {
@@ -11,11 +13,11 @@ const ProductCartDetails = props => {
 
    return (
       <div className={classes.Cart_details_img}>
-         <Link to={"/shop/product/" + product._id + '/?productId=' + product._id}>
+         <Link to={formatUrlName(product.prodName, product._id)}>
             <img src={product.prodImg} alt='img' />
          </Link>
          <div>
-            <Link to={"/shop/product/" + product._id + '/?productId=' + product._id}>{product.prodName}</Link>
+            <Link to={formatUrlName(product.prodName, product._id)}>{product.prodName}</Link>
             <div className={classes.Cart_details_info}>
                <div>
                   <p>Size</p>

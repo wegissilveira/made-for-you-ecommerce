@@ -88,7 +88,7 @@ function App() {
             <Route path="/search/:searchKey" exact component={Products} />
             <Route path="/shop/" exact component={ShopConfig} />
             <Route path="/shop/:cat" exact component={Products} />
-            <Route path="/shop/product/:id" exact component={ProductPage} />
+            <Route path="/product/:prodName" exact component={ProductPage} />
             <Route path="/cart/" exact component={Cart} />
             <Route path="/wishlist/" exact component={Wishlist} />
             <Route path="/user-login/" exact component={UserLogin} />

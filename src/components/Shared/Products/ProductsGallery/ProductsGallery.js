@@ -12,7 +12,6 @@ const ProductsGallery = (props) => {
       productsSubContainerRef
    } = props
 
-
    return (
       <div
          ref={productsSubContainerRef}

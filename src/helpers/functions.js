@@ -92,3 +92,8 @@ export const verifyCheckout = () => {
    const isCheckout = window.location.search.match('productId') ? false : true
    return isCheckout
 }
+
+export const formatUrlName = (str, id) => {
+   const url = `/product/${str.replaceAll(/\W+/g, '-')}/?productId=${id}`
+   return url
+}

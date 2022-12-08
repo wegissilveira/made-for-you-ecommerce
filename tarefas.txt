@@ -69,8 +69,7 @@ FASE 1 - Melhorias estruturais e funcionais:
             -MainPageProductsHeaderMobile - ESTÁ DESATIVADO (REATIVAÇÃO SENDO ANALISADA)
          - mainPageDiscounts - Sem alterações
          - mainPageBenefits - Sem alterações
-   - BestDealSection
-      -> 
+   - BestDealSection - OK
    - Compartilhado
       -> ProductPageModal - OK
          -ProductModalSlider - OK
@@ -82,18 +81,12 @@ FASE 1 - Melhorias estruturais e funcionais:
       
 
    - Ajustes pontuais:
-      -> (BUG) O terceiro produto da lista do Cart está sempre retornando NaN no preço - aparentemente, depois de criar CartList o NaN ocorre com o primeiro produto
       -> (MELHORIA) Considerar habilitar o header da galeria da home no mobile. Caso isso aconteça, criar um componente para compartilhar a lógica dos header mobile e desk
       -> (BUG): Scroll de show more/less parece funcionar bem somente em telas com 1366px, telas maiores o cálculo não parece estar correto - OBS.: A função foi removida de 'Products' e convertida no hook 'useSetPageTop'. Corrigir o bug e analisar possíveis melhorias no código.
-      -> (MELHORIA): Botão para limpar busca
-      -> (MELHORIA): Corrigir url para que na pdp o id só apareça no parâmetro:
-         - Talvez substituir o id que não é parâmetro pelo nome do produto
       -> (BUG/MELHORIA): Na PDP, inicialmente imagens é undefined, o que faz com que por uma fração de segundos apareçam as imagens quebradas:
          - Buscar uma maneira de corrigir isso, inicialmente tentar reverter o erro, caso não seja possível, inserir um loader até as imagens serem válidas.
       -> (MELHORIA): Inserir estoque no objeto de productsData e passar o 'max' que está sendo recebido nos componentes de quantidade dos produtos para o valor do estoque.
       -> (MELHORIA): Quando chegar no checkout analisar se é possível atualizar o valor do input diretamente de QtySelectorInput sem ter que ficar passando uma função callback como props
-      -> (BUG): Na galeria no mobile na home, quando se clica no olho para abrir o modal se direciona para a categorias logo após a ação de abrir o modal
-      -> (MELHORIA): Adicionar mensagem de erro na PDP para alertar que é necessário selecionar uma cor antes de adicionar o produto no carrinho
       -> (MELHORIA): Passar finalPrice para o redux
       -> (MELHORIA): No ProgressBar o componente é renderizado sem para em decorrência da atualização constante dos bullets e da movimentação dos círculos:
          - Na fase de renderização analisar se é possível contornar isso e diminui a constância de renderização
@@ -105,7 +98,7 @@ FASE 1 - Melhorias estruturais e funcionais:
 
 
       *****PRÓXIMOS NA FILA****  
-      -> Refatorar lógica do ColorSelect
+      -> (MELHORIA): Adicionar mensagem de erro na PDP para alertar que é necessário selecionar uma cor antes de adicionar o produto no carrinho
 
 
 
@@ -120,6 +113,7 @@ FASE 1 - Melhorias estruturais e funcionais:
          => MOTIVO: Está sendo passado só em um nível após atualizações
       -> (MELHORIAS): Analisar a possibilidade e a utilidade de se criar um hook para os bullets de cores
       -> (MELHORIA) Ver se é possível transformar o slider da pdp e o do modal dos produtos em um único componente
+      -> (MELHORIA): Botão para limpar busca
 
 
 
@@ -158,6 +152,11 @@ FASE 1 - Melhorias estruturais e funcionais:
       -> (BUG): Quando se altera a quantidade de produtos e vai do checkout pra pdp e vice-versa o dropdown de quantidade fica com erro - OK
       -> (BUG): Preço total do checkout não atualizando quando se remove produtos do carrinho - OK
       -> (BUG): Só o primeiro produto do carrinho está tendo a quantidade exibida - OK
+      -> (BUG) O terceiro produto da lista do Cart está sempre retornando NaN no preço - aparentemente, depois de criar CartList o NaN ocorre com o primeiro produto - OK
+         - Não consegui reproduzir novamente. Acredito que tenha sido resolvido por consequência de outras alterações.
+      -> (BUG): Na galeria da home, quando se clica no olho para abrir o modal se direciona para a categorias logo após a ação de abrir o modal - OK
+      -> (MELHORIA): Corrigir url para que na pdp o id só apareça no parâmetro: - OK
+         - Talvez substituir o id que não é parâmetro pelo nome do produto
    
 
    3.1- Analisar warnings no terminal
