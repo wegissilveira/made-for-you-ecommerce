@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react"
-import classes from './ProductInfoBody.module.css'
+import classes from './ProductInfoBody.module.scss'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
