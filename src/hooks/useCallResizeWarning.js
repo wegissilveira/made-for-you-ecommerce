@@ -11,12 +11,15 @@ const useCallResizeWarning = (filterRef, containerRef, filterOpen) => {
    const containerHeightHandler = (cHeight = containerHeight, fHeight = filter_height, open = filterOpen, addRow) => {
       let height
       if (addRow) {
+         console.log('ENTROU 1');
          height = addRow[0] === 'more' ? containerHeight + addRow[1] : containerHeight - addRow[1]
       } else {
+         console.log('ENTROU 2');
          height = open ? containerHeight + fHeight : cHeight - fHeight
       }
 
       setContainerHeight(height)
+      console.log('HEIGHT WARNING: ', height);
    }
 
    const callResizeAlert = () => {// alert('Atualize a página para que todos os componentes se ajustem às novas dimensões. Essa mensagem não aparecerá novamente nesta sessão.')

@@ -96,11 +96,14 @@ FASE 1 - Melhorias estruturais e funcionais:
 
 
       *****PRÓXIMOS NA FILA****  
-      -> (BUG): Scroll de show more/less parece funcionar bem somente em telas com 1366px, telas maiores o cálculo não parece estar correto - OBS.: A função foi removida de 'Products' e convertida no hook 'useSetPageTop'. Corrigir o bug e analisar possíveis melhorias no código.
 
 
 
       *****EM EXECUÇÃO****
+      -> build useContainerHeight hook para remover o containerHeightHandler do hook useCallResizeWarning, já que não faz sentido ele está ali.
+         - O problema no momento é que o valor que está sendo setado no hook não é o valor atualizado, mas sim o anterior
+         - É necessário chamar a função inicialmente após o elemento ter sido totalmente renderizado
+         - Como está o height inicial é setado baseado no componente antes de ser construído, o que gera um valor muito menor.
 
 
 
@@ -159,6 +162,7 @@ FASE 1 - Melhorias estruturais e funcionais:
       -> (MELHORIA): Adicionar mensagem de erro na PDP para alertar que é necessário selecionar uma cor antes de adicionar o produto no carrinho - OK
       -> (BUG/MELHORIA): Na PDP, inicialmente imagens é undefined, o que faz com que por uma fração de segundos apareçam as imagens quebradas:
          - Buscar uma maneira de corrigir isso, inicialmente tentar reverter o erro, caso não seja possível, inserir um loader até as imagens serem válidas - OK
+      -> (BUG): Scroll de show more/less parece funcionar bem somente em telas com 1366px, telas maiores o cálculo não parece estar correto - OBS.: A função foi removida de 'Products' e convertida no hook 'useSetPageTop'. Corrigir o bug e analisar possíveis melhorias no código. - OK
    
 
    3.1- Analisar warnings no terminal

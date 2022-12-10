@@ -1,14 +1,25 @@
 import React from 'react'
-
 import classes from './LoadMoreProducts.module.css'
+
+import useSetPageTop from 'hooks/useSetPageTop'
+import useContainerHeight from 'hooks/useSetContainerHeight'
+
 
 const LoadMoreProducts = (props) => {
    const {
       products,
       count,
       pageLimit,
-      setProductsPageHandlerCB
+      setProductsPageHandler
    } = props
+
+   useSetPageTop(count)
+   const { setContainerHeight } = useContainerHeight()
+
+   const set = action => {
+      setContainerHeight(action)
+      setProductsPageHandler(action)
+   }
 
    return (
       <div className={classes.Products_show_container}>
@@ -17,7 +28,8 @@ const LoadMoreProducts = (props) => {
                <button
                   disabled={count >= products.length}
                   type="button"
-                  onClick={() => setProductsPageHandlerCB('more')}
+                  // onClick={() => setProductsPageHandler('more')}
+                  onClick={() => set('more')}
                > SHOW MORE
                </button>
             </div>
@@ -27,7 +39,7 @@ const LoadMoreProducts = (props) => {
                <button
                   disabled={count <= pageLimit || products.length <= pageLimit}
                   type="button"
-                  onClick={() => setProductsPageHandlerCB('less')}
+                  onClick={() => setProductsPageHandler('less')}
                > SHOW LESS
                </button>
             </div>

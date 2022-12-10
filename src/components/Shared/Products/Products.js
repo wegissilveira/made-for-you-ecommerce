@@ -1,10 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
-
 import classes from './Products.module.css'
 
 import { useParams } from 'react-router-dom'
-
-import useSetPageTop from 'hooks/useSetPageTop'
 
 import productsData from 'Data/productsData'
 import LoadMoreProducts from './LoadMoreProducts/LoadMoreProducts'
@@ -12,22 +9,21 @@ import ProductsGallery from './ProductsGallery/ProductsGallery'
 import CategoryHeader from './CategoryHeader/CategoryHeader'
 
 
+const _ = undefined
 const Products = props => {
    const {
       productsProps,
-      containerHeight, // Função recebida de 'Filter' que seta a altura do filtro. Usado para setar a altura dinamicamente em caso do filtro estar aberto ou fechado
-      isFilterOpen, // Complemento da função de cima - identificar exatamente o que faz, mas acredito que altera a altura da janela para subir ou descer e garantir que os botão de load more estejam sempre no bottom da janela.
+      containerHeightFN, // Função recebida de 'Filter' que seta a altura do filtro. Usado para setar a altura dinamicamente em caso do filtro estar aberto ou fechado
       pageLimit = 8
    } = props
    
    const [productsState, setProductsState] = useState([])
    const [pageLimitState, setPageLimit] = useState(0)
    const [galleryClass, setGalleryClass] = useState('ProductsContainer')
+   const [count, setCount] = useState(0)
 
-   const productsContainerRef = useRef()
    const productsSubContainerRef = useRef()
 
-   const { setProductsPageHandler, setCount, count } = useSetPageTop()
    const params = useParams()
 
    const mountProducts = (urlArg) => {      
@@ -51,6 +47,35 @@ const Products = props => {
       setProductsState(products)
    }
 
+   const setGalleryHeightHandler = action => {
+      const containerEl = document.getElementById('gallery-container')
+      const productCardStyle = window.getComputedStyle(containerEl.children[0].children[0])
+      const productCardHeight = parseInt((productCardStyle.height).match(/\d+/)[0])
+      const productCardMarginTop = parseInt((productCardStyle.marginTop).match(/\d+/)[0])
+      const productCardFullHeight = productCardHeight + productCardMarginTop
+
+      if (containerHeightFN) {
+         containerHeightFN(_, _, _, [action, productCardFullHeight + 20])
+      }
+   }
+
+   const setPageProductsQtyHandler = (action, subContainer) => {  
+      const subContainerEl = subContainer.current
+      const subContainerWidth = Number((window.getComputedStyle(subContainerEl).inlineSize).replace(/[^0-9.]+/g, ""))
+      const productCardWidth = Number((window.getComputedStyle(subContainerEl.children[0]).inlineSize).replace(/[^0-9.]+/g, ""))
+      const itemsPerRow = Math.floor(subContainerWidth / productCardWidth)
+
+      let newCount
+      if (action === 'more') {
+         newCount = count + itemsPerRow
+      } else {
+         newCount = count - itemsPerRow
+      }
+
+      setCount(newCount)
+      setGalleryHeightHandler(action)
+   }
+
    useEffect(() => {
       if (params.searchKey) mountProducts('searchKey')
       if (params.cat) mountProducts('cat')
@@ -69,8 +94,8 @@ const Products = props => {
 
    return (
       <div
-         ref={productsContainerRef}
          className={classes[galleryClass]}
+         id="gallery-container"
       >
          <CategoryHeader />
          <ProductsGallery 
@@ -82,7 +107,7 @@ const Products = props => {
             products={productsProps || productsState}
             count={count}
             pageLimit={pageLimitState}
-            setProductsPageHandlerCB={(action) => setProductsPageHandler(action, productsContainerRef, productsSubContainerRef, containerHeight, isFilterOpen)}
+            setProductsPageHandler={(action) => setPageProductsQtyHandler(action, productsSubContainerRef)}
          />
       </div>
    )
