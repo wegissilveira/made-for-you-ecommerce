@@ -4,7 +4,6 @@ import classes from './Filter.module.css'
 import { FilterDataContext } from './context/FilterContext'
 
 import useCallResizeWarning from 'hooks/useCallResizeWarning'
-import useContainerHeight from 'hooks/useSetContainerHeight'
 
 import Toastify from 'components/Shared/UI/Toastify/Toastify'
 import Products from 'components/Shared/Products/Products'
@@ -37,10 +36,6 @@ const Filter = () => {
       openToastify,
       containerHeight
    } = useCallResizeWarning(filterRef, containerRef, filterOpen)
-
-   const { setContainerHeight, height } = useContainerHeight()
-
-   // console.log('HEIGHT HOOK: ', height);
 
    const translateFilter = {
       transform: `translateY(${translateValueState}px)`,

@@ -154,7 +154,7 @@ const PriceSlider = () => {
                ></span>
                <span
                   id="right-thumb"
-                  ref={thumb_2_Ref}s
+                  ref={thumb_2_Ref}
                   onPointerDown={e => beginSliding(e)}
                   onPointerUp={e => stopSliding(e)}
                ></span>

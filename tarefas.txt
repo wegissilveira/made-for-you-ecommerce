@@ -100,10 +100,6 @@ FASE 1 - Melhorias estruturais e funcionais:
 
 
       *****EM EXECUÇÃO****
-      -> build useContainerHeight hook para remover o containerHeightHandler do hook useCallResizeWarning, já que não faz sentido ele está ali.
-         - O problema no momento é que o valor que está sendo setado no hook não é o valor atualizado, mas sim o anterior
-         - É necessário chamar a função inicialmente após o elemento ter sido totalmente renderizado
-         - Como está o height inicial é setado baseado no componente antes de ser construído, o que gera um valor muito menor.
 
 
 
@@ -116,6 +112,7 @@ FASE 1 - Melhorias estruturais e funcionais:
       -> (MELHORIA) Ver se é possível transformar o slider da pdp e o do modal dos produtos em um único componente
       -> (MELHORIA): Botão para limpar busca
       -> (MELHORIA): Inserir estoque no objeto de productsData e passar o 'max' que está sendo recebido nos componentes de quantidade dos produtos para o valor do estoque.
+      -> build useContainerHeight hook para remover o containerHeightHandler do hook useCallResizeWarning, já que não faz sentido ele está ali. - MOTIVO => Não vale o esforço no momento.
 
 
 
