@@ -6,10 +6,9 @@ import { mountProducts } from "helpers/functions"
 import Products from 'components/Shared/Products/Products'
 import productsData from 'Data/productsData'
 import MainPageProductsHeader from './MainPageProductsHeader/MainPageProductsHeader'
-import MainPageProductsHeaderMobile from './MainPageProductsHeaderMobile/MainPageProductsHeaderMobile'
 
 
-const MainPageProducts = props => {
+const MainPageProducts = () => {
    const [tag, setTag] = useState('all-products')
    const [products, setProducts] = useState([])
    const [pageLimit, setPageLimit] = useState(8)
@@ -41,10 +40,6 @@ const MainPageProducts = props => {
          <p>Select a category using special switches or go to the section with a convenient filter by product</p>
          <MainPageProductsHeader 
             setTagCB={(tag) => setTag(tag)}
-         />
-         <MainPageProductsHeaderMobile 
-            setTagCB={(tag) => setTag(tag)}
-            tag={tag}
          />
          <Products
             productsProps={products}

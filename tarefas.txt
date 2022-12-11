@@ -80,29 +80,7 @@ FASE 1 - Melhorias estruturais e funcionais:
       -> Toastify - OK
       
 
-   - Ajustes pontuais:
-      -> (MELHORIA): Passar finalPrice para o redux - Na devida etapa
-      -> (MELHORIA): No ProgressBar o componente é renderizado sem para em decorrência da atualização constante dos bullets e da movimentação dos círculos:
-         - Na fase de renderização analisar se é possível contornar isso e diminui a constância de renderização
-
-      -> (MELHORIA) Considerar habilitar o header da galeria da home no mobile. Caso isso aconteça, criar um componente para compartilhar a lógica dos header mobile e desk
-      -> (MELHORIA): Quando chegar no checkout analisar se é possível atualizar o valor do input diretamente de QtySelectorInput sem ter que ficar passando uma função callback como props      
-
-      
-
-
-      *****APÓS REFATORAMENTO*****
-      
-
-
-      *****PRÓXIMOS NA FILA****  
-
-
-
-      *****EM EXECUÇÃO****
-
-
-
+   - Ajustes pontuais: - OK  
       *****ABORTADOS****      
       -> (MELHORIA): Buscar uma maneira de melhorar a chamada de toggleQtySelectMobileHandler em ProductQtyMobile para que não seja necessário ficar passando a função como callback:
          - Talvez inserir a função em um helper ou criar um hook para fazer o toggle do modal
@@ -112,7 +90,8 @@ FASE 1 - Melhorias estruturais e funcionais:
       -> (MELHORIA) Ver se é possível transformar o slider da pdp e o do modal dos produtos em um único componente
       -> (MELHORIA): Botão para limpar busca
       -> (MELHORIA): Inserir estoque no objeto de productsData e passar o 'max' que está sendo recebido nos componentes de quantidade dos produtos para o valor do estoque.
-      -> build useContainerHeight hook para remover o containerHeightHandler do hook useCallResizeWarning, já que não faz sentido ele está ali. - MOTIVO => Não vale o esforço no momento.
+      -> (MELHORIA): build useContainerHeight hook para remover o containerHeightHandler do hook useCallResizeWarning, já que não faz sentido ele está ali. - MOTIVO => Não vale o esforço no momento.
+      -> (MELHORIA) Considerar habilitar o header da galeria da home no mobile. Caso isso aconteça, criar um componente para compartilhar a lógica dos header mobile e desk
 
 
 
@@ -162,15 +141,70 @@ FASE 1 - Melhorias estruturais e funcionais:
       -> (BUG): Scroll de show more/less parece funcionar bem somente em telas com 1366px, telas maiores o cálculo não parece estar correto - OBS.: A função foi removida de 'Products' e convertida no hook 'useSetPageTop'. Corrigir o bug e analisar possíveis melhorias no código. - OK
    
 
-   3.1- Analisar warnings no terminal
+   3.1- Analisar warnings no terminal - OK
 
 4- Analisar Redux e identificar melhorias, tanto na store quanto nos componentes
-   3.1- Analisar distribuição de props para identificar os pontos desnecessários que possam ser substituídos pelo contexto do redux
+   4.1- Analisar distribuição de props para identificar os pontos desnecessários que possam ser substituídos pelo contexto do redux
+
+      - Ajustes pontuais:
+      -> (MELHORIA): Passar finalPrice para o redux - Na devida etapa
+      -> (MELHORIA): Quando chegar no checkout analisar se é possível atualizar o valor do input diretamente de QtySelectorInput sem ter que ficar passando uma função callback como props:
+         - O valor está sendo passado para 'trás' como callback, pois é necessário que a state em 'Cart' seja atualizada para a alteração do valor do preço total.
+         - Ficará para a etapa do redux junto com a melhoria do finalPrice. Caso o finalPrice seja movido para uma state global, provavelmente os callbacks e props serão removidos automaticamente.
+      
+
+
+      *****APÓS REFATORAMENTO*****
+      
+
+
+      *****PRÓXIMOS NA FILA****  
+
+
+
+      *****EM EXECUÇÃO**** 
+
+
+
+      *****ABORTADOS****  
+
+
+
+      *****FEITOS*****
+
+
+
 
 5- Análise e correção de renderizações desnecessárias
    -> O update dos valores dos skus e quantidade da pdp atualiza states a cada alteração (mudei para um reducer) e a cada mudança de valor o componente pai (ProductInfoBody), que é o responsável pelo gerenciamento dos valores é renderizado. Eu quero que ele seja atualizado somente quando a requisição (localStorage) é realizada, talvez nem nesse caso, e não a cada alteração de valor. Eu poderia setar um valor no elemento, mas no caso da quantidade não é possível, já que o valor é criado com uma state. Buscar uma maneira de fazer isso. 
+   
 
 6- Estudar os hooks, tanto documentação quanto o curso referência da lista de estudos, antes de fechar esta fase. O intuito é identificar se há alguma melhoria que possa ser feita usando os hooks que ainda não tenho conhecimento.
+
+   - Ajustes pontuais:
+      -> (MELHORIA): No ProgressBar o componente é renderizado sem para em decorrência da atualização constante dos bullets e da movimentação dos círculos:
+         - Na fase de renderização analisar se é possível contornar isso e diminui a constância de renderização    
+
+      
+
+
+      *****APÓS REFATORAMENTO*****
+      
+
+
+      *****PRÓXIMOS NA FILA****  
+
+
+
+      *****EM EXECUÇÃO**** 
+
+
+
+      *****ABORTADOS****  
+
+
+
+      *****FEITOS*****
 
 
 EXTRAS: 
