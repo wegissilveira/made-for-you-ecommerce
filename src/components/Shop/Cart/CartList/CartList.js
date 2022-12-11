@@ -6,22 +6,12 @@ import ProductCartTable from "./ProductCartTable/ProductCartTable"
 import KeepBuyingBtn from "../KeepBuyingBtn/KeepBuyingBtn"
 
 
-const CartList = props => {
-   const {
-      productsCartDetails,
-      setQtdeHandlerCB,
-      finalPrice
-   } = props
-
-
+const CartList = () => {
    return (
       <div className={classes.Cart_container}>
-         <ProductCartTable 
-            productsCartDetails={productsCartDetails}
-            setQtdeHandlerCB={setQtdeHandlerCB}
-         />
+         <ProductCartTable />
          <KeepBuyingBtn btnText={'KEEP BUYING'} />
-         <CartForm finalPrice={finalPrice} />
+         <CartForm />
       </div>
    )
 }

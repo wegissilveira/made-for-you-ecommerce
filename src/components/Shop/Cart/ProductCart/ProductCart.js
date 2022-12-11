@@ -16,16 +16,21 @@ import ProductCartDetails from './ProductCartDetails/ProductCartDetails'
 const ProductCart = props => {
    const {
       product,
-      setQtdeCallback,
       onCartListState,
-      cart
+      onUpdateCartValueState,
+      cart,
+      totalCartValue
    } = props
-
+   
    const [productQty, setQty] = useState(1)
 
-   const setQtdeHandler = value => {
+   const setQtdeHandler = (value, action) => {
+      const newCartValue = action === 'increase' ? 
+         totalCartValue + parseFloat(product.price) :
+         totalCartValue - parseFloat(product.price)
+
+      onUpdateCartValueState(newCartValue)
       setQty(value)
-      setQtdeCallback(value, product._id)
    }
 
    const removeProductCart = id => {
@@ -78,7 +83,8 @@ const ProductCart = props => {
 
 const mapStateToProps = state => {
    return {
-      cart: state.cartListState
+      cart: state.cartListState,
+      totalCartValue: state.totalCartValue
    }
 }
 
@@ -87,6 +93,10 @@ const mapDispatchToProps = dispatch => {
       onCartListState: () => dispatch({
          type: actionTypes.CARTLIST,
          value: cartListDataFn()
+      }),
+      onUpdateCartValueState: newValue => dispatch({
+         type: actionTypes.UPDATE_FINAL_VALUE,
+         value: newValue
       })
    }
 }

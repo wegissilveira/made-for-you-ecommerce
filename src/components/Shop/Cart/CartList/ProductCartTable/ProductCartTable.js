@@ -1,14 +1,14 @@
 import React from 'react'
 import classes from './ProductCartTable.module.scss'
 
+import { connect } from 'react-redux'
+
 import ProductCart from 'components/Shop/Cart/ProductCart/ProductCart'
 
 
 const ProductCartTable = props => {
    const {
-      productsCartDetails,
-      setQtdeHandlerCB,
-      removeProductCartHandlerCB
+      cart
    } = props
 
    return (
@@ -25,13 +25,10 @@ const ProductCartTable = props => {
          </thead>
          <tbody>
             {
-               productsCartDetails.map((product, i) => {
+               cart.map((product, i) => {
                   return <ProductCart
-                     key={i}
+                     key={product+'-'+i}
                      product={product}
-                     prodIndex={i}
-                     setQtdeCallback={setQtdeHandlerCB}
-                     removeProductCallback={id => removeProductCartHandlerCB(id)}
                   />
                })
             }
@@ -40,4 +37,10 @@ const ProductCartTable = props => {
    )
 }
 
-export default ProductCartTable
+const mapStateToProps = state => {
+   return {
+      cart: state.cartListState
+   }
+}
+
+export default connect(mapStateToProps)(ProductCartTable)

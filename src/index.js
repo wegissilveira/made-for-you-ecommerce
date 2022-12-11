@@ -4,14 +4,24 @@ import ReactDOM from 'react-dom';
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 
-import './index.css';
-// import 'bootstrap/dist/css/bootstrap.min.css';
+import App from './App'
 
-import App from './App';
-
+import cartListDataFn from 'Data/cartData'
+import wishlistFn from 'Data/wishlistData';
+import * as actionTypes from 'store/actions/actionTypes'
 import reducer from './store/reducers/reducer'
 
 const store = createStore(reducer)
+
+store.dispatch({
+  type: actionTypes.CARTLIST,
+  value: cartListDataFn()
+})
+
+store.dispatch({
+  type: actionTypes.WISHLIST,
+  value: wishlistFn()
+})
 
 // ReactDOM.render(
 //   <React.StrictMode>

@@ -1,31 +1,33 @@
-import wishlistDataFn from '../../Data/wishlistData'
-import cartListDataFn from '../../Data/cartData'
-
 import * as actionTypes from '../actions/actionTypes'
+import { setCartTotalValue } from 'helpers/functions'
 
 const initialState = {
-    wishlistState: wishlistDataFn(),
-    cartListState: cartListDataFn()
+   wishlistState: [],
+   cartListState: [],
+   totalCartValue: 0
 }
 
 const reducer = ((state = initialState, action) => {
-
-    if (action.type === actionTypes.WISHLIST) {
-        return {
+   switch(action.type) {
+      case actionTypes.WISHLIST:
+         return {
             ...state,
             wishlistState: action.value
-        }
-    }
-
-    if (action.type === actionTypes.CARTLIST) {
-        return {
+         }
+      case actionTypes.CARTLIST:
+         return {
             ...state,
-            cartListState: action.value
-        }
-    }
-
-    return state
-}) 
-
+            cartListState: action.value,
+            totalCartValue: setCartTotalValue(action.value)
+         }
+      case actionTypes.UPDATE_FINAL_VALUE:
+         return {
+            ...state,
+            totalCartValue: action.value
+         }
+      default:
+         return state
+   }
+})
 
 export default reducer

@@ -97,3 +97,30 @@ export const formatUrlName = (str, id) => {
    const url = `/product/${str.replaceAll(/\W+/g, '-')}/?productId=${id}`
    return url
 }
+
+export const calculateTotalValue = (prodQty, cart) => {
+   let fullPrice = 0
+   cart.forEach(prod => {
+      prodQty.forEach(p => {
+         if (p.id === prod._id) {
+            fullPrice = fullPrice + (Number(p.qty) * parseFloat(prod.price))
+         } 
+      })
+   })
+
+   return fullPrice
+}
+
+export const setCartTotalValue = (cart) => {
+   // const buildQtyArr = () => {
+      const arrQty = []      
+      cart.map((item) => {
+         const productsQty = {}
+         productsQty.qty = item.qtde
+         productsQty.id = item._id
+         arrQty.push(productsQty)
+      })
+
+      return calculateTotalValue(arrQty, cart)
+   // }
+}

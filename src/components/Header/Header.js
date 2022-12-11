@@ -17,7 +17,7 @@ const Header = props => {
       cart,
       wish
    } = props
-
+   
    const [translateMenuValue, setTranslateMenuValue] = useState(-100)
 
    const mobileMenuHandler = () => {

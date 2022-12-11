@@ -1,6 +1,4 @@
-import React from 'react';
-
-import './App.css';
+import React from 'react'
 
 import Layout from './containers/Layout/Layout'
 import MainPageConfig from './containers/MainPageConfig/MainPageConfig'

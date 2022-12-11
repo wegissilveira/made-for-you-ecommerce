@@ -30,7 +30,7 @@ const ProductsQty = props => {
       if (arg === 'decrease' && productQtyState > 1) qty--
 
       if(!isCheckoutRoute) updateQty(qty, true)
-      if(isCheckoutRoute) changeQtyCallBack(qty)
+      if(isCheckoutRoute) changeQtyCallBack(qty, arg)
    }
 
    useEffect(() => {

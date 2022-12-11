@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
 import classes from './Cart.module.scss'
 
@@ -13,54 +13,11 @@ const Cart = props => {
       cart
    } = props
 
-   const [qty, setQty] = useState([])
-   const [finalPrice, setFinalPrice] = useState(0)
-
-   const setQtdeHandler = (value, prodId) => {
-      const arrQty = [...qty]
-      arrQty.forEach((prod) => {
-         if (prod.id === prodId) prod.qty = value
-      })
-      setQty(arrQty)
-   }
-
-   useEffect(() => {
-      const arrQty = []      
-      cart.map((item) => {
-         const productsQty = {}
-         productsQty.qty = item.qtde
-         productsQty.id = item._id
-         arrQty.push(productsQty)
-      })
-
-      setQty(arrQty)
-   }, [])
-
-   useEffect(() => {
-      let fullPrice = 0
-      const prodQty = [...qty]
-
-      cart.forEach(prod => {
-         prodQty.forEach(p => {
-            if (p.id === prod._id) {
-               fullPrice = fullPrice + (Number(p.qty) * parseFloat(prod.price))
-            } 
-         })
-      }) 
-
-      setFinalPrice(fullPrice)
-   }, [JSON.stringify(qty), cart])
-
-
    return (
       <div className={classes.Session_container}>
          <h1>SHOPPING BAG</h1>
          {cart.length > 0 ?
-            <CartList 
-               productsCartDetails={cart}
-               setQtdeHandlerCB={setQtdeHandler}
-               finalPrice={finalPrice}
-            />
+            <CartList />
             :
             <>
                <h1>YOUR BAG IS EMPTY</h1>
@@ -77,6 +34,5 @@ const mapStateToProps = state => {
       cart: state.cartListState
    }
 }
-
 
 export default connect(mapStateToProps)(Cart)

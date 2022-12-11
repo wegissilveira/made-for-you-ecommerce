@@ -37,6 +37,7 @@ nav {
     background-color: #fff;
     height: var(--nav-height);
     z-index: 9999;
+    top: 0;
 }
 
 .Navbar_container {

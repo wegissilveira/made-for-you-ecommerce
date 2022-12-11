@@ -1,2 +1,3 @@
 export const WISHLIST = 'WISHLIST'
 export const CARTLIST = 'CARTLIST'
+export const UPDATE_FINAL_VALUE = 'UPDATE_FINAL_VALUE'
