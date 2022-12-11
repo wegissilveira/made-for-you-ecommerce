@@ -23,14 +23,14 @@ const ProductsQty = props => {
    const { productQty } = useContext(ProductDataContext)
    const location = useLocation()
 
-   const changeQty = arg => {
+   const changeQty = action => {
       let qty = productQtyState
       
-      if (arg === 'increase' && (productQtyState < max || max === undefined)) qty++
-      if (arg === 'decrease' && productQtyState > 1) qty--
+      if (action === 'increase' && (productQtyState < max || max === undefined)) qty++
+      if (action === 'decrease' && productQtyState > 1) qty--
 
       if(!isCheckoutRoute) updateQty(qty, true)
-      if(isCheckoutRoute) changeQtyCallBack(qty, arg)
+      if(isCheckoutRoute) changeQtyCallBack(qty, action)
    }
 
    useEffect(() => {

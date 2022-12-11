@@ -27,7 +27,11 @@ const QtySelectorInput = props => {
 		const inputValue = e.target.closest('DIV').getElementsByTagName('INPUT')[0].value
       
 		if(!isCheckoutRoute) updateQty(inputValue, true)
-      if(isCheckoutRoute) changeQtyCheckoutCB(inputValue)
+      if(isCheckoutRoute) {
+         const action = productQtyState < inputValue ? 'increase' : 'decrease'
+         const newQty = action === 'decrease' ? productQtyState - inputValue : inputValue - productQtyState
+         changeQtyCheckoutCB(inputValue, action, true, newQty)
+      } 
 	}
    
    useEffect(() => {

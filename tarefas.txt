@@ -146,6 +146,11 @@ FASE 1 - Melhorias estruturais e funcionais:
 4- Analisar Redux e identificar melhorias, tanto na store quanto nos componentes
    Descrição: Analisar distribuição de props para identificar os pontos desnecessários que possam ser substituídos pelo contexto do redux
 
+   - CONTACT - Sem alterações
+   - FOOTER - Sem alterações
+   - HEADER - 
+   - CART - 
+
       - Ajustes pontuais:
       
 
@@ -159,7 +164,7 @@ FASE 1 - Melhorias estruturais e funcionais:
 
 
       *****EM EXECUÇÃO**** 
-
+      -> Criando a lógica de atualização do preço final no selector do mobile
 
 
       *****ABORTADOS****  

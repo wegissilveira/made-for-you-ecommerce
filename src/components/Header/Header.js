@@ -4,7 +4,6 @@ import classes from './Header.module.css'
 import './Header.css'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { connect } from 'react-redux'
 
 import DrawerMenu from './DrawerMenu/DrawerMenu'
 import NavigationDesk from './NavigationDesk/NavigationDesk'
@@ -12,12 +11,7 @@ import HeaderLogo from './HeaderLogo/HeaderLogo'
 import HeaderUserOptions from './HeaderUserOptions/HeaderUserOptions'
 
 
-const Header = props => {
-   const {
-      cart,
-      wish
-   } = props
-   
+const Header = props => {   
    const [translateMenuValue, setTranslateMenuValue] = useState(-100)
 
    const mobileMenuHandler = () => {
@@ -32,16 +26,12 @@ const Header = props => {
       }
    }
 
-
    return (
       <nav>
          <div className={classes.Navbar_container}>
             <NavigationDesk />
             <HeaderLogo />
-            <HeaderUserOptions
-               cart={cart}
-               wish={wish}
-            />
+            <HeaderUserOptions />
          </div>
          <FontAwesomeIcon
             onClick={mobileMenuHandler}
@@ -56,12 +46,4 @@ const Header = props => {
    )
 }
 
-const mapStateToProps = state => {
-   return {
-      wish: state.wishlistState,
-      cart: state.cartListState
-   }
-}
-
-
-export default connect(mapStateToProps)(Header)
+export default Header

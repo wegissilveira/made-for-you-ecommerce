@@ -24,13 +24,14 @@ const ProductCart = props => {
    
    const [productQty, setQty] = useState(1)
 
-   const setQtdeHandler = (value, action) => {
+   const setQtdeHandler = (newQty, action, mobile, qtyMobile) => {
+      const currentQty = mobile ? qtyMobile : 1
       const newCartValue = action === 'increase' ? 
-         totalCartValue + parseFloat(product.price) :
-         totalCartValue - parseFloat(product.price)
+         totalCartValue + (parseFloat(product.price) * currentQty) :
+         totalCartValue - (parseFloat(product.price) * currentQty)
 
       onUpdateCartValueState(newCartValue)
-      setQty(value)
+      setQty(newQty)
    }
 
    const removeProductCart = id => {

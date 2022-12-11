@@ -3,6 +3,7 @@ import classes from './HeaderUserOptions.module.css'
 
 import { NavLink } from 'react-router-dom'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { connect } from 'react-redux'
 
 import SearchComponent from "../SearchComponent/SearchComponent"
 
@@ -54,4 +55,12 @@ const HeaderUserOptions = (props) => {
    )
 }
 
-export default HeaderUserOptions
+const mapStateToProps = state => {
+   return {
+      wish: state.wishlistState,
+      cart: state.cartListState
+   }
+}
+
+
+export default connect(mapStateToProps)(HeaderUserOptions)
