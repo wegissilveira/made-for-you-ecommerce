@@ -143,13 +143,16 @@ FASE 1 - Melhorias estruturais e funcionais:
 
    3.1- Analisar warnings no terminal - OK
 
-4- Analisar Redux e identificar melhorias, tanto na store quanto nos componentes
+4- Analisar Redux e identificar melhorias, tanto na store quanto nos componentes - OK
    Descrição: Analisar distribuição de props para identificar os pontos desnecessários que possam ser substituídos pelo contexto do redux
 
    - CONTACT - Sem alterações
    - FOOTER - Sem alterações
-   - HEADER - 
-   - CART - 
+   - HEADER - OK
+   - CART - OK
+   - MainPage - Sem alterações
+   - SHARED - Sem alterações
+   - SHOP - Sem alterações 
 
       - Ajustes pontuais:
       
@@ -164,7 +167,7 @@ FASE 1 - Melhorias estruturais e funcionais:
 
 
       *****EM EXECUÇÃO**** 
-      -> Criando a lógica de atualização do preço final no selector do mobile
+      
 
 
       *****ABORTADOS****  
@@ -175,6 +178,7 @@ FASE 1 - Melhorias estruturais e funcionais:
       -> Setar valor inicial das states de wishlist e cart com um dispatch - OK 
       -> (MELHORIA): Passar finalPrice para o redux - OK
       -> (MELHORIA): Quando chegar no checkout analisar se é possível atualizar o valor do input diretamente de QtySelectorInput sem ter que ficar passando uma função callback como props - OK
+      -> Criando a lógica de atualização do preço final no selector do mobile - OK
 
 
 
@@ -185,6 +189,10 @@ FASE 1 - Melhorias estruturais e funcionais:
       - Ajustes pontuais:
       -> (MELHORIA): No ProgressBar o componente é renderizado sem para em decorrência da atualização constante dos bullets e da movimentação dos círculos:
          - Na fase de renderização analisar se é possível contornar isso e diminui a constância de renderização    
+      -> No checkout HeaderUserOptions é renderizado quando se excluí um produto do carrinho. Entender o porquê e analisar uma maneira de prevenir isso
+      -> Na PDP todas as ações renderizam várias partes, incluindo o HeaderUserOptions
+      -> OBS.: Ações nos produtos da galeria não disparam nenhum rerender na home e em shop, no entanto em wishlist e nas páginas das categorias rerenders são disparados
+      -> OBS.: As ações que disparam rerender na PDP não disparam no modal do produto
 
       
 

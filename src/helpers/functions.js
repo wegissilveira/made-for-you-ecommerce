@@ -98,21 +98,8 @@ export const formatUrlName = (str, id) => {
    return url
 }
 
-export const calculateTotalValue = (prodQty, cart) => {
-   let fullPrice = 0
-   cart.forEach(prod => {
-      prodQty.forEach(p => {
-         if (p.id === prod._id) {
-            fullPrice = fullPrice + (Number(p.qty) * parseFloat(prod.price))
-         } 
-      })
-   })
-
-   return fullPrice
-}
-
 export const setCartTotalValue = (cart) => {
-   // const buildQtyArr = () => {
+   const buildQtyArr = () => {
       const arrQty = []      
       cart.map((item) => {
          const productsQty = {}
@@ -121,6 +108,22 @@ export const setCartTotalValue = (cart) => {
          arrQty.push(productsQty)
       })
 
-      return calculateTotalValue(arrQty, cart)
-   // }
+      return calculateTotalValue(arrQty)
+   }
+
+   const calculateTotalValue = (prodQty) => {
+      let fullPrice = 0
+
+      cart.forEach(prod => {
+         prodQty.forEach(p => {
+            if (p.id === prod._id) {
+               fullPrice = fullPrice + (Number(p.qty) * parseFloat(prod.price))
+            } 
+         })
+      })
+
+      return fullPrice
+   }
+
+   return buildQtyArr()
 }

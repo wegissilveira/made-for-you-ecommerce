@@ -1,5 +1,5 @@
 import React from 'react'
-import classes from './ProductModalInfo.module.css'
+import classes from './ProductModalInfo.module.scss'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
