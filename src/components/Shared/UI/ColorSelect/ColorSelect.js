@@ -94,4 +94,4 @@ const ColorSelect = props => {
    )
 }
 
-export default ColorSelect
+export default React.memo(ColorSelect)

@@ -69,4 +69,4 @@ const ProductQtyMobile = props => {
 	)
 }
 
-export default ProductQtyMobile
+export default React.memo(ProductQtyMobile)

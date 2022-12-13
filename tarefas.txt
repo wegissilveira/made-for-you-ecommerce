@@ -183,13 +183,12 @@ FASE 1 - Melhorias estruturais e funcionais:
 
 
 
-5- Análise e correção de renderizações desnecessárias
+5- Análise e correção de renderizações desnecessárias - Abortei a maioria. O profiler não parece funcionar bem
    -> O update dos valores dos skus e quantidade da pdp atualiza states a cada alteração (mudei para um reducer) e a cada mudança de valor o componente pai (ProductInfoBody), que é o responsável pelo gerenciamento dos valores é renderizado. Eu quero que ele seja atualizado somente quando a requisição (localStorage) é realizada, talvez nem nesse caso, e não a cada alteração de valor. Eu poderia setar um valor no elemento, mas no caso da quantidade não é possível, já que o valor é criado com uma state. Buscar uma maneira de fazer isso. 
 
       - Ajustes pontuais:
       -> (MELHORIA): No ProgressBar o componente é renderizado sem para em decorrência da atualização constante dos bullets e da movimentação dos círculos:
          - Na fase de renderização analisar se é possível contornar isso e diminui a constância de renderização    
-      -> No checkout HeaderUserOptions é renderizado quando se excluí um produto do carrinho. Entender o porquê e analisar uma maneira de prevenir isso
       -> Na PDP todas as ações renderizam várias partes, incluindo o HeaderUserOptions
       -> OBS.: Ações nos produtos da galeria não disparam nenhum rerender na home e em shop, no entanto em wishlist e nas páginas das categorias rerenders são disparados
       -> OBS.: As ações que disparam rerender na PDP não disparam no modal do produto
@@ -210,6 +209,11 @@ FASE 1 - Melhorias estruturais e funcionais:
 
 
       *****ABORTADOS****  
+      -> No checkout HeaderUserOptions é renderizado quando se excluí um produto do carrinho. Entender o porquê e analisar uma maneira de prevenir isso:
+         - Isso ocorre, pois quando eu removo um produto do carrinho a state global cart é alterada, tal state é recebida como props no componente em questão, o que o faz ser renderizado'
+         - Cart é usado para definir se há itens no carrinho ou não, caso haja o ícone é verde, caso contrário cinza
+         - Eu poderia buscar uma solução, a princípio pensei em criar uma state global que atualizaria somente quando o carrinho fosse de 0 pra 1 ou de 1 pra 0, sendo assim o componente seria renderizado somente quando tal state fosse alterada. Mas decidi que não vale o algo tão pequeno e pontual não compensa o aumento da complexidade.
+         - OBS.: O mesmo ocorre na wishlist e a mesma decisão se aplica.
 
 
 

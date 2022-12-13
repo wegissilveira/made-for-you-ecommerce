@@ -66,4 +66,4 @@ const ProductsQty = props => {
    )
 }
 
-export default ProductsQty
+export default React.memo(ProductsQty)

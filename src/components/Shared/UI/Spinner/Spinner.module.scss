@@ -3,6 +3,9 @@
 	display: flex;
 	justify-content: center;
 	margin: 50px;
+	@media (max-width: 1023px) {
+		width: unset;
+	}
 	.Spinner {
 		width: 8em;
 		height: 8em;

@@ -28,7 +28,6 @@ const SKUSizeSelector = (props) => {
       <div className={classes['SKUSelector--container']}>
          <p>Size</p>
          <select ref={selectRef} onChange={e => updateSize(e.target.value, true)}>
-         {/* <select ref={selectRef} onChange={e => setSizeHandlerCB(e.target.value, true)}> */}
             <option value="100x100">100x100 cm</option>
             <option value="200x200">200x200 cm</option>
             <option value="300x300">300x300 cm</option>
@@ -38,4 +37,4 @@ const SKUSizeSelector = (props) => {
    )
 }
 
-export default SKUSizeSelector
+export default React.memo(SKUSizeSelector)
