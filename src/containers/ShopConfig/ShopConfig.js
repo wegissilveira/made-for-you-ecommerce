@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 
 import FilterContext from 'components/Shop/Filter/context/FilterProvider'
 
@@ -9,7 +9,6 @@ import products from 'Data/productsData'
 
 
 class ShopConfig extends Component {
-
    render() {
       return (
          <div>

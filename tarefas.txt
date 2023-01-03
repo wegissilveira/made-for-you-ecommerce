@@ -229,5 +229,46 @@ EXTRAS:
 
 FASE 2 - Implementação do TypeScript - Estudar os artigos de typescript da makerevich antes de iniciar esta fase
 
+      - Header - OK
+      - Footer - OK
+      - Contact - OK
+      - MainPage:
+         - MainPageBenefits - OK
+         - MainPageDiscounts - OK
+         - MainPageProducts - OK
+         - MainPageHeader - FALTANDO MinorSliderHeader - SERÁ AJUSTADO APÓS ProgressBar 
+      - containers:
+         - ShopConfig - ALTERAR APÓS Filter
+         - MainPageConfig - OK
+         - Layout - OK
+
+      - Ajustes pontuais:
+      -> (BUG): Na PDP ícone de favoritar (coração) invertido quando o produto está ou não na lista de favoritos
+      -> (MELHORIA TIPAGEM): Buscar uma maneira de tipar as strings de imagem que possuem 'require' de maneira mais forte, para que não aceitem qualquer string
+         -> Tentar fazer o mesmo para cores
+
+
+
+      *****APÓS REFATORAMENTO*****
+
+
+
+      *****PRÓXIMOS NA FILA****  
+
+
+
+      *****EM EXECUÇÃO**** 
+
+
+
+      *****ABORTADOS****  
+
+
+
+      *****FEITOS****  
+
+
+
+
 FASE 3 - Subir para produção
    - OBS.: Alterar script de busca para versão em prod

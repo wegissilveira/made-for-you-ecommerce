@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState } from 'react'
 import classes from './MinorSliderHeader.module.css'
 
 import ProgressBar from '../../../Shared/UI/ProgressBar/ProgressBar'
