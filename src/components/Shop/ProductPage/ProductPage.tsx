@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 
 import classes from './ProductPage.module.css'
 
@@ -13,11 +13,14 @@ const ProductPage = () => {
    const [loading, setLoading] =  useState(true)
    const currentProduct = useProduct()
 
-   useEffect(() => {
-      const loaded = Object.keys(currentProduct).length >= 1 ? true : false
-      setTimeout(() => {
-         setLoading(!loaded)
-      }, 1500)
+   useEffect(() => {       
+      if (currentProduct) {
+         const loaded = Object.keys(currentProduct).length >= 1 ? true : false
+         setTimeout(() => {
+            setLoading(!loaded)
+         }, 1500)
+      }
+
    }, [currentProduct])
 
    return (
@@ -26,7 +29,7 @@ const ProductPage = () => {
             !loading
                ?
                   <>
-                     <ProductSlider imgs={currentProduct.imgsDemo} />
+                     <ProductSlider imgs={currentProduct!.imgsDemo} />
                      <ProductInfoComponent product={currentProduct} />
                   </> 
                :

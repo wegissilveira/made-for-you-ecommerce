@@ -1,20 +1,26 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import classes from './ProductSlider.module.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+import { SliderDirection } from 'common/types'
 
-const ProductSlider = props => {
+
+type Props = {
+	imgs: string[]
+}
+
+const ProductSlider = (props: Props) => {
 	const {
 		imgs
 	} = props
 
-	const [images, setImages] = useState([])
+	const [images, setImages] = useState<string[]>([])
 	const [imgSlide, setImgSlide] = useState(0)
 
-	const changeSlide = arg => {
+	const changeSlide = (action: SliderDirection | number) => {
 		let newImgSlide = imgSlide
-		if (arg === 'previous') {
+		if (action === 'previous') {
 			if (imgSlide > 0) {
 				newImgSlide = imgSlide - 1
 			} else {
@@ -22,7 +28,7 @@ const ProductSlider = props => {
 			}
 		} 
 		
-		if (arg === 'next') {
+		if (action === 'next') {
 			if (imgSlide < imgs.length - 1) {
 				newImgSlide = imgSlide + 1
 			} else {
@@ -30,8 +36,8 @@ const ProductSlider = props => {
 			}
 		} 
 		
-		if (typeof arg === 'number') {
-			newImgSlide = arg
+		if (typeof action === 'number') {
+			newImgSlide = action
 		}
 
 		setImgSlide(newImgSlide)

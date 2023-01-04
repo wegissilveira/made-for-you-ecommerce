@@ -14,17 +14,21 @@ export type InitialState = {
    totalCartValue: number
 }
 
-export type ProductsType = {
+type Offer = 'new' | 'old' | 'best-seller' | 'sales'
+type Category = 'bathroom' | 'living-room' | 'kitchen' | 'furniture' | 'bedroom' | 'children-room'
+type Tag = 'textile'| 'decorations' | 'furniture' | 'bedroom'
+
+export type ProductType = {
    _id: string 
    name: string 
    price: string
    img: string
-   tag: string
-   category: string
+   tag: Tag
+   category: Category
    imgsDemo: string[]
    colors: string[]
    deal: boolean
-   offer: string
+   offer: Offer
    slide?: [boolean, string]
 }
 

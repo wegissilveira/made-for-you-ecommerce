@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import classes from './MainPageProducts.module.css'
 
 import { mountProducts } from "helpers/functions"
-import { ProductsType } from 'common/types'
+import { ProductType } from 'common/types'
 
 import Products from 'components/Shared/Products/Products'
 import productsData from 'Data/productsData'
@@ -11,7 +11,7 @@ import MainPageProductsHeader from './MainPageProductsHeader/MainPageProductsHea
 
 const MainPageProducts = () => {
    const [tag, setTag] = useState('all-products')
-   const [products, setProducts] = useState<ProductsType[]>([])
+   const [products, setProducts] = useState<ProductType[]>([])
    const [pageLimit, setPageLimit] = useState(8)
 
    useEffect(() => {

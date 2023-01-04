@@ -1,6 +1,6 @@
-import { ProductsType } from 'common/types'
+import { ProductType } from 'common/types'
 
-const productsData: ProductsType[] = [
+const productsData: ProductType[] = [
     {
         _id: '16',
         name: 'Cottage Plaid Shower Curtain',

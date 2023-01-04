@@ -237,6 +237,7 @@ FASE 2 - Implementação do TypeScript - Estudar os artigos de typescript da mak
          - MainPageDiscounts - OK
          - MainPageProducts - OK
          - MainPageHeader - FALTANDO MinorSliderHeader - SERÁ AJUSTADO APÓS ProgressBar 
+      - ProductPage - Falta ProductInfoComponent
       - containers:
          - ShopConfig - ALTERAR APÓS Filter
          - MainPageConfig - OK
