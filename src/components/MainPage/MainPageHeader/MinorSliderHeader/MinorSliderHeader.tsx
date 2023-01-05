@@ -10,7 +10,7 @@ import MinorSlider from './MinorSlider/MinorSlider'
 const MinorSliderHeader = () => {
    const [minorSlideImg, setMinorSlideImg] = useState(0)
 
-   const changeSlideHandler = (index) => {
+   const changeSlideHandler = (index: number | string) => {
       let sliderToShow
       if (typeof index !== 'string') {
          sliderToShow = index
@@ -24,7 +24,6 @@ const MinorSliderHeader = () => {
       setMinorSlideImg(sliderToShow)
    }
 
-   // ProgressBar será avaliado separadamente por se tratar de um componente compartilhado. O mesmo ocorrerá com todos os componentes compartilhados.
    return (
       <div className={classes.Header_block_1}>
          <ProgressBar

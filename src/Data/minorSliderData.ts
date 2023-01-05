@@ -8,7 +8,7 @@ export const MinorSliderData: MinorSliderType[] = [
       name: 'Devlan Wall Art (Set of 3)',
       price: '38.99',
       bgColor: '#fad3e0',
-      cat: 'living-room/'
+      cat: 'living-room'
    },
    {
       _id: '5',

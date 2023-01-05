@@ -1,21 +1,25 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import './Wishlist.module.css'
 
 import { connect } from 'react-redux'
-import * as actionTypes from 'store/actions/actionTypes'
 
 import productsData from 'Data/productsData'
-import wishlistDataFn from 'Data/wishlistData'
+
+import { ProductType, InitialState } from 'common/types'
 
 import Products from '../../Shared/Products/Products'
 
 
-const Wishlist = (props) => {
+type Props = {
+   wish: string[]
+}
+
+const Wishlist = (props: Props) => {
    const {
       wish
    } = props
 
-   const [wishlistProducts, setWishlistProducts] = useState([])
+   const [wishlistProducts, setWishlistProducts] = useState<ProductType[]>()
 
    useEffect(() => {
       const allProducts = [...productsData]
@@ -32,16 +36,10 @@ const Wishlist = (props) => {
    )
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state: InitialState) => {
    return {
       wish: state.wishlistState
    }
 }
 
-const mapDispatchToProps = dispatch => {
-   return {
-      onWishlistState: () => dispatch({ type: actionTypes.WISHLIST, value: wishlistDataFn() })
-   }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Wishlist)
+export default connect(mapStateToProps)(Wishlist)

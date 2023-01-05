@@ -13,7 +13,7 @@ const productsData: ProductType[] = [
             require('../assets/images/ProductCard/Textile/Cortina-1/cortina-1-img-2.jpg'),
             require('../assets/images/ProductCard/Textile/Cortina-1/cortina-1-img-3.jpg'),
         ],
-        colors: ['red', 'green', 'yellow'],
+        colors: ['#FF0000', '#008000', '#FFFF00'],
         deal: false,
         offer: 'new'
     },
@@ -29,7 +29,7 @@ const productsData: ProductType[] = [
             require('../assets/images/ProductCard/Furniture/Sofa-2/sofa-2-img-2.jpg'),
             require('../assets/images/ProductCard/Furniture/Sofa-2/sofa-2-img-3.jpg'),
         ],
-        colors: ['blue', 'green', 'purple'],
+        colors: ['#0000FF', '#008000', '#800080'],
         deal: true,
         offer: 'best-seller'
     },
@@ -45,7 +45,7 @@ const productsData: ProductType[] = [
             require('../assets/images/ProductCard/Decorations/Quadro-1/quadro-1-img-2.jpg'),
             require('../assets/images/ProductCard/Decorations/Quadro-1/quadro-1-img-3.jpg'),
         ],
-        colors: ['red', 'yellow', 'purple'],
+        colors: ['#FF0000', '#FFFF00', '#800080'],
         deal: false,
         offer: 'best-seller',
         slide: [true, '#fad3e0']
@@ -62,7 +62,7 @@ const productsData: ProductType[] = [
             require('../assets/images/ProductCard/Furniture/Mesa-2/mesa-2-img-2.jpg'),
             require('../assets/images/ProductCard/Furniture/Mesa-2/mesa-2-img-3.jpg'),
         ],
-        colors: ['red', 'green', 'purple'],
+        colors: ['#FF0000', '#008000', '#800080'],
         deal: false,
         offer: 'new'
     },
@@ -78,14 +78,14 @@ const productsData: ProductType[] = [
             require('../assets/images/ProductCard/Decorations/Quadro-2/quadro-2-img-2.jpg'),
             require('../assets/images/ProductCard/Decorations/Quadro-2/quadro-2-img-3.jpg'),
         ],
-        colors: ['red', 'green', 'purple'],
+        colors: ['#FF0000', '#008000', '#800080'],
         deal: true,
         offer: 'new',
         slide: [true, 'rgb(151, 105, 105)']
     },
     {
         _id: '6',
-        name: 'Vintasso Upholstered Bed',
+        name: 'Vintasso Upholste#FF0000 Bed',
         price: '388.99',
         img: require('../assets/images/ProductCard/Furniture/cama-1/cama-1-img-1.png'),
         tag: 'furniture',
@@ -95,7 +95,7 @@ const productsData: ProductType[] = [
             require('../assets/images/ProductCard/Furniture/cama-1/cama-1-img-2.jpg'),
             require('../assets/images/ProductCard/Furniture/cama-1/cama-1-img-3.jpg'),
         ],
-        colors: ['red', 'yellow', 'purple'],
+        colors: ['#FF0000', '#FFFF00', '#800080'],
         deal: true,
         offer: 'new'
     },
@@ -111,7 +111,7 @@ const productsData: ProductType[] = [
             require('../assets/images/ProductCard/Textile/panoPrato-1/panoPrato-1-img-2.jpg'),
             require('../assets/images/ProductCard/Textile/panoPrato-1/panoPrato-1-img-3.jpg'),
         ],
-        colors: ['red', 'green', 'purple'],
+        colors: ['#FF0000', '#008000', '#800080'],
         deal: false,
         offer: 'new'
     },
@@ -127,7 +127,7 @@ const productsData: ProductType[] = [
             require('../assets/images/ProductCard/Furniture/estante-1/estante-1-img-2.jpg'),
             require('../assets/images/ProductCard/Furniture/estante-1/estante-1-img-3.jpg'),
         ],
-        colors: ['red', 'green', 'blue'],
+        colors: ['#FF0000', '#008000', '#0000FF'],
         deal: false,
         offer: 'old'
     },
@@ -143,7 +143,7 @@ const productsData: ProductType[] = [
             require('../assets/images/ProductCard/Textile/jogo-cama-infantil-1/jogo-cama-infantil-1-img-2.jpg'),
             require('../assets/images/ProductCard/Textile/jogo-cama-infantil-1/jogo-cama-infantil-1-img-3.jpg'),
         ],
-        colors: ['blue', 'green', 'purple'],
+        colors: ['#0000FF', '#008000', '#800080'],
         deal: true,
         offer: 'old'
     },
@@ -159,14 +159,14 @@ const productsData: ProductType[] = [
             require('../assets/images/ProductCard/Decorations/Luminaria-1/luminaria-1-img-2.jpg'),
             require('../assets/images/ProductCard/Decorations/Luminaria-1/luminaria-1-img-3.jpg'),
         ],
-        colors: ['red', 'green', 'purple'],
+        colors: ['#FF0000', '#008000', '#800080'],
         deal: true,
         offer: 'best-seller',
         slide: [true, '#ccc']
     },
     {
         _id: '11',
-        name: 'Aurora Brown Manufactured Wood Floor Vase',
+        name: 'Aurora Brown Manufactu#FF0000 Wood Floor Vase',
         price: '1038.99',
         img: require('../assets/images/ProductCard/Decorations/Vaso-1/vaso-1-img-1.png'),
         tag: 'decorations',
@@ -176,7 +176,7 @@ const productsData: ProductType[] = [
             require('../assets/images/ProductCard/Decorations/Vaso-1/vaso-1-img-2.jpg'),
             require('../assets/images/ProductCard/Decorations/Vaso-1/vaso-1-img-3.jpg'),
         ],
-        colors: ['red', 'green', 'purple'],
+        colors: ['#FF0000', '#008000', '#800080'],
         deal: false,
         offer: 'new',
         slide: [true, 'rgb(238, 225, 183)']
@@ -193,7 +193,7 @@ const productsData: ProductType[] = [
             require('../assets/images/ProductCard/Furniture/Gabinete-1/gabinete-1-img-2.jpg'),
             require('../assets/images/ProductCard/Furniture/Gabinete-1/gabinete-1-img-3.jpg'),
         ],
-        colors: ['red', 'blue', 'purple'],
+        colors: ['#FF0000', '#0000FF', '#800080'],
         deal: true,
         offer: 'old'
     },
@@ -209,7 +209,7 @@ const productsData: ProductType[] = [
             require('../assets/images/ProductCard/Furniture/Armario-1/armario-1-img-2.jpg'),
             require('../assets/images/ProductCard/Furniture/Armario-1/armario-1-img-3.jpg'),
         ],
-        colors: ['yellow', 'green', 'purple'],
+        colors: ['#FFFF00', '#008000', '#800080'],
         deal: false,
         offer: 'old'
     },
@@ -225,7 +225,7 @@ const productsData: ProductType[] = [
             require('../assets/images/ProductCard/Furniture/Gabinete-2/gabinete-2-img-2.jpg'),
             require('../assets/images/ProductCard/Furniture/Gabinete-2/gabinete-2-img-3.jpg'),
         ],
-        colors: ['red', 'green', 'yellow'],
+        colors: ['#FF0000', '#008000', '#FFFF00'],
         deal: true,
         offer: 'new'
     },
@@ -241,7 +241,7 @@ const productsData: ProductType[] = [
             require('../assets/images/ProductCard/Textile/Coxa-1/coxa-1-img-2.jpg'),
             require('../assets/images/ProductCard/Textile/Coxa-1/coxa-1-img-3.jpg'),
         ],
-        colors: ['red', 'green', 'purple'],
+        colors: ['#FF0000', '#008000', '#800080'],
         deal: true,
         offer: 'old'
     },
@@ -257,7 +257,7 @@ const productsData: ProductType[] = [
             require('../assets/images/ProductCard/Decorations/Espelho-1/espelho-1-img-2.jpg'),
             require('../assets/images/ProductCard/Decorations/Espelho-1/espelho-1-img-3.jpg'),
         ],
-        colors: ['red', 'green', 'purple'],
+        colors: ['#FF0000', '#008000', '#800080'],
         deal: false,
         offer: 'sales'
     },

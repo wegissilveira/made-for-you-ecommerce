@@ -18,8 +18,15 @@ import { initialValue } from "../helpers/values"
 import { connect } from 'react-redux'
 import useProduct from 'hooks/useProduct'
 
+import { Cart } from "common/types"
 
-const ProductProvider = props => {
+
+// type Props = {
+//    cart: Cart
+// }
+
+// const ProductProvider = (props: Props) => {
+const ProductProvider = (props) => {
    const {
       cart
    } = props

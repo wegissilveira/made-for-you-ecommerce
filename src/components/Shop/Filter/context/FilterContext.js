@@ -4,7 +4,7 @@ import { initialFilter } from "../helpers/values"
 export const UpdateProductsListContext = createContext({
    updateTag: () => {},
    updateCategory: () => {},
-   updateFilterColor: () => {},
+   updateFilterColor: (color) => {},
    updateOffer: () => {},
    updateOrder: () => {},
    updatePrice: () => {},

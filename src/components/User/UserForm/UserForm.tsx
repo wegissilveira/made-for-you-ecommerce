@@ -1,12 +1,19 @@
-import React from 'react'
-
 import classes from './UserForm.module.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'react-router-dom'
 
 
-const loginForm = {
+type Form = {
+   title: string 
+   inputs: string[]
+   button: string 
+   caption: string 
+   redirectLink: string
+   redirectMsg: string 
+}
+
+const loginForm: Form = {
    title: 'Log in',
    inputs: ['Email', 'Password'],
    button: 'Log in',
@@ -15,7 +22,7 @@ const loginForm = {
    redirectMsg: 'Or click here to create an account.'
 }
 
-const signUpForm = {
+const signUpForm: Form = {
    title: 'Sign up',
    inputs: ['Email', 'Password', 'Repeat Password'],
    button: 'Sign up',
@@ -24,9 +31,16 @@ const signUpForm = {
    redirectMsg: 'Already have an account? Enter here.'
 }
 
+type Props = {
+   formType: 'login' | 'signup'
+}
 
-const UserForm = props => {
-   const form = props.form === 'login' ? { ...loginForm } : { ...signUpForm }
+const UserForm = (props: Props) => {
+   const {
+      formType
+   } = props
+
+   const form: Form = formType === 'login' ? { ...loginForm } : { ...signUpForm }
 
    return (
       <div className={classes.Session_container}>

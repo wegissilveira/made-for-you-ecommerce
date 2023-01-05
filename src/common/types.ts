@@ -1,7 +1,17 @@
+type RGB = `rgb(${number}, ${number}, ${number})`
+export type HEX = `#${string}`
+export type Color = RGB | HEX
+
+type Offer = 'new' | 'old' | 'best-seller' | 'sales'
+type Category = 'bathroom' | 'living-room' | 'kitchen' | 'furniture' | 'bedroom' | 'children-room'
+type Tag = 'textile'| 'decorations' | 'furniture' | 'bedroom'
+
+export type SliderDirection = 'next' | 'previous'
+
 export type Cart = {
    _id: string
    qtde: number
-   color: string
+   color: Color
    size: string
    price: string
    prodName: string
@@ -14,10 +24,6 @@ export type InitialState = {
    totalCartValue: number
 }
 
-type Offer = 'new' | 'old' | 'best-seller' | 'sales'
-type Category = 'bathroom' | 'living-room' | 'kitchen' | 'furniture' | 'bedroom' | 'children-room'
-type Tag = 'textile'| 'decorations' | 'furniture' | 'bedroom'
-
 export type ProductType = {
    _id: string 
    name: string 
@@ -26,19 +32,17 @@ export type ProductType = {
    tag: Tag
    category: Category
    imgsDemo: string[]
-   colors: string[]
+   colors: Color[]
    deal: boolean
    offer: Offer
-   slide?: [boolean, string]
+   slide?: [boolean, Color]
 }
-
-export type SliderDirection = 'next' | 'previous'
 
 export type MainSliderType = {
    img: string
    alt: string
    linkText: string[]
-   cat: string
+   cat: Category
 }
 
 export type MinorSliderType = {
@@ -47,6 +51,6 @@ export type MinorSliderType = {
    alt: string
    name: string
    price: string
-   bgColor: string
-   cat: string
+   bgColor: Color
+   cat: Category
 }

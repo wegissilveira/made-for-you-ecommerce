@@ -236,17 +236,38 @@ FASE 2 - Implementação do TypeScript - Estudar os artigos de typescript da mak
          - MainPageBenefits - OK
          - MainPageDiscounts - OK
          - MainPageProducts - OK
-         - MainPageHeader - FALTANDO MinorSliderHeader - SERÁ AJUSTADO APÓS ProgressBar 
+         - MainPageHeader - OK
+         - MainPageShopByRoom - OK
       - ProductPage - Falta ProductInfoComponent
+      - User - OK
+      - UI:
+         - ColorSelect
+         - ProductQtyMobile
+         - ProductsQty
+         - ProgressBar
+         - Spinner
+         - Toastify
+
       - containers:
          - ShopConfig - ALTERAR APÓS Filter
          - MainPageConfig - OK
          - Layout - OK
+      - hooks:
+         - useCallResizeWarning - ALTERAR APÓS Filter
+         - useProduct - OK
+         - useSetPageTop - OK
+
+
 
       - Ajustes pontuais:
       -> (BUG): Na PDP ícone de favoritar (coração) invertido quando o produto está ou não na lista de favoritos
-      -> (MELHORIA TIPAGEM): Buscar uma maneira de tipar as strings de imagem que possuem 'require' de maneira mais forte, para que não aceitem qualquer string
-         -> Tentar fazer o mesmo para cores
+      -> (MELHORIA): Inserir o tipo Color onde for necessário
+      -> (MELHORIA): Passar as cores do filtro para ColorSelect como props
+      -> (BUG): Analisar erro de websocked failed e key is not a prop
+      -> (BUG): Converter color HEX para texto na exibição no carrinho (e em qualquer outro lugar que precise)
+         - Parece que não há uma maneira nativa, é necessário usar uma lista e comparar
+         - https://github.com/bahamas10/css-color-names/blob/master/css-color-names.json
+         - https://stackoverflow.com/questions/69141635/how-to-convert-rgb-color-to-color-name-string-in-javascript
 
 
 
@@ -263,11 +284,13 @@ FASE 2 - Implementação do TypeScript - Estudar os artigos de typescript da mak
 
 
       *****ABORTADOS****  
+      -> (MELHORIA TIPAGEM): Buscar uma maneira de tipar as strings de imagem que possuem 'require' de maneira mais forte, para que não aceitem qualquer string
+         -> OBS.: Não parece ser possível para imagens. Daria pra fazer em 'runtime', mas isso não me entrega o que eu busco, que é o TS pontuando a falha.
 
 
 
       *****FEITOS****  
-
+      -> (MELHORIA TIPAGEM): Criar tipagem de cores
 
 
 

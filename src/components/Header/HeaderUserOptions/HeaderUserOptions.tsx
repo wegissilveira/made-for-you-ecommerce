@@ -8,11 +8,11 @@ import { Cart, InitialState } from 'common/types'
 
 import SearchComponent from "../SearchComponent/SearchComponent"
 
+
 type Props = {
    cart: Cart[]
    wish: string[]
 }
-
 
 const HeaderUserOptions = (props: Props) => {
    const {
@@ -22,7 +22,6 @@ const HeaderUserOptions = (props: Props) => {
 
    const bagColor = cart.length > 0 ? 'green' : 'grey'
    const heartColor = wish.length > 0 ? 'red' : 'grey'
-
 
    return (
       <div className={classes['User-options--container']}>

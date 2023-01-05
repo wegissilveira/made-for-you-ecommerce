@@ -5,7 +5,7 @@ export const MainSliderData: MainSliderType[] = [
       img: require('assets/images/Header/MainSlider/imgSlider1-mainpage.jpg'),
       alt: 'Produto 1',
       linkText: ['LIVING ROOM DECOR COLLECTION', 'Start from $ 199.99'],
-      cat: 'living-room/'
+      cat: 'living-room'
    },
    {
       img: require('assets/images/Header/MainSlider/imgSlider2-mainpage.jpg'),
