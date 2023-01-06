@@ -241,9 +241,9 @@ FASE 2 - Implementação do TypeScript - Estudar os artigos de typescript da mak
       - ProductPage - Falta ProductInfoComponent
       - User - OK
       - UI:
-         - ColorSelect
-         - ProductQtyMobile
-         - ProductsQty
+         - ColorSelect - OK
+         - ProductQtyMobile - OK
+         - ProductsQty - OK
          - ProgressBar
          - Spinner
          - Toastify

@@ -8,6 +8,8 @@ type Tag = 'textile'| 'decorations' | 'furniture' | 'bedroom'
 
 export type SliderDirection = 'next' | 'previous'
 
+export type QtyAction = 'increase' | 'decrease'
+
 export type Cart = {
    _id: string
    qtde: number
@@ -53,4 +55,25 @@ export type MinorSliderType = {
    price: string
    bgColor: Color
    cat: Category
+}
+
+export type SetQtyDesk = {
+   mobile: false
+   newQty: number
+   action: QtyAction
+}
+
+export type SetQtyMobile = {
+   mobile: true
+   qtyMobile: number   
+   newQty: number
+   action: QtyAction
+}
+
+export type SetQty = SetQtyDesk | SetQtyMobile
+
+export interface QtyProps {
+   max: number
+   changeQtyCallBack: (qtyObj: SetQty) => void
+   productQtyCheckout: number
 }

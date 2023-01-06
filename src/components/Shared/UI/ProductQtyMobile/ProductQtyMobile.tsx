@@ -8,10 +8,14 @@ import { ProductDataContext } from "components/Shop/ProductPage/context/ProductC
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useLocation } from "react-router-dom"
 
+import { QtyProps } from 'common/types'
+
 import QtySelectorMobile from './QtySelectorMobile/QtySelectorMobile'
 
 
-const ProductQtyMobile = props => {
+interface Props extends QtyProps {}
+
+const ProductQtyMobile = (props: Props) => {
 	const {
 		max,
       changeQtyCallBack,
@@ -19,16 +23,19 @@ const ProductQtyMobile = props => {
 	} = props
 
 	const [ productQtyState, setProductQtyState ] = useState(1)
-	const [maxQty, setMaxQty] = useState([])
+	const [maxQty, setMaxQty] = useState<number[]>([] as number[])
 	const [ isCheckoutRoute, setIsCheckout ] = useState(false)
 
-	const qtyListRef = useRef()
+	const qtyListRef = useRef<HTMLDivElement>(null)
 	const { productQty } = useContext(ProductDataContext)
 	const location = useLocation()
 
 	const toggleQtySelectMobileHandler = () => {
-		const selectStatus = qtyListRef.current.style.display
-		qtyListRef.current.style.display = selectStatus === 'flex' ? 'none' : 'flex'
+		const currentRef = qtyListRef.current
+		if (currentRef) {
+			const selectStatus = currentRef.style.display
+			currentRef.style.display = selectStatus === 'flex' ? 'none' : 'flex'
+		}
 	}
 
 	useEffect(() => {
@@ -62,7 +69,7 @@ const ProductQtyMobile = props => {
 				qtyListRef={qtyListRef}
 				maxQty={maxQty}
 				toggleQtySelectMobileCB={toggleQtySelectMobileHandler}
-				changeQtyCheckoutCB={changeQtyCallBack}
+				changeQtyCallBack={changeQtyCallBack}
 				productQtyCheckout={productQtyCheckout}
 			/>
 		</div>

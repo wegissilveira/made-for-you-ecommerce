@@ -4,7 +4,7 @@ import { initialValue } from "../helpers/values"
 export const UpdateProductValuesContext = createContext({
    updateTag: () => {},
    updateSize: () => {},
-   updateQty: () => {},
+   updateQty: (qty, update) => {},
    updateColor: (color, update) => {}
 })
 

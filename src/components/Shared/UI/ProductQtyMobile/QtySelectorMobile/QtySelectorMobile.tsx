@@ -4,15 +4,22 @@ import classes from './QtySelectorMobile.module.css'
 import ReactDOM from 'react-dom'  
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+import { QtyProps } from 'common/types'
+
 import QtySelectorInput from './QtySelectorInput/QtySelectorInput'
 
+interface Props extends Omit<QtyProps, 'max'> {
+   qtyListRef: React.MutableRefObject<HTMLDivElement | null>
+   maxQty: number[]
+   toggleQtySelectMobileCB: () => void
+}
 
-const QtySelectorMobile = (props) => {
+const QtySelectorMobile = (props: Props) => {
    const {
       qtyListRef,
       maxQty,
       toggleQtySelectMobileCB,
-      changeQtyCheckoutCB,
+      changeQtyCallBack,
       productQtyCheckout
    } = props
 
@@ -34,12 +41,12 @@ const QtySelectorMobile = (props) => {
                <h2>Select Quantity</h2>
                <QtySelectorInput 
                   maxQty={maxQty}
-                  changeQtyCheckoutCB={changeQtyCheckoutCB}
+                  changeQtyCallBack={changeQtyCallBack}
                   productQtyCheckout={productQtyCheckout}
                />
             </div>
          </div>,
-         document.getElementById('qty-selector-root')
+         document.getElementById('qty-selector-root')!
       )
    )
 }

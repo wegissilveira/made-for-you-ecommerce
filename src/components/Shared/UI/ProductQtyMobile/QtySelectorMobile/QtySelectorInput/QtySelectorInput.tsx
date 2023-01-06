@@ -5,13 +5,19 @@ import { verifyCheckout } from "helpers/functions"
 
 import { UpdateProductValuesContext, ProductDataContext } from "components/Shop/ProductPage/context/ProductContext"
 
+import { QtyAction, QtyProps } from 'common/types'
+
 import { useLocation } from "react-router-dom"
 
 
-const QtySelectorInput = props => {
+interface Props extends Omit<QtyProps, 'max'> {
+   maxQty: number[]
+}
+
+const QtySelectorInput = (props: Props) => {
    const  {
       maxQty,
-      changeQtyCheckoutCB,
+      changeQtyCallBack,
       productQtyCheckout
    } = props
 
@@ -23,14 +29,23 @@ const QtySelectorInput = props => {
 
    const location = useLocation()
 
-   const changeQtyHandler = e => {
-		const inputValue = e.target.closest('DIV').getElementsByTagName('INPUT')[0].value
+   const changeQtyHandler = (e: React.MouseEvent<HTMLDivElement>) => {
+      const containerEl = e.target as HTMLDivElement
+      const inputQty = containerEl.closest('DIV')!.getElementsByTagName('INPUT')[0] as HTMLInputElement
+		const inputValue = Number(inputQty.value)
       
 		if(!isCheckoutRoute) updateQty(inputValue, true)
       if(isCheckoutRoute) {
-         const action = productQtyState < inputValue ? 'increase' : 'decrease'
+         const action: QtyAction = productQtyState < inputValue ? 'increase' : 'decrease'
          const newQty = action === 'decrease' ? productQtyState - inputValue : inputValue - productQtyState
-         changeQtyCheckoutCB(inputValue, action, true, newQty)
+         const qtyObj = {
+            newQty: inputValue,
+            action: action,
+            mobile: true,
+            qtyMobile: newQty
+         }
+
+         changeQtyCallBack(qtyObj)
       } 
 	}
    

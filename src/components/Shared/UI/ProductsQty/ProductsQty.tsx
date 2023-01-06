@@ -5,11 +5,15 @@ import { verifyCheckout } from "helpers/functions"
 
 import { UpdateProductValuesContext, ProductDataContext } from "components/Shop/ProductPage/context/ProductContext"
 
+import { QtyAction, SetQtyDesk, QtyProps } from 'common/types'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useLocation } from "react-router-dom"
 
 
-const ProductsQty = props => {
+interface Props extends QtyProps {}
+
+const ProductsQty = (props: Props) => {
    const {
       max,
       changeQtyCallBack,
@@ -23,14 +27,20 @@ const ProductsQty = props => {
    const { productQty } = useContext(ProductDataContext)
    const location = useLocation()
 
-   const changeQty = action => {
+   const changeQty = (action: QtyAction) => {
       let qty = productQtyState
       
       if (action === 'increase' && (productQtyState < max || max === undefined)) qty++
       if (action === 'decrease' && productQtyState > 1) qty--
+      
+      const qtyObj: SetQtyDesk = {
+         mobile: false,
+         newQty: qty,
+         action: action
+      }
 
       if(!isCheckoutRoute) updateQty(qty, true)
-      if(isCheckoutRoute) changeQtyCallBack(qty, action)
+      if(isCheckoutRoute) changeQtyCallBack(qtyObj)
    }
 
    useEffect(() => {
@@ -53,12 +63,12 @@ const ProductsQty = props => {
          <div className={classes.Product_qtde_arrows}>
             <FontAwesomeIcon 
                className={classes[productQtyState < max || max === undefined ? 'active' : 'disabled']}
-               onClick={productQtyState < max || max === undefined ? () => changeQty('increase') : null}
+               onClick={productQtyState < max || max === undefined ? () => changeQty('increase') : undefined}
                icon="chevron-up" size="xs"
             />
             <FontAwesomeIcon
                className={classes[productQtyState > 1 ? 'active' : 'disabled']}
-               onClick={productQtyState > 1 ? () => changeQty('decrease') : null}
+               onClick={productQtyState > 1 ? () => changeQty('decrease') : undefined}
                icon="chevron-down" size="xs"
             />
          </div>

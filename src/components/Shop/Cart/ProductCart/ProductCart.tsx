@@ -1,19 +1,30 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import classes from './ProductCart.module.scss'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import { Dispatch } from 'redux'
 import { connect } from 'react-redux'
 import * as actionTypes from 'store/actions/actionTypes'
 
 import cartListDataFn from 'Data/cartData'
+
+import { Cart, InitialState, SetQty } from 'common/types';
 
 import ProductsQty from "components/Shared/UI/ProductsQty/ProductsQty"
 import ProductQtyMobile from 'components/Shared/UI/ProductQtyMobile/ProductQtyMobile'
 import ProductCartDetails from './ProductCartDetails/ProductCartDetails'
 
 
-const ProductCart = props => {
+type Props = {
+   product: Cart
+   onCartListState: () => void
+   onUpdateCartValueState: (newValue: number) => void
+   cart: Cart[]
+   totalCartValue: number
+}
+
+const ProductCart = (props: Props) => {
    const {
       product,
       onCartListState,
@@ -24,17 +35,17 @@ const ProductCart = props => {
    
    const [productQty, setQty] = useState(1)
 
-   const setQtdeHandler = (newQty, action, mobile, qtyMobile) => {
-      const currentQty = mobile ? qtyMobile : 1
-      const newCartValue = action === 'increase' ? 
+   const setQtdeHandler = (qtyObj: SetQty) => {
+      const currentQty = qtyObj.mobile ? qtyObj.qtyMobile : 1
+      const newCartValue = qtyObj.action === 'increase' ? 
          totalCartValue + (parseFloat(product.price) * currentQty) :
          totalCartValue - (parseFloat(product.price) * currentQty)
 
       onUpdateCartValueState(newCartValue)
-      setQty(newQty)
+      setQty(qtyObj.newQty)
    }
 
-   const removeProductCart = id => {
+   const removeProductCart = (id: string) => {
       let cartList = cart.filter(item => item._id !== id)
       localStorage.setItem('cartList', JSON.stringify(cartList))
       onCartListState()
@@ -60,7 +71,6 @@ const ProductCart = props => {
             <ProductQtyMobile
                changeQtyCallBack={setQtdeHandler}
                productQtyCheckout={productQty}
-               id={product._id}
                max={8}
             />
          </td>
@@ -82,20 +92,20 @@ const ProductCart = props => {
    )
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state: InitialState) => {
    return {
       cart: state.cartListState,
       totalCartValue: state.totalCartValue
    }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch: Dispatch) => {
    return {
       onCartListState: () => dispatch({
          type: actionTypes.CARTLIST,
          value: cartListDataFn()
       }),
-      onUpdateCartValueState: newValue => dispatch({
+      onUpdateCartValueState: (newValue: number) => dispatch({
          type: actionTypes.UPDATE_FINAL_VALUE,
          value: newValue
       })
