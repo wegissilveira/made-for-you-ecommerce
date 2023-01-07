@@ -2,14 +2,14 @@ import classes from './Cart.module.scss'
 
 import { connect } from 'react-redux'
 
-import { InitialState, CartType } from 'common/types'
+import { InitialState, ProductCartType } from 'common/types'
 
 import CartList from './CartList/CartList'
 import KeepBuyingBtn from './KeepBuyingBtn/KeepBuyingBtn'
 
 
 type Props = {
-   cart: CartType[]
+   cart: ProductCartType[]
 }
 
 const Cart = (props: Props) => {

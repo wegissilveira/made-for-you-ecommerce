@@ -3,7 +3,7 @@ import classes from './ColorSelect.module.scss'
 
 import { ProductType, Color, HEX } from 'common/types'
 
-import { UpdateProductsListContext } from 'components/Shop/Filter/context/FilterContext'
+import { UpdateFilterListContext } from 'components/Shop/Filter/context/FilterContext'
 import { UpdateProductValuesContext, ProductDataContext } from "components/Shop/ProductPage/context/ProductContext"
 
 
@@ -20,8 +20,8 @@ type ColorLoad = {
 type ColorAction = ColorEl | ColorLoad
 
 type Props = {
-   product: ProductType
-   title: string
+   product?: ProductType
+   title?: string
    isFilter: boolean
 }
 
@@ -34,7 +34,7 @@ const ColorSelect = (props: Props) => {
 
    const [currentColors, setCurrentColors] = useState<Color[]>(['#FF0000', '#FFFF00', '#0000FF', '#800080', '#008000'])
    
-   const { updateFilterColor } = useContext(UpdateProductsListContext)
+   const { updateFilterColor } = useContext(UpdateFilterListContext)
    const { updateColor } = useContext(UpdateProductValuesContext)
    const { productColor } = useContext(ProductDataContext)   
 

@@ -1,12 +1,17 @@
-import React from 'react'
 import classes from './ProductCartTable.module.scss'
 
 import { connect } from 'react-redux'
 
+import { InitialState, ProductCartType } from 'common/types'
+
 import ProductCart from 'components/Shop/Cart/ProductCart/ProductCart'
 
 
-const ProductCartTable = props => {
+type Props = {
+   cart: ProductCartType[]
+}
+
+const ProductCartTable = (props: Props) => {
    const {
       cart
    } = props
@@ -37,7 +42,7 @@ const ProductCartTable = props => {
    )
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state: InitialState) => {
    return {
       cart: state.cartListState
    }

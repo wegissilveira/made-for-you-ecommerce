@@ -14,7 +14,7 @@ import {
 } from "./action-creators"
 
 import { 
-   UpdateProductsListContext,
+   UpdateFilterListContext,
    FilterDataContext
 } from "./FilterContext"
 
@@ -64,11 +64,11 @@ const FilterProvider = (props) => {
    }, [])
 
    return (
-      <UpdateProductsListContext.Provider value={updateProductsListHandler}>
+      <UpdateFilterListContext.Provider value={updateProductsListHandler}>
          <FilterDataContext.Provider value={filterReducerState}>
             {props.children}
          </FilterDataContext.Provider>
-      </UpdateProductsListContext.Provider>
+      </UpdateFilterListContext.Provider>
    )
 } 
 

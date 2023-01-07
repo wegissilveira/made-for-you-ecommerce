@@ -248,11 +248,21 @@ FASE 2 - Implementação do TypeScript - Estudar os artigos de typescript da mak
          - Spinner - OK
          - Toastify - OK
       - BestDealSection - OK
-      - Cart:
-         - CartForm
-         - CartList
-         - KeepBuyingBtn
-         - ProductCart
+      - Cart: - OK
+         - CartForm - OK
+         - CartList - OK
+         - KeepBuyingBtn - OK
+         - ProductCart - OK
+      - Filter:
+         - context
+         - FilterBody - OK
+         - FilterBottom - OK
+         - FilterCheckbox - OK
+         - FilterColorSelector - OK
+         - FilterHeader - OK
+         - helpers - OK
+         - PriceSlider - OK
+
 
       - containers:
          - ShopConfig - ALTERAR APÓS Filter

@@ -1,14 +1,14 @@
 import { createContext } from "react"
 import { initialFilter } from "../helpers/values"
 
-export const UpdateProductsListContext = createContext({
-   updateTag: () => {},
-   updateCategory: () => {},
+export const UpdateFilterListContext = createContext({
+   updateTag: (tag) => {},
+   updateCategory: (cat) => {},
    updateFilterColor: (color) => {},
-   updateOffer: () => {},
-   updateOrder: () => {},
-   updatePrice: () => {},
+   updateOffer: (offerArr) => {},
+   updateOrder: (order) => {},
+   updatePrice: (priceRange) => {},
    setDefaultValues: () => {},
 })
 
-export const FilterDataContext = createContext({filterReducerState: initialFilter})
+export const FilterDataContext = createContext(initialFilter)

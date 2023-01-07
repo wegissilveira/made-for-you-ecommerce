@@ -1,20 +1,20 @@
-import React, { useContext } from "react"
+import { useContext } from "react"
 import classes from './FilterBottom.module.css'
 
-import { UpdateProductsListContext } from "../context/FilterContext"
+import { UpdateFilterListContext } from "../context/FilterContext"
 
 const filterButtonStyle = [classes.Filter_button, classes.Filter_button_active]
 
 const FilterBottom = () => {
-   const { setDefaultValues } = useContext(UpdateProductsListContext)
+   const { setDefaultValues } = useContext(UpdateFilterListContext)
 
    const cleanFiltersHandler = () => {
-      const selectList = Array.from(document.getElementById('order-filter-wrapper').childNodes)
-      const categoriesList = Array.from(document.getElementById('categories-wrapper').childNodes)
-      const typesList = Array.from(document.getElementById('types-wrapper').childNodes)
-      const offerList = Array.from(document.getElementById('our-offers-wrapper').childNodes)
-      const colorInput = document.getElementById('all-colors-input')
-      const colorsBullets = Array.from(document.getElementById('colors-selector-bullets').childNodes)
+      const selectList = Array.from(document.getElementById('order-filter-wrapper')!.children) as HTMLOptionElement[]
+      const categoriesList = Array.from(document.getElementById('categories-wrapper')!.children) as HTMLParagraphElement[]
+      const typesList = Array.from(document.getElementById('types-wrapper')!.children) as HTMLParagraphElement[]
+      const offerList = Array.from(document.getElementById('our-offers-wrapper')!.children) as HTMLDivElement[]
+      const colorInput = document.getElementById('all-colors-input') as HTMLInputElement
+      const colorsBullets = Array.from(document.getElementById('colors-selector-bullets')!.children) as HTMLDivElement[]
       
       selectList.forEach((element, i) => {
          if (i === 0) {
@@ -24,7 +24,7 @@ const FilterBottom = () => {
          }
       })
 
-      const resetFilters = (el, i) => {
+      const resetFilters = (el: Element, i: number) => {
          if (i !== 0) i === 1 ? el.className = classes.Selected : el.className = classes.Not_Selected
       }
 
@@ -40,15 +40,15 @@ const FilterBottom = () => {
          if (element.tagName === 'DIV') {
             Array.from(element.children).forEach(el => {
                if (el.tagName === 'INPUT') {
-                  el.checked = false
+                  (el as HTMLInputElement).checked = false
                }
             })
          }
       })
 
       colorsBullets.forEach((bullet) => {
-         bullet.style.border = '1px solid black'
-         bullet.children[0].style.opacity = 0.4  
+         (bullet.children[0] as HTMLSpanElement).style.opacity = '0.4'
+         bullet.style.border = '1px solid black'         
       })
 
       colorInput.checked = false      

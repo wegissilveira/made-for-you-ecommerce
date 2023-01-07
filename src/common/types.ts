@@ -2,15 +2,16 @@ type RGB = `rgb(${number}, ${number}, ${number})`
 export type HEX = `#${string}`
 export type Color = RGB | HEX
 
-type Offer = 'new' | 'old' | 'best-seller' | 'sales'
-type Category = 'bathroom' | 'living-room' | 'kitchen' | 'furniture' | 'bedroom' | 'children-room'
-type Tag = 'textile'| 'decorations' | 'furniture' | 'bedroom'
+export type Offer = 'new' | 'old' | 'best-seller' | 'sales'
+export type Category = 'bathroom' | 'living-room' | 'kitchen' | 'furniture' | 'bedroom' | 'children-room' | 'all'
+export type Tag = 'textile'| 'decorations' | 'furniture' | 'lightning' | 'accessories' | 'all-products'
+type Order = 'default' | 'low-high' | 'high-low' | 'alphabetical'
 
 export type SliderDirection = 'next' | 'previous'
 
 export type QtyAction = 'increase' | 'decrease'
 
-export type CartType = {
+export type ProductCartType = {
    _id: string
    qtde: number
    color: Color
@@ -21,7 +22,7 @@ export type CartType = {
 }
 
 export type InitialState = {
-   cartListState: CartType[]
+   cartListState: ProductCartType[]
    wishlistState: string[]
    totalCartValue: number
 }
@@ -76,4 +77,27 @@ export type QtyProps = {
    max: number
    changeQtyCallBack: (qtyObj: SetQty) => void
    productQtyCheckout: number
+}
+
+export type OfferOptions = {
+   value: Offer
+   title: string
+} 
+
+export type FilterType = {
+   productsState: ProductType[]
+   tag: Tag
+   category: Category
+   color:  {
+      currentColor: Color
+      lastSelectedColor: Color
+   }
+   offer: Offer[]
+   order: Order
+   priceRange: {
+      minValue: number
+      maxValue: number
+   }
+   isFilterOn: boolean
+   isFilterTagOn: boolean
 }

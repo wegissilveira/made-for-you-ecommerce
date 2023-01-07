@@ -1,24 +1,26 @@
-import React, { useContext } from "react"
+import { useContext } from "react"
 import classes from './FilterBody.module.css'
 
 import productsData from 'Data/productsData'
 
-import { UpdateProductsListContext } from "../context/FilterContext"
+import { UpdateFilterListContext } from "../context/FilterContext"
+
+import { Tag, Category, OfferOptions } from "common/types"
 
 import PriceSlider from 'components/Shop/Filter/PriceSlider/PriceSlider'
 import FilterCheckbox from 'components/Shop/Filter/FilterCheckbox/FilterCheckbox'
 import FilterColorSelector from 'components/Shop/Filter/FilterColorSelector/FilterColorSelector'
 
-const checkboxItems = [
+
+const checkboxItems: OfferOptions[] = [
    {value: 'new', title: 'New Products'},
    {value: 'old', title: 'Old Products'},
    {value: 'best-seller', title: 'Best Sellers'},
    {value: 'sales', title: 'Sales'},
 ]
 
-
 const FilterBody = () => {
-   const { updateTag, updateCategory } = useContext(UpdateProductsListContext)
+   const { updateTag, updateCategory } = useContext(UpdateFilterListContext)
 
    // Categorias
    let categoriesTotalQtde = 0
@@ -81,23 +83,22 @@ const FilterBody = () => {
       }
    })
 
-   const setProductTag = (e, type, tag) => {
+   const setProductTag = (e: React.MouseEvent<HTMLParagraphElement>, type: 'cat' | 'type', tag: Category | Tag) => {
       type === 'cat' ? updateCategory(tag) : updateTag(tag)
 
-      let elementsArr = Array.from(e.target.parentNode.children)
+      const changeTagEl = e.target as HTMLDivElement
+      const elementsArr = Array.from(changeTagEl.parentNode!.children)
       elementsArr.forEach((element, i) => {
          if (i !== 0) element.className = classes.Not_Selected
       })
 
-      e.target.className = classes.Selected
+      changeTagEl.className = classes.Selected
    }
 
    return (
       <div className={classes.Filter_Blocks}>
          <div id="categories-wrapper">
             <h6>CATEGORIES</h6>
-            {/* Considerar transformar estas funções em um único componente que recebe os valores como props, talvez um array, onde o componente seria chamado uma única vez para cara filtro ou passar os valores individualmente, onde o componente seria chamado uma vez para cada item do filtro */}
-            {/* O manter várias chamadas. O certo é que esta parte será extraída para um componente separado */}
             <p className={classes.Selected} onClick={e => setProductTag(e, 'cat', 'all')}>All categories ({categoriesTotalQtde}) </p>
             <p onClick={e => setProductTag(e, 'cat', 'bedroom')}>Bedroom ({bedRoomQtde}) </p>
             <p onClick={e => setProductTag(e, 'cat', 'living-room')}>Living room ({livingRoomQtde}) </p>

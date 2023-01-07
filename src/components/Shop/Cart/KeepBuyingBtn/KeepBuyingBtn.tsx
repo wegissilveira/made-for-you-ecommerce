@@ -1,10 +1,14 @@
-import React from "react"
 import classes from './KeepBuyingBtn.module.scss'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link } from 'react-router-dom'
 
-const KeepBuyingBtn = props => {
+
+type Props = {
+   btnText: string
+}
+
+const KeepBuyingBtn = (props: Props) => {
    const {
       btnText
    } = props

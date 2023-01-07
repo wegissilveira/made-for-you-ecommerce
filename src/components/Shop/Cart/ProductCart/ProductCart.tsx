@@ -9,7 +9,7 @@ import * as actionTypes from 'store/actions/actionTypes'
 
 import cartListDataFn from 'Data/cartData'
 
-import { CartType, InitialState, SetQty } from 'common/types';
+import { ProductCartType, InitialState, SetQty } from 'common/types';
 
 import ProductsQty from "components/Shared/UI/ProductsQty/ProductsQty"
 import ProductQtyMobile from 'components/Shared/UI/ProductQtyMobile/ProductQtyMobile'
@@ -17,10 +17,10 @@ import ProductCartDetails from './ProductCartDetails/ProductCartDetails'
 
 
 type Props = {
-   product: CartType
+   product: ProductCartType
    onCartListState: () => void
    onUpdateCartValueState: (newValue: number) => void
-   cart: CartType[]
+   cart: ProductCartType[]
    totalCartValue: number
 }
 

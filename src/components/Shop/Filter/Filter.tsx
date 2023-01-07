@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from 'react'
+import { useState, useEffect, useRef, useContext } from 'react'
 import classes from './Filter.module.css'
 
 import { FilterDataContext } from './context/FilterContext'
@@ -14,7 +14,7 @@ import FilterBody from './FilterBody/FilterBody'
 
 const _ = undefined
 
-const toastifyMsg = [
+const toastifyMsg: [string, string] = [
    'Reload The Page',
    'In order for all components to adjust to the new screen dimensions, the page should be reloaded.'
 ]
@@ -22,10 +22,10 @@ const toastifyMsg = [
 const Filter = () => {
    const [pageLimit, setPageLimit] = useState(12)
    const [filterOpen, setFilterOpen] = useState(false)
-   const [translateValueState, setTranslateValue] = useState()
+   const [translateValueState, setTranslateValue] = useState(0)
 
-   const containerRef = useRef()
-   const filterRef = useRef()
+   const containerRef = useRef(null)
+   const filterRef = useRef(null)
 
    const filterReducerState = useContext(FilterDataContext)
 
@@ -40,11 +40,11 @@ const Filter = () => {
    const translateFilter = {
       transform: `translateY(${translateValueState}px)`,
       transition: '.8s ease-in-out'
-   }
+   } as const
 
    const containerStyle = {
       height: containerHeight + 'px'
-   }
+   } as const
    
    const openFilterHandler = () => {
       const open = filterOpen ? false : true
@@ -70,7 +70,6 @@ const Filter = () => {
 
    return (
       <>
-         {/* Analisar se o toastify fica aqui mesmo. Talvez seja melhor movê-lo para um portal */}
          <Toastify
             toastifyDetails={toastifyMsg}
             open={openToastify}

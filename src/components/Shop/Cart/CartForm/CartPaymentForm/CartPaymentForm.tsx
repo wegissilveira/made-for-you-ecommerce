@@ -1,13 +1,18 @@
-import React from 'react'
 import classes from './CartPaymentForm.module.scss'
 
 import { connect } from 'react-redux'
 
-const CartPaymentForm = (props) => {
+import { InitialState } from 'common/types'
+
+
+type Props = {
+   totalCartValue: number
+}
+
+const CartPaymentForm = (props: Props) => {
    const {
       totalCartValue
    } = props
-
 
    return (
       <div>
@@ -30,7 +35,7 @@ const CartPaymentForm = (props) => {
    )
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state: InitialState) => {
    return {
       totalCartValue: state.totalCartValue
    }

@@ -4,8 +4,8 @@ const useCallResizeWarning = (filterRef, containerRef, filterOpen) => {
    const [openToastify, setOpenToastify] = useState(false)
    const [resize, setResize] = useState(true)
    const [containerHeight, setContainerHeight] = useState()
-   const [translateValue, setTranslateValue] = useState()
-   const [filter_height, setFilterHeight] = useState()
+   const [translateValue, setTranslateValue] = useState(0)
+   const [filter_height, setFilterHeight] = useState(0)
 
 
    const containerHeightHandler = (cHeight = containerHeight, fHeight = filter_height, open = filterOpen, addRow) => {

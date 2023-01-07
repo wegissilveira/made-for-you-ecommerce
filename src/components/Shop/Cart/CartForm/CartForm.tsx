@@ -1,4 +1,3 @@
-import React from 'react'
 import CartCouponForm from './CartCouponForm/CartCouponForm'
 
 import classes from './CartForm.module.css'

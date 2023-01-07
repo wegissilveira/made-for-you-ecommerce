@@ -1,23 +1,28 @@
-import React, { useContext } from "react"
+import { useContext } from "react"
 import classes from './FilterHeader.module.css'
 
-import { UpdateProductsListContext } from "../context/FilterContext"
+import { UpdateFilterListContext } from "../context/FilterContext"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 
-const FilterHeader = props => {
+type Props = {
+   filterOpen: boolean
+   openFilterHandlerCB: () => void
+}
+
+const FilterHeader = (props: Props) => {
    const {
       filterOpen,
       openFilterHandlerCB,
    } = props
 
-   const { updateOrder } = useContext(UpdateProductsListContext)
+   const { updateOrder } = useContext(UpdateFilterListContext)
 
    const filterToggle =
       filterOpen === false ?
-         ['OPEN FILTERS', 'filter'] :
-         ['CLOSE FILTERS', 'times']
+         ['OPEN FILTERS', 'filter'] as const :
+         ['CLOSE FILTERS', 'times'] as const
 
 
    return (

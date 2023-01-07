@@ -1,12 +1,17 @@
-import React from 'react' 
 import classes from './ProductCartDetails.module.scss'
 
 import { Link } from 'react-router-dom'
 
 import { formatUrlName } from 'helpers/functions'
 
+import { ProductCartType } from 'common/types'
 
-const ProductCartDetails = props => {
+
+type Props = {
+   product: ProductCartType
+}
+
+const ProductCartDetails = (props: Props) => {
    const  {
       product
    } = props

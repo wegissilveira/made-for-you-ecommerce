@@ -1,4 +1,3 @@
-import React from "react"
 import classes from './CartList.module.scss'
 
 import CartForm from 'components/Shop/Cart/CartForm/CartForm'
