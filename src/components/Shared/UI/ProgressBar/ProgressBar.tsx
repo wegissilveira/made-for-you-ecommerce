@@ -1,18 +1,31 @@
-import React, {useEffect, useState} from 'react'
+import {useEffect, useState} from 'react'
 import classes from './ProgressBar.module.css'
 
+import { SliderDirection } from 'common/types'
+
+
+type Props = {
+   diameter?: number
+   bars: number
+   timer?: number
+   auto?: boolean
+   direction?: 'column' | 'row'
+   height?: number
+   clickable?: boolean
+   changeDot: (index: number | SliderDirection) => void
+}
 
 const strokeWidth = 3
-let interval
-const ProgressBar = props => {
+let interval: number
+const ProgressBar = (props: Props) => {
    const {
       diameter = 30,
       bars,
-      timer,
-      auto,
-      direction,
-      height,
-      clickable,
+      timer = 5000,
+      auto = false,
+      direction = 'row',
+      height = 'auto',
+      clickable = true,
       changeDot
    } = props
 
@@ -21,18 +34,17 @@ const ProgressBar = props => {
 
    const barsArray = Array(bars).fill(1) // => Quantidade de círculos que serão criadas
 
-   const changeSlideHandler = index => {
+   const changeSlideHandler = (index: number) => {
       setPercentage(0) // Reseta a posição do círculo
       setBarIndex(index) // Coloca a barra no ponto clicado
       changeDot(index) // Passa o slide do componente parent para acompanhar o ponto que recebe a barra
-      clearTimeout(interval) // Limpa o tempo de 'seTimeout' para que este 0 juntamente com 'percentage'
+      clearTimeout(interval) // Limpa o tempo de 'setTimeout' para que este 0 juntamente com 'percentage'
    }
    
    useEffect(() => {
       let mounted = true
       if (auto) {
-         // eslint-disable-next-line react-hooks/exhaustive-deps
-         interval = setTimeout(() => {
+         interval = window.setTimeout(() => {
             if (mounted) {
                percentage < 100 ? setPercentage(percentage + 1) : setPercentage(0)
             }
@@ -40,12 +52,14 @@ const ProgressBar = props => {
                barIndex < barsArray.length - 1 ? setBarIndex(barIndex + 1) : setBarIndex(0)
                changeDot('next')
             }
-         }, timer / 100);
-
+         }, timer / 100)
       } else {
          setPercentage(100)
       }
-      return () => mounted = false;
+      
+      return () => {
+         mounted = false
+      }
    })
 
    const radius = (diameter - strokeWidth) / 2
@@ -54,9 +68,9 @@ const ProgressBar = props => {
    const dashOffset = dashArray - dashArray * percentage / 100
 
    const barStyle = {
-      flexDirection: direction === 'column' ? 'column' : 'row',
+      flexDirection: direction,
       height: height + 'px'
-   }
+   } as const
 
    return (
       <div
@@ -70,7 +84,7 @@ const ProgressBar = props => {
                height={diameter}
                viewBox={viewBox}
                style={{ cursor: clickable === false ? 'default' : 'pointer' }}
-               onClick={clickable === false ? null : () => changeSlideHandler(i)}
+               onClick={clickable === false ? undefined : () => changeSlideHandler(i)}
             >
                {i === barIndex ?
                   <circle

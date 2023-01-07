@@ -1,9 +1,19 @@
-import React from "react"
 import classes from './BestDealSlider.module.css'
 
 import { Link } from 'react-router-dom'
 
-const BestDealSlider = props => {
+import { CSSProperties } from 'react'
+import { ProductType } from 'common/types'
+
+
+type Props = {
+   sliderTitle: string
+   products: ProductType[]
+   bestDealRef: React.RefObject<HTMLDivElement>
+   translateSlider: CSSProperties
+}
+
+const BestDealSlider = (props: Props) => {
    const {
       sliderTitle,
       products,

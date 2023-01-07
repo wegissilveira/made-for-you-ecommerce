@@ -5,7 +5,7 @@ import { verifyCheckout } from "helpers/functions"
 
 import { UpdateProductValuesContext, ProductDataContext } from "components/Shop/ProductPage/context/ProductContext"
 
-import { QtyAction, SetQtyDesk, QtyProps } from 'common/types'
+import { QtyAction, QtyProps } from 'common/types'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useLocation } from "react-router-dom"
@@ -33,11 +33,11 @@ const ProductsQty = (props: Props) => {
       if (action === 'increase' && (productQtyState < max || max === undefined)) qty++
       if (action === 'decrease' && productQtyState > 1) qty--
       
-      const qtyObj: SetQtyDesk = {
+      const qtyObj = {
          mobile: false,
          newQty: qty,
          action: action
-      }
+      } as const
 
       if(!isCheckoutRoute) updateQty(qty, true)
       if(isCheckoutRoute) changeQtyCallBack(qtyObj)

@@ -232,7 +232,7 @@ FASE 2 - Implementação do TypeScript - Estudar os artigos de typescript da mak
       - Header - OK
       - Footer - OK
       - Contact - OK
-      - MainPage:
+      - MainPage: - OK
          - MainPageBenefits - OK
          - MainPageDiscounts - OK
          - MainPageProducts - OK
@@ -240,13 +240,19 @@ FASE 2 - Implementação do TypeScript - Estudar os artigos de typescript da mak
          - MainPageShopByRoom - OK
       - ProductPage - Falta ProductInfoComponent
       - User - OK
-      - UI:
+      - UI: - OK
          - ColorSelect - OK
          - ProductQtyMobile - OK
          - ProductsQty - OK
-         - ProgressBar
-         - Spinner
-         - Toastify
+         - ProgressBar - OK
+         - Spinner - OK
+         - Toastify - OK
+      - BestDealSection - OK
+      - Cart:
+         - CartForm
+         - CartList
+         - KeepBuyingBtn
+         - ProductCart
 
       - containers:
          - ShopConfig - ALTERAR APÓS Filter

@@ -56,7 +56,6 @@ const ProductModalSlider = props => {
          <ProgressBar
             bars={product.imgsDemo.length}
             auto={true}
-            timer={5000}
             changeDot={changeSlide}
          />
       </div>

@@ -11,13 +11,13 @@ import FilterHeader from './FilterHeader/FilterHeader'
 import FilterBottom from './FilterBottom/FilterBottom'
 import FilterBody from './FilterBody/FilterBody'
 
+
 const _ = undefined
 
 const toastifyMsg = [
    'Reload The Page',
    'In order for all components to adjust to the new screen dimensions, the page should be reloaded.'
 ]
-
 
 const Filter = () => {
    const [pageLimit, setPageLimit] = useState(12)

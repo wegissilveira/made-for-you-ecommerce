@@ -1,12 +1,17 @@
-import React, { useState, useEffect, useRef } from 'react'
-
+import { useState, useEffect, useRef } from 'react'
 import classes from './BestDealSection.module.css'
+
+import { ProductType } from 'common/types'
 
 import BestDealSlider from './BestDealSlider/BestDealSlider'
 import ProgressBar from 'components/Shared/UI/ProgressBar/ProgressBar'
 
 
-const BestDealSection = props => {
+type Props = {
+   products: ProductType[]
+}
+
+const BestDealSection = (props: Props) => {
    const {
       products
    } = props
@@ -19,7 +24,7 @@ const BestDealSection = props => {
       transform: `translateX(${translateValue}%)`
    }
 
-   const bestDealRef = useRef()
+   const bestDealRef = useRef<HTMLDivElement>(null)
 
    const screen_width = window.screen.width
    let circle_diameter
@@ -38,21 +43,23 @@ const BestDealSection = props => {
 
    const changeSlide = () => {
       const bestDealEl = bestDealRef.current
-      let newTransValue = (bestDealEl.children[0].offsetWidth / bestDealEl.offsetWidth) * 100
-      setTranslateValue(-newTransValue)
-
-      setTimeout(() => {
-         bestDealEl.appendChild(bestDealEl.firstElementChild)
-
-         bestDealEl.style.transition = 'none'
-         setTranslateValue(0)
-      }, 2000)
+      if (bestDealEl) {
+         let newTransValue = ((bestDealEl.children[0] as HTMLDivElement).offsetWidth / bestDealEl.offsetWidth) * 100
+         setTranslateValue(-newTransValue)
+   
+         setTimeout(() => {
+            bestDealEl.appendChild(bestDealEl.firstElementChild!)
+   
+            bestDealEl.style.transition = 'none'
+            setTranslateValue(0)
+         }, 2000)
+      }
    }
 
    useEffect(() => {
       if (bestDealRef.current) {
          setTimeout(() => {
-            bestDealRef.current.style.transition = '2s'
+            if (bestDealRef.current) bestDealRef.current.style.transition = '2s'
          }, 30)
       }
    }, [translateValue])
@@ -70,7 +77,6 @@ const BestDealSection = props => {
             bars={productsBestDeal.length}
             diameter={circle_diameter}
             auto={true}
-            timer={2500}
             changeDot={changeSlide}
             clickable={false}
          />

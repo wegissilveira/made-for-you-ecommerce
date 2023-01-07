@@ -10,7 +10,7 @@ export type SliderDirection = 'next' | 'previous'
 
 export type QtyAction = 'increase' | 'decrease'
 
-export type Cart = {
+export type CartType = {
    _id: string
    qtde: number
    color: Color
@@ -21,7 +21,7 @@ export type Cart = {
 }
 
 export type InitialState = {
-   cartListState: Cart[]
+   cartListState: CartType[]
    wishlistState: string[]
    totalCartValue: number
 }
@@ -72,7 +72,7 @@ export type SetQtyMobile = {
 
 export type SetQty = SetQtyDesk | SetQtyMobile
 
-export interface QtyProps {
+export type QtyProps = {
    max: number
    changeQtyCallBack: (qtyObj: SetQty) => void
    productQtyCheckout: number

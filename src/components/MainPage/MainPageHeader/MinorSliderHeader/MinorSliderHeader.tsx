@@ -4,14 +4,18 @@ import classes from './MinorSliderHeader.module.css'
 import ProgressBar from '../../../Shared/UI/ProgressBar/ProgressBar'
 import { MinorSliderData } from 'Data/minorSliderData'
 
+import { SliderDirection } from 'common/types'
+
 import MinorSlider from './MinorSlider/MinorSlider'
 
 
 const MinorSliderHeader = () => {
    const [minorSlideImg, setMinorSlideImg] = useState(0)
 
+   // Mudar tipo string para SliderDirection
    const changeSlideHandler = (index: number | string) => {
       let sliderToShow
+      
       if (typeof index !== 'string') {
          sliderToShow = index
       } else {

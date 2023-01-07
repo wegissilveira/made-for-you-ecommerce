@@ -43,7 +43,7 @@ const QtySelectorInput = (props: Props) => {
             action: action,
             mobile: true,
             qtyMobile: newQty
-         }
+         } as const
 
          changeQtyCallBack(qtyObj)
       } 

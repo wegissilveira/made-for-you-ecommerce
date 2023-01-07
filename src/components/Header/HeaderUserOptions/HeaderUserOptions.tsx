@@ -4,13 +4,13 @@ import { NavLink } from 'react-router-dom'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { connect } from 'react-redux'
 
-import { Cart, InitialState } from 'common/types'
+import { CartType, InitialState } from 'common/types'
 
 import SearchComponent from "../SearchComponent/SearchComponent"
 
 
 type Props = {
-   cart: Cart[]
+   cart: CartType[]
    wish: string[]
 }
 

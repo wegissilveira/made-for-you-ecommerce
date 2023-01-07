@@ -1,9 +1,13 @@
-import React from 'react'
 import classes from './Toastify.module.css'
-
 import ReactDOM from 'react-dom' 
 
-const Toastify = props => {
+
+type Props = {
+   open: boolean
+   toastifyDetails: string[]
+}
+
+const Toastify = (props: Props) => {
    const {
       open,
       toastifyDetails
@@ -20,7 +24,6 @@ const Toastify = props => {
    const header = toastifyDetails[0]
    const msg = toastifyDetails[1]
 
-
    return (
       ReactDOM.createPortal(
          <div
@@ -32,7 +35,7 @@ const Toastify = props => {
             <h3>{header}</h3>
             <p>{msg}</p>
          </div>,
-         document.getElementById('toastify-root')
+         document.getElementById('toastify-root')!
       )
    )
 }
