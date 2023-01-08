@@ -81,8 +81,8 @@ export type SetQty = SetQtyDesk | SetQtyMobile
 
 export type QtyProps = {
    max: number
-   changeQtyCallBack: (qtyObj: SetQty) => void
-   productQtyCheckout: number
+   changeQtyCallBack?: (qtyObj: SetQty) => void
+   productQtyCheckout?: number
 }
 
 export type OfferOptions = {

@@ -238,7 +238,6 @@ FASE 2 - Implementação do TypeScript - Estudar os artigos de typescript da mak
          - MainPageProducts - OK
          - MainPageHeader - OK
          - MainPageShopByRoom - OK
-      - ProductPage - Falta ProductInfoComponent
       - User - OK
       - UI: - OK
          - ColorSelect - OK
@@ -262,16 +261,28 @@ FASE 2 - Implementação do TypeScript - Estudar os artigos de typescript da mak
          - FilterHeader - OK
          - helpers - OK
          - PriceSlider - OK
-
+      - ProductPage:
+         - context
+         - ProductInfoComponent: - OK
+            - ProductInfoBody - OK
+            - ProductInfoFooter - OK
+            - ProductInfoHeader - OK
+         - ProductSlider - OK
+         - helpers - OK
+      - ProductModal - OK
 
       - containers:
-         - ShopConfig - ALTERAR APÓS Filter
+         - ShopConfig - OK
          - MainPageConfig - OK
          - Layout - OK
-      - hooks:
-         - useCallResizeWarning - ALTERAR APÓS Filter
+      - hooks: - OK
+         - useCallResizeWarning - OK
          - useProduct - OK
          - useSetPageTop - OK
+      - helpers
+      - store redux:
+         - actions
+         - reducers
 
 
 

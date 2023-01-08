@@ -132,7 +132,6 @@ const ProductCard = props => {
                openModalHandlerCB={i => openModalHandler(i)}
             />
          </div>
-         {/* PASSAR MODAL PRO PORTAL EM OUTRA ETAPA DO REFATORAMENTO */}
          <ProductPageModal
             showProduct={showProduct}
             setShowProduct={closeModalCallback}

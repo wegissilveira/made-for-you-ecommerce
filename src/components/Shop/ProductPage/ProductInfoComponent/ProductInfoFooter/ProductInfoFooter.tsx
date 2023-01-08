@@ -1,15 +1,9 @@
-import React from "react"
-
 import classes from './ProductInfoFooter.module.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
-const ProductInfoFooter = (props) => {
-   const {
-      modalStyle
-   } = props
-
+const ProductInfoFooter = () => {
    return (
       <div className={classes.Product_specifications_container}>
          <div>

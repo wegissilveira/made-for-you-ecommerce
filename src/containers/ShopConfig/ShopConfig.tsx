@@ -14,7 +14,7 @@ class ShopConfig extends Component {
          <div>
             <h1>SHOP</h1>
             <FilterContext>
-               <Filter products={products} />
+               <Filter />
             </FilterContext>            
             <BestDealSession products={products} />
          </div>

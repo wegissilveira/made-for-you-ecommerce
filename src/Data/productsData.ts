@@ -166,7 +166,7 @@ const productsData: ProductType[] = [
     },
     {
         _id: '11',
-        name: 'Aurora Brown Manufactu#FF0000 Wood Floor Vase',
+        name: 'Aurora Brown Manufactured Wood Floor Vase',
         price: '1038.99',
         img: require('../assets/images/ProductCard/Decorations/Vaso-1/vaso-1-img-1.png'),
         tag: 'decorations',

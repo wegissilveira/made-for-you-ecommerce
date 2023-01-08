@@ -1,7 +1,7 @@
 import { useReducer, useMemo } from "react"
 import filterReducer from "./filterReducer"
 import { initialFilter } from "../helpers/values"
-import { Tag, Category, Offer, Order, PriceRange, ColorValues, Action } from "common/types"
+import { Tag, Category, Offer, Order, PriceRange, ColorValues } from "common/types"
 
 import { 
    setTag,

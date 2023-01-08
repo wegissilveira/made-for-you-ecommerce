@@ -1,11 +1,15 @@
-import React from "react"
-
 import classes from './ProductInfoHeader.module.css'
+
+import { ProductType } from 'common/types'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
-const ProductInfoHeader = props => {
+type Props = {
+   product: ProductType
+}
+
+const ProductInfoHeader = (props: Props) => {
    const {
       product
    } = props

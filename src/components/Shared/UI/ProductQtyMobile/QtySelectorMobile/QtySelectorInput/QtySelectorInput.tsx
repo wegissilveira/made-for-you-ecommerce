@@ -45,14 +45,16 @@ const QtySelectorInput = (props: Props) => {
             qtyMobile: newQty
          } as const
 
-         changeQtyCallBack(qtyObj)
+         if(changeQtyCallBack) changeQtyCallBack(qtyObj)
       } 
 	}
    
    useEffect(() => {
       let qty = 1
       if (!isCheckoutRoute) qty = productQty
-      if (isCheckoutRoute) qty = productQtyCheckout
+      if(productQtyCheckout) {
+         if (isCheckoutRoute) qty = productQtyCheckout
+      }      
 
       setProductQtyState(qty)
    }, [productQtyCheckout, productQty, isCheckoutRoute])

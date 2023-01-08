@@ -1,11 +1,18 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import classes from './ProductModalSlider.module.scss'
+
+import { ProductType, SliderDirection } from 'common/types'
 
 import ProgressBar from 'components/Shared/UI/ProgressBar/ProgressBar'
 import ProductModalImages from './ProductModalImages/ProductModalImages'
 
 
-const ProductModalSlider = props => {
+type Props = {
+   imgs: string[]
+   product: ProductType
+}
+
+const ProductModalSlider = (props: Props) => {
    const [imgSlide, setImgSlide] = useState(0)
    const [translateValue, setTranslateValue] = useState(0)
 
@@ -14,7 +21,7 @@ const ProductModalSlider = props => {
       imgs
    } = props
 
-   const changeSlide = arg => {
+   const changeSlide = (arg: SliderDirection | number) => {
       let newImgSlide = imgSlide
       let newTranslateValue = translateValue
       if (arg === 'previous') {

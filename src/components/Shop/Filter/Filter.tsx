@@ -24,8 +24,8 @@ const Filter = () => {
    const [filterOpen, setFilterOpen] = useState(false)
    const [translateValueState, setTranslateValue] = useState(0)
 
-   const containerRef = useRef(null)
-   const filterRef = useRef(null)
+   const containerRef = useRef<HTMLDivElement>(null)
+   const filterRef = useRef<HTMLDivElement>(null)
 
    const filterReducerState = useContext(FilterDataContext)
 
@@ -36,14 +36,14 @@ const Filter = () => {
       openToastify,
       containerHeight
    } = useCallResizeWarning(filterRef, containerRef, filterOpen)
-
+   
    const translateFilter = {
       transform: `translateY(${translateValueState}px)`,
       transition: '.8s ease-in-out'
    } as const
 
    const containerStyle = {
-      height: containerHeight + 'px'
+      height: containerHeight === 0 ? 'auto' : containerHeight + 'px'
    } as const
    
    const openFilterHandler = () => {

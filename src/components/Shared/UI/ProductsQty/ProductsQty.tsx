@@ -40,7 +40,9 @@ const ProductsQty = (props: Props) => {
       } as const
 
       if(!isCheckoutRoute) updateQty(qty, true)
-      if(isCheckoutRoute) changeQtyCallBack(qtyObj)
+      if (changeQtyCallBack) {
+         if(isCheckoutRoute) changeQtyCallBack(qtyObj)
+      }      
    }
 
    useEffect(() => {
@@ -51,7 +53,9 @@ const ProductsQty = (props: Props) => {
    useEffect(() => {
       let qty = 1
       if (!isCheckoutRoute) qty = productQty
-      if (isCheckoutRoute) qty = productQtyCheckout
+      if (productQtyCheckout) {
+         if (isCheckoutRoute) qty = productQtyCheckout
+      }     
 
       setProductQtyState(qty)
    }, [productQtyCheckout, productQty, isCheckoutRoute])

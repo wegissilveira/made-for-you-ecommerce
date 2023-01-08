@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react"
+import { useState, useEffect, useContext } from "react"
 import classes from './ProductInfoBody.module.scss'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -6,10 +6,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { UpdateProductValuesContext, ProductDataContext } from "components/Shop/ProductPage/context/ProductContext"
 
 import { connect } from 'react-redux'
+import { Dispatch } from "redux"
 import * as actionTypes from 'store/actions/actionTypes'
 
 import cartListDataFn from 'Data/cartData.js'
 import wishlistDataFn from 'Data/wishlistData'
+
+import { ProductType, ProductCartType, InitialState } from 'common/types'
 
 import ColorSelect from 'components/Shared/UI/ColorSelect/ColorSelect'
 import ProductsQty from "components/Shared/UI/ProductsQty/ProductsQty"
@@ -17,7 +20,27 @@ import ProductQtyMobile from 'components/Shared/UI/ProductQtyMobile/ProductQtyMo
 import SKUSizeSelector from "./SKUSizeSelector/SKUSizeSelector"
 
 
-const ProductInfoBody = props => {
+type Props = {
+   product: ProductType
+   cart: ProductCartType[]
+   wish: string[]
+   onWishlistState: () => void
+   onCartListState: () => void
+}
+
+enum IconValues {
+   EMPTY_HEART = 'fas',
+   FULL_HEART = 'far'
+}
+
+type Icon = IconValues.EMPTY_HEART | IconValues.FULL_HEART
+
+type BagButtonColor = {
+   color: 'Bag_button_green' | 'Bag_button_orange' | 'Bag_button_red'
+   text: 'ADD TO BAG' | 'UPDATE BAG' | 'REMOVE FROM BAG'
+}
+
+const ProductInfoBody = (props: Props) => {
    const {
       product,
       cart,
@@ -26,10 +49,10 @@ const ProductInfoBody = props => {
       onCartListState
    } = props   
 
-   const [productCart, setProductCart] = useState({})
+   const [productCart, setProductCart] = useState<ProductCartType>({} as ProductCartType)
    const [isProductInBag, setProdExists] = useState(0) // => state é utilizada para atualizar as cores do botão de adicionar ao carrinho  
-   const [wishIcon, setWishIcon] = useState('fas')
-   const [bagButton, setBagButton] = useState({
+   const [wishIcon, setWishIcon] = useState<Icon>(IconValues.EMPTY_HEART)
+   const [bagButton, setBagButton] = useState<BagButtonColor>({
       color: 'Bag_button_green',
       text: 'ADD TO BAG'
    })
@@ -37,7 +60,7 @@ const ProductInfoBody = props => {
    const { finishUpdate } = useContext(UpdateProductValuesContext)
    const productReducerState = useContext(ProductDataContext)
 
-   const wishlistHandler = id => {
+   const wishlistHandler = (id: string) => {
       let list = [...wish]
       if (list.includes(id)) {
          list = list.filter(item => item !== id)
@@ -63,7 +86,7 @@ const ProductInfoBody = props => {
       // count = 0 significa que o produto ainda não está no carrinho
       // productUpdate significa que ele está no carrinho, mas que teve seus valores atualizados
       if (count === 0 || productReducerState.productUpdated) {
-         let productCart = {}
+         let productCart: ProductCartType = {} as ProductCartType
          
          productCart._id = product._id
          productCart.qtde = productReducerState.productQty
@@ -94,16 +117,19 @@ const ProductInfoBody = props => {
    }
 
    useEffect(() => {
-      let productCartDetails = {}
-      cart.forEach(cartProd => {
-         if (cartProd._id === product._id) {
-            productCartDetails = {
-               ...product,
-               ...cartProd
+      let productCartDetails: ProductCartType = {} as ProductCartType
+      if (cart.length > 0) {
+         cart.forEach(cartProd => {
+            if (cartProd._id === product._id) {
+               productCartDetails = {
+                  ...product,
+                  ...cartProd
+               }
             }
-         }
-      })
-      setProductCart(productCartDetails)
+         })
+   
+         setProductCart(productCartDetails)
+      }
    }, [product])
 
    useEffect(() => {
@@ -118,14 +144,14 @@ const ProductInfoBody = props => {
    }, [product])
 
    useEffect(() => {
-      let icon = 'fas'
-      if (wish.includes(product._id)) icon = 'far'
+      let icon: Icon = IconValues.EMPTY_HEART
+      if (wish.includes(product._id)) icon = IconValues.FULL_HEART
 
       setWishIcon(icon)
    }, [wish])
 
    useEffect(() => {
-      const obj = {}
+      const obj: BagButtonColor = {} as BagButtonColor
       if (productReducerState.productUpdated === true && isProductInBag === 1) {
          obj.color = 'Bag_button_orange'
          obj.text = 'UPDATE BAG'
@@ -159,7 +185,7 @@ const ProductInfoBody = props => {
                onClick={() => productCartHandler()}
                type="button"
                className={classes[bagButton.color]}
-               disabled={productReducerState.productColor === ''}
+               disabled={productReducerState.productColor.length === 0}
             > {bagButton.text}
             </button>
 
@@ -177,14 +203,14 @@ const ProductInfoBody = props => {
    )
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state: InitialState) => {
    return {
       wish: state.wishlistState,
       cart: state.cartListState
    }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch: Dispatch) => {
    return {
       onWishlistState: () => dispatch({ type: actionTypes.WISHLIST, value: wishlistDataFn() }),
       onCartListState: () => dispatch({ type: actionTypes.CARTLIST, value: cartListDataFn() })

@@ -101,7 +101,7 @@ export const formatUrlName = (str, id) => {
 export const setCartTotalValue = (cart) => {
    const buildQtyArr = () => {
       const arrQty = []      
-      cart.map((item) => {
+      cart.forEach((item) => {
          const productsQty = {}
          productsQty.qty = item.qtde
          productsQty.id = item._id

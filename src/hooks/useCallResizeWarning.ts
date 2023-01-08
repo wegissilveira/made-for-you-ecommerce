@@ -1,15 +1,16 @@
 import { useState, useEffect, useRef } from "react"
 
-const useCallResizeWarning = (filterRef, containerRef, filterOpen) => {
+const useCallResizeWarning = (filterRef: React.RefObject<HTMLDivElement>, containerRef: React.RefObject<HTMLDivElement>, filterOpen: boolean) => {
    const [openToastify, setOpenToastify] = useState(false)
    const [resize, setResize] = useState(true)
-   const [containerHeight, setContainerHeight] = useState()
+   const [containerHeight, setContainerHeight] = useState(0)
    const [translateValue, setTranslateValue] = useState(0)
    const [filter_height, setFilterHeight] = useState(0)
 
 
-   const containerHeightHandler = (cHeight = containerHeight, fHeight = filter_height, open = filterOpen, addRow) => {
+   const containerHeightHandler = (cHeight = containerHeight, fHeight = filter_height, open = filterOpen, addRow?: ['more' | 'less', number]) => {
       let height
+
       if (addRow) {
          height = addRow[0] === 'more' ? containerHeight + addRow[1] : containerHeight - addRow[1]
       } else {
@@ -25,27 +26,32 @@ const useCallResizeWarning = (filterRef, containerRef, filterOpen) => {
          setOpenToastify(false)
       }, 8000)
       setResize(false)
-      sessionStorage.setItem('warned', true)
+      sessionStorage.setItem('warned', JSON.stringify(true))
    }
 
    const reportWindowSize = () => {
-      const fHeight = filterRef.current.offsetHeight
+      if (filterRef.current) {
+         const fHeight = filterRef.current.offsetHeight
 
-      setTranslateValue(-fHeight)
-      setFilterHeight(fHeight)
+         setTranslateValue(-fHeight)
+         setFilterHeight(fHeight)
 
-      setTimeout(() => {
-         const containerHeight = containerRef.current.offsetHeight
-         containerHeightHandler(containerHeight, fHeight)
-      }, 30)
+         setTimeout(() => {
+            if (containerRef.current) {
+               const containerHeight = containerRef.current.offsetHeight
+               containerHeightHandler(containerHeight, fHeight)
+            }
+         }, 30)
+      }
+
    }
 
    const observer = useRef(
       new ResizeObserver(() => {
-         const windowWidth = window.innerWidth
+         const windowWidth = window.innerWidth.toString()
          const loadWidth = sessionStorage.getItem('windowWidth')
          const rendered = sessionStorage.getItem('rendered')
-         if (rendered && windowWidth != loadWidth) {
+         if (rendered && windowWidth !== loadWidth) {
             callResizeAlert()
          }
       })
@@ -60,8 +66,8 @@ const useCallResizeWarning = (filterRef, containerRef, filterOpen) => {
       const loadWidth = window.innerWidth
 
       setTimeout(() => {
-         sessionStorage.setItem('rendered', true)
-         sessionStorage.setItem('windowWidth', loadWidth)
+         sessionStorage.setItem('rendered', JSON.stringify(true))
+         sessionStorage.setItem('windowWidth', JSON.stringify(loadWidth))
       }, 1000)
    }, [])
 

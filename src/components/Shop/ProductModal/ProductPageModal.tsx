@@ -1,11 +1,16 @@
-import React from 'react'
-
 import './Modal.css'
 import Modal from 'react-modal'
+import { CSSProperties } from 'react'
+
+import { ProductType } from 'common/types'
 
 import ProductModalInfo from './ProductModalInfo/ProductModalInfo'
 
-const customStyles = {
+type Styles = {
+   content: CSSProperties
+}
+
+const customStyles: Styles = {
    content: {
       width: '60%',
       top: '50%',
@@ -22,7 +27,14 @@ if (window.innerWidth <= 768) {
    customStyles.content.paddingTop = '40px'
 }
 
-const ProductPageModal = props => {
+type Props = {
+   imgs: string[]
+   showProduct: boolean
+   setShowProduct: () => void
+   product: ProductType
+}
+
+const ProductPageModal = (props: Props) => {
    const {
       imgs,
       showProduct,

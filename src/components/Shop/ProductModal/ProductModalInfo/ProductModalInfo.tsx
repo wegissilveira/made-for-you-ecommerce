@@ -1,14 +1,20 @@
-import React from 'react'
 import classes from './ProductModalInfo.module.scss'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import ProductInfoComponent from 'components/Shop/ProductPage/ProductInfoComponent/ProductInfoComponent'
+import { ProductType } from 'common/types'
 
+import ProductInfoComponent from 'components/Shop/ProductPage/ProductInfoComponent/ProductInfoComponent'
 import ProductModalSlider from './ProductModalSlider/ProductModalSlider'
 
 
-const ProductModalInfo = (props) => {
+type Props = {
+   imgs: string[]
+   setShowProductCB: () => void
+   product: ProductType
+}
+
+const ProductModalInfo = (props: Props) => {
    const {
       imgs,
       product,

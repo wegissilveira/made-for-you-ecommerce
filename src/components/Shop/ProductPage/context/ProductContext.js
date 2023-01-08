@@ -2,10 +2,10 @@ import { createContext } from "react"
 import { initialValue } from "../helpers/values"
 
 export const UpdateProductValuesContext = createContext({
-   updateTag: () => {},
-   updateSize: () => {},
+   updateColor: (color, update) => {},
+   updateSize: (size, update) => {},
    updateQty: (qty, update) => {},
-   updateColor: (color, update) => {}
+   finishUpdate: () => {}
 })
 
 export const ProductDataContext = createContext(initialValue)

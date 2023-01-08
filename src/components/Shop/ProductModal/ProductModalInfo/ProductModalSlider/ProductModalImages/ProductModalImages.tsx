@@ -1,8 +1,12 @@
-import React from 'react'
 import classes from './ProductModalImages.module.scss'
 
 
-const ProductModalImages = props => {
+type Props = {
+   productImgs: string[]
+   translateValue: number
+}
+
+const ProductModalImages = (props: Props) => {
    const {
       productImgs,
       translateValue
@@ -15,7 +19,7 @@ const ProductModalImages = props => {
       >
          {productImgs.map((slide, i) =>
             <img
-               key={i}
+               key={slide+'-'+i}
                src={slide}
                alt="img-1"
             />

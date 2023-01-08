@@ -1,14 +1,19 @@
-import React from 'react'
 import classes from './ProductInfoComponent.module.css'
 
 import ProductContext from 'components/Shop/ProductPage/context/ProductProvider'
+
+import { ProductType } from 'common/types'
 
 import ProductInfoFooter from './ProductInfoFooter/ProductInfoFooter'
 import ProductInfoBody from './ProductInfoBody/ProductInfoBody'
 import ProductInfoHeader from './ProductInfoHeader/ProductInfoHeader'
 
 
-const ProductInfoComponent = props => {
+type Props = {
+   product: ProductType
+}
+
+const ProductInfoComponent = (props: Props) => {
    const {
       product      
    } = props
