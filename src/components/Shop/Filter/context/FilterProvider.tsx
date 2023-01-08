@@ -1,7 +1,7 @@
 import { useReducer, useMemo } from "react"
-
 import filterReducer from "./filterReducer"
 import { initialFilter } from "../helpers/values"
+import { Tag, Category, Offer, Order, PriceRange, ColorValues, Action } from "common/types"
 
 import { 
    setTag,
@@ -19,31 +19,35 @@ import {
 } from "./FilterContext"
 
 
-const FilterProvider = (props) => {
+type Props = {
+   children: React.ReactNode
+}
+
+const FilterProvider = (props: Props) => {
    const [filterReducerState, dispatch] = useReducer(filterReducer, initialFilter)
 
    const updateProductsListHandler = useMemo(() => {
-      const updateTag = (tag) => {
+      const updateTag = (tag: Tag) => {
          dispatch(setTag(tag))
       }
       
-      const updateCategory = (cat) => {
+      const updateCategory = (cat: Category) => {
          dispatch(setCategory(cat))
       }
 
-      const updateFilterColor = (color) => {
+      const updateFilterColor = (color: ColorValues) => {
          dispatch(setColor(color))
       }
 
-      const updateOffer = (offer) => {
-         dispatch(setOffer(offer))
+      const updateOffer = (offerArr: Offer[]) => {
+         dispatch(setOffer(offerArr))
       }
 
-      const updateOrder = (order) => {
+      const updateOrder = (order: Order) => {
          dispatch(setOrder(order))
       }
 
-      const updatePrice = (priceRange) => {
+      const updatePrice = (priceRange: PriceRange) => {
          dispatch(setPrice(priceRange))
       }
 

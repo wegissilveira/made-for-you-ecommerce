@@ -46,7 +46,7 @@ const ColorSelect = (props: Props) => {
       const colorObj = {
          currentColor: color,
          lastSelectedColor: color
-      }
+      } as const
 
       updateFilterColor(colorObj)
       colorInput.checked = false

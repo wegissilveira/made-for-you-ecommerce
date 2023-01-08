@@ -253,8 +253,8 @@ FASE 2 - Implementação do TypeScript - Estudar os artigos de typescript da mak
          - CartList - OK
          - KeepBuyingBtn - OK
          - ProductCart - OK
-      - Filter:
-         - context
+      - Filter: - OK
+         - context - OK
          - FilterBody - OK
          - FilterBottom - OK
          - FilterCheckbox - OK

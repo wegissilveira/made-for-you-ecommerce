@@ -4,12 +4,25 @@ import classes from './FilterHeader.module.css'
 import { UpdateFilterListContext } from "../context/FilterContext"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { Order } from "common/types"
 
 
 type Props = {
    filterOpen: boolean
    openFilterHandlerCB: () => void
 }
+
+type OrderValues = {
+   value: Order,
+   text: string
+}
+
+const orderValues: OrderValues[] = [
+   {value: 'default', text: 'Default Sorting'},
+   {value: 'low-high', text: 'Price: Low to High'},
+   {value: 'high-low', text: 'Price: High to Low'},
+   {value: 'alphabetical', text: 'Alphabetical Order'}
+]
 
 const FilterHeader = (props: Props) => {
    const {
@@ -36,13 +49,14 @@ const FilterHeader = (props: Props) => {
          <div className={classes.Filter_sort}>
             <p>Sort by</p>
             <select
-               onChange={e => updateOrder(e.target.value)}
+               onChange={e => updateOrder(e.target.value as Order)}
                id="order-filter-wrapper"
             >
-               <option value="default">Default Sorting</option>
-               <option value="low-high">Price: Low to High</option>
-               <option value="high-low">Price: High to Low</option>
-               <option value="alphabetical">Alphabetical Order</option>
+               {
+                  orderValues.map((option, i) => {
+                    return <option key={option+'-'+i} value={option.value}>{option.text}</option>
+                  })
+               }
             </select>
          </div>
       </div>

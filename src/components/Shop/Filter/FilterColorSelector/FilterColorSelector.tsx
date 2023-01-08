@@ -3,6 +3,8 @@ import classes from './FilterColorSelector.module.css'
 
 import { UpdateFilterListContext, FilterDataContext } from "../context/FilterContext"
 
+import { Color } from "common/types"
+
 import ColorSelect from 'components/Shared/UI/ColorSelect/ColorSelect'
 
 
@@ -13,7 +15,7 @@ const FilterColorSelector = () => {
    const lastSelectedColorHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
       const isAllColorsChecked = e.target.checked
       const checked = {
-         currentColor: isAllColorsChecked ? '' : filterReducerState.color.lastSelectedColor,
+         currentColor: isAllColorsChecked ? '' as Color : filterReducerState.color.lastSelectedColor,
          lastSelectedColor: filterReducerState.color.lastSelectedColor
       }
       

@@ -12,6 +12,23 @@ import FilterCheckbox from 'components/Shop/Filter/FilterCheckbox/FilterCheckbox
 import FilterColorSelector from 'components/Shop/Filter/FilterColorSelector/FilterColorSelector'
 
 
+type Cat = {
+   type: 'cat'
+   tag: Category
+}
+
+type Dep = {
+   type: 'department'
+   tag: Tag
+}
+
+type Type = Cat | Dep
+
+enum TagType {
+   CAT_TYPE = 'cat',
+   DEP_TYPE = 'department',
+}
+
 const checkboxItems: OfferOptions[] = [
    {value: 'new', title: 'New Products'},
    {value: 'old', title: 'Old Products'},
@@ -83,8 +100,8 @@ const FilterBody = () => {
       }
    })
 
-   const setProductTag = (e: React.MouseEvent<HTMLParagraphElement>, type: 'cat' | 'type', tag: Category | Tag) => {
-      type === 'cat' ? updateCategory(tag) : updateTag(tag)
+   const setProductTag = (e: React.MouseEvent<HTMLParagraphElement>, type: Type) => {
+      type.type === TagType.CAT_TYPE ? updateCategory(type.tag) : updateTag(type.tag)
 
       const changeTagEl = e.target as HTMLDivElement
       const elementsArr = Array.from(changeTagEl.parentNode!.children)
@@ -99,22 +116,22 @@ const FilterBody = () => {
       <div className={classes.Filter_Blocks}>
          <div id="categories-wrapper">
             <h6>CATEGORIES</h6>
-            <p className={classes.Selected} onClick={e => setProductTag(e, 'cat', 'all')}>All categories ({categoriesTotalQtde}) </p>
-            <p onClick={e => setProductTag(e, 'cat', 'bedroom')}>Bedroom ({bedRoomQtde}) </p>
-            <p onClick={e => setProductTag(e, 'cat', 'living-room')}>Living room ({livingRoomQtde}) </p>
-            <p onClick={e => setProductTag(e, 'cat', 'kitchen')}>Kitchen ({kitchen}) </p>
-            <p onClick={e => setProductTag(e, 'cat', 'bathroom')}>Bathroom ({bathRoomQtde}) </p>
-            <p onClick={e => setProductTag(e, 'cat', 'children-room')}>Children's room ({childrenRoom}) </p>
+            <p className={classes.Selected} onClick={e => setProductTag(e, {type: TagType.CAT_TYPE, tag: 'all'})}>All categories ({categoriesTotalQtde}) </p>
+            <p onClick={e => setProductTag(e, {type: TagType.CAT_TYPE, tag: 'all'})}>Bedroom ({bedRoomQtde}) </p>
+            <p onClick={e => setProductTag(e, {type: TagType.CAT_TYPE, tag: 'living-room'})}>Living room ({livingRoomQtde}) </p>
+            <p onClick={e => setProductTag(e, {type: TagType.CAT_TYPE, tag: 'kitchen'})}>Kitchen ({kitchen}) </p>
+            <p onClick={e => setProductTag(e, {type: TagType.CAT_TYPE, tag: 'bathroom'})}>Bathroom ({bathRoomQtde}) </p>
+            <p onClick={e => setProductTag(e, {type: TagType.CAT_TYPE, tag: 'children-room'})}>Children's room ({childrenRoom}) </p>
          </div>
          <span></span>
          <div id="types-wrapper">
             <h6>TYPE</h6>
-            <p className={classes.Selected} onClick={e => setProductTag(e, 'type', 'all-products')}>All tags ({typesTotalQtde}) </p>
-            <p onClick={e => setProductTag(e, 'type', 'furniture')}>Furniture ({furnitureQtde}) </p>
-            <p onClick={e => setProductTag(e, 'type', 'accessories')}>Accessories ({accessoriesQtde}) </p>
-            <p onClick={e => setProductTag(e, 'type', 'decorations')}>Decorations ({decorationsQtde}) </p>
-            <p onClick={e => setProductTag(e, 'type', 'textile')}>Textile ({textileQtde}) </p>
-            <p onClick={e => setProductTag(e, 'type', 'lightning')}>Lighting ({lightingQtde}) </p>
+            <p className={classes.Selected} onClick={e => setProductTag(e, {type: TagType.DEP_TYPE, tag: 'all-products'})}>All tags ({typesTotalQtde}) </p>
+            <p onClick={e => setProductTag(e, {type: TagType.DEP_TYPE, tag: 'furniture'})}>Furniture ({furnitureQtde}) </p>
+            <p onClick={e => setProductTag(e, {type: TagType.DEP_TYPE, tag: 'accessories'})}>Accessories ({accessoriesQtde}) </p>
+            <p onClick={e => setProductTag(e, {type: TagType.DEP_TYPE, tag: 'decorations'})}>Decorations ({decorationsQtde}) </p>
+            <p onClick={e => setProductTag(e, {type: TagType.DEP_TYPE, tag: 'textile'})}>Textile ({textileQtde}) </p>
+            <p onClick={e => setProductTag(e, {type: TagType.DEP_TYPE, tag: 'lightning'})}>Lighting ({lightingQtde}) </p>
          </div>
          <span></span>
          <FilterCheckbox
