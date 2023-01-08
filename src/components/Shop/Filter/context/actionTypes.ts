@@ -1,4 +1,4 @@
-export enum ActionType {
+export enum ActionTypeFilter {
    SET_TAG = 'setTag',
    SET_CATEGORY = 'setCategory',
    SET_COLOR = 'setColor',

@@ -1,13 +1,6 @@
-import { HEX } from "common/types"
+import { HEX, ProductPageType } from "common/types"
 
-type initialValue = {
-   productColor: HEX
-   productQty: number
-   productSize: string
-   productUpdated: boolean
-}
-
-export const initialValue: initialValue = {
+export const initialValue: ProductPageType = {
    productColor: '' as HEX,
    productQty: 1,
    productSize: '100x100',

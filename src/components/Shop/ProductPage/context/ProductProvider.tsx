@@ -18,15 +18,15 @@ import { initialValue } from "../helpers/values"
 import { connect } from 'react-redux'
 import useProduct from 'hooks/useProduct'
 
-import { Cart } from "common/types"
+import { ProductCartType, Color, InitialState } from "common/types"
 
 
-// type Props = {
-//    cart: Cart
-// }
+type Props = {
+   cart: ProductCartType[]
+   children: React.ReactNode
+}
 
-// const ProductProvider = (props: Props) => {
-const ProductProvider = (props) => {
+const ProductProvider = (props: Props) => {
    const {
       cart
    } = props
@@ -36,9 +36,9 @@ const ProductProvider = (props) => {
    const product = useProduct()
 
    const updateCurrentProduct = useMemo(() => {
-      const updateColor = (color, update) => dispatch(setColor(color, update))
-      const updateSize = (size, update) => dispatch(setSize(size, update))
-      const updateQty = (qty, update) => dispatch(setQty(qty, update))
+      const updateColor = (color: Color, update: boolean) => dispatch(setColor(color, update))
+      const updateSize = (size: string, update: boolean) => dispatch(setSize(size, update))
+      const updateQty = (qty: number, update: boolean) => dispatch(setQty(qty, update))
       const finishUpdate = () => dispatch(setUpdate())
 
       return { 
@@ -69,7 +69,7 @@ const ProductProvider = (props) => {
    )
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state: InitialState) => {
    return {
       cart: state.cartListState
    }

@@ -1,10 +1,10 @@
-import { Tag, Category, ColorValues, Offer, Order, PriceRange, Action } from "common/types"
-import { ActionType } from "./actionTypes"
+import { Tag, Category, ColorValues, Offer, Order, PriceRange, FilterAction } from "common/types"
+import { ActionTypeFilter } from "./actionTypes"
 
-export const setTag = (tag: Tag) => ({type: ActionType.SET_TAG, tag } as Action)
-export const setCategory = (category: Category) => ({type: ActionType.SET_CATEGORY, category } as Action)
-export const setColor = (color: ColorValues) => ({type: ActionType.SET_COLOR, color } as Action)
-export const setOffer = (offer: Offer[]) => ({type: ActionType.SET_OFFER, offer } as Action)
-export const setOrder = (order: Order) => ({type:  ActionType.SET_ORDER, order } as Action)
-export const setPrice = (priceRange: PriceRange) => ({type:  ActionType.SET_PRICE, priceRange } as Action)
-export const resetFilter = () => ({type: ActionType.RESET_FILTER } as Action)
+export const setTag = (tag: Tag) => ({type: ActionTypeFilter.SET_TAG, tag } as FilterAction)
+export const setCategory = (category: Category) => ({type: ActionTypeFilter.SET_CATEGORY, category } as FilterAction)
+export const setColor = (color: ColorValues) => ({type: ActionTypeFilter.SET_COLOR, color } as FilterAction)
+export const setOffer = (offer: Offer[]) => ({type: ActionTypeFilter.SET_OFFER, offer } as FilterAction)
+export const setOrder = (order: Order) => ({type:  ActionTypeFilter.SET_ORDER, order } as FilterAction)
+export const setPrice = (priceRange: PriceRange) => ({type:  ActionTypeFilter.SET_PRICE, priceRange } as FilterAction)
+export const resetFilter = () => ({type: ActionTypeFilter.RESET_FILTER } as FilterAction)

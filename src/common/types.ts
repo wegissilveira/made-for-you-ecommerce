@@ -1,4 +1,5 @@
-import { ActionType } from "components/Shop/Filter/context/actionTypes"
+import { ActionTypeFilter } from "components/Shop/Filter/context/actionTypes"
+import { ActionTypesProduct } from "components/Shop/ProductPage/context/actionTypes"
 
 type RGB = `rgb(${number}, ${number}, ${number})`
 export type HEX = `#${string}`
@@ -8,10 +9,34 @@ export type ColorValues = {
    lastSelectedColor: Color
 }
 
-export type Offer = 'new' | 'old' | 'best-seller' | 'sales'
-export type Category = 'bathroom' | 'living-room' | 'kitchen' | 'furniture' | 'bedroom' | 'children-room' | 'all'
-export type Tag = 'textile'| 'decorations' | 'furniture' | 'lightning' | 'accessories' | 'all-products'
-export type Order = 'default' | 'low-high' | 'high-low' | 'alphabetical'
+export type Offer = 
+   | 'new' 
+   | 'old' 
+   | 'best-seller' 
+   | 'sales'
+
+export type Category = 
+   | 'bathroom' 
+   | 'living-room' 
+   | 'kitchen' 
+   | 'furniture' 
+   | 'bedroom' 
+   | 'children-room' 
+   | 'all'
+
+export type Tag = 
+   | 'textile'
+   | 'decorations' 
+   | 'furniture' 
+   | 'lightning' 
+   | 'accessories' 
+   | 'all-products'
+
+export type Order = 
+   | 'default' 
+   | 'low-high' 
+   | 'high-low' 
+   | 'alphabetical'
 
 export type SliderDirection = 'next' | 'previous'
 
@@ -111,40 +136,40 @@ export type PriceRange = {
 }
 
 type SetTag = {
-   type: ActionType.SET_TAG
+   type: ActionTypeFilter.SET_TAG
    tag: Tag
 }
 
 type SetCategory = {
-   type: ActionType.SET_CATEGORY
+   type: ActionTypeFilter.SET_CATEGORY
    category: Category
 }
 
 type SetColor = {
-   type: ActionType.SET_COLOR
+   type: ActionTypeFilter.SET_COLOR
    color: ColorValues
 }
 
 type SetOffer = {
-   type: ActionType.SET_OFFER
+   type: ActionTypeFilter.SET_OFFER
    offer: Offer[]
 }
 
 type SetOrder = {
-   type: ActionType.SET_ORDER
+   type: ActionTypeFilter.SET_ORDER
    order: Order
 }
 
 type SetPrice = {
-   type: ActionType.SET_PRICE
+   type: ActionTypeFilter.SET_PRICE
    priceRange: PriceRange
 }
 
 type ResetFilter = {
-   type: ActionType.RESET_FILTER
+   type: ActionTypeFilter.RESET_FILTER
 }
 
-export type Action = 
+export type FilterAction = 
    | SetTag
    | SetCategory
    | SetColor
@@ -152,3 +177,40 @@ export type Action =
    | SetOrder
    | SetPrice
    | ResetFilter
+
+   
+export type ProductPageType = {
+   productColor: HEX
+   productQty: number
+   productSize: string
+   productUpdated: boolean
+}
+
+type UpdateColor = {
+   type: ActionTypesProduct.UPDATE_COLOR
+   productColor:  HEX
+   productUpdate: boolean
+}
+
+type UpdateSize = {
+   type: ActionTypesProduct.UPDATE_SIZE
+   productSize: string
+   productUpdate: boolean
+}
+
+type UpdateQty = {
+   type: ActionTypesProduct.UPDATE_QTY
+   productQty: number
+   productUpdate: boolean
+}
+
+type FinishUpdate = {
+   type: ActionTypesProduct.FINISH_UPDATE
+   productUpdate: boolean
+}
+
+export type ProductAction = 
+   | UpdateColor
+   | UpdateSize
+   | UpdateQty
+   | FinishUpdate
