@@ -45,7 +45,6 @@ const MainPageProducts = () => {
          <Products
             productsProps={products}
             pageLimit={pageLimit}
-            tag={tag}
          />
       </div>
    )

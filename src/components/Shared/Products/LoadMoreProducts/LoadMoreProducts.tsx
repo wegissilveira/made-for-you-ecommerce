@@ -1,10 +1,18 @@
-import React from 'react'
 import classes from './LoadMoreProducts.module.css'
 
 import useSetPageTop from 'hooks/useSetPageTop'
 
+import { ProductType, GalleryQty } from 'common/types'
 
-const LoadMoreProducts = (props) => {
+
+type Props = {
+   products: ProductType[]
+   count: number
+   pageLimit: number
+   setProductsPageHandler: (action: GalleryQty) => void
+}
+
+const LoadMoreProducts = (props: Props) => {
    const {
       products,
       count,

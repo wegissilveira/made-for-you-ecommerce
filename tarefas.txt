@@ -247,8 +247,8 @@ FASE 2 - Implementação do TypeScript - Estudar os artigos de typescript da mak
          - Spinner - OK
          - Toastify - OK
       - Products:
-         - CategoryHeader
-         - LoadMoreProducts
+         - CategoryHeader - OK
+         - LoadMoreProducts - OK
          - ProductsGallery
       - BestDealSection - OK
       - Cart: - OK
@@ -299,6 +299,8 @@ FASE 2 - Implementação do TypeScript - Estudar os artigos de typescript da mak
          - Parece que não há uma maneira nativa, é necessário usar uma lista e comparar
          - https://github.com/bahamas10/css-color-names/blob/master/css-color-names.json
          - https://stackoverflow.com/questions/69141635/how-to-convert-rgb-color-to-color-name-string-in-javascript
+      -> Height da galeria não se adapta quando filtro é escolhido ou removido
+         - Buscar uma maneira de executar a função de resize nesse contexto
 
 
 

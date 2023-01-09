@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from "react"
 
+import { GalleryQty } from "common/types"
+
 const useCallResizeWarning = (filterRef: React.RefObject<HTMLDivElement>, containerRef: React.RefObject<HTMLDivElement>, filterOpen: boolean) => {
    const [openToastify, setOpenToastify] = useState(false)
    const [resize, setResize] = useState(true)
@@ -8,7 +10,7 @@ const useCallResizeWarning = (filterRef: React.RefObject<HTMLDivElement>, contai
    const [filter_height, setFilterHeight] = useState(0)
 
 
-   const containerHeightHandler = (cHeight = containerHeight, fHeight = filter_height, open = filterOpen, addRow?: ['more' | 'less', number]) => {
+   const containerHeightHandler = (cHeight = containerHeight, fHeight = filter_height, open = filterOpen, addRow?: [GalleryQty, number]) => {
       let height
 
       if (addRow) {

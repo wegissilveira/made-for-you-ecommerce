@@ -19,7 +19,7 @@ const Wishlist = (props: Props) => {
       wish
    } = props
 
-   const [wishlistProducts, setWishlistProducts] = useState<ProductType[]>()
+   const [wishlistProducts, setWishlistProducts] = useState<ProductType[]>([])
 
    useEffect(() => {
       const allProducts = [...productsData]
