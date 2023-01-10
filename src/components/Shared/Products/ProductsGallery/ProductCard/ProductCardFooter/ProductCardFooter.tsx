@@ -1,11 +1,21 @@
-import React from 'react'
 import classes from './ProductCardFooter.module.css'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from 'react-router-dom'
+import { formatUrlName } from 'helpers/functions'
 
 
-const ProductCardFooter = (props) => {
+type Props = {
+   productId: string
+   productName: string
+   productPrice: string
+   productIndex: number
+   iconBgColor: string
+   cartHandlerCB: (action?: 'load') => void
+   openModalHandlerCB: () => void
+}
+
+const ProductCardFooter = (props: Props) => {
    const {
       productId,
       productName,
@@ -20,12 +30,12 @@ const ProductCardFooter = (props) => {
    return (
       <div className={classes.Products_description}>
          <div>
-            <Link to={"/shop/product/" + productId}>{productName}</Link>
+            <Link to={formatUrlName(productName, productId)}>{productName}</Link>
             <p>$ {productPrice}</p>
          </div>
          <div>
             <FontAwesomeIcon
-               onClick={() => openModalHandlerCB(productIndex)}
+               onClick={openModalHandlerCB}
                icon="eye"
             />
             <FontAwesomeIcon

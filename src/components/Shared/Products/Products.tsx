@@ -3,7 +3,7 @@ import classes from './Products.module.css'
 
 import { useParams } from 'react-router-dom'
 
-import { ProductType, GalleryQty } from 'common/types'
+import { ProductType, GalleryQty, SearchParams, SearchTerms } from 'common/types'
 
 import productsData from 'Data/productsData'
 import LoadMoreProducts from './LoadMoreProducts/LoadMoreProducts'
@@ -31,9 +31,9 @@ const Products = (props: Props) => {
    const [count, setCount] = useState(0)
 
    const productsSubContainerRef = useRef<HTMLDivElement>(null)
-   const params: {searchKey: string, cat: string} = useParams()
+   const params = useParams<SearchParams>()
 
-   const mountProducts = (urlArg: 'searchKey' | 'cat') => {
+   const mountProducts = (urlArg: SearchTerms.SEARCH_KEY | SearchTerms.CAT) => {
       const currentProducts = [...productsData]
       let products: ProductType[] = []
       const productsId: string[] = []
@@ -85,8 +85,8 @@ const Products = (props: Props) => {
    }
 
    useEffect(() => {
-      if (params.searchKey) mountProducts('searchKey')
-      if (params.cat) mountProducts('cat')
+      if (params.searchKey) mountProducts(SearchTerms.SEARCH_KEY)
+      if (params.cat) mountProducts(SearchTerms.CAT)
    }, [params.searchKey])
 
    useEffect(() => {

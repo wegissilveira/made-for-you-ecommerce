@@ -216,3 +216,14 @@ export type ProductAction =
    | UpdateSize
    | UpdateQty
    | FinishUpdate
+
+
+export enum SearchTerms {
+   'SEARCH_KEY' = 'searchKey',
+   'CAT' = 'cat'
+}
+
+export type SearchParams = {
+   searchKey: SearchTerms.SEARCH_KEY
+   cat: SearchTerms.CAT
+}

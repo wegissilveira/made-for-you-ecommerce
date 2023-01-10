@@ -1,11 +1,16 @@
-import React from "react"
-
 import classes from './ProductsGallery.module.css'
+import { ProductType } from 'common/types'
 
 import ProductCard from 'components/Shared/Products/ProductsGallery/ProductCard/ProductCard'
 
 
-const ProductsGallery = (props) => {
+type Props = {
+   products: ProductType[]
+   count: number
+   productsSubContainerRef: React.RefObject<HTMLDivElement>
+}
+
+const ProductsGallery = (props: Props) => {
    const {
       products,
       count,
@@ -22,7 +27,7 @@ const ProductsGallery = (props) => {
                let productsList
                if (i + 1 <= count) {
                   productsList = <ProductCard
-                                    key={product + i}
+                                    key={product + '-' + i}
                                     product={product}
                                     index={i}
                                  />

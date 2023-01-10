@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 
 import classes from './ProductCard.module.css'
 
@@ -6,8 +6,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom'
+import { Dispatch } from 'redux';
 
-import { formatUrlName } from 'helpers/functions';
+import { ProductCartType, ProductType, InitialState } from 'common/types'
+
+import { formatUrlName } from 'helpers/functions'
 
 import ProductPageModal from 'components/Shop/ProductModal/ProductPageModal'
 import * as actionTypes from 'store/actions/actionTypes'
@@ -16,7 +19,16 @@ import cartListDataFn from 'Data/cartData'
 import ProductCardFooter from './ProductCardFooter/ProductCardFooter'
 
 
-const ProductCard = props => {
+type Props = {
+   wish: string[]
+   cart: ProductCartType[]
+   product: ProductType
+   index: number
+   onWishlistState: () => void
+   onCartListState: () => void
+}
+
+const ProductCard = (props: Props) => {
    const [showProduct, setShowProduct] = useState(false)
    const [prodExistsCart, setProdExistsCart] = useState(false)
 
@@ -31,8 +43,7 @@ const ProductCard = props => {
 
    const history = useHistory()
 
-   const wishlistHandler = id => {
-
+   const wishlistHandler = (id: string) => {
       let list = [...wish]
       if (list.includes(id)) {
          list = list.filter(item => item !== id)
@@ -41,20 +52,19 @@ const ProductCard = props => {
       }
 
       localStorage.setItem('wishlist', JSON.stringify(list))
-
       onWishlistState()
    }
 
-   const cartHandler = arg => {
+   const cartHandler = (action?: 'load') => {
       let cartList = [...cart]
-      let cartItemsList = []
+      let cartItemsList: string[] = []
       let count = 0
       cartList.forEach(item => {
          if (item._id === product._id) count++
          cartItemsList.push(item._id)
       })
 
-      if (arg === 'load') {
+      if (action === 'load') {
          if (cartItemsList.includes(product._id)) {
             setProdExistsCart(true)
          } else {
@@ -62,9 +72,9 @@ const ProductCard = props => {
          }
       }
 
-      if (arg !== 'load') {
+      if (action !== 'load') {
          if (count === 0) {
-            let productCart = {}
+            let productCart = {} as ProductCartType
 
             productCart._id = product._id
             productCart.qtde = 1
@@ -87,7 +97,7 @@ const ProductCard = props => {
       }
    }
 
-   const openModalHandler = i => {
+   const openModalHandler = () => {
       setShowProduct(!showProduct)
       document.body.style.overflow = "hidden"
       history.push("?productId=" + product._id)
@@ -100,7 +110,7 @@ const ProductCard = props => {
    }
 
    const wish_icon = wish.includes(product._id) ? 'fas' : 'far'
-   const bag_icon_color = prodExistsCart ? classes.Wishlist_icon_bag_selected : classes.Wishlist_icon_bag
+   const bag_icon_color: string = prodExistsCart ? classes.Wishlist_icon_bag_selected : classes.Wishlist_icon_bag
 
    useEffect(() => {
       cartHandler('load')
@@ -124,35 +134,33 @@ const ProductCard = props => {
                </div>
             </Link>
             <ProductCardFooter 
+               productId={product._id}
                productName={product.name}
                productPrice={product.price}
                productIndex={index}
                iconBgColor={bag_icon_color}
                cartHandlerCB={cartHandler}
-               openModalHandlerCB={i => openModalHandler(i)}
+               openModalHandlerCB={openModalHandler}
             />
          </div>
          <ProductPageModal
             showProduct={showProduct}
             setShowProduct={closeModalCallback}
             product={product}
-            wishlist={wish}
             imgs={product.imgsDemo}
-            name={product.name}
-            setProductOnCart={(arg) => setProdExistsCart(arg)}
          />
       </>
    )
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state: InitialState) => {
    return {
       wish: state.wishlistState,
       cart: state.cartListState
    }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch: Dispatch) => {
    return {
       onWishlistState: () => dispatch({ type: actionTypes.WISHLIST, value: wishlistDataFn() }),
       onCartListState: () => dispatch({ type: actionTypes.CARTLIST, value: cartListDataFn() })

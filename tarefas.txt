@@ -246,10 +246,10 @@ FASE 2 - Implementação do TypeScript - Estudar os artigos de typescript da mak
          - ProgressBar - OK
          - Spinner - OK
          - Toastify - OK
-      - Products:
+      - Products: - OK
          - CategoryHeader - OK
          - LoadMoreProducts - OK
-         - ProductsGallery
+         - ProductsGallery - OK
       - BestDealSection - OK
       - Cart: - OK
          - CartForm - OK

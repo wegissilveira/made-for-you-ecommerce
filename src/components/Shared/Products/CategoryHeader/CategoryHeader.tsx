@@ -1,7 +1,8 @@
 import { useParams } from "react-router-dom"
+import { SearchParams } from 'common/types'
 
 const CategoryHeader = () => {
-   const { searchKey, cat} = useParams<{searchKey: string, cat: string}>()
+   const { searchKey, cat} = useParams<SearchParams>()
 
    return (
       <>

@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { SearchTerms } from 'common/types'
+
 import Layout from './containers/Layout/Layout'
 import MainPageConfig from './containers/MainPageConfig/MainPageConfig'
 import ShopConfig from './containers/ShopConfig/ShopConfig'
@@ -45,6 +47,7 @@ import {
   faUser,
   faHeart as regularFaheart
 } from '@fortawesome/free-regular-svg-icons'
+import { SearchKeys } from 'common/types'
 
 library.add(
   fab,
@@ -83,9 +86,9 @@ function App() {
           <ScrollToTop />
           <Switch>
             <Route path="/" exact component={MainPageConfig} />
-            <Route path="/search/:searchKey" exact component={Products} />
+            <Route path={`/search/:${SearchTerms.SEARCH_KEY}`} exact component={Products} />
             <Route path="/shop/" exact component={ShopConfig} />
-            <Route path="/shop/:cat" exact component={Products} />
+            <Route path={`/shop/:${SearchTerms.CAT}`} exact component={Products} />
             <Route path="/product/:prodName" exact component={ProductPage} />
             <Route path="/cart/" exact component={Cart} />
             <Route path="/wishlist/" exact component={Wishlist} />
