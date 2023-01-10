@@ -6,8 +6,7 @@ import { Provider } from 'react-redux'
 
 import App from './App'
 
-import cartListDataFn from 'Data/cartData'
-import wishlistFn from 'Data/wishlistData';
+import { cartListDataFn, wishlistDataFn } from "services"
 import * as actionTypes from 'store/actions/actionTypes'
 import reducer from './store/reducers/reducer'
 
@@ -20,7 +19,7 @@ store.dispatch({
 
 store.dispatch({
   type: actionTypes.WISHLIST,
-  value: wishlistFn()
+  value: wishlistDataFn()
 })
 
 // ReactDOM.render(

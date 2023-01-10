@@ -7,7 +7,7 @@ import { Dispatch } from 'redux'
 import { connect } from 'react-redux'
 import * as actionTypes from 'store/actions/actionTypes'
 
-import cartListDataFn from 'Data/cartData'
+import { cartListDataFn } from "services"
 
 import { ProductCartType, InitialState, SetQty } from 'common/types';
 

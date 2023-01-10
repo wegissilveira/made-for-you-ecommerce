@@ -14,8 +14,7 @@ import { formatUrlName } from 'helpers/functions'
 
 import ProductPageModal from 'components/Shop/ProductModal/ProductPageModal'
 import * as actionTypes from 'store/actions/actionTypes'
-import wishlistDataFn from 'Data/wishlistData'
-import cartListDataFn from 'Data/cartData'
+import { cartListDataFn, wishlistDataFn } from "services"
 import ProductCardFooter from './ProductCardFooter/ProductCardFooter'
 
 
