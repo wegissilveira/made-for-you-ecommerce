@@ -124,6 +124,7 @@ const ProductCard = props => {
                </div>
             </Link>
             <ProductCardFooter 
+               productId={product._id}
                productName={product.name}
                productPrice={product.price}
                productIndex={index}

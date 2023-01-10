@@ -3,6 +3,7 @@ import classes from './ProductCardFooter.module.css'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from 'react-router-dom'
+import { formatUrlName } from 'helpers/functions'
 
 
 const ProductCardFooter = (props) => {
@@ -16,11 +17,10 @@ const ProductCardFooter = (props) => {
       openModalHandlerCB
    } = props
 
-
    return (
       <div className={classes.Products_description}>
          <div>
-            <Link to={"/shop/product/" + productId}>{productName}</Link>
+            <Link to={formatUrlName(productName, productId)}>{productName}</Link>
             <p>$ {productPrice}</p>
          </div>
          <div>
