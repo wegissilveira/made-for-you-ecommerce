@@ -47,7 +47,6 @@ import {
   faUser,
   faHeart as regularFaheart
 } from '@fortawesome/free-regular-svg-icons'
-import { SearchKeys } from 'common/types'
 
 library.add(
   fab,

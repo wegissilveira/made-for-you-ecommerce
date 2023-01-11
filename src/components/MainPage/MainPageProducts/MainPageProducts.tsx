@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import classes from './MainPageProducts.module.css'
 
 import { mountProducts } from "helpers/functions"
-import { ProductType } from 'common/types'
+import { ProductType, Tag } from 'common/types'
 
 import Products from 'components/Shared/Products/Products'
 import productsData from 'Data/productsData'
@@ -10,7 +10,7 @@ import MainPageProductsHeader from './MainPageProductsHeader/MainPageProductsHea
 
 
 const MainPageProducts = () => {
-   const [tag, setTag] = useState('all-products')
+   const [tag, setTag] = useState<Tag>('all-products')
    const [products, setProducts] = useState<ProductType[]>([])
    const [pageLimit, setPageLimit] = useState(8)
 
@@ -28,7 +28,7 @@ const MainPageProducts = () => {
       const filterObj = {
          tag,
          category: 'all'
-      }
+      } as const
 
       const mountedProducts = mountProducts(productsData, filterObj)
       setProducts(mountedProducts)
@@ -40,7 +40,7 @@ const MainPageProducts = () => {
          <h1>FEATURED PRODUCTS</h1>
          <p>Select a category using special switches or go to the section with a convenient filter by product</p>
          <MainPageProductsHeader 
-            setTagCB={(tag: string) => setTag(tag)}
+            setTagCB={(tag: Tag) => setTag(tag)}
          />
          <Products
             productsProps={products}

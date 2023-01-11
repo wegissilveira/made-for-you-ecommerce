@@ -7,7 +7,7 @@ import { UpdateProductValuesContext, ProductDataContext } from "components/Shop/
 
 import { connect } from 'react-redux'
 import { Dispatch } from "redux"
-import * as actionTypes from 'store/actions/actionTypes'
+import { ActionTypesGlobal } from 'store/actions/actionTypes'
 
 import { cartListDataFn, wishlistDataFn } from "services"
 
@@ -211,8 +211,8 @@ const mapStateToProps = (state: InitialState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
    return {
-      onWishlistState: () => dispatch({ type: actionTypes.WISHLIST, value: wishlistDataFn() }),
-      onCartListState: () => dispatch({ type: actionTypes.CARTLIST, value: cartListDataFn() })
+      onWishlistState: () => dispatch({ type: ActionTypesGlobal.WISHLIST, value: wishlistDataFn() }),
+      onCartListState: () => dispatch({ type: ActionTypesGlobal.CARTLIST, value: cartListDataFn() })
    }
 }
 

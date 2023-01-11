@@ -1,8 +1,9 @@
 import classes from './MainPageProductsHeader.module.css'
+import { Tag } from 'common/types'
 
 
 type Props = {
-   setTagCB: (tag: string) => void
+   setTagCB: (tag: Tag) => void
 }
 
 const MainPageProductsHeader = (props: Props) => {
@@ -10,7 +11,7 @@ const MainPageProductsHeader = (props: Props) => {
       setTagCB
    } = props
    
-   const setActiveTabHandler = (e: React.MouseEvent<HTMLDivElement>, tag: string) => {
+   const setActiveTabHandler = (e: React.MouseEvent<HTMLDivElement>, tag: Tag) => {
       const target = e.target as HTMLDivElement
 
       const container = target.closest('div[class^=MainPageProductsHeader_Products_select_container]')

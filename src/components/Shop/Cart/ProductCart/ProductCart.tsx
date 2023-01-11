@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { Dispatch } from 'redux'
 import { connect } from 'react-redux'
-import * as actionTypes from 'store/actions/actionTypes'
+import { ActionTypesGlobal } from 'store/actions/actionTypes'
 
 import { cartListDataFn } from "services"
 
@@ -102,11 +102,11 @@ const mapStateToProps = (state: InitialState) => {
 const mapDispatchToProps = (dispatch: Dispatch) => {
    return {
       onCartListState: () => dispatch({
-         type: actionTypes.CARTLIST,
+         type: ActionTypesGlobal.CARTLIST,
          value: cartListDataFn()
       }),
       onUpdateCartValueState: (newValue: number) => dispatch({
-         type: actionTypes.UPDATE_FINAL_VALUE,
+         type: ActionTypesGlobal.UPDATE_FINAL_VALUE,
          value: newValue
       })
    }

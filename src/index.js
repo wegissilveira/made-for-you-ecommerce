@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { createStore } from 'redux'
@@ -7,19 +6,19 @@ import { Provider } from 'react-redux'
 import App from './App'
 
 import { cartListDataFn, wishlistDataFn } from "services"
-import * as actionTypes from 'store/actions/actionTypes'
+import { ActionTypesGlobal } from 'store/actions/actionTypes'
 import reducer from './store/reducers/reducer'
 
 const store = createStore(reducer)
 
 store.dispatch({
-  type: actionTypes.CARTLIST,
-  value: cartListDataFn()
+  type: ActionTypesGlobal.CARTLIST,
+  cartList: cartListDataFn()
 })
 
 store.dispatch({
-  type: actionTypes.WISHLIST,
-  value: wishlistDataFn()
+  type: ActionTypesGlobal.WISHLIST,
+  wishlist: wishlistDataFn()
 })
 
 // ReactDOM.render(

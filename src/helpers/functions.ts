@@ -1,14 +1,53 @@
-export const mountProducts = (productsArg, filtersObj, currentFilterValue, currentFilter, isFilterOn) => {
+import { 
+   ProductType, 
+   ProductCartType,
+   Tag, 
+   Category, 
+   Order,
+   Offer,
+   ColorValues,
+   Color,
+   PriceRange,
+   FilterType, 
+   FilterBase 
+} from 'common/types'
+
+type FilterTypePartialProducts = Partial<FilterType> & {
+   tag: Tag
+   category: Category
+}
+
+type FilterTypePartialFilter = Partial<FilterType> & {
+   priceRange: PriceRange
+   color: ColorValues
+   offer: Offer[]
+   order: Order
+}
+
+type ProductQty = {
+   qty: number
+   id: string
+}
+
+export const mountProducts = (
+   productsArg: ProductType[], 
+   filtersObj: FilterTypePartialProducts, 
+   filter?: FilterBase,
+   isFilterOn?: boolean
+): ProductType[] => {
+
    let {
       tag,
       category
    } = filtersObj
 
-   if (currentFilter === 'tag') tag = currentFilterValue
-   if (currentFilter === 'category') category = currentFilterValue
+   if (filter) {
+      if (filter.type === 'tag') tag = filter.currentFilterValue
+      if (filter.type === 'category') category = filter.currentFilterValue
+   }
 
-   const currentProducts = isFilterOn ? mountFilters(productsArg, filtersObj) : [...productsArg]
-   let products = []
+   const currentProducts = isFilterOn ? mountFilters(productsArg, filtersObj as FilterTypePartialFilter) : [...productsArg]
+   let products: ProductType[] = []
    
    switch(true) {
       case (tag === 'all-products' && category === 'all') :
@@ -30,7 +69,13 @@ export const mountProducts = (productsArg, filtersObj, currentFilterValue, curre
    return products
 }
 
-export const mountFilters = (productsArg, filtersObj, currentFilterValue, currentFilter, isFilterTagOn) => {
+export const mountFilters = (
+   productsArg: ProductType[], 
+   filtersObj: FilterTypePartialFilter, 
+   filter?: FilterBase,
+   isFilterTagOn?: boolean
+): ProductType[] => {
+
    let {
       priceRange,
       color,
@@ -38,13 +83,15 @@ export const mountFilters = (productsArg, filtersObj, currentFilterValue, curren
       order
    } = filtersObj
 
-   if (currentFilter === 'priceRange') priceRange = currentFilterValue
-   if (currentFilter === 'color') color = currentFilterValue
-   if (currentFilter === 'offer') offer = currentFilterValue
-   if (currentFilter === 'order') order = currentFilterValue
+   if (filter) {
+      if (filter.type === 'priceRange') priceRange = filter.currentFilterValue
+      if (filter.type === 'color') color = filter.currentFilterValue
+      if (filter.type === 'offer') offer = filter.currentFilterValue
+      if (filter.type === 'order') order = filter.currentFilterValue
+   }
 
    const currentProducts = [...productsArg]
-   let products
+   let products: ProductType[] = []
 
    if (priceRange) {
       products = currentProducts.filter(product => 
@@ -52,7 +99,7 @@ export const mountFilters = (productsArg, filtersObj, currentFilterValue, curren
       )
    }
 
-   if (color.currentColor && color.currentColor !== '') {
+   if (color.currentColor && color.currentColor !== '' as Color) {
       products = products.filter(product =>
          product.colors.includes(color.currentColor)
       )
@@ -82,7 +129,7 @@ export const mountFilters = (productsArg, filtersObj, currentFilterValue, curren
    }
 
    if (isFilterTagOn) {
-      return mountProducts(products, filtersObj)
+      return mountProducts(products, filtersObj as FilterTypePartialProducts)
    } else {
       return products
    }
@@ -93,16 +140,16 @@ export const verifyCheckout = () => {
    return isCheckout
 }
 
-export const formatUrlName = (str, id) => {
+export const formatUrlName = (str: string, id: string) => {
    const url = `/product/${str.replaceAll(/\W+/g, '-')}/?productId=${id}`
    return url
 }
 
-export const setCartTotalValue = (cart) => {
+export const setCartTotalValue = (cart: ProductCartType[]) => {
    const buildQtyArr = () => {
-      const arrQty = []      
+      const arrQty: ProductQty[] = []          
       cart.forEach((item) => {
-         const productsQty = {}
+         const productsQty = {} as ProductQty
          productsQty.qty = item.qtde
          productsQty.id = item._id
          arrQty.push(productsQty)
@@ -111,7 +158,7 @@ export const setCartTotalValue = (cart) => {
       return calculateTotalValue(arrQty)
    }
 
-   const calculateTotalValue = (prodQty) => {
+   const calculateTotalValue = (prodQty: ProductQty[]) => {
       let fullPrice = 0
 
       cart.forEach(prod => {

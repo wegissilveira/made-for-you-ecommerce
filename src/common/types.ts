@@ -1,5 +1,6 @@
 import { ActionTypeFilter } from "components/Shop/Filter/context/actionTypes"
 import { ActionTypesProduct } from "components/Shop/ProductPage/context/actionTypes"
+import { ActionTypesGlobal } from 'store/actions/actionTypes'
 
 type RGB = `rgb(${number}, ${number}, ${number})`
 export type HEX = `#${string}`
@@ -11,12 +12,12 @@ export type ColorValues = {
 
 export type Offer = 
    | 'new' 
-   | 'old' 
-   | 'best-seller' 
+   | 'old'
+   | 'best-seller'
    | 'sales'
 
 export type Category = 
-   | 'bathroom' 
+   | 'bathroom'
    | 'living-room' 
    | 'kitchen' 
    | 'furniture' 
@@ -37,6 +38,15 @@ export type Order =
    | 'low-high' 
    | 'high-low' 
    | 'alphabetical'
+
+export enum FilterValues {
+   CATEGORY = 'category',
+   TAG = 'tag',
+   ORDER = 'order',
+   OFFER = 'offer',
+   COLOR = 'color',
+   PRICE_RANGE = 'priceRange',
+}
 
 export type SliderDirection = 'next' | 'previous'
 
@@ -117,6 +127,11 @@ export type OfferOptions = {
    title: string
 } 
 
+export type PriceRange = {
+   minValue: number,
+   maxValue: number
+}
+
 export type FilterType = {
    productsState: ProductType[]
    tag: Tag
@@ -132,10 +147,43 @@ export type FilterType = {
    isFilterTagOn: boolean
 }
 
-export type PriceRange = {
-   minValue: number,
-   maxValue: number
+export type FilterTag = {
+   currentFilterValue: Tag,
+   type: FilterValues.TAG
 }
+
+export type FilterCat = {
+   currentFilterValue: Category,
+   type: FilterValues.CATEGORY
+}
+
+export type FilterOrder = {
+   currentFilterValue: Order,
+   type: FilterValues.ORDER
+}
+
+export type FilterOffer = {
+   currentFilterValue: Offer[],
+   type: FilterValues.OFFER
+}
+
+export type FilterColor = {
+   currentFilterValue: ColorValues,
+   type: FilterValues.COLOR
+}
+
+export type FilterPrice = {
+   currentFilterValue: PriceRange,
+   type: FilterValues.PRICE_RANGE
+}
+
+export type FilterBase = 
+   | FilterTag
+   | FilterCat   
+   | FilterOrder
+   | FilterOffer 
+   | FilterColor
+   | FilterPrice
 
 type SetTag = {
    type: ActionTypeFilter.SET_TAG
@@ -227,3 +275,23 @@ export type SearchParams = {
    searchKey: SearchTerms.SEARCH_KEY
    cat: SearchTerms.CAT
 }
+
+type UpdateWishlist = {
+   type: ActionTypesGlobal.WISHLIST
+   wishlist: string[]
+}
+
+type updateCart = {
+   type: ActionTypesGlobal.CARTLIST
+   cartList: ProductCartType[]
+}
+
+type UpdateFinalValue = {
+   type: ActionTypesGlobal.UPDATE_FINAL_VALUE
+   totalCartValue: number
+}
+
+export type GlobaAction = 
+   | UpdateWishlist
+   | updateCart
+   | UpdateFinalValue

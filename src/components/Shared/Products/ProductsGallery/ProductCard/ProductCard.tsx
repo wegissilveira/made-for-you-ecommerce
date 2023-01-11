@@ -13,7 +13,7 @@ import { ProductCartType, ProductType, InitialState } from 'common/types'
 import { formatUrlName } from 'helpers/functions'
 
 import ProductPageModal from 'components/Shop/ProductModal/ProductPageModal'
-import * as actionTypes from 'store/actions/actionTypes'
+import { ActionTypesGlobal } from 'store/actions/actionTypes'
 import { cartListDataFn, wishlistDataFn } from "services"
 import ProductCardFooter from './ProductCardFooter/ProductCardFooter'
 
@@ -161,8 +161,8 @@ const mapStateToProps = (state: InitialState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
    return {
-      onWishlistState: () => dispatch({ type: actionTypes.WISHLIST, value: wishlistDataFn() }),
-      onCartListState: () => dispatch({ type: actionTypes.CARTLIST, value: cartListDataFn() })
+      onWishlistState: () => dispatch({ type: ActionTypesGlobal.WISHLIST, value: wishlistDataFn() }),
+      onCartListState: () => dispatch({ type: ActionTypesGlobal.CARTLIST, value: cartListDataFn() })
    }
 }
 
