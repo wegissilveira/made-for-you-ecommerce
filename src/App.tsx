@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { SearchTerms } from 'common/types'
 
 import Layout from './containers/Layout/Layout'
@@ -83,18 +81,18 @@ function App() {
       <BrowserRouter >    
         <Layout>
           <ScrollToTop />
-          <Switch>
-            <Route path="/" exact component={MainPageConfig} />
-            <Route path={`/search/:${SearchTerms.SEARCH_KEY}`} exact component={Products} />
-            <Route path="/shop/" exact component={ShopConfig} />
-            <Route path={`/shop/:${SearchTerms.CAT}`} exact component={Products} />
-            <Route path="/product/:prodName" exact component={ProductPage} />
-            <Route path="/cart/" exact component={Cart} />
-            <Route path="/wishlist/" exact component={Wishlist} />
-            <Route path="/user-login/" exact component={UserLogin} />
-            <Route path="/user-signup/" exact component={UserSignUp} />
-            <Route path="/contact/" exact component={Contact} />
-          </Switch>
+            <Switch>
+              <Route path="/" exact component={MainPageConfig} />
+              <Route path={`/search/:${SearchTerms.SEARCH_KEY}`} exact component={Products} />
+              <Route path="/shop/" exact component={ShopConfig} />
+              <Route path={`/shop/:${SearchTerms.CAT}`} exact component={Products} />
+              <Route path="/product/:prodName" exact component={ProductPage} />
+              <Route path="/cart/" exact component={Cart} />
+              <Route path="/wishlist/" exact component={Wishlist} />
+              <Route path="/user-login/" exact component={UserLogin} />
+              <Route path="/user-signup/" exact component={UserSignUp} />
+              <Route path="/contact/" exact component={Contact} />
+            </Switch>
         </Layout>
       </BrowserRouter>
   );

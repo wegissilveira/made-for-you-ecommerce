@@ -283,10 +283,12 @@ FASE 2 - Implementação do TypeScript - Estudar os artigos de typescript da mak
          - useCallResizeWarning - OK
          - useProduct - OK
          - useSetPageTop - OK
-      - helpers
+      - helpers - OK
       - store redux: - OK
          - actions - OK
          - reducers - OK
+      - Services: - OK
+      - Data: - OK
 
 
 
@@ -301,12 +303,16 @@ FASE 2 - Implementação do TypeScript - Estudar os artigos de typescript da mak
          - https://stackoverflow.com/questions/69141635/how-to-convert-rgb-color-to-color-name-string-in-javascript
       -> Height da galeria não se adapta quando filtro é escolhido ou removido
          - Buscar uma maneira de executar a função de resize nesse contexto
-      -> Quando se adiciona ou remove um produto no carrinho um erro é mostrado no terminal
-      -> Quando se adiciona ou remove um item na wishlist a loja quebra
+      -> (BUG): Quando se adiciona ou remove um produto no carrinho um erro é mostrado no terminal
+      -> (BUG): Quando se adiciona ou remove um item na wishlist a loja quebra
+      -> (BUG): ScrollToTop não funciona. Página não vai para o topo após mudar a rota:
+         - Link da pergunta que gerou o HOC: https://stackoverflow.com/questions/64361996/react-router-scroll-page-to-the-top-after-transition
+         - OBS.: Esse componente não é um HOC. Encaixá-o em outro lugar
 
 
 
       *****APÓS REFATORAMENTO*****
+      -> Analisar o hook mantine de trancar o Scroll. Acho que tenho algo assim em algum lugar no body usando manipulação de dom, mas também analisar como o hook funciona
 
 
 
