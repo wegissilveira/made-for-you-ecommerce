@@ -103,11 +103,11 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
    return {
       onCartListState: () => dispatch({
          type: ActionTypesGlobal.CARTLIST,
-         value: cartListDataFn()
+         cartList: cartListDataFn()
       }),
       onUpdateCartValueState: (newValue: number) => dispatch({
          type: ActionTypesGlobal.UPDATE_FINAL_VALUE,
-         value: newValue
+         totalCartValue: newValue
       })
    }
 }

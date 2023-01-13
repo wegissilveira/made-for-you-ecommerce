@@ -293,18 +293,11 @@ FASE 2 - Implementação do TypeScript - Estudar os artigos de typescript da mak
 
 
       - Ajustes pontuais:
-      -> (BUG): Na PDP ícone de favoritar (coração) invertido quando o produto está ou não na lista de favoritos
       -> (MELHORIA): Inserir o tipo Color onde for necessário
       -> (MELHORIA): Passar as cores do filtro para ColorSelect como props
       -> (BUG): Analisar erro de websocked failed e key is not a prop
-      -> (BUG): Converter color HEX para texto na exibição no carrinho (e em qualquer outro lugar que precise)
-         - Parece que não há uma maneira nativa, é necessário usar uma lista e comparar
-         - https://github.com/bahamas10/css-color-names/blob/master/css-color-names.json
-         - https://stackoverflow.com/questions/69141635/how-to-convert-rgb-color-to-color-name-string-in-javascript
       -> Height da galeria não se adapta quando filtro é escolhido ou removido
          - Buscar uma maneira de executar a função de resize nesse contexto
-      -> (BUG): Quando se adiciona ou remove um produto no carrinho um erro é mostrado no terminal
-      -> (BUG): Quando se adiciona ou remove um item na wishlist a loja quebra
       -> (BUG): ScrollToTop não funciona. Página não vai para o topo após mudar a rota:
          - Link da pergunta que gerou o HOC: https://stackoverflow.com/questions/64361996/react-router-scroll-page-to-the-top-after-transition
          - OBS.: Esse componente não é um HOC. Encaixá-o em outro lugar
@@ -317,6 +310,8 @@ FASE 2 - Implementação do TypeScript - Estudar os artigos de typescript da mak
 
 
       *****PRÓXIMOS NA FILA****  
+      -> (MELHORIA) Criar tipo para objeto de cores no fetch
+         -> Remover any da função do fetch em ProductCartDetails
 
 
 
@@ -331,7 +326,11 @@ FASE 2 - Implementação do TypeScript - Estudar os artigos de typescript da mak
 
 
       *****FEITOS****  
-      -> (MELHORIA TIPAGEM): Criar tipagem de cores
+      -> (MELHORIA TIPAGEM): Criar tipagem de cores - OK
+      -> (BUG): Quando se adiciona ou remove um produto no carrinho um erro é mostrado no terminal - OK
+      -> (BUG): Quando se adiciona ou remove um item na wishlist a loja quebra - OK
+      -> (BUG): Na PDP ícone de favoritar (coração) invertido quando o produto está ou não na lista de favoritos - OK
+      -> (BUG): Converter color HEX para texto na exibição no carrinho (e em qualquer outro lugar que precise) - OK
 
 
 

@@ -28,8 +28,8 @@ type Props = {
 }
 
 enum IconValues {
-   EMPTY_HEART = 'fas',
-   FULL_HEART = 'far'
+   EMPTY_HEART = 'far',
+   FULL_HEART = 'fas'
 }
 
 type Icon = IconValues.EMPTY_HEART | IconValues.FULL_HEART
@@ -211,8 +211,8 @@ const mapStateToProps = (state: InitialState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
    return {
-      onWishlistState: () => dispatch({ type: ActionTypesGlobal.WISHLIST, value: wishlistDataFn() }),
-      onCartListState: () => dispatch({ type: ActionTypesGlobal.CARTLIST, value: cartListDataFn() })
+      onWishlistState: () => dispatch({ type: ActionTypesGlobal.WISHLIST, wishlist: wishlistDataFn() }),
+      onCartListState: () => dispatch({ type: ActionTypesGlobal.CARTLIST, cartList: cartListDataFn() })
    }
 }
 

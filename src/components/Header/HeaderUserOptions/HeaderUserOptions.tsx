@@ -19,7 +19,7 @@ const HeaderUserOptions = (props: Props) => {
       cart,
       wish
    } = props
-
+   
    const bagColor = cart.length > 0 ? 'green' : 'grey'
    const heartColor = wish.length > 0 ? 'red' : 'grey'
 
