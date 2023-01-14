@@ -5,6 +5,7 @@ import { ProductType, Color, HEX } from 'common/types'
 
 import { UpdateFilterListContext } from 'components/Shop/Filter/context/FilterContext'
 import { UpdateProductValuesContext, ProductDataContext } from "components/Shop/ProductPage/context/ProductContext"
+import useSetGalleryFilterHeight from "hooks/useSetGalleryFilterHeight"
 
 
 type ColorEl = {
@@ -19,19 +20,10 @@ type ColorLoad = {
 
 type ColorAction = ColorEl | ColorLoad
 
-type Filter = {
-   filter: true 
-   setGalleryHeightCB: () => void
-}
-
-type NotFilter = {
-   filter: false 
-}
-
 type Props = {
    product?: ProductType
    title?: string
-   isFilter: Filter | NotFilter 
+   isFilter: boolean 
 }
 
 const ColorSelect = (props: Props) => {
@@ -46,6 +38,7 @@ const ColorSelect = (props: Props) => {
    const { updateFilterColor } = useContext(UpdateFilterListContext)
    const { updateColor } = useContext(UpdateProductValuesContext)
    const { productColor } = useContext(ProductDataContext)   
+   const setGalleryHeight = useSetGalleryFilterHeight()
 
    const didMountRef = useRef(false)
 
@@ -94,11 +87,11 @@ const ColorSelect = (props: Props) => {
    
          bulletBorder.className = [classes['Color-bullet'], classes['Active-bullet']].join(' ')
    
-         if (isFilter.filter) {
-            isFilter.setGalleryHeightCB()
+         if (isFilter) {
+            setGalleryHeight()
             updateColorStateHandler(colors.color)
          } 
-         if (!isFilter.filter) updateColor(colors.color, true)
+         if (!isFilter) updateColor(colors.color, true)
       }
    }
 

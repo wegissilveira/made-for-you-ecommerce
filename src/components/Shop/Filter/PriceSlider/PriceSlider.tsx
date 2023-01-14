@@ -10,21 +10,13 @@ import classes from './PriceSlider.module.css'
 import { FilterDataContext } from '../context/FilterContext'
 
 import { UpdateFilterListContext } from "../context/FilterContext"
-
+import useSetGalleryFilterHeight from "hooks/useSetGalleryFilterHeight"
 import { initial_min_value, initial_max_value } from '../helpers/values'
 
 
-type Props = {
-   setGalleryHeightCB: () => void
-}
-
 const initial_position = 0 // => Valor inicial do thumb esquerdo ***
 
-const PriceSlider = (props: Props) => {
-   const {
-      setGalleryHeightCB
-   } = props
-
+const PriceSlider = () => {
    const [slider_width, setSliderWidth] = useState(0)
    const [min_value, setMinValue] = useState(initial_min_value)
    const [max_value, setMaxValue] = useState(initial_max_value)
@@ -39,6 +31,7 @@ const PriceSlider = (props: Props) => {
 
    const { updatePrice } = useContext(UpdateFilterListContext)
    const {isFilterOn, isFilterTagOn} = useContext(FilterDataContext)
+   const setGalleryHeight = useSetGalleryFilterHeight()
 
 
    const beginSliding = (e: React.PointerEvent<HTMLSpanElement>) => {
@@ -96,7 +89,7 @@ const PriceSlider = (props: Props) => {
             updatePrice(priceRange)
             setMaxValue(maxValue)
             setValueMobileThumb2(current_position)
-            setGalleryHeightCB()
+            setGalleryHeight()
          }
    
          if (thumb_id === 'left-thumb') {
@@ -123,7 +116,7 @@ const PriceSlider = (props: Props) => {
             updatePrice(priceRange)
             setMinValue(minValue)
             setValueMobileThumb1(current_position)
-            setGalleryHeightCB()
+            setGalleryHeight()
          }
    
          // slider.style.transform = `translate(${current_position}px)`

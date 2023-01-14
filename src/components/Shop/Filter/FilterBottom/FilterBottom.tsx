@@ -2,11 +2,13 @@ import { useContext } from "react"
 import classes from './FilterBottom.module.css'
 
 import { UpdateFilterListContext } from "../context/FilterContext"
+import useSetGalleryFilterHeight from "hooks/useSetGalleryFilterHeight"
 
 const filterButtonStyle = [classes.Filter_button, classes.Filter_button_active]
 
 const FilterBottom = () => {
    const { setDefaultValues } = useContext(UpdateFilterListContext)
+   const setGalleryHeight = useSetGalleryFilterHeight()
 
    const cleanFiltersHandler = () => {
       const selectList = Array.from(document.getElementById('order-filter-wrapper')!.children) as HTMLOptionElement[]
@@ -53,6 +55,7 @@ const FilterBottom = () => {
 
       colorInput.checked = false      
       setDefaultValues()
+      setGalleryHeight()
    }
 
 

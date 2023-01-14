@@ -295,7 +295,6 @@ FASE 2 - Implementação do TypeScript - Estudar os artigos de typescript da mak
 
       - Ajustes pontuais:
       -> (BUG): Analisar erro de websocked failed e key is not a prop
-      -> (BUG): Entender e resolver 'ref is not a prop' que aparece no console
       -> (MELHORIA) Criar tipo para objeto de cores no fetch - Ler artigos de fetch primeiro
          -> Remover any da função do fetch em ProductCartDetails
 
@@ -310,13 +309,17 @@ FASE 2 - Implementação do TypeScript - Estudar os artigos de typescript da mak
 
 
       *****PRÓXIMOS NA FILA**** 
+      -> (BUG): Entender e resolver 'ref is not a prop' que aparece no console
+         - Analisar se fowardRef é aplicável aqui. Eu estou passando várias refs como props
       -> (BUG): Corrigir resize filter no mobile
-      
+
 
 
 
       *****EM EXECUÇÃO**** 
-      -> (BUG): Inserir resize do filtro no botão de limpar o filtro
+      -> (BUG): Quando o filtro é fechado após um item ser aplicado a altura volta sempre pra altura anterior a escolha do item, como se a nova altura estivesse sendo ignorada.
+         - Provavelmente alguma state não sendo atualizada
+      
       
 
 

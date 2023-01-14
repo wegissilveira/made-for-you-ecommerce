@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react"
 
 import { GalleryQty } from "common/types"
 
-const useCallResizeWarning = (filterRef: React.RefObject<HTMLDivElement>, containerRef: React.RefObject<HTMLDivElement>, filterOpen: boolean) => {
+const useCallResizeWarning = (filterRef?: React.RefObject<HTMLDivElement>, containerRef?: React.RefObject<HTMLDivElement>, filterOpen?: boolean) => {
    const [openToastify, setOpenToastify] = useState(false)
    const [resize, setResize] = useState(true)
    const [containerHeight, setContainerHeight] = useState(0)
@@ -11,15 +11,15 @@ const useCallResizeWarning = (filterRef: React.RefObject<HTMLDivElement>, contai
 
 
    const containerHeightHandler = (cHeight = containerHeight, fHeight = filter_height, open = filterOpen, addRow?: [GalleryQty, number]) => {
-      let height: number = containerHeight
-
+      let height: number = cHeight      
+      
       if (addRow) {
          switch (addRow[0]) {
             case 'more':
-               height = containerHeight + addRow[1]
+               height = cHeight + addRow[1]
                break
             case 'less':
-               height = containerHeight - addRow[1]
+               height = cHeight - addRow[1]
                break
             case 'filter':
                height = addRow[1]
@@ -28,9 +28,12 @@ const useCallResizeWarning = (filterRef: React.RefObject<HTMLDivElement>, contai
                return
          }
       } else {
-         height = open ? containerHeight + fHeight : cHeight - fHeight
+         height = open ? cHeight + fHeight : cHeight - fHeight
       }
-
+      console.log('HOOK OPEN HEIGHT: ', height);
+      console.log('HOOK OPEN: ', open);
+      console.log('HOOK containerHeight: ', containerHeight);
+      
       setContainerHeight(height)
    }
 
@@ -44,18 +47,22 @@ const useCallResizeWarning = (filterRef: React.RefObject<HTMLDivElement>, contai
    }
 
    const reportWindowSize = () => {
-      if (filterRef.current) {
-         const fHeight = filterRef.current.offsetHeight
-
-         setTranslateValue(-fHeight)
-         setFilterHeight(fHeight)
-
-         setTimeout(() => {
-            if (containerRef.current) {
-               const containerHeight = containerRef.current.offsetHeight
-               containerHeightHandler(containerHeight, fHeight)
+      if  (filterRef) {
+         if (filterRef.current) {
+            const fHeight = filterRef.current.offsetHeight
+   
+            setTranslateValue(-fHeight)
+            setFilterHeight(fHeight)
+   
+            if (containerRef) {
+               setTimeout(() => {
+                  if (containerRef.current) {
+                     const containerHeight = containerRef.current.offsetHeight
+                     containerHeightHandler(containerHeight, fHeight)
+                  }
+               }, 30)
             }
-         }, 30)
+         }
       }
    }
 
@@ -92,12 +99,14 @@ const useCallResizeWarning = (filterRef: React.RefObject<HTMLDivElement>, contai
    }, [])
 
    useEffect(() => {
-      if (containerRef.current) {
-         const body = document.getElementsByTagName('BODY')[0]
-         if (resize) {
-            observer.current.observe(body)
-         } else {
-            observer.current.unobserve(body)
+      if (containerRef) {
+         if (containerRef.current) {
+            const body = document.getElementsByTagName('BODY')[0]
+            if (resize) {
+               observer.current.observe(body)
+            } else {
+               observer.current.unobserve(body)
+            }
          }
       }
    })

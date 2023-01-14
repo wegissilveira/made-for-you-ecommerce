@@ -172,7 +172,7 @@ const ProductInfoBody = (props: Props) => {
          <div className={classes.Product_details_container}>
             <SKUSizeSelector productCartDetails={productCart} />
             <ColorSelect
-               isFilter={{filter: false}}
+               isFilter={false}
                title={'Color'}
                product={product}
             />

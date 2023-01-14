@@ -75,6 +75,7 @@ const Filter = () => {
             open={openToastify}
          />
          <div 
+            id="filter-container"
             className={classes.Filter_container} 
             ref={containerRef} 
             style={containerStyle}
@@ -88,7 +89,7 @@ const Filter = () => {
                   className={classes.Filter_subContainer}
                   ref={filterRef}
                >
-                  <FilterBody containerHeightFN={containerHeightHandler} />
+                  <FilterBody />
                   <FilterBottom/>
                </div>
                <Products

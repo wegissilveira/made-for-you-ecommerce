@@ -7,6 +7,8 @@ import { UpdateFilterListContext } from "../context/FilterContext"
 
 import { Tag, Category, OfferOptions, GalleryQty } from "common/types"
 
+import useSetGalleryFilterHeight from "hooks/useSetGalleryFilterHeight"
+
 import PriceSlider from 'components/Shop/Filter/PriceSlider/PriceSlider'
 import FilterCheckbox from 'components/Shop/Filter/FilterCheckbox/FilterCheckbox'
 import FilterColorSelector from 'components/Shop/Filter/FilterColorSelector/FilterColorSelector'
@@ -29,10 +31,6 @@ enum TagType {
    DEP_TYPE = 'department',
 }
 
-type Props = {
-   containerHeightFN: (cHeight?: number, fHeight?: number, open?: boolean, addRow?: [GalleryQty, number]) => void
-}
-
 const checkboxItems: OfferOptions[] = [
    {value: 'new', title: 'New Products'},
    {value: 'old', title: 'Old Products'},
@@ -40,13 +38,9 @@ const checkboxItems: OfferOptions[] = [
    {value: 'sales', title: 'Sales'},
 ]
 
-const _ = undefined
-const FilterBody = (props: Props) => {
-   const {
-      containerHeightFN
-   } = props
-
+const FilterBody = () => {
    const { updateTag, updateCategory } = useContext(UpdateFilterListContext)
+   const setGalleryHeight = useSetGalleryFilterHeight()
 
    // Categorias
    let categoriesTotalQtde = 0
@@ -109,18 +103,6 @@ const FilterBody = (props: Props) => {
       }
    })
 
-   const setGalleryHeightHandler = () => {
-      const containerEl = document.getElementById('gallery-container') as HTMLDivElement
-      const productCardStyle = window.getComputedStyle(containerEl)
-
-      setTimeout(() => {
-         const productCardHeight = parseInt((productCardStyle.height).match(/\d+/)![0])
-         const productCardMarginTop = parseInt((productCardStyle.marginTop).match(/\d+/)![0])
-         const productCardFullHeight = productCardHeight + productCardMarginTop + 478
-         containerHeightFN(_, _, _, ['filter', productCardFullHeight + 20])
-      }, 1)
-   }
-
    const setProductTagHandler = (e: React.MouseEvent<HTMLParagraphElement>, type: Type) => {
       type.type === TagType.CAT_TYPE ? updateCategory(type.tag) : updateTag(type.tag)
 
@@ -132,7 +114,7 @@ const FilterBody = (props: Props) => {
 
       changeTagEl.className = classes.Selected
 
-      setGalleryHeightHandler()
+      setGalleryHeight()
    }
 
    return (
@@ -157,13 +139,11 @@ const FilterBody = (props: Props) => {
             <p onClick={e => setProductTagHandler(e, {type: TagType.DEP_TYPE, tag: 'lightning'})}>Lighting ({lightingQtde}) </p>
          </div>
          <span></span>
-         <FilterCheckbox
-            checkboxItems={checkboxItems} setGalleryHeightCB={setGalleryHeightHandler}
-         />
+         <FilterCheckbox checkboxItems={checkboxItems} />
          <span></span>
-         <FilterColorSelector setGalleryHeightCB={setGalleryHeightHandler} />
+         <FilterColorSelector/>
          <span></span>
-         <PriceSlider setGalleryHeightCB={setGalleryHeightHandler} />
+         <PriceSlider />
       </div>
    )
 }

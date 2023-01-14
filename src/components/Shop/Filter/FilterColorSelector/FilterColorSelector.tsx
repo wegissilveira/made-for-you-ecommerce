@@ -2,23 +2,16 @@ import { useContext } from "react"
 import classes from './FilterColorSelector.module.css'
 
 import { UpdateFilterListContext, FilterDataContext } from "../context/FilterContext"
-
+import useSetGalleryFilterHeight from "hooks/useSetGalleryFilterHeight"
 import { Color } from "common/types"
 
 import ColorSelect from 'components/Shared/UI/ColorSelect/ColorSelect'
 
 
-type Props = {
-   setGalleryHeightCB: () => void
-}
-
-const FilterColorSelector = (props: Props) => {
-   const {
-      setGalleryHeightCB
-   } = props
-
+const FilterColorSelector = () => {
    const { updateFilterColor } = useContext(UpdateFilterListContext)
    const filterReducerState = useContext(FilterDataContext)
+   const setGalleryHeight = useSetGalleryFilterHeight()
 
    const lastSelectedColorHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
       const isAllColorsChecked = e.target.checked
@@ -28,7 +21,7 @@ const FilterColorSelector = (props: Props) => {
       }
       
       updateFilterColor(checked)
-      setGalleryHeightCB()
+      setGalleryHeight()
    }
 
    return (
@@ -42,9 +35,7 @@ const FilterColorSelector = (props: Props) => {
             />
             <label htmlFor="all-colors-input">All available colors</label>
          </div>
-         <ColorSelect
-            isFilter={{filter: true, setGalleryHeightCB}}
-         />
+         <ColorSelect isFilter={true} />
       </div>
    )
 }
