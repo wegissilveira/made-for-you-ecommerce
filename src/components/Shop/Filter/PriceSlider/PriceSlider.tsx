@@ -14,9 +14,17 @@ import { UpdateFilterListContext } from "../context/FilterContext"
 import { initial_min_value, initial_max_value } from '../helpers/values'
 
 
+type Props = {
+   setGalleryHeightCB: () => void
+}
+
 const initial_position = 0 // => Valor inicial do thumb esquerdo ***
 
-const PriceSlider = () => {
+const PriceSlider = (props: Props) => {
+   const {
+      setGalleryHeightCB
+   } = props
+
    const [slider_width, setSliderWidth] = useState(0)
    const [min_value, setMinValue] = useState(initial_min_value)
    const [max_value, setMaxValue] = useState(initial_max_value)
@@ -88,6 +96,7 @@ const PriceSlider = () => {
             updatePrice(priceRange)
             setMaxValue(maxValue)
             setValueMobileThumb2(current_position)
+            setGalleryHeightCB()
          }
    
          if (thumb_id === 'left-thumb') {
@@ -114,6 +123,7 @@ const PriceSlider = () => {
             updatePrice(priceRange)
             setMinValue(minValue)
             setValueMobileThumb1(current_position)
+            setGalleryHeightCB()
          }
    
          // slider.style.transform = `translate(${current_position}px)`

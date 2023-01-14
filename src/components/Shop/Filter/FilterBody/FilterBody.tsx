@@ -5,7 +5,7 @@ import productsData from 'Data/productsData'
 
 import { UpdateFilterListContext } from "../context/FilterContext"
 
-import { Tag, Category, OfferOptions } from "common/types"
+import { Tag, Category, OfferOptions, GalleryQty } from "common/types"
 
 import PriceSlider from 'components/Shop/Filter/PriceSlider/PriceSlider'
 import FilterCheckbox from 'components/Shop/Filter/FilterCheckbox/FilterCheckbox'
@@ -29,6 +29,10 @@ enum TagType {
    DEP_TYPE = 'department',
 }
 
+type Props = {
+   containerHeightFN: (cHeight?: number, fHeight?: number, open?: boolean, addRow?: [GalleryQty, number]) => void
+}
+
 const checkboxItems: OfferOptions[] = [
    {value: 'new', title: 'New Products'},
    {value: 'old', title: 'Old Products'},
@@ -36,7 +40,12 @@ const checkboxItems: OfferOptions[] = [
    {value: 'sales', title: 'Sales'},
 ]
 
-const FilterBody = () => {
+const _ = undefined
+const FilterBody = (props: Props) => {
+   const {
+      containerHeightFN
+   } = props
+
    const { updateTag, updateCategory } = useContext(UpdateFilterListContext)
 
    // Categorias
@@ -100,7 +109,19 @@ const FilterBody = () => {
       }
    })
 
-   const setProductTag = (e: React.MouseEvent<HTMLParagraphElement>, type: Type) => {
+   const setGalleryHeightHandler = () => {
+      const containerEl = document.getElementById('gallery-container') as HTMLDivElement
+      const productCardStyle = window.getComputedStyle(containerEl)
+
+      setTimeout(() => {
+         const productCardHeight = parseInt((productCardStyle.height).match(/\d+/)![0])
+         const productCardMarginTop = parseInt((productCardStyle.marginTop).match(/\d+/)![0])
+         const productCardFullHeight = productCardHeight + productCardMarginTop + 478
+         containerHeightFN(_, _, _, ['filter', productCardFullHeight + 20])
+      }, 1)
+   }
+
+   const setProductTagHandler = (e: React.MouseEvent<HTMLParagraphElement>, type: Type) => {
       type.type === TagType.CAT_TYPE ? updateCategory(type.tag) : updateTag(type.tag)
 
       const changeTagEl = e.target as HTMLDivElement
@@ -110,37 +131,39 @@ const FilterBody = () => {
       })
 
       changeTagEl.className = classes.Selected
+
+      setGalleryHeightHandler()
    }
 
    return (
       <div className={classes.Filter_Blocks}>
          <div id="categories-wrapper">
             <h6>CATEGORIES</h6>
-            <p className={classes.Selected} onClick={e => setProductTag(e, {type: TagType.CAT_TYPE, tag: 'all'})}>All categories ({categoriesTotalQtde}) </p>
-            <p onClick={e => setProductTag(e, {type: TagType.CAT_TYPE, tag: 'all'})}>Bedroom ({bedRoomQtde}) </p>
-            <p onClick={e => setProductTag(e, {type: TagType.CAT_TYPE, tag: 'living-room'})}>Living room ({livingRoomQtde}) </p>
-            <p onClick={e => setProductTag(e, {type: TagType.CAT_TYPE, tag: 'kitchen'})}>Kitchen ({kitchen}) </p>
-            <p onClick={e => setProductTag(e, {type: TagType.CAT_TYPE, tag: 'bathroom'})}>Bathroom ({bathRoomQtde}) </p>
-            <p onClick={e => setProductTag(e, {type: TagType.CAT_TYPE, tag: 'children-room'})}>Children's room ({childrenRoom}) </p>
+            <p className={classes.Selected} onClick={e => setProductTagHandler(e, {type: TagType.CAT_TYPE, tag: 'all'})}>All categories ({categoriesTotalQtde}) </p>
+            <p onClick={e => setProductTagHandler(e, {type: TagType.CAT_TYPE, tag: 'bedroom'})}>Bedroom ({bedRoomQtde}) </p>
+            <p onClick={e => setProductTagHandler(e, {type: TagType.CAT_TYPE, tag: 'living-room'})}>Living room ({livingRoomQtde}) </p>
+            <p onClick={e => setProductTagHandler(e, {type: TagType.CAT_TYPE, tag: 'kitchen'})}>Kitchen ({kitchen}) </p>
+            <p onClick={e => setProductTagHandler(e, {type: TagType.CAT_TYPE, tag: 'bathroom'})}>Bathroom ({bathRoomQtde}) </p>
+            <p onClick={e => setProductTagHandler(e, {type: TagType.CAT_TYPE, tag: 'children-room'})}>Children's room ({childrenRoom}) </p>
          </div>
          <span></span>
          <div id="types-wrapper">
             <h6>TYPE</h6>
-            <p className={classes.Selected} onClick={e => setProductTag(e, {type: TagType.DEP_TYPE, tag: 'all-products'})}>All tags ({typesTotalQtde}) </p>
-            <p onClick={e => setProductTag(e, {type: TagType.DEP_TYPE, tag: 'furniture'})}>Furniture ({furnitureQtde}) </p>
-            <p onClick={e => setProductTag(e, {type: TagType.DEP_TYPE, tag: 'accessories'})}>Accessories ({accessoriesQtde}) </p>
-            <p onClick={e => setProductTag(e, {type: TagType.DEP_TYPE, tag: 'decorations'})}>Decorations ({decorationsQtde}) </p>
-            <p onClick={e => setProductTag(e, {type: TagType.DEP_TYPE, tag: 'textile'})}>Textile ({textileQtde}) </p>
-            <p onClick={e => setProductTag(e, {type: TagType.DEP_TYPE, tag: 'lightning'})}>Lighting ({lightingQtde}) </p>
+            <p className={classes.Selected} onClick={e => setProductTagHandler(e, {type: TagType.DEP_TYPE, tag: 'all-products'})}>All tags ({typesTotalQtde}) </p>
+            <p onClick={e => setProductTagHandler(e, {type: TagType.DEP_TYPE, tag: 'furniture'})}>Furniture ({furnitureQtde}) </p>
+            <p onClick={e => setProductTagHandler(e, {type: TagType.DEP_TYPE, tag: 'accessories'})}>Accessories ({accessoriesQtde}) </p>
+            <p onClick={e => setProductTagHandler(e, {type: TagType.DEP_TYPE, tag: 'decorations'})}>Decorations ({decorationsQtde}) </p>
+            <p onClick={e => setProductTagHandler(e, {type: TagType.DEP_TYPE, tag: 'textile'})}>Textile ({textileQtde}) </p>
+            <p onClick={e => setProductTagHandler(e, {type: TagType.DEP_TYPE, tag: 'lightning'})}>Lighting ({lightingQtde}) </p>
          </div>
          <span></span>
          <FilterCheckbox
-            checkboxItems={checkboxItems}
+            checkboxItems={checkboxItems} setGalleryHeightCB={setGalleryHeightHandler}
          />
          <span></span>
-         <FilterColorSelector />
+         <FilterColorSelector setGalleryHeightCB={setGalleryHeightHandler} />
          <span></span>
-         <PriceSlider />
+         <PriceSlider setGalleryHeightCB={setGalleryHeightHandler} />
       </div>
    )
 }

@@ -52,7 +52,7 @@ export type SliderDirection = 'next' | 'previous'
 
 export type QtyAction = 'increase' | 'decrease'
 
-export type GalleryQty = 'more' | 'less'
+export type GalleryQty = 'more' | 'less' | 'filter'
 
 export type ProductCartType = {
    _id: string

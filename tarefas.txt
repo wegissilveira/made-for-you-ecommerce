@@ -218,6 +218,7 @@ FASE 1 - Melhorias estruturais e funcionais:
 
 
       *****FEITOS*****
+
    
 
 6- Estudar os hooks, tanto documentação quanto o curso referência da lista de estudos, antes de fechar esta fase. O intuito é identificar se há alguma melhoria que possa ser feita usando os hooks que ainda não tenho conhecimento.
@@ -293,35 +294,38 @@ FASE 2 - Implementação do TypeScript - Estudar os artigos de typescript da mak
 
 
       - Ajustes pontuais:
-      -> (MELHORIA): Inserir o tipo Color onde for necessário
-      -> (MELHORIA): Passar as cores do filtro para ColorSelect como props
       -> (BUG): Analisar erro de websocked failed e key is not a prop
-      -> Height da galeria não se adapta quando filtro é escolhido ou removido
-         - Buscar uma maneira de executar a função de resize nesse contexto
-      -> (BUG): ScrollToTop não funciona. Página não vai para o topo após mudar a rota:
-         - Link da pergunta que gerou o HOC: https://stackoverflow.com/questions/64361996/react-router-scroll-page-to-the-top-after-transition
-         - OBS.: Esse componente não é um HOC. Encaixá-o em outro lugar
+      -> (BUG): Entender e resolver 'ref is not a prop' que aparece no console
+      -> (MELHORIA) Criar tipo para objeto de cores no fetch - Ler artigos de fetch primeiro
+         -> Remover any da função do fetch em ProductCartDetails
 
 
 
       *****APÓS REFATORAMENTO*****
       -> Analisar o hook mantine de trancar o Scroll. Acho que tenho algo assim em algum lugar no body usando manipulação de dom, mas também analisar como o hook funciona
+      -> Passar css para sass.
+         - Usar este site para conversão e ir testando pra ver se não quebra nada: https://beautifytools.com/css-to-scss-converter.php
 
 
 
-      *****PRÓXIMOS NA FILA****  
-      -> (MELHORIA) Criar tipo para objeto de cores no fetch
-         -> Remover any da função do fetch em ProductCartDetails
+
+      *****PRÓXIMOS NA FILA**** 
+      -> (BUG): Corrigir resize filter no mobile
+      
 
 
 
       *****EM EXECUÇÃO**** 
+      -> (BUG): Inserir resize do filtro no botão de limpar o filtro
+      
 
 
 
       *****ABORTADOS****  
       -> (MELHORIA TIPAGEM): Buscar uma maneira de tipar as strings de imagem que possuem 'require' de maneira mais forte, para que não aceitem qualquer string
          -> OBS.: Não parece ser possível para imagens. Daria pra fazer em 'runtime', mas isso não me entrega o que eu busco, que é o TS pontuando a falha.
+      -> (MELHORIA): Converter states do priceslider para reducer 
+      -> (MELHORIA): Passar as cores do filtro para ColorSelect como props
 
 
 
@@ -331,6 +335,9 @@ FASE 2 - Implementação do TypeScript - Estudar os artigos de typescript da mak
       -> (BUG): Quando se adiciona ou remove um item na wishlist a loja quebra - OK
       -> (BUG): Na PDP ícone de favoritar (coração) invertido quando o produto está ou não na lista de favoritos - OK
       -> (BUG): Converter color HEX para texto na exibição no carrinho (e em qualquer outro lugar que precise) - OK
+      -> (BUG): ScrollToTop não funciona. Página não vai para o topo após mudar a rota - OK
+      -> (BUG): Height da galeria não se adapta quando filtro é escolhido ou removido - OK
+      -> (MELHORIA): Inserir o tipo Color onde for necessário - OK
 
 
 

@@ -11,10 +11,22 @@ const useCallResizeWarning = (filterRef: React.RefObject<HTMLDivElement>, contai
 
 
    const containerHeightHandler = (cHeight = containerHeight, fHeight = filter_height, open = filterOpen, addRow?: [GalleryQty, number]) => {
-      let height
+      let height: number = containerHeight
 
       if (addRow) {
-         height = addRow[0] === 'more' ? containerHeight + addRow[1] : containerHeight - addRow[1]
+         switch (addRow[0]) {
+            case 'more':
+               height = containerHeight + addRow[1]
+               break
+            case 'less':
+               height = containerHeight - addRow[1]
+               break
+            case 'filter':
+               height = addRow[1]
+               break
+            default:
+               return
+         }
       } else {
          height = open ? containerHeight + fHeight : cHeight - fHeight
       }
@@ -45,7 +57,6 @@ const useCallResizeWarning = (filterRef: React.RefObject<HTMLDivElement>, contai
             }
          }, 30)
       }
-
    }
 
    const observer = useRef(

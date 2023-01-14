@@ -88,7 +88,7 @@ const Filter = () => {
                   className={classes.Filter_subContainer}
                   ref={filterRef}
                >
-                  <FilterBody />
+                  <FilterBody containerHeightFN={containerHeightHandler} />
                   <FilterBottom/>
                </div>
                <Products

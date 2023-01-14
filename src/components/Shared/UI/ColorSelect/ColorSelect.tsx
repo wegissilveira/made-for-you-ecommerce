@@ -19,10 +19,19 @@ type ColorLoad = {
 
 type ColorAction = ColorEl | ColorLoad
 
+type Filter = {
+   filter: true 
+   setGalleryHeightCB: () => void
+}
+
+type NotFilter = {
+   filter: false 
+}
+
 type Props = {
    product?: ProductType
    title?: string
-   isFilter: boolean
+   isFilter: Filter | NotFilter 
 }
 
 const ColorSelect = (props: Props) => {
@@ -85,8 +94,11 @@ const ColorSelect = (props: Props) => {
    
          bulletBorder.className = [classes['Color-bullet'], classes['Active-bullet']].join(' ')
    
-         if (isFilter) updateColorStateHandler(colors.color)
-         if (!isFilter) updateColor(colors.color, true)
+         if (isFilter.filter) {
+            isFilter.setGalleryHeightCB()
+            updateColorStateHandler(colors.color)
+         } 
+         if (!isFilter.filter) updateColor(colors.color, true)
       }
    }
 

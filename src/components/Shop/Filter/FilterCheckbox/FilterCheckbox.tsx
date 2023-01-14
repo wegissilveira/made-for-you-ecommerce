@@ -8,11 +8,13 @@ import { OfferOptions, Offer } from "common/types"
 
 type Props = {
    checkboxItems: OfferOptions[]
+   setGalleryHeightCB: () => void
 }
 
 const FilterCheckbox = (props: Props) => {
    const {
-      checkboxItems
+      checkboxItems,
+      setGalleryHeightCB
    } = props
 
    const { updateOffer } = useContext(UpdateFilterListContext)
@@ -29,6 +31,7 @@ const FilterCheckbox = (props: Props) => {
       }
       
       updateOffer(inputValuesArr)
+      setGalleryHeightCB()
    }  
 
 

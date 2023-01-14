@@ -8,7 +8,15 @@ import { Color } from "common/types"
 import ColorSelect from 'components/Shared/UI/ColorSelect/ColorSelect'
 
 
-const FilterColorSelector = () => {
+type Props = {
+   setGalleryHeightCB: () => void
+}
+
+const FilterColorSelector = (props: Props) => {
+   const {
+      setGalleryHeightCB
+   } = props
+
    const { updateFilterColor } = useContext(UpdateFilterListContext)
    const filterReducerState = useContext(FilterDataContext)
 
@@ -20,6 +28,7 @@ const FilterColorSelector = () => {
       }
       
       updateFilterColor(checked)
+      setGalleryHeightCB()
    }
 
    return (
@@ -34,7 +43,7 @@ const FilterColorSelector = () => {
             <label htmlFor="all-colors-input">All available colors</label>
          </div>
          <ColorSelect
-            isFilter={true}
+            isFilter={{filter: true, setGalleryHeightCB}}
          />
       </div>
    )
