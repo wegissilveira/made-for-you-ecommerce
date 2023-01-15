@@ -68,7 +68,7 @@ const ProductQtyMobile = (props: Props) => {
 				<FontAwesomeIcon icon="chevron-down" size="xs" />
 			</div>
 			<QtySelectorMobile 
-				qtyListRef={qtyListRef}
+				ref={qtyListRef}
 				maxQty={maxQty}
 				toggleQtySelectMobileCB={toggleQtySelectMobileHandler}
 				changeQtyCallBack={changeQtyCallBack}

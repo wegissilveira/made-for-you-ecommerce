@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ForwardedRef, forwardRef } from 'react'
 import classes from './QtySelectorMobile.module.css'
 
 import ReactDOM from 'react-dom'  
@@ -9,14 +9,12 @@ import { QtyProps } from 'common/types'
 import QtySelectorInput from './QtySelectorInput/QtySelectorInput'
 
 interface Props extends Omit<QtyProps, 'max'> {
-   qtyListRef: React.MutableRefObject<HTMLDivElement | null>
    maxQty: number[]
    toggleQtySelectMobileCB: () => void
 }
 
-const QtySelectorMobile = (props: Props) => {
+const QtySelectorMobile = forwardRef((props: Props, qtyListRef: ForwardedRef<HTMLDivElement>) => {
    const {
-      qtyListRef,
       maxQty,
       toggleQtySelectMobileCB,
       changeQtyCallBack,
@@ -49,6 +47,6 @@ const QtySelectorMobile = (props: Props) => {
          document.getElementById('qty-selector-root')!
       )
    )
-}
+})
 
 export default QtySelectorMobile

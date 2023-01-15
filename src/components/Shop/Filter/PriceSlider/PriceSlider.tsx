@@ -10,7 +10,6 @@ import classes from './PriceSlider.module.css'
 import { FilterDataContext } from '../context/FilterContext'
 
 import { UpdateFilterListContext } from "../context/FilterContext"
-import useSetGalleryFilterHeight from "hooks/useSetGalleryFilterHeight"
 import { initial_min_value, initial_max_value } from '../helpers/values'
 
 
@@ -31,7 +30,6 @@ const PriceSlider = () => {
 
    const { updatePrice } = useContext(UpdateFilterListContext)
    const {isFilterOn, isFilterTagOn} = useContext(FilterDataContext)
-   const setGalleryHeight = useSetGalleryFilterHeight()
 
 
    const beginSliding = (e: React.PointerEvent<HTMLSpanElement>) => {
@@ -89,7 +87,6 @@ const PriceSlider = () => {
             updatePrice(priceRange)
             setMaxValue(maxValue)
             setValueMobileThumb2(current_position)
-            setGalleryHeight()
          }
    
          if (thumb_id === 'left-thumb') {
@@ -116,7 +113,6 @@ const PriceSlider = () => {
             updatePrice(priceRange)
             setMinValue(minValue)
             setValueMobileThumb1(current_position)
-            setGalleryHeight()
          }
    
          // slider.style.transform = `translate(${current_position}px)`

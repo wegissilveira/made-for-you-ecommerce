@@ -1,23 +1,21 @@
+import { CSSProperties, ForwardedRef, forwardRef } from 'react'
 import classes from './BestDealSlider.module.css'
 
 import { Link } from 'react-router-dom'
 
-import { CSSProperties } from 'react'
 import { ProductType } from 'common/types'
 
 
 type Props = {
    sliderTitle: string
    products: ProductType[]
-   bestDealRef: React.RefObject<HTMLDivElement>
    translateSlider: CSSProperties
 }
 
-const BestDealSlider = (props: Props) => {
+const BestDealSlider = forwardRef((props: Props, bestDealRef: ForwardedRef<HTMLDivElement>) => {
    const {
       sliderTitle,
       products,
-      bestDealRef,
       translateSlider
    } = props
 
@@ -59,6 +57,6 @@ const BestDealSlider = (props: Props) => {
          </div>
       </>
    )
-}
+})
 
 export default BestDealSlider

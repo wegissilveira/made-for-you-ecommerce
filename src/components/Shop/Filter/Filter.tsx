@@ -12,8 +12,6 @@ import FilterBottom from './FilterBottom/FilterBottom'
 import FilterBody from './FilterBody/FilterBody'
 
 
-const _ = undefined
-
 const toastifyMsg: [string, string] = [
    'Reload The Page',
    'In order for all components to adjust to the new screen dimensions, the page should be reloaded.'
@@ -22,37 +20,44 @@ const toastifyMsg: [string, string] = [
 const Filter = () => {
    const [pageLimit, setPageLimit] = useState(12)
    const [filterOpen, setFilterOpen] = useState(false)
-   const [translateValueState, setTranslateValue] = useState(0)
+   const [translateValue, setTranslateValue] = useState(() => {
+      if (window.innerWidth <= 414) {
+         return -900
+      } else {
+         return -391
+      }
+   })
+   const [filter_height, setFilterHeight] = useState(0)
 
    const containerRef = useRef<HTMLDivElement>(null)
    const filterRef = useRef<HTMLDivElement>(null)
 
    const filterReducerState = useContext(FilterDataContext)
 
-   const { 
-      containerHeightHandler, 
-      translateValue,
-      filter_height,
-      openToastify,
-      containerHeight
-   } = useCallResizeWarning(filterRef, containerRef, filterOpen)
+   const { openToastify } = useCallResizeWarning(containerRef)
    
    const translateFilter = {
-      transform: `translateY(${translateValueState}px)`,
+      marginTop: translateValue + 'px',
       transition: '.8s ease-in-out'
-   } as const
-
-   const containerStyle = {
-      height: containerHeight === 0 ? 'auto' : containerHeight + 'px'
    } as const
    
    const openFilterHandler = () => {
       const open = filterOpen ? false : true
-      const translate = translateValueState < 0 ? 0 : -filter_height
+      const translate = translateValue < 0 ? 0 : -filter_height
 
       setFilterOpen(open)
       setTranslateValue(translate)
-      containerHeightHandler(_, _, open)
+   }
+
+   const setFilterHeightHandler = () => {
+      if  (filterRef) {
+         if (filterRef.current) {
+            const fHeight = filterRef.current.offsetHeight
+   
+            setTranslateValue(-fHeight)
+            setFilterHeight(fHeight)
+         }
+      }
    }
 
    useEffect(() => {
@@ -67,6 +72,10 @@ const Filter = () => {
       }
    }, [])
 
+   useEffect(() => {
+      setFilterHeightHandler()
+   }, [])
+
 
    return (
       <>
@@ -75,10 +84,8 @@ const Filter = () => {
             open={openToastify}
          />
          <div 
-            id="filter-container"
             className={classes.Filter_container} 
             ref={containerRef} 
-            style={containerStyle}
          >
             <FilterHeader 
                filterOpen={filterOpen}
@@ -95,7 +102,6 @@ const Filter = () => {
                <Products
                   productsProps={filterReducerState.productsState} // => Envia o array com os produtos que serão exibidos
                   pageLimit={pageLimit}  // => Número limite de produtos a serem mostrados inicialmente
-                  containerHeightFN={containerHeightHandler}
                />
             </div>
          </div>

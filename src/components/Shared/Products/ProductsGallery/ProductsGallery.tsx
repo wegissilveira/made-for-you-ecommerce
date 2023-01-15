@@ -1,3 +1,4 @@
+import { ForwardedRef, forwardRef } from 'react'
 import classes from './ProductsGallery.module.css'
 import { ProductType } from 'common/types'
 
@@ -7,14 +8,12 @@ import ProductCard from 'components/Shared/Products/ProductsGallery/ProductCard/
 type Props = {
    products: ProductType[]
    count: number
-   productsSubContainerRef: React.RefObject<HTMLDivElement>
 }
 
-const ProductsGallery = (props: Props) => {
+const ProductsGallery = forwardRef((props: Props, productsSubContainerRef: ForwardedRef<HTMLDivElement>) => {
    const {
       products,
-      count,
-      productsSubContainerRef
+      count
    } = props
 
    return (
@@ -40,6 +39,6 @@ const ProductsGallery = (props: Props) => {
          }
       </div>
    )
-}
+})
 
 export default ProductsGallery

@@ -68,7 +68,7 @@ const MainSliderHeader = () => {
          <div className={classes.MainSlider_container}>
             <MainSlider 
                translateValue={translateValue} 
-               sliderRef={sliderRef}
+               ref={sliderRef}
             />
             <MainSliderArrows 
                clickEnabled={clickEnabled}

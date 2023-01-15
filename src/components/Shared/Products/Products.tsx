@@ -13,7 +13,6 @@ import CategoryHeader from './CategoryHeader/CategoryHeader'
 
 type Props = {
    productsProps: ProductType[]
-   containerHeightFN?: (cHeight?: number, fHeight?: number, open?: boolean, addRow?: [GalleryQty, number]) => void
    pageLimit?: number
 }
 
@@ -21,7 +20,6 @@ const _ = undefined
 const Products = (props: Props) => {
    const {
       productsProps,
-      containerHeightFN, // Função recebida de 'Filter' que seta a altura do filtro. Usado para setar a altura dinamicamente em caso do filtro estar aberto ou fechado
       pageLimit = 8
    } = props
    
@@ -52,18 +50,6 @@ const Products = (props: Props) => {
       setProductsState(products)
    }
 
-   const setGalleryHeightHandler = (action: GalleryQty) => {
-      const containerEl = document.getElementById('gallery-container') as HTMLDivElement
-      const productCardStyle = window.getComputedStyle(containerEl.children[0].children[0])
-      const productCardHeight = parseInt((productCardStyle.height).match(/\d+/)![0])
-      const productCardMarginTop = parseInt((productCardStyle.marginTop).match(/\d+/)![0])
-      const productCardFullHeight = productCardHeight + productCardMarginTop
-
-      if (containerHeightFN) {
-         containerHeightFN(_, _, _, [action, productCardFullHeight + 20])
-      }
-   }
-
    const setPageProductsQtyHandler = (action: GalleryQty, subContainer: React.RefObject<HTMLDivElement>) => {  
       const subContainerEl = subContainer.current
 
@@ -80,7 +66,6 @@ const Products = (props: Props) => {
          }
    
          setCount(newCount)
-         setGalleryHeightHandler(action)
       }
    }
 
@@ -109,7 +94,7 @@ const Products = (props: Props) => {
          <ProductsGallery 
             products={productsProps || productsState}
             count={count}
-            productsSubContainerRef={productsSubContainerRef}
+            ref={productsSubContainerRef}
          />
          <LoadMoreProducts 
             products={productsProps || productsState}

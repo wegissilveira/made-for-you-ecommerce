@@ -1,3 +1,5 @@
+import { ForwardedRef, forwardRef } from 'react'
+
 import classes from './MainSlider.module.css'
 
 import { Link } from 'react-router-dom'
@@ -7,20 +9,18 @@ import { MainSliderData } from 'Data/mainSliderData'
 
 type Props = {
    translateValue: number
-   sliderRef: React.MutableRefObject<HTMLDivElement>
 }
 
-const MainSlider = (props: Props) => {
+const MainSlider = forwardRef((props: Props, ref: ForwardedRef<HTMLDivElement>) => {
    const {
-      translateValue,
-      sliderRef
+      translateValue
    } = props
 
    return (
       <div
          className={classes.MainSlider_subContainer}
          style={{transform: `translate(${translateValue}%)`}}
-         ref={sliderRef}
+         ref={ref}
       >
          {MainSliderData.map((img, i) =>
             <div key={`${i}-${img}`} className={'image-' + i}>
@@ -38,6 +38,6 @@ const MainSlider = (props: Props) => {
          )}
       </div>
    )
-}
+})
 
 export default MainSlider

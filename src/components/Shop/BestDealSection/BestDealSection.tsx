@@ -70,7 +70,7 @@ const BestDealSection = (props: Props) => {
          <BestDealSlider 
             sliderTitle={'BEST DEAL'}
             products={productsBestDeal}
-            bestDealRef={bestDealRef}
+            ref={bestDealRef}
             translateSlider={translateSlider}
          />
          <ProgressBar

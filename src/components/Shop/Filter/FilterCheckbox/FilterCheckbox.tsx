@@ -2,7 +2,6 @@ import { useContext } from "react"
 import classes from './FilterCheckbox.module.css'
 
 import { UpdateFilterListContext, FilterDataContext } from "../context/FilterContext"
-import useSetGalleryFilterHeight from "hooks/useSetGalleryFilterHeight"
 import { OfferOptions, Offer } from "common/types"
 
 
@@ -17,7 +16,6 @@ const FilterCheckbox = (props: Props) => {
 
    const { updateOffer } = useContext(UpdateFilterListContext)
    const filterReducerState = useContext(FilterDataContext)
-   const setGalleryHeight = useSetGalleryFilterHeight()
 
    const setOfferHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
       let inputValuesArr = [...filterReducerState.offer]
@@ -30,7 +28,6 @@ const FilterCheckbox = (props: Props) => {
       }
       
       updateOffer(inputValuesArr)
-      setGalleryHeight()
    }  
 
 

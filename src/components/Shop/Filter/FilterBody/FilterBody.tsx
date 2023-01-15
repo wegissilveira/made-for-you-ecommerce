@@ -5,9 +5,7 @@ import productsData from 'Data/productsData'
 
 import { UpdateFilterListContext } from "../context/FilterContext"
 
-import { Tag, Category, OfferOptions, GalleryQty } from "common/types"
-
-import useSetGalleryFilterHeight from "hooks/useSetGalleryFilterHeight"
+import { Tag, Category, OfferOptions } from "common/types"
 
 import PriceSlider from 'components/Shop/Filter/PriceSlider/PriceSlider'
 import FilterCheckbox from 'components/Shop/Filter/FilterCheckbox/FilterCheckbox'
@@ -40,7 +38,6 @@ const checkboxItems: OfferOptions[] = [
 
 const FilterBody = () => {
    const { updateTag, updateCategory } = useContext(UpdateFilterListContext)
-   const setGalleryHeight = useSetGalleryFilterHeight()
 
    // Categorias
    let categoriesTotalQtde = 0
@@ -113,8 +110,6 @@ const FilterBody = () => {
       })
 
       changeTagEl.className = classes.Selected
-
-      setGalleryHeight()
    }
 
    return (
