@@ -10,7 +10,7 @@ import Products from './components/Shared/Products/Products'
 import UserLogin from './components/User/UserLogin/UserLogin'
 import UserSignUp from './components/User/UserSignUp/UserSignUp'
 import Contact from './components/Contact/Contact'
-import ScrollToTop from './HOC/ScrollToTop'
+import { ScrollToTop } from 'helpers/components'
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { library } from '@fortawesome/fontawesome-svg-core'

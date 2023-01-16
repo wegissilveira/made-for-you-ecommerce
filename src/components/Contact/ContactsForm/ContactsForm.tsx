@@ -1,4 +1,4 @@
-import classes from './ContactsForm.module.css'
+import classes from './ContactsForm.module.scss'
 
 const ContactsForm = () => {
    return (

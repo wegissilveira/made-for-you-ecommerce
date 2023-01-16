@@ -28,7 +28,6 @@ const ProductsGallery = forwardRef((props: Props, productsSubContainerRef: Forwa
                   productsList = <ProductCard
                                     key={product + '-' + i}
                                     product={product}
-                                    index={i}
                                  />
                }
                return productsList

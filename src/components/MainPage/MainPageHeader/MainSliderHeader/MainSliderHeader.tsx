@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import classes from './MainSliderHeader.module.css'
+import classes from './MainSliderHeader.module.scss'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 

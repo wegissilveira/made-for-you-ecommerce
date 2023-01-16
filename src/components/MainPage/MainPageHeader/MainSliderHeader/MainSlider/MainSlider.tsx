@@ -1,6 +1,6 @@
 import { ForwardedRef, forwardRef } from 'react'
 
-import classes from './MainSlider.module.css'
+import classes from './MainSlider.module.scss'
 
 import { Link } from 'react-router-dom'
 

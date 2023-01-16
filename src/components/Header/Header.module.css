@@ -1,136 +1,143 @@
 :root {
-    --nav-height: 60px;
+	--nav-height: 60px;
 }
 
 @media (max-width:992px) {
-    :root {
-        --nav-height: 50px;
-    }
+	:root {
+		--nav-height: 50px;
+	}
 }
 
 main {
-    padding-top: var(--nav-height);
+	padding-top: var(--nav-height);
 }
 
-p, h1, h2, h3, h4, h5, h6, label {
-    color: grey;
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+label {
+	color: grey;
 }
 
 ul {
-    list-style-type: none;
-    color: black;
-    margin-bottom: 0;
-    padding: 0;
-    margin: 0;
+	list-style-type: none;
+	color: black;
+	margin-bottom: 0;
+	padding: 0;
+	margin: 0;
 }
 
 input {
-    border: 0;
-    outline: 0;
-    background: transparent;
-    border-bottom: 1px solid #dee2e6;
+	border: 0;
+	outline: 0;
+	background: transparent;
+	border-bottom: 1px solid #dee2e6;
 }
 
 nav {
-    position: fixed;
-    width: 100%;
-    background-color: #fff;
-    height: var(--nav-height);
-    z-index: 9999;
-    top: 0;
+	position: fixed;
+	width: 100%;
+	background-color: #fff;
+	height: var(--nav-height);
+	z-index: 9999;
+	top: 0;
 }
 
 .Navbar_container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 
-    width: 100%;
-    height: 100%;
-    padding-left: 15px;
-    padding-right: 15px;
-    box-sizing: border-box;
+	width: 100%;
+	height: 100%;
+	padding-left: 15px;
+	padding-right: 15px;
+	box-sizing: border-box;
 }
 
 @media (max-width: 992px) {
-    .Navbar_container {
-        right: 0;
-    }
+	.Navbar_container {
+		right: 0;
+	}
 }
 
 @media (max-width: 768px) {
-    .Navbar_container {
-        box-sizing: unset;
-    }
+	.Navbar_container {
+		box-sizing: unset;
+	}
 }
 
 .Account_icons {
-    width: 60%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+	width: 60%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 @media (max-width: 992px) {
-    .Account_icons {
-        width: 100%;
-    }
+	.Account_icons {
+		width: 100%;
+	}
 }
 
 @media (max-width: 480px) {
-    .Account_icons {
-        margin: 0;
-    }
+	.Account_icons {
+		margin: 0;
+	}
 }
 
 @media (max-width: 992px) {
-    .Account_icons > li:first-of-type {
-        display: none;
-    }
+	.Account_icons>li:first-of-type {
+		display: none;
+	}
 }
 
 @media (max-width: 480px) {
-    .Account_icons > li:nth-of-type(2) {
-        display: none;
-    }
+	.Account_icons>li:nth-of-type(2) {
+		display: none;
+	}
 }
 
 .Enter_account_container {
-    width: 40%;
-    color: grey;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+	width: 40%;
+	color: grey;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .Enter_account_btn {
-    width: auto;
-    height: 40px;
-    color: grey;
-    cursor: pointer;
-    font-weight: bold;
+	width: auto;
+	height: 40px;
+	color: grey;
+	cursor: pointer;
+	font-weight: bold;
 
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-ms-border-radius: 5px;
+	-o-border-radius: 5px;
 }
 
 .Enter_account_btn p {
-    margin: 5px 10px 5px 10px
+	margin: 5px 10px 5px 10px
 }
 
 .Menu_hamburger {
-    display: none;
-    margin-left: 12px;
-    position: absolute;
-    top: 10px;
-    left: 10px;
+	display: none;
+	margin-left: 12px;
+	position: absolute;
+	top: 10px;
+	left: 10px;
 }
 
 @media (max-width: 768px) {
-    .Menu_hamburger {
-        display: inline-block;
-    }
+	.Menu_hamburger {
+		display: inline-block;
+	}
 }

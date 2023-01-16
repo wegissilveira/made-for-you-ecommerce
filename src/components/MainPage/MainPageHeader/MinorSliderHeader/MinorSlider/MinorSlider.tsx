@@ -1,4 +1,4 @@
-import classes from './MinorSlider.module.css'
+import classes from './MinorSlider.module.scss'
 
 import { Link } from 'react-router-dom'
 import { formatUrlName } from 'helpers/functions'

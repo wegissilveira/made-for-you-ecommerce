@@ -1,0 +1,49 @@
+.Discounts_icons_container {
+	display: flex;
+	justify-content: space-between;
+	width: 74%;
+	margin-left: 13%;
+	margin-bottom: 80px;
+	margin-top: 80px;
+	>div {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		h6 {
+			margin-bottom: 0;
+			margin-top: 30px;
+		}
+		p {
+			margin: 0;
+		}
+	}
+}
+.Plane_icon {
+	transform: rotate(-90deg);
+	-webkit-transform: rotate(-90deg);
+	-moz-transform: rotate(-90deg);
+	-ms-transform: rotate(-90deg);
+	-o-transform: rotate(-90deg);
+}
+@media (max-width: 1579.98px) {
+	.Discounts_icons_container {
+		width: 90%;
+		margin-left: 5%;
+	}
+}
+@media (max-width: 767.98px) {
+	.Discounts_icons_container {
+		display: none;
+	}
+}
+@media (max-width: 1366px) {
+	.Discounts_icons_container {
+		width: 80%;
+		margin-left: 10%;
+		>div {
+			p {
+				display: none;
+			}
+		}
+	}
+}

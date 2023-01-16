@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import classes from './MainPageProducts.module.css'
+import classes from './MainPageProducts.module.scss'
 
 import { mountProducts } from "helpers/functions"
 import { ProductType, Tag } from 'common/types'

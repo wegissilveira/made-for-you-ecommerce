@@ -22,7 +22,6 @@ type Props = {
    wish: string[]
    cart: ProductCartType[]
    product: ProductType
-   index: number
    onWishlistState: () => void
    onCartListState: () => void
 }
@@ -35,7 +34,6 @@ const ProductCard = (props: Props) => {
       wish,
       cart,
       product,
-      index,
       onWishlistState,
       onCartListState
    } = props
@@ -136,7 +134,6 @@ const ProductCard = (props: Props) => {
                productId={product._id}
                productName={product.name}
                productPrice={product.price}
-               productIndex={index}
                iconBgColor={bag_icon_color}
                cartHandlerCB={cartHandler}
                openModalHandlerCB={openModalHandler}

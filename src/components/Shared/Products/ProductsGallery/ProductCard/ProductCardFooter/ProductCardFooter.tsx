@@ -9,7 +9,6 @@ type Props = {
    productId: string
    productName: string
    productPrice: string
-   productIndex: number
    iconBgColor: string
    cartHandlerCB: (action?: 'load') => void
    openModalHandlerCB: () => void
@@ -20,7 +19,6 @@ const ProductCardFooter = (props: Props) => {
       productId,
       productName,
       productPrice,
-      productIndex,
       iconBgColor,
       cartHandlerCB,
       openModalHandlerCB

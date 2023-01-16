@@ -1,4 +1,4 @@
-import classes from './Contact.module.css'
+import classes from './Contact.module.scss'
 import ContactsForm from './ContactsForm/ContactsForm'
 import ContactsInfo from './ContactsInfo/ContactsInfo'
 

@@ -1,4 +1,4 @@
-import classes from './HeaderTitle.module.css'
+import classes from './HeaderTitle.module.scss'
 
 const HeaderTitle = () => {
    return (

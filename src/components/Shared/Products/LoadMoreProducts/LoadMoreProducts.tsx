@@ -9,7 +9,8 @@ type Props = {
    products: ProductType[]
    count: number
    pageLimit: number
-   setProductsPageHandler: (action: GalleryQty) => void
+   setProductsPageCount: (newCount: number) => void
+   galleryEl: React.RefObject<HTMLDivElement>
 }
 
 const LoadMoreProducts = (props: Props) => {
@@ -17,10 +18,30 @@ const LoadMoreProducts = (props: Props) => {
       products,
       count,
       pageLimit,
-      setProductsPageHandler
+      setProductsPageCount,
+      galleryEl
    } = props
 
    useSetPageTop(count)
+
+   const setProductsPageHandler = (action: GalleryQty) => {  
+      const subContainerEl = galleryEl.current
+
+      if (subContainerEl) {
+         const subContainerWidth = Number((window.getComputedStyle(subContainerEl).inlineSize).replace(/[^0-9.]+/g, ""))
+         const productCardWidth = Number((window.getComputedStyle(subContainerEl.children[0]).inlineSize).replace(/[^0-9.]+/g, ""))
+         const itemsPerRow = Math.floor(subContainerWidth / productCardWidth)
+   
+         let newCount
+         if (action === 'more') {
+            newCount = count + itemsPerRow
+         } else {
+            newCount = count - itemsPerRow
+         }
+   
+         setProductsPageCount(newCount)
+      }
+   }
 
 
    return (

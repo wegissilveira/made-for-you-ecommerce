@@ -1,4 +1,4 @@
-import classes from './MainPageHeader.module.css'
+import classes from './MainPageHeader.module.scss'
 
 import MinorSliderHeader from './MinorSliderHeader/MinorSliderHeader'
 import MainSliderHeader from './MainSliderHeader/MainSliderHeader'

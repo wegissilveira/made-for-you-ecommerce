@@ -1,0 +1,44 @@
+.Session_container {
+	background-color: #87BBE0;
+	height: 80vh;
+	padding-top: 100px;
+}
+.Contact_box_container {
+	display: flex;
+	background-color: #fff;
+	width: 60%;
+	height: 80%;
+	margin-left: 7%;
+	border-radius: 15px;
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	-ms-border-radius: 15px;
+	-o-border-radius: 15px;
+}
+@media (max-width: 768px) {
+	.Session_container {
+		padding-bottom: 50px;
+	}
+}
+@media (max-width: 480px) {
+	.Session_container {
+		height: auto;
+		margin: 0;
+		padding-top: 30px;
+		padding-bottom: 30px;
+	}
+	.Contact_box_container {
+		margin-top: 0;
+	}
+}
+@media (max-width: 1366px) {
+	.Contact_box_container {
+		width: 70%;
+	}
+}
+@media (max-width: 992px) {
+	.Contact_box_container {
+		width: 85%;
+		flex-direction: column;
+	}
+}

@@ -1,4 +1,4 @@
-import classes from './FooterBottom.module.css'
+import classes from './FooterBottom.module.scss'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 

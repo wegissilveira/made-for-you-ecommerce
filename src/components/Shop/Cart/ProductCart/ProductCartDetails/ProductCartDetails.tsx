@@ -21,11 +21,11 @@ const ProductCartDetails = (props: Props) => {
    
    useEffect(() => {
       (async () => {
-         const colorsNameList = await getColors()
-         const currentColor: any = Object.entries(colorsNameList).find(([colorName, colorHex]) => {
-            return (colorHex as string).toLocaleLowerCase() === product.color.toLocaleLowerCase() 
+         const colorsNameList = await getColors()         
+         const currentColor = Object.entries(colorsNameList).find(([colorName, colorHex]) => {
+            return colorHex.toLocaleLowerCase() === product.color.toLocaleLowerCase() 
          })
-         if (currentColor) setColorName(currentColor[0])
+         if (currentColor) setColorName(currentColor[0] as HEX)
       })()      
    }, [])
 

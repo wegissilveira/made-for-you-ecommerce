@@ -50,24 +50,9 @@ const Products = (props: Props) => {
       setProductsState(products)
    }
 
-   const setPageProductsQtyHandler = (action: GalleryQty, subContainer: React.RefObject<HTMLDivElement>) => {  
-      const subContainerEl = subContainer.current
-
-      if (subContainerEl) {
-         const subContainerWidth = Number((window.getComputedStyle(subContainerEl).inlineSize).replace(/[^0-9.]+/g, ""))
-         const productCardWidth = Number((window.getComputedStyle(subContainerEl.children[0]).inlineSize).replace(/[^0-9.]+/g, ""))
-         const itemsPerRow = Math.floor(subContainerWidth / productCardWidth)
-   
-         let newCount
-         if (action === 'more') {
-            newCount = count + itemsPerRow
-         } else {
-            newCount = count - itemsPerRow
-         }
-   
-         setCount(newCount)
-      }
-   }
+   const setPageProductsQtyHandler = (newCount: number) => {
+      setCount(newCount)
+   } 
 
    useEffect(() => {
       if (params.searchKey) mountProducts(SearchTerms.SEARCH_KEY)
@@ -100,7 +85,8 @@ const Products = (props: Props) => {
             products={productsProps || productsState}
             count={count}
             pageLimit={pageLimitState}
-            setProductsPageHandler={(action: GalleryQty) => setPageProductsQtyHandler(action, productsSubContainerRef)}
+            setProductsPageCount={setPageProductsQtyHandler}
+            galleryEl={productsSubContainerRef}
          />
       </div>
    )

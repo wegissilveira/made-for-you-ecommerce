@@ -1,4 +1,4 @@
-import classes from './MainPageShopByRoom.module.css'
+import classes from './MainPageShopByRoom.module.scss'
 
 import { Link } from 'react-router-dom'
 

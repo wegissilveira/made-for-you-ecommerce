@@ -1,4 +1,4 @@
-import classes from './MainPageProductsHeader.module.css'
+import classes from './MainPageProductsHeader.module.scss'
 import { Tag } from 'common/types'
 
 

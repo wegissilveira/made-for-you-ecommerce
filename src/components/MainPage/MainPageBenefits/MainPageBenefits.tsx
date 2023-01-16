@@ -1,4 +1,4 @@
-import classes from './MainPageBenefits.module.css'
+import classes from './MainPageBenefits.module.scss'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 

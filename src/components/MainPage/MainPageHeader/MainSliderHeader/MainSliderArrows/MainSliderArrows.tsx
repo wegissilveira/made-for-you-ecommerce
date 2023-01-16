@@ -1,4 +1,4 @@
-import classes from './MainSliderArrows.module.css'
+import classes from './MainSliderArrows.module.scss'
 
 import { SliderDirection } from 'common/types'
 

@@ -230,15 +230,28 @@ EXTRAS:
 
 FASE 2 - Implementação do TypeScript - Estudar os artigos de typescript da makerevich antes de iniciar esta fase
 
-      - Header - OK
-      - Footer - OK
-      - Contact - OK
-      - MainPage: - OK
-         - MainPageBenefits - OK
-         - MainPageDiscounts - OK
-         - MainPageProducts - OK
-         - MainPageHeader - OK
-         - MainPageShopByRoom - OK
+   -> Segundo OK para conversão de sass
+      - Header - OK 
+      - Footer - OK OK
+         - FooterBottom - OK OK
+         - FooterContacts - OK OK
+         - FooterMenu - OK OK
+      - Contact - OK OK
+         - ContactsForm - OK OK
+         - ContactsInfo - OK OK
+      - MainPage: - OK OK
+         - MainPageBenefits - OK OK
+         - MainPageDiscounts - OK OK
+         - MainPageProducts - OK OK
+            - MainPageProductsHeader - OK OK
+         - MainPageHeader - OK OK
+            - HeaderTitle - OK OK
+            - MainSliderHeader - OK OK
+               - MainSlider - OK OK
+               - MainSliderArrows - OK OK
+            - MinorSliderHeader - OK OK
+               - MinorSlider - OK OK
+         - MainPageShopByRoom - OK OK
       - User - OK
       - UI: - OK
          - ColorSelect - OK
@@ -294,29 +307,29 @@ FASE 2 - Implementação do TypeScript - Estudar os artigos de typescript da mak
 
 
       - Ajustes pontuais:
-      -> (BUG): Analisar erro de websocked failed e key is not a prop
+         -> (BUG): Analisar erro de websocked failed e key is not a prop - Não há um padrão que consegui replicar. Acho que pode estar ligado a alguma extensão ou plugin 
+         -> (BUG): Fonte está diferente do site original
+         -> (BUG): seção de descontos e sales está descentralizada em 1600px
+         -> (BUG): Fundo da página de contato está com faixas brancas nas laterais
+         -> (BUG): Shop by room no mobile não está legal, fugiu muito do original
       
 
 
 
       *****APÓS REFATORAMENTO*****
-      -> Analisar o hook mantine de trancar o Scroll. Acho que tenho algo assim em algum lugar no body usando manipulação de dom, mas também analisar como o hook funciona
-      -> Passar css para sass.
-         - Usar este site para conversão e ir testando pra ver se não quebra nada: https://beautifytools.com/css-to-scss-converter.php
 
 
 
 
       *****PRÓXIMOS NA FILA**** 
-      -> (MELHORIA) Criar tipo para objeto de cores no fetch - Ler artigos de fetch primeiro
-         -> Remover any da função do fetch em ProductCartDetails
       
 
 
 
 
-      *****EM EXECUÇÃO**** 
-      -> (MELHORIA): Passar setPageProductsQtyHandler de Products para LoadMoreProducts. Não faz sentido está onde está. única coisa que precisa ser devolvida para Products é count      
+      *****EM EXECUÇÃO****       
+      -> Passar css para sass.
+         - Usar este site para conversão e ir testando pra ver se não quebra nada: https://beautifytools.com/css-to-scss-converter.php
       
       
 
@@ -327,7 +340,9 @@ FASE 2 - Implementação do TypeScript - Estudar os artigos de typescript da mak
          -> OBS.: Não parece ser possível para imagens. Daria pra fazer em 'runtime', mas isso não me entrega o que eu busco, que é o TS pontuando a falha.
       -> (MELHORIA): Converter states do priceslider para reducer 
       -> (MELHORIA): Passar as cores do filtro para ColorSelect como props
-      
+      -> Analisar o hook mantine de trancar o Scroll. Acho que tenho algo assim em algum lugar no body usando manipulação de dom, mas também analisar como o hook funciona
+         -> Isso acontece no Header, no ProductCard na função openModalHandler
+
 
 
 
@@ -343,6 +358,8 @@ FASE 2 - Implementação do TypeScript - Estudar os artigos de typescript da mak
       -> (BUG): Quando o filtro é fechado após um item ser aplicado a altura volta sempre pra altura anterior a escolha do item, como se a nova altura estivesse sendo ignorada. - OK
       -> (BUG): Corrigir resize filter no mobile - OK
       -> (BUG): Entender e resolver 'ref is not a prop' que aparece no console - OK
+      -> (MELHORIA): Passar setPageProductsQtyHandler de Products para LoadMoreProducts. Não faz sentido está onde está. única coisa que precisa ser devolvida para Products é count - OK
+      -> (MELHORIA) Criar tipo para objeto de cores no fetch - Ler artigos de fetch primeiro - OK
 
 
 

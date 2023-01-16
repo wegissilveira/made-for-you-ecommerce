@@ -1,4 +1,4 @@
-import classes from './FooterMenu.module.css'
+import classes from './FooterMenu.module.scss'
 
 const FooterMenu = () => {
    return (
