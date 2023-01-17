@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import classes from './ProductsQty.module.css'
+import classes from './ProductsQty.module.scss'
 
 import { verifyCheckout } from "helpers/functions"
 

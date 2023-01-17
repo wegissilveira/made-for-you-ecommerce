@@ -1,4 +1,4 @@
-import classes from './HeaderLogo.module.css'
+import classes from './HeaderLogo.module.scss'
 
 import { Link } from 'react-router-dom'
 

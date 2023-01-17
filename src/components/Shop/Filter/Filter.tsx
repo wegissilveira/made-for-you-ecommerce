@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useContext } from 'react'
-import classes from './Filter.module.css'
+import classes from './Filter.module.scss'
 
 import { FilterDataContext } from './context/FilterContext'
 

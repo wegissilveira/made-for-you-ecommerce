@@ -1,4 +1,4 @@
-import classes from './LoadMoreProducts.module.css'
+import classes from './LoadMoreProducts.module.scss'
 
 import useSetPageTop from 'hooks/useSetPageTop'
 

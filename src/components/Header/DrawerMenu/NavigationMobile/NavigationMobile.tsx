@@ -1,5 +1,4 @@
-import React from 'react'
-import classes from './NavigationMobile.module.css'
+import classes from './NavigationMobile.module.scss'
 
 import { NavLink } from 'react-router-dom'
 

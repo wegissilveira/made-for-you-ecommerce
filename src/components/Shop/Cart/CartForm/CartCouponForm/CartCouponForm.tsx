@@ -1,5 +1,4 @@
-import React from "react"
-import classes from './CartCouponForm.module.css'
+import classes from './CartCouponForm.module.scss'
 
 const CartCouponForm = () => {
    return (

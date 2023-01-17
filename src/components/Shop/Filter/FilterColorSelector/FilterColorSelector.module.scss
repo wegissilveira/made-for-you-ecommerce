@@ -1,0 +1,31 @@
+.FilterColor_container {
+   flex-basis: 20%;
+   flex-shrink: 0;
+   flex-grow: 0;
+
+   input {
+      cursor: pointer;
+   }
+
+   label {
+      cursor: pointer;
+   }
+}
+
+@media (max-width: 480px) {
+   .FilterColor_container {
+      >div {
+         &:nth-of-type(2) {
+            margin-left: 10%;
+         }
+      }
+   }
+}
+
+@media (max-width: 767px) {
+   .FilterColor_subContainer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+   }
+}

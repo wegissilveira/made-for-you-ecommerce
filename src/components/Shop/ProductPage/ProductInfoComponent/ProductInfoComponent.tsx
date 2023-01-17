@@ -1,4 +1,4 @@
-import classes from './ProductInfoComponent.module.css'
+import classes from './ProductInfoComponent.module.scss'
 
 import ProductContext from 'components/Shop/ProductPage/context/ProductProvider'
 

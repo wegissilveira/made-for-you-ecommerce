@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import classes from './BestDealSection.module.css'
+import classes from './BestDealSection.module.scss'
 
 import { ProductType } from 'common/types'
 

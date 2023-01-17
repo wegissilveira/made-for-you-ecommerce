@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import classes from './FilterBottom.module.css'
+import classes from './FilterBottom.module.scss'
 
 import { UpdateFilterListContext } from "../context/FilterContext"
 

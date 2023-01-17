@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react'
-import classes from './ProgressBar.module.css'
+import classes from './ProgressBar.module.scss'
 
 import { SliderDirection } from 'common/types'
 

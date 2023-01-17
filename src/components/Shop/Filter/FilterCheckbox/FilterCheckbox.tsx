@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import classes from './FilterCheckbox.module.css'
+import classes from './FilterCheckbox.module.scss'
 
 import { UpdateFilterListContext, FilterDataContext } from "../context/FilterContext"
 import { OfferOptions, Offer } from "common/types"

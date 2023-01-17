@@ -1,4 +1,4 @@
-import classes from './NavigationDesk.module.css'
+import classes from './NavigationDesk.module.scss'
 
 import { NavLink } from 'react-router-dom'
 

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import './Wishlist.module.css'
+import './Wishlist.module.scss'
 
 import { connect } from 'react-redux'
 

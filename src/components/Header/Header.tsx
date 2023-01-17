@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import classes from './Header.module.css'
+import classes from './Header.module.scss'
 import './Header.scss'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"

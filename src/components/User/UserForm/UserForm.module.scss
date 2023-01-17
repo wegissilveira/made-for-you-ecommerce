@@ -1,0 +1,181 @@
+.Session_container {
+   display: flex;
+   justify-content: space-between;
+   height: auto;
+   margin-bottom: 80px;
+
+   >div {
+      width: 50%;
+
+      &:first-of-type {
+         >img {
+            max-width: 100%;
+         }
+      }
+   }
+}
+
+.UserForm_container {
+   height: 600px;
+}
+
+.UserForm_subContainer {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   align-items: center;
+   width: 60%;
+   margin-left: 20%;
+   height: 80%;
+   margin-top: 5%;
+
+   >* {
+      width: 100%;
+   }
+
+   h3 {
+      text-align: center;
+   }
+
+   label {
+      margin-bottom: 0;
+      margin-left: 2%;
+   }
+
+   input {
+      width: 100%;
+      height: 35px;
+      border: 1px solid grey;
+      padding-left: 10px;
+      box-sizing: border-box;
+      border-radius: 15px;
+      -webkit-border-radius: 15px;
+      -moz-border-radius: 15px;
+      -ms-border-radius: 15px;
+      -o-border-radius: 15px;
+   }
+
+   >a {
+      text-decoration: none;
+
+      >p {
+         text-align: center;
+         cursor: pointer;
+
+         &:hover {
+            text-decoration: underline;
+         }
+      }
+   }
+}
+
+.Account_access_btn {
+   width: 100%;
+   height: 35px;
+   border: 1px solid grey;
+   padding-left: 10px;
+   box-sizing: border-box;
+   border-radius: 15px;
+   -webkit-border-radius: 15px;
+   -moz-border-radius: 15px;
+   -ms-border-radius: 15px;
+   -o-border-radius: 15px;
+   background-color: grey;
+   color: white;
+   cursor: pointer;
+   padding-top: 6px;
+   padding-left: 0;
+   margin: 0;
+   text-align: center;
+
+   &:hover {
+      background-color: rgb(100, 100, 100);
+   }
+}
+
+.UserForm_caption {
+   margin-top: 24px;
+   display: flex;
+   align-items: center;
+
+   >p {
+      flex-basis: 40%;
+      text-align: center;
+   }
+
+   >span {
+      flex-basis: 30%;
+      width: 100%;
+      height: 1px;
+      background-color: grey;
+   }
+}
+
+.Form_icons_container {
+   width: 60%;
+   display: flex;
+   justify-content: space-evenly;
+
+   >div {
+      width: 45px;
+      height: 45px;
+      padding: 5px;
+      text-align: center;
+      cursor: pointer;
+      border: 1px solid #dee2e6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      -ms-border-radius: 10px;
+      -o-border-radius: 10px;
+   }
+}
+
+@media (max-width:768px) {
+   .Session_container {
+      flex-direction: column;
+
+      >div {
+         width: 100%;
+
+         &:first-of-type {
+            order: 1;
+         }
+      }
+   }
+
+   .UserForm_subContainer {
+      width: 90%;
+      margin-left: 5%;
+   }
+
+   .Form_icons_container {
+      width: 30%;
+   }
+}
+
+@media (max-width:992px) {
+   .Session_container {
+      >div {
+         &:first-of-type {
+            >img {
+               margin-top: 20%;
+            }
+         }
+      }
+   }
+}
+
+@media (max-width:480px) {
+   .Form_icons_container {
+      width: 40%;
+
+      >div {
+         width: 35px;
+         height: 35px;
+      }
+   }
+}

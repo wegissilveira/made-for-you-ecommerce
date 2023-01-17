@@ -1,0 +1,40 @@
+.Navigation-desk--container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-basis: 33.33%;
+	flex-shrink: 0;
+	flex-grow: 0;
+
+	>ul {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-left: 28%;
+		margin-top: 0;
+
+		a {
+			padding: 16px 8px;
+			text-decoration: none;
+			color: rgb(145, 142, 142);
+
+			&:hover {
+				color: #000;
+			}
+		}
+	}
+}
+
+@media (max-width: 768px) {
+	.Navigation-desk--container {
+		display: none;
+	}
+}
+
+@media (max-width: 1366px) {
+	.Navigation-desk--container {
+		>ul {
+			margin-left: 15%;
+		}
+	}
+}

@@ -5,7 +5,7 @@ import {
    useRef
 } from 'react'
 
-import classes from './PriceSlider.module.css'
+import classes from './PriceSlider.module.scss'
 
 import { FilterDataContext } from '../context/FilterContext'
 

@@ -1,4 +1,4 @@
-import classes from './UserForm.module.css'
+import classes from './UserForm.module.scss'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'react-router-dom'

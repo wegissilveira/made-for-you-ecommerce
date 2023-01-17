@@ -1,4 +1,4 @@
-import classes from './ProductCardFooter.module.css'
+import classes from './ProductCardFooter.module.scss'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from 'react-router-dom'

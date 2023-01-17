@@ -1,0 +1,35 @@
+.Cart_light_button {
+   display: flex;
+   align-items: center;
+   justify-content: space-evenly;
+   background-color: #3A3A3A;
+   color: white;
+   border: 1px solid #3A3A3A;
+   height: 45px;
+   width: 220px;
+   cursor: pointer;
+   font-weight: bold;
+   background-color: white;
+   color: #3A3A3A;
+   width: 170px;
+
+   span {
+      font-size: 12px;
+   }
+
+   &:hover {
+      background-color: rgb(235, 235, 235);
+   }
+}
+
+.Cart_dark_button {
+   &:hover {
+      background-color: #4e4e4e;
+   }
+}
+
+@media (max-width: 768px) {
+   .Cart_light_button {
+      margin-top: 20px;
+   }
+}

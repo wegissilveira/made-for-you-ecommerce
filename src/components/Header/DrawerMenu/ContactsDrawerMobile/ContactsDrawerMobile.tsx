@@ -1,4 +1,4 @@
-import classes from './ContactsDrawerMobile.module.css'
+import classes from './ContactsDrawerMobile.module.scss'
 
 import { NavLink } from 'react-router-dom'
 

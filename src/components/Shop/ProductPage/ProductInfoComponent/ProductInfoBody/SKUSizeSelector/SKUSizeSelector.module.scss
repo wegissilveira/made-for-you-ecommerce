@@ -1,0 +1,23 @@
+.SKUSelector--container {
+   select {
+      border: 0;
+      border-bottom: 1px solid #dee2e6;
+      margin-top: 8px;
+      width: 100%;
+      color: grey;
+      cursor: pointer;
+
+      &:focus {
+         outline: none;
+      }
+   }
+}
+
+@media (max-width: 480px) {
+   .SKUSelector--container {
+      select {
+         margin-top: 0;
+         width: 40%;
+      }
+   }
+}

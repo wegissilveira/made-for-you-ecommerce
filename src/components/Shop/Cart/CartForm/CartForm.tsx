@@ -1,6 +1,6 @@
 import CartCouponForm from './CartCouponForm/CartCouponForm'
 
-import classes from './CartForm.module.css'
+import classes from './CartForm.module.scss'
 import CartPaymentForm from './CartPaymentForm/CartPaymentForm'
 import CartShippingForm from './CartShippingForm/CartShippingForm'
 

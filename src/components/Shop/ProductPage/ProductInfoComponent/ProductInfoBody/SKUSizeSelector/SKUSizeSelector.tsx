@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useContext } from 'react'
-import classes from './SKUSizeSelector.module.css'
+import classes from './SKUSizeSelector.module.scss'
 
 import { ProductCartType } from 'common/types'
 

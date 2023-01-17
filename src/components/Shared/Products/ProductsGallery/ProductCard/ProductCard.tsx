@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-import classes from './ProductCard.module.css'
+import classes from './ProductCard.module.scss'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from 'react-router-dom'

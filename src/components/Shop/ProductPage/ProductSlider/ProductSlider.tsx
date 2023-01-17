@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import classes from './ProductSlider.module.css'
+import classes from './ProductSlider.module.scss'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 

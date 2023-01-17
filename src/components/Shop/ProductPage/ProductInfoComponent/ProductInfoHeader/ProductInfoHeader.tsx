@@ -1,4 +1,4 @@
-import classes from './ProductInfoHeader.module.css'
+import classes from './ProductInfoHeader.module.scss'
 
 import { ProductType } from 'common/types'
 

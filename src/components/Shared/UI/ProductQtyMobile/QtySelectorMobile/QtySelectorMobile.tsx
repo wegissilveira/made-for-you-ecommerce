@@ -1,5 +1,5 @@
 import React, { ForwardedRef, forwardRef } from 'react'
-import classes from './QtySelectorMobile.module.css'
+import classes from './QtySelectorMobile.module.scss'
 
 import ReactDOM from 'react-dom'  
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

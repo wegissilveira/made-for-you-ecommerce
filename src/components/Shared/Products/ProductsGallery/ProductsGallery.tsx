@@ -1,5 +1,5 @@
 import { ForwardedRef, forwardRef } from 'react'
-import classes from './ProductsGallery.module.css'
+import classes from './ProductsGallery.module.scss'
 import { ProductType } from 'common/types'
 
 import ProductCard from 'components/Shared/Products/ProductsGallery/ProductCard/ProductCard'

@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import classes from './FilterColorSelector.module.css'
+import classes from './FilterColorSelector.module.scss'
 
 import { UpdateFilterListContext, FilterDataContext } from "../context/FilterContext"
 import { Color } from "common/types"

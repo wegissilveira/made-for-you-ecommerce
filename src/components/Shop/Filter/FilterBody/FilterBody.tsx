@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import classes from './FilterBody.module.css'
+import classes from './FilterBody.module.scss'
 
 import productsData from 'Data/productsData'
 

@@ -39,7 +39,7 @@ Here is a working live demo :  https://www.wegis.com.br/made-for-you
 
 
 ## Sources
-- Layout partially inspired by [Vladislav Berg](https://www.behance.net/gallery/98180195/All-for-your-home-Online-Store-E-commerce) and [Magdalena Figura](https://www.behance.net/gallery/84904331/Login-page-UIUX-design) work.
+- Layout partially inspired by [Vladislav Berg](https://www.behance.net/gallery/98180195/All-for-your-home-Online-Store-E-commerce) and [Magdalena Figura](https://www.behance.net/gallery/84904331/Login-page-UIUX-design) works.
 
 ### Bug / Feature Request
 
@@ -52,4 +52,5 @@ If you'd like to request a new function, feel free to do so by opening an issue 
 
 - [React](https://reactjs.org/) - React makes it painless to create interactive UIs.
 - [Redux](https://redux.js.org/) - A Predictable State Container for JS Apps.
-- [CSS](https://www.w3schools.com/css/) - Cascading Style Sheets is a style sheet language used for describing the presentation of a document written in a markup language.
+- [Typescript](https://www.typescriptlang.org/) - TypeScript is a strongly typed programming language that builds on JavaScript, giving you better tooling at any scale.
+- [SASS](https://sass-lang.com/) - Sass is the most mature, stable, and powerful professional grade CSS extension language in the world.

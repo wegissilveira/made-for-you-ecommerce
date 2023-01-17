@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
-import classes from './Products.module.css'
+import classes from './Products.module.scss'
 
 import { useParams } from 'react-router-dom'
 

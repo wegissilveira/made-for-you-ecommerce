@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import classes from './SearchComponent.module.css'
+import classes from './SearchComponent.module.scss'
 
 import { useHistory } from 'react-router-dom'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"

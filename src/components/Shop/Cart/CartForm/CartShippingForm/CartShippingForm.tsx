@@ -1,4 +1,4 @@
-import classes from './CartShippingForm.module.css'
+import classes from './CartShippingForm.module.scss'
 
 const CartShippingForm = () => {
    return (

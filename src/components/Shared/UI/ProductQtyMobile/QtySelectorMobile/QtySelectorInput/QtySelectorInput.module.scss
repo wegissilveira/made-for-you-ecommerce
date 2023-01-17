@@ -1,0 +1,17 @@
+.selectList_items {
+	overflow: scroll;
+	height: 85%;
+	>div {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		height: 50px;
+		padding-right: 10px;
+		padding-left: 10px;
+		border-bottom: 1px solid #dee2e6;
+		>label {
+			margin: 0;
+			color: rgba(20, 20, 20, 0.452);
+		}
+	}
+}

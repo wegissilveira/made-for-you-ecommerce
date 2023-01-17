@@ -1,4 +1,4 @@
-import './Modal.css'
+import './Modal.scss'
 import Modal from 'react-modal'
 import { CSSProperties } from 'react'
 

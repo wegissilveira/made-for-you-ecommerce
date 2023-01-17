@@ -1,4 +1,4 @@
-import classes from './DrawerSocialIcons.module.css'
+import classes from './DrawerSocialIcons.module.scss'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 

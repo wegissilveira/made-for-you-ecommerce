@@ -1,4 +1,4 @@
-import classes from './Toastify.module.css'
+import classes from './Toastify.module.scss'
 import ReactDOM from 'react-dom' 
 
 

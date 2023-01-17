@@ -252,42 +252,57 @@ FASE 2 - Implementação do TypeScript - Estudar os artigos de typescript da mak
             - MinorSliderHeader - OK OK
                - MinorSlider - OK OK
          - MainPageShopByRoom - OK OK
-      - User - OK
-      - UI: - OK
-         - ColorSelect - OK
-         - ProductQtyMobile - OK
-         - ProductsQty - OK
-         - ProgressBar - OK
-         - Spinner - OK
-         - Toastify - OK
-      - Products: - OK
-         - CategoryHeader - OK
-         - LoadMoreProducts - OK
-         - ProductsGallery - OK
-      - BestDealSection - OK
-      - Cart: - OK
-         - CartForm - OK
-         - CartList - OK
-         - KeepBuyingBtn - OK
-         - ProductCart - OK
-      - Filter: - OK
+      - User - OK OK
+         - UserForm - OK OK
+         - UserLogin - OK OK
+         - UserSignUp - OK OK
+         - WIshlist - OK OK
+      - UI: - OK OK
+         - ColorSelect - OK OK
+         - ProductQtyMobile - OK OK
+            - QtySelectorMobile - OK OK
+               - QtySelectorInput - OK OK
+         - ProductsQty - OK OK
+         - ProgressBar - OK OK
+         - Spinner - OK OK
+         - Toastify - OK OK
+      - Products: - OK OK
+         - CategoryHeader - OK OK
+         - LoadMoreProducts - OK OK
+         - ProductsGallery - OK OK
+            - ProductCard - OK OK
+               - ProductCardFooter - OK OK
+      - BestDealSection - OK OK
+         - BestDealSlider - OK OK
+      - Cart: - OK OK
+         - CartForm - OK OK
+            - CartCouponForm - OK OK
+            - CartPaymentForm - OK OK
+            - CartShippingForm - OK OK
+         - CartList - OK OK
+            - ProductCartTable - OK OK
+         - KeepBuyingBtn - OK OK
+         - ProductCart - OK OK
+            - ProductCartDetails - OK OK
+      - Filter: - OK OK
          - context - OK
-         - FilterBody - OK
-         - FilterBottom - OK
-         - FilterCheckbox - OK
-         - FilterColorSelector - OK
-         - FilterHeader - OK
+         - FilterBody - OK OK
+         - FilterBottom - OK OK
+         - FilterCheckbox - OK OK
+         - FilterColorSelector - OK OK
+         - FilterHeader - OK OK
          - helpers - OK
-         - PriceSlider - OK
-      - ProductPage: - OK
+         - PriceSlider - OK OK
+      - ProductPage: - OK OK
          - context - OK
-         - ProductInfoComponent: - OK
-            - ProductInfoBody - OK
-            - ProductInfoFooter - OK
-            - ProductInfoHeader - OK
-         - ProductSlider - OK
+         - ProductInfoComponent: - OK OK
+            - ProductInfoBody - OK OK
+               - SKUSizeSelector - OK OK
+            - ProductInfoFooter - OK OK
+            - ProductInfoHeader - OK OK
+         - ProductSlider - OK OK
          - helpers - OK
-      - ProductModal - OK
+      - ProductModal - OK OK
 
       - containers:
          - ShopConfig - OK
@@ -312,6 +327,12 @@ FASE 2 - Implementação do TypeScript - Estudar os artigos de typescript da mak
          -> (BUG): seção de descontos e sales está descentralizada em 1600px
          -> (BUG): Fundo da página de contato está com faixas brancas nas laterais
          -> (BUG): Shop by room no mobile não está legal, fugiu muito do original
+         -> (MELHORIA): Aumentar o diâmetro do span de cor nos selects de cores em mobile
+         -> (BUG): Borda de loadmoreproducts não está sendo desativada
+            - Ocorreu após alterar css para scss, mesmo antes de converter as regras 
+         -> (BUG): Seletor de cores no filtro do mobile não está legal. Melhorar a diagramação
+         -> (BUG): No modal informações do produto que deviam aparecer somente na PDP estão aparecendo e quebrando o componente
+         -> (MELHORIA): Ícones do header estão muito colados do lado direito
       
 
 
@@ -328,8 +349,6 @@ FASE 2 - Implementação do TypeScript - Estudar os artigos de typescript da mak
 
 
       *****EM EXECUÇÃO****       
-      -> Passar css para sass.
-         - Usar este site para conversão e ir testando pra ver se não quebra nada: https://beautifytools.com/css-to-scss-converter.php
       
       
 
@@ -360,6 +379,7 @@ FASE 2 - Implementação do TypeScript - Estudar os artigos de typescript da mak
       -> (BUG): Entender e resolver 'ref is not a prop' que aparece no console - OK
       -> (MELHORIA): Passar setPageProductsQtyHandler de Products para LoadMoreProducts. Não faz sentido está onde está. única coisa que precisa ser devolvida para Products é count - OK
       -> (MELHORIA) Criar tipo para objeto de cores no fetch - Ler artigos de fetch primeiro - OK
+      -> Passar css para sass - OK
 
 
 

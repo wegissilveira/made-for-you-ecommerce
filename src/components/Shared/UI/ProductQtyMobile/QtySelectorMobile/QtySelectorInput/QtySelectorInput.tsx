@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react"
-import classes from  './QtySelectorInput.module.css'
+import classes from  './QtySelectorInput.module.scss'
 
 import { verifyCheckout } from "helpers/functions"
 

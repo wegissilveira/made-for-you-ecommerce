@@ -1,5 +1,5 @@
 import { CSSProperties, ForwardedRef, forwardRef } from 'react'
-import classes from './BestDealSlider.module.css'
+import classes from './BestDealSlider.module.scss'
 
 import { Link } from 'react-router-dom'
 

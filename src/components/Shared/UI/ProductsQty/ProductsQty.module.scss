@@ -1,0 +1,43 @@
+.Product_qtde {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	width: 70px;
+	height: 45px;
+	border: 1px solid #dee2e6;
+	>p {
+		margin: 0;
+	}
+}
+.Product_qtde_arrows {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 65%;
+	>* {
+		&:hover {
+			color: #535455;
+		}
+	}
+	>.active {
+		cursor: pointer;
+		color: #212529;
+	}
+	>.disabled {
+		cursor: default;
+		color: #ccc;
+	}
+}
+.Product_qtde_container {
+	button {
+		font-size: 12px;
+		height: 45px;
+		width: 160px;
+		border-radius: 0;
+		-webkit-border-radius: none;
+		-moz-border-radius: 0;
+		-ms-border-radius: 0;
+		-o-border-radius: 0;
+		-webkit-border-radius: 0;
+	}
+}

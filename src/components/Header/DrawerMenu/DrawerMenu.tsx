@@ -1,4 +1,4 @@
-import classes from './DrawerMenu.module.css'
+import classes from './DrawerMenu.module.scss'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 

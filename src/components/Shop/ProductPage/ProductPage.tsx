@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-import classes from './ProductPage.module.css'
+import classes from './ProductPage.module.scss'
 
 import useProduct from 'hooks/useProduct'
 
