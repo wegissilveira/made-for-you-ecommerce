@@ -54,3 +54,4 @@ If you'd like to request a new function, feel free to do so by opening an issue 
 - [Redux](https://redux.js.org/) - A Predictable State Container for JS Apps.
 - [Typescript](https://www.typescriptlang.org/) - TypeScript is a strongly typed programming language that builds on JavaScript, giving you better tooling at any scale.
 - [SASS](https://sass-lang.com/) - Sass is the most mature, stable, and powerful professional grade CSS extension language in the world.
+- [Font Awesome](https://fontawesome.com/v5/docs/web/use-with/react) - Font Awesome is the Internet's icon library and toolkit, used by millions of designers, developers, and content creators.
