@@ -3,19 +3,11 @@ import classes from './Filter.module.scss'
 
 import { FilterDataContext } from './context/FilterContext'
 
-import useCallResizeWarning from 'hooks/useCallResizeWarning'
-
-import Toastify from 'components/Shared/UI/Toastify/Toastify'
 import Products from 'components/Shared/Products/Products'
 import FilterHeader from './FilterHeader/FilterHeader'
 import FilterBottom from './FilterBottom/FilterBottom'
 import FilterBody from './FilterBody/FilterBody'
 
-
-const toastifyMsg: [string, string] = [
-   'Reload The Page',
-   'In order for all components to adjust to the new screen dimensions, the page should be reloaded.'
-]
 
 const Filter = () => {
    const [pageLimit, setPageLimit] = useState(12)
@@ -33,8 +25,6 @@ const Filter = () => {
    const filterRef = useRef<HTMLDivElement>(null)
 
    const filterReducerState = useContext(FilterDataContext)
-
-   const { openToastify } = useCallResizeWarning(containerRef)
    
    const translateFilter = {
       marginTop: translateValue + 'px',
@@ -78,34 +68,28 @@ const Filter = () => {
 
 
    return (
-      <>
-         <Toastify
-            toastifyDetails={toastifyMsg}
-            open={openToastify}
+      <div 
+         className={classes.Filter_container} 
+         ref={containerRef} 
+      >
+         <FilterHeader 
+            filterOpen={filterOpen}
+            openFilterHandlerCB={openFilterHandler}
          />
-         <div 
-            className={classes.Filter_container} 
-            ref={containerRef} 
-         >
-            <FilterHeader 
-               filterOpen={filterOpen}
-               openFilterHandlerCB={openFilterHandler}
-            />
-            <div style={translateFilter}>
-               <div
-                  className={classes.Filter_subContainer}
-                  ref={filterRef}
-               >
-                  <FilterBody />
-                  <FilterBottom/>
-               </div>
-               <Products
-                  productsProps={filterReducerState.productsState} // => Envia o array com os produtos que serão exibidos
-                  pageLimit={pageLimit}  // => Número limite de produtos a serem mostrados inicialmente
-               />
+         <div style={translateFilter}>
+            <div
+               className={classes.Filter_subContainer}
+               ref={filterRef}
+            >
+               <FilterBody />
+               <FilterBottom/>
             </div>
+            <Products
+               productsProps={filterReducerState.productsState} // => Envia o array com os produtos que serão exibidos
+               pageLimit={pageLimit}  // => Número limite de produtos a serem mostrados inicialmente
+            />
          </div>
-      </>
+      </div>
    )
 }
 

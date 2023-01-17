@@ -2,6 +2,14 @@
 	--nav-height: 60px;
 }
 
+body {
+	margin: 0;
+}
+
+* {
+	font-family: system-ui;
+}
+
 @media (max-width:992px) {
 	:root {
 		--nav-height: 50px;

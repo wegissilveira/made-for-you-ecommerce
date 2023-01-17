@@ -4,8 +4,20 @@
 	width: 88%;
 	margin-left: 6%;
 	overflow: hidden;
+	@media (max-width: 768px) {
+		width: unset;
+		margin: 0;
+		padding-left: 8px;
+		padding-right: 8px;
+	}
 	>h1 {
 		text-align: center;
+	}
+	a {
+		@media (max-width: 768px) {
+			margin-bottom: 8px;
+			display: inline-block;
+		}
 	}
 }
 .ShoppingByRoom_container {

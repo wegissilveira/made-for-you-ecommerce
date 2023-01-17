@@ -1,6 +1,7 @@
 .Discounts_container {
    width: 88%;
-   margin-left: 6%;
+   max-width: 1200px;
+   margin: 0 auto;
    display: grid;
    grid-template-columns: 1fr 1fr; 
    grid-template-rows:  0.8fr 0.8fr 1.4fr;

@@ -1,92 +1,82 @@
-@media (max-width: 480px) {
-	.Color-SKUSelector--wrapper {
-		>div {
-			margin-left: 0;
-		}
-	}
+.Color-SKUSelector--wrapper {
 	.Color-bullets--wrapper {
-		margin-left: 20%;
-		>div {
-			width: 40px;
-			height: 40px;
-			>span {
-				width: 26px;
-				height: 26px;
-			}
-		}
-	}
-}
-@media (max-width: 360px) {
-	.Color-SKUSelector--wrapper {
-		>div {
-			width: 80%;
-			display: flex;
-			flex-wrap: wrap;
-		}
-	}
-}
-.Color-bullets--wrapper {
-   display: flex;
-   margin-left: -5px;
-   justify-content: space-between;
-   margin-top: 8px;
-   .Color-bullet {
-      border: 1px solid #000;
-      span {
-         opacity: 0.4;
-      }
-      &.Active-bullet {
-         border: 2px solid #000;
-         span {
-            opacity: 1.0;
-         }
-      }
-   }
-}
-.Color-bullets--wrapper {
-	>div {
 		display: flex;
-		justify-content: center;
-		align-items: center;
-		width: 26px;
-		height: 26px;
-		cursor: pointer;
-		// margin: 8px 5px 0 5px;
-		border-radius: 50%;
-		-webkit-border-radius: 50%;
-		-moz-border-radius: 50%;
-		-ms-border-radius: 50%;
-		-o-border-radius: 50%;
-		&:hover {
-			border: 2px solid black;
-		}
-		>span {
-			width: 18px;
-			height: 18px;
+		margin-left: -5px;
+		justify-content: space-between;
+		margin-top: 8px;
+
+		.Color-bullet {
+			border: 1px solid #000;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 26px;
+			height: 26px;
+			cursor: pointer;
 			border-radius: 50%;
 			-webkit-border-radius: 50%;
 			-moz-border-radius: 50%;
 			-ms-border-radius: 50%;
 			-o-border-radius: 50%;
-		}
-	}
-}
-.Product_details_color {
-	span {
-		&:hover {
-			background-color: yellow;
-		}
-	}
-}
-@media (max-width: 768px) {
-	.Color-bullets--wrapper {
-		>div {
-			width: 35px;
-			height: 35px;
-			>span {
-				width: 22px;
-				height: 22px;
+
+			&:hover {
+				border: 2px solid black;
+			}
+
+			span {
+				opacity: 0.4;
+				width: 18px;
+				height: 18px;
+				border-radius: 50%;
+				-webkit-border-radius: 50%;
+				-moz-border-radius: 50%;
+				-ms-border-radius: 50%;
+				-o-border-radius: 50%;
+
+				@media (max-width: 768px) {
+					width: 80%;
+					height: 80%;
+				}
+				@media (max-width: 480px) {
+					width: 26px;
+					height: 26px;
+				}
+				@media (max-width: 768px) {
+					width: 80%;
+					height: 80%;
+				}
+			}
+
+			&.Active-bullet {
+				border: 2px solid #000;
+				span {
+					opacity: 1.0;
+				}
+				@media (max-width: 768px) {
+					width: 35px;
+					height: 35px;
+				}
+			}
+			@media (max-width: 480px) {
+				width: 40px;
+				height: 40px;
+			}
+			@media (max-width: 768px) {
+				width: 35px;
+				height: 35px;
+				margin-bottom: 5px;
 			}
 		}
+		@media (max-width: 414px) {
+			max-width: 80px;
+			display: flex;
+			flex-wrap: wrap;
+		}
+		@media (max-width: 360px) {
+			width: 80%;
+			display: flex;
+			flex-wrap: wrap;
+		}
+
 	}
 }
