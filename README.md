@@ -50,7 +50,7 @@ If you'd like to request a new function, feel free to do so by opening an issue 
 
 ## Built with 
 
-- [React](https://reactjs.org/) - React makes it painless to create interactive UIs.
+- [React](https://reactjs.org/) - A JavaScript library for building user interfaces.
 - [Redux](https://redux.js.org/) - A Predictable State Container for JS Apps.
 - [Typescript](https://www.typescriptlang.org/) - TypeScript is a strongly typed programming language that builds on JavaScript, giving you better tooling at any scale.
 - [SASS](https://sass-lang.com/) - Sass is the most mature, stable, and powerful professional grade CSS extension language in the world.
