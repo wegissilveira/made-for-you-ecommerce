@@ -82,16 +82,16 @@ function App() {
         <Layout>
           <ScrollToTop />
           <Switch>
-            <Route path="/" exact component={MainPageConfig} />
-            <Route path={`/search/:${SearchTerms.SEARCH_KEY}`} exact component={Products} />
-            <Route path="/shop/" exact component={ShopConfig} />
-            <Route path={`/shop/:${SearchTerms.CAT}`} exact component={Products} />
-            <Route path="/product/:prodName" exact component={ProductPage} />
-            <Route path="/cart/" exact component={Cart} />
-            <Route path="/wishlist/" exact component={Wishlist} />
-            <Route path="/user-login/" exact component={UserLogin} />
-            <Route path="/user-signup/" exact component={UserSignUp} />
-            <Route path="/contact/" exact component={Contact} />
+            <Route path={`${process.env.PUBLIC_URL}/`} exact component={MainPageConfig} />
+            <Route path={`${process.env.PUBLIC_URL}/search/:${SearchTerms.SEARCH_KEY}`} exact component={Products} />
+            <Route path={`${process.env.PUBLIC_URL}/shop/`} exact component={ShopConfig} />
+            <Route path={`${process.env.PUBLIC_URL}/shop/:${SearchTerms.CAT}`} exact component={Products} />
+            <Route path={`${process.env.PUBLIC_URL}/product/:prodName`} exact component={ProductPage} />
+            <Route path={`${process.env.PUBLIC_URL}/cart/`} exact component={Cart} />
+            <Route path={`${process.env.PUBLIC_URL}/wishlist/`} exact component={Wishlist} />
+            <Route path={`${process.env.PUBLIC_URL}/user-login/`} exact component={UserLogin} />
+            <Route path={`${process.env.PUBLIC_URL}/user-signup/`} exact component={UserSignUp} />
+            <Route path={`${process.env.PUBLIC_URL}/contact/`} exact component={Contact} />
           </Switch>
         </Layout>
       </BrowserRouter>

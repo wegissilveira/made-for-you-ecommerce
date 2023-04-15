@@ -33,7 +33,7 @@ const MinorSlider = (props: Props ) => {
                      alt={"img-1"}
                   />
                   <div>
-                     <Link to={formatUrlName(item.name, item._id)} >
+                     <Link to={process.env.PUBLIC_URL + formatUrlName(item.name, item._id)} >
                         <p>{item.name}</p>
                         <p>{item.price}</p>
                      </Link>

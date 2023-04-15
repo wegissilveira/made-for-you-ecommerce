@@ -8,21 +8,21 @@ const NavigationDesk = () => {
          <ul>
             <li >
                <NavLink
-                  to="/"
+                  to={`${process.env.PUBLIC_URL}/`}
                   exact
                > Home
                </NavLink>
             </li>
             <li >
                <NavLink
-                  to="/shop/"
+                  to={`${process.env.PUBLIC_URL}/shop/`}
                   exact
                > Shop
                </NavLink>
             </li>
             <li >
                <NavLink
-                  to="/contact/"
+                  to={`${process.env.PUBLIC_URL}/contact/`}
                   exact
                > Contacts
                </NavLink>

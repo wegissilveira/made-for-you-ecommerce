@@ -31,11 +31,11 @@ const ProductCartDetails = (props: Props) => {
 
    return (
       <div className={classes.Cart_details_img}>
-         <Link to={formatUrlName(product.prodName, product._id)}>
+         <Link to={process.env.PUBLIC_URL + formatUrlName(product.prodName, product._id)}>
             <img src={product.prodImg} alt='img' />
          </Link>
          <div>
-            <Link to={formatUrlName(product.prodName, product._id)}>{product.prodName}</Link>
+            <Link to={process.env.PUBLIC_URL + formatUrlName(product.prodName, product._id)}>{product.prodName}</Link>
             <div className={classes.Cart_details_info}>
                <div>
                   <p>Size</p>

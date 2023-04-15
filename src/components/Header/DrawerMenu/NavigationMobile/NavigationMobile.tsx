@@ -18,7 +18,7 @@ const NavigationMobile = (props: Props) => {
          <li>
             <NavLink
                onClick={toggleMenu}
-               to="/"
+               to={`${process.env.PUBLIC_URL}/`}
                exact
             > Home
             </NavLink>
@@ -26,14 +26,14 @@ const NavigationMobile = (props: Props) => {
          <li>
             <NavLink
                onClick={toggleMenu}
-               to="/shop/"
+               to={`${process.env.PUBLIC_URL}/shop/`}
             > Shop
             </NavLink>
          </li>
          <li>
             <NavLink
                onClick={toggleMenu}
-               to="/user-login/"
+               to={`${process.env.PUBLIC_URL}/contact/`}
             > Login
             </NavLink>
          </li>

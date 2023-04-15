@@ -28,7 +28,7 @@ const ProductCardFooter = (props: Props) => {
    return (
       <div className={classes.Products_description}>
          <div>
-            <Link to={formatUrlName(productName, productId)}>{productName}</Link>
+            <Link to={process.env.PUBLIC_URL + formatUrlName(productName, productId)}>{productName}</Link>
             <p>$ {productPrice}</p>
          </div>
          <div>
