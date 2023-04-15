@@ -19,7 +19,7 @@ const ContactsDrawerMobile = (props: Props) => {
             <p>+375 29 364-74-69</p>
             <NavLink
                onClick={toggleMenu}
-               to="/contact/"
+               to={`${process.env.PUBLIC_URL}/contact/`}
                exact
             > Form
             </NavLink>

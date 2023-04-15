@@ -13,11 +13,11 @@ const SearchComponent = () => {
       let host = '/made-for-you/search/'
       switch (hostname) {
          case 'localhost':
-            return '/search/'
+            return `${process.env.PUBLIC_URL}/search/`
          case '127.0.0.1':
-            return '/search/'
+            return `${process.env.PUBLIC_URL}/search/`
          case '':
-            return'/search/'
+            return `${process.env.PUBLIC_URL}/search/`
          default:
             return host
       }
@@ -26,6 +26,7 @@ const SearchComponent = () => {
    const searchProducts = () => {
       let host = verifyLocalhost(window.location.hostname)     
       const searchValue = inputRef.current.value
+      console.log('HOST: ', host);
       
       if (searchValue.length >= 3) {
          history.push(host + searchValue)

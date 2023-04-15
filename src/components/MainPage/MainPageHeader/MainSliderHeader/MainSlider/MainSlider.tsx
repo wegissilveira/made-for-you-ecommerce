@@ -29,7 +29,7 @@ const MainSlider = forwardRef((props: Props, ref: ForwardedRef<HTMLDivElement>) 
                   alt={img.alt}
                />
                <div>
-                  <Link to={'/shop/' + img.cat}>
+                  <Link to={`${process.env.PUBLIC_URL}/shop/` + img.cat}>
                      <p>{img.linkText[0]}</p>
                      <p>{img.linkText[1]}</p>
                   </Link>

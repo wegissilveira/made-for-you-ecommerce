@@ -32,7 +32,7 @@ const HeaderUserOptions = (props: Props) => {
             <li>
                <NavLink
                   className={classes.Enter_account_btn}
-                  to="/user-login/"
+                  to={`${process.env.PUBLIC_URL}/user-login/`}
                >
                   <FontAwesomeIcon
                      icon={['far', 'user']}
@@ -41,7 +41,7 @@ const HeaderUserOptions = (props: Props) => {
                </NavLink>
             </li>
             <li>
-               <NavLink to="/wishlist/">
+               <NavLink to={`${process.env.PUBLIC_URL}/wishlist/`}>
                   <FontAwesomeIcon
                      icon={['far', 'heart']}
                      color={heartColor}
@@ -49,7 +49,7 @@ const HeaderUserOptions = (props: Props) => {
                </NavLink>
             </li>
             <li>
-               <NavLink to="/cart/">
+               <NavLink to={`${process.env.PUBLIC_URL}/cart/`}>
                   <FontAwesomeIcon
                      icon='shopping-bag'
                      color={bagColor}

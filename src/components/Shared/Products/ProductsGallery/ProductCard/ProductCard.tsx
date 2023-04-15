@@ -122,7 +122,7 @@ const ProductCard = (props: Props) => {
                icon={[wish_icon, 'heart']} size="2x"
                className={classes.Wishlist_icon_heart}
             />
-            <Link to={formatUrlName(product.name, product._id)}>
+            <Link to={process.env.PUBLIC_URL + formatUrlName(product.name, product._id)}>
                <div className={classes.Products_img_container}>
                   <img
                      src={product.img}

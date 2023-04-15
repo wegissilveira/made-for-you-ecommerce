@@ -85,7 +85,7 @@ const UserForm = (props: Props) => {
                      />
                   </div>
                </div>
-               <Link to={form.redirectLink}>
+               <Link to={`${process.env.PUBLIC_URL}${form.redirectLink}`}>
                   <p>{form.redirectMsg}</p>
                </Link>
             </div>
