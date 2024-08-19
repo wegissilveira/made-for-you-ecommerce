@@ -10,6 +10,7 @@ import { Dispatch } from "redux"
 import { ActionTypesGlobal } from 'store/actions/actionTypes'
 
 import { cartListDataFn, wishlistDataFn } from "services"
+import useMediaQuery from 'hooks/useMediaQuery'
 
 import { ProductType, ProductCartType, InitialState } from 'common/types'
 
@@ -58,6 +59,8 @@ const ProductInfoBody = (props: Props) => {
 
    const { finishUpdate } = useContext(UpdateProductValuesContext)
    const productReducerState = useContext(ProductDataContext)
+
+   const matchesDesk = useMediaQuery('(max-width: 480px)')   
 
    const wishlistHandler = (id: string) => {
       let list = [...wish]
@@ -177,9 +180,11 @@ const ProductInfoBody = (props: Props) => {
                product={product}
             />
          </div>
-         <div className={classes.Product_wishlist_container} >
-            <ProductsQty max={8} />
-            <ProductQtyMobile max={8} />
+         <div className={classes.Product_wishlist_container} >            
+            {matchesDesk ? 
+               <ProductQtyMobile max={8} /> : 
+               <ProductsQty max={8} />
+            }
             <button
                onClick={() => productCartHandler()}
                type="button"

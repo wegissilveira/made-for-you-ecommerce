@@ -21,7 +21,7 @@ const MinorSlider = (props: Props ) => {
          {sliderProducts.map((item, i) => {
             return (
                <div
-                  key={`${item}-${i}`}
+                  key={item.img}
                   className={classes.MinorSlider_subContainer}
                   style={{
                      backgroundColor: item.bgColor,

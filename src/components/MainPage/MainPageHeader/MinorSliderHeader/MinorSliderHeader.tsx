@@ -15,13 +15,12 @@ const MinorSliderHeader = () => {
       
       if (typeof index !== 'string') {
          sliderToShow = index
+      } else if (minorSlideImg < MinorSliderData.length - 1) {
+         sliderToShow = minorSlideImg + 1
       } else {
-         if (minorSlideImg < MinorSliderData.length - 1) {
-            sliderToShow = minorSlideImg + 1
-         } else {
-            sliderToShow = 0
-         }
+         sliderToShow = 0
       }
+      
       setMinorSlideImg(sliderToShow)
    }
 

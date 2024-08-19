@@ -3,9 +3,8 @@ import { useState, useEffect } from 'react'
 import classes from './ProductCard.module.scss'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { useHistory } from 'react-router-dom'
 import { Dispatch } from 'redux';
 
 import { ProductCartType, ProductType, InitialState } from 'common/types'

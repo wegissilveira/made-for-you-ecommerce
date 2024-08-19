@@ -3,7 +3,7 @@ import classes from './Products.module.scss'
 
 import { useParams } from 'react-router-dom'
 
-import { ProductType, GalleryQty, SearchParams, SearchTerms } from 'common/types'
+import { ProductType, SearchParams, SearchTerms } from 'common/types'
 
 import productsData from 'Data/productsData'
 import LoadMoreProducts from './LoadMoreProducts/LoadMoreProducts'
@@ -16,7 +16,6 @@ type Props = {
    pageLimit?: number
 }
 
-const _ = undefined
 const Products = (props: Props) => {
    const {
       productsProps,
@@ -24,7 +23,7 @@ const Products = (props: Props) => {
    } = props
    
    const [productsState, setProductsState] = useState<ProductType[]>([])
-   const [pageLimitState, setPageLimit] = useState(0)
+   const [pageLimitState, setPageLimitState] = useState(0)
    const [galleryClass, setGalleryClass] = useState('ProductsContainer')
    const [count, setCount] = useState(0)
 
@@ -60,7 +59,7 @@ const Products = (props: Props) => {
    }, [params.searchKey])
 
    useEffect(() => {
-      setPageLimit(pageLimit)
+      setPageLimitState(pageLimit)
       setCount(pageLimit)
    }, [pageLimit])
 

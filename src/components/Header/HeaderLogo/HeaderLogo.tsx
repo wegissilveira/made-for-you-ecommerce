@@ -8,8 +8,7 @@ const HeaderLogo = () => {
       <Link
          to={`${process.env.PUBLIC_URL}/`}
          className={classes.Logo}
-      > m
-         <span>y</span>Home
+      > m <span>y</span>Home
       </Link>
    )
 }

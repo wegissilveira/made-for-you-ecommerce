@@ -1,7 +1,7 @@
 html {
 	&:root {
 		--thumb-radius: 15px;
-		--thumb-top: calc((var(--thumb-radius) - 2px)/-2);
+		--thumb-top: calc((var(--thumb-radius) - 2px)/ -2);
 		--thumb-end: calc(var(--thumb-radius) / -2);
 	}
 }

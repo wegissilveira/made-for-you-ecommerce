@@ -10,7 +10,7 @@ const SearchComponent = () => {
    const history = useHistory()
 
    const verifyLocalhost = (hostname: string) => {
-      let host = '/made-for-you/search/'
+      const host = '/made-for-you/search/'
       switch (hostname) {
          case 'localhost':
             return `${process.env.PUBLIC_URL}/search/`
@@ -24,9 +24,8 @@ const SearchComponent = () => {
    }
 
    const searchProducts = () => {
-      let host = verifyLocalhost(window.location.hostname)     
+      const host = verifyLocalhost(window.location.hostname)     
       const searchValue = inputRef.current.value
-      console.log('HOST: ', host);
       
       if (searchValue.length >= 3) {
          history.push(host + searchValue)
@@ -36,11 +35,11 @@ const SearchComponent = () => {
    }
 
    return (
-      <div 
-         className={classes['SearchProducts--wrapper']}
-         onKeyDown={(e) => e.key === 'Enter' ? searchProducts() : null}
-      >
-         <input ref={inputRef} />
+      <div className={classes['SearchProducts--wrapper']}>
+         <input 
+            ref={inputRef} 
+            onKeyDown={(e) => e.key === 'Enter' ? searchProducts() : null}
+         />
          <FontAwesomeIcon
             icon="search"
             color="grey"

@@ -23,7 +23,7 @@ const MainSlider = forwardRef((props: Props, ref: ForwardedRef<HTMLDivElement>) 
          ref={ref}
       >
          {MainSliderData.map((img, i) =>
-            <div key={`${i}-${img}`} className={'image-' + i}>
+            <div key={img.img} className={'image-' + i}>
                <img
                   src={img.img}
                   alt={img.alt}

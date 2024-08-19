@@ -9,7 +9,7 @@ import { UpdateProductValuesContext, ProductDataContext } from "components/Shop/
 
 type ColorEl = {
    action: 'click'
-   ev: React.MouseEvent<HTMLDivElement>
+   ev: React.MouseEvent<HTMLButtonElement>
    color: Color
 }
 
@@ -100,7 +100,7 @@ const ColorSelect = (props: Props) => {
    }, [productColor])
 
    useEffect(() => {
-      if (product && product.colors) setCurrentColors(product.colors)
+      if (product?.colors) setCurrentColors(product.colors)
    }, [product])
 
 
@@ -113,13 +113,16 @@ const ColorSelect = (props: Props) => {
          >
             {
                currentColors.map((color, i) => {
-                  return <div 
-                     className={classes['Color-bullet']}
-                     key={color+'-'+i}
-                     onClick={(e) => selectColorHandler({action: 'click', ev: e, color: color})}
-                  >
-                     <span style={{ backgroundColor: color }}></span>
-                  </div>
+                  return (
+                     <button 
+                        className={classes['Color-bullet']}
+                        key={color}
+                        onClick={(e) => selectColorHandler({action: 'click', ev: e, color: color})}
+                     >
+                        <span style={{ backgroundColor: color }}></span>
+                     </button>
+                  )
+
                })
             }
          </div>

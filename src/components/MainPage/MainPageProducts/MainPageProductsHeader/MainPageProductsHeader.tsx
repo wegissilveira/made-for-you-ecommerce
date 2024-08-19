@@ -11,8 +11,8 @@ const MainPageProductsHeader = (props: Props) => {
       setTagCB
    } = props
    
-   const setActiveTabHandler = (e: React.MouseEvent<HTMLDivElement>, tag: Tag) => {
-      const target = e.target as HTMLDivElement
+   const setActiveTabHandler = (e: React.MouseEvent<HTMLButtonElement>, tag: Tag) => {
+      const target = e.target as HTMLButtonElement
 
       const container = target.closest('div[class^=MainPageProductsHeader_Products_select_container]')
       Array.from(container!.children).forEach(child => {
@@ -26,29 +26,29 @@ const MainPageProductsHeader = (props: Props) => {
 
    return (
       <div className={classes.Products_select_container}>
-         <div
+         <button
             onClick={(e) => setActiveTabHandler(e, 'all-products')}
             className={[
                classes.Products_select,
                classes.Products_select_active].join(' ')
             }
          > ALL PRODUCTS
-         </div>
-         <div
+         </button>
+         <button
             onClick={(e) => setActiveTabHandler(e, 'furniture')}
             className={classes.Products_select}
          > FURNITURE
-         </div>
-         <div
+         </button>
+         <button
             onClick={(e) => setActiveTabHandler(e, 'decorations')}
             className={classes.Products_select}
          > DECORATIONS
-         </div>
-         <div
+         </button>
+         <button
             onClick={(e) => setActiveTabHandler(e, 'textile')}
             className={classes.Products_select}
          > TEXTILE
-         </div>
+         </button>
       </div>
    )
 }

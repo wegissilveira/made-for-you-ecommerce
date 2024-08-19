@@ -4,7 +4,9 @@
 	width: 43%;
 	margin-left: 28.5%;
 	margin-top: 48px;
-	>div {
+	> button {
+		border: 0;
+		padding: 0;
 		width: 25%;
 	}
 }
@@ -38,7 +40,7 @@
 	color: white;
 	height: 53px;
 	display: flex;
-	justify-content: space-between;
+	justify-content: center;
 	flex-direction: column;
 	padding: 10 0 0 0;
 	padding-bottom: 0;

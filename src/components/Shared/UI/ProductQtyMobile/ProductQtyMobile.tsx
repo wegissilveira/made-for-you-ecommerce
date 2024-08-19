@@ -24,7 +24,7 @@ const ProductQtyMobile = (props: Props) => {
 
 	const [ productQtyState, setProductQtyState ] = useState(1)
 	const [maxQty, setMaxQty] = useState<number[]>([] as number[])
-	const [ isCheckoutRoute, setIsCheckout ] = useState(false)
+	const [ isCheckoutRoute, setIsCheckoutRoute ] = useState(false)
 
 	const qtyListRef = useRef<HTMLDivElement>(null)
 	const { productQty } = useContext(ProductDataContext)
@@ -55,7 +55,7 @@ const ProductQtyMobile = (props: Props) => {
 
 	useEffect(() => {
       const isCheckout = verifyCheckout()
-      setIsCheckout(isCheckout)
+      setIsCheckoutRoute(isCheckout)
    }, [location])
 	
 	return (

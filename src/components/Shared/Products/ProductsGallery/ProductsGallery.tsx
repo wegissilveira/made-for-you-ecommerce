@@ -26,7 +26,7 @@ const ProductsGallery = forwardRef((props: Props, productsSubContainerRef: Forwa
                let productsList
                if (i + 1 <= count) {
                   productsList = <ProductCard
-                                    key={product + '-' + i}
+                                    key={product._id}
                                     product={product}
                                  />
                }
