@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 import { ActionTypesGlobal } from 'store/actions/actionTypes'
 
 import { cartListDataFn } from "services"
+import useMediaQuery from 'hooks/useMediaQuery'
 
 import { ProductCartType, InitialState, SetQty } from 'common/types';
 
@@ -34,6 +35,8 @@ const ProductCart = (props: Props) => {
    } = props
    
    const [productQty, setQty] = useState(1)
+
+   const isMobile = useMediaQuery('(max-width: 480px)')  
 
    const setQtdeHandler = (qtyObj: SetQty) => {
       const currentQty = qtyObj.mobile ? qtyObj.qtyMobile : 1
@@ -63,16 +66,18 @@ const ProductCart = (props: Props) => {
          <td className={classes['Cart-column--discount']}>0%</td>
          <td className={classes['Cart-column--unit-price']}>$ {product.price}</td>
          <td className={classes['Cart-column--qty']}>
-            <ProductsQty
-               productQtyCheckout={productQty}
-               changeQtyCallBack={setQtdeHandler}
-               max={8}
-            />
-            <ProductQtyMobile
-               changeQtyCallBack={setQtdeHandler}
-               productQtyCheckout={productQty}
-               max={8}
-            />
+            {isMobile ? 
+               <ProductQtyMobile
+                  changeQtyCallBack={setQtdeHandler}
+                  productQtyCheckout={productQty}
+                  max={8}
+               /> :
+               <ProductsQty
+                  productQtyCheckout={productQty}
+                  changeQtyCallBack={setQtdeHandler}
+                  max={8}
+               />
+            }
          </td>
          <td className={classes['Cart-column--total-price']}>$ {(productQty * parseFloat(product.price)).toFixed(2)}</td>
          <td className={classes['Cart-column--remove-prod']}>

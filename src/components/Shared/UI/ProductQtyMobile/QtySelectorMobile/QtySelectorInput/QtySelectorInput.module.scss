@@ -1,7 +1,11 @@
 .selectList_items {
 	overflow: scroll;
 	height: 85%;
-	>div {
+	> button {
+		border: 0;
+		padding: 0;
+		width: 100%;
+		background: none;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;

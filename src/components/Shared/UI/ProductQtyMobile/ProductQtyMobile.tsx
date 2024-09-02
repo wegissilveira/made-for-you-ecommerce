@@ -60,13 +60,13 @@ const ProductQtyMobile = (props: Props) => {
 	
 	return (
 		<div className={classes.ProductQtde_mobile_container}>
-			<div
+			<button
 				onClick={() => toggleQtySelectMobileHandler()}
 				className={classes.OpenSelect_btn}
 			>
 				<p>{productQtyState}</p>
 				<FontAwesomeIcon icon="chevron-down" size="xs" />
-			</div>
+			</button>
 			<QtySelectorMobile 
 				ref={qtyListRef}
 				maxQty={maxQty}

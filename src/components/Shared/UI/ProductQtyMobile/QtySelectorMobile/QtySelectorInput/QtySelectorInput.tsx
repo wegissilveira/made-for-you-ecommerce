@@ -22,20 +22,20 @@ const QtySelectorInput = (props: Props) => {
    } = props
 
    const [ productQtyState, setProductQtyState ] = useState(1)
-   const [ isCheckoutRoute, setIsCheckout ] = useState(false)
+   const [ isCheckoutRoute, setIsCheckoutRoute ] = useState(false)
 
    const { productQty } = useContext(ProductDataContext)
    const { updateQty } = useContext(UpdateProductValuesContext)
 
    const location = useLocation()
 
-   const changeQtyHandler = (e: React.MouseEvent<HTMLDivElement>) => {
-      const containerEl = e.target as HTMLDivElement
-      const inputQty = containerEl.closest('DIV')!.getElementsByTagName('INPUT')[0] as HTMLInputElement
+   const changeQtyHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+      const inputQty = e.currentTarget.getElementsByTagName('INPUT')[0] as HTMLInputElement
 		const inputValue = Number(inputQty.value)
       
-		if(!isCheckoutRoute) updateQty(inputValue, true)
-      if(isCheckoutRoute) {
+		if(!isCheckoutRoute) {
+         updateQty(inputValue, true)
+      } else {
          const action: QtyAction = productQtyState < inputValue ? 'increase' : 'decrease'
          const newQty = action === 'decrease' ? productQtyState - inputValue : inputValue - productQtyState
          const qtyObj = {
@@ -46,7 +46,7 @@ const QtySelectorInput = (props: Props) => {
          } as const
 
          if(changeQtyCallBack) changeQtyCallBack(qtyObj)
-      } 
+      }
 	}
    
    useEffect(() => {
@@ -61,16 +61,18 @@ const QtySelectorInput = (props: Props) => {
 
    useEffect(() => {
       const isCheckout = verifyCheckout()
-      setIsCheckout(isCheckout)
+      setIsCheckoutRoute(isCheckout)
    }, [location])
 
-
    return (
-      <div onClick={e => changeQtyHandler(e)} className={classes.selectList_items}>
+      <div className={classes.selectList_items}>
          {
             maxQty.map((item, i) => {
                return (
-                  <div key={item + i}>
+                  <button 
+                     key={item} 
+                     onClick={changeQtyHandler}
+                  >
                      <label>{i + 1}</label>
                      <input
                         type="radio"
@@ -78,7 +80,7 @@ const QtySelectorInput = (props: Props) => {
                         checked={Number(productQtyState) === i + 1}
                         readOnly
                      />
-                  </div>
+                  </button>
                )
             })
          }

@@ -60,7 +60,7 @@ const ProductInfoBody = (props: Props) => {
    const { finishUpdate } = useContext(UpdateProductValuesContext)
    const productReducerState = useContext(ProductDataContext)
 
-   const matchesDesk = useMediaQuery('(max-width: 480px)')   
+   const isMobile = useMediaQuery('(max-width: 480px)')   
 
    const wishlistHandler = (id: string) => {
       let list = [...wish]
@@ -181,7 +181,7 @@ const ProductInfoBody = (props: Props) => {
             />
          </div>
          <div className={classes.Product_wishlist_container} >            
-            {matchesDesk ? 
+            {isMobile ? 
                <ProductQtyMobile max={8} /> : 
                <ProductsQty max={8} />
             }
