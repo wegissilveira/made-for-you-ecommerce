@@ -34,7 +34,7 @@ const ProductCart = (props: Props) => {
       totalCartValue
    } = props
    
-   const [productQty, setQty] = useState(1)
+   const [productQty, setProductQty] = useState(1)
 
    const isMobile = useMediaQuery('(max-width: 480px)')  
 
@@ -45,7 +45,7 @@ const ProductCart = (props: Props) => {
          totalCartValue - (parseFloat(product.price) * currentQty)
 
       onUpdateCartValueState(newCartValue)
-      setQty(qtyObj.newQty)
+      setProductQty(qtyObj.newQty)
    }
 
    const removeProductCart = (id: string) => {
@@ -55,7 +55,7 @@ const ProductCart = (props: Props) => {
    }
 
    useEffect(() => {
-      setQty(product.qtde)
+      setProductQty(product.qtde)
    }, [])
 
    return (

@@ -33,7 +33,7 @@ const BestDealSlider = forwardRef((props: Props, bestDealRef: ForwardedRef<HTMLD
                   if (product.deal) {
                      bestDealElement =
                         <div
-                           key={i}
+                           key={product._id}
                            className={classes.Products_subContainer}
                         >
                            <div>

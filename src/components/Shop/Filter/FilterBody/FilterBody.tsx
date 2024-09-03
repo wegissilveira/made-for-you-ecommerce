@@ -100,7 +100,7 @@ const FilterBody = () => {
       }
    })
 
-   const setProductTagHandler = (e: React.MouseEvent<HTMLParagraphElement>, type: Type) => {
+   const setProductTagHandler = (e: React.MouseEvent<HTMLButtonElement>, type: Type) => {
       type.type === TagType.CAT_TYPE ? updateCategory(type.tag) : updateTag(type.tag)
 
       const changeTagEl = e.target as HTMLDivElement
@@ -116,22 +116,22 @@ const FilterBody = () => {
       <div className={classes.Filter_Blocks}>
          <div id="categories-wrapper">
             <h6>CATEGORIES</h6>
-            <p className={classes.Selected} onClick={e => setProductTagHandler(e, {type: TagType.CAT_TYPE, tag: 'all'})}>All categories ({categoriesTotalQtde}) </p>
-            <p onClick={e => setProductTagHandler(e, {type: TagType.CAT_TYPE, tag: 'bedroom'})}>Bedroom ({bedRoomQtde}) </p>
-            <p onClick={e => setProductTagHandler(e, {type: TagType.CAT_TYPE, tag: 'living-room'})}>Living room ({livingRoomQtde}) </p>
-            <p onClick={e => setProductTagHandler(e, {type: TagType.CAT_TYPE, tag: 'kitchen'})}>Kitchen ({kitchen}) </p>
-            <p onClick={e => setProductTagHandler(e, {type: TagType.CAT_TYPE, tag: 'bathroom'})}>Bathroom ({bathRoomQtde}) </p>
-            <p onClick={e => setProductTagHandler(e, {type: TagType.CAT_TYPE, tag: 'children-room'})}>Children's room ({childrenRoom}) </p>
+            <button className={classes.Selected} onClick={e => setProductTagHandler(e, {type: TagType.CAT_TYPE, tag: 'all'})}>All categories ({categoriesTotalQtde}) </button>
+            <button onClick={e => setProductTagHandler(e, {type: TagType.CAT_TYPE, tag: 'bedroom'})}>Bedroom ({bedRoomQtde}) </button>
+            <button onClick={e => setProductTagHandler(e, {type: TagType.CAT_TYPE, tag: 'living-room'})}>Living room ({livingRoomQtde}) </button>
+            <button onClick={e => setProductTagHandler(e, {type: TagType.CAT_TYPE, tag: 'kitchen'})}>Kitchen ({kitchen}) </button>
+            <button onClick={e => setProductTagHandler(e, {type: TagType.CAT_TYPE, tag: 'bathroom'})}>Bathroom ({bathRoomQtde}) </button>
+            <button onClick={e => setProductTagHandler(e, {type: TagType.CAT_TYPE, tag: 'children-room'})}>Children's room ({childrenRoom}) </button>
          </div>
          <span></span>
          <div id="types-wrapper">
             <h6>TYPE</h6>
-            <p className={classes.Selected} onClick={e => setProductTagHandler(e, {type: TagType.DEP_TYPE, tag: 'all-products'})}>All tags ({typesTotalQtde}) </p>
-            <p onClick={e => setProductTagHandler(e, {type: TagType.DEP_TYPE, tag: 'furniture'})}>Furniture ({furnitureQtde}) </p>
-            <p onClick={e => setProductTagHandler(e, {type: TagType.DEP_TYPE, tag: 'accessories'})}>Accessories ({accessoriesQtde}) </p>
-            <p onClick={e => setProductTagHandler(e, {type: TagType.DEP_TYPE, tag: 'decorations'})}>Decorations ({decorationsQtde}) </p>
-            <p onClick={e => setProductTagHandler(e, {type: TagType.DEP_TYPE, tag: 'textile'})}>Textile ({textileQtde}) </p>
-            <p onClick={e => setProductTagHandler(e, {type: TagType.DEP_TYPE, tag: 'lightning'})}>Lighting ({lightingQtde}) </p>
+            <button className={classes.Selected} onClick={e => setProductTagHandler(e, {type: TagType.DEP_TYPE, tag: 'all-products'})}>All tags ({typesTotalQtde}) </button>
+            <button onClick={e => setProductTagHandler(e, {type: TagType.DEP_TYPE, tag: 'furniture'})}>Furniture ({furnitureQtde}) </button>
+            <button onClick={e => setProductTagHandler(e, {type: TagType.DEP_TYPE, tag: 'accessories'})}>Accessories ({accessoriesQtde}) </button>
+            <button onClick={e => setProductTagHandler(e, {type: TagType.DEP_TYPE, tag: 'decorations'})}>Decorations ({decorationsQtde}) </button>
+            <button onClick={e => setProductTagHandler(e, {type: TagType.DEP_TYPE, tag: 'textile'})}>Textile ({textileQtde}) </button>
+            <button onClick={e => setProductTagHandler(e, {type: TagType.DEP_TYPE, tag: 'lightning'})}>Lighting ({lightingQtde}) </button>
          </div>
          <span></span>
          <FilterCheckbox checkboxItems={checkboxItems} />

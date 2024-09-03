@@ -7,6 +7,19 @@
    padding-right: 1%;
    padding-left: 2%;
 
+   > div {
+      button {
+         display: block;
+         margin: 16px 0;
+         padding: 0;
+         background: none;
+         border: none;
+         cursor: pointer;
+         color: grey;
+         font-size: 16px;
+      }
+   }
+
    >span {
       background-color: #ccc;
       width: 1px;

@@ -9,7 +9,7 @@ type Props = {
 const Toastify = (props: Props) => {
    const { open, toastifyDetails } = props;
 
-   let translateX = -110;
+   let translateX;
 
    if (open === true) {
       translateX = 0;

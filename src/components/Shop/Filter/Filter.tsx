@@ -27,7 +27,7 @@ const Filter = () => {
          return -391
       }
    })
-   const [filter_height, setFilterHeight] = useState(0)
+   const [filterHeight, setFilterHeight] = useState(0)
 
    const containerRef = useRef<HTMLDivElement>(null)
    const filterRef = useRef<HTMLDivElement>(null)
@@ -41,10 +41,10 @@ const Filter = () => {
    } as const
    
    const openFilterHandler = () => {
-      const open = filterOpen ? false : true
-      const translate = translateValue < 0 ? 0 : -filter_height
 
-      setFilterOpen(open)
+      const translate = translateValue < 0 ? 0 : -filterHeight
+
+      setFilterOpen(!filterOpen)
       setTranslateValue(translate)
    }
 
@@ -58,10 +58,6 @@ const Filter = () => {
          }
       }
    }
-
-   useEffect(() => {
-      setTranslateValue(translateValue)
-   }, [translateValue])
 
    useEffect(() => {
       if (window.matchMedia('(max-width: 480px)').matches) {

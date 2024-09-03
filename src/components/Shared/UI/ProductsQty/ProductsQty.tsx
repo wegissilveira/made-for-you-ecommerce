@@ -21,7 +21,7 @@ const ProductsQty = (props: Props) => {
    } = props
 
    const [ productQtyState, setProductQtyState ] = useState(1)
-   const [ isCheckoutRoute, setIsCheckout ] = useState(false)
+   const [ isCheckoutRoute, setIsCheckoutRoute ] = useState(false)
 
    const { updateQty } = useContext(UpdateProductValuesContext)
    const { productQty } = useContext(ProductDataContext)
@@ -47,7 +47,7 @@ const ProductsQty = (props: Props) => {
 
    useEffect(() => {
       const isCheckout = verifyCheckout()
-      setIsCheckout(isCheckout)
+      setIsCheckoutRoute(isCheckout)
    }, [location])
 
    useEffect(() => {
