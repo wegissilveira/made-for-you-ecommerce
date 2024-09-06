@@ -37,15 +37,14 @@ const FilterHeader = (props: Props) => {
          ['OPEN FILTERS', 'filter'] as const :
          ['CLOSE FILTERS', 'times'] as const
 
-
    return (
       <div className={classes.FilterHeader}>
-         <div onClick={() => openFilterHandlerCB()}
+         <button onClick={() => openFilterHandlerCB()}
             className={classes.Filter_toggle}
          >
             <FontAwesomeIcon icon={filterToggle[1]} />
-            <p>{filterToggle[0]}</p>
-         </div>
+            {filterToggle[0]}
+         </button>
          <div className={classes.Filter_sort}>
             <p>Sort by</p>
             <select

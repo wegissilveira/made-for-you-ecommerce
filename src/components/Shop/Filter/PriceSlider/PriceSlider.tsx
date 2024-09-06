@@ -7,20 +7,19 @@ import {
 
 import classes from './PriceSlider.module.scss'
 
-import { FilterDataContext } from '../context/FilterContext'
+import { FilterDataContext, UpdateFilterListContext } from '../context/FilterContext'
 
-import { UpdateFilterListContext } from "../context/FilterContext"
 import { initial_min_value, initial_max_value } from '../helpers/values'
 
 
 const initial_position = 0 // => Valor inicial do thumb esquerdo ***
 
 const PriceSlider = () => {
-   const [slider_width, setSliderWidth] = useState(0)
-   const [min_value, setMinValue] = useState(initial_min_value)
-   const [max_value, setMaxValue] = useState(initial_max_value)
-   const [mobile_thumb1_position, setValueMobileThumb1] = useState(0)
-   const [mobile_thumb2_position, setValueMobileThumb2] = useState(0)
+   const [sliderWidth, setSliderWidth] = useState(0)
+   const [minValue, setMinValue] = useState(initial_min_value)
+   const [maxValue, setMaxValue] = useState(initial_max_value)
+   const [valueMobileThumb1, setValueMobileThumb1] = useState(0)
+   const [valueMobileThumb2, setValueMobileThumb2] = useState(0)
 
    const sliderRef = useRef<HTMLDivElement>(null) // => Div que engloba o slider
    const thumb_1_Ref = useRef<HTMLSpanElement>(null)
@@ -56,70 +55,62 @@ const PriceSlider = () => {
       const thumb_id = spanEl.id
       let priceThumb = thumb_id === 'left-thumb' ? price_thumb_1_Ref : price_thumb_2_Ref
 
-      if (sliderContainer) {
-         let rect = sliderContainer.getBoundingClientRect()
-         let current_position = e.clientX - rect.left
-   
-         if (thumb_id === 'right-thumb') {
-            let maxValue
-   
-            current_position = current_position - sliderContainer.offsetWidth
-   
-            if (current_position >= initial_position) {
-               current_position = initial_position
-            }
-   
-            if (current_position <= mobile_thumb1_position - (slider_width - 25)) {
-               current_position = mobile_thumb1_position - (slider_width - 25)
-            }
-   
-            if (current_position > -1) {
-               maxValue = initial_max_value
-            } else {
-               maxValue = (current_position + slider_width) * (initial_max_value / slider_width)
-            }
-   
-            const priceRange = {
-               minValue: min_value,
-               maxValue: maxValue
-            }
-   
-            updatePrice(priceRange)
-            setMaxValue(maxValue)
-            setValueMobileThumb2(current_position)
+      if (!sliderContainer) return
+
+      let rect = sliderContainer.getBoundingClientRect()
+      let current_position = e.clientX - rect.left
+
+      if (thumb_id === 'right-thumb') {
+         let maxValue = initial_max_value
+
+         current_position = current_position - sliderContainer.offsetWidth
+
+         if (current_position >= initial_position) {
+            current_position = initial_position
+         } else if (current_position <= valueMobileThumb1 - (sliderWidth - 25)) {
+            current_position = valueMobileThumb1 - (sliderWidth - 25)
          }
-   
-         if (thumb_id === 'left-thumb') {
-            let minValue
-            if (current_position <= initial_position) {
-               current_position = initial_position
-            }
-   
-            if (current_position >= mobile_thumb2_position + (slider_width - 25)) {
-               current_position = mobile_thumb2_position + (slider_width - 25)
-            }
-   
-            if (current_position - initial_position < 1) {
-               minValue = initial_min_value
-            } else {
-               minValue = (current_position - initial_position) * (initial_max_value / slider_width)            
-            }
-   
-            const priceRange = {
-               minValue: minValue,
-               maxValue: max_value
-            }
-   
-            updatePrice(priceRange)
-            setMinValue(minValue)
-            setValueMobileThumb1(current_position)
+
+         if (current_position <= -1) {
+            maxValue = (current_position + sliderWidth) * (initial_max_value / sliderWidth)
          }
-   
-         // slider.style.transform = `translate(${current_position}px)`
-         spanEl.style.transform = `translate(${current_position}px)`
-         // slider_price.style.transform = `translate(${current_position}px)`
-         if (priceThumb.current) priceThumb.current.style.transform = `translate(${current_position}px)`
+
+         const priceRange = {
+            minValue: minValue,
+            maxValue: maxValue
+         }
+
+         updatePrice(priceRange)
+         setMaxValue(maxValue)
+         setValueMobileThumb2(current_position)
+
+      } else if (thumb_id === 'left-thumb') {
+         let minValue = initial_min_value
+
+         if (current_position <= initial_position) {
+            current_position = initial_position               
+         } else if (current_position >= valueMobileThumb2 + (sliderWidth - 25)) {
+            current_position = valueMobileThumb2 + (sliderWidth - 25)
+         }
+
+         if (current_position - initial_position >= 1) {
+            minValue = (current_position - initial_position) * (initial_max_value / sliderWidth)            
+         }
+
+         const priceRange = {
+            minValue: minValue,
+            maxValue: maxValue
+         }
+
+         updatePrice(priceRange)
+         setMinValue(minValue)
+         setValueMobileThumb1(current_position)
       }
+
+      // slider.style.transform = `translate(${current_position}px)`
+      spanEl.style.transform = `translate(${current_position}px)`
+      // slider_price.style.transform = `translate(${current_position}px)`
+      if (priceThumb.current) priceThumb.current.style.transform = `translate(${current_position}px)`
    }
 
    const resetPriceSlider = () => {
@@ -165,8 +156,8 @@ const PriceSlider = () => {
                   onPointerDown={e => beginSliding(e)}
                   onPointerUp={e => stopSliding(e)}
                ></span>
-               <p ref={price_thumb_1_Ref}> {Math.floor(min_value)} </p>
-               <p ref={price_thumb_2_Ref}> {Math.floor(max_value)} </p>
+               <p ref={price_thumb_1_Ref}> {Math.floor(minValue)} </p>
+               <p ref={price_thumb_2_Ref}> {Math.floor(maxValue)} </p>
             </div>
          </div>
       </div>
