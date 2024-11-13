@@ -68,6 +68,7 @@ export type InitialState = {
    cartListState: ProductCartType[]
    wishlistState: string[]
    totalCartValue: number
+   catalog: ProductType[]
 }
 
 export type ProductType = {
@@ -291,7 +292,13 @@ type UpdateFinalValue = {
    totalCartValue: number
 }
 
+type LoadCatalog = {
+   type: ActionTypesGlobal.LOAD_CATALOG
+   catalog: ProductType[]
+}
+
 export type GlobaAction = 
    | UpdateWishlist
    | updateCart
    | UpdateFinalValue
+   | LoadCatalog

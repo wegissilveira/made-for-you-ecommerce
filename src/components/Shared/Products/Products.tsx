@@ -10,7 +10,6 @@ import LoadMoreProducts from './LoadMoreProducts/LoadMoreProducts'
 import ProductsGallery from './ProductsGallery/ProductsGallery'
 import CategoryHeader from './CategoryHeader/CategoryHeader'
 
-
 type Props = {
    productsProps: ProductType[]
    pageLimit?: number
@@ -67,7 +66,6 @@ const Products = (props: Props) => {
       const pathname = window.location.pathname
       pathname === '/shop/' && setGalleryClass('ProductsContainer-shop')
    }, [])
-
 
    return (
       <div

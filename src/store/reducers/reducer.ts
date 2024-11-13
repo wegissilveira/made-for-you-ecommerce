@@ -5,7 +5,8 @@ import { InitialState, GlobaAction } from 'common/types'
 const initialState: InitialState = {
    wishlistState: [],
    cartListState: [],
-   totalCartValue: 0
+   totalCartValue: 0,
+   catalog: []
 }
 
 const reducer = ((state = initialState, action: GlobaAction): InitialState => {
@@ -25,6 +26,11 @@ const reducer = ((state = initialState, action: GlobaAction): InitialState => {
          return {
             ...state,
             totalCartValue: action.totalCartValue
+         }
+      case ActionTypesGlobal.LOAD_CATALOG:
+         return {
+            ...state,
+            catalog: action.catalog
          }
       default:
          return state

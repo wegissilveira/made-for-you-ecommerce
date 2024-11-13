@@ -10,6 +10,7 @@ import Products from './components/Shared/Products/Products'
 import UserLogin from './components/User/UserLogin/UserLogin'
 import UserSignUp from './components/User/UserSignUp/UserSignUp'
 import Contact from './components/Contact/Contact'
+import RegisterProductPage from 'pages/RegisterProductPage'
 import { ScrollToTop } from 'helpers/components'
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
@@ -92,6 +93,7 @@ function App() {
             <Route path={`${process.env.PUBLIC_URL}/user-login/`} exact component={UserLogin} />
             <Route path={`${process.env.PUBLIC_URL}/user-signup/`} exact component={UserSignUp} />
             <Route path={`${process.env.PUBLIC_URL}/contact/`} exact component={Contact} />
+            <Route path={`${process.env.PUBLIC_URL}/register-product/`} exact component={RegisterProductPage} />
           </Switch>
         </Layout>
       </BrowserRouter>
