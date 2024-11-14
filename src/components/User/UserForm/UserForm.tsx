@@ -46,7 +46,7 @@ const UserForm = (props: Props) => {
       <div className={classes.Session_container}>
          <div>
             <img
-               src={require("../../../assets/images/Header/MainSlider/imgSlider1-mainpage.jpg")}
+               src={`${process.env.REACT_APP_IMAGE_BASE_URL}/Header/MainSlider/imgSlider1-mainpage.jpg`}
                alt="img"
             />
          </div>

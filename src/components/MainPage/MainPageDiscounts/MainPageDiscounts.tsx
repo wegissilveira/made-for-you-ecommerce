@@ -15,12 +15,12 @@ const mainPageDiscounts = () => {
          </div>
          <img 
             className={classes['Discounts-three']}
-            src={require('../../../assets/images/Discounts/quadro-3.png')} 
+            src={`${process.env.REACT_APP_IMAGE_BASE_URL}/Discounts/quadro-3.png`}
             alt="discount-img" 
          />
          <img 
             className={classes['Discounts-two']}
-            src={require('../../../assets/images/Discounts/quadro-2.png')} 
+            src={`${process.env.REACT_APP_IMAGE_BASE_URL}/Discounts/quadro-2.png`}
             alt="discount-img" 
          />
          <div className={classes['Discounts-four']}>
