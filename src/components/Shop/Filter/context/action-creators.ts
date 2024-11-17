@@ -1,6 +1,7 @@
-import { Tag, Category, ColorValues, Offer, Order, PriceRange, FilterAction } from "common/types"
+import { Tag, Category, ColorValues, Offer, Order, PriceRange, ProductType, FilterAction } from "common/types"
 import { ActionTypeFilter } from "./actionTypes"
 
+export const setInitFilter = (catalog: ProductType[]) => ({type: ActionTypeFilter.SET_INIT_FILTER, catalog } as FilterAction)
 export const setTag = (tag: Tag) => ({type: ActionTypeFilter.SET_TAG, tag } as FilterAction)
 export const setCategory = (category: Category) => ({type: ActionTypeFilter.SET_CATEGORY, category } as FilterAction)
 export const setColor = (color: ColorValues) => ({type: ActionTypeFilter.SET_COLOR, color } as FilterAction)

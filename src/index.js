@@ -1,10 +1,11 @@
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
+import { createRoot } from "react-dom/client"
 
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { ApolloClient, InMemoryCache, ApolloProvider, HttpLink } from '@apollo/client'
 
-import App from './App'
+import RootComponent from 'RootComponent'
 
 import { cartListDataFn, wishlistDataFn } from "services"
 import { ActionTypesGlobal } from 'store/actions/actionTypes'
@@ -44,11 +45,13 @@ store.dispatch({
   wishlist: wishlistDataFn()
 })
 
-ReactDOM.render(
+const container = document.getElementById("root")
+const root = createRoot(container)
+
+root.render(
   <ApolloProvider client={client}>
     <Provider store={store}>
-      <App />
+      <RootComponent />
     </Provider>
-  </ApolloProvider>,
-  document.getElementById('root')
-);
+  </ApolloProvider>
+)

@@ -1,11 +1,10 @@
 import { useState, useRef, useEffect } from 'react'
 import classes from './Products.module.scss'
-
+import { connect } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
-import { ProductType, SearchParams, SearchTerms } from 'common/types'
+import { ProductType, SearchParams, SearchTerms, InitialState, PropsCatalog } from 'common/types'
 
-import productsData from 'Data/productsData'
 import LoadMoreProducts from './LoadMoreProducts/LoadMoreProducts'
 import ProductsGallery from './ProductsGallery/ProductsGallery'
 import CategoryHeader from './CategoryHeader/CategoryHeader'
@@ -13,12 +12,13 @@ import CategoryHeader from './CategoryHeader/CategoryHeader'
 type Props = {
    productsProps: ProductType[]
    pageLimit?: number
-}
+} & PropsCatalog
 
 const Products = (props: Props) => {
    const {
       productsProps,
-      pageLimit = 8
+      pageLimit = 8,
+      catalog
    } = props
    
    const [productsState, setProductsState] = useState<ProductType[]>([])
@@ -30,7 +30,7 @@ const Products = (props: Props) => {
    const params = useParams<SearchParams>()
 
    const mountProducts = (urlArg: SearchTerms.SEARCH_KEY | SearchTerms.CAT) => {
-      const currentProducts = [...productsData]
+      const currentProducts = [...catalog]      
       let products: ProductType[] = []
       const productsId: string[] = []
       const key = new RegExp(params[urlArg], 'gi')
@@ -89,4 +89,10 @@ const Products = (props: Props) => {
    )
 }
 
-export default Products
+const mapStateToProps = (state: InitialState) => {
+   return {
+      catalog: state.catalog
+   }
+}
+
+export default connect(mapStateToProps)(Products)

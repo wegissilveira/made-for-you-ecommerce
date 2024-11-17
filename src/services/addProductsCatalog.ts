@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client'
 
 export const ADD_PRODUCTS_CATALOG = gql`
   mutation addProducts($products: [ProductInput!]!) {

@@ -124,7 +124,7 @@ const ProductCard = (props: Props) => {
             <Link to={process.env.PUBLIC_URL + formatUrlName(product.name, product._id)}>
                <div className={classes.Products_img_container}>
                   <img
-                     src={product.img}
+                     src={`${process.env.REACT_APP_IMAGE_BASE_URL}/${product.img}`}
                      alt="Produto"
                   />
                </div>
@@ -161,6 +161,5 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
       onCartListState: () => dispatch({ type: ActionTypesGlobal.CARTLIST, cartList: cartListDataFn() })
    }
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductCard)

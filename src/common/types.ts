@@ -10,6 +10,10 @@ export type ColorValues = {
    lastSelectedColor: Color
 }
 
+export type PropsCatalog = {
+   catalog: ProductType[]
+}
+
 export type Offer = 
    | 'new' 
    | 'old'
@@ -135,6 +139,7 @@ export type PriceRange = {
 
 export type FilterType = {
    productsState: ProductType[]
+   catalog: ProductType[]
    tag: Tag
    category: Category
    color:  ColorValues
@@ -185,6 +190,11 @@ export type FilterBase =
    | FilterOffer 
    | FilterColor
    | FilterPrice
+   
+export type setInitFilter = {
+   type: ActionTypeFilter.SET_INIT_FILTER
+   catalog: ProductType[]
+}
 
 type SetTag = {
    type: ActionTypeFilter.SET_TAG
@@ -228,6 +238,7 @@ export type FilterAction =
    | SetOrder
    | SetPrice
    | ResetFilter
+   | setInitFilter
 
    
 export type ProductPageType = {

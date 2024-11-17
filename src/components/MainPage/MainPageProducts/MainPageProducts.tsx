@@ -1,15 +1,16 @@
 import { useState, useEffect } from 'react'
 import classes from './MainPageProducts.module.scss'
+import { connect } from 'react-redux'
 
 import { mountProducts } from "helpers/functions"
-import { ProductType, Tag } from 'common/types'
+import { ProductType, Tag, InitialState, PropsCatalog } from 'common/types'
 
 import Products from 'components/Shared/Products/Products'
-import productsData from 'Data/productsData'
 import MainPageProductsHeader from './MainPageProductsHeader/MainPageProductsHeader'
 
+const MainPageProducts = (props: PropsCatalog) => {
+   const { catalog } = props
 
-const MainPageProducts = () => {
    const [tag, setTag] = useState<Tag>('all-products')
    const [products, setProducts] = useState<ProductType[]>([])
    const [pageLimit, setPageLimit] = useState(8)
@@ -30,9 +31,9 @@ const MainPageProducts = () => {
          category: 'all'
       } as const
 
-      const mountedProducts = mountProducts(productsData, filterObj)
+      const mountedProducts = mountProducts(catalog, filterObj)      
       setProducts(mountedProducts)
-   }, [tag])
+   }, [tag, catalog])
 
 
    return (
@@ -50,4 +51,10 @@ const MainPageProducts = () => {
    )
 }
 
-export default MainPageProducts
+const mapStateToProps = (state: InitialState) => {
+   return {
+      catalog: state.catalog
+   }
+}
+
+export default connect(mapStateToProps)(MainPageProducts)

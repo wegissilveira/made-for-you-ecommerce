@@ -1,6 +1,5 @@
 import { mountProducts, mountFilters } from 'helpers/functions'
 import { initialFilter } from '../helpers/values'
-import productsData from 'Data/productsData'
 import { ActionTypeFilter } from './actionTypes'
 import { FilterType, 
    FilterAction, 
@@ -9,18 +8,24 @@ import { FilterType,
 
 const filterReducer = (state: FilterType = initialFilter, action: FilterAction): FilterType => {
    switch (action.type) {
-      case ActionTypeFilter.SET_TAG:         
+      case ActionTypeFilter.SET_INIT_FILTER:
+         return {
+            ...state,
+            productsState: action.catalog,
+            catalog: action.catalog
+         }
+      case ActionTypeFilter.SET_TAG:
          return {
             ...state,
             tag: action.tag,
             productsState: mountProducts(
-               productsData, // => productsArg
-               state, // => filtersObj
+               state.catalog,
+               state,
                {
                   currentFilterValue: action.tag,
                   type: FilterValues.TAG
                },
-               state.isFilterOn // => isFilterOn
+               state.isFilterOn
             ),
             isFilterTagOn: true
          }
@@ -29,7 +34,7 @@ const filterReducer = (state: FilterType = initialFilter, action: FilterAction):
             ...state,
             category: action.category,
             productsState: mountProducts(
-               productsData, 
+               state.catalog,
                state, 
                {
                   currentFilterValue: action.category,
@@ -44,7 +49,7 @@ const filterReducer = (state: FilterType = initialFilter, action: FilterAction):
             ...state,
             color: action.color,
             productsState: mountFilters(
-               productsData, 
+               state.catalog,
                state, 
                {
                   currentFilterValue: action.color,
@@ -59,7 +64,7 @@ const filterReducer = (state: FilterType = initialFilter, action: FilterAction):
             ...state,
             offer: action.offer,
             productsState: mountFilters(
-               productsData, 
+               state.catalog,
                state,
                {
                   currentFilterValue: action.offer,
@@ -74,7 +79,7 @@ const filterReducer = (state: FilterType = initialFilter, action: FilterAction):
             ...state,
             order: action.order,
             productsState: mountFilters(
-               productsData, 
+               state.catalog,
                state, 
                {
                   currentFilterValue: action.order,
@@ -89,7 +94,7 @@ const filterReducer = (state: FilterType = initialFilter, action: FilterAction):
             ...state,
             priceRange: action.priceRange,
             productsState: mountFilters(
-               productsData, 
+               state.catalog,
                state, 
                {
                   currentFilterValue: action.priceRange,
@@ -101,7 +106,8 @@ const filterReducer = (state: FilterType = initialFilter, action: FilterAction):
          }
       case ActionTypeFilter.RESET_FILTER:
          return {
-            ...initialFilter
+            ...initialFilter,
+            productsState: state.catalog
          }
       default:
          return state

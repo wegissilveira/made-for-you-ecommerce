@@ -1,8 +1,9 @@
 import { createContext } from "react"
 import { initialFilter } from "../helpers/values"
-import { Tag, Category, ColorValues, Offer, Order, PriceRange } from "common/types"
+import { Tag, Category, ColorValues, Offer, Order, PriceRange, ProductType } from "common/types"
 
 export const UpdateFilterListContext = createContext({
+   initFilter: (catalog: ProductType[]) => {},
    updateTag: (tag: Tag) => {},
    updateCategory: (category: Category) => {},
    updateFilterColor: (color: ColorValues) => {},

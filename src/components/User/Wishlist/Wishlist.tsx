@@ -3,26 +3,24 @@ import './Wishlist.module.scss'
 
 import { connect } from 'react-redux'
 
-import productsData from 'Data/productsData'
-
-import { ProductType, InitialState } from 'common/types'
+import { ProductType, InitialState, PropsCatalog } from 'common/types'
 
 import Products from '../../Shared/Products/Products'
 
-
 type Props = {
    wish: string[]
-}
+} & PropsCatalog
 
 const Wishlist = (props: Props) => {
    const {
-      wish
+      wish,
+      catalog
    } = props
 
    const [wishlistProducts, setWishlistProducts] = useState<ProductType[]>([])
 
    useEffect(() => {
-      const allProducts = [...productsData]
+      const allProducts = [...catalog]
       const products = allProducts.filter(product => wish.includes(product._id))
       setWishlistProducts(products)
    }, [])
@@ -38,7 +36,8 @@ const Wishlist = (props: Props) => {
 
 const mapStateToProps = (state: InitialState) => {
    return {
-      wish: state.wishlistState
+      wish: state.wishlistState,
+      catalog: state.catalog
    }
 }
 

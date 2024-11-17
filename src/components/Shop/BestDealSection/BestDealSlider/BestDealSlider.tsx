@@ -39,7 +39,10 @@ const BestDealSlider = forwardRef((props: Props, bestDealRef: ForwardedRef<HTMLD
                            <div>
                               <Link to={"/shop/product/" + product._id}>
                                  <div className={classes.Deal_image} >
-                                    <img src={product.img} alt="img-deal" />
+                                    <img 
+                                       src={`${process.env.REACT_APP_IMAGE_BASE_URL}/${product.img}`} 
+                                       alt="img-deal" 
+                                    />
                                  </div>
                                  <div className={classes.Products_description}>
                                     <p>{product.name}</p>

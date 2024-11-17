@@ -1,9 +1,10 @@
 import { useReducer, useMemo } from "react"
 import filterReducer from "./filterReducer"
 import { initialFilter } from "../helpers/values"
-import { Tag, Category, Offer, Order, PriceRange, ColorValues } from "common/types"
+import { Tag, Category, Offer, Order, PriceRange, ColorValues, ProductType } from "common/types"
 
 import { 
+   setInitFilter,
    setTag,
    setCategory,
    setColor,
@@ -27,6 +28,10 @@ const FilterProvider = (props: Props) => {
    const [filterReducerState, dispatch] = useReducer(filterReducer, initialFilter)
 
    const updateProductsListHandler = useMemo(() => {
+      const initFilter = (catalog: ProductType[]) => {
+         dispatch(setInitFilter(catalog))
+      }
+
       const updateTag = (tag: Tag) => {
          dispatch(setTag(tag))
       }
@@ -56,6 +61,7 @@ const FilterProvider = (props: Props) => {
       }
 
       return { 
+         initFilter,
          updateTag, 
          updateCategory, 
          updateFilterColor, 

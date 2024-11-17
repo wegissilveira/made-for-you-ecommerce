@@ -1,7 +1,9 @@
 import { useState, useEffect, useRef, useContext } from 'react'
 import classes from './Filter.module.scss'
+import { connect } from 'react-redux'
 
-import { FilterDataContext } from './context/FilterContext'
+import { FilterDataContext, UpdateFilterListContext } from './context/FilterContext'
+import { InitialState, PropsCatalog } from "common/types"
 
 import useCallResizeWarning from 'hooks/useCallResizeWarning'
 
@@ -11,13 +13,14 @@ import FilterHeader from './FilterHeader/FilterHeader'
 import FilterBottom from './FilterBottom/FilterBottom'
 import FilterBody from './FilterBody/FilterBody'
 
-
 const toastifyMsg: [string, string] = [
    'Reload The Page',
    'In order for all components to adjust to the new screen dimensions, the page should be reloaded.'
 ]
 
-const Filter = () => {
+const Filter = (props: PropsCatalog) => {
+   const { catalog } = props
+
    const [pageLimit, setPageLimit] = useState(12)
    const [filterOpen, setFilterOpen] = useState(false)
    const [translateValue, setTranslateValue] = useState(() => {
@@ -33,6 +36,7 @@ const Filter = () => {
    const filterRef = useRef<HTMLDivElement>(null)
 
    const filterReducerState = useContext(FilterDataContext)
+   const { initFilter } = useContext(UpdateFilterListContext)
    const { openToastify } = useCallResizeWarning(containerRef)
    
    const translateFilter = {
@@ -41,7 +45,6 @@ const Filter = () => {
    } as const
    
    const openFilterHandler = () => {
-
       const translate = translateValue < 0 ? 0 : -filterHeight
 
       setFilterOpen(!filterOpen)
@@ -71,6 +74,9 @@ const Filter = () => {
       setFilterHeightHandler()
    }, [])
 
+   useEffect(() => {
+      initFilter(catalog)
+   }, [catalog])
 
    return (
       <>
@@ -86,8 +92,8 @@ const Filter = () => {
                   <FilterBottom />
                </div>
                <Products
-                  productsProps={filterReducerState.productsState} // => Envia o array com os produtos que serão exibidos
-                  pageLimit={pageLimit} // => Número limite de produtos a serem mostrados inicialmente
+                  productsProps={filterReducerState.productsState}
+                  pageLimit={pageLimit}
                />
             </div>
          </div>
@@ -95,4 +101,10 @@ const Filter = () => {
    );
 }
 
-export default Filter
+const mapStateToProps = (state: InitialState) => {
+   return {
+      catalog: state.catalog
+   }
+}
+
+export default connect(mapStateToProps)(Filter)

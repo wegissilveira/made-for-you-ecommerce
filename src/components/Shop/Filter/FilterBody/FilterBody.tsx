@@ -1,11 +1,10 @@
 import { useContext } from "react"
 import classes from './FilterBody.module.scss'
-
-import productsData from 'Data/productsData'
+import { connect } from 'react-redux'
 
 import { UpdateFilterListContext } from "../context/FilterContext"
 
-import { Tag, Category, OfferOptions } from "common/types"
+import { Tag, Category, OfferOptions, InitialState, PropsCatalog } from "common/types"
 
 import PriceSlider from 'components/Shop/Filter/PriceSlider/PriceSlider'
 import FilterCheckbox from 'components/Shop/Filter/FilterCheckbox/FilterCheckbox'
@@ -36,7 +35,9 @@ const checkboxItems: OfferOptions[] = [
    {value: 'sales', title: 'Sales'},
 ]
 
-const FilterBody = () => {
+const FilterBody = (props: PropsCatalog) => {
+   const { catalog } = props
+
    const { updateTag, updateCategory } = useContext(UpdateFilterListContext)
 
    // Categorias
@@ -55,7 +56,7 @@ const FilterBody = () => {
    let textileQtde = 0
    let lightingQtde = 0
 
-   productsData.forEach(product => {
+   catalog.forEach(product => {
       categoriesTotalQtde++
       typesTotalQtde++
          
@@ -143,4 +144,10 @@ const FilterBody = () => {
    )
 }
 
-export default FilterBody
+const mapStateToProps = (state: InitialState) => {
+   return {
+      catalog: state.catalog
+   }
+}
+
+export default connect(mapStateToProps)(FilterBody)
