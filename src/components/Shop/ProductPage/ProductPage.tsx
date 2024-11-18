@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
-
 import classes from './ProductPage.module.scss'
 
 import useProduct from 'hooks/useProduct'
+import { ProductType } from 'common/types'
 
 import ProductInfoComponent from './ProductInfoComponent/ProductInfoComponent'
 import ProductSlider from './ProductSlider/ProductSlider'
@@ -10,18 +10,14 @@ import Spinner from 'components/Shared/UI/Spinner/Spinner'
 
 
 const ProductPage = () => {
-   const [loading, setLoading] =  useState(true)
-   const currentProduct = useProduct()
+   const [currentProduct, setCurrentProduct] = useState<ProductType>({} as ProductType)
+   const { data, loading } = useProduct()
 
-   useEffect(() => {       
-      if (currentProduct) {
-         const loaded = Object.keys(currentProduct).length >= 1 ? true : false
-         setTimeout(() => {
-            setLoading(!loaded)
-         }, 1500)
+   useEffect(() => {
+      if (data) {
+         setCurrentProduct(data.product)
       }
-
-   }, [currentProduct])
+   }, [data])   
 
    return (
       <div className={classes.Product_page_container}>
@@ -29,12 +25,12 @@ const ProductPage = () => {
             !loading
                ?
                   <>
-                     <ProductSlider imgs={currentProduct!.imgsDemo} />
+                     <ProductSlider imgs={currentProduct.imgsDemo} />
                      <ProductInfoComponent product={currentProduct} />
                   </> 
                :
             <>
-            <Spinner />
+               <Spinner />
             </>
          }
 

@@ -32,7 +32,7 @@ const ProductCartDetails = (props: Props) => {
    return (
       <div className={classes.Cart_details_img}>
          <Link to={process.env.PUBLIC_URL + formatUrlName(product.prodName, product._id)}>
-            <img src={product.prodImg} alt='img' />
+            <img src={`${process.env.REACT_APP_IMAGE_BASE_URL}/${product.prodImg}`} alt='img' />
          </Link>
          <div>
             <Link to={process.env.PUBLIC_URL + formatUrlName(product.prodName, product._id)}>{product.prodName}</Link>

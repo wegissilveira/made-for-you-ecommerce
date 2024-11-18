@@ -33,7 +33,7 @@ const ProductProvider = (props: Props) => {
 
    const [productReducerState, dispatch] = useReducer(productReducer, initialValue)
 
-   const product = useProduct()
+   const { data } = useProduct()
 
    const updateCurrentProduct = useMemo(() => {
       const updateColor = (color: Color, update: boolean) => dispatch(setColor(color, update))
@@ -51,14 +51,16 @@ const ProductProvider = (props: Props) => {
 
    useEffect(() => {
       let productCartArr = [...cart]
-      productCartArr.forEach(prod => {
-         if (prod._id === product._id) {
-            dispatch(setColor(prod.color, false))
-            dispatch(setSize(prod.size, false))
-            dispatch(setQty(prod.qtde, false))
-         }
-      })
-   }, [product])
+      if (data) {
+         productCartArr.forEach(prod => {
+            if (prod._id === data.product._id) {
+               dispatch(setColor(prod.color, false))
+               dispatch(setSize(prod.size, false))
+               dispatch(setQty(prod.qtde, false))
+            }
+         })
+      }
+   }, [data])
 
    return (
       <UpdateProductValuesContext.Provider value={updateCurrentProduct}>

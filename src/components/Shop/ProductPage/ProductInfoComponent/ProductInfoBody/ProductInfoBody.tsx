@@ -75,8 +75,8 @@ const ProductInfoBody = (props: Props) => {
       onWishlistState()
    }
    
-   const productCartHandler = () => {
-      let productCartArr = [...cart]
+   const productCartHandler = () => {      
+      let productCartArr = [...cart]    
       
       let count = 0
       // Checa se o produto existe no carrinho
@@ -150,7 +150,7 @@ const ProductInfoBody = (props: Props) => {
       if (wish.includes(product._id)) icon = IconValues.FULL_HEART
 
       setWishIcon(icon)
-   }, [wish])
+   }, [wish, product._id])
 
    useEffect(() => {
       const obj: BagButtonColor = {} as BagButtonColor

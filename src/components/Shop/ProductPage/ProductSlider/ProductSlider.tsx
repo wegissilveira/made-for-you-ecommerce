@@ -55,7 +55,7 @@ const ProductSlider = (props: Props) => {
 					{images.map((img, i) =>
 						<img
 							key={i}
-							src={img}
+							src={`${process.env.REACT_APP_IMAGE_BASE_URL}/${img}`}
 							alt={"img-" + i}
 							style={{ display: imgSlide === i ? 'block' : 'none' }}
 						/>
@@ -69,15 +69,18 @@ const ProductSlider = (props: Props) => {
 			<div className={classes.Product_page_thumb_images}>
 				<img
 					onClick={() => changeSlide(0)}
-					src={images[0]} alt="img-1"
+					src={`${process.env.REACT_APP_IMAGE_BASE_URL}/${images[0]}`}
+					alt="img-1"
 				/>
 				<img
 					onClick={() => changeSlide(1)}
-					src={images[1]} alt="img-2"
+					src={`${process.env.REACT_APP_IMAGE_BASE_URL}/${images[1]}`}
+					alt="img-2"
 				/>
 				<img
 					onClick={() => changeSlide(2)}
-					src={images[2]} alt="img-3"
+					src={`${process.env.REACT_APP_IMAGE_BASE_URL}/${images[2]}`}
+					alt="img-3"
 				/>
 			</div>
 		</div>

@@ -20,7 +20,7 @@ const ProductModalImages = (props: Props) => {
          {productImgs.map((slide, i) =>
             <img
                key={slide+'-'+i}
-               src={slide}
+               src={`${process.env.REACT_APP_IMAGE_BASE_URL}/${slide}`}
                alt="img-1"
             />
          )}

@@ -3,6 +3,7 @@ import classes from './ProductsGallery.module.scss'
 import { ProductType } from 'common/types'
 
 import ProductCard from 'components/Shared/Products/ProductsGallery/ProductCard/ProductCard'
+import Spinner from 'components/Shared/UI/Spinner/Spinner'
 
 
 type Props = {
@@ -15,6 +16,8 @@ const ProductsGallery = forwardRef((props: Props, productsSubContainerRef: Forwa
       products,
       count
    } = props
+
+   if (products.length === 0) return <Spinner />
 
    return (
       <div

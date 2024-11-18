@@ -1,24 +1,20 @@
-import { useEffect, useState } from 'react'
-
-import productsData from 'Data/productsData'
+import { useEffect } from 'react'
 import { useHistory } from "react-router-dom"
-
-import { ProductType } from 'common/types'
-
+import { useLazyQuery } from '@apollo/client'
+import { GET_PRODUCT } from 'services/getProduct'
 
 const useProduct = () => {
-   const [product, setProducts] = useState<ProductType>({} as ProductType)
-   const history = useHistory()   
+   const history = useHistory()
+   const [getProduct, { data, loading, error }] = useLazyQuery(GET_PRODUCT)
    
    const idParams = history.location.search
    const currentId = idParams.split('=')[1]
 
    useEffect(() => {
-      const product = productsData.find(product => product._id === currentId)           
-      if (product) setProducts(product)
-   }, [])
+      getProduct({ variables: { id: currentId } })
+   }, [currentId])
    
-   return product
+   return { data, loading, error }
 } 
 
 export default useProduct

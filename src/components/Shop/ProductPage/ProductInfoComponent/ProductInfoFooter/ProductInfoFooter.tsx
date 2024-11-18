@@ -2,8 +2,16 @@ import classes from './ProductInfoFooter.module.scss'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+type Props = {
+   isPdp: RegExpMatchArray | null
+}
 
-const ProductInfoFooter = () => {
+
+const ProductInfoFooter = (props: Props) => {
+   const { isPdp = true } = props
+
+   if (!isPdp) return <></>
+
    return (
       <div className={classes.Product_specifications_container}>
          <div>
